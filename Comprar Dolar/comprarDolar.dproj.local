@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/06/09 22:06:17.000.117,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 19:59:42.000.129,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 20:01:58.000.870,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\Curso Alura - Delphi explorando a linguagem\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 20:01:58.000.870,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\Curso Alura - Delphi explorando a linguagem\Unit1.dfm</Transaction>
+    <Transaction>2022/07/04 23:09:59.000.910,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos Desenvolvimento\Delphi\Curso Alura - Delphi explorando a linguagem\Conversor-Dolar-Real\conversorDolarReal.dproj</Transaction>
+    <Transaction>2022/07/05 19:24:14.244,D:\Projetos Desenvolvimento\Delphi\Curso Alura - Delphi explorando a linguagem\Comprar Dolar\comprarDolar.dproj=D:\Projetos Desenvolvimento\Delphi\Curso Alura - Delphi explorando a linguagem\Conversor-Dolar-Real\conversorDolarReal.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
