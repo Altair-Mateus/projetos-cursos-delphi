@@ -1,0 +1,97 @@
+object Form_contatos: TForm_contatos
+  Left = 0
+  Top = 0
+  Caption = 'Gest'#227'o de Contatos'
+  ClientHeight = 344
+  ClientWidth = 632
+  Color = clBtnHighlight
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object LabelId: TLabel
+    Left = 16
+    Top = 32
+    Width = 12
+    Height = 17
+    Caption = 'Id'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHotLight
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+  end
+  object LabelNome: TLabel
+    Left = 72
+    Top = 72
+    Width = 37
+    Height = 17
+    Caption = 'Nome'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHotLight
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 128
+    Top = 80
+    Width = 12
+    Height = 17
+    Caption = 'Id'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHotLight
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 184
+    Top = 48
+    Width = 12
+    Height = 17
+    Caption = 'Id'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHotLight
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      
+        'Database=D:\Projetos Desenvolvimento\Delphi\Agenda_de_Contatos\D' +
+        'ados\AGENDACONTATOS.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Server=localhost'
+      'Port=3050'
+      'DriverID=FB')
+    Connected = True
+    LoginPrompt = False
+    Left = 592
+    Top = 24
+  end
+  object BindSourceCONTATOS: TBindSourceDB
+    DataSet = FDTableCONTATOS
+    ScopeMappings = <>
+    Left = 584
+    Top = 136
+  end
+  object FDTableCONTATOS: TFDTable
+    Active = True
+    IndexFieldNames = 'ID'
+    Connection = FDConnection1
+    TableName = 'CONTATOS'
+    Left = 584
+    Top = 80
+  end
+end
