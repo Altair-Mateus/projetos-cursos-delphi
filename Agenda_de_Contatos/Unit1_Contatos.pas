@@ -11,7 +11,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, Vcl.StdCtrls, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Data.Bind.Components, Data.Bind.DBScope,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, System.Rtti, System.Bindings.Outputs,
-  Vcl.Bind.Editors;
+  Vcl.Bind.Editors, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids;
 
 type
   TForm_contatos = class(TForm)
@@ -31,6 +31,15 @@ type
     LinkControlToField2: TLinkControlToField;
     LinkControlToField3: TLinkControlToField;
     LinkControlToField4: TLinkControlToField;
+    DBNavigator1: TDBNavigator;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    LabelRegistros: TLabel;
+    MemoObservacoes: TMemo;
+    LabelObservacoes: TLabel;
+    LinkControlToField5: TLinkControlToField;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,5 +52,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm_contatos.Button1Click(Sender: TObject);
+begin
+  Form_contatos.Close;
+end;
 
 end.

@@ -1,43 +1,62 @@
 ﻿[FDConnection1]
-Coordinates=0,0,90,33
+Coordinates=0,0,104,36
 Visible=True
 
 []
 Coordinates=109,1,82,33
 
 [BindSourceCONTATOS]
-Coordinates=0,60,129,141
+Coordinates=0,60,152,190
 
 [FDTableCONTATOS]
-Coordinates=40,52,112,33
+Coordinates=40,52,134,36
 Visible=False
 
 [LabelId]
-Coordinates=320,20,50,51
+Coordinates=320,20,57,58
 
 [LabelNome]
-Coordinates=320,90,69,51
+Coordinates=320,90,80,58
 
 [LabelTelefone]
-Coordinates=320,160,83,51
+Coordinates=320,160,96,58
 Visible=True
 
 [LabelEmail]
-Coordinates=320,230,68,51
+Coordinates=320,230,78,58
 
 [BindingsList1]
-Coordinates=109,1,82,33
+Coordinates=109,1,91,36
 
 [EditId]
-Coordinates=190,30,42,51
+Coordinates=190,30,48,58
 
 [EditNome]
-Coordinates=180,100,62,51
+Coordinates=180,100,71,58
 
 [EditTelefone]
-Coordinates=170,170,76,51
+Coordinates=170,170,87,58
 Visible=True
 
 [EditEmail]
-Coordinates=170,240,61,51
+Coordinates=170,240,69,58
+
+[DataSource1]
+Coordinates=284,300,89,36
+
+[DBNavigator1]
+Coordinates=450,100,94,58
+
+[DBGrid1]
+Coordinates=109,1,64,36
+
+[LabelRegistros]
+Coordinates=440,20,101,58
+
+[MemoObservacoes]
+Coordinates=170,310,125,58
+Visible=True
+
+[LabelObservacoes]
+Coordinates=320,300,122,58
 
