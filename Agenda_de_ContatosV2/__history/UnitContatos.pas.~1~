@@ -8,8 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB,
-  FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.Comp.Client;
 
 type
   TForm1 = class(TForm)
@@ -24,10 +23,6 @@ type
     LabelObservacoes: TLabel;
     MemoObservacoes: TMemo;
     FDConnection1: TFDConnection;
-    FDTable_Contatos: TFDTable;
-    DataSource1: TDataSource;
-    Button_Novo: TButton;
-    Button_Salvar: TButton;
   private
     { Private declarations }
   public
