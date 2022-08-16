@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/06/09 22:06:17.000.117,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/09 20:12:59.000.059,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/16 20:10:03.381,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/16 20:17:55.236,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\UnitContatos.dfm=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/08/16 20:17:55.236,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\UnitContatos.pas=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/16 20:19:53.193,D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\ProjetoContatosV2.dproj=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/08/16 20:21:07.809,D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\UnitContatos.dfm=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\UnitContatos.dfm</Transaction>
+    <Transaction>2022/08/16 20:21:07.809,D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\UnitContatos.pas=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\UnitContatos.pas</Transaction>
+  </Transactions>
+</BorlandProject>
