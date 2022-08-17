@@ -78,6 +78,19 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
+  object Label_Status: TLabel
+    Left = 170
+    Top = 349
+    Width = 3
+    Height = 13
+  end
+  object Label_StatusConBd: TLabel
+    Left = 18
+    Top = 349
+    Width = 146
+    Height = 13
+    Caption = 'Status da Conex'#227'o com o BD: '
+  end
   object EditId: TEdit
     Left = 16
     Top = 55
@@ -176,6 +189,15 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+  end
+  object Button1: TButton
+    Left = 393
+    Top = 195
+    Width = 105
+    Height = 49
+    Caption = 'Button1'
+    TabOrder = 7
+    OnClick = Button1Click
   end
   object FDConnection1: TFDConnection
     Params.Strings = (

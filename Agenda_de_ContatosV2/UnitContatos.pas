@@ -28,6 +28,10 @@ type
     DataSource1: TDataSource;
     Button_Novo: TButton;
     Button_Salvar: TButton;
+    Button1: TButton;
+    Label_Status: TLabel;
+    Label_StatusConBd: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,5 +44,23 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+
+  FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
+  FDConnection1.Connected := true;
+
+  FDTable_Contatos.TableName := 'contatos';
+  FDTable_Contatos.Active := true;
+
+  if FDConnection1.Connected = true then
+  begin
+
+    Label_Status.Caption := 'Conectado';
+    Label_Status.Font.Color := clGreen;
+  end
+
+end;
 
 end.
