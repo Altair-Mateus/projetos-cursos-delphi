@@ -54,7 +54,7 @@ begin
   FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
   FDConnection1.Connected := true;
 
-  FDConnection1.Open();
+  FDTable_Contatos.Open();
 
   FDTable_Contatos.TableName := 'contatos';
   FDTable_Contatos.Active := true;
@@ -71,11 +71,7 @@ end;
 procedure TForm1.Button_BuscaPrimeiroRegistroClick(Sender: TObject);
 begin
 
-  EditId.Text := FDTable_Contatos.FieldByName('id').Value;
-  EditNome.Text := FDTable_Contatos.FieldByName('nome').Value;
-  EditTelefone.Text := FDTable_Contatos.FieldByName('telefone').Value;
-  EditEmail.Text := FDTable_Contatos.FieldByName('email').Value;
-  MemoObservacoes.Text := FDTable_Contatos.FieldByName('observacoes').Value;
+  EditNome.Text := FDTable_Contatos.FieldByName('NOME').Value;
 
 end;
 

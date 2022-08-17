@@ -71,11 +71,7 @@ end;
 procedure TForm1.Button_BuscaPrimeiroRegistroClick(Sender: TObject);
 begin
 
-  EditId.Text := FDTable_Contatos.FieldByName('id').Value;
-  EditNome.Text := FDTable_Contatos.FieldByName('nome').Value;
-  EditTelefone.Text := FDTable_Contatos.FieldByName('telefone').Value;
-  EditEmail.Text := FDTable_Contatos.FieldByName('email').Value;
-  MemoObservacoes.Text := FDTable_Contatos.FieldByName('observacoes').Value;
+  EditNome.Text := FDTable_Contatos.FieldByName('nome').AsString;
 
 end;
 

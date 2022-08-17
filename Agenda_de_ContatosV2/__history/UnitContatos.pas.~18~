@@ -29,7 +29,12 @@ type
     Button_Novo: TButton;
     Button_Salvar: TButton;
     Button1: TButton;
+    Label_Status: TLabel;
+    Label_StatusConBd: TLabel;
+    Button_BuscaPrimeiroRegistro: TButton;
+    FDTable_Contato: TFDTable;
     procedure Button1Click(Sender: TObject);
+    procedure Button_BuscaPrimeiroRegistroClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,9 +51,25 @@ implementation
 procedure TForm1.Button1Click(Sender: TObject);
 begin
 
-  FDConnection1.Params.Database := GetCurrentDir + '\Dados\AGENDACONTATOS.FDB';
-
+  FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
   FDConnection1.Connected := true;
+
+  FDTable_Contatos.TableName := 'CONTATOS';
+  FDTable_Contatos.Active := true;
+
+  if FDConnection1.Connected = true then
+  begin
+
+    Label_Status.Caption := 'Conectado';
+    Label_Status.Font.Color := clGreen;
+  end
+
+end;
+
+procedure TForm1.Button_BuscaPrimeiroRegistroClick(Sender: TObject);
+begin
+
+  EditNome.Text := FDTable_Contatos.FieldByName('NOME').Value;
 
 end;
 
