@@ -28,13 +28,15 @@ type
     DataSource1: TDataSource;
     Button_Novo: TButton;
     Button_Salvar: TButton;
-    Button1: TButton;
     Label_Status: TLabel;
     Label_StatusConBd: TLabel;
-    Button_BuscaPrimeiroRegistro: TButton;
-    FDTable_Contato: TFDTable;
-    procedure Button1Click(Sender: TObject);
-    procedure Button_BuscaPrimeiroRegistroClick(Sender: TObject);
+    Button_ContatoAnterior: TButton;
+    Button_ProximoContato: TButton;
+    procedure carrega;
+    procedure FormCreate(Sender: TObject);
+    procedure Button_ProximoContatoClick(Sender: TObject);
+    procedure Button_ContatoAnteriorClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -48,10 +50,31 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Button_ContatoAnteriorClick(Sender: TObject);
+begin
+  FDTable_Contatos.Prior;
+  carrega;
+end;
+
+procedure TForm1.Button_ProximoContatoClick(Sender: TObject);
+begin
+  FDTable_Contatos.Next;
+  carrega;
+end;
+
+procedure TForm1.carrega;
+begin
+  EditId.Text := FDTable_Contatos.FieldByName('id').Value;
+  EditNome.Text := FDTable_Contatos.FieldByName('nome').Value;
+  EditTelefone.Text := FDTable_Contatos.FieldByName('telefone').Value;
+  EditEmail.Text := FDTable_Contatos.FieldByName('email').Value;
+  MemoObservacoes.Text := FDTable_Contatos.FieldByName('observacoes').Value;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
 begin
 
-  FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
+FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
   FDConnection1.Connected := true;
 
   FDConnection1.Open();
@@ -64,18 +87,8 @@ begin
 
     Label_Status.Caption := 'Conectado';
     Label_Status.Font.Color := clGreen;
+    carrega;
   end
-
-end;
-
-procedure TForm1.Button_BuscaPrimeiroRegistroClick(Sender: TObject);
-begin
-
-  EditId.Text := FDTable_Contatos.FieldByName('id').Value;
-  EditNome.Text := FDTable_Contatos.FieldByName('nome').Value;
-  EditTelefone.Text := FDTable_Contatos.FieldByName('telefone').Value;
-  EditEmail.Text := FDTable_Contatos.FieldByName('email').Value;
-  MemoObservacoes.Text := FDTable_Contatos.FieldByName('observacoes').Value;
 
 end;
 
