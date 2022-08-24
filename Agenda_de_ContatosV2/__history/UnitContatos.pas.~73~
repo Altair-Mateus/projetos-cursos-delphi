@@ -168,7 +168,6 @@ begin
   //  Salva os dados
   //  Pega o valor inserido no campo e grava no banco
 
-  FDTable_Contatos.FieldByName('id').Required := False;
   FDTable_Contatos.FieldByName('nome').Value       := EditNome.Text;
   FDTable_Contatos.FieldByName('telefone').Value   := EditTelefone.Text;
   FDTable_Contatos.FieldByName('email').Value      := EditEmail.Text;

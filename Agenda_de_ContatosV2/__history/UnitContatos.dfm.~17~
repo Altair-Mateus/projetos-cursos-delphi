@@ -2,15 +2,16 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 398
+  ClientHeight = 417
   ClientWidth = 677
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object LabelId: TLabel
@@ -79,14 +80,14 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label_Status: TLabel
-    Left = 170
-    Top = 368
+    Left = 380
+    Top = 396
     Width = 55
-    Height = 41
+    Height = 22
   end
   object Label_StatusConBd: TLabel
-    Left = 18
-    Top = 368
+    Left = 228
+    Top = 396
     Width = 146
     Height = 13
     Caption = 'Status da Conex'#227'o com o BD: '
@@ -112,6 +113,7 @@ object Form1: TForm1
     Width = 521
     Height = 27
     Color = clInactiveBorder
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -126,6 +128,7 @@ object Form1: TForm1
     Width = 224
     Height = 27
     Color = clInactiveBorder
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -137,9 +140,10 @@ object Form1: TForm1
   object EditEmail: TEdit
     Left = 273
     Top = 123
-    Width = 225
+    Width = 353
     Height = 27
     Color = clInactiveBorder
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -151,9 +155,10 @@ object Form1: TForm1
   object MemoObservacoes: TMemo
     Left = 18
     Top = 195
-    Width = 320
+    Width = 608
     Height = 97
     Color = clInactiveBorder
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -163,7 +168,7 @@ object Form1: TForm1
     TabOrder = 4
   end
   object Button_Novo: TButton
-    Left = 137
+    Left = 212
     Top = 320
     Width = 105
     Height = 42
@@ -177,7 +182,7 @@ object Form1: TForm1
     TabOrder = 5
   end
   object Button_Salvar: TButton
-    Left = 256
+    Left = 331
     Top = 320
     Width = 105
     Height = 42
@@ -190,36 +195,35 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 6
   end
-  object Button1: TButton
-    Left = 18
-    Top = 320
-    Width = 105
-    Height = 42
-    Caption = 'Verifica Conex'#227'o com o BD'
+  object Button_ContatoAnterior: TButton
+    Left = 278
+    Top = 368
+    Width = 47
+    Height = 26
+    Caption = '<'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 7
-    WordWrap = True
-    OnClick = Button1Click
+    OnClick = Button_ContatoAnteriorClick
   end
-  object Button_BuscaPrimeiroRegistro: TButton
-    Left = 367
-    Top = 320
-    Width = 105
-    Height = 42
-    Caption = 'Busca 1'#186' Registro'
+  object Button_ProximoContato: TButton
+    Left = 331
+    Top = 368
+    Width = 47
+    Height = 26
+    Caption = '>'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 8
-    OnClick = Button_BuscaPrimeiroRegistroClick
+    OnClick = Button_ProximoContatoClick
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -231,22 +235,17 @@ object Form1: TForm1
       'Server=localhost'
       'Port=3050'
       'DriverID=FB')
-    Left = 608
-    Top = 104
+    Left = 640
+    Top = 88
   end
   object FDTable_Contatos: TFDTable
     Connection = FDConnection1
-    Left = 608
-    Top = 152
+    Left = 640
+    Top = 136
   end
   object DataSource1: TDataSource
     DataSet = FDTable_Contatos
-    Left = 608
-    Top = 208
-  end
-  object FDTable_Contato: TFDTable
-    Connection = FDConnection1
-    Left = 472
+    Left = 640
     Top = 192
   end
 end

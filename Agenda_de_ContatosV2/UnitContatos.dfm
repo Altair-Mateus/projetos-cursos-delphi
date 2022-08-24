@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Agenda de Contatos  - v2.0'
   ClientHeight = 417
   ClientWidth = 677
   Color = clWhite
@@ -82,8 +82,8 @@ object Form1: TForm1
   object Label_Status: TLabel
     Left = 380
     Top = 396
-    Width = 55
-    Height = 22
+    Width = 3
+    Height = 13
   end
   object Label_StatusConBd: TLabel
     Left = 228
@@ -180,6 +180,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    OnClick = Button_NovoClick
   end
   object Button_Salvar: TButton
     Left = 331
@@ -194,6 +195,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+    OnClick = Button_SalvarClick
   end
   object Button_ContatoAnterior: TButton
     Left = 278
@@ -239,6 +241,7 @@ object Form1: TForm1
     Top = 88
   end
   object FDTable_Contatos: TFDTable
+    BeforePost = FDTable_ContatosBeforePost
     Connection = FDConnection1
     Left = 640
     Top = 136

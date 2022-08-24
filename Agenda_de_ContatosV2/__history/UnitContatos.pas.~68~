@@ -40,7 +40,6 @@ type
     procedure Button_ContatoAnteriorClick(Sender: TObject);
     procedure Button_NovoClick(Sender: TObject);
     procedure Button_SalvarClick(Sender: TObject);
-    procedure FDTable_ContatosBeforePost(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -115,7 +114,6 @@ end;
 
 procedure TForm1.Button_SalvarClick(Sender: TObject);
 begin
-  FDTable_Contatos.Insert;
   FDTable_Contatos.Post;
   bloqueia;
 
@@ -161,25 +159,9 @@ begin
 
 end;
 
-
-procedure TForm1.FDTable_ContatosBeforePost(DataSet: TDataSet);
-begin
-
-  //  Salva os dados
-  //  Pega o valor inserido no campo e grava no banco
-
-  FDTable_Contatos.FieldByName('id').Required := False;
-  FDTable_Contatos.FieldByName('nome').Value       := EditNome.Text;
-  FDTable_Contatos.FieldByName('telefone').Value   := EditTelefone.Text;
-  FDTable_Contatos.FieldByName('email').Value      := EditEmail.Text;
-  FDTable_Contatos.FieldByName('observacoes').Value := MemoObservacoes.Text;
-
-end;
-
+//  Inicia conexão com o banco
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-
-  //  Inicia conexão com o banco
 
   //  Caminho do arquivo .FDB
   FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
