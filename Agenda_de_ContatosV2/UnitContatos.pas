@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids;
+  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -41,6 +42,9 @@ type
     DBGrid1: TDBGrid;
     Label_Tabela: TLabel;
     SpeedButton_Sair: TSpeedButton;
+    Image1: TImage;
+    SpeedButton1: TSpeedButton;
+    OpenDialog1: TOpenDialog;
     procedure bloqueia;
     procedure limpa;
     procedure carrega;
@@ -57,6 +61,7 @@ type
     procedure SpeedButton_PesquisarClick(Sender: TObject);
     procedure SpeedButton_SairClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -99,6 +104,15 @@ end;
 procedure TForm1.SpeedButton_SairClick(Sender: TObject);
 begin
   Form1.Close;
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+  opendialog1.Execute();
+  //showmessage(OpenDialog1.FileName);
+
+  Image1.Picture.LoadFromFile(OpenDialog1.FileName);
+
 end;
 
 procedure TForm1.SpeedButton_PesquisarClick(Sender: TObject);
