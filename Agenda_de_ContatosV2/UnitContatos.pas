@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Buttons;
+  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids;
 
 type
   TForm1 = class(TForm)
@@ -38,6 +38,9 @@ type
     EditPesquisa: TEdit;
     LabelPesquisar: TLabel;
     SpeedButton_Pesquisar: TSpeedButton;
+    DBGrid1: TDBGrid;
+    Label_Tabela: TLabel;
+    SpeedButton_Sair: TSpeedButton;
     procedure bloqueia;
     procedure limpa;
     procedure carrega;
@@ -52,6 +55,8 @@ type
     procedure Button_DesbloqueiaClick(Sender: TObject);
     procedure Button_CancelarClick(Sender: TObject);
     procedure SpeedButton_PesquisarClick(Sender: TObject);
+    procedure SpeedButton_SairClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -89,6 +94,11 @@ begin
   MemoObservacoes.Text := '';
 
 
+end;
+
+procedure TForm1.SpeedButton_SairClick(Sender: TObject);
+begin
+  Form1.Close;
 end;
 
 procedure TForm1.SpeedButton_PesquisarClick(Sender: TObject);
@@ -231,6 +241,11 @@ begin
 
 end;
 
+
+procedure TForm1.DBGrid1DblClick(Sender: TObject);
+begin
+  carrega;
+end;
 
 procedure TForm1.FDTable_ContatosBeforePost(DataSet: TDataSet);
 begin
