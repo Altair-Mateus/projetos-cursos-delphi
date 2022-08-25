@@ -32,6 +32,11 @@ type
     Label_StatusConBd: TLabel;
     Button_ContatoAnterior: TButton;
     Button_ProximoContato: TButton;
+    Button_Excluir: TButton;
+    Button_Editar: TButton;
+    Button_Cancelar: TButton;
+    EditPesquisa: TEdit;
+    LabelPesquisar: TLabel;
     procedure bloqueia;
     procedure limpa;
     procedure carrega;
@@ -41,6 +46,10 @@ type
     procedure Button_NovoClick(Sender: TObject);
     procedure Button_SalvarClick(Sender: TObject);
     procedure FDTable_ContatosBeforePost(DataSet: TDataSet);
+    procedure Button_ExcluirClick(Sender: TObject);
+    procedure Button_EditarClick(Sender: TObject);
+    procedure Button_DesbloqueiaClick(Sender: TObject);
+    procedure Button_CancelarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -50,6 +59,7 @@ type
 
 var
   Form1: TForm1;
+  estado: integer;
 
 implementation
 
@@ -79,6 +89,32 @@ begin
 
 end;
 
+procedure TForm1.Button_DesbloqueiaClick(Sender: TObject);
+begin
+bloqueia;
+end;
+
+procedure TForm1.Button_CancelarClick(Sender: TObject);
+begin
+
+  //  Limpa os dados
+  limpa;
+
+
+  if estado  = 1 then
+    FDTable_Contatos.Prior;
+
+  //  carrega os dados
+  carrega;
+
+  //  bloqueia as edits
+  bloqueia;
+
+  estado := 0;
+
+
+end;
+
 procedure TForm1.Button_ContatoAnteriorClick(Sender: TObject);
 begin
 
@@ -90,6 +126,23 @@ begin
 
 end;
 
+procedure TForm1.Button_EditarClick(Sender: TObject);
+begin
+
+  bloqueia;
+  FDTable_Contatos.Edit;
+
+
+end;
+
+procedure TForm1.Button_ExcluirClick(Sender: TObject);
+begin
+
+  FDTable_Contatos.Delete;
+
+  carrega;
+end;
+
 procedure TForm1.Button_NovoClick(Sender: TObject);
 begin
 
@@ -99,8 +152,12 @@ begin
   //  Limpa os campos
   limpa;
 
+  estado := 1; // post
+
   //  Coloca o cursor no EditNome
   EditNome.SetFocus;
+
+  FDTable_Contatos.Insert;
 
 end;
 
@@ -115,7 +172,7 @@ end;
 
 procedure TForm1.Button_SalvarClick(Sender: TObject);
 begin
-  FDTable_Contatos.Insert;
+
   FDTable_Contatos.Post;
   bloqueia;
 
@@ -168,7 +225,7 @@ begin
   //  Salva os dados
   //  Pega o valor inserido no campo e grava no banco
 
-  FDTable_Contatos.FieldByName('id').Required := False;
+  FDTable_Contatos.FieldByName('id').Required      := False;
   FDTable_Contatos.FieldByName('nome').Value       := EditNome.Text;
   FDTable_Contatos.FieldByName('telefone').Value   := EditTelefone.Text;
   FDTable_Contatos.FieldByName('email').Value      := EditEmail.Text;

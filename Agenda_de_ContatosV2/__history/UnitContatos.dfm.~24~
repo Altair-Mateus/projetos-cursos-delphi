@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Agenda de Contatos  - v2.0'
   ClientHeight = 417
   ClientWidth = 677
   Color = clWhite
@@ -168,7 +168,7 @@ object Form1: TForm1
     TabOrder = 4
   end
   object Button_Novo: TButton
-    Left = 212
+    Left = 93
     Top = 320
     Width = 105
     Height = 42
@@ -180,9 +180,10 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    OnClick = Button_NovoClick
   end
   object Button_Salvar: TButton
-    Left = 331
+    Left = 212
     Top = 320
     Width = 105
     Height = 42
@@ -194,6 +195,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+    OnClick = Button_SalvarClick
   end
   object Button_ContatoAnterior: TButton
     Left = 278
@@ -225,6 +227,34 @@ object Form1: TForm1
     TabOrder = 8
     OnClick = Button_ProximoContatoClick
   end
+  object Button_Excluir: TButton
+    Left = 451
+    Top = 320
+    Width = 105
+    Height = 42
+    Caption = 'EXCLUIR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 9
+  end
+  object Button_Editar: TButton
+    Left = 331
+    Top = 320
+    Width = 105
+    Height = 42
+    Caption = 'EDITAR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       
@@ -239,6 +269,7 @@ object Form1: TForm1
     Top = 88
   end
   object FDTable_Contatos: TFDTable
+    BeforePost = FDTable_ContatosBeforePost
     Connection = FDConnection1
     Left = 640
     Top = 136

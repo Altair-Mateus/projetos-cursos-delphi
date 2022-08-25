@@ -32,6 +32,9 @@ type
     Label_StatusConBd: TLabel;
     Button_ContatoAnterior: TButton;
     Button_ProximoContato: TButton;
+    Button_Excluir: TButton;
+    Button_Editar: TButton;
+    Button_Desbloqueia: TButton;
     procedure bloqueia;
     procedure limpa;
     procedure carrega;
@@ -40,6 +43,10 @@ type
     procedure Button_ContatoAnteriorClick(Sender: TObject);
     procedure Button_NovoClick(Sender: TObject);
     procedure Button_SalvarClick(Sender: TObject);
+    procedure FDTable_ContatosBeforePost(DataSet: TDataSet);
+    procedure Button_ExcluirClick(Sender: TObject);
+    procedure Button_EditarClick(Sender: TObject);
+    procedure Button_DesbloqueiaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -78,6 +85,11 @@ begin
 
 end;
 
+procedure TForm1.Button_DesbloqueiaClick(Sender: TObject);
+begin
+bloqueia;
+end;
+
 procedure TForm1.Button_ContatoAnteriorClick(Sender: TObject);
 begin
 
@@ -87,6 +99,25 @@ begin
   //  Carrega os dados
   carrega;
 
+end;
+
+procedure TForm1.Button_EditarClick(Sender: TObject);
+begin
+
+  bloqueia;
+  FDTable_Contatos.Edit;
+
+
+  showmessage('Dados Editados!');
+
+end;
+
+procedure TForm1.Button_ExcluirClick(Sender: TObject);
+begin
+
+  FDTable_Contatos.Delete;
+
+  carrega;
 end;
 
 procedure TForm1.Button_NovoClick(Sender: TObject);
@@ -101,6 +132,8 @@ begin
   //  Coloca o cursor no EditNome
   EditNome.SetFocus;
 
+  FDTable_Contatos.Insert;
+
 end;
 
 procedure TForm1.Button_ProximoContatoClick(Sender: TObject);
@@ -114,6 +147,7 @@ end;
 
 procedure TForm1.Button_SalvarClick(Sender: TObject);
 begin
+
   FDTable_Contatos.Post;
   bloqueia;
 
@@ -159,9 +193,25 @@ begin
 
 end;
 
-//  Inicia conexão com o banco
+
+procedure TForm1.FDTable_ContatosBeforePost(DataSet: TDataSet);
+begin
+
+  //  Salva os dados
+  //  Pega o valor inserido no campo e grava no banco
+
+  FDTable_Contatos.FieldByName('id').Required      := False;
+  FDTable_Contatos.FieldByName('nome').Value       := EditNome.Text;
+  FDTable_Contatos.FieldByName('telefone').Value   := EditTelefone.Text;
+  FDTable_Contatos.FieldByName('email').Value      := EditEmail.Text;
+  FDTable_Contatos.FieldByName('observacoes').Value := MemoObservacoes.Text;
+
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+
+  //  Inicia conexão com o banco
 
   //  Caminho do arquivo .FDB
   FDConnection1.Params.Database := 'D:\Projetos Desenvolvimento\Delphi\Agenda_de_ContatosV2\Dados\AGENDACONTATOS.FDB';
