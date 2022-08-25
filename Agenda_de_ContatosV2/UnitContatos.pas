@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Buttons;
 
 type
   TForm1 = class(TForm)
@@ -37,6 +37,7 @@ type
     Button_Cancelar: TButton;
     EditPesquisa: TEdit;
     LabelPesquisar: TLabel;
+    SpeedButton_Pesquisar: TSpeedButton;
     procedure bloqueia;
     procedure limpa;
     procedure carrega;
@@ -50,6 +51,7 @@ type
     procedure Button_EditarClick(Sender: TObject);
     procedure Button_DesbloqueiaClick(Sender: TObject);
     procedure Button_CancelarClick(Sender: TObject);
+    procedure SpeedButton_PesquisarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -85,6 +87,17 @@ begin
   EditTelefone.Text    := '';
   EditEmail.Text       := '';
   MemoObservacoes.Text := '';
+
+
+end;
+
+procedure TForm1.SpeedButton_PesquisarClick(Sender: TObject);
+begin
+
+  if not FDTable_Contatos.FindKey([EditPesquisa.Text]) then
+    showmessage('Não encontrado!')
+  else
+    carrega;
 
 
 end;
