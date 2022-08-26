@@ -77,6 +77,8 @@ implementation
 
 {$R *.dfm}
 
+uses UnitLogin;
+
 //  Bloqueia/Desbloqueia os Edit
 procedure TForm1.bloqueia;
 begin
@@ -103,7 +105,8 @@ end;
 
 procedure TForm1.SpeedButton_SairClick(Sender: TObject);
 begin
-  Form1.Close;
+  Form1.hide;
+  Form2.show;
 end;
 
 procedure TForm1.SpeedButton1Click(Sender: TObject);
@@ -112,6 +115,10 @@ begin
   //showmessage(OpenDialog1.FileName);
 
   Image1.Picture.LoadFromFile(OpenDialog1.FileName);
+
+  FDTable_Contatos.Edit;
+  FDTable_Contatos.FieldByName('imagem_perfil').Value := OpenDialog1.FileName;
+  FDTable_Contatos.Post;
 
 end;
 
@@ -251,7 +258,20 @@ begin
     MemoObservacoes.Text := FDTable_Contatos.FieldByName('observacoes').Value;
   end;
 
+  if FDTable_Contatos.FieldByName('foto_perfil').Value <> null  then
+  begin
 
+    if fileexists(FDTable_Contatos.FieldByName('foto_perfil').Value) then
+    begin
+      Image1.Picture.LoadFromFile(FDTable_Contatos.FieldByName('foto_perfil').Value)
+    end
+
+  else
+  Image1.Picture := nil;
+
+
+
+  end;
 
 end;
 
