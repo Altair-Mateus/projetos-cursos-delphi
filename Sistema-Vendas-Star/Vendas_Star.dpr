@@ -2,13 +2,13 @@ program Vendas_Star;
 
 uses
   Vcl.Forms,
-  UnitPrincipal in 'UnitPrincipal.pas' {Form1};
+  UnitPrincipal in 'UnitPrincipal.pas' {formPrincipal};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TformPrincipal, formPrincipal);
   Application.Run;
 end.
