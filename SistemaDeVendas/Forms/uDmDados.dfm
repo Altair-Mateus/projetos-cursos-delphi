@@ -1,5 +1,6 @@
 object dmDados: TdmDados
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 360
   Width = 610
   object FDConnection: TFDConnection
@@ -14,7 +15,7 @@ object dmDados: TdmDados
       'Server=localhost'
       'DriverID=FB')
     LoginPrompt = False
-    Left = 24
+    Left = 32
     Top = 16
   end
 end
