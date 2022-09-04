@@ -87,6 +87,7 @@
         <DCC_DcuOutput>D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\dcu\</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>icons\principal.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -107,10 +108,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Forms\uDmDados.pas">
-            <Form>DataModule1</Form>
+            <Form>dmDados</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="Classes\uBiblioteca.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -138,7 +140,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\prjVendas.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Exe\prjVendas.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>prjVendas.exe</RemoteName>
                         <Overwrite>true</Overwrite>
