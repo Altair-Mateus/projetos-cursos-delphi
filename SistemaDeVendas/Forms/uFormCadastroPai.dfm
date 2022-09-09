@@ -1,0 +1,117 @@
+object FormCadastroPai: TFormCadastroPai
+  Left = 0
+  Top = 0
+  BorderStyle = bsSingle
+  Caption = 'FormCadastroPai'
+  ClientHeight = 375
+  ClientWidth = 719
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PanelCabecalho: TPanel
+    Left = 0
+    Top = 0
+    Width = 719
+    Height = 41
+    Align = alTop
+    TabOrder = 0
+    object BitBtnNovo: TBitBtn
+      Left = 9
+      Top = 1
+      Width = 81
+      Height = 41
+      Caption = 'Novo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtnNovoClick
+    end
+    object BitBtnSalvar: TBitBtn
+      Left = 96
+      Top = 1
+      Width = 81
+      Height = 41
+      Caption = 'Salvar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BitBtnSalvarClick
+    end
+    object BitBtnCancelar: TBitBtn
+      Left = 192
+      Top = 1
+      Width = 81
+      Height = 41
+      Caption = 'Cancelar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BitBtnCancelarClick
+    end
+    object BitBtnExcluir: TBitBtn
+      Left = 288
+      Top = 1
+      Width = 81
+      Height = 41
+      Caption = 'Excluir'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = BitBtnExcluirClick
+    end
+    object BitBtnSair: TBitBtn
+      Left = 632
+      Top = 1
+      Width = 81
+      Height = 41
+      Caption = 'SAIR'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = BitBtnSairClick
+    end
+  end
+  object FDQueryCadastro: TFDQuery
+    Transaction = FDTransactionCadastro
+    UpdateObject = FDUpdateSQLCadastro
+    Left = 624
+    Top = 216
+  end
+  object FDUpdateSQLCadastro: TFDUpdateSQL
+    Connection = dmDados.FDConnection
+    Left = 624
+    Top = 264
+  end
+  object FDTransactionCadastro: TFDTransaction
+    Connection = dmDados.FDConnection
+    Left = 624
+    Top = 312
+  end
+end

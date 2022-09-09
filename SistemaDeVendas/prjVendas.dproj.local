@@ -5,16 +5,19 @@
     <Transaction>2022/08/09 20:12:59.000.059,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2022/08/26 20:43:41.000.266,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2022/09/04 15:49:49.000.542,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 15:53:32.000.418,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormMain.dfm</Transaction>
     <Transaction>2022/09/04 15:53:32.000.418,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormMain.pas</Transaction>
+    <Transaction>2022/09/04 15:53:32.000.418,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormMain.dfm</Transaction>
     <Transaction>2022/09/04 15:53:59.000.150,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\prjVendas.dproj</Transaction>
     <Transaction>2022/09/04 16:11:23.000.571,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
     <Transaction>2022/09/04 16:14:02.000.259,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uDmDados.dfm</Transaction>
     <Transaction>2022/09/04 16:14:02.000.259,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uDmDados.pas</Transaction>
     <Transaction>2022/09/04 16:30:52.000.797,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
     <Transaction>2022/09/04 16:31:38.000.212,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Classes\uBiblioteca.pas</Transaction>
-    <Transaction>2022/09/04 17:11:10.773,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 17:12:01.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 17:12:01.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/04 17:11:10.000.773,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/04 17:12:01.000.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/04 17:12:01.000.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/04 19:09:08.000.201,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/04 19:11:02.000.677,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroPai.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/04 19:11:02.000.677,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroPai.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

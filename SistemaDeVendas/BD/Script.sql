@@ -14,6 +14,7 @@ CREATE TABLE cliente
 	bairro varchar(50),
 	ie varchar(30),
 	im varchar(30),
+	DT_EXCLUIDO DATE,
 	PRIMARY KEY (id_cliente)
 
 );
