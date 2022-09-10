@@ -13,6 +13,7 @@ object FormCadastroPai: TFormCadastroPai
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelCabecalho: TPanel
@@ -99,6 +100,7 @@ object FormCadastroPai: TFormCadastroPai
     end
   end
   object FDQueryCadastro: TFDQuery
+    Connection = dmDados.FDConnection
     Transaction = FDTransactionCadastro
     UpdateObject = FDUpdateSQLCadastro
     Left = 624
@@ -113,5 +115,10 @@ object FormCadastroPai: TFormCadastroPai
     Connection = dmDados.FDConnection
     Left = 624
     Top = 312
+  end
+  object DataSourceCadastro: TDataSource
+    DataSet = FDQueryCadastro
+    Left = 624
+    Top = 160
   end
 end

@@ -10,9 +10,21 @@ object FormMain: TFormMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesktopCenter
   WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
+  object MainMenu1: TMainMenu
+    Left = 704
+    Top = 200
+    object Cadastros1: TMenuItem
+      Caption = 'Cadastros'
+      object Clientes1: TMenuItem
+        Caption = 'Clientes'
+        OnClick = Clientes1Click
+      end
+    end
+  end
 end

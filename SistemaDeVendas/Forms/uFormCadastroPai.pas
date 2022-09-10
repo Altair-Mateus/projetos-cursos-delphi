@@ -21,11 +21,14 @@ type
     FDQueryCadastro: TFDQuery;
     FDUpdateSQLCadastro: TFDUpdateSQL;
     FDTransactionCadastro: TFDTransaction;
+    DataSourceCadastro: TDataSource;
     procedure BitBtnNovoClick(Sender: TObject);
     procedure BitBtnSalvarClick(Sender: TObject);
     procedure BitBtnCancelarClick(Sender: TObject);
     procedure BitBtnExcluirClick(Sender: TObject);
     procedure BitBtnSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -56,6 +59,7 @@ begin
 
 end;
 
+
 procedure TFormCadastroPai.BitBtnExcluirClick(Sender: TObject);
 begin
 
@@ -65,11 +69,16 @@ begin
   //  Localiza o campo da tabela e define o valor da variavel Date
   FDQueryCadastro.FieldByName('DT_EXCLUIDO').AsDateTime := Date;
 
+  //  Inicia a transacao
+  FDTransactionCadastro.StartTransaction;
+
   //  Grava no BD
   FDQueryCadastro.Post;
 
   //  Mantem a transacao aberta
   FDTransactionCadastro.CommitRetaining;
+
+  ShowMessage('Cadastro Excluído!');
 
 end;
 
@@ -100,12 +109,26 @@ begin
 
   if FDQueryCadastro.State in [dsEdit, dsInsert] then
   begin
+
+    //  Inicia a transacao
+    FDTransactionCadastro.StartTransaction;
+
     // Grava no banco de dados
     FDQueryCadastro.Post;
 
     //  Mantem a transacao aberta
     FDTransactionCadastro.CommitRetaining;
+
+    ShowMessage('Cadastro Salvo!')
   end;
+
+end;
+
+procedure TFormCadastroPai.FormCreate(Sender: TObject);
+begin
+
+  // Abre a query
+  FDQueryCadastro.Open();
 
 end;
 
