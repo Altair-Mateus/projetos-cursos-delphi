@@ -1,5 +1,6 @@
 inherited FormCadastroCliente: TFormCadastroCliente
   Caption = 'Cadastro de Cliente'
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -8,7 +9,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 58
     Height = 13
     Caption = 'ID_CLIENTE'
-    FocusControl = DBEdit1
+    FocusControl = DBEditCliente
   end
   object Label2: TLabel [1]
     Left = 112
@@ -16,7 +17,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 78
     Height = 13
     Caption = 'RAZAO_SOCIAL'
-    FocusControl = DBEdit2
+    FocusControl = DBEditRazaoSocial
   end
   object Label3: TLabel [2]
     Left = 328
@@ -24,7 +25,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 50
     Height = 13
     Caption = 'FANTASIA'
-    FocusControl = DBEdit3
+    FocusControl = DBEditFantasia
   end
   object Label4: TLabel [3]
     Left = 544
@@ -32,7 +33,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 50
     Height = 13
     Caption = 'CPF_CNPJ'
-    FocusControl = DBEdit4
+    FocusControl = DBEditCnpj
   end
   object Label5: TLabel [4]
     Left = 8
@@ -47,7 +48,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 29
     Height = 13
     Caption = 'NOME'
-    FocusControl = DBEdit5
+    FocusControl = DBEditNome
   end
   object Label7: TLabel [6]
     Left = 464
@@ -55,7 +56,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 30
     Height = 13
     Caption = 'EMAIL'
-    FocusControl = DBEdit6
+    FocusControl = DBEditEmail
   end
   object Label8: TLabel [7]
     Left = 9
@@ -63,7 +64,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 22
     Height = 13
     Caption = 'SITE'
-    FocusControl = DBEdit7
+    FocusControl = DBEditSite
   end
   object Label9: TLabel [8]
     Left = 224
@@ -71,7 +72,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 54
     Height = 13
     Caption = 'ENDERECO'
-    FocusControl = DBEdit8
+    FocusControl = DBEditEndereco
   end
   object Label10: TLabel [9]
     Left = 497
@@ -79,7 +80,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 75
     Height = 13
     Caption = 'COMPLEMENTO'
-    FocusControl = DBEdit9
+    FocusControl = DBEditComplemento
   end
   object Label11: TLabel [10]
     Left = 8
@@ -87,7 +88,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 43
     Height = 13
     Caption = 'NUMERO'
-    FocusControl = DBEdit10
+    FocusControl = DBEditNumero
   end
   object Label12: TLabel [11]
     Left = 112
@@ -95,7 +96,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 39
     Height = 13
     Caption = 'BAIRRO'
-    FocusControl = DBEdit11
+    FocusControl = DBEditBairro
   end
   object Label13: TLabel [12]
     Left = 375
@@ -103,7 +104,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 12
     Height = 13
     Caption = 'IM'
-    FocusControl = DBEdit12
+    FocusControl = DBEditIm
   end
   object Label14: TLabel [13]
     Left = 547
@@ -111,9 +112,23 @@ inherited FormCadastroCliente: TFormCadastroCliente
     Width = 10
     Height = 13
     Caption = 'IE'
-    FocusControl = DBEdit13
+    FocusControl = DBEditIe
   end
-  object DBEdit1: TDBEdit [15]
+  object Label15: TLabel [14]
+    Left = 8
+    Top = 288
+    Width = 38
+    Height = 13
+    Caption = 'CIDADE'
+  end
+  object Label16: TLabel [15]
+    Left = 167
+    Top = 288
+    Width = 40
+    Height = 13
+    Caption = 'ESTADO'
+  end
+  object DBEditCliente: TDBEdit [17]
     Left = 8
     Top = 83
     Width = 89
@@ -124,7 +139,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     ShowHint = False
     TabOrder = 1
   end
-  object DBEdit2: TDBEdit [16]
+  object DBEditRazaoSocial: TDBEdit [18]
     Left = 112
     Top = 83
     Width = 200
@@ -133,7 +148,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 2
   end
-  object DBEdit3: TDBEdit [17]
+  object DBEditFantasia: TDBEdit [19]
     Left = 328
     Top = 83
     Width = 200
@@ -142,7 +157,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 3
   end
-  object DBEdit4: TDBEdit [18]
+  object DBEditCnpj: TDBEdit [20]
     Left = 544
     Top = 83
     Width = 153
@@ -151,7 +166,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 4
   end
-  object DBComboBoxTipoFJ: TDBComboBox [19]
+  object DBComboBoxTipoFJ: TDBComboBox [21]
     Left = 8
     Top = 139
     Width = 121
@@ -163,7 +178,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
       'JUR'#205'DICA')
     TabOrder = 5
   end
-  object DBEdit5: TDBEdit [20]
+  object DBEditNome: TDBEdit [22]
     Left = 144
     Top = 139
     Width = 305
@@ -172,7 +187,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 6
   end
-  object DBEdit6: TDBEdit [21]
+  object DBEditEmail: TDBEdit [23]
     Left = 464
     Top = 139
     Width = 233
@@ -181,7 +196,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 7
   end
-  object DBEdit7: TDBEdit [22]
+  object DBEditSite: TDBEdit [24]
     Left = 9
     Top = 192
     Width = 200
@@ -190,7 +205,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 8
   end
-  object DBEdit8: TDBEdit [23]
+  object DBEditEndereco: TDBEdit [25]
     Left = 224
     Top = 192
     Width = 257
@@ -199,7 +214,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 9
   end
-  object DBEdit9: TDBEdit [24]
+  object DBEditComplemento: TDBEdit [26]
     Left = 497
     Top = 192
     Width = 200
@@ -208,7 +223,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 10
   end
-  object DBEdit10: TDBEdit [25]
+  object DBEditNumero: TDBEdit [27]
     Left = 8
     Top = 248
     Width = 89
@@ -217,7 +232,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 11
   end
-  object DBEdit11: TDBEdit [26]
+  object DBEditBairro: TDBEdit [28]
     Left = 112
     Top = 248
     Width = 249
@@ -226,7 +241,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 12
   end
-  object DBEdit12: TDBEdit [27]
+  object DBEditIm: TDBEdit [29]
     Left = 375
     Top = 248
     Width = 153
@@ -235,7 +250,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataSource = DataSourceCadastro
     TabOrder = 13
   end
-  object DBEdit13: TDBEdit [28]
+  object DBEditIe: TDBEdit [30]
     Left = 544
     Top = 248
     Width = 153
@@ -243,6 +258,30 @@ inherited FormCadastroCliente: TFormCadastroCliente
     DataField = 'IE'
     DataSource = DataSourceCadastro
     TabOrder = 14
+  end
+  object DBLookupComboBoxCidade: TDBLookupComboBox [31]
+    Left = 8
+    Top = 307
+    Width = 145
+    Height = 21
+    DataField = 'ID_CIDADE'
+    DataSource = DataSourceCadastro
+    KeyField = 'ID_CIDADE'
+    ListField = 'NOME'
+    ListSource = DataModuleLookup.DataSourceCidade
+    TabOrder = 15
+  end
+  object DBLookupComboBoxEstado: TDBLookupComboBox [32]
+    Left = 167
+    Top = 307
+    Width = 74
+    Height = 21
+    DataField = 'ID_ESTADO'
+    DataSource = DataSourceCadastro
+    KeyField = 'ID_ESTADO'
+    ListField = 'SIGLA'
+    ListSource = DataModuleLookup.DataSourceEstados
+    TabOrder = 16
   end
   inherited FDQueryCadastro: TFDQuery
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
@@ -323,6 +362,14 @@ inherited FormCadastroCliente: TFormCadastroCliente
       FieldName = 'BAIRRO'
       Origin = 'BAIRRO'
       Size = 50
+    end
+    object FDQueryCadastroID_CIDADE: TIntegerField
+      FieldName = 'ID_CIDADE'
+      Origin = 'ID_CIDADE'
+    end
+    object FDQueryCadastroID_ESTADO: TIntegerField
+      FieldName = 'ID_ESTADO'
+      Origin = 'ID_ESTADO'
     end
   end
 end

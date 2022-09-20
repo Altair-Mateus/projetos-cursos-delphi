@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, uLookup;
 
 type
   TFormCadastroCliente = class(TFormCadastroPai)
@@ -28,33 +28,40 @@ type
     FDQueryCadastroDT_EXCLUIDO: TDateField;
     Label1: TLabel;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
+    DBEditRazaoSocial: TDBEdit;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    DBEditFantasia: TDBEdit;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
+    DBEditCnpj: TDBEdit;
     Label5: TLabel;
     DBComboBoxTipoFJ: TDBComboBox;
-    DBEdit1: TDBEdit;
+    DBEditCliente: TDBEdit;
     Label6: TLabel;
-    DBEdit5: TDBEdit;
+    DBEditNome: TDBEdit;
     Label7: TLabel;
-    DBEdit6: TDBEdit;
+    DBEditEmail: TDBEdit;
     Label8: TLabel;
-    DBEdit7: TDBEdit;
+    DBEditSite: TDBEdit;
     Label9: TLabel;
-    DBEdit8: TDBEdit;
+    DBEditEndereco: TDBEdit;
     Label10: TLabel;
-    DBEdit9: TDBEdit;
+    DBEditComplemento: TDBEdit;
     FDQueryCadastroBAIRRO: TWideStringField;
     Label11: TLabel;
-    DBEdit10: TDBEdit;
+    DBEditNumero: TDBEdit;
     Label12: TLabel;
-    DBEdit11: TDBEdit;
+    DBEditBairro: TDBEdit;
     Label13: TLabel;
-    DBEdit12: TDBEdit;
+    DBEditIm: TDBEdit;
     Label14: TLabel;
-    DBEdit13: TDBEdit;
+    DBEditIe: TDBEdit;
+    FDQueryCadastroID_CIDADE: TIntegerField;
+    FDQueryCadastroID_ESTADO: TIntegerField;
+    Label15: TLabel;
+    Label16: TLabel;
+    DBLookupComboBoxCidade: TDBLookupComboBox;
+    DBLookupComboBoxEstado: TDBLookupComboBox;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,5 +74,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormCadastroCliente.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  //  Abre a query de estados
+  DataModuleLookup.FDQueryEstados.Open();
+  //  Mostra todos os resultados da query
+  DataModuleLookup.FDQueryEstados.FetchAll;
+
+  //  Abre a query de cidades
+  DataModuleLookup.FDQueryCidade.Open();
+  //  Mostra todos os resultados da query
+  DataModuleLookup.FDQueryCidade.FetchAll;
+
+end;
 
 end.

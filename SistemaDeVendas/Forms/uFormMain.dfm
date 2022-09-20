@@ -25,6 +25,14 @@ object FormMain: TFormMain
         Caption = 'Clientes'
         OnClick = Clientes1Click
       end
+      object Estados1: TMenuItem
+        Caption = 'Estados'
+        OnClick = Estados1Click
+      end
+      object Cidades1: TMenuItem
+        Caption = 'Cidades'
+        OnClick = Cidades1Click
+      end
     end
   end
 end

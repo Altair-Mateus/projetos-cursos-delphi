@@ -18,3 +18,21 @@ CREATE TABLE cliente
 	PRIMARY KEY (id_cliente)
 
 );
+
+
+CREATE TABLE cidade 
+(
+	id_cidade integer NOT NULL,
+	nome varchar(60),
+	PRIMARY KEY (id_cidade)
+
+);
+
+CREATE TABLE estado 
+(
+	id_estado integer NOT NULL,
+	nome varchar(60),
+	sigla varchar(2),
+	PRIMARY KEY (id_estado)
+
+);
