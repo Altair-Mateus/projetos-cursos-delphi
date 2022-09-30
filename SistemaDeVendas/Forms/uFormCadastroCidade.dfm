@@ -2,6 +2,7 @@ inherited FormCadastroCidade: TFormCadastroCidade
   Caption = 'Cadastro de Cidades'
   ClientHeight = 265
   ClientWidth = 576
+  Position = poScreenCenter
   ExplicitWidth = 582
   ExplicitHeight = 294
   PixelsPerInch = 96

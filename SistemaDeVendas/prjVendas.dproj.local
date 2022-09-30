@@ -17,8 +17,8 @@
     <Transaction>2022/09/04 17:12:01.000.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
     <Transaction>2022/09/04 17:12:01.000.090,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormConfigBanco.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
     <Transaction>2022/09/04 19:09:08.000.201,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 19:11:02.000.677,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroPai.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
     <Transaction>2022/09/04 19:11:02.000.677,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroPai.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/04 19:11:02.000.677,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroPai.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
     <Transaction>2022/09/09 20:44:33.000.474,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
     <Transaction>2022/09/09 20:45:44.000.697,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroClientes.pas</Transaction>
     <Transaction>2022/09/09 20:45:44.000.697,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroClientes.dfm</Transaction>
@@ -26,13 +26,20 @@
     <Transaction>2022/09/15 20:18:05.000.904,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroEstado.pas</Transaction>
     <Transaction>2022/09/15 20:18:05.000.904,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroEstado.dfm</Transaction>
     <Transaction>2022/09/15 20:30:02.000.639,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/15 20:32:10.000.372,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroCidade.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
     <Transaction>2022/09/15 20:32:10.000.372,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroCidade.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/15 20:32:10.000.372,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormCadastroCidade.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
     <Transaction>2022/09/15 21:02:48.000.853,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
     <Transaction>2022/09/15 21:03:18.000.752,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Shared\uLookup.dfm</Transaction>
     <Transaction>2022/09/15 21:03:18.000.752,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Shared\uLookup.pas</Transaction>
-    <Transaction>2022/09/20 16:03:20.126,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/20 16:06:59.632,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroPai.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
-    <Transaction>2022/09/20 16:06:59.632,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroPai.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/20 16:03:20.000.126,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/20 16:06:59.000.632,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroPai.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/20 16:06:59.000.632,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroPai.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/20 17:33:50.000.937,=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/20 17:34:12.000.773,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.pas</Transaction>
+    <Transaction>2022/09/20 17:34:12.000.773,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/09/21 19:12:18.000.837,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormPesquisaClientes.dfm</Transaction>
+    <Transaction>2022/09/21 19:12:18.000.837,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormPesquisaClientes.pas</Transaction>
+    <Transaction>2022/09/21 19:12:45.000.634,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormPesquisaClientes.pas=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.pas</Transaction>
+    <Transaction>2022/09/21 19:12:45.000.634,D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormPesquisaClientes.dfm=D:\Projetos Desenvolvimento\Delphi\SistemaDeVendas\Forms\uFormFiltroClientes.dfm</Transaction>
   </Transactions>
 </BorlandProject>

@@ -2,6 +2,7 @@ inherited FormCadastroEstado: TFormCadastroEstado
   Caption = 'Cadastro de Estados'
   ClientHeight = 273
   ClientWidth = 559
+  Position = poScreenCenter
   ExplicitWidth = 565
   ExplicitHeight = 302
   PixelsPerInch = 96

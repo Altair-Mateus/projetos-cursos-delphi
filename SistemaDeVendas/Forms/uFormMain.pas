@@ -8,18 +8,22 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
-  Vcl.Menus, uFormCadastroClientes, uFormCadastroEstado, uFormCadastroCidade;
+  Vcl.Menus, uFormCadastroClientes, uFormCadastroEstado, uFormCadastroCidade,
+  uFormFiltroClientes;
 
 type
   TFormMain = class(TForm)
     MainMenu1: TMainMenu;
-    Cadastros1: TMenuItem;
-    Clientes1: TMenuItem;
-    Estados1: TMenuItem;
-    Cidades1: TMenuItem;
-    procedure Clientes1Click(Sender: TObject);
-    procedure Cidades1Click(Sender: TObject);
-    procedure Estados1Click(Sender: TObject);
+    Cadastros: TMenuItem;
+    CadClientes: TMenuItem;
+    CadEstados: TMenuItem;
+    CadCidades: TMenuItem;
+    Pesquisar: TMenuItem;
+    PesqClientes: TMenuItem;
+    procedure CadClientesClick(Sender: TObject);
+    procedure CadCidadesClick(Sender: TObject);
+    procedure CadEstadosClick(Sender: TObject);
+    procedure PesqClientesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +38,7 @@ implementation
 {$R *.dfm}
 
 
-procedure TFormMain.Cidades1Click(Sender: TObject);
+procedure TFormMain.CadCidadesClick(Sender: TObject);
 begin
 
   //  Cria o Form
@@ -54,7 +58,7 @@ begin
 
 end;
 
-procedure TFormMain.Clientes1Click(Sender: TObject);
+procedure TFormMain.CadClientesClick(Sender: TObject);
 begin
 
   //  Cria o form
@@ -73,7 +77,26 @@ begin
   end;
 end;
 
-procedure TFormMain.Estados1Click(Sender: TObject);
+procedure TFormMain.PesqClientesClick(Sender: TObject);
+begin
+
+
+
+  try
+
+    //  Cria o form
+    FormFiltroCliente := TFormFiltroCliente.Create(Self);
+
+    //  Exibe o Form
+    FormFiltroCliente.ShowModal;
+
+  finally
+
+  end;
+
+end;
+
+procedure TFormMain.CadEstadosClick(Sender: TObject);
 begin
 
   //  Cria o form

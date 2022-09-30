@@ -62,6 +62,7 @@ type
     DBLookupComboBoxCidade: TDBLookupComboBox;
     DBLookupComboBoxEstado: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
+    procedure FDQueryCadastroBeforeEdit(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -74,6 +75,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormCadastroCliente.FDQueryCadastroBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+
+  // Coloca o cursor no campo razao social
+  //  quando os componentes ja estiverem visiveis
+  if Self.Visible then
+  begin
+
+    DBEditRazaoSocial.SetFocus;
+
+  end;
+
+end;
 
 procedure TFormCadastroCliente.FormShow(Sender: TObject);
 begin
@@ -88,6 +104,10 @@ begin
   DataModuleLookup.FDQueryCidade.Open();
   //  Mostra todos os resultados da query
   DataModuleLookup.FDQueryCidade.FetchAll;
+
+  //  Coloca o cursor no campo razao social
+  DBEditRazaoSocial.SetFocus;
+
 
 end;
 

@@ -19,19 +19,26 @@ object FormMain: TFormMain
   object MainMenu1: TMainMenu
     Left = 704
     Top = 200
-    object Cadastros1: TMenuItem
+    object Cadastros: TMenuItem
       Caption = 'Cadastros'
-      object Clientes1: TMenuItem
+      object CadClientes: TMenuItem
         Caption = 'Clientes'
-        OnClick = Clientes1Click
+        OnClick = CadClientesClick
       end
-      object Estados1: TMenuItem
+      object CadEstados: TMenuItem
         Caption = 'Estados'
-        OnClick = Estados1Click
+        OnClick = CadEstadosClick
       end
-      object Cidades1: TMenuItem
+      object CadCidades: TMenuItem
         Caption = 'Cidades'
-        OnClick = Cidades1Click
+        OnClick = CadCidadesClick
+      end
+    end
+    object Pesquisar: TMenuItem
+      Caption = 'Pesquisar'
+      object PesqClientes: TMenuItem
+        Caption = 'Clientes'
+        OnClick = PesqClientesClick
       end
     end
   end

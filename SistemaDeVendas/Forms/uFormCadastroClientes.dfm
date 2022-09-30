@@ -1,5 +1,6 @@
 inherited FormCadastroCliente: TFormCadastroCliente
   Caption = 'Cadastro de Cliente'
+  Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -284,6 +285,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     TabOrder = 16
   end
   inherited FDQueryCadastro: TFDQuery
+    BeforeEdit = FDQueryCadastroBeforeEdit
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
     UpdateOptions.FetchGeneratorsPoint = gpImmediate
     UpdateOptions.GeneratorName = 'GEN_CLIENTE_ID'

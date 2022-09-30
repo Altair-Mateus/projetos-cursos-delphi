@@ -11,7 +11,8 @@ uses
   uFormCadastroEstado in 'Forms\uFormCadastroEstado.pas' {FormCadastroEstado},
   uFormCadastroCidade in 'Forms\uFormCadastroCidade.pas' {FormCadastroCidade},
   uLookup in 'Shared\uLookup.pas' {DataModuleLookup: TDataModule},
-  uFormFiltroPai in 'Forms\uFormFiltroPai.pas' {FormFiltroPai};
+  uFormFiltroPai in 'Forms\uFormFiltroPai.pas' {FormFiltroPai},
+  uFormFiltroClientes in 'Forms\uFormFiltroClientes.pas' {FormFiltroCliente};
 
 {$R *.res}
 
