@@ -135,6 +135,7 @@ begin
 
     //  Libera da memoria
     FreeAndNil(FormCadastroCliente);
+
   end;
 
 end;

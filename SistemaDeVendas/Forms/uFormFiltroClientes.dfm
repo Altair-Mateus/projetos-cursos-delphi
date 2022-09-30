@@ -83,7 +83,6 @@ inherited FormFiltroCliente: TFormFiltroCliente
       Left = 616
       Top = 13
       TabOrder = 6
-      OnClick = ButtonVisualizarClick
       ExplicitLeft = 616
       ExplicitTop = 13
     end
