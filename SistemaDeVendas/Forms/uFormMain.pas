@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   Vcl.Menus, uFormCadastroClientes, uFormCadastroEstado, uFormCadastroCidade,
-  uFormFiltroClientes;
+  uFormFiltroClientes, uFormCadastroFornecedor;
 
 type
   TFormMain = class(TForm)
@@ -20,10 +20,12 @@ type
     CadCidades: TMenuItem;
     Pesquisar: TMenuItem;
     PesqClientes: TMenuItem;
+    Fornecedores1: TMenuItem;
     procedure CadClientesClick(Sender: TObject);
     procedure CadCidadesClick(Sender: TObject);
     procedure CadEstadosClick(Sender: TObject);
     procedure PesqClientesClick(Sender: TObject);
+    procedure Fornecedores1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -113,6 +115,26 @@ begin
     FreeAndNil(FormCadastroEstado);
 
   end;
+end;
+
+procedure TFormMain.Fornecedores1Click(Sender: TObject);
+begin
+
+  //  Cria o form
+  FormCadastroFornecedor := TFormCadastroFornecedor.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    FormCadastroFornecedor.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(FormCadastroFornecedor);
+
+  end;
+
 end;
 
 end.

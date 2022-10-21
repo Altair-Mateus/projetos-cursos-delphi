@@ -1,5 +1,6 @@
 inherited FormCadastroFornecedor: TFormCadastroFornecedor
-  Caption = 'Cadastro de Fornecedor'
+  Caption = ' '
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -8,7 +9,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 86
     Height = 13
     Caption = 'ID_FORNECEDOR'
-    FocusControl = DBEdit1
+    FocusControl = DBEditIdFornecedor
   end
   object Label2: TLabel [1]
     Left = 128
@@ -16,7 +17,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 78
     Height = 13
     Caption = 'RAZAO_SOCIAL'
-    FocusControl = DBEdit2
+    FocusControl = DBEditRazaoSocial
   end
   object Label3: TLabel [2]
     Left = 400
@@ -24,7 +25,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 50
     Height = 13
     Caption = 'FANTASIA'
-    FocusControl = DBEdit3
+    FocusControl = DBEditFantasia
   end
   object Label4: TLabel [3]
     Left = 24
@@ -32,7 +33,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 25
     Height = 13
     Caption = 'CNPJ'
-    FocusControl = DBEdit4
+    FocusControl = DBEditCnpj
   end
   object Label5: TLabel [4]
     Left = 192
@@ -40,7 +41,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 54
     Height = 13
     Caption = 'ENDERECO'
-    FocusControl = DBEdit5
+    FocusControl = DBEditEndereco
   end
   object Label6: TLabel [5]
     Left = 27
@@ -48,23 +49,21 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 39
     Height = 13
     Caption = 'BAIRRO'
-    FocusControl = DBEdit6
+    FocusControl = DBEditBairro
   end
   object Label7: TLabel [6]
     Left = 192
     Top = 168
-    Width = 55
+    Width = 38
     Height = 13
-    Caption = 'ID_CIDADE'
-    FocusControl = DBEdit7
+    Caption = 'CIDADE'
   end
   object Label8: TLabel [7]
     Left = 368
     Top = 168
-    Width = 57
+    Width = 40
     Height = 13
-    Caption = 'ID_ESTADO'
-    FocusControl = DBEdit8
+    Caption = 'ESTADO'
   end
   object Label9: TLabel [8]
     Left = 27
@@ -72,9 +71,9 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     Width = 30
     Height = 13
     Caption = 'EMAIL'
-    FocusControl = DBEdit9
+    FocusControl = DBEditEmail
   end
-  object DBEdit1: TDBEdit [10]
+  object DBEditIdFornecedor: TDBEdit [10]
     Left = 24
     Top = 88
     Width = 86
@@ -83,7 +82,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 1
   end
-  object DBEdit2: TDBEdit [11]
+  object DBEditRazaoSocial: TDBEdit [11]
     Left = 128
     Top = 88
     Width = 250
@@ -92,7 +91,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 2
   end
-  object DBEdit3: TDBEdit [12]
+  object DBEditFantasia: TDBEdit [12]
     Left = 400
     Top = 88
     Width = 200
@@ -101,7 +100,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 3
   end
-  object DBEdit4: TDBEdit [13]
+  object DBEditCnpj: TDBEdit [13]
     Left = 24
     Top = 136
     Width = 150
@@ -110,7 +109,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 4
   end
-  object DBEdit5: TDBEdit [14]
+  object DBEditEndereco: TDBEdit [14]
     Left = 192
     Top = 136
     Width = 408
@@ -119,7 +118,7 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 5
   end
-  object DBEdit6: TDBEdit [15]
+  object DBEditBairro: TDBEdit [15]
     Left = 27
     Top = 184
     Width = 150
@@ -128,36 +127,44 @@ inherited FormCadastroFornecedor: TFormCadastroFornecedor
     DataSource = DataSourceCadastro
     TabOrder = 6
   end
-  object DBEdit7: TDBEdit [16]
-    Left = 192
-    Top = 184
-    Width = 150
-    Height = 21
-    DataField = 'ID_CIDADE'
-    DataSource = DataSourceCadastro
-    TabOrder = 7
-  end
-  object DBEdit8: TDBEdit [17]
-    Left = 368
-    Top = 184
-    Width = 134
-    Height = 21
-    DataField = 'ID_ESTADO'
-    DataSource = DataSourceCadastro
-    TabOrder = 8
-  end
-  object DBEdit9: TDBEdit [18]
+  object DBEditEmail: TDBEdit [16]
     Left = 27
     Top = 240
     Width = 300
     Height = 21
     DataField = 'EMAIL'
     DataSource = DataSourceCadastro
+    TabOrder = 7
+  end
+  object DBLookupComboBoxCidade: TDBLookupComboBox [17]
+    Left = 192
+    Top = 187
+    Width = 145
+    Height = 21
+    DataField = 'ID_CIDADE'
+    DataSource = DataSourceCadastro
+    KeyField = 'NOME'
+    ListSource = DataModuleLookup.DataSourceCidade
+    TabOrder = 8
+  end
+  object DBLookupComboBoxEstado: TDBLookupComboBox [18]
+    Left = 368
+    Top = 187
+    Width = 145
+    Height = 21
+    DataField = 'ID_ESTADO'
+    DataSource = DataSourceCadastro
+    KeyField = 'SIGLA'
+    ListSource = DataModuleLookup.DataSourceEstados
     TabOrder = 9
   end
   inherited FDQueryCadastro: TFDQuery
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_FORNECEDOR_ID'
+    UpdateOptions.AutoIncFields = 'ID_FORNECEDOR'
     SQL.Strings = (
-      'select * from fornecedor')
+      'select * from fornecedor;')
     object FDQueryCadastroID_FORNECEDOR: TIntegerField
       FieldName = 'ID_FORNECEDOR'
       Origin = 'ID_FORNECEDOR'

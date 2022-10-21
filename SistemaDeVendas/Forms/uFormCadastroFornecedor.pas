@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   Data.DB, FireDAC.Comp.Client, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, uLookup;
 
 type
   TFormCadastroFornecedor = class(TFormCadastroPai)
@@ -22,23 +22,24 @@ type
     FDQueryCadastroID_ESTADO: TIntegerField;
     FDQueryCadastroEMAIL: TWideStringField;
     Label1: TLabel;
-    DBEdit1: TDBEdit;
+    DBEditIdFornecedor: TDBEdit;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
+    DBEditRazaoSocial: TDBEdit;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    DBEditFantasia: TDBEdit;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
+    DBEditCnpj: TDBEdit;
     Label5: TLabel;
-    DBEdit5: TDBEdit;
+    DBEditEndereco: TDBEdit;
     Label6: TLabel;
-    DBEdit6: TDBEdit;
+    DBEditBairro: TDBEdit;
     Label7: TLabel;
-    DBEdit7: TDBEdit;
     Label8: TLabel;
-    DBEdit8: TDBEdit;
     Label9: TLabel;
-    DBEdit9: TDBEdit;
+    DBEditEmail: TDBEdit;
+    DBLookupComboBoxCidade: TDBLookupComboBox;
+    DBLookupComboBoxEstado: TDBLookupComboBox;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,5 +52,23 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormCadastroFornecedor.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  //  Abre a query de estados
+  DataModuleLookup.FDQueryEstados.Open();
+  //  Mostra todos os resultados da query
+  DataModuleLookup.FDQueryEstados.FetchAll;
+
+  //  Abre a query de cidades
+  DataModuleLookup.FDQueryCidade.Open();
+  //  Mostra todos os resultados da query
+  DataModuleLookup.FDQueryCidade.FetchAll;
+
+  //  Coloca o cursor no campo razao social
+  DBEditRazaoSocial.SetFocus;
+end;
 
 end.

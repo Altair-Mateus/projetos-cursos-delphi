@@ -33,6 +33,10 @@ object FormMain: TFormMain
         Caption = 'Cidades'
         OnClick = CadCidadesClick
       end
+      object Fornecedores1: TMenuItem
+        Caption = 'Fornecedores'
+        OnClick = Fornecedores1Click
+      end
     end
     object Pesquisar: TMenuItem
       Caption = 'Pesquisar'
