@@ -13,7 +13,8 @@ uses
   uLookup in 'Shared\uLookup.pas' {DataModuleLookup: TDataModule},
   uFormFiltroPai in 'Forms\uFormFiltroPai.pas' {FormFiltroPai},
   uFormFiltroClientes in 'Forms\uFormFiltroClientes.pas' {FormFiltroCliente},
-  uFormCadastroFornecedor in 'Forms\uFormCadastroFornecedor.pas' {FormCadastroFornecedor};
+  uFormCadastroFornecedor in 'Forms\uFormCadastroFornecedor.pas' {FormCadastroFornecedor},
+  uFormFiltroFornecedores in 'Forms\uFormFiltroFornecedores.pas' {FormFiltroPai1};
 
 {$R *.res}
 
@@ -25,5 +26,6 @@ begin
   Application.CreateForm(TdmDados, dmDados);
   Application.CreateForm(TDataModuleLookup, DataModuleLookup);
   Application.CreateForm(TFormCadastroFornecedor, FormCadastroFornecedor);
+  Application.CreateForm(TFormFiltroPai1, FormFiltroPai1);
   Application.Run;
 end.

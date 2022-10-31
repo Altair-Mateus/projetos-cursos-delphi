@@ -48,6 +48,9 @@ begin
   if FDQueryCadastro.State in [dsEdit, dsInsert] then
   begin
 
+    //  Inicia a transacao
+  FDTransactionCadastro.StartTransaction;
+
     //  Cancela o procedimento
     FDQueryCadastro.Cancel;
 

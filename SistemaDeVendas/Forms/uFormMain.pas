@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   Vcl.Menus, uFormCadastroClientes, uFormCadastroEstado, uFormCadastroCidade,
-  uFormFiltroClientes, uFormCadastroFornecedor;
+  uFormFiltroClientes, uFormCadastroFornecedor, uFormFiltroFornecedores;
 
 type
   TFormMain = class(TForm)
@@ -21,11 +21,13 @@ type
     Pesquisar: TMenuItem;
     PesqClientes: TMenuItem;
     Fornecedores1: TMenuItem;
+    Fornecedores2: TMenuItem;
     procedure CadClientesClick(Sender: TObject);
     procedure CadCidadesClick(Sender: TObject);
     procedure CadEstadosClick(Sender: TObject);
     procedure PesqClientesClick(Sender: TObject);
     procedure Fornecedores1Click(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -94,6 +96,9 @@ begin
 
   finally
 
+    //  Libera da memoria
+    FreeAndNil(FormFiltroCliente);
+
   end;
 
 end;
@@ -136,5 +141,6 @@ begin
   end;
 
 end;
+
 
 end.

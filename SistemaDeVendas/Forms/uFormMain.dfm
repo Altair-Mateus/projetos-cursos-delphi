@@ -44,6 +44,9 @@ object FormMain: TFormMain
         Caption = 'Clientes'
         OnClick = PesqClientesClick
       end
+      object Fornecedores2: TMenuItem
+        Caption = 'Fornecedores'
+      end
     end
   end
 end
