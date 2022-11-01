@@ -4,18 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, fCadastroCliente,
-  fCadastroProduto, fPesquisarCliente, fPesquisarProdutos, fCadastroVenda,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, fPesquisarCliente, fPesquisarProdutos, fCadastroVenda,
   Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls, System.ImageList, Vcl.ImgList,
   fPesquisarVenda, Vcl.Imaging.pngimage;
 
 type
   TfrmMain = class(TForm)
     MainMenu: TMainMenu;
-    Cadastros1: TMenuItem;
-    Clientes1: TMenuItem;
-    N1: TMenuItem;
-    Produtos1: TMenuItem;
     Vendas1: TMenuItem;
     Pesquisar1: TMenuItem;
     Clientes2: TMenuItem;
@@ -33,8 +28,6 @@ type
     ButtonCadProd: TButton;
     ButtonVenda: TButton;
     Image1: TImage;
-    procedure Clientes1Click(Sender: TObject);
-    procedure Produtos1Click(Sender: TObject);
     procedure Clientes2Click(Sender: TObject);
     procedure Podutos1Click(Sender: TObject);
     procedure CriarNovaVenda1Click(Sender: TObject);
@@ -58,18 +51,19 @@ implementation
 procedure TfrmMain.ButtonCadClienteClick(Sender: TObject);
 begin
 
-  //  Cria o form
-  frmCadastroCliente := TfrmCadastroCliente.Create(Self);
+  //  Cria o Form
+  frmPesquisarClientes := TfrmPesquisarClientes.Create(Self);
 
   try
 
-    //  Exibe o form
-    frmCadastroCliente.ShowModal;
+
+    //  Exibe o Form
+    frmPesquisarClientes.ShowModal;
 
   finally
 
     //  Libera da memoria
-    FreeAndNil(frmCadastroCliente);
+    FreeAndNil(frmPesquisarClientes);
 
   end;
 
@@ -78,18 +72,18 @@ end;
 procedure TfrmMain.ButtonCadProdClick(Sender: TObject);
 begin
 
-  //  Cria o Form
-  frmCadastroProdutos := TfrmCadastroProdutos.Create(Self);
+  // Cria o form
+  frmPesquisarProdutos := TfrmPesquisarProdutos.Create(Self);
 
   try
 
-    //  Exibe o Form
-    frmCadastroProdutos.ShowModal;
+    //  Exibe o form
+    frmPesquisarProdutos.ShowModal;
 
   finally
 
     //  Libera da memoria
-    FreeAndNil(frmCadastroProdutos);
+    FreeAndNil(frmPesquisarProdutos);
 
   end;
 
@@ -115,26 +109,6 @@ begin
 
 end;
 
-procedure TfrmMain.Clientes1Click(Sender: TObject);
-begin
-
-  //  Cria o form
-  frmCadastroCliente := TfrmCadastroCliente.Create(Self);
-
-  try
-
-    //  Exibe o form
-    frmCadastroCliente.ShowModal;
-
-  finally
-
-    //  Libera da memoria
-    FreeAndNil(frmCadastroCliente);
-
-  end;
-
-
-end;
 
 procedure TfrmMain.Clientes2Click(Sender: TObject);
 begin
@@ -219,24 +193,5 @@ begin
 
 end;
 
-procedure TfrmMain.Produtos1Click(Sender: TObject);
-begin
-
-  //  Cria o Form
-  frmCadastroProdutos := TfrmCadastroProdutos.Create(Self);
-
-  try
-
-    //  Exibe o Form
-    frmCadastroProdutos.ShowModal;
-
-  finally
-
-    //  Libera da memoria
-    FreeAndNil(frmCadastroProdutos);
-
-  end;
-
-end;
 
 end.

@@ -451,9 +451,15 @@ object frmMain: TfrmMain
       Top = 33
       Width = 121
       Height = 56
-      Caption = 'Cadastrar Cliente'
+      Caption = 'Clientes'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ImageIndex = 0
       Images = ImageList1
+      ParentFont = False
       TabOrder = 0
       WordWrap = True
       OnClick = ButtonCadClienteClick
@@ -463,9 +469,15 @@ object frmMain: TfrmMain
       Top = 33
       Width = 121
       Height = 56
-      Caption = 'Cadastrar Produto'
+      Caption = 'Produtos'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ImageIndex = 1
       Images = ImageList1
+      ParentFont = False
       TabOrder = 1
       WordWrap = True
       OnClick = ButtonCadProdClick
@@ -476,8 +488,14 @@ object frmMain: TfrmMain
       Width = 121
       Height = 56
       Caption = 'Venda'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ImageIndex = 2
       Images = ImageList1
+      ParentFont = False
       TabOrder = 2
       WordWrap = True
       OnClick = ButtonVendaClick
@@ -486,22 +504,8 @@ object frmMain: TfrmMain
   object MainMenu: TMainMenu
     Left = 696
     Top = 248
-    object Cadastros1: TMenuItem
-      Caption = 'Cadastros'
-      object Clientes1: TMenuItem
-        Caption = 'Clientes'
-        OnClick = Clientes1Click
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object Produtos1: TMenuItem
-        Caption = 'Produtos'
-        OnClick = Produtos1Click
-      end
-    end
     object Pesquisar1: TMenuItem
-      Caption = 'Pesquisar'
+      Caption = 'Cadastros'
       object Clientes2: TMenuItem
         Caption = 'Clientes'
         OnClick = Clientes2Click
