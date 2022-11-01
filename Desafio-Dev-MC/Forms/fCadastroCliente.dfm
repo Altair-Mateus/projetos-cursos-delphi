@@ -4,7 +4,9 @@ inherited frmCadastroCliente: TfrmCadastroCliente
   TextHeight = 13
   inherited Panel1: TPanel
     inherited BitBtnSalvar: TBitBtn
+      Top = 10
       Enabled = False
+      ExplicitTop = 10
     end
     inherited BitBtnCancelar: TBitBtn
       Left = 255
@@ -89,12 +91,11 @@ inherited frmCadastroCliente: TfrmCadastroCliente
       FocusControl = DBEditNome
     end
     object LabelUf: TLabel
-      Left = 475
+      Left = 432
       Top = 115
       Width = 13
       Height = 13
       Caption = 'UF'
-      FocusControl = DBEditUf
     end
     object DBEditBairro: TDBEdit
       Left = 500
@@ -117,7 +118,7 @@ inherited frmCadastroCliente: TfrmCadastroCliente
     object DBEditCep: TDBEdit
       Left = 243
       Top = 131
-      Width = 214
+      Width = 166
       Height = 21
       DataField = 'CEP'
       DataSource = DataSourceCadastro
@@ -178,18 +179,44 @@ inherited frmCadastroCliente: TfrmCadastroCliente
       DataSource = DataSourceCadastro
       TabOrder = 8
     end
-    object DBEditUf: TDBEdit
-      Left = 475
+    object DBComboBoxUF: TDBComboBox
+      Left = 432
       Top = 134
-      Width = 30
+      Width = 73
       Height = 21
+      Style = csDropDownList
       DataField = 'UF'
       DataSource = DataSourceCadastro
+      Items.Strings = (
+        'AC'
+        'AL'
+        'AP'
+        'AM'
+        'BA'
+        'CE'
+        'DF'
+        'ES'
+        'GO'
+        'MA'
+        'MT'
+        'MS'
+        'MG'
+        'PA'
+        'PB'
+        'PR'
+        'PE'
+        'PI'
+        'RJ'
+        'RN'
+        'RS'
+        'RO'
+        'RR'
+        'SC'
+        'SP'
+        'SE'
+        'TO')
       TabOrder = 9
     end
-  end
-  inherited DataSourceCadastro: TDataSource
-    AutoEdit = False
   end
   inherited FDQueryCadastro: TFDQuery
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint]

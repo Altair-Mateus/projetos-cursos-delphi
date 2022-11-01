@@ -34,7 +34,6 @@ type
     LabelCep: TLabel;
     DBEditCep: TDBEdit;
     LabelUf: TLabel;
-    DBEditUf: TDBEdit;
     LabelFone: TLabel;
     DBEditFone: TDBEdit;
     LabelCelular: TLabel;
@@ -42,15 +41,16 @@ type
     LabelEmail: TLabel;
     DBEditEmail: TDBEdit;
     DBEditCodigo: TDBEdit;
+    DBComboBoxUF: TDBComboBox;
     procedure BitBtnNovoClick(Sender: TObject);
-    procedure limpa;
-    procedure geraCodigo;
     procedure BitBtnSalvarClick(Sender: TObject);
     procedure BitBtnCancelarClick(Sender: TObject);
+
   private
     { Private declarations }
-    procedure LimpaCampos;
     procedure ValidaCampos;
+    procedure limpaCampos;
+    procedure geraCodigo;
 
   public
     { Public declarations }
@@ -66,15 +66,14 @@ implementation
 procedure TfrmCadastroCliente.BitBtnSalvarClick(Sender: TObject);
 begin
 
+  //  Campos obrigatorios
   ValidaCampos;
+
+  //  Executa codigo da heranca
   inherited;
 
-
-  limpa;
-
-  BitBtnSalvar.Enabled := False;
-  BitBtnCancelar.Enabled := False;
-  BitBtnNovo.Enabled := True;
+  //  Limpa os campos
+  limpaCampos;
 
 end;
 
@@ -124,10 +123,13 @@ begin
 
 end;
 
-procedure TfrmCadastroCliente.limpa;
+procedure TfrmCadastroCliente.limpaCampos;
 var
   i: integer;
 begin
+
+  //  Limpa comboBox
+  DBComboBoxUF.ItemIndex := -1;
 
   //  Limpa os campos
   for i := 0 to frmCadastroCliente.ComponentCount -1 do
@@ -141,32 +143,19 @@ begin
 
 end;
 
-procedure TfrmCadastroCliente.LimpaCampos;
-var
-  i: Integer;
-begin
-
-  for i := 0 to Self.ComponentCount - 1 do
-  begin
-
-    (self.Components[i] as TDBEdit).Clear;
-
-  end;
-
-
-end;
 
 procedure TfrmCadastroCliente.ValidaCampos;
 begin
 
-  //  Valida se o campo Nome foi preenchido
+  //  Valida se os campos obrigatorios
+  //  foram preenchidos
   if DBEditNome.Text = EmptyStr then
   begin
 
     ShowMessage('Preencha o Nome do Cliente!');
     DBEditNome.SetFocus;
-    Abort
-         ;
+    Abort;
+
   end;
 
 end;
@@ -175,6 +164,7 @@ procedure TfrmCadastroCliente.BitBtnCancelarClick(Sender: TObject);
 begin
   inherited;
 
+  //  Fecha a tela
   frmCadastroCliente.Close
 
 end;
@@ -184,7 +174,7 @@ begin
 inherited;
 
   //  Limpa os Dbedits
-  limpa;
+  limpaCampos;
 
   //  Gera codigo do cadastro
   geraCodigo;
