@@ -19,9 +19,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Left = 911
       ExplicitLeft = 911
     end
-    inherited BitBtnExcluir: TBitBtn
-      Enabled = False
-    end
   end
   object PanelCabecalhoVenda: TPanel [1]
     Left = 0
@@ -32,7 +29,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Color = clHighlight
     Enabled = False
     ParentBackground = False
-    TabOrder = 1
+    TabOrder = 4
     object LabelNrNota: TLabel
       Left = 16
       Top = 16
@@ -440,6 +437,11 @@ inherited frmCadastroVenda: TfrmCadastroVenda
         end>
     end
   end
+  inherited PanelCampos: TPanel
+    Top = 263
+    Width = 1023
+    Height = 343
+  end
   inherited DataSourceCadastro: TDataSource
     Left = 984
     Top = 304
@@ -486,10 +488,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
   inherited FDUpdateSQLCadastro: TFDUpdateSQL
     Left = 984
     Top = 376
-  end
-  inherited FDTransactionCadastro: TFDTransaction
-    Left = 984
-    Top = 440
   end
   object FDQueryProduto: TFDQuery [8]
     Connection = dmDados.FDConnection
@@ -627,6 +625,10 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       ProviderFlags = []
       ReadOnly = True
     end
+  end
+  inherited FDTransactionCadastro: TFDTransaction
+    Left = 984
+    Top = 440
   end
   inherited ImageList1: TImageList
     Left = 408
