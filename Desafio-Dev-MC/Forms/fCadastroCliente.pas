@@ -46,9 +46,11 @@ type
     procedure limpa;
     procedure geraCodigo;
     procedure BitBtnSalvarClick(Sender: TObject);
+    procedure BitBtnCancelarClick(Sender: TObject);
   private
     { Private declarations }
     procedure LimpaCampos;
+    procedure ValidaCampos;
 
   public
     { Public declarations }
@@ -63,13 +65,17 @@ implementation
 
 procedure TfrmCadastroCliente.BitBtnSalvarClick(Sender: TObject);
 begin
+
+  ValidaCampos;
   inherited;
+
+
   limpa;
 
   BitBtnSalvar.Enabled := False;
   BitBtnCancelar.Enabled := False;
-  BitBtnExcluir.Enabled := False;
   BitBtnNovo.Enabled := True;
+
 end;
 
 procedure TfrmCadastroCliente.geraCodigo;
@@ -150,15 +156,32 @@ begin
 
 end;
 
+procedure TfrmCadastroCliente.ValidaCampos;
+begin
+
+  //  Valida se o campo Nome foi preenchido
+  if DBEditNome.Text = EmptyStr then
+  begin
+
+    ShowMessage('Preencha o Nome do Cliente!');
+    DBEditNome.SetFocus;
+    Abort
+         ;
+  end;
+
+end;
+
+procedure TfrmCadastroCliente.BitBtnCancelarClick(Sender: TObject);
+begin
+  inherited;
+
+  frmCadastroCliente.Close
+
+end;
+
 procedure TfrmCadastroCliente.BitBtnNovoClick(Sender: TObject);
 begin
 inherited;
-
-  BitBtnSalvar.Enabled := True;
-  BitBtnCancelar.Enabled := True;
-  BitBtnExcluir.Enabled := True;
-  BitBtnNovo.Enabled := False;
-
 
   //  Limpa os Dbedits
   limpa;
