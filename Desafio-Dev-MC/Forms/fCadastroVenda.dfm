@@ -29,7 +29,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Color = clHighlight
     Enabled = False
     ParentBackground = False
-    TabOrder = 4
+    TabOrder = 3
     object LabelNrNota: TLabel
       Left = 16
       Top = 16
@@ -375,72 +375,80 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       TabOrder = 4
     end
   end
-  object PanelItems: TPanel [3]
-    Left = 0
+  inherited PanelCampos: TPanel
     Top = 263
     Width = 1023
     Height = 343
-    Align = alClient
-    TabOrder = 3
-    object DBGridItensVenda: TDBGrid
+    ExplicitLeft = 0
+    ExplicitTop = 263
+    ExplicitWidth = 1023
+    ExplicitHeight = 343
+    object PanelItems: TPanel
       Left = 1
       Top = 1
       Width = 1021
       Height = 341
       Align = alClient
-      DataSource = DataSourceItemNota
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      OnDblClick = DBGridItensVendaDblClick
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'LCTO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PRODUTO'
-          Title.Caption = 'Cod Produto'
-          Width = 70
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DescProduto'
-          Title.Caption = 'Descri'#231#227'o do Produto'
-          Width = 300
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'QTDE'
-          Title.Caption = 'Quantidade'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR_UNIT'
-          Title.Caption = 'Valor Unit'#225'rio'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR_TOTAL'
-          Title.Caption = 'Total Produto'
-          Visible = True
-        end>
+      ExplicitLeft = 0
+      ExplicitTop = 263
+      ExplicitWidth = 1023
+      ExplicitHeight = 343
+      object DBGridItensVenda: TDBGrid
+        Left = 1
+        Top = 1
+        Width = 1019
+        Height = 339
+        Align = alClient
+        DataSource = DataSourceItemNota
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnDblClick = DBGridItensVendaDblClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'LCTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRODUTO'
+            Title.Caption = 'Cod Produto'
+            Width = 70
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DescProduto'
+            Title.Caption = 'Descri'#231#227'o do Produto'
+            Width = 300
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QTDE'
+            Title.Caption = 'Quantidade'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_UNIT'
+            Title.Caption = 'Valor Unit'#225'rio'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_TOTAL'
+            Title.Caption = 'Total Produto'
+            Visible = True
+          end>
+      end
     end
-  end
-  inherited PanelCampos: TPanel
-    Top = 263
-    Width = 1023
-    Height = 343
   end
   inherited DataSourceCadastro: TDataSource
     Left = 984
@@ -489,7 +497,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Left = 984
     Top = 376
   end
-  object FDQueryProduto: TFDQuery [8]
+  object FDQueryProduto: TFDQuery [7]
     Connection = dmDados.FDConnection
     SQL.Strings = (
       'select * from produtos;')
@@ -531,12 +539,12 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Precision = 18
     end
   end
-  object DataSourceItemNota: TDataSource [9]
+  object DataSourceItemNota: TDataSource [8]
     DataSet = FDQueryItemNota
     Left = 408
     Top = 304
   end
-  object FDQueryItemNota: TFDQuery [10]
+  object FDQueryItemNota: TFDQuery [9]
     AfterPost = FDQueryItemNotaAfterPost
     AfterCancel = FDQueryItemNotaAfterCancel
     AfterDelete = FDQueryItemNotaAfterDelete
@@ -593,26 +601,26 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Lookup = True
     end
   end
-  object FDTransactionItemNota: TFDTransaction [11]
+  object FDTransactionItemNota: TFDTransaction [10]
     Connection = dmDados.FDConnection
     Left = 408
     Top = 425
   end
-  object FDQueryCliente: TFDQuery [12]
+  object FDQueryCliente: TFDQuery [11]
     Connection = dmDados.FDConnection
     SQL.Strings = (
       'select * from cliente')
     Left = 56
     Top = 329
   end
-  object FDQueryProduto1: TFDQuery [13]
+  object FDQueryProduto1: TFDQuery [12]
     Connection = dmDados.FDConnection
     SQL.Strings = (
       'select * from produtos;')
     Left = 56
     Top = 385
   end
-  object FDQueryItemVenda: TFDQuery [14]
+  object FDQueryItemVenda: TFDQuery [13]
     Connection = dmDados.FDConnection
     SQL.Strings = (
       'SELECT max(lcto) FROM item_venda')

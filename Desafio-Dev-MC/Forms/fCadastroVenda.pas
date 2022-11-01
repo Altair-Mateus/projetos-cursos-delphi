@@ -235,8 +235,6 @@ begin
   FDQueryItemNota.Post;
   BaixaEstoque;
 
-
-
 end;
 
 procedure TfrmCadastroVenda.BuscaNomeCliente;
