@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client,
   Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.ExtCtrls, uDmDados,
-  Vcl.Grids, Vcl.DBGrids;
+  Vcl.Grids, Vcl.DBGrids, System.ImageList, Vcl.ImgList;
 
 type
   TfrmPesquisarPai = class(TForm)
@@ -28,10 +28,13 @@ type
     RadioButtonCodigo: TRadioButton;
     RadioButtonNome: TRadioButton;
     DBGridResultadoPesquisa: TDBGrid;
+    ImageList1: TImageList;
+    ButtonExcluir: TButton;
     procedure ButtonSairClick(Sender: TObject);
     procedure ValidaQueryVazia;
     procedure ButtonVisualizarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ButtonExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +47,31 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmPesquisarPai.ButtonExcluirClick(Sender: TObject);
+var
+
+  result : Word;
+
+begin
+
+  result := Application.MessageBox('Deseja Excluir o Cadastro?', 'Confirmar Exclusão', MB_YESNO);
+
+  case result of
+
+    IDYES:
+    begin
+      DBGridResultadoPesquisa.DataSource.DataSet.Delete;
+    end;
+
+  end;
+
+
+  //DBGridItensVenda.DataSource.DataSet.Delete;
+
+  //DBGridResultadoPesquisa.DataSource.DataSet.Delete;
+
+end;
 
 procedure TfrmPesquisarPai.ButtonSairClick(Sender: TObject);
 begin
