@@ -16,13 +16,13 @@ type
     BitBtnNovo: TBitBtn;
     BitBtnSalvar: TBitBtn;
     BitBtnSair: TBitBtn;
-    BitBtnExcluir: TBitBtn;
     BitBtnCancelar: TBitBtn;
     DataSourceCadastro: TDataSource;
     FDQueryCadastro: TFDQuery;
     FDUpdateSQLCadastro: TFDUpdateSQL;
     FDTransactionCadastro: TFDTransaction;
     ImageList1: TImageList;
+    PanelCampos: TPanel;
     procedure BitBtnNovoClick(Sender: TObject);
     procedure BitBtnSairClick(Sender: TObject);
     procedure BitBtnSalvarClick(Sender: TObject);
@@ -77,6 +77,11 @@ end;
 procedure TfrmCadastroPai.BitBtnNovoClick(Sender: TObject);
 begin
 
+  BitBtnSalvar.Enabled   := True;
+  BitBtnCancelar.Enabled := True;
+  BitBtnNovo.Enabled     := False;
+  PanelCampos.Enabled    := True;
+
   // Abre a query
   FDQueryCadastro.Open();
 
@@ -100,6 +105,11 @@ end;
 
 procedure TfrmCadastroPai.BitBtnSalvarClick(Sender: TObject);
 begin
+
+  BitBtnSalvar.Enabled   := False;
+  BitBtnCancelar.Enabled := False;
+  BitBtnNovo.Enabled     := True;
+  PanelCampos.Enabled    := False;
 
   if FDQueryCadastro.State in [dsEdit, dsInsert] then
   begin

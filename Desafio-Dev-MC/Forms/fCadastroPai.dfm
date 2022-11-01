@@ -72,23 +72,6 @@ object frmCadastroPai: TfrmCadastroPai
       TabOrder = 2
       OnClick = BitBtnSairClick
     end
-    object BitBtnExcluir: TBitBtn
-      Left = 392
-      Top = 8
-      Width = 113
-      Height = 49
-      Caption = 'EXCLUIR'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ImageIndex = 2
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 3
-      OnClick = BitBtnExcluirClick
-    end
     object BitBtnCancelar: TBitBtn
       Left = 264
       Top = 8
@@ -102,9 +85,22 @@ object frmCadastroPai: TfrmCadastroPai
       Font.Style = []
       Images = ImageList1
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
       OnClick = BitBtnCancelarClick
     end
+  end
+  object PanelCampos: TPanel
+    Left = 0
+    Top = 65
+    Width = 772
+    Height = 284
+    Align = alClient
+    Enabled = False
+    TabOrder = 1
+    ExplicitLeft = 352
+    ExplicitTop = 168
+    ExplicitWidth = 185
+    ExplicitHeight = 41
   end
   object DataSourceCadastro: TDataSource
     DataSet = FDQueryCadastro
