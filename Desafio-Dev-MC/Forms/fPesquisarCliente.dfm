@@ -9,9 +9,6 @@ inherited frmPesquisarClientes: TfrmPesquisarClientes
     inherited ButtonNovo: TButton
       OnClick = ButtonNovoClick
     end
-    inherited RadioButtonNome: TRadioButton
-      Caption = 'C'#243'digo'
-    end
   end
   inherited DBGridResultadoPesquisa: TDBGrid
     Columns = <
