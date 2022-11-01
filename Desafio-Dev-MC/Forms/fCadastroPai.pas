@@ -26,7 +26,6 @@ type
     procedure BitBtnNovoClick(Sender: TObject);
     procedure BitBtnSairClick(Sender: TObject);
     procedure BitBtnSalvarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure BitBtnCancelarClick(Sender: TObject);
     procedure BitBtnExcluirClick(Sender: TObject);
 
@@ -78,6 +77,9 @@ end;
 procedure TfrmCadastroPai.BitBtnNovoClick(Sender: TObject);
 begin
 
+  // Abre a query
+  FDQueryCadastro.Open();
+
   //  Se o FDQuery não estiver inserindo ou editando entraremos no modo de insert
   if not (FDQueryCadastro.State in [dsEdit, dsInsert]) then
   begin
@@ -109,20 +111,12 @@ begin
     FDQueryCadastro.Post;
 
     //  Mantem a trnsaction aberta
-    FDTransactionCadastro.CommitRetaining;
+    FDTransactionCadastro.Commit;
 
     ShowMessage('Cadastro Salvo!');
 
-  end;
+    end;
 
-
-end;
-
-procedure TfrmCadastroPai.FormCreate(Sender: TObject);
-begin
-
-  // Abre a query
-  FDQueryCadastro.Open();
 
 end;
 
