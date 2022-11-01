@@ -17,7 +17,7 @@ type
     EditCodigo: TEdit;
     ButtonPesquisa: TButton;
     ButtonSair: TButton;
-    ButtonVisualizar: TButton;
+    ButtonEditar: TButton;
     ButtonNovo: TButton;
     DataSourcePesquisar: TDataSource;
     FDQueryPesquisar: TFDQuery;
@@ -32,7 +32,7 @@ type
     ButtonExcluir: TButton;
     procedure ButtonSairClick(Sender: TObject);
     procedure ValidaQueryVazia;
-    procedure ButtonVisualizarClick(Sender: TObject);
+    procedure ButtonEditarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonExcluirClick(Sender: TObject);
   private
@@ -55,6 +55,8 @@ var
 
 begin
 
+  ValidaQueryVazia;
+
   result := Application.MessageBox('Deseja Excluir o Cadastro?', 'Confirmar Exclusão', MB_YESNO);
 
   case result of
@@ -66,11 +68,6 @@ begin
 
   end;
 
-
-  //DBGridItensVenda.DataSource.DataSet.Delete;
-
-  //DBGridResultadoPesquisa.DataSource.DataSet.Delete;
-
 end;
 
 procedure TfrmPesquisarPai.ButtonSairClick(Sender: TObject);
@@ -81,7 +78,7 @@ begin
 
 end;
 
-procedure TfrmPesquisarPai.ButtonVisualizarClick(Sender: TObject);
+procedure TfrmPesquisarPai.ButtonEditarClick(Sender: TObject);
 begin
 
   ValidaQueryVazia;
@@ -105,7 +102,7 @@ begin
   if FDQueryPesquisar.IsEmpty then
   begin
 
-    ShowMessage('SELECIONE UM CADASTRO PARA VISUALIZAR!');
+    ShowMessage('SELECIONE UM CADASTRO!');
     Abort;
 
   end;

@@ -24,7 +24,6 @@ object frmPesquisarPai: TfrmPesquisarPai
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 759
     object LabelCodigo: TLabel
       Left = 24
       Top = 20
@@ -72,23 +71,23 @@ object frmPesquisarPai: TfrmPesquisarPai
       TabOrder = 2
       OnClick = ButtonSairClick
     end
-    object ButtonVisualizar: TButton
-      Left = 623
-      Top = 19
+    object ButtonEditar: TButton
+      Left = 512
+      Top = 66
       Width = 97
       Height = 41
       Caption = 'Editar'
       ImageIndex = 1
       Images = ImageList1
       TabOrder = 3
-      OnClick = ButtonVisualizarClick
+      OnClick = ButtonEditarClick
     end
     object ButtonNovo: TButton
-      Left = 512
-      Top = 66
+      Left = 623
+      Top = 19
       Width = 97
       Height = 41
-      Caption = 'Novo'
+      Caption = 'Incluir'
       ImageIndex = 0
       Images = ImageList1
       TabOrder = 4
