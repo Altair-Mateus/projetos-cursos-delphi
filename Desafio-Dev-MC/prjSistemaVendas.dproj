@@ -83,8 +83,8 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_ExeOutput>D:\Projetos Desenvolvimento\desafioDevMC\teste-de-conhecimento\Exe\</DCC_ExeOutput>
-        <DCC_DcuOutput>D:\Projetos Desenvolvimento\desafioDevMC\teste-de-conhecimento\dcu\</DCC_DcuOutput>
+        <DCC_ExeOutput>D:\Projetos Desenvolvimento\Delphi\Desafio-Dev-MC\Exe\</DCC_ExeOutput>
+        <DCC_DcuOutput>D:\Projetos Desenvolvimento\Delphi\Desafio-Dev-MC\dcu\</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>icons\logo-principal.ico</Icon_MainIcon>

@@ -42,13 +42,14 @@ type
     LabelEmail: TLabel;
     DBEditEmail: TDBEdit;
     DBEditCodigo: TDBEdit;
-    FDQueryCliente: TFDQuery;
-    FDQueryClienteMAX: TIntegerField;
     procedure BitBtnNovoClick(Sender: TObject);
     procedure limpa;
     procedure geraCodigo;
+    procedure BitBtnSalvarClick(Sender: TObject);
   private
     { Private declarations }
+    procedure LimpaCampos;
+
   public
     { Public declarations }
   end;
@@ -60,31 +61,60 @@ implementation
 
 {$R *.dfm}
 
+procedure TfrmCadastroCliente.BitBtnSalvarClick(Sender: TObject);
+begin
+  inherited;
+  limpa;
+
+  BitBtnSalvar.Enabled := False;
+  BitBtnCancelar.Enabled := False;
+  BitBtnExcluir.Enabled := False;
+  BitBtnNovo.Enabled := True;
+end;
+
 procedure TfrmCadastroCliente.geraCodigo;
 var
   cod: integer;
-
+  FDQueryCliente: TFDQuery;
 begin
 
   cod := 0;
 
-  //  Abre a query
-  FDQueryCadastro.Open();
+  //  Cria query
+  FDQueryCliente := TFDQuery.Create(nil);
 
-  //  Ve o ultimo registro
-  FDQueryCadastro.Last();
+  try
 
-  //  Pega o último código gerado e soma + 1
-  cod := FDQueryCadastro.FieldByName('CODIGO').AsInteger + 1;
+    //  Estabelece a conexao com o banco
+    FDQueryCliente.Connection := dmDados.FDConnection;
 
-  //  Insere o registro no final da tabela
-  FDQueryCadastro.Append();
+    //  Ve o ultimo codigo usado
+    FDQueryCliente.Close;
+    FDQueryCliente.SQL.Clear;
+    FDQueryCliente.SQL.Add(' select max(codigo) as codigo' );
+    FDQueryCliente.SQL.Add(' from cliente ');
+    FDQueryCliente.Open;
 
-  //  Seta no edit o codigo gerado
-  DBEditCodigo.Text := IntToStr(cod);
+    //  Ultimo codigo usado + 1
+    cod := FDQueryCliente.FieldByName('codigo').AsInteger + 1;
 
-  //  Posiciona o cursor
-  DBEditNome.SetFocus;
+    //  Insere o registro no final da tabela
+    FDQueryCliente.Append();
+
+    //  Seta no edit o codigo gerado
+    DBEditCodigo.Text := IntToStr(cod);
+
+    //  Posiciona o cursor
+    DBEditNome.SetFocus;
+
+  finally
+
+    //  Libera da memoria
+    FDQueryCliente.free;
+
+  end;
+
+
 
 end;
 
@@ -105,9 +135,30 @@ begin
 
 end;
 
+procedure TfrmCadastroCliente.LimpaCampos;
+var
+  i: Integer;
+begin
+
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+
+    (self.Components[i] as TDBEdit).Clear;
+
+  end;
+
+
+end;
+
 procedure TfrmCadastroCliente.BitBtnNovoClick(Sender: TObject);
 begin
 inherited;
+
+  BitBtnSalvar.Enabled := True;
+  BitBtnCancelar.Enabled := True;
+  BitBtnExcluir.Enabled := True;
+  BitBtnNovo.Enabled := False;
+
 
   //  Limpa os Dbedits
   limpa;

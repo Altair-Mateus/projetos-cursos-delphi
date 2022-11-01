@@ -81,6 +81,19 @@ inherited frmCadastroCliente: TfrmCadastroCliente
     Caption = 'EMAIL'
     FocusControl = DBEditEmail
   end
+  inherited Panel1: TPanel
+    inherited BitBtnSalvar: TBitBtn
+      Enabled = False
+    end
+    inherited BitBtnExcluir: TBitBtn
+      Enabled = False
+    end
+    inherited BitBtnCancelar: TBitBtn
+      Left = 255
+      Enabled = False
+      ExplicitLeft = 255
+    end
+  end
   object DBEditNome: TDBEdit [11]
     Left = 168
     Top = 96
@@ -172,6 +185,9 @@ inherited frmCadastroCliente: TfrmCadastroCliente
     Enabled = False
     TabOrder = 1
   end
+  inherited DataSourceCadastro: TDataSource
+    AutoEdit = False
+  end
   inherited FDQueryCadastro: TFDQuery
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint]
     UpdateOptions.FetchGeneratorsPoint = gpNone
@@ -229,18 +245,8 @@ inherited frmCadastroCliente: TfrmCadastroCliente
       Size = 50
     end
   end
-  object FDQueryCliente: TFDQuery
-    Connection = dmDados.FDConnection
-    SQL.Strings = (
-      'select max(codigo) from cliente')
-    Left = 352
-    Top = 296
-    object FDQueryClienteMAX: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'MAX'
-      Origin = '"MAX"'
-      ProviderFlags = []
-      ReadOnly = True
-    end
+  inherited ImageList1: TImageList
+    Left = 472
+    Top = 280
   end
 end
