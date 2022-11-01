@@ -33,14 +33,17 @@ type
     DBEditPrecoVenda: TDBEdit;
     LabelSaldo: TLabel;
     DBEditSaldo: TDBEdit;
-    DBComboBox1: TDBComboBox;
-    FDQueryProduto: TFDQuery;
-    FDQueryProdutoMAX: TIntegerField;
-    procedure limpa;
-    procedure geraCodigo;
+    DBComboBoxUn: TDBComboBox;
     procedure BitBtnNovoClick(Sender: TObject);
+    procedure BitBtnCancelarClick(Sender: TObject);
+    procedure BitBtnSalvarClick(Sender: TObject);
+
   private
     { Private declarations }
+    procedure limpaCampos;
+    procedure geraCodigo;
+    procedure ValidaCampos;
+
   public
     { Public declarations }
   end;
@@ -54,47 +57,89 @@ implementation
 
 { TfrmCadastroPai1 }
 
+procedure TfrmCadastroProdutos.BitBtnCancelarClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Fecha a tela
+  frmCadastroProdutos.Close;
+
+end;
+
 procedure TfrmCadastroProdutos.BitBtnNovoClick(Sender: TObject);
 begin
   inherited;
 
   //  Limpa os Dbedits
-  limpa;
+  limpaCampos;
 
   //  Gera codigo do cadastro
   geraCodigo;
 
 end;
 
+procedure TfrmCadastroProdutos.BitBtnSalvarClick(Sender: TObject);
+begin
+
+  //  Valida os campos
+  ValidaCampos;
+
+  //  Executa o codigo da heranca
+  inherited;
+
+  //  Limpa os campos
+  limpaCampos;
+
+end;
+
 procedure TfrmCadastroProdutos.geraCodigo;
 var
   cod: integer;
-
+  FDQueryProduto: TFDQuery;
 begin
 
   cod := 0;
 
-  //  Abre a query
-  FDQueryCadastro.Open();
+  //  Cria query
+  FDQueryProduto := TFDQuery.Create(nil);
 
-  //  Ve o ultimo registro
-  FDQueryCadastro.Last();
+  try
 
-  //  Pega o último código gerado e soma + 1
-  cod := FDQueryCadastro.FieldByName('CODIGO').AsInteger + 1;
+    //  Estabelece a conexao com o banco
+    FDQueryProduto.Connection := dmDados.FDConnection;
 
-  //  Insere o registro no final da tabela
-  FDQueryCadastro.Append();
+    //  Ve o ultimo codigo usado
+    FDQueryProduto.Close;
+    FDQueryProduto.SQL.Clear;
+    FDQueryProduto.SQL.Add(' select max(codigo) as codigo' );
+    FDQueryProduto.SQL.Add(' from produtos ');
+    FDQueryProduto.Open;
 
-  //  Seta no edit o codigo gerado
-  DBEditCodigo.Text := IntToStr(cod);
+    //  Ultimo codigo usado + 1
+    cod := FDQueryProduto.FieldByName('codigo').AsInteger + 1;
 
-  //  Posiciona o cursor
-  DBEditDescricao.SetFocus;
+    //  Insere o registro no final da tabela
+    FDQueryProduto.Append();
+
+    //  Seta no edit o codigo gerado
+    DBEditCodigo.Text := IntToStr(cod);
+
+    //  Posiciona o cursor
+    DBEditDescricao.SetFocus;
+
+  finally
+
+    //  Libera da memoria
+    FDQueryProduto.free;
+
+  end;
+
+
+
 
 end;
 
-procedure TfrmCadastroProdutos.limpa;
+procedure TfrmCadastroProdutos.limpaCampos;
 var
   i: integer;
 begin
@@ -106,6 +151,22 @@ begin
       TDBEdit(frmCadastroProdutos.Components[i]).Clear
 
   end;
+end;
+
+procedure TfrmCadastroProdutos.ValidaCampos;
+begin
+
+  //  Valida se os campos obrigatorios
+  //  foram preenchidos
+  if DBEditDescricao.Text = EmptyStr then
+  begin
+
+    ShowMessage('Preencha a Descrição do Produto!');
+    DBEditDescricao.SetFocus;
+    Abort;
+
+  end;
+
 end;
 
 end.
