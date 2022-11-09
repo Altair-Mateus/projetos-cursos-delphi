@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, uDmDados, Vcl.ComCtrls,
-  fItensVenda;
+  fItensVenda, System.ImageList, Vcl.ImgList;
 
 type
   TfrmPesquisarVenda = class(TfrmPesquisarPai)
@@ -37,6 +37,7 @@ type
     RadioButtonData: TRadioButton;
     procedure ButtonPesquisaClick(Sender: TObject);
     procedure ButtonVisualizarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
     procedure Pesquisa;
@@ -86,6 +87,19 @@ begin
 
 end;
 
+procedure TfrmPesquisarVenda.FormActivate(Sender: TObject);
+begin
+  inherited;
+
+  //  Coloca a data inicial da pesquisa para
+  //  seis dias antes da data atual
+  DateTimePickerInicial.Date := now - 6;
+
+  //  Coloca a data atual como data final da pesquisa
+  DateTimePickerFinal.Date := now;
+
+end;
+
 procedure TfrmPesquisarVenda.Pesquisa;
 begin
 
@@ -104,6 +118,14 @@ begin
   begin
 
     FDQueryPesquisar.SQL.Add('and nrnota = ' + EditCodigo.Text);
+
+  end;
+
+  //  Pesquisa por nome
+  if StrToIntDef(EditNome.Text, 0) > 0 then
+  begin
+
+    FDQueryPesquisar.SQL.Add('and cliente = ' + EditNome.Text);
 
   end;
 

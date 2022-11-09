@@ -1,11 +1,12 @@
 inherited frmPesquisarVenda: TfrmPesquisarVenda
   Caption = 'frmPesquisarVenda'
-  ClientWidth = 1079
-  ExplicitWidth = 1095
+  ClientWidth = 1145
+  OnActivate = FormActivate
+  ExplicitWidth = 1161
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 1079
+    Width = 1145
     ExplicitWidth = 1079
     inherited LabelNome: TLabel
       Width = 69
@@ -27,15 +28,44 @@ inherited frmPesquisarVenda: TfrmPesquisarVenda
       Caption = 'Per'#237'odo Final'
     end
     inherited ButtonPesquisa: TButton
+      Left = 472
+      Top = 18
       OnClick = ButtonPesquisaClick
+      ExplicitLeft = 472
+      ExplicitTop = 18
+    end
+    inherited ButtonSair: TButton
+      Left = 694
+      Top = 18
+      ExplicitLeft = 694
+      ExplicitTop = 18
+    end
+    inherited ButtonEditar: TButton
+      Left = 472
+      Top = 65
+      ExplicitLeft = 472
+      ExplicitTop = 65
+    end
+    inherited ButtonNovo: TButton
+      Left = 583
+      Top = 18
+      ExplicitLeft = 583
+      ExplicitTop = 18
     end
     inherited RadioButtonNome: TRadioButton
       Width = 74
       Caption = 'Cod Cliente'
       ExplicitWidth = 74
     end
+    inherited ButtonExcluir: TButton
+      Left = 583
+      Top = 65
+      TabOrder = 12
+      ExplicitLeft = 583
+      ExplicitTop = 65
+    end
     object PanelTipoVenda: TPanel
-      Left = 753
+      Left = 841
       Top = 17
       Width = 132
       Height = 98
@@ -70,7 +100,7 @@ inherited frmPesquisarVenda: TfrmPesquisarVenda
       end
     end
     object PanelOpVenda: TPanel
-      Left = 907
+      Left = 995
       Top = 17
       Width = 137
       Height = 98
@@ -116,7 +146,7 @@ inherited frmPesquisarVenda: TfrmPesquisarVenda
       Top = 39
       Width = 97
       Height = 21
-      Date = 44859.000000000000000000
+      Date = 44873.000000000000000000
       Time = 0.875328750000335300
       TabOrder = 9
     end
@@ -143,7 +173,7 @@ inherited frmPesquisarVenda: TfrmPesquisarVenda
     ExplicitWidth = 89
   end
   inherited DBGridResultadoPesquisa: TDBGrid
-    Width = 1079
+    Width = 1145
     Columns = <
       item
         Expanded = False
