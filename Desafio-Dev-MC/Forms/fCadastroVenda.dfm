@@ -10,14 +10,28 @@ inherited frmCadastroVenda: TfrmCadastroVenda
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 1023
+    ExplicitTop = -6
     ExplicitWidth = 1023
+    inherited BitBtnNovo: TBitBtn
+      Left = 11
+      Top = 10
+      TabStop = False
+      ExplicitLeft = 11
+      ExplicitTop = 10
+    end
     inherited BitBtnSalvar: TBitBtn
       Top = 10
+      TabStop = False
       ExplicitTop = 10
     end
     inherited BitBtnSair: TBitBtn
       Left = 911
+      TabOrder = 3
       ExplicitLeft = 911
+    end
+    inherited BitBtnCancelar: TBitBtn
+      TabOrder = 2
+      TabStop = False
     end
   end
   object PanelCabecalhoVenda: TPanel [1]
@@ -90,7 +104,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       DataField = 'NRNOTA'
       DataSource = DataSourceCadastro
       Enabled = False
-      TabOrder = 1
+      TabOrder = 5
     end
     object DBEditCodCLiente: TDBEdit
       Left = 336
@@ -148,7 +162,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       DataField = 'EMISSAO'
       DataSource = DataSourceCadastro
       Enabled = False
-      TabOrder = 5
+      TabOrder = 1
     end
     object PanelOpVenda: TPanel
       Left = 728
@@ -307,7 +321,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Height = 25
       ImageIndex = 3
       Images = ImageList1
-      TabOrder = 7
+      TabOrder = 2
       OnClick = ButtonProdutoClick
     end
     object ButtonAdicionar: TButton
@@ -316,7 +330,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Width = 89
       Height = 41
       Caption = 'ADICIONAR'
-      TabOrder = 6
+      TabOrder = 7
       OnClick = ButtonAdicionarClick
     end
     object EditProduto: TEdit
@@ -324,7 +338,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Top = 35
       Width = 73
       Height = 21
-      TabOrder = 0
+      TabOrder = 3
       OnExit = EditProdutoExit
     end
     object EditQtd: TEdit
@@ -332,7 +346,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Top = 35
       Width = 74
       Height = 21
-      TabOrder = 2
+      TabOrder = 4
       OnExit = EditQtdExit
     end
     object EditValorUnit: TEdit
@@ -340,7 +354,8 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Top = 35
       Width = 87
       Height = 21
-      TabOrder = 3
+      TabStop = False
+      TabOrder = 5
       OnExit = EditValorUnitExit
     end
     object EditValorTotal: TEdit
@@ -348,7 +363,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Top = 35
       Width = 81
       Height = 21
-      TabOrder = 5
+      TabOrder = 6
     end
     object EditLcto: TEdit
       Left = 16
@@ -356,7 +371,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Width = 57
       Height = 21
       Enabled = False
-      TabOrder = 1
+      TabOrder = 0
     end
     object DBEditTotalVenda: TDBEdit
       Left = 704
@@ -372,14 +387,13 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 1
     end
   end
   inherited PanelCampos: TPanel
     Top = 263
     Width = 1023
     Height = 343
-    ExplicitLeft = 0
     ExplicitTop = 263
     ExplicitWidth = 1023
     ExplicitHeight = 343
@@ -390,10 +404,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
       Height = 341
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 263
-      ExplicitWidth = 1023
-      ExplicitHeight = 343
       object DBGridItensVenda: TDBGrid
         Left = 1
         Top = 1
@@ -416,35 +426,32 @@ inherited frmCadastroVenda: TfrmCadastroVenda
           end
           item
             Expanded = False
-            FieldName = 'PRODUTO'
-            Title.Caption = 'Cod Produto'
-            Width = 70
+            FieldName = 'NR_VENDA'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'DescProduto'
-            Title.Caption = 'Descri'#231#227'o do Produto'
-            Width = 300
+            FieldName = 'PRODUTO'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'QTDE'
-            Title.Caption = 'Quantidade'
-            Width = 100
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'VALOR_UNIT'
-            Title.Caption = 'Valor Unit'#225'rio'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'VALOR_TOTAL'
-            Title.Caption = 'Total Produto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DescProduto'
             Visible = True
           end>
       end
@@ -455,8 +462,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Top = 304
   end
   inherited FDQueryCadastro: TFDQuery
-    AfterOpen = FDQueryCadastroAfterOpen
-    AfterScroll = FDQueryCadastroAfterScroll
     SQL.Strings = (
       'select * from venda;')
     Left = 984
@@ -545,15 +550,12 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Top = 304
   end
   object FDQueryItemNota: TFDQuery [9]
-    AfterPost = FDQueryItemNotaAfterPost
     AfterCancel = FDQueryItemNotaAfterCancel
-    AfterDelete = FDQueryItemNotaAfterDelete
     Connection = dmDados.FDConnection
     Transaction = FDTransactionItemNota
     SQL.Strings = (
       'select * from item_venda'
-      'where nr_venda = :nr_venda'
-      '')
+      'where nr_venda = :nr_venda')
     Left = 408
     Top = 368
     ParamData = <

@@ -82,10 +82,6 @@ type
     procedure BitBtnNovoClick(Sender: TObject);
     procedure ButtonProdutoClick(Sender: TObject);
     procedure ButtonAdicionarClick(Sender: TObject);
-    procedure FDQueryCadastroAfterOpen(DataSet: TDataSet);
-    procedure FDQueryCadastroAfterScroll(DataSet: TDataSet);
-    procedure FDQueryItemNotaAfterPost(DataSet: TDataSet);
-    procedure FDQueryItemNotaAfterDelete(DataSet: TDataSet);
     procedure FDQueryItemNotaAfterCancel(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
     procedure BitBtnSalvarClick(Sender: TObject);
@@ -99,7 +95,6 @@ type
   private
     { Private declarations }
     procedure GravarItem;
-    procedure SetItens(pIdVenda: integer);
     procedure GeraNumeroVenda;
     procedure BuscaNomeProduto;
     procedure CalculaValorTotalItem;
@@ -108,6 +103,7 @@ type
     procedure GeraNumeroLcto;
     procedure BaixaEstoque;
     procedure CalculaTotalVenda;
+    procedure LimpaCampos;
 
   public
     { Public declarations }
@@ -126,114 +122,194 @@ var
 
 begin
 
-  if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
-  begin
 
-    //  Pasa o numero da venda para a variavel nrnota
-    nrnota := DBEditNrNota.text;
-
-    //  consulta os itens da venda de acordo com nrnota
-    FDQueryItemNota.Close;
-    FDQueryItemNota.SQL.Clear;
-    FDQueryItemNota.SQL.Add('select * from item_venda ');
-    FDQueryItemNota.SQL.Add(' where nr_venda = ' + QuotedStr(nrnota));
-    FDQueryItemNota.Open();
-
-    //  Busca emissao da venda de acordo com nrnota
-    FDQueryVenda.Close;
-    FDQueryVenda.SQL.Clear;
-    FDQueryVenda.SQL.Add('select * from venda ');
-    FDQueryVenda.SQL.Add(' where nrnota = ' + QuotedStr(nrnota));
-    FDQueryVenda.Open();
-
-
-    //  Atualiza o estoque dos produtos e seta
-    //  a data da ultima venda
-    while not FDQueryItemNota.Eof do
+    if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
     begin
 
-      FDQueryProduto.Close;
-      FDQueryProduto.SQL.Clear;
-      FDQueryProduto.SQL.Add('update produtos ');
-      FDQueryProduto.SQL.Add(' set ');
-      FDQueryProduto.SQL.Add(' saldo = saldo - :pr00, ');
-      FDQueryProduto.SQL.Add(' data_venda = :pr01 ');
-      FDQueryProduto.SQL.Add(' where codigo = :pr02 ');
+      //  Pasa o numero da venda para a variavel nrnota
+      nrnota := DBEditNrNota.text;
+
+      //  consulta os itens da venda de acordo com nrnota
+      FDQueryItemNota.Close;
+      FDQueryItemNota.SQL.Clear;
+      FDQueryItemNota.SQL.Add('select * from item_venda ');
+      FDQueryItemNota.SQL.Add(' where nr_venda = ' + QuotedStr(nrnota));
+      FDQueryItemNota.Open();
+
+      //  Busca emissao da venda de acordo com nrnota
+      FDQueryVenda.Close;
+      FDQueryVenda.SQL.Clear;
+      FDQueryVenda.SQL.Add('select * from venda ');
+      FDQueryVenda.SQL.Add(' where nrnota = ' + QuotedStr(nrnota));
+      FDQueryVenda.Open();
 
 
-      FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
-      FDQueryProduto.Params[1].AsDateTime := FDQueryVendaEMISSAO.Value;
-      FDQueryProduto.Params[2].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
+      //  Atualiza o estoque dos produtos e seta
+      //  a data da ultima venda
+      while not FDQueryItemNota.Eof do
+      begin
 
-      FDQueryProduto.ExecSQL;
+        FDQueryProduto.Close;
+        FDQueryProduto.SQL.Clear;
+        FDQueryProduto.SQL.Add('update produtos ');
+        FDQueryProduto.SQL.Add(' set ');
+        FDQueryProduto.SQL.Add(' saldo = saldo - :pr00, ');
+        FDQueryProduto.SQL.Add(' data_venda = :pr01 ');
+        FDQueryProduto.SQL.Add(' where codigo = :pr02 ');
 
-      FDQueryItemNota.Next;
+
+        FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
+        FDQueryProduto.Params[1].AsDateTime := FDQueryVendaEMISSAO.Value;
+        FDQueryProduto.Params[2].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
+
+        FDQueryProduto.ExecSQL;
+
+        FDQueryItemNota.Next;
+
+      end;
 
     end;
 
-  end;
 
-
-  //  Se for pre venda ira baixar somente estoque
-  if FDQueryCadastroOPERACAO_VENDA.Value = 'P' then
-  begin
-
-    //  Pasa o numero da venda para a variavel nrnota
-    nrnota := DBEditNrNota.text;
-
-    //  consulta os itens da venda de acordo com nrnota
-    FDQueryItemNota.Close;
-    FDQueryItemNota.SQL.Clear;
-    FDQueryItemNota.SQL.Add('select * from item_venda ');
-    FDQueryItemNota.SQL.Add(' where nr_venda = ' + QuotedStr(nrnota) + '');
-    FDQueryItemNota.Open();
-
-    //  Atualiza o estoque dos produtos
-    while not FDQueryItemNota.Eof do
+    //  Se for pre venda ira baixar somente estoque
+    if FDQueryCadastroOPERACAO_VENDA.Value = 'P' then
     begin
 
-      FDQueryProduto.Close;
-      FDQueryProduto.SQL.Clear;
-      FDQueryProduto.SQL.Add('update produtos ');
-      FDQueryProduto.SQL.Add(' set ');
-      FDQueryProduto.SQL.Add(' saldo = saldo - :pr00 ');
-      FDQueryProduto.SQL.Add(' where codigo = :pr01 ');
+      //  Pasa o numero da venda para a variavel nrnota
+      nrnota := DBEditNrNota.text;
 
-      FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
-      FDQueryProduto.Params[1].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
+      //  consulta os itens da venda de acordo com nrnota
+      FDQueryItemNota.Close;
+      FDQueryItemNota.SQL.Clear;
+      FDQueryItemNota.SQL.Add('select * from item_venda ');
+      FDQueryItemNota.SQL.Add(' where nr_venda = ' + QuotedStr(nrnota) + '');
+      FDQueryItemNota.Open();
 
-      FDQueryProduto.ExecSQL;
+      //  Atualiza o estoque dos produtos
+      while not FDQueryItemNota.Eof do
+      begin
 
-      FDQueryItemNota.Next;
+        FDQueryProduto.Close;
+        FDQueryProduto.SQL.Clear;
+        FDQueryProduto.SQL.Add('update produtos ');
+        FDQueryProduto.SQL.Add(' set ');
+        FDQueryProduto.SQL.Add(' saldo = saldo - :pr00 ');
+        FDQueryProduto.SQL.Add(' where codigo = :pr01 ');
+
+        FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
+        FDQueryProduto.Params[1].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
+
+        FDQueryProduto.ExecSQL;
+
+        FDQueryItemNota.Next;
+
+      end;
 
     end;
 
-  end;
+
 
 
 end;
 
 procedure TfrmCadastroVenda.BitBtnNovoClick(Sender: TObject);
 begin
-  inherited;
+
+  BitBtnSalvar.Enabled   := True;
+  BitBtnCancelar.Enabled := True;
+  BitBtnNovo.Enabled     := False;
+  PanelCampos.Enabled    := True;
+
+  // Abre a query
+  FDQueryCadastro.Open();
+
+  //  Se o FDQuery não estiver inserindo ou editando entraremos no modo de insert
+  if not (FDQueryCadastro.State in [dsEdit, dsInsert]) then
+  begin
+
+    FDQueryCadastro.Insert;
+
+  end;
+
+  FDQueryItemNota.Open();
+
+  //  Se o FDQuery não estiver inserindo ou editando entraremos no modo de insert
+  if not (FDQueryItemNota.State in [dsEdit, dsInsert]) then
+  begin
+
+    FDQueryItemNota.Insert;
+
+  end;
+
+  LimpaCampos;
+
+  //FDTransactionCadastro.StartTransaction;
 
   PanelCabecalhoVenda.Enabled := True;
 
-  //  Cria o numero da venda
-  GeraNumeroVenda;
   FDQueryCadastroEMISSAO.AsDateTime := Date;
   FDTransactionItemNota.StartTransaction;
-  FDQueryItemNota.Open();
+
+
+  //  Cria o numero da venda
+  GeraNumeroVenda;
+
   DBEditTotalVenda.Text := '0';
-  //FDQueryItemNota.ParamByName('nr_venda').AsString := DBEditNrNota.Text;
+
 
 end;
 procedure TfrmCadastroVenda.BitBtnSalvarClick(Sender: TObject);
 begin
-  inherited;
 
-  FDQueryItemNota.Post;
+  BitBtnSalvar.Enabled   := False;
+  BitBtnCancelar.Enabled := False;
+  BitBtnNovo.Enabled     := True;
+  PanelCampos.Enabled    := False;
+
+  if FDQueryCadastro.State in [dsEdit, dsInsert] then
+  begin
+
+    //  Inicia a transaction
+    FDTransactionCadastro.StartTransaction;
+
+    //  Grava no banco
+    FDQueryCadastro.Post;
+
+    //  Fecha a transaction
+    FDTransactionCadastro.Commit;
+
+    ShowMessage('Cadastro Salvo!');
+
+    FDQueryCadastro.Close;
+
+  end;
+
+   if FDQueryItemNota.State in [dsEdit, dsInsert] then
+  begin
+
+    //  Inicia a transaction
+   // FDTransactionItemNota.StartTransaction;
+
+    //  Grava no banco
+    FDQueryItemNota.Post;
+
+    //  Fecha a transaction
+    FDTransactionItemNota.Commit;
+
+
+    FDQueryItemNota.Close;
+
+  end;
+
+  //FDQueryItemNota.Post;
   BaixaEstoque;
+
+  LimpaCampos;
+
+  //FDTransactionItemNota.Commit;
+  //FDTransactionCadastro.Commit;
+
+  DataSourceItemNota.DataSet.Close
 
 end;
 
@@ -308,7 +384,7 @@ var
   i: integer;
 
 begin
-  inherited;
+
 
   GravarItem;
   LimpaCamposItens;
@@ -318,7 +394,7 @@ begin
 end;
 procedure TfrmCadastroVenda.ButtonClienteClick(Sender: TObject);
 begin
-  inherited;
+
   //  Cria o Form
   frmPesquisarClientes := TfrmPesquisarClientes.Create(Self);
   try
@@ -332,7 +408,7 @@ begin
 end;
 procedure TfrmCadastroVenda.ButtonProdutoClick(Sender: TObject);
 begin
-  inherited;
+
   // Cria o form
   frmPesquisarProdutos := TfrmPesquisarProdutos.Create(Self);
   try
@@ -364,7 +440,7 @@ end;
 
 procedure TfrmCadastroVenda.DBComboBoxOpVendaExit(Sender: TObject);
 begin
-  inherited;
+
 
   //  Libera a tela para adicionar itens
   PanelProdutos.Enabled := True;
@@ -372,7 +448,7 @@ end;
 
 procedure TfrmCadastroVenda.DBEditCodCLienteExit(Sender: TObject);
 begin
-  inherited;
+
   BuscaNomeCliente;
 end;
 
@@ -380,7 +456,7 @@ procedure TfrmCadastroVenda.DBGridItensVendaDblClick(Sender: TObject);
 var
   totalVenda: Double;
 begin
-  inherited;
+
   DBGridItensVenda.DataSource.DataSet.Delete;
 
   totalVenda := StrToFloat(DBEditTotalVenda.Text);
@@ -397,7 +473,7 @@ end;
 
 procedure TfrmCadastroVenda.EditProdutoExit(Sender: TObject);
 begin
-  inherited;
+
 
   BuscaNomeProduto;
 
@@ -405,7 +481,7 @@ end;
 
 procedure TfrmCadastroVenda.EditQtdExit(Sender: TObject);
 begin
-  inherited;
+
 
   CalculaValorTotalItem;
 
@@ -413,45 +489,25 @@ end;
 
 procedure TfrmCadastroVenda.EditValorUnitExit(Sender: TObject);
 begin
-  inherited;
+
 
   CalculaValorTotalItem;
 
 end;
 
-procedure TfrmCadastroVenda.FDQueryCadastroAfterOpen(DataSet: TDataSet);
-begin
-  inherited;
-  //  Seta o numero da nota na tabela de itens vendas
-  SetItens(FDQueryCadastroNRNOTA.AsInteger);
-end;
-procedure TfrmCadastroVenda.FDQueryCadastroAfterScroll(DataSet: TDataSet);
-begin
-  inherited;
-  //  Seta o numero da nota na tabela de itens vendas
-  SetItens(FDQueryCadastroNRNOTA.AsInteger);
-end;
+
 procedure TfrmCadastroVenda.FDQueryItemNotaAfterCancel(DataSet: TDataSet);
 begin
-  inherited;
+
   FDTransactionItemNota.RollbackRetaining;
 end;
-procedure TfrmCadastroVenda.FDQueryItemNotaAfterDelete(DataSet: TDataSet);
-begin
-  inherited;
-  FDTransactionItemNota.CommitRetaining;
-end;
-procedure TfrmCadastroVenda.FDQueryItemNotaAfterPost(DataSet: TDataSet);
-begin
-  inherited;
-  FDTransactionItemNota.CommitRetaining;
-end;
+
 procedure TfrmCadastroVenda.FormActivate(Sender: TObject);
 begin
-  inherited;
+
   LabelNomeCliente.Caption := '';
   LabelDescProd.Caption    := '';
-  FDQueryItemNota.ParamByName('nr_venda').AsString := DBEditNrNota.Text;
+
 end;
 procedure TfrmCadastroVenda.GeraNumeroLcto;
 var
@@ -473,21 +529,46 @@ end;
 procedure TfrmCadastroVenda.GeraNumeroVenda;
 var
   cod: integer;
+  FDQueryVendas: TFDQuery;
 begin
+
   cod := 0;
-  //  Abre a query
-  FDQueryCadastro.Open();
-  //  Ve o ultimo registro
-  FDQueryCadastro.Last();
-  //  Pega o último código gerado e soma + 1
-  cod := FDQueryCadastro.FieldByName('NRNOTA').AsInteger + 1;
-  //  Insere o registro no final da tabela
-  FDQueryCadastro.Append();
-  //  Seta no edit o codigo gerado
-  DBEditNrNota.Text := IntToStr(cod);
-  //  Posiciona o cursor
-  DBEditCodCLiente.SetFocus;
+
+  //  Cria query
+  FDQueryVendas := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryVendas.Connection := dmDados.FDConnection;
+
+    //  Ve o ultimo codigo usado
+    FDQueryVendas.Close;
+    FDQueryVendas.SQL.Clear;
+    FDQueryVendas.SQL.Add(' select max(nrnota) as nrnota' );
+    FDQueryVendas.SQL.Add(' from venda ');
+    FDQueryVendas.Open;
+
+    //  Ultimo codigo usado + 1
+    cod := FDQueryVendas.FieldByName('nrnota').AsInteger + 1;
+
+    //  Insere o registro no final da tabela
+    FDQueryVendas.Append();
+
+    //  Seta no edit o codigo gerado
+    DBEditNrNota.Text := IntToStr(cod);
+
+    //  Posiciona o cursor
+    DBEditCodCLiente.SetFocus;
+
+  finally
+
+    //  Libera da memoria
+    FDQueryVendas.free;
+
+  end;;
 end;
+
 procedure TfrmCadastroVenda.GravarItem;
 var
   i: integer;
@@ -534,6 +615,24 @@ begin
   //DBEditTotalVenda.Text := FloatToStr(totalVenda + StrToFloat(EditValorTotal.Text))
 
 end;
+procedure TfrmCadastroVenda.LimpaCampos;
+var
+  i: integer;
+begin
+
+
+  //  Limpa os campos
+  for i := 0 to frmCadastroVenda.ComponentCount -1 do
+  begin
+    if frmCadastroVenda.Components[i] is TDBEdit then
+      TDBEdit(frmCadastroVenda.Components[i]).Clear
+
+  end;
+
+
+
+end;
+
 procedure TfrmCadastroVenda.LimpaCamposItens;
 begin
 
@@ -544,10 +643,10 @@ begin
 
 end;
 
-procedure TfrmCadastroVenda.SetItens(pIdVenda: integer);
-begin
-  FDQueryItemNota.Close;
-  FDQueryItemNota.ParamByName('NR_VENDA').AsInteger := pIdVenda;
-  AtualizaFDQuery(FDQueryItemNota, '');
-end;
+//procedure TfrmCadastroVenda.SetItens(pIdVenda: integer);
+//begin
+//  FDQueryItemNota.Close;
+//  FDQueryItemNota.ParamByName('NR_VENDA').AsInteger := pIdVenda;
+//  AtualizaFDQuery(FDQueryItemNota, '');
+//end;
 end.
