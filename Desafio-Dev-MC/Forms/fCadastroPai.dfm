@@ -97,10 +97,6 @@ object frmCadastroPai: TfrmCadastroPai
     Align = alClient
     Enabled = False
     TabOrder = 1
-    ExplicitLeft = 352
-    ExplicitTop = 168
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
   object DataSourceCadastro: TDataSource
     DataSet = FDQueryCadastro

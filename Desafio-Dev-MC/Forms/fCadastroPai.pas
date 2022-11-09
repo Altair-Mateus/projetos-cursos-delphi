@@ -120,10 +120,12 @@ begin
     //  Grava no banco
     FDQueryCadastro.Post;
 
-    //  Mantem a trnsaction aberta
+    //  Fecha a transaction
     FDTransactionCadastro.Commit;
 
     ShowMessage('Cadastro Salvo!');
+
+    FDQueryCadastro.Close;
 
     end;
 

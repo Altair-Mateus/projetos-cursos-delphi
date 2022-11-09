@@ -60,7 +60,6 @@ inherited frmPesquisarProdutos: TfrmPesquisarProdutos
       end>
   end
   inherited FDQueryPesquisar: TFDQuery
-    Active = True
     SQL.Strings = (
       'select * from produtos;')
     object FDQueryPesquisarCODIGO: TIntegerField
