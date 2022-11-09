@@ -25,7 +25,7 @@ object frmCadastroPai: TfrmCadastroPai
     TabOrder = 0
     object BitBtnNovo: TBitBtn
       Left = 0
-      Top = 8
+      Top = 10
       Width = 113
       Height = 49
       Caption = 'NOVO'
@@ -46,6 +46,7 @@ object frmCadastroPai: TfrmCadastroPai
       Width = 113
       Height = 49
       Caption = 'SALVAR'
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -74,10 +75,11 @@ object frmCadastroPai: TfrmCadastroPai
     end
     object BitBtnCancelar: TBitBtn
       Left = 264
-      Top = 8
+      Top = 10
       Width = 113
       Height = 49
       Caption = 'CANCELAR'
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

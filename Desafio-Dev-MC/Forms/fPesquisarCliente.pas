@@ -26,6 +26,7 @@ type
     procedure ButtonNovoClick(Sender: TObject);
     procedure ButtonPesquisaClick(Sender: TObject);
     procedure ButtonVisualizarClick(Sender: TObject);
+    procedure ButtonEditarClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -41,6 +42,38 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmPesquisarClientes.ButtonEditarClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmCadastroCliente := TfrmCadastroCliente.Create(Self);
+
+  try
+
+    //  Abre a query
+    frmCadastroCliente.FDQueryCadastro.Open();
+
+    frmCadastroCliente.BitBtnNovo.Enabled := False;
+    frmCadastroCliente.BitBtnSalvar.Enabled := True;
+    frmCadastroCliente.BitBtnCancelar.Enabled := True;
+    frmCadastroCliente.PanelCampos.Enabled    := True;
+
+    //  Pega o registro selecionado na tabela e abre o cadastro
+    frmCadastroCliente.FDQueryCadastro.Locate('codigo', FDQueryPesquisarCODIGO.AsInteger, []);
+
+    //  Exibe o form
+    frmCadastroCliente.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmCadastroCliente);
+
+  end;
+
+end;
 
 procedure TfrmPesquisarClientes.ButtonNovoClick(Sender: TObject);
 begin

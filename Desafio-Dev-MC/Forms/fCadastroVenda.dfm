@@ -14,10 +14,8 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     ExplicitWidth = 1023
     inherited BitBtnNovo: TBitBtn
       Left = 11
-      Top = 10
       TabStop = False
       ExplicitLeft = 11
-      ExplicitTop = 10
     end
     inherited BitBtnSalvar: TBitBtn
       Top = 10
@@ -550,7 +548,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     Top = 304
   end
   object FDQueryItemNota: TFDQuery [9]
-    AfterCancel = FDQueryItemNotaAfterCancel
     Connection = dmDados.FDConnection
     Transaction = FDTransactionItemNota
     SQL.Strings = (

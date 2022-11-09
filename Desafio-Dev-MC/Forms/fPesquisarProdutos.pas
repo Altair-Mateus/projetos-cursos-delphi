@@ -23,6 +23,7 @@ type
     procedure ButtonPesquisaClick(Sender: TObject);
     procedure ButtonNovoClick(Sender: TObject);
     procedure ButtonVisualizarClick(Sender: TObject);
+    procedure ButtonEditarClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -40,6 +41,39 @@ implementation
 {$R *.dfm}
 
 { TfrmPesquisarProdutos }
+
+procedure TfrmPesquisarProdutos.ButtonEditarClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmCadastroProdutos := TfrmCadastroProdutos.Create(Self);
+
+  try
+
+    //  Abre a query
+    frmCadastroProdutos.FDQueryCadastro.Open();
+
+    frmCadastroProdutos.BitBtnNovo.Enabled := False;
+    frmCadastroProdutos.BitBtnSalvar.Enabled := True;
+    frmCadastroProdutos.BitBtnCancelar.Enabled := True;
+    frmCadastroProdutos.PanelCampos.Enabled    := True;
+
+    //  Pega o registro selecionado na tabela e abre o cadastro
+    frmCadastroProdutos.FDQueryCadastro.Locate('codigo', FDQueryPesquisarCODIGO.AsInteger, []);
+
+    //  Exibe o form
+    frmCadastroProdutos.ShowModal;
+
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmCadastroProdutos);
+
+  end;
+
+end;
 
 procedure TfrmPesquisarProdutos.ButtonNovoClick(Sender: TObject);
 begin

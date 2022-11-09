@@ -82,7 +82,6 @@ type
     procedure BitBtnNovoClick(Sender: TObject);
     procedure ButtonProdutoClick(Sender: TObject);
     procedure ButtonAdicionarClick(Sender: TObject);
-    procedure FDQueryItemNotaAfterCancel(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
     procedure BitBtnSalvarClick(Sender: TObject);
     procedure EditQtdExit(Sender: TObject);
@@ -110,9 +109,10 @@ type
   end;
 var
   frmCadastroVenda: TfrmCadastroVenda;
-  nr_nota: integer;
+
 implementation
 {$R *.dfm}
+
 procedure TfrmCadastroVenda.BaixaEstoque;
 var
 
@@ -122,7 +122,7 @@ var
 
 begin
 
-
+    ShowMessage('entrei no baixa estoque!');
     if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
     begin
 
@@ -209,7 +209,7 @@ begin
 
 
 
-
+   ShowMessage('sai do baixa estoque!');
 end;
 
 procedure TfrmCadastroVenda.BitBtnNovoClick(Sender: TObject);
@@ -243,8 +243,6 @@ begin
 
   LimpaCampos;
 
-  //FDTransactionCadastro.StartTransaction;
-
   PanelCabecalhoVenda.Enabled := True;
 
   FDQueryCadastroEMISSAO.AsDateTime := Date;
@@ -260,11 +258,6 @@ begin
 end;
 procedure TfrmCadastroVenda.BitBtnSalvarClick(Sender: TObject);
 begin
-
-  BitBtnSalvar.Enabled   := False;
-  BitBtnCancelar.Enabled := False;
-  BitBtnNovo.Enabled     := True;
-  PanelCampos.Enabled    := False;
 
   if FDQueryCadastro.State in [dsEdit, dsInsert] then
   begin
@@ -287,8 +280,6 @@ begin
    if FDQueryItemNota.State in [dsEdit, dsInsert] then
   begin
 
-    //  Inicia a transaction
-   // FDTransactionItemNota.StartTransaction;
 
     //  Grava no banco
     FDQueryItemNota.Post;
@@ -301,15 +292,17 @@ begin
 
   end;
 
-  //FDQueryItemNota.Post;
+
   BaixaEstoque;
 
   LimpaCampos;
 
-  //FDTransactionItemNota.Commit;
-  //FDTransactionCadastro.Commit;
+  DataSourceItemNota.DataSet.Close;
 
-  DataSourceItemNota.DataSet.Close
+  BitBtnSalvar.Enabled   := False;
+  BitBtnCancelar.Enabled := False;
+  BitBtnNovo.Enabled     := True;
+  PanelCampos.Enabled    := False;
 
 end;
 
@@ -405,6 +398,7 @@ begin
     //  Libera da memoria
     FreeAndNil(frmPesquisarClientes);
   end;
+
 end;
 procedure TfrmCadastroVenda.ButtonProdutoClick(Sender: TObject);
 begin
@@ -418,14 +412,17 @@ begin
     //  Libera da memoria
     FreeAndNil(frmPesquisarProdutos);
   end;
+
 end;
 procedure TfrmCadastroVenda.CalculaTotalVenda;
 var
   totalVenda: double;
 
 begin
+
   totalVenda := StrToFloat(DBEditTotalVenda.Text);
-  DBEditTotalVenda.Text := FloatToStr(totalVenda + StrToFloat(EditValorTotal.Text))
+  DBEditTotalVenda.Text := FloatToStr(totalVenda + StrToFloat(EditValorTotal.Text));
+
 end;
 
 procedure TfrmCadastroVenda.CalculaValorTotalItem;
@@ -444,12 +441,14 @@ begin
 
   //  Libera a tela para adicionar itens
   PanelProdutos.Enabled := True;
+
 end;
 
 procedure TfrmCadastroVenda.DBEditCodCLienteExit(Sender: TObject);
 begin
 
   BuscaNomeCliente;
+
 end;
 
 procedure TfrmCadastroVenda.DBGridItensVendaDblClick(Sender: TObject);
@@ -461,11 +460,7 @@ begin
 
   totalVenda := StrToFloat(DBEditTotalVenda.Text);
 
-  //showmessage(FloatToStr(totalVenda));
-
   totalvenda := totalVenda - StrToFloat(DBGridItensVenda.Columns.Items[5].Field.Text);
-
-  //showmessage(FloatToStr(totalVenda));
 
   DBEditTotalVenda.Text := FloatToStr(totalVenda);
 
@@ -495,12 +490,6 @@ begin
 
 end;
 
-
-procedure TfrmCadastroVenda.FDQueryItemNotaAfterCancel(DataSet: TDataSet);
-begin
-
-  FDTransactionItemNota.RollbackRetaining;
-end;
 
 procedure TfrmCadastroVenda.FormActivate(Sender: TObject);
 begin
@@ -610,9 +599,7 @@ begin
   FDQueryItemNotaNR_VENDA.AsInteger  := StrToInt(DBEditNrNota.Text);
   FDQueryItemNotaVALOR_TOTAL.AsFloat := StrToFloat(EditValorTotal.Text);
 
-  CalculaTotalVenda
-  //totalVenda := StrToFloat(DBEditTotalVenda.Text);
-  //DBEditTotalVenda.Text := FloatToStr(totalVenda + StrToFloat(EditValorTotal.Text))
+  CalculaTotalVenda;
 
 end;
 procedure TfrmCadastroVenda.LimpaCampos;
@@ -643,10 +630,4 @@ begin
 
 end;
 
-//procedure TfrmCadastroVenda.SetItens(pIdVenda: integer);
-//begin
-//  FDQueryItemNota.Close;
-//  FDQueryItemNota.ParamByName('NR_VENDA').AsInteger := pIdVenda;
-//  AtualizaFDQuery(FDQueryItemNota, '');
-//end;
 end.

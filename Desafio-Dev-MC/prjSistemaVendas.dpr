@@ -14,8 +14,7 @@ uses
   fPesquisarProdutos in 'Forms\fPesquisarProdutos.pas' {frmPesquisarProdutos},
   fCadastroVenda in 'Forms\fCadastroVenda.pas' {frmCadastroVenda},
   fPesquisarVenda in 'Forms\fPesquisarVenda.pas' {frmPesquisarVenda},
-  fItensVenda in 'Forms\fItensVenda.pas' {frmItensVenda},
-  fVenda in 'Forms\fVenda.pas' {Form1};
+  fItensVenda in 'Forms\fItensVenda.pas' {frmItensVenda};
 
 {$R *.res}
 
@@ -25,6 +24,5 @@ begin
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmConfigBanco, frmConfigBanco);
   Application.CreateForm(TdmDados, dmDados);
-  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.
