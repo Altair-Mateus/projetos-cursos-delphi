@@ -6,8 +6,8 @@ object dmDados: TdmDados
   object FDConnection: TFDConnection
     Params.Strings = (
       
-        'Database=D:\Projetos Desenvolvimento\desafioDevMC\teste-de-conhe' +
-        'cimento\BANCO\MC_TESTE.FDB'
+        'Database=D:\Projetos Desenvolvimento\Delphi\Desafio-Dev-MC\BANCO' +
+        '\MC_TESTE.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'Protocol=TCPIP'

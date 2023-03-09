@@ -10,7 +10,6 @@ inherited frmCadastroVenda: TfrmCadastroVenda
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 1023
-    ExplicitTop = -6
     ExplicitWidth = 1023
     inherited BitBtnNovo: TBitBtn
       Left = 11
@@ -921,6 +920,22 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     object FDQueryVendaEMISSAO: TDateField
       FieldName = 'EMISSAO'
       Origin = 'EMISSAO'
+    end
+  end
+  object FDQueryItensVenda: TFDQuery
+    Connection = dmDados.FDConnection
+    SQL.Strings = (
+      'select * from item_venda')
+    Left = 377
+    Top = 520
+    object FDQueryItensVendaQTDE: TBCDField
+      FieldName = 'QTDE'
+      Origin = 'QTDE'
+      Precision = 18
+    end
+    object FDQueryItensVendaPRODUTO: TIntegerField
+      FieldName = 'PRODUTO'
+      Origin = 'PRODUTO'
     end
   end
 end
