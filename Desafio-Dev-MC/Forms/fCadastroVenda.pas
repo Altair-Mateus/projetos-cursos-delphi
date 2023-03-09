@@ -119,15 +119,14 @@ implementation
 
 procedure TfrmCadastroVenda.BaixaEstoque;
 var
-
   data_emissao: TDate;
   nrnota: string;
 begin
 
-    if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
+if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
   begin
 
-    //  Pasa o numero da venda para a variavel nrnota
+    //  Passa o numero da venda para a variavel nrnota
     nrnota := DBEditNrNota.text;
 
     //  consulta os itens da venda de acordo com nrnota
@@ -161,6 +160,7 @@ begin
 
       FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
       FDQueryProduto.Params[1].AsDateTime := FDQueryVendaEMISSAO.Value;
+      showmessage(DateToStr(FDQueryVendaEMISSAO.Value));
       FDQueryProduto.Params[2].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
 
       FDQueryProduto.ExecSQL;
