@@ -79,8 +79,6 @@ type
     LabelPreVenda: TLabel;
     LabelVenda: TLabel;
     FDQueryItensVenda: TFDQuery;
-    FDQueryItensVendaQTDE: TBCDField;
-    FDQueryItensVendaPRODUTO: TIntegerField;
     procedure ButtonClienteClick(Sender: TObject);
     procedure BitBtnNovoClick(Sender: TObject);
     procedure ButtonProdutoClick(Sender: TObject);
@@ -112,16 +110,17 @@ type
   end;
 var
   frmCadastroVenda: TfrmCadastroVenda;
-//  nrnota: String;
 
 implementation
 {$R *.dfm}
+
 
 procedure TfrmCadastroVenda.BaixaEstoque;
 var
   data_emissao: TDate;
   nrnota: string;
 begin
+
 
 if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
   begin
@@ -159,8 +158,7 @@ if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
 
 
       FDQueryProduto.Params[0].AsFloat :=  FDQueryItemNotaQTDE.Value;
-      FDQueryProduto.Params[1].AsDateTime := FDQueryVendaEMISSAO.Value;
-      showmessage(DateToStr(FDQueryVendaEMISSAO.Value));
+      FDQueryProduto.Params[1].AsDateTime := FDQueryCadastroEMISSAO.Value;
       FDQueryProduto.Params[2].AsFloat :=  FDQueryItemNotaPRODUTO.Value;
 
       FDQueryProduto.ExecSQL;
@@ -176,7 +174,7 @@ if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
   if FDQueryCadastroOPERACAO_VENDA.Value = 'P' then
   begin
 
-    //  Pasa o numero da venda para a variavel nrnota
+    //  Passa o numero da venda para a variavel nrnota
     nrnota := DBEditNrNota.text;
 
     //  consulta os itens da venda de acordo com nrnota
@@ -208,6 +206,7 @@ if FDQueryCadastroOPERACAO_VENDA.Value = 'V' then
 
   end;
 
+
 end;
 
 procedure TfrmCadastroVenda.BitBtnNovoClick(Sender: TObject);
@@ -229,7 +228,10 @@ begin
 
   end;
 
-  FDQueryItemNota.Open();
+  //  erro
+//  FDQueryItemNota.SQL.Cleara;
+//  FDQueryItemNota.SQL.Add('select * from item_venda where nr_venda = :nr_venda');
+  FDQueryItemNota.Active := True;
 
   //  Se o FDQuery não estiver inserindo ou editando entraremos no modo de insert
   if not (FDQueryItemNota.State in [dsEdit, dsInsert]) then
@@ -254,6 +256,7 @@ begin
 
 
 end;
+
 procedure TfrmCadastroVenda.BitBtnSalvarClick(Sender: TObject);
 begin
 
@@ -271,7 +274,6 @@ begin
 
     ShowMessage('Cadastro Salvo!');
 
-//    FDQueryCadastro.Close;
 
   end;
 
@@ -286,12 +288,15 @@ begin
     FDTransactionItemNota.Commit;
 
 
-    FDQueryItemNota.Close;
+
 
   end;
 
 
   BaixaEstoque;
+  FDQueryCadastro.Close;
+  FDQueryItemNota.Close;
+  FDQueryProduto.Close;
 
   LimpaCampos;
 
@@ -301,6 +306,7 @@ begin
   BitBtnCancelar.Enabled := False;
   BitBtnNovo.Enabled     := True;
   PanelCampos.Enabled    := False;
+
 
 end;
 
@@ -495,6 +501,7 @@ begin
   LabelNomeCliente.Caption := '';
   LabelDescProd.Caption    := '';
 
+
 end;
 procedure TfrmCadastroVenda.GeraNumeroLcto;
 var
@@ -553,7 +560,8 @@ begin
     //  Libera da memoria
     FDQueryVendas.free;
 
-  end;;
+  end;
+
 end;
 
 procedure TfrmCadastroVenda.GravarItem;

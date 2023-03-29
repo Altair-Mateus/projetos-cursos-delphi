@@ -418,51 +418,47 @@ inherited frmCadastroVenda: TfrmCadastroVenda
         Columns = <
           item
             Expanded = False
-            FieldName = 'LCTO'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NR_VENDA'
-            Visible = True
-          end
-          item
-            Expanded = False
             FieldName = 'PRODUTO'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTDE'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VALOR_UNIT'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VALOR_TOTAL'
+            Title.Caption = 'C'#211'DIGO'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DescProduto'
+            Title.Caption = 'NOME'
+            Width = 310
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QTDE'
+            Width = 82
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_UNIT'
+            Title.Caption = 'VALOR UNIT'#193'RIO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_TOTAL'
+            Title.Caption = 'VALOR TOTAL'
             Visible = True
           end>
       end
     end
   end
   inherited DataSourceCadastro: TDataSource
-    Left = 984
-    Top = 304
+    Left = 936
+    Top = 312
   end
   inherited FDQueryCadastro: TFDQuery
     SQL.Strings = (
       'select * from venda;')
-    Left = 984
-    Top = 240
+    Left = 920
+    Top = 248
     object FDQueryCadastroNRNOTA: TIntegerField
       FieldName = 'NRNOTA'
       Origin = 'NRNOTA'
@@ -496,7 +492,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     end
   end
   inherited FDUpdateSQLCadastro: TFDUpdateSQL
-    Left = 984
+    Left = 944
     Top = 376
   end
   object FDQueryProduto: TFDQuery [7]
@@ -633,7 +629,7 @@ inherited frmCadastroVenda: TfrmCadastroVenda
     end
   end
   inherited FDTransactionCadastro: TFDTransaction
-    Left = 984
+    Left = 936
     Top = 440
   end
   inherited ImageList1: TImageList
@@ -924,18 +920,18 @@ inherited frmCadastroVenda: TfrmCadastroVenda
   end
   object FDQueryItensVenda: TFDQuery
     Connection = dmDados.FDConnection
+    Transaction = FDTransactionItemNota
     SQL.Strings = (
-      'select * from item_venda')
+      'select * from item_venda'
+      'where nr_venda = :nr_venda')
     Left = 377
     Top = 520
-    object FDQueryItensVendaQTDE: TBCDField
-      FieldName = 'QTDE'
-      Origin = 'QTDE'
-      Precision = 18
-    end
-    object FDQueryItensVendaPRODUTO: TIntegerField
-      FieldName = 'PRODUTO'
-      Origin = 'PRODUTO'
-    end
+    ParamData = <
+      item
+        Name = 'NR_VENDA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end
