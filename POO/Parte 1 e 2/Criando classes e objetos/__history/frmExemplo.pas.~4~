@@ -1,0 +1,46 @@
+unit frmExemplo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, uAviao, uCarro;
+
+type
+  TForm1 = class(TForm)
+    GroupBoxCarro: TGroupBox;
+    LabelDescricao: TLabel;
+    LabelQuilometragem: TLabel;
+    LabelCapacidade: TLabel;
+    EdtDescCarro: TEdit;
+    EdtQuilometragem: TEdit;
+    EdtCapCarro: TEdit;
+    ButtonCriar: TButton;
+    ButtonLiberar: TButton;
+    GroupBoxAviao: TGroupBox;
+    LabelDescricaoAviao: TLabel;
+    LabelQuilometragemAviao: TLabel;
+    LabelCapacidadeAviao: TLabel;
+    EdtDescAviao: TEdit;
+    EdtHorasVoo: TEdit;
+    EdtCapAviao: TEdit;
+    ButtonCriarAviao: TButton;
+    ButtonLiberarAviao: TButton;
+  private
+    { Private declarations }
+  public
+
+    Carro: TCarro;
+    Aviao: TAviao;
+
+
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

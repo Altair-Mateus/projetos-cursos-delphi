@@ -1,0 +1,24 @@
+unit uCarro;
+
+interface
+
+type
+TCarro = class
+  Descricao : string;
+  Capacidade : integer;
+  Quilometragem : integer;
+
+  procedure Mover;
+
+end;
+
+implementation
+
+{ TCarro }
+
+procedure TCarro.Mover;
+begin
+
+end;
+
+end.

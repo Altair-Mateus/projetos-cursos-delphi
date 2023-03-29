@@ -1,0 +1,64 @@
+unit frmExemplo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, uAviao, uCarro;
+
+type
+  TForm1 = class(TForm)
+    GroupBoxCarro: TGroupBox;
+    LabelDescricao: TLabel;
+    LabelQuilometragem: TLabel;
+    LabelCapacidade: TLabel;
+    EdtDescCarro: TEdit;
+    EdtQuilometragem: TEdit;
+    EdtCapCarro: TEdit;
+    ButtonCriar: TButton;
+    ButtonLiberar: TButton;
+    GroupBoxAviao: TGroupBox;
+    LabelDescricaoAviao: TLabel;
+    LabelQuilometragemAviao: TLabel;
+    LabelCapacidadeAviao: TLabel;
+    EdtDescAviao: TEdit;
+    EdtHorasVoo: TEdit;
+    EdtCapAviao: TEdit;
+    ButtonCriarAviao: TButton;
+    ButtonLiberarAviao: TButton;
+    procedure ButtonCriarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+
+    Carro: TCarro;
+    Aviao: TAviao;
+
+
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.ButtonCriarClick(Sender: TObject);
+begin
+
+  // cria o objeto e inicializa campos conforme valores dos edits
+  Carro:=TCarro.Create;
+
+  if EdtDescCarro.Text<>'' then
+  Carro.Descricao:=EdtDescCarro.Text;
+
+  if EdtCapCarro.Text<>'' then
+  Carro.Capacidade:=StrToIntDef(EdtCapCarro.Text,0);
+
+  if EdtQuilometragem.Text<>'' then
+  Carro.Quilometragem:=StrToIntDef(EdtQuilometragem.Text,0);
+
+end;
+
+end.

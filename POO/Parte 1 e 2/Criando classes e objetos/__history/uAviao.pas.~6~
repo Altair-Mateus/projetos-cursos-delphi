@@ -1,0 +1,19 @@
+unit uAviao;
+
+interface
+
+uses
+  Vcl.Dialogs;
+
+type
+TAviao = class
+  Descricao: string;
+  Capacidade: integer;
+  HorasVoo: integer;
+
+  procedure Mover;
+end;
+
+implementation
+
+end.
