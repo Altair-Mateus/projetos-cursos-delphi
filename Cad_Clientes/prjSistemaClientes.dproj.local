@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/06/09 22:06:17.000.117,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/09 20:12:59.000.059,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/26 20:43:41.000.266,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/13 20:42:05.000.228,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/13 20:51:54.000.032,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/03/13 20:52:24.000.139,D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\uDmdados.dfm=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2023/03/13 20:52:24.000.139,D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\uDmdados.pas=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/03/13 20:53:29.000.483,D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\fCadCliente.pas=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/13 20:53:29.000.483,D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\fCadCliente.dfm=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/03/13 20:53:48.000.610,D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\prjSistemaClientes.dproj=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,17 @@
+object DataModule2: TDataModule2
+  OldCreateOrder = False
+  Height = 287
+  Width = 449
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=FB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      
+        'Database=D:\Projetos Desenvolvimento\Delphi\Cad_Clientes\Dados\D' +
+        'BTEST.FDB')
+    LoginPrompt = False
+    Left = 208
+    Top = 128
+  end
+end
