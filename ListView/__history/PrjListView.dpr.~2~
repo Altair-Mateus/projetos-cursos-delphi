@@ -1,0 +1,15 @@
+program PrjListView;
+
+uses
+  Vcl.Forms,
+  uFrmListView in 'uFrmListView.pas' {Form1},
+  uCliente in 'uCliente.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

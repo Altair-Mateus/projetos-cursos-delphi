@@ -1,0 +1,57 @@
+unit ListView;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TForm1 = class(TForm)
+    ListViewDados: TListView;
+    PanelCampos: TPanel;
+    LabelNome: TLabel;
+    EditNome: TEdit;
+    EditEmail: TEdit;
+    LabelEmail: TLabel;
+    ButtonAdicionar: TButton;
+    ButtonRemover: TButton;
+    ButtonExibir: TButton;
+    procedure ButtonAdicionarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.ButtonAdicionarClick(Sender: TObject);
+var
+  //  Representa o item que estava adicionando
+  tempItem: TListItem;
+
+begin
+
+
+
+  //  Adiciona um novo item
+  tempItem := ListViewDados.Items.Add;
+
+  //  Alimenta os campos do ListView
+  tempItem.Caption := EditNome.Text;
+  tempItem.SubItems.Add(EditEmail.Text);
+
+
+  EditNome.Text := '';
+  EditEmail.Text := '';
+  EditNome.SetFocus;
+
+end;
+
+end.

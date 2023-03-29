@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/06/09 22:06:17.000.117,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/09 20:12:59.000.059,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/26 20:43:41.000.266,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/20 20:23:55.000.409,=C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/20 20:45:18.000.313,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\ListView\ListView.pas</Transaction>
+    <Transaction>2023/03/20 20:45:18.000.313,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos Desenvolvimento\Delphi\ListView\ListView.dfm</Transaction>
+    <Transaction>2023/03/20 20:45:30.000.138,C:\Users\taico\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos Desenvolvimento\Delphi\ListView\PrjListView.dproj</Transaction>
+    <Transaction>2023/03/20 21:15:34.000.775,=D:\Projetos Desenvolvimento\Delphi\ListView\Unit1.pas</Transaction>
+    <Transaction>2023/03/20 21:17:08.000.273,D:\Projetos Desenvolvimento\Delphi\ListView\Unit1.pas=D:\Projetos Desenvolvimento\Delphi\ListView\UnitCliente.pas</Transaction>
+    <Transaction>2023/03/20 21:27:43.000.923,D:\Projetos Desenvolvimento\Delphi\ListView\ListView.dfm=D:\Projetos Desenvolvimento\Delphi\ListView\uListView.dfm</Transaction>
+    <Transaction>2023/03/20 21:27:43.000.923,D:\Projetos Desenvolvimento\Delphi\ListView\ListView.pas=D:\Projetos Desenvolvimento\Delphi\ListView\uListView.pas</Transaction>
+    <Transaction>2023/03/20 21:28:03.000.606,D:\Projetos Desenvolvimento\Delphi\ListView\uListView.dfm=D:\Projetos Desenvolvimento\Delphi\ListView\uFrmListView.dfm</Transaction>
+    <Transaction>2023/03/20 21:28:03.000.606,D:\Projetos Desenvolvimento\Delphi\ListView\uListView.pas=D:\Projetos Desenvolvimento\Delphi\ListView\uFrmListView.pas</Transaction>
+    <Transaction>2023/03/20 21:28:14.000.403,D:\Projetos Desenvolvimento\Delphi\ListView\UnitCliente.pas=D:\Projetos Desenvolvimento\Delphi\ListView\uCliente.pas</Transaction>
+    <Transaction>2023/03/20 21:36:59.255,=D:\Projetos Desenvolvimento\Delphi\ListView\Unit2.pas</Transaction>
+    <Transaction>2023/03/20 21:37:24.244,D:\Projetos Desenvolvimento\Delphi\ListView\uFrmListViewOO.pas=D:\Projetos Desenvolvimento\Delphi\ListView\Unit2.pas</Transaction>
+    <Transaction>2023/03/20 21:37:24.244,D:\Projetos Desenvolvimento\Delphi\ListView\uFrmListViewOO.dfm=D:\Projetos Desenvolvimento\Delphi\ListView\Unit2.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
