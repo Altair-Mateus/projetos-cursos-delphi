@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   View_Pirincipal in 'View_Pirincipal.pas' {Form1},
   Classe_Pessoa in 'Classe_Pessoa.pas',
-  Classe_Vendedor in 'Classe_Vendedor.pas';
+  Classe_Vendedor in 'Classe_Vendedor.pas',
+  Classe_Administrativo in 'Classe_Administrativo.pas';
 
 {$R *.res}
 
