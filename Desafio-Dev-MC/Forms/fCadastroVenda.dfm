@@ -934,4 +934,20 @@ inherited frmCadastroVenda: TfrmCadastroVenda
         Value = Null
       end>
   end
+  object FDQueryItemVendas: TFDQuery
+    Connection = dmDados.FDConnection
+    SQL.Strings = (
+      'select * from item_venda')
+    Left = 520
+    Top = 320
+    object FDQueryItemVendasPRODUTO: TIntegerField
+      FieldName = 'PRODUTO'
+      Origin = 'PRODUTO'
+    end
+    object FDQueryItemVendasQTDE: TBCDField
+      FieldName = 'QTDE'
+      Origin = 'QTDE'
+      Precision = 18
+    end
+  end
 end
