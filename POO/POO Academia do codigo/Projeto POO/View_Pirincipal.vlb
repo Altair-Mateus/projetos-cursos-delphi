@@ -1,0 +1,10 @@
+﻿[]
+Coordinates=120,78,91,36
+
+[LabelFuncao]
+Coordinates=121,10,53,58
+
+[ComboBoxFuncao]
+Coordinates=10,10,101,124
+Visible=True
+
