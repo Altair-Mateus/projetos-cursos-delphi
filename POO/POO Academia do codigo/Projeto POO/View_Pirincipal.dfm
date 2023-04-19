@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object LabelFuncao: TLabel
@@ -88,6 +89,7 @@ object Form1: TForm1
     Height = 41
     Caption = 'Calcular Sal'#225'rio'
     TabOrder = 5
+    OnClick = ButtonCalcSalarioClick
   end
   object ButtonRetorna: TButton
     Left = 93
