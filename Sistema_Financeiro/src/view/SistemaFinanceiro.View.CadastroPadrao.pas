@@ -29,6 +29,9 @@ type
     pnlBotoesCad: TPanel;
     btnSalvar: TButton;
     btnCancelar: TButton;
+    procedure btnIncluirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,5 +44,29 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmCadastroPadrao.btnAlterarClick(Sender: TObject);
+begin
+
+  //  Abre a tela de cadastro
+  CardPanelPrincipal.ActiveCard := CardCadastro;
+
+end;
+
+procedure TfrmCadastroPadrao.btnCancelarClick(Sender: TObject);
+begin
+
+   //  Abre a tela de cadastro
+  CardPanelPrincipal.ActiveCard := CardPesquisa;
+
+end;
+
+procedure TfrmCadastroPadrao.btnIncluirClick(Sender: TObject);
+begin
+
+  //  Abre a tela de cadastro
+  CardPanelPrincipal.ActiveCard := CardCadastro;
+
+end;
 
 end.

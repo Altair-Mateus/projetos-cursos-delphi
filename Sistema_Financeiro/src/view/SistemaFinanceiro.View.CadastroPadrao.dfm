@@ -2,8 +2,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Left = 0
   Top = 0
   Caption = 'Cadastro Padr'#227'o'
-  ClientHeight = 447
-  ClientWidth = 767
+  ClientHeight = 475
+  ClientWidth = 755
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,178 +11,211 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 19
   object CardPanelPrincipal: TCardPanel
     Left = 0
     Top = 0
-    Width = 767
-    Height = 447
+    Width = 755
+    Height = 475
     Align = alClient
     ActiveCard = CardCadastro
     Caption = 'CardPanel1'
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitWidth = 300
-    ExplicitHeight = 200
+    ExplicitWidth = 767
+    ExplicitHeight = 447
     object CardCadastro: TCard
       Left = 1
       Top = 1
-      Width = 765
-      Height = 445
+      Width = 753
+      Height = 473
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 765
+      ExplicitHeight = 445
       object pnlBotoesCad: TPanel
         Left = 0
-        Top = 376
-        Width = 765
+        Top = 404
+        Width = 753
         Height = 69
         Align = alBottom
         TabOrder = 0
-        ExplicitWidth = 723
+        ExplicitTop = 376
+        ExplicitWidth = 765
         object btnSalvar: TButton
-          Left = 256
-          Top = 5
+          Left = 1
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
           Caption = 'Salvar'
           ImageIndex = 6
           Images = ImageList1
           TabOrder = 0
+          ExplicitLeft = 256
+          ExplicitTop = 5
+          ExplicitHeight = 57
         end
         object btnCancelar: TButton
-          Left = 382
-          Top = 6
+          Left = 121
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
+          BiDiMode = bdLeftToRight
           Caption = 'Cancelar'
           ImageIndex = 3
           Images = ImageList1
+          ParentBiDiMode = False
           TabOrder = 1
+          OnClick = btnCancelarClick
+          ExplicitLeft = 177
         end
       end
     end
     object CardPesquisa: TCard
       Left = 1
       Top = 1
-      Width = 765
-      Height = 445
+      Width = 753
+      Height = 473
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 765
+      ExplicitHeight = 445
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
-        Width = 765
-        Height = 97
+        Width = 753
+        Height = 81
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 723
         object lblPesquisar: TLabel
-          Left = 24
+          Left = 16
           Top = 16
           Width = 73
           Height = 19
+          Align = alCustom
           Caption = 'Pesquisar:'
         end
         object edtPesquisar: TEdit
-          Left = 24
-          Top = 41
+          Left = 16
+          Top = 40
           Width = 345
           Height = 27
+          Align = alCustom
           TabOrder = 0
         end
         object btnPesquisae: TButton
-          Left = 440
-          Top = 21
-          Width = 137
-          Height = 57
+          Left = 632
+          Top = 0
+          Width = 121
+          Height = 81
+          Align = alRight
           Caption = 'Pesquisar'
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
+          ExplicitLeft = 621
+          ExplicitTop = 16
+          ExplicitHeight = 68
         end
       end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 376
-        Width = 765
+        Top = 404
+        Width = 753
         Height = 69
         Align = alBottom
         TabOrder = 1
-        ExplicitWidth = 723
+        ExplicitTop = 376
+        ExplicitWidth = 765
         object btnIncluir: TButton
-          Left = 56
-          Top = 5
+          Left = 1
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
           Caption = 'Incluir'
           ImageIndex = 0
           Images = ImageList1
           TabOrder = 0
+          OnClick = btnIncluirClick
+          ExplicitLeft = 56
+          ExplicitTop = 5
+          ExplicitHeight = 57
         end
         object btnAlterar: TButton
-          Left = 182
-          Top = 6
+          Left = 121
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
           Caption = 'Alterar'
           ImageIndex = 1
           Images = ImageList1
           TabOrder = 1
+          OnClick = btnAlterarClick
+          ExplicitLeft = 182
+          ExplicitTop = 6
+          ExplicitHeight = 57
         end
         object btnExcluir: TButton
-          Left = 308
-          Top = 6
+          Left = 241
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
           Caption = 'Excluir'
           ImageIndex = 2
           Images = ImageList1
           TabOrder = 2
+          ExplicitLeft = 308
+          ExplicitTop = 6
+          ExplicitHeight = 57
         end
         object btnImprimir: TButton
-          Left = 434
-          Top = 5
+          Left = 361
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alLeft
           Caption = 'Imprimir'
           ImageIndex = 4
           Images = ImageList1
           TabOrder = 3
+          ExplicitLeft = 434
+          ExplicitTop = 5
+          ExplicitHeight = 57
         end
         object btnSair: TButton
-          Left = 560
-          Top = 5
+          Left = 632
+          Top = 1
           Width = 120
-          Height = 57
+          Height = 67
+          Align = alRight
           Caption = 'SAIR'
-          ImageIndex = 5
+          ImageIndex = 3
           Images = ImageList1
           TabOrder = 4
+          ExplicitLeft = 560
+          ExplicitTop = 5
+          ExplicitHeight = 57
         end
       end
       object pnlGrid: TPanel
         Left = 0
-        Top = 97
-        Width = 765
-        Height = 279
+        Top = 81
+        Width = 753
+        Height = 323
         Align = alClient
         TabOrder = 2
-        ExplicitLeft = 272
-        ExplicitTop = 200
-        ExplicitWidth = 185
-        ExplicitHeight = 41
+        ExplicitTop = 97
+        ExplicitWidth = 765
+        ExplicitHeight = 279
         object Image1: TImage
           Left = 640
           Top = 152
@@ -192,8 +225,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         object DBGrid1: TDBGrid
           Left = 1
           Top = 1
-          Width = 763
-          Height = 277
+          Width = 751
+          Height = 321
           Align = alClient
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
