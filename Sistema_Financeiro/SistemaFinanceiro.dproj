@@ -107,7 +107,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\view\SistemaFinanceiro.View.CadastroPadrao.pas">
-            <Form>Form1</Form>
+            <Form>frmCadastroPadrao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.WinXPanels;
 
 type
-  TForm1 = class(TForm)
+  TfrmCadastroPadrao = class(TForm)
     CardPanelPrincipal: TCardPanel;
     CardCadastro: TCard;
     CardPesquisa: TCard;
@@ -26,6 +26,9 @@ type
     btnExcluir: TButton;
     btnImprimir: TButton;
     btnSair: TButton;
+    pnlBotoesCad: TPanel;
+    btnSalvar: TButton;
+    btnCancelar: TButton;
   private
     { Private declarations }
   public
@@ -33,7 +36,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmCadastroPadrao: TfrmCadastroPadrao;
 
 implementation
 

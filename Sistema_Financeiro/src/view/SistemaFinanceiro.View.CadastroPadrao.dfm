@@ -1,7 +1,7 @@
-object Form1: TForm1
+object frmCadastroPadrao: TfrmCadastroPadrao
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Cadastro Padr'#227'o'
   ClientHeight = 447
   ClientWidth = 767
   Color = clBtnFace
@@ -19,7 +19,7 @@ object Form1: TForm1
     Width = 767
     Height = 447
     Align = alClient
-    ActiveCard = CardPesquisa
+    ActiveCard = CardCadastro
     Caption = 'CardPanel1'
     TabOrder = 0
     ExplicitLeft = 8
@@ -37,6 +37,35 @@ object Form1: TForm1
       ExplicitTop = 0
       ExplicitWidth = 185
       ExplicitHeight = 41
+      object pnlBotoesCad: TPanel
+        Left = 0
+        Top = 376
+        Width = 765
+        Height = 69
+        Align = alBottom
+        TabOrder = 0
+        ExplicitWidth = 723
+        object btnSalvar: TButton
+          Left = 256
+          Top = 5
+          Width = 120
+          Height = 57
+          Caption = 'Salvar'
+          ImageIndex = 6
+          Images = ImageList1
+          TabOrder = 0
+        end
+        object btnCancelar: TButton
+          Left = 382
+          Top = 6
+          Width = 120
+          Height = 57
+          Caption = 'Cancelar'
+          ImageIndex = 3
+          Images = ImageList1
+          TabOrder = 1
+        end
+      end
     end
     object CardPesquisa: TCard
       Left = 1
