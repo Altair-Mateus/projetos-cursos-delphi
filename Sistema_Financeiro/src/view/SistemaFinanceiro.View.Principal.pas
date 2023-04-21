@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash;
 
 type
   TfrmPrincipal = class(TForm)
@@ -12,6 +12,7 @@ type
     mnuCadastros: TMenuItem;
     mnuRelatorios: TMenuItem;
     mnuAjuda: TMenuItem;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,5 +25,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+
+  //  Cria o Form
+  frmSplash := TfrmSplash.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmSplash.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmSplash);
+
+  end;
+
+end;
 
 end.

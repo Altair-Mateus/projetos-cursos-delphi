@@ -2,8 +2,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Left = 0
   Top = 0
   Caption = 'Cadastro Padr'#227'o'
-  ClientHeight = 475
-  ClientWidth = 755
+  ClientHeight = 502
+  ClientWidth = 801
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   object CardPanelPrincipal: TCardPanel
     Left = 0
     Top = 0
-    Width = 755
-    Height = 475
+    Width = 801
+    Height = 502
     Align = alClient
     ActiveCard = CardCadastro
     Caption = 'CardPanel1'
@@ -28,8 +28,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     object CardCadastro: TCard
       Left = 1
       Top = 1
-      Width = 753
-      Height = 473
+      Width = 799
+      Height = 500
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
@@ -37,8 +37,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       ExplicitHeight = 445
       object pnlBotoesCad: TPanel
         Left = 0
-        Top = 404
-        Width = 753
+        Top = 431
+        Width = 799
         Height = 69
         Align = alBottom
         TabOrder = 0
@@ -78,8 +78,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     object CardPesquisa: TCard
       Left = 1
       Top = 1
-      Width = 753
-      Height = 473
+      Width = 799
+      Height = 500
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
@@ -88,11 +88,12 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
-        Width = 753
+        Width = 799
         Height = 81
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 753
         object lblPesquisar: TLabel
           Left = 16
           Top = 16
@@ -110,7 +111,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TabOrder = 0
         end
         object btnPesquisae: TButton
-          Left = 632
+          Left = 678
           Top = 0
           Width = 121
           Height = 81
@@ -126,8 +127,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 404
-        Width = 753
+        Top = 431
+        Width = 799
         Height = 69
         Align = alBottom
         TabOrder = 1
@@ -192,7 +193,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ExplicitHeight = 57
         end
         object btnSair: TButton
-          Left = 632
+          Left = 678
           Top = 1
           Width = 120
           Height = 67
@@ -209,8 +210,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object pnlGrid: TPanel
         Left = 0
         Top = 81
-        Width = 753
-        Height = 323
+        Width = 799
+        Height = 350
         Align = alClient
         TabOrder = 2
         ExplicitTop = 97
@@ -225,8 +226,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         object DBGrid1: TDBGrid
           Left = 1
           Top = 1
-          Width = 751
-          Height = 321
+          Width = 797
+          Height = 348
           Align = alClient
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
