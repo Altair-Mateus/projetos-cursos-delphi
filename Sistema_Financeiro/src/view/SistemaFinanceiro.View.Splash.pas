@@ -10,15 +10,21 @@ uses
 type
   TfrmSplash = class(TForm)
     pnlPrincipal: TPanel;
-    imgLogo: TImage;
+    imgDll: TImage;
     lblstatus: TLabel;
     ProgressBar: TProgressBar;
     lblNomeApp: TLabel;
     Timer: TTimer;
+    imgLogo: TImage;
+    imgBd: TImage;
+    imgConfig: TImage;
+    imgIniciando: TImage;
     procedure TimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    procedure AtualizarStatus(mensagem: String; imagem: TImage);
+
   public
     { Public declarations }
   end;
@@ -29,6 +35,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmSplash.AtualizarStatus(mensagem: String; imagem: TImage);
+begin
+
+  //  Altera o caption
+  lblstatus.Caption := mensagem;
+
+  //  Mostra a imagem
+  imagem.Visible := True;
+
+end;
 
 procedure TfrmSplash.FormCreate(Sender: TObject);
 begin
@@ -45,10 +62,10 @@ begin
 
     case ProgressBar.Position of
 
-      10: lblstatus.Caption := 'Carregando dependências...';
-      25: lblstatus.Caption := 'Conectado ao Banco de Dados...';
-      45: lblstatus.Caption := 'Carregando as configurações...';
-      75: lblstatus.Caption := 'Iniciando o Sistema...'
+      10: AtualizarStatus('Carregando dependências...', imgDll);
+      25: AtualizarStatus('Conectando ao Banco de Dados...', imgBd);
+      45: AtualizarStatus('Carregando as configurações...', imgConfig);
+      75: AtualizarStatus('Iniciando o Sistema...', imgIniciando);
 
     end;
 
