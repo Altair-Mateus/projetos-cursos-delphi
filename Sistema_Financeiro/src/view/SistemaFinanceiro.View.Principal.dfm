@@ -22,6 +22,10 @@ object frmPrincipal: TfrmPrincipal
     Top = 192
     object mnuCadastros: TMenuItem
       Caption = 'Cadastros'
+      object mnuUsuarios: TMenuItem
+        Caption = 'Usu'#225'rios'
+        OnClick = mnuUsuariosClick
+      end
     end
     object mnuRelatorios: TMenuItem
       Caption = 'Relat'#243'rios'

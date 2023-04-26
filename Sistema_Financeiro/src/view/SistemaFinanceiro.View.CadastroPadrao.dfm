@@ -20,11 +20,9 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     Width = 801
     Height = 502
     Align = alClient
-    ActiveCard = CardCadastro
+    ActiveCard = CardPesquisa
     Caption = 'CardPanel1'
     TabOrder = 0
-    ExplicitWidth = 767
-    ExplicitHeight = 447
     object CardCadastro: TCard
       Left = 1
       Top = 1
@@ -33,8 +31,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
-      ExplicitWidth = 765
-      ExplicitHeight = 445
       object pnlBotoesCad: TPanel
         Left = 0
         Top = 431
@@ -42,8 +38,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 69
         Align = alBottom
         TabOrder = 0
-        ExplicitTop = 376
-        ExplicitWidth = 765
         object btnSalvar: TButton
           Left = 1
           Top = 1
@@ -54,9 +48,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 6
           Images = ImageList1
           TabOrder = 0
-          ExplicitLeft = 256
-          ExplicitTop = 5
-          ExplicitHeight = 57
         end
         object btnCancelar: TButton
           Left = 121
@@ -71,7 +62,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ParentBiDiMode = False
           TabOrder = 1
           OnClick = btnCancelarClick
-          ExplicitLeft = 177
         end
       end
     end
@@ -83,8 +73,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
-      ExplicitWidth = 765
-      ExplicitHeight = 445
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
@@ -93,7 +81,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 753
         object lblPesquisar: TLabel
           Left = 16
           Top = 16
@@ -120,9 +107,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
-          ExplicitLeft = 621
-          ExplicitTop = 16
-          ExplicitHeight = 68
         end
       end
       object pnlBotoes: TPanel
@@ -132,8 +116,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 69
         Align = alBottom
         TabOrder = 1
-        ExplicitTop = 376
-        ExplicitWidth = 765
         object btnIncluir: TButton
           Left = 1
           Top = 1
@@ -145,9 +127,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 0
           OnClick = btnIncluirClick
-          ExplicitLeft = 56
-          ExplicitTop = 5
-          ExplicitHeight = 57
         end
         object btnAlterar: TButton
           Left = 121
@@ -160,9 +139,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 1
           OnClick = btnAlterarClick
-          ExplicitLeft = 182
-          ExplicitTop = 6
-          ExplicitHeight = 57
         end
         object btnExcluir: TButton
           Left = 241
@@ -174,9 +150,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 2
           Images = ImageList1
           TabOrder = 2
-          ExplicitLeft = 308
-          ExplicitTop = 6
-          ExplicitHeight = 57
         end
         object btnImprimir: TButton
           Left = 361
@@ -188,9 +161,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 4
           Images = ImageList1
           TabOrder = 3
-          ExplicitLeft = 434
-          ExplicitTop = 5
-          ExplicitHeight = 57
         end
         object btnSair: TButton
           Left = 678
@@ -202,9 +172,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 3
           Images = ImageList1
           TabOrder = 4
-          ExplicitLeft = 560
-          ExplicitTop = 5
-          ExplicitHeight = 57
         end
       end
       object pnlGrid: TPanel
@@ -214,9 +181,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 350
         Align = alClient
         TabOrder = 2
-        ExplicitTop = 97
-        ExplicitWidth = 765
-        ExplicitHeight = 279
         object Image1: TImage
           Left = 640
           Top = 152

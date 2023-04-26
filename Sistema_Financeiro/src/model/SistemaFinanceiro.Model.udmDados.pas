@@ -11,10 +11,19 @@ uses
 type
   TDataModule1 = class(TDataModule)
     FDConnection: TFDConnection;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+
+    const ARQUIVOCONFIGURACAO = 'ConfigBanco.cfg';
+
   public
     { Public declarations }
+
+    procedure CarregarConfiguracoes;
+    procedure ConectarBd;
+    procedure DesconectarBd;
+
   end;
 
 var
@@ -25,5 +34,73 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+{ TDataModule1 }
+
+procedure TDataModule1.CarregarConfiguracoes;
+var
+
+  ParametroNome:   String;
+  ParametroValor:  String;
+  Contador:        Integer;
+  ListaParametros: TStringList;
+
+begin
+
+//  FDConnection.Params.Clear;
+
+  if not FileExists(ARQUIVOCONFIGURACAO) then
+  begin
+
+    raise Exception.Create('Arquivo de configuração ' + ARQUIVOCONFIGURACAO + ' não encontrado!');
+
+  end;
+
+  //  Instanciando o objeto
+  ListaParametros := TStringList.Create;
+
+  try
+
+    //  Carregando o conteudo do arquivo
+    ListaParametros.LoadFromFile(ARQUIVOCONFIGURACAO);
+
+    for Contador := 0 to Pred(ListaParametros.Count) do
+    begin
+
+      ParametroNome  := ListaParametros[Contador].Split(['='])[0].Trim;
+      ParametroValor := ListaParametros[Contador].Split(['='])[1].Trim;
+
+      FDConnection.Params.Add(ParametroNome + '=' + ParametroValor);
+
+    end;
+  finally
+
+    ListaParametros.Free;
+
+  end;
+
+end;
+
+procedure TDataModule1.ConectarBd;
+begin
+
+  FDConnection.Connected;
+
+end;
+
+procedure TDataModule1.DataModuleCreate(Sender: TObject);
+begin
+
+  CarregarConfiguracoes;
+  ConectarBd;
+
+end;
+
+procedure TDataModule1.DesconectarBd;
+begin
+
+  FDConnection.Connected := False;
+
+end;
 
 end.
