@@ -29,6 +29,9 @@ type
     pnlBotoesCad: TPanel;
     btnSalvar: TButton;
     btnCancelar: TButton;
+    PanelCampos: TPanel;
+    PanelTitulo: TPanel;
+    Labeltitulo: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
