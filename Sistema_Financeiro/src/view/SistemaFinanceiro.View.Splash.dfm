@@ -24,11 +24,15 @@ object frmSplash: TfrmSplash
     Align = alClient
     BevelOuter = bvNone
     Color = 5737262
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
     Padding.Top = 15
     ParentBackground = False
+    ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 645
-    ExplicitHeight = 313
     object imgDll: TImage
       Left = 216
       Top = 202
@@ -458,13 +462,12 @@ object frmSplash: TfrmSplash
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -19
-      Font.Name = 'Myriad Pro Light'
+      Font.Name = 'Calibri Light'
       Font.Style = []
       ParentColor = False
       ParentFont = False
       Layout = tlCenter
-      ExplicitTop = 315
-      ExplicitWidth = 72
+      ExplicitWidth = 63
     end
     object lblNomeApp: TLabel
       Left = 0
@@ -3185,7 +3188,6 @@ object frmSplash: TfrmSplash
       Align = alBottom
       Step = 1
       TabOrder = 0
-      ExplicitTop = 341
     end
   end
   object Timer: TTimer

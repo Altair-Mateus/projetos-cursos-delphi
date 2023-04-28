@@ -9,7 +9,11 @@ object DataModule1: TDataModule1
       'User_Name=SYSDBA'
       'Password=masterkey'
       'CharacterSet=UTF8'
-      'Protocol=TCPIP')
+      'Protocol=TCPIP'
+      'DriverID=FB'
+      
+        'Database=D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\d' +
+        'ados\SISTEMAFINANCEIRO.FDB')
     LoginPrompt = False
     Left = 24
     Top = 32

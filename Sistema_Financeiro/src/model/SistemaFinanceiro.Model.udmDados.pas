@@ -47,7 +47,8 @@ var
 
 begin
 
-//  FDConnection.Params.Clear;
+  FDConnection.Params.DriverID := '';
+  FDConnection.Params.Database := '';
 
   if not FileExists(ARQUIVOCONFIGURACAO) then
   begin
