@@ -18,6 +18,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 19
   object CardPanelPrincipal: TCardPanel
@@ -26,12 +27,10 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     Width = 811
     Height = 512
     Align = alClient
-    ActiveCard = CardCadastro
+    ActiveCard = CardPesquisa
     Caption = 'CardPanel1'
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 801
-    ExplicitHeight = 502
     object CardCadastro: TCard
       Left = 1
       Top = 1
@@ -40,8 +39,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
-      ExplicitWidth = 799
-      ExplicitHeight = 500
       object pnlBotoesCad: TPanel
         Left = 0
         Top = 441
@@ -49,8 +46,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 69
         Align = alBottom
         TabOrder = 0
-        ExplicitTop = 431
-        ExplicitWidth = 799
         object btnSalvar: TButton
           Left = 1
           Top = 1
@@ -87,9 +82,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 144
-        ExplicitWidth = 799
-        ExplicitHeight = 287
       end
       object PanelTitulo: TPanel
         Left = 0
@@ -104,11 +96,9 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Color = 5737262
         ParentBackground = False
         TabOrder = 2
-        ExplicitLeft = -8
-        ExplicitTop = -3
         object Labeltitulo: TLabel
-          Left = 24
-          Top = 11
+          Left = 16
+          Top = 9
           Width = 98
           Height = 23
           Caption = 'TITULO TELA'
@@ -131,8 +121,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
-      ExplicitWidth = 799
-      ExplicitHeight = 500
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
@@ -141,7 +129,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 799
         object lblPesquisar: TLabel
           Left = 16
           Top = 16
@@ -168,7 +155,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
-          ExplicitLeft = 678
         end
       end
       object pnlBotoes: TPanel
@@ -178,8 +164,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 69
         Align = alBottom
         TabOrder = 1
-        ExplicitTop = 431
-        ExplicitWidth = 799
         object btnIncluir: TButton
           Left = 1
           Top = 1
@@ -236,7 +220,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 3
           Images = ImageList1
           TabOrder = 4
-          ExplicitLeft = 678
+          OnClick = btnSairClick
         end
       end
       object pnlGrid: TPanel
@@ -246,8 +230,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 360
         Align = alClient
         TabOrder = 2
-        ExplicitWidth = 799
-        ExplicitHeight = 350
         object Image1: TImage
           Left = 640
           Top = 152
@@ -260,6 +242,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Width = 807
           Height = 358
           Align = alClient
+          ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText

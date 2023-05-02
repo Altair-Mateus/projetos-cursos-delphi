@@ -6,16 +6,21 @@ inherited frmUsuarios: TfrmUsuarios
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
+    ActiveCard = CardCadastro
+    ExplicitWidth = 815
     inherited CardCadastro: TCard
       Width = 813
+      ExplicitWidth = 813
       inherited pnlBotoesCad: TPanel
         Width = 813
+        ExplicitWidth = 813
+        inherited btnSalvar: TButton
+          OnClick = btnSalvarClick
+        end
       end
       inherited PanelCampos: TPanel
         Width = 813
-        ExplicitTop = 41
         ExplicitWidth = 813
-        ExplicitHeight = 400
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -82,6 +87,7 @@ inherited frmUsuarios: TfrmUsuarios
           Font.Style = []
           FrameColor = 5737262
           ParentFont = False
+          State = tssOn
           StateCaptions.CaptionOn = 'Ativo'
           StateCaptions.CaptionOff = 'Inativo'
           TabOrder = 3
@@ -90,23 +96,18 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelTitulo: TPanel
         Width = 813
-        ExplicitLeft = 0
-        ExplicitTop = 0
         ExplicitWidth = 813
         inherited Labeltitulo: TLabel
-          Left = 16
-          Top = 9
           Width = 211
           Caption = 'Inserindo um novo usu'#225'rio'
           Color = 5934638
-          ExplicitLeft = 16
-          ExplicitTop = 9
           ExplicitWidth = 211
         end
       end
     end
     inherited CardPesquisa: TCard
       Width = 813
+      ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
         ExplicitWidth = 813
@@ -118,14 +119,15 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited pnlBotoes: TPanel
         Width = 813
+        ExplicitWidth = 813
         inherited btnSair: TButton
           Left = 692
           ExplicitLeft = 692
-          ExplicitTop = 5
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
+        ExplicitWidth = 813
         inherited DBGrid1: TDBGrid
           Width = 811
           DataSource = DataSourceUsuarios

@@ -35,10 +35,15 @@ type
     procedure btnIncluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+
+    procedure LimpaCampos;
+
   end;
 
 var
@@ -69,6 +74,42 @@ begin
 
   //  Abre a tela de cadastro
   CardPanelPrincipal.ActiveCard := CardCadastro;
+
+  //  Limpa Campos
+  LimpaCampos;
+
+end;
+
+procedure TfrmCadastroPadrao.btnSairClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TfrmCadastroPadrao.FormShow(Sender: TObject);
+begin
+
+  //  Exibe o card de pesquisa primeiro
+  CardPanelPrincipal.ActiveCard := CardPesquisa;
+
+end;
+
+procedure TfrmCadastroPadrao.LimpaCampos;
+var
+
+  Contador: integer;
+
+begin
+
+  for contador := 0 to Pred(ComponentCount) do
+  begin
+
+    if Components[Contador] is TCustomEdit then
+      TCustomEdit(Components[Contador]).Clear;
+
+  end;
+
 
 end;
 
