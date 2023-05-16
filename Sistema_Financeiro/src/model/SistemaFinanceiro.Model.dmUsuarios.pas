@@ -20,6 +20,7 @@ type
     ClientDataSetUsuarioslogin: TWideStringField;
     ClientDataSetUsuariossenha: TWideStringField;
     ClientDataSetUsuariosstatus: TWideStringField;
+    FDQueryId: TFDQuery;
   private
     { Private declarations }
   public

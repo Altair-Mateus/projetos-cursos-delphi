@@ -28,8 +28,13 @@ type
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
+
+    procedure GeraCodigo;
+    procedure ValidaSelecao;
+
   public
     { Public declarations }
   end;
@@ -49,16 +54,11 @@ begin
   //  Coloca o dataset em modo de edição
   DataModuleUsuarios.ClientDataSetUsuarios.Edit;
 
-  if DBGrid1.SelectedIndex < 1 then
-  begin
-
-    Application.MessageBox('Selecione um usuário para alterar!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
+  ValidaSelecao;
 
   inherited;
 
-    //  COloca o nome do usuario no titulo
+    //  Coloca o nome do usuario no titulo
     Labeltitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
 
     //  Carrega os dados
@@ -90,14 +90,34 @@ begin
 
 end;
 
+procedure TfrmUsuarios.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+
+  Application.MessageBox('Deseja excluir o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+//  if app then
+
+
+end;
+
 procedure TfrmUsuarios.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
   Labeltitulo.Caption := 'Inserindo um novo usuário';
 
-  //  Colocando o data set em modo de inserção de dados
-  DataModuleUsuarios.ClientDataSetUsuarios.Insert;
+  if not (DataModuleUsuarios.ClientDataSetUsuarios.State in [ dsEdit, dsInsert]) then
+  begin
+
+    //  Colocando o data set em modo de inserção de dados
+    DataModuleUsuarios.ClientDataSetUsuarios.Insert;
+
+
+  end;
+
+  DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
+  GeraCodigo;
 
 end;
 
@@ -106,7 +126,7 @@ begin
   inherited;
 
   DataModuleUsuarios.ClientDataSetUsuarios.Close;
-  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios';
+  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios order by 1';
   DataModuleUsuarios.ClientDataSetUsuarios.Open;
 
 end;
@@ -176,6 +196,52 @@ begin
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
   inherited;
+end;
+
+procedure TfrmUsuarios.GeraCodigo;
+var
+  cod: integer;
+begin
+
+  cod := 0;
+
+  try
+
+     DataModuleUsuarios.FDQueryId.Close;
+     DataModuleUsuarios.FDQueryId.sql.Clear;
+     DataModuleUsuarios.FDQueryId.SQL.Add('select max(id) as id from usuarios');
+     DataModuleUsuarios.FDQueryId.Open;
+
+
+    //  Ultimo codigo usado + 1
+    cod := DataModuleUsuarios.FDQueryId.FieldByName('id').AsInteger + 1;
+
+    DataModuleUsuarios.ClientDataSetUsuariosid.AsInteger := cod;
+
+    //  Insere o registro no final da tabela
+    DataModuleUsuarios.FDQueryId.Append();
+
+  finally
+
+    //  Libera da memoria
+//    DataModuleUsuarios.FDQueryId.Free;
+
+  end;
+
+
+
+end;
+
+procedure TfrmUsuarios.ValidaSelecao;
+begin
+
+  if DBGrid1.SelectedIndex < 0 then
+  begin
+
+    Application.MessageBox('Selecione um usuário!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
 end;
 
 end.

@@ -6,7 +6,6 @@ inherited frmUsuarios: TfrmUsuarios
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
-    ActiveCard = CardCadastro
     ExplicitWidth = 815
     inherited CardCadastro: TCard
       Width = 813
@@ -120,6 +119,9 @@ inherited frmUsuarios: TfrmUsuarios
       inherited pnlBotoes: TPanel
         Width = 813
         ExplicitWidth = 813
+        inherited btnExcluir: TButton
+          OnClick = btnExcluirClick
+        end
         inherited btnSair: TButton
           Left = 692
           ExplicitLeft = 692
@@ -149,6 +151,7 @@ inherited frmUsuarios: TfrmUsuarios
               Expanded = False
               FieldName = 'login'
               Title.Caption = 'Login'
+              Width = 151
               Visible = True
             end
             item

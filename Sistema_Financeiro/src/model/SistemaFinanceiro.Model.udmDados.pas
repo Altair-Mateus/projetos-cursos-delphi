@@ -47,7 +47,6 @@ var
 
 begin
 
-  FDConnection.Params.DriverID := '';
   FDConnection.Params.Database := '';
 
   if not FileExists(ARQUIVOCONFIGURACAO) then
