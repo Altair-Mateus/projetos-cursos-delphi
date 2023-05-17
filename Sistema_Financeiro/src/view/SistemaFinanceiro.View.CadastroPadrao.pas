@@ -37,6 +37,8 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -86,6 +88,19 @@ begin
   Close;
 
 end;
+
+procedure TfrmCadastroPadrao.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  begin
+  if (gdSelected in State) then
+  begin
+    DBGrid1.Canvas.Brush.Color := $00578B2E;  // Define a cor de fundo da célula selecionada
+    DBGrid1.Canvas.Font.Color := clWhite;  // Define a cor do texto da célula selecionada
+  end;
+
+  // Desenha a célula com as propriedades de cor atualizadas
+  DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
 
 procedure TfrmCadastroPadrao.FormShow(Sender: TObject);
 begin

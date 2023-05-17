@@ -3,7 +3,6 @@ object DataModuleUsuarios: TDataModuleUsuarios
   Height = 350
   Width = 474
   object FDQueryUsuarios: TFDQuery
-    Active = True
     Connection = DataModule1.FDConnection
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
     SQL.Strings = (
@@ -12,6 +11,7 @@ object DataModuleUsuarios: TDataModuleUsuarios
     Top = 64
   end
   object ClientDataSetUsuarios: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'
@@ -50,10 +50,5 @@ object DataModuleUsuarios: TDataModuleUsuarios
     Options = [poAllowCommandText, poUseQuoteChar]
     Left = 160
     Top = 64
-  end
-  object FDQueryId: TFDQuery
-    Connection = DataModule1.FDConnection
-    Left = 224
-    Top = 160
   end
 end

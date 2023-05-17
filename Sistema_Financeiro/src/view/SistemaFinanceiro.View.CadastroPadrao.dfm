@@ -128,6 +128,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 81
         Align = alTop
         BevelOuter = bvNone
+        Color = 5737262
+        ParentBackground = False
         TabOrder = 0
         object lblPesquisar: TLabel
           Left = 16
@@ -136,6 +138,14 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Height = 19
           Align = alCustom
           Caption = 'Pesquisar:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
         end
         object edtPesquisar: TEdit
           Left = 16
@@ -249,6 +259,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TitleFont.Height = -16
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGrid1DrawColumnCell
         end
       end
     end

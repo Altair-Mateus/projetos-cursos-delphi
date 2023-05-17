@@ -31,9 +31,8 @@ type
     procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
-
-    procedure GeraCodigo;
     procedure ValidaSelecao;
+    procedure ValidaCampos;
 
   public
     { Public declarations }
@@ -91,12 +90,32 @@ begin
 end;
 
 procedure TfrmUsuarios.btnExcluirClick(Sender: TObject);
+var
+
+  option : Word;
+
 begin
   inherited;
 
-  Application.MessageBox('Deseja excluir o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+  option := Application.MessageBox('Deseja excluir o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
 
-//  if app then
+  if option = IDNO then
+  begin
+    exit;
+  end;
+
+
+  try
+
+    //  Excluindo registro
+    DataModuleUsuarios.ClientDataSetUsuarios.Delete;
+    DataModuleUsuarios.ClientDataSetUsuarios.ApplyUpdates(0);
+
+  except on E : Exception do
+
+    Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir usuário', MB_OK + MB_ICONERROR);
+
+  end;
 
 
 end;
@@ -117,7 +136,7 @@ begin
   end;
 
   DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
-  GeraCodigo;
+  DataModuleUsuarios.GeraCodigo;
 
 end;
 
@@ -140,33 +159,7 @@ begin
 
 
   //  Valida os campos obrigatórios
-  if Trim(EditNome.Text) = '' then
-  begin
-
-    Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditNome.SetFocus;
-
-    abort;
-  end;
-
-  if Trim(EditLogin.Text) = '' then
-  begin
-
-    Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditLogin.SetFocus;
-
-    abort;
-  end;
-
-  if Trim(EditSenha.Text) = '' then
-  begin
-
-    Application.MessageBox('Campo Senha não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditSenha.SetFocus;
-
-    abort;
-  end;
-
+  ValidaCampos;
 
   //  Define o status do usuario
   if ToggleSwitchStatus.State = tssOn then
@@ -198,36 +191,43 @@ begin
   inherited;
 end;
 
-procedure TfrmUsuarios.GeraCodigo;
-var
-  cod: integer;
+procedure TfrmUsuarios.ValidaCampos;
 begin
+if Trim(EditNome.Text) = '' then
+  begin
 
-  cod := 0;
+    Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    EditNome.SetFocus;
 
-  try
-
-     DataModuleUsuarios.FDQueryId.Close;
-     DataModuleUsuarios.FDQueryId.sql.Clear;
-     DataModuleUsuarios.FDQueryId.SQL.Add('select max(id) as id from usuarios');
-     DataModuleUsuarios.FDQueryId.Open;
-
-
-    //  Ultimo codigo usado + 1
-    cod := DataModuleUsuarios.FDQueryId.FieldByName('id').AsInteger + 1;
-
-    DataModuleUsuarios.ClientDataSetUsuariosid.AsInteger := cod;
-
-    //  Insere o registro no final da tabela
-    DataModuleUsuarios.FDQueryId.Append();
-
-  finally
-
-    //  Libera da memoria
-//    DataModuleUsuarios.FDQueryId.Free;
-
+    abort;
   end;
 
+  if Trim(EditLogin.Text) = '' then
+  begin
+
+    Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    EditLogin.SetFocus;
+
+    abort;
+  end;
+
+  if Trim(EditSenha.Text) = '' then
+  begin
+
+    Application.MessageBox('Campo Senha não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    EditSenha.SetFocus;
+
+    abort;
+  end;
+
+  if DataModuleUsuarios.VerificaLogin(Trim(EditLogin.Text), DataModuleUsuarios.ClientDataSetUsuarios.FieldByName('ID').AsString) then
+  begin
+
+    Application.MessageBox(PWidechar(Format('Login %s já cadastrado!', [EditLogin.Text])), 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    EditLogin.SetFocus;
+
+    abort;
+  end;
 
 
 end;
