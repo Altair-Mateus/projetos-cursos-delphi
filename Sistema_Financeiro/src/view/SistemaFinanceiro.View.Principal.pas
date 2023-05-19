@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
-  SistemaFinanceiro.View.Usuarios;
+  SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login;
 
 type
   TfrmPrincipal = class(TForm)
@@ -32,7 +32,7 @@ implementation
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
 
-  //  Cria o Form
+  //  Cria o Form do splash
   frmSplash := TfrmSplash.Create(Self);
 
   try
@@ -46,6 +46,30 @@ begin
     FreeAndNil(frmSplash);
 
   end;
+
+  //  Cria o Form do splash
+  frmLogin := TfrmLogin.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmLogin.ShowModal;
+
+    if frmLogin.ModalResult <> mrOk then
+    begin
+
+      Application.Terminate;
+
+    end;
+
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmLogin);
+
+  end;
+
 
 end;
 

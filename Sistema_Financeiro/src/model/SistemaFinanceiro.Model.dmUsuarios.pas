@@ -21,11 +21,23 @@ type
     ClientDataSetUsuariossenha: TWideStringField;
     ClientDataSetUsuariosstatus: TWideStringField;
   private
+    FNomeUsuarioLogado: String;
+    FLoginUsuarioLogado: String;
+    FIdUsuarioLogado: String;
+    procedure SetNomeUsuarioLogado(const Value: String);
+    procedure SetIdUsuarioLogado(const Value: String);
+    procedure SetLoginUsuarioLogado(const Value: String);
     { Private declarations }
   public
     { Public declarations }
     procedure GeraCodigo;
     function VerificaLogin(Login: String; Id: String) : Boolean;
+    procedure EfetuaLogin(Login: String; Senha : String);
+
+
+    property NomeUsuarioLogado : String read FNomeUsuarioLogado write SetNomeUsuarioLogado;
+    property LoginUsuarioLogado : String read FLoginUsuarioLogado write SetLoginUsuarioLogado;
+    property IdUsuarioLogado : String read FIdUsuarioLogado write SetIdUsuarioLogado;
 
 
   end;
@@ -40,6 +52,57 @@ implementation
 {$R *.dfm}
 
 { TDataModuleUsuarios }
+
+procedure TDataModuleUsuarios.EfetuaLogin(Login, Senha: String);
+var
+  FDQueryLogin : TFDQuery;
+
+begin
+
+  FDQueryLogin := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryLogin.Connection :=  DataModule1.FDConnection;
+
+    FDQueryLogin.Close;
+    FDQueryLogin.SQL.Clear;
+    FDQueryLogin.SQL.Add('select * from usuarios where login = :LOGIN and senha = :senha');
+
+
+    FDQueryLogin.ParamByName('LOGIN').AsString := Login;
+    FDQueryLogin.ParamByName('SENHA').AsString := Senha;
+    FDQueryLogin.Open;
+
+    //  Valida usuario
+    if FDQueryLogin.IsEmpty then
+    begin
+
+      raise Exception.Create('Usuário e/ou senha inválidos');
+
+    end;
+
+    //  Valida se o usuario esta ativo
+    if FDQueryLogin.FieldByName('STATUS').AsString <> 'A' then
+    begin
+
+      raise Exception.Create('Usuário não está ativo! Contate o Administrador');
+
+    end;
+
+    FIdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
+    FNomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
+    FLoginUsuarioLogado := FDQueryLogin.FieldByName('LOGIN').AsString;
+
+  finally
+
+    FDQueryLogin.Close;
+    FDQueryLogin.Free;
+
+  end;
+
+end;
 
 procedure TDataModuleUsuarios.GeraCodigo;
 var
@@ -77,6 +140,21 @@ begin
 
   end;
 
+end;
+
+procedure TDataModuleUsuarios.SetIdUsuarioLogado(const Value: String);
+begin
+  FIdUsuarioLogado := Value;
+end;
+
+procedure TDataModuleUsuarios.SetLoginUsuarioLogado(const Value: String);
+begin
+  FLoginUsuarioLogado := Value;
+end;
+
+procedure TDataModuleUsuarios.SetNomeUsuarioLogado(const Value: String);
+begin
+  FNomeUsuarioLogado := Value;
 end;
 
 function TDataModuleUsuarios.VerificaLogin(Login, Id: String): Boolean;
