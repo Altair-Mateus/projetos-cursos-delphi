@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
-  SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login;
+  SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls;
 
 type
   TfrmPrincipal = class(TForm)
@@ -14,6 +15,11 @@ type
     mnuRelatorios: TMenuItem;
     mnuAjuda: TMenuItem;
     mnuUsuarios: TMenuItem;
+    pnlDadosGerais: TPanel;
+    pnlAtalhos: TPanel;
+    pnlInfos: TPanel;
+    lblUserLogado: TLabel;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
   private
@@ -28,6 +34,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses SistemaFinanceiro.Model.dmUsuarios;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
@@ -70,7 +78,9 @@ begin
 
   end;
 
-
+  //  Mostra o Usuario logado
+  lblUserLogado.Caption := DataModuleUsuarios.GetUsuarioLogado.IdUsuarioLogado +
+  ' - ' + DataModuleUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
 end;
 
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);

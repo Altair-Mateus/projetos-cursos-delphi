@@ -156,15 +156,21 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TabOrder = 0
         end
         object btnPesquisae: TButton
-          Left = 688
-          Top = 0
+          AlignWithMargins = True
+          Left = 685
+          Top = 5
           Width = 121
-          Height = 81
+          Height = 71
+          Margins.Top = 5
+          Margins.Bottom = 5
           Align = alRight
           Caption = 'Pesquisar'
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
+          ExplicitLeft = 709
+          ExplicitTop = 0
+          ExplicitHeight = 81
         end
       end
       object pnlBotoes: TPanel

@@ -1,5 +1,7 @@
 object DataModuleUsuarios: TDataModuleUsuarios
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 350
   Width = 474
   object FDQueryUsuarios: TFDQuery

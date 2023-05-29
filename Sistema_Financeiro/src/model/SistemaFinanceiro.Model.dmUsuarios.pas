@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider, Datasnap.DBClient,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  SistemaFinanceiro.Model.Entidades.Usuario;
 
 type
   TDataModuleUsuarios = class(TDataModule)
@@ -20,13 +21,10 @@ type
     ClientDataSetUsuarioslogin: TWideStringField;
     ClientDataSetUsuariossenha: TWideStringField;
     ClientDataSetUsuariosstatus: TWideStringField;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
-    FNomeUsuarioLogado: String;
-    FLoginUsuarioLogado: String;
-    FIdUsuarioLogado: String;
-    procedure SetNomeUsuarioLogado(const Value: String);
-    procedure SetIdUsuarioLogado(const Value: String);
-    procedure SetLoginUsuarioLogado(const Value: String);
+    FUsuario : TModelUsuario;
     { Private declarations }
   public
     { Public declarations }
@@ -34,11 +32,7 @@ type
     function VerificaLogin(Login: String; Id: String) : Boolean;
     procedure EfetuaLogin(Login: String; Senha : String);
 
-
-    property NomeUsuarioLogado : String read FNomeUsuarioLogado write SetNomeUsuarioLogado;
-    property LoginUsuarioLogado : String read FLoginUsuarioLogado write SetLoginUsuarioLogado;
-    property IdUsuarioLogado : String read FIdUsuarioLogado write SetIdUsuarioLogado;
-
+    function GetUsuarioLogado: TModelUsuario;
 
   end;
 
@@ -52,6 +46,22 @@ implementation
 {$R *.dfm}
 
 { TDataModuleUsuarios }
+
+procedure TDataModuleUsuarios.DataModuleCreate(Sender: TObject);
+begin
+
+  //  Instanciando o objeto
+  FUsuario := TModelUsuario.Create;
+
+end;
+
+procedure TDataModuleUsuarios.DataModuleDestroy(Sender: TObject);
+begin
+
+  //  Liberando da memoria
+  FUsuario.Free;
+
+end;
 
 procedure TDataModuleUsuarios.EfetuaLogin(Login, Senha: String);
 var
@@ -91,9 +101,10 @@ begin
 
     end;
 
-    FIdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
-    FNomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
-    FLoginUsuarioLogado := FDQueryLogin.FieldByName('LOGIN').AsString;
+    FUsuario.IdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
+    FUsuario.NomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
+    FUsuario.LoginUsuarioLogado := FDQueryLogin.FieldByName('LOGIN').AsString;
+
 
   finally
 
@@ -142,20 +153,11 @@ begin
 
 end;
 
-procedure TDataModuleUsuarios.SetIdUsuarioLogado(const Value: String);
+function TDataModuleUsuarios.GetUsuarioLogado: TModelUsuario;
 begin
-  FIdUsuarioLogado := Value;
+  Result := FUsuario;
 end;
 
-procedure TDataModuleUsuarios.SetLoginUsuarioLogado(const Value: String);
-begin
-  FLoginUsuarioLogado := Value;
-end;
-
-procedure TDataModuleUsuarios.SetNomeUsuarioLogado(const Value: String);
-begin
-  FNomeUsuarioLogado := Value;
-end;
 
 function TDataModuleUsuarios.VerificaLogin(Login, Id: String): Boolean;
 var

@@ -6,7 +6,6 @@ inherited frmUsuarios: TfrmUsuarios
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
-    ActiveCard = CardCadastro
     ExplicitWidth = 815
     inherited CardCadastro: TCard
       Width = 813
@@ -112,9 +111,11 @@ inherited frmUsuarios: TfrmUsuarios
         Width = 813
         ExplicitWidth = 813
         inherited btnPesquisae: TButton
-          Left = 692
+          Left = 689
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 692
+          ExplicitLeft = 689
+          ExplicitTop = 3
+          ExplicitHeight = 64
         end
       end
       inherited pnlBotoes: TPanel
