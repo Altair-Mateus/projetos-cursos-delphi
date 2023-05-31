@@ -2117,25 +2117,25 @@ object frmLogin: TfrmLogin
       ExplicitTop = 8
     end
     object lblBemVindo: TLabel
-      Left = 120
-      Top = 128
-      Width = 225
-      Height = 96
+      Left = 96
+      Top = 104
+      Width = 305
+      Height = 128
       Alignment = taCenter
       Caption = 'Bem-Vindo(a) de Volta!'
       Color = 5868590
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
-      Font.Height = -40
-      Font.Name = 'Myriad Pro'
-      Font.Style = []
+      Font.Height = -53
+      Font.Name = 'Calibri'
+      Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
       WordWrap = True
     end
     object lblLado: TLabel
-      Left = 112
-      Top = 230
+      Left = 104
+      Top = 238
       Width = 278
       Height = 23
       Alignment = taCenter
@@ -3347,7 +3347,7 @@ object frmLogin: TfrmLogin
     ColorDepth = cd32Bit
     Height = 32
     Width = 32
-    Left = 752
+    Left = 736
     Top = 296
     Bitmap = {
       494C010102000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600

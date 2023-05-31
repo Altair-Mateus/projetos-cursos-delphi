@@ -40,10 +40,16 @@ object DataModuleUsuarios: TDataModuleUsuarios
     object ClientDataSetUsuariossenha: TWideStringField
       FieldName = 'senha'
       Origin = 'SENHA'
+      Size = 60
     end
     object ClientDataSetUsuariosstatus: TWideStringField
       FieldName = 'status'
       Origin = 'STATUS'
+      Size = 1
+    end
+    object ClientDataSetUsuariossenha_temp: TWideStringField
+      FieldName = 'senha_temp'
+      Origin = 'SENHA_TEMP'
       Size = 1
     end
   end

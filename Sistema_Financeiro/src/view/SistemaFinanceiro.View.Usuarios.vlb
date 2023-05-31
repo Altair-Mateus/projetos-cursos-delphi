@@ -13,14 +13,8 @@ Coordinates=10,350,85,58
 [CardPanelPrincipal]
 Coordinates=374,282,125,58
 
-[DataModuleUsuarios.ClientDataSetUsuarios]
-Coordinates=380,214,269,58
-
 [btnIncluir]
 Coordinates=509,282,67,58
-
-[DataModuleUsuarios.FDQueryUsuarios]
-Coordinates=99,146,241,58
 
 [lblPesquisar]
 Coordinates=525,78,85,58
@@ -89,18 +83,12 @@ Coordinates=387,10,74,58
 Coordinates=105,350,128,36
 Visible=True
 
-[LabelSenha]
-Coordinates=115,10,83,58
-
 [LabelNome]
 Coordinates=297,10,80,58
 
 [EditNome]
 Coordinates=342,78,71,58
 
-[EditSenha]
-Coordinates=191,78,74,58
-
 []
-Coordinates=684,366,91,36
+Coordinates=115,10,83,58
 

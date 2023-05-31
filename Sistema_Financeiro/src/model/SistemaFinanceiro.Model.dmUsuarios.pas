@@ -21,6 +21,7 @@ type
     ClientDataSetUsuarioslogin: TWideStringField;
     ClientDataSetUsuariossenha: TWideStringField;
     ClientDataSetUsuariosstatus: TWideStringField;
+    ClientDataSetUsuariossenha_temp: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -29,10 +30,14 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
-    function VerificaLogin(Login: String; Id: String) : Boolean;
     procedure EfetuaLogin(Login: String; Senha : String);
+    procedure LimparSenhaTemp(IdUsuario: String);
+    procedure RedefinirSenha(Usuario: TModelUsuario);
 
+    function VerificaLogin(Login: String; Id: String) : Boolean;
     function GetUsuarioLogado: TModelUsuario;
+
+    CONST TEMP_PASSWORD = '12345';
 
   end;
 
@@ -42,6 +47,9 @@ var
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses
+  BCrypt;
 
 {$R *.dfm}
 
@@ -78,11 +86,10 @@ begin
 
     FDQueryLogin.Close;
     FDQueryLogin.SQL.Clear;
-    FDQueryLogin.SQL.Add('select * from usuarios where login = :LOGIN and senha = :senha');
+    FDQueryLogin.SQL.Add('select * from usuarios where login = :LOGIN');
 
 
     FDQueryLogin.ParamByName('LOGIN').AsString := Login;
-    FDQueryLogin.ParamByName('SENHA').AsString := Senha;
     FDQueryLogin.Open;
 
     //  Valida usuario
@@ -100,6 +107,15 @@ begin
       raise Exception.Create('Usuário não está ativo! Contate o Administrador');
 
     end;
+
+    //  Valida o hash da senha
+    if not TBCrypt.CompareHash(Senha, FDQueryLogin.FieldByName('SENHA').AsString) then
+    begin
+
+      raise Exception.Create('Usuário e/ou senha inválidos');
+
+    end;
+
 
     FUsuario.IdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
     FUsuario.NomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
@@ -158,6 +174,44 @@ begin
   Result := FUsuario;
 end;
 
+
+procedure TDataModuleUsuarios.LimparSenhaTemp(IdUsuario: String);
+var
+
+  FDQuery : TFDQuery;
+
+begin
+
+  FDQuery := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQuery.Connection := DataModule1.FDConnection;
+
+    FDQuery.SQL.Clear;
+    FDQuery.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
+    FDQuery.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
+
+    FDQuery.ParamByName('SENHA_TEMP').AsString := 'S';
+    FDQuery.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(TEMP_PASSWORD);
+    FDQuery.ParamByName('ID').AsString         := IdUsuario;
+
+    FDQuery.ExecSQL;
+
+  finally
+
+    FDQuery.Close;
+    FDQuery.Free;
+
+  end;
+
+end;
+
+procedure TDataModuleUsuarios.RedefinirSenha(Usuario: TModelUsuario);
+begin
+
+end;
 
 function TDataModuleUsuarios.VerificaLogin(Login, Id: String): Boolean;
 var

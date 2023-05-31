@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.WinXCtrls;
+  Vcl.WinXCtrls, Vcl.Menus;
 
 type
   TfrmUsuarios = class(TfrmCadastroPadrao)
@@ -19,16 +19,18 @@ type
     EditNome: TEdit;
     LabelLogin: TLabel;
     EditLogin: TEdit;
-    EditSenha: TEdit;
-    LabelSenha: TLabel;
     ToggleSwitchStatus: TToggleSwitch;
     LabelStatus: TLabel;
+    PopupMenu: TPopupMenu;
+    mnuLimpaSenha: TMenuItem;
+    lblAvisoSenha: TLabel;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure mnuLimpaSenhaClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaSelecao;
@@ -45,7 +47,10 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmUsuarios;
+uses
+
+  SistemaFinanceiro.Model.dmUsuarios,
+  BCrypt;
 
 procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
@@ -63,7 +68,6 @@ begin
     //  Carrega os dados
     EditNome.Text  := DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
     EditLogin.Text := DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString;
-    EditSenha.Text := DataModuleUsuarios.ClientDataSetUsuariossenha.AsString;
 
     if DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString = 'A' then
     begin
@@ -124,6 +128,7 @@ procedure TfrmUsuarios.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
+  lblAvisoSenha.Visible := True;
   Labeltitulo.Caption := 'Inserindo um novo usuário';
 
   if not (DataModuleUsuarios.ClientDataSetUsuarios.State in [ dsEdit, dsInsert]) then
@@ -161,6 +166,16 @@ begin
   //  Valida os campos obrigatórios
   ValidaCampos;
 
+  //  Se for um novo usuário será colocado a senha temporária
+  if DataModuleUsuarios.ClientDataSetUsuarios.State in [dsInsert] then
+  begin
+
+    DataModuleUsuarios.ClientDataSetUsuariossenha.AsString := TBCrypt.GenerateHash(DataModuleUsuarios.TEMP_PASSWORD);
+    DataModuleUsuarios.ClientDataSetUsuariossenha_temp.AsString := 'S';
+
+  end;
+
+
   //  Define o status do usuario
   if ToggleSwitchStatus.State = tssOn then
   begin
@@ -178,7 +193,6 @@ begin
   //  Passando os dados para o dataset
   DataModuleUsuarios.ClientDataSetUsuariosnome.AsString := Trim(EditNome.Text);
   DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString := Trim(EditLogin.Text);
-  DataModuleUsuarios.ClientDataSetUsuariossenha.AsString := Trim(EditSenha.Text);
   DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString := LStatus;
 
   //  Gravando no banco de dados
@@ -189,6 +203,27 @@ begin
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
   inherited;
+end;
+
+procedure TfrmUsuarios.mnuLimpaSenhaClick(Sender: TObject);
+begin
+  inherited;
+
+  if not DataSourceUsuarios.DataSet.IsEmpty then
+  begin
+
+    DataModuleUsuarios.LimparSenhaTemp(DataSourceUsuarios.DataSet.FieldByName('ID').AsString);
+
+    Application.MessageBox
+    (
+      PWideChar(format('Foi definida a senha padrão para o usuário "%s"',
+        [DataSourceUsuarios.DataSet.FieldByName('NOME').AsString] )),
+      'Atenção', MB_OK + MB_ICONINFORMATION
+
+    );
+  end;
+
+
 end;
 
 procedure TfrmUsuarios.ValidaCampos;
@@ -207,15 +242,6 @@ if Trim(EditNome.Text) = '' then
 
     Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     EditLogin.SetFocus;
-
-    abort;
-  end;
-
-  if Trim(EditSenha.Text) = '' then
-  begin
-
-    Application.MessageBox('Campo Senha não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditSenha.SetFocus;
 
     abort;
   end;

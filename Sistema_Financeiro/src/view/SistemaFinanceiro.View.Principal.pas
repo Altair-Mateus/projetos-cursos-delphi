@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
   SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls, System.ImageList,
+  Vcl.ImgList;
 
 type
   TfrmPrincipal = class(TForm)
@@ -20,8 +21,13 @@ type
     pnlInfos: TPanel;
     lblUserLogado: TLabel;
     Image1: TImage;
+    btnusuarios: TButton;
+    ImageList1: TImageList;
+    btnCP: TButton;
+    btnCR: TButton;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
+    procedure btnusuariosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,6 +42,25 @@ implementation
 {$R *.dfm}
 
 uses SistemaFinanceiro.Model.dmUsuarios;
+
+procedure TfrmPrincipal.btnusuariosClick(Sender: TObject);
+begin
+  //  Cria o Form
+  frmUsuarios := TfrmUsuarios.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    frmUsuarios.ShowModal;
+
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmUsuarios);
+
+  end;
+end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin

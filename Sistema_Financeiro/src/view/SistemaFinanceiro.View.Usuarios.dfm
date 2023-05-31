@@ -34,19 +34,30 @@ inherited frmUsuarios: TfrmUsuarios
           Height = 19
           Caption = 'Login'
         end
-        object LabelSenha: TLabel
-          Left = 272
-          Top = 112
-          Width = 43
-          Height = 19
-          Caption = 'Senha'
-        end
         object LabelStatus: TLabel
           Left = 35
           Top = 190
           Width = 43
           Height = 19
           Caption = 'Status'
+        end
+        object lblAvisoSenha: TLabel
+          Left = 16
+          Top = 342
+          Width = 585
+          Height = 69
+          Caption = 
+            'ATEN'#199#195'O: Ao salvar o cadastro a senha gerada ser'#225' a tempor'#225'ria. ' +
+            'Quando logar a primeira vez com seu usu'#225'rio voc'#234' poder'#225' alterar ' +
+            'a mesma.'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 5737262
+          Font.Height = -19
+          Font.Name = 'Calibri'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+          WordWrap = True
         end
         object EditNome: TEdit
           Left = 32
@@ -63,14 +74,6 @@ inherited frmUsuarios: TfrmUsuarios
           Height = 27
           Color = clWhite
           TabOrder = 1
-        end
-        object EditSenha: TEdit
-          Left = 272
-          Top = 137
-          Width = 209
-          Height = 27
-          Color = clWhite
-          TabOrder = 2
         end
         object ToggleSwitchStatus: TToggleSwitch
           Left = 107
@@ -89,7 +92,7 @@ inherited frmUsuarios: TfrmUsuarios
           State = tssOn
           StateCaptions.CaptionOn = 'Ativo'
           StateCaptions.CaptionOff = 'Inativo'
-          TabOrder = 3
+          TabOrder = 2
           ThumbColor = 5737262
         end
       end
@@ -109,13 +112,17 @@ inherited frmUsuarios: TfrmUsuarios
       ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
         ExplicitWidth = 813
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick
           ExplicitLeft = 689
-          ExplicitTop = 3
-          ExplicitHeight = 64
+          ExplicitTop = 5
+          ExplicitHeight = 71
         end
       end
       inherited pnlBotoes: TPanel
@@ -134,7 +141,9 @@ inherited frmUsuarios: TfrmUsuarios
         ExplicitWidth = 813
         inherited DBGrid1: TDBGrid
           Width = 811
+          Margins.Top = 0
           DataSource = DataSourceUsuarios
+          PopupMenu = PopupMenu
           Columns = <
             item
               Expanded = False
@@ -174,6 +183,14 @@ inherited frmUsuarios: TfrmUsuarios
   object DataSourceUsuarios: TDataSource
     DataSet = DataModuleUsuarios.ClientDataSetUsuarios
     Left = 728
+    Top = 152
+  end
+  object PopupMenu: TPopupMenu
+    Left = 728
     Top = 208
+    object mnuLimpaSenha: TMenuItem
+      Caption = 'Limpar Senha'
+      OnClick = mnuLimpaSenhaClick
+    end
   end
 end
