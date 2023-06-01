@@ -31,7 +31,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 722
   end
   object pnlAtalhos: TPanel
     AlignWithMargins = True
@@ -46,8 +45,6 @@ object frmPrincipal: TfrmPrincipal
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seClient]
-    ExplicitWidth = 722
-    ExplicitHeight = 195
     object btnusuarios: TButton
       Left = 20
       Top = 25
@@ -135,8 +132,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 373
-    ExplicitWidth = 722
     object lblUserLogado: TLabel
       AlignWithMargins = True
       Left = 862

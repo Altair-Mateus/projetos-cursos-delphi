@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
   SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList;
+  Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha;
 
 type
   TfrmPrincipal = class(TForm)
@@ -28,6 +28,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,9 +104,44 @@ begin
 
   end;
 
+
+  if DataModuleUsuarios.GetUsuarioLogado.Senha_Temp then
+  begin
+
+    frmRedefinirSenha := TfrmRedefinirSenha.Create(nil);
+
+    try
+
+      frmRedefinirSenha.Usuario := DataModuleUsuarios.GetUsuarioLogado;
+
+      frmRedefinirSenha.ShowModal;
+
+      if frmRedefinirSenha.ModalResult <> mrOk then
+      begin
+
+        Application.Terminate;
+
+      end;
+
+    finally
+
+      FreeAndNil(frmRedefinirSenha);
+
+    end;
+
+  end;
+
+
   //  Mostra o Usuario logado
   lblUserLogado.Caption := DataModuleUsuarios.GetUsuarioLogado.IdUsuarioLogado +
   ' - ' + DataModuleUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+
+  lblUserLogado.Caption := ''
+
 end;
 
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);

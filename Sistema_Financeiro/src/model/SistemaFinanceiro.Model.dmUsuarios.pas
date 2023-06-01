@@ -120,6 +120,8 @@ begin
     FUsuario.IdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
     FUsuario.NomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
     FUsuario.LoginUsuarioLogado := FDQueryLogin.FieldByName('LOGIN').AsString;
+    FUsuario.Senha              := FDQueryLogin.FieldByName('SENHA').AsString;
+    FUsuario.Senha_Temp         := FDQueryLogin.FieldByName('SENHA_TEMP').AsString = 'S';
 
 
   finally
@@ -209,7 +211,35 @@ begin
 end;
 
 procedure TDataModuleUsuarios.RedefinirSenha(Usuario: TModelUsuario);
+var
+
+  FDQuery : TFDQuery;
+
 begin
+
+  FDQuery := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQuery.Connection := DataModule1.FDConnection;
+
+    FDQuery.SQL.Clear;
+    FDQuery.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
+    FDQuery.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
+
+    FDQuery.ParamByName('SENHA_TEMP').AsString := 'N';
+    FDQuery.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(Usuario.Senha);
+    FDQuery.ParamByName('ID').AsString         := Usuario.IdUsuarioLogado;
+
+    FDQuery.ExecSQL;
+
+  finally
+
+    FDQuery.Close;
+    FDQuery.Free;
+
+  end;
 
 end;
 

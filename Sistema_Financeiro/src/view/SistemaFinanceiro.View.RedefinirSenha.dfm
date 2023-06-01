@@ -12,6 +12,8 @@ object frmRedefinirSenha: TfrmRedefinirSenha
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLogin: TPanel
@@ -23,9 +25,6 @@ object frmRedefinirSenha: TfrmRedefinirSenha
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 454
-    ExplicitWidth = 312
-    ExplicitHeight = 379
     object imgPessoa: TImage
       Left = 1
       Top = 1
@@ -303,10 +302,12 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Proportional = True
     end
     object lblUsuario: TLabel
-      Left = 120
-      Top = 104
-      Width = 76
-      Height = 29
+      AlignWithMargins = True
+      Left = 4
+      Top = 92
+      Width = 321
+      Height = 33
+      Align = alTop
       Alignment = taCenter
       Caption = 'Usu'#225'rio'
       Font.Charset = DEFAULT_CHARSET
@@ -315,6 +316,9 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Font.Name = 'Calibri'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 1
+      ExplicitTop = 89
+      ExplicitWidth = 327
     end
     object lblRedefina: TLabel
       Left = 62
@@ -371,6 +375,7 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      PasswordChar = '*'
       TabOrder = 0
     end
     object edtConfirmaSenha: TEdit
@@ -397,8 +402,6 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Margins.Top = 1
       Align = alBottom
       TabOrder = 2
-      ExplicitTop = 312
-      ExplicitWidth = 314
       object btnCancelar: TButton
         AlignWithMargins = True
         Left = 178
@@ -418,11 +421,8 @@ object frmRedefinirSenha: TfrmRedefinirSenha
         ImageIndex = 0
         Images = ImageList1
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 175
-        ExplicitTop = 0
-        ExplicitHeight = 57
       end
       object btnSalvar: TButton
         AlignWithMargins = True
@@ -443,10 +443,8 @@ object frmRedefinirSenha: TfrmRedefinirSenha
         ImageIndex = 1
         Images = ImageList1
         ParentFont = False
-        TabOrder = 1
-        ExplicitLeft = 0
-        ExplicitTop = -18
-        ExplicitHeight = 61
+        TabOrder = 0
+        OnClick = btnSalvarClick
       end
     end
   end

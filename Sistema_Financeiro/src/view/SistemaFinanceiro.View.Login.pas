@@ -42,7 +42,9 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmUsuarios;
+uses
+
+  SistemaFinanceiro.Model.dmUsuarios;
 
 { TfrmLogin }
 

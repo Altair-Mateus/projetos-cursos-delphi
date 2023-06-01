@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList;
-
+  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
+  SistemaFinanceiro.Model.Entidades.Usuario;
 type
   TfrmRedefinirSenha = class(TForm)
     pnlLogin: TPanel;
@@ -23,11 +23,22 @@ type
     btnCancelar: TButton;
     ImageList1: TImageList;
     pnlBtns: TPanel;
+
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+
   private
+    FUsuario: TModelUsuario;
+
+    procedure SetUsuario(const Value: TModelUsuario);
+    procedure ValidaCampos;
+
     { Private declarations }
   public
     { Public declarations }
+
+    property Usuario : TModelUsuario read FUsuario write SetUsuario;
   end;
 
 var
@@ -37,10 +48,81 @@ implementation
 
 {$R *.dfm}
 
+uses
+
+  SistemaFinanceiro.Model.dmUsuarios;
+
+
 procedure TfrmRedefinirSenha.btnCancelarClick(Sender: TObject);
 begin
 
-  Application.Terminate;
+  ModalResult := mrCancel;
+
+end;
+
+procedure TfrmRedefinirSenha.btnSalvarClick(Sender: TObject);
+begin
+
+  ValidaCampos;
+
+  Usuario.Senha := Trim(edtSenha.Text);
+  DataModuleUsuarios.RedefinirSenha(Usuario);
+  Application.MessageBox('Senha Alterada!', 'Sucesso', MB_OK + MB_ICONINFORMATION);
+
+  ModalResult := mrOk;
+
+end;
+
+procedure TfrmRedefinirSenha.FormShow(Sender: TObject);
+begin
+
+  //  Seta o nome do usuário
+  lblUsuario.Caption := FUsuario.NomeUsuarioLogado;
+
+end;
+
+procedure TfrmRedefinirSenha.SetUsuario(const Value: TModelUsuario);
+begin
+  FUsuario := Value;
+end;
+
+procedure TfrmRedefinirSenha.ValidaCampos;
+begin
+
+  edtSenha.Text := Trim(edtSenha.Text);
+  edtConfirmaSenha.Text := Trim(edtConfirmaSenha.Text);
+
+  if edtSenha.Text = '' then
+  begin
+
+    Application.MessageBox('Informe a sua nova senha!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtSenha.SetFocus;
+
+    abort;
+
+  end;
+
+  if edtConfirmaSenha.Text = '' then
+  begin
+
+    Application.MessageBox('Confirme a sua nova senha!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtConfirmaSenha.SetFocus;
+
+    abort;
+
+  end;
+
+  if edtSenha.Text <> edtConfirmaSenha.Text then
+  begin
+
+    Application.MessageBox('Senha diferente da confirmação!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtConfirmaSenha.SetFocus;
+
+    abort;
+
+  end;
+
+
 
 end;
 
