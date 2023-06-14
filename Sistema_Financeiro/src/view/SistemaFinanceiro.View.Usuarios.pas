@@ -24,20 +24,26 @@ type
     PopupMenu: TPopupMenu;
     mnuLimpaSenha: TMenuItem;
     lblAvisoSenha: TLabel;
-    procedure btnPesquisaeClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure mnuLimpaSenhaClick(Sender: TObject);
+    procedure btnPesquisaeClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaSelecao;
     procedure ValidaCampos;
+    procedure HabilitaBotoes;
 
   public
     { Public declarations }
+
+  protected
+
+    procedure Pesquisar; override;
+
   end;
 
 var
@@ -55,10 +61,10 @@ uses
 procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
 
+  ValidaSelecao;
+
   //  Coloca o dataset em modo de edição
   DataModuleUsuarios.ClientDataSetUsuarios.Edit;
-
-  ValidaSelecao;
 
   inherited;
 
@@ -149,10 +155,7 @@ procedure TfrmUsuarios.btnPesquisaeClick(Sender: TObject);
 begin
   inherited;
 
-  DataModuleUsuarios.ClientDataSetUsuarios.Close;
-  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios order by 1';
-  DataModuleUsuarios.ClientDataSetUsuarios.Open;
-
+  Pesquisar;
 end;
 
 procedure TfrmUsuarios.btnSalvarClick(Sender: TObject);
@@ -202,7 +205,18 @@ begin
   //  Retorna ao cardPesquisa;
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
+  //  Atualiza a lista por ordem de usuario
+  Pesquisar;
+
   inherited;
+end;
+
+procedure TfrmUsuarios.HabilitaBotoes;
+begin
+
+  btnAlterar.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
+  btnExcluir.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
+
 end;
 
 procedure TfrmUsuarios.mnuLimpaSenhaClick(Sender: TObject);
@@ -224,6 +238,18 @@ begin
   end;
 
 
+end;
+
+procedure TfrmUsuarios.Pesquisar;
+begin
+
+  DataModuleUsuarios.ClientDataSetUsuarios.Close;
+  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios order by 1';
+  DataModuleUsuarios.ClientDataSetUsuarios.Open;
+
+  HabilitaBotoes;
+
+  inherited;
 end;
 
 procedure TfrmUsuarios.ValidaCampos;
@@ -264,7 +290,7 @@ begin
   if DBGrid1.SelectedIndex < 0 then
   begin
 
-    Application.MessageBox('Selecione um usuário!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Selecione um cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
 

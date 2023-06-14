@@ -41,10 +41,15 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
+
   public
     { Public declarations }
 
     procedure LimpaCampos;
+
+  protected
+
+    procedure Pesquisar; virtual;
 
   end;
 
@@ -108,6 +113,8 @@ begin
   //  Exibe o card de pesquisa primeiro
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
+  Pesquisar;
+
 end;
 
 procedure TfrmCadastroPadrao.LimpaCampos;
@@ -125,6 +132,11 @@ begin
 
   end;
 
+
+end;
+
+procedure TfrmCadastroPadrao.Pesquisar;
+begin
 
 end;
 

@@ -11,11 +11,9 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = MainMenu1
-  OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object pnlDadosGerais: TPanel
     AlignWithMargins = True
@@ -31,6 +29,7 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 966
   end
   object pnlAtalhos: TPanel
     AlignWithMargins = True
@@ -45,10 +44,12 @@ object frmPrincipal: TfrmPrincipal
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seClient]
+    ExplicitWidth = 966
+    ExplicitHeight = 227
     object btnusuarios: TButton
       Left = 20
       Top = 25
-      Width = 133
+      Width = 150
       Height = 88
       Margins.Left = 15
       Margins.Top = 10
@@ -72,7 +73,7 @@ object frmPrincipal: TfrmPrincipal
     object btnCP: TButton
       Left = 180
       Top = 25
-      Width = 133
+      Width = 150
       Height = 88
       Margins.Left = 15
       Margins.Top = 10
@@ -96,7 +97,7 @@ object frmPrincipal: TfrmPrincipal
     object btnCR: TButton
       Left = 340
       Top = 25
-      Width = 133
+      Width = 150
       Height = 88
       Margins.Left = 15
       Margins.Top = 10
@@ -132,6 +133,8 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
+    ExplicitTop = 405
+    ExplicitWidth = 966
     object lblUserLogado: TLabel
       AlignWithMargins = True
       Left = 862

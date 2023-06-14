@@ -1,5 +1,4 @@
 object DataModuleUsuarios: TDataModuleUsuarios
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 350
@@ -13,7 +12,6 @@ object DataModuleUsuarios: TDataModuleUsuarios
     Top = 64
   end
   object ClientDataSetUsuarios: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'

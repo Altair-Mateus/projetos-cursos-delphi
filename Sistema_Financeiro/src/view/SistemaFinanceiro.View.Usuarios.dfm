@@ -1,12 +1,11 @@
 inherited frmUsuarios: TfrmUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
   ClientWidth = 815
-  ExplicitWidth = 821
-  PixelsPerInch = 96
+  ExplicitWidth = 827
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
-    ExplicitWidth = 815
+    ExplicitWidth = 811
     inherited CardCadastro: TCard
       Width = 813
       ExplicitWidth = 813
@@ -44,8 +43,8 @@ inherited frmUsuarios: TfrmUsuarios
         object lblAvisoSenha: TLabel
           Left = 16
           Top = 342
-          Width = 585
-          Height = 69
+          Width = 574
+          Height = 46
           Caption = 
             'ATEN'#199#195'O: Ao salvar o cadastro a senha gerada ser'#225' a tempor'#225'ria. ' +
             'Quando logar a primeira vez com seu usu'#225'rio voc'#234' poder'#225' alterar ' +
@@ -109,36 +108,34 @@ inherited frmUsuarios: TfrmUsuarios
     end
     inherited CardPesquisa: TCard
       Width = 813
-      ExplicitWidth = 813
+      ExplicitWidth = 809
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 689
-          ExplicitTop = 5
-          ExplicitHeight = 71
+          ExplicitLeft = 685
         end
       end
       inherited pnlBotoes: TPanel
         Width = 813
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 692
-          ExplicitLeft = 692
+          ExplicitLeft = 688
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited DBGrid1: TDBGrid
           Width = 811
           Margins.Top = 0

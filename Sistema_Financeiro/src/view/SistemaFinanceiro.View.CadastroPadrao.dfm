@@ -16,10 +16,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 19
   object CardPanelPrincipal: TCardPanel
     Left = 0
@@ -31,6 +29,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     Caption = 'CardPanel1'
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 807
+    ExplicitHeight = 511
     object CardCadastro: TCard
       Left = 1
       Top = 1
@@ -121,6 +121,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
+      ExplicitWidth = 805
+      ExplicitHeight = 509
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
@@ -131,6 +133,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Color = 5737262
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 805
         object lblPesquisar: TLabel
           Left = 16
           Top = 16
@@ -168,9 +171,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
-          ExplicitLeft = 709
-          ExplicitTop = 0
-          ExplicitHeight = 81
+          ExplicitLeft = 681
         end
       end
       object pnlBotoes: TPanel
@@ -180,6 +181,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 69
         Align = alBottom
         TabOrder = 1
+        ExplicitTop = 440
+        ExplicitWidth = 805
         object btnIncluir: TButton
           Left = 1
           Top = 1
@@ -199,6 +202,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Height = 67
           Align = alLeft
           Caption = 'Alterar'
+          Enabled = False
           ImageIndex = 1
           Images = ImageList1
           TabOrder = 1
@@ -211,6 +215,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Height = 67
           Align = alLeft
           Caption = 'Excluir'
+          Enabled = False
           ImageIndex = 2
           Images = ImageList1
           TabOrder = 2
@@ -237,6 +242,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 4
           OnClick = btnSairClick
+          ExplicitLeft = 684
         end
       end
       object pnlGrid: TPanel
@@ -246,6 +252,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Height = 360
         Align = alClient
         TabOrder = 2
+        ExplicitWidth = 805
+        ExplicitHeight = 359
         object Image1: TImage
           Left = 640
           Top = 152
