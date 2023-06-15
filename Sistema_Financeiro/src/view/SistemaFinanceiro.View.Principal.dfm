@@ -2,7 +2,7 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Sistema Financeiro'
-  ClientHeight = 497
+  ClientHeight = 507
   ClientWidth = 990
   Color = 5737262
   Font.Charset = DEFAULT_CHARSET
@@ -36,7 +36,7 @@ object frmPrincipal: TfrmPrincipal
     Left = 10
     Top = 165
     Width = 970
-    Height = 228
+    Height = 238
     Margins.Left = 10
     Margins.Right = 10
     Align = alClient
@@ -122,7 +122,7 @@ object frmPrincipal: TfrmPrincipal
   object pnlInfos: TPanel
     AlignWithMargins = True
     Left = 10
-    Top = 406
+    Top = 416
     Width = 970
     Height = 81
     Margins.Left = 10

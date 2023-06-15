@@ -58,6 +58,9 @@ var
 
 implementation
 
+uses
+  Vcl.WinXCtrls;
+
 {$R *.dfm}
 
 procedure TfrmCadastroPadrao.btnAlterarClick(Sender: TObject);
@@ -128,7 +131,15 @@ begin
   begin
 
     if Components[Contador] is TCustomEdit then
+    begin
       TCustomEdit(Components[Contador]).Clear;
+    end
+    else if Components[Contador] is TToggleSwitch then
+    begin
+      TToggleSwitch(Components[Contador]).State := tssOn;
+    end;
+
+
 
   end;
 

@@ -8,8 +8,10 @@ inherited frmUsuarios: TfrmUsuarios
     ExplicitWidth = 811
     inherited CardCadastro: TCard
       Width = 813
+      Height = 509
       ExplicitWidth = 813
       inherited pnlBotoesCad: TPanel
+        Top = 440
         Width = 813
         ExplicitWidth = 813
         inherited btnSalvar: TButton
@@ -18,6 +20,7 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelCampos: TPanel
         Width = 813
+        Height = 399
         ExplicitWidth = 813
         object LabelNome: TLabel
           Left = 32
@@ -108,7 +111,8 @@ inherited frmUsuarios: TfrmUsuarios
     end
     inherited CardPesquisa: TCard
       Width = 813
-      ExplicitWidth = 809
+      Height = 509
+      ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0

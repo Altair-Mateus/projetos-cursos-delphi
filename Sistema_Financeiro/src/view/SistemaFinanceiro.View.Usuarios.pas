@@ -56,7 +56,7 @@ implementation
 uses
 
   SistemaFinanceiro.Model.dmUsuarios,
-  BCrypt;
+  BCrypt, SistemaFinanceiro.Utilitarios;
 
 procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
@@ -142,7 +142,6 @@ begin
 
     //  Colocando o data set em modo de inserção de dados
     DataModuleUsuarios.ClientDataSetUsuarios.Insert;
-
 
   end;
 
@@ -241,10 +240,14 @@ begin
 end;
 
 procedure TfrmUsuarios.Pesquisar;
+var
+  LFiltroPesquisa : String;
 begin
 
+  LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
+
   DataModuleUsuarios.ClientDataSetUsuarios.Close;
-  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios order by 1';
+  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios ' + LFiltroPesquisa + 'order by 1';
   DataModuleUsuarios.ClientDataSetUsuarios.Open;
 
   HabilitaBotoes;
