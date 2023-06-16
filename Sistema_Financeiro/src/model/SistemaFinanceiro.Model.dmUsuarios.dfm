@@ -15,7 +15,7 @@ object DataModuleUsuarios: TDataModuleUsuarios
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'
-    Left = 288
+    Left = 328
     Top = 64
     object ClientDataSetUsuariosid: TIntegerField
       FieldName = 'id'
@@ -54,7 +54,7 @@ object DataModuleUsuarios: TDataModuleUsuarios
   object DataSetProviderUsuarios: TDataSetProvider
     DataSet = FDQueryUsuarios
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 160
+    Left = 176
     Top = 64
   end
 end

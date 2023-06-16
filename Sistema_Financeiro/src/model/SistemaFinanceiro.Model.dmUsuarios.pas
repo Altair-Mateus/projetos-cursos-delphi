@@ -3,7 +3,7 @@ unit SistemaFinanceiro.Model.dmUsuarios;
 interface
 
 uses
-  System.SysUtils, System.Classes, SistemaFinanceiro.Model.udmDados,
+  System.SysUtils, System.Classes,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider, Datasnap.DBClient,
@@ -49,7 +49,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses
-  BCrypt;
+  BCrypt, SistemaFinanceiro.Model.udmDados;
 
 {$R *.dfm}
 
