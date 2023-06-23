@@ -33,7 +33,6 @@ type
     procedure btnPesquisaeClick(Sender: TObject);
   private
     { Private declarations }
-    procedure ValidaSelecao;
     procedure ValidaCampos;
     procedure HabilitaBotoes;
 
@@ -60,8 +59,6 @@ uses
 
 procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
-
-  ValidaSelecao;
 
   //  Coloca o dataset em modo de edição
   DataModuleUsuarios.ClientDataSetUsuarios.Edit;
@@ -287,16 +284,5 @@ if Trim(EditNome.Text) = '' then
 
 end;
 
-procedure TfrmUsuarios.ValidaSelecao;
-begin
-
-  if DBGrid1.SelectedIndex < 0 then
-  begin
-
-    Application.MessageBox('Selecione um cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-end;
 
 end.

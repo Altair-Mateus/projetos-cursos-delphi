@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
   SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha;
+  Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha,
+  SistemaFinanceiro.View.Caixa;
 
 type
   TfrmPrincipal = class(TForm)
@@ -25,10 +26,15 @@ type
     ImageList1: TImageList;
     btnCP: TButton;
     btnCR: TButton;
+    btnCaixa: TButton;
+    mnuFinanceiro: TMenuItem;
+    Caixa1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnCaixaClick(Sender: TObject);
+    procedure Caixa1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,6 +49,27 @@ implementation
 {$R *.dfm}
 
 uses SistemaFinanceiro.Model.dmUsuarios;
+
+procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
+begin
+
+  //Cria o form
+  frmCaixa := TfrmCaixa.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmCaixa.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmCaixa);
+
+  end;
+
+
+end;
 
 procedure TfrmPrincipal.btnusuariosClick(Sender: TObject);
 begin
@@ -61,6 +88,26 @@ begin
     FreeAndNil(frmUsuarios);
 
   end;
+end;
+
+procedure TfrmPrincipal.Caixa1Click(Sender: TObject);
+begin
+
+  //Cria o form
+  frmCaixa := TfrmCaixa.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmCaixa.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmCaixa);
+
+  end;
+
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);

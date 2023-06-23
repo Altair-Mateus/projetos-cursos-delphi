@@ -46,6 +46,7 @@ type
     { Public declarations }
 
     procedure LimpaCampos;
+    procedure ValidaSelecao;
 
   protected
 
@@ -65,6 +66,8 @@ uses
 
 procedure TfrmCadastroPadrao.btnAlterarClick(Sender: TObject);
 begin
+
+  ValidaSelecao;
 
   //  Abre a tela de cadastro
   CardPanelPrincipal.ActiveCard := CardCadastro;
@@ -120,6 +123,7 @@ begin
 
 end;
 
+
 procedure TfrmCadastroPadrao.LimpaCampos;
 var
 
@@ -148,6 +152,18 @@ end;
 
 procedure TfrmCadastroPadrao.Pesquisar;
 begin
+
+end;
+
+procedure TfrmCadastroPadrao.ValidaSelecao;
+begin
+
+  if DBGrid1.SelectedIndex < 0 then
+  begin
+
+    Application.MessageBox('Selecione um cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
 
 end;
 

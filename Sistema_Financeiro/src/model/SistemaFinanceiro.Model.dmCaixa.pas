@@ -14,18 +14,21 @@ type
     DataSetProviderCaixa: TDataSetProvider;
     ClientDataSetCaixa: TClientDataSet;
     ClientDataSetCaixaid: TIntegerField;
-    ClientDataSetCaixanumero_doc: TStringField;
-    ClientDataSetCaixadescricao: TStringField;
-    ClientDataSetCaixatipo: TStringField;
     ClientDataSetCaixadata_cadastro: TDateField;
     ClientDataSetCaixavalor: TFMTBCDField;
+    ClientDataSetCaixanumero_doc: TWideStringField;
+    ClientDataSetCaixadescricao: TWideStringField;
+    ClientDataSetCaixatipo: TWideStringField;
   private
     { Private declarations }
 
-    procedure GeraCodigo;
+
 
   public
     { Public declarations }
+
+    procedure GeraCodigo;
+
   end;
 
 var

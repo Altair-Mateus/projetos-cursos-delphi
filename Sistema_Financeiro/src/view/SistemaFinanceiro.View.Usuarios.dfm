@@ -5,14 +5,15 @@ inherited frmUsuarios: TfrmUsuarios
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
+    ActiveCard = CardCadastro
     ExplicitWidth = 811
+    ExplicitHeight = 509
     inherited CardCadastro: TCard
       Width = 813
-      Height = 509
       ExplicitWidth = 813
       inherited pnlBotoesCad: TPanel
-        Top = 440
         Width = 813
+        ExplicitTop = 439
         ExplicitWidth = 813
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
@@ -20,8 +21,8 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelCampos: TPanel
         Width = 813
-        Height = 399
         ExplicitWidth = 813
+        ExplicitHeight = 398
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -67,6 +68,7 @@ inherited frmUsuarios: TfrmUsuarios
           Width = 449
           Height = 27
           Color = clWhite
+          MaxLength = 100
           TabOrder = 0
         end
         object EditLogin: TEdit
@@ -75,6 +77,7 @@ inherited frmUsuarios: TfrmUsuarios
           Width = 209
           Height = 27
           Color = clWhite
+          MaxLength = 20
           TabOrder = 1
         end
         object ToggleSwitchStatus: TToggleSwitch
@@ -111,7 +114,6 @@ inherited frmUsuarios: TfrmUsuarios
     end
     inherited CardPesquisa: TCard
       Width = 813
-      Height = 509
       ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
@@ -128,6 +130,7 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited pnlBotoes: TPanel
         Width = 813
+        ExplicitTop = 438
         ExplicitWidth = 809
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
@@ -140,6 +143,7 @@ inherited frmUsuarios: TfrmUsuarios
       inherited pnlGrid: TPanel
         Width = 813
         ExplicitWidth = 809
+        ExplicitHeight = 357
         inherited DBGrid1: TDBGrid
           Width = 811
           Margins.Top = 0
@@ -188,7 +192,7 @@ inherited frmUsuarios: TfrmUsuarios
   end
   object PopupMenu: TPopupMenu
     Left = 728
-    Top = 208
+    Top = 216
     object mnuLimpaSenha: TMenuItem
       Caption = 'Limpar Senha'
       OnClick = mnuLimpaSenhaClick
