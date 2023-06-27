@@ -29,18 +29,20 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     Caption = 'CardPanel1'
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 799
+    ExplicitHeight = 509
     object CardCadastro: TCard
       Left = 1
       Top = 1
-      Width = 805
-      Height = 509
+      Width = 801
+      Height = 508
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
       object pnlBotoesCad: TPanel
         Left = 0
-        Top = 440
-        Width = 805
+        Top = 439
+        Width = 801
         Height = 69
         Align = alBottom
         TabOrder = 0
@@ -73,8 +75,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelCampos: TPanel
         Left = 0
         Top = 41
-        Width = 805
-        Height = 399
+        Width = 801
+        Height = 398
         Margins.Top = 0
         Align = alClient
         Color = clWhite
@@ -84,7 +86,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelTitulo: TPanel
         Left = 0
         Top = 0
-        Width = 805
+        Width = 801
         Height = 41
         Margins.Left = 0
         Margins.Top = 0
@@ -114,24 +116,24 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     object CardPesquisa: TCard
       Left = 1
       Top = 1
-      Width = 805
-      Height = 509
+      Width = 801
+      Height = 508
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
-      ExplicitWidth = 801
-      ExplicitHeight = 508
+      ExplicitWidth = 797
+      ExplicitHeight = 507
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
-        Width = 805
+        Width = 801
         Height = 81
         Align = alTop
         BevelOuter = bvNone
         Color = 5737262
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 801
+        ExplicitWidth = 797
         object lblPesquisar: TLabel
           Left = 16
           Top = 16
@@ -158,7 +160,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         end
         object btnPesquisae: TButton
           AlignWithMargins = True
-          Left = 681
+          Left = 677
           Top = 5
           Width = 121
           Height = 71
@@ -169,18 +171,18 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 5
           Images = ImageList1
           TabOrder = 1
-          ExplicitLeft = 677
+          ExplicitLeft = 673
         end
       end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 440
-        Width = 805
+        Top = 439
+        Width = 801
         Height = 69
         Align = alBottom
         TabOrder = 1
-        ExplicitTop = 439
-        ExplicitWidth = 801
+        ExplicitTop = 438
+        ExplicitWidth = 797
         object btnIncluir: TButton
           Left = 1
           Top = 1
@@ -230,7 +232,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TabOrder = 3
         end
         object btnSair: TButton
-          Left = 684
+          Left = 680
           Top = 1
           Width = 120
           Height = 67
@@ -240,18 +242,18 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 4
           OnClick = btnSairClick
-          ExplicitLeft = 680
+          ExplicitLeft = 676
         end
       end
       object pnlGrid: TPanel
         Left = 0
         Top = 81
-        Width = 805
-        Height = 359
+        Width = 801
+        Height = 358
         Align = alClient
         TabOrder = 2
-        ExplicitWidth = 801
-        ExplicitHeight = 358
+        ExplicitWidth = 797
+        ExplicitHeight = 357
         object Image1: TImage
           Left = 640
           Top = 152
@@ -261,9 +263,10 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         object DBGrid1: TDBGrid
           Left = 1
           Top = 1
-          Width = 803
-          Height = 357
+          Width = 799
+          Height = 356
           Align = alClient
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET

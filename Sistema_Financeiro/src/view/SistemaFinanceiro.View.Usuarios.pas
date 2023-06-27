@@ -239,12 +239,13 @@ end;
 procedure TfrmUsuarios.Pesquisar;
 var
   LFiltroPesquisa : String;
+
 begin
 
   LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
 
   DataModuleUsuarios.ClientDataSetUsuarios.Close;
-  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'select * from usuarios ' + LFiltroPesquisa + 'order by 1';
+  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'SELECT * FROM USUARIOS WHERE 1 = 1' + LFiltroPesquisa + 'ORDER BY 1';
   DataModuleUsuarios.ClientDataSetUsuarios.Open;
 
   HabilitaBotoes;

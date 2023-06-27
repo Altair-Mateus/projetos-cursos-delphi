@@ -22,6 +22,8 @@ type
     lblReceita: TLabel;
     lblDespesa: TLabel;
     memDesc: TMemo;
+    cbTipoLcto: TComboBox;
+    lblTipo: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -210,13 +212,21 @@ end;
 procedure TfrmCaixa.Pesquisar;
 var
   LFiltroPesquisa : String;
+  LFiltroTipo     : String;
 
 begin
 
   LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
 
+  case cbTipoLcto.ItemIndex of
+
+    1 : LFiltroTipo := ' AND TIPO = ''R'' ';
+    2 : LFiltroTipo := ' AND TIPO = ''D'' ';
+
+  end;
+
   DataModuleCaixa.ClientDataSetCaixa.Close;
-  DataModuleCaixa.ClientDataSetCaixa.CommandText := 'SELECT * FROM CAIXA ' + LFiltroPesquisa + 'ORDER BY 1';
+  DataModuleCaixa.ClientDataSetCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroPesquisa + LFiltroTipo + 'ORDER BY 1';
   DataModuleCaixa.ClientDataSetCaixa.Open;
 
   HabilitaBotoes;

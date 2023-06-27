@@ -1,30 +1,32 @@
 inherited frmCaixa: TfrmCaixa
   Caption = 'Caixa'
   ClientHeight = 578
-  ClientWidth = 807
+  ClientWidth = 1096
   WindowState = wsMaximized
+  ExplicitWidth = 1108
   ExplicitHeight = 616
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 807
+    Width = 1096
     Height = 578
-    ActiveCard = CardCadastro
+    ExplicitWidth = 803
     ExplicitHeight = 577
     inherited CardCadastro: TCard
+      Width = 1094
       Height = 576
-      ExplicitWidth = 801
-      ExplicitHeight = 575
+      ExplicitWidth = 805
+      ExplicitHeight = 576
       inherited pnlBotoesCad: TPanel
         Top = 507
+        Width = 1094
         ExplicitTop = 506
-        ExplicitWidth = 801
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
+        Width = 1094
         Height = 466
-        ExplicitWidth = 801
         ExplicitHeight = 465
         object lblNDoc: TLabel
           Left = 40
@@ -131,7 +133,7 @@ inherited frmCaixa: TfrmCaixa
         end
       end
       inherited PanelTitulo: TPanel
-        ExplicitWidth = 801
+        Width = 1094
         inherited Labeltitulo: TLabel
           Width = 325
           Caption = 'Inserindo um novo Lan'#231'amento no Caixa'
@@ -141,32 +143,74 @@ inherited frmCaixa: TfrmCaixa
       end
     end
     inherited CardPesquisa: TCard
+      Width = 1094
       Height = 576
-      ExplicitWidth = 805
+      ExplicitWidth = 801
       ExplicitHeight = 576
       inherited pnlPesquisa: TPanel
+        Width = 1094
         ExplicitWidth = 805
+        object lblTipo: TLabel [1]
+          Left = 392
+          Top = 15
+          Width = 122
+          Height = 19
+          Align = alCustom
+          Caption = 'Tipo Lan'#231'amento'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         inherited btnPesquisae: TButton
+          Left = 970
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 681
+          ExplicitLeft = 972
+          ExplicitTop = 3
+        end
+        object cbTipoLcto: TComboBox
+          Left = 392
+          Top = 40
+          Width = 145
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 2
+          Text = 'TODOS'
+          Items.Strings = (
+            'TODOS'
+            'RECEITA'
+            'DESPESA')
         end
       end
       inherited pnlBotoes: TPanel
         Top = 507
+        Width = 1094
         ExplicitTop = 507
         ExplicitWidth = 805
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
+        inherited btnImprimir: TButton
+          ExplicitLeft = 367
+          ExplicitTop = 5
+        end
         inherited btnSair: TButton
+          Left = 973
           ExplicitLeft = 684
         end
       end
       inherited pnlGrid: TPanel
+        Width = 1094
         Height = 426
         ExplicitWidth = 805
         ExplicitHeight = 426
         inherited DBGrid1: TDBGrid
+          Width = 1092
           Height = 424
           DataSource = DataSourceCaixa
           Columns = <
@@ -174,6 +218,7 @@ inherited frmCaixa: TfrmCaixa
               Expanded = False
               FieldName = 'id'
               Title.Caption = 'Id'
+              Width = 63
               Visible = True
             end
             item
@@ -194,19 +239,20 @@ inherited frmCaixa: TfrmCaixa
               Expanded = False
               FieldName = 'descricao'
               Title.Caption = 'Descri'#231#227'o'
-              Width = 317
+              Width = 477
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'tipo'
               Title.Caption = 'Tipo'
+              Width = 52
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor'
-              Title.Caption = 'Valor'
+              Title.Caption = 'Valor R$'
               Width = 110
               Visible = True
             end>

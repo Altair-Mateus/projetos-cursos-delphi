@@ -54,7 +54,7 @@ begin
 
   end;
 
-  Result := ' WHERE ' + Copy(Result, 1, Length(Result) - 4);
+  Result := ' AND (' + Copy(Result, 1, Length(Result) - 4) + ')';
 
 end;
 
