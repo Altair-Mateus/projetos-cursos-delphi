@@ -141,7 +141,12 @@ begin
     else if Components[Contador] is TToggleSwitch then
     begin
       TToggleSwitch(Components[Contador]).State := tssOn;
+    end
+    else if Components[Contador] is TRadioGroup then
+    begin
+      TRadioGroup(Components[Contador]).ItemIndex := -1;
     end;
+
 
 
 

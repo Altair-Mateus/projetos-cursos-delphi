@@ -2,27 +2,31 @@ inherited frmUsuarios: TfrmUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
   ClientWidth = 815
   ExplicitWidth = 827
+  ExplicitHeight = 548
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
-    ActiveCard = CardCadastro
     ExplicitWidth = 811
     ExplicitHeight = 509
     inherited CardCadastro: TCard
       Width = 813
-      ExplicitWidth = 813
+      Height = 508
+      ExplicitWidth = 809
+      ExplicitHeight = 507
       inherited pnlBotoesCad: TPanel
+        Top = 439
         Width = 813
-        ExplicitTop = 439
-        ExplicitWidth = 813
+        ExplicitTop = 438
+        ExplicitWidth = 809
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
         Width = 813
-        ExplicitWidth = 813
-        ExplicitHeight = 398
+        Height = 398
+        ExplicitWidth = 809
+        ExplicitHeight = 397
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -103,7 +107,7 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelTitulo: TPanel
         Width = 813
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited Labeltitulo: TLabel
           Width = 211
           Caption = 'Inserindo um novo usu'#225'rio'
@@ -114,6 +118,7 @@ inherited frmUsuarios: TfrmUsuarios
     end
     inherited CardPesquisa: TCard
       Width = 813
+      Height = 508
       ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
@@ -121,31 +126,32 @@ inherited frmUsuarios: TfrmUsuarios
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
-        ExplicitWidth = 809
+        ExplicitWidth = 813
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 685
+          ExplicitLeft = 689
         end
       end
       inherited pnlBotoes: TPanel
+        Top = 439
         Width = 813
-        ExplicitTop = 438
-        ExplicitWidth = 809
+        ExplicitWidth = 813
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 692
-          ExplicitLeft = 688
+          ExplicitLeft = 692
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
-        ExplicitWidth = 809
-        ExplicitHeight = 357
+        Height = 358
+        ExplicitWidth = 813
         inherited DBGrid1: TDBGrid
           Width = 811
+          Height = 356
           Margins.Top = 0
           DataSource = DataSourceUsuarios
           PopupMenu = PopupMenu

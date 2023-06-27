@@ -42,11 +42,15 @@ begin
     exit;
   end;
 
+
+  //  Função upper converte a string em letras maiusculas
+  //  Função QuotedStr trata o texto e o coloca dentro aspas simples
+  //  Função trim remove os espaços no inicio e fim do texto
   for LContador := 0 to Pred(Grid.Columns.Count) do
   begin
 
-    Result := Result + Grid.Columns.Items[LContador].FieldName +
-              ' LIKE ' + QuotedStr('%' + Trim(Pesquisa) + '%') + ' OR ';
+    Result := Result + 'upper(trim(' + Grid.Columns.Items[LContador].FieldName + '))' +
+              ' LIKE ' + QuotedStr('%' + UpperCase(Trim(Pesquisa)) + '%') + ' OR ';
 
   end;
 

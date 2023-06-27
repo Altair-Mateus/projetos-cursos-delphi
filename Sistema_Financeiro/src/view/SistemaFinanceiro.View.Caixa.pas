@@ -6,14 +6,13 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask;
 
 type
   TfrmCaixa = class(TfrmCadastroPadrao)
     DataSourceCaixa: TDataSource;
     lblNDoc: TLabel;
     edtNDoc: TEdit;
-    edtDesc: TEdit;
     lblDesc: TLabel;
     edtValor: TEdit;
     lblValor: TLabel;
@@ -22,10 +21,13 @@ type
     lblData: TLabel;
     lblReceita: TLabel;
     lblDespesa: TLabel;
+    memDesc: TMemo;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -52,12 +54,76 @@ uses
   SistemaFinanceiro.Model.dmCaixa,
   SistemaFinanceiro.Utilitarios;
 
+procedure TfrmCaixa.btnAlterarClick(Sender: TObject);
+begin
+
+  //  Coloca o dataset em modo de edição
+  DataModuleCaixa.ClientDataSetCaixa.Edit;
+
+  inherited;
+
+  //  Coloca o numero do registro no titulo
+  Labeltitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
+
+  //  Carrega os dados
+  edtNDoc.Text := DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString;
+  memDesc.Text := DataModuleCaixa.ClientDataSetCaixadescricao.AsString;
+  edtValor.Text := DataModuleCaixa.ClientDataSetCaixavalor.AsString;
+  DateTimePicker.Date := DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime;
+
+  if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'R' then
+  begin
+
+    RadioGroup.ItemIndex := 0;
+
+  end
+    else if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'D' then
+    begin
+
+      RadioGroup.ItemIndex := 1;
+
+    end;
+
+
+
+end;
+
 procedure TfrmCaixa.btnCancelarClick(Sender: TObject);
 begin
   inherited;
 
   //  Cancelando inclusão
   DataModuleCaixa.ClientDataSetCaixa.Cancel;
+
+end;
+
+procedure TfrmCaixa.btnExcluirClick(Sender: TObject);
+var
+
+  option : Word;
+
+begin
+  inherited;
+
+  option := Application.MessageBox('Deseja excluir o lançamento?', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+  if option = IDNO then
+  begin
+    exit;
+  end;
+
+
+  try
+
+    //  Excluindo registro
+    DataModuleCaixa.ClientDataSetCaixa.Delete;
+    DataModuleCaixa.ClientDataSetCaixa.ApplyUpdates(0);
+
+  except on E : Exception do
+
+    Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir lançamento do caixa', MB_OK + MB_ICONERROR);
+
+  end;
 
 end;
 
@@ -81,7 +147,7 @@ begin
   DateTimePicker.Date := now;
 
   //  Coloca o tipo de lançamento como nulo
-  RadioGroup.ItemIndex := -1;
+//  RadioGroup.ItemIndex := -1;
 
 end;
 
@@ -104,7 +170,7 @@ begin
   DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime := DateTimePicker.DateTime;
   DataModuleCaixa.ClientDataSetCaixavalor.AsFloat := StrToFloat(Trim(edtValor.text));
   DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString := Trim(edtNDoc.text);
-  DataModuleCaixa.ClientDataSetCaixadescricao.AsString := Trim(edtDesc.text);
+  DataModuleCaixa.ClientDataSetCaixadescricao.AsString := Trim(memDesc.text);
 
   if RadioGroup.ItemIndex = 0 then
   begin
@@ -162,11 +228,11 @@ end;
 procedure TfrmCaixa.ValidaCampos;
 begin
 
-  if Trim(edtDesc.Text) = '' then
+  if Trim(memDesc.Text) = '' then
   begin
 
     Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    edtDesc.SetFocus;
+    memDesc.SetFocus;
 
     abort;
 
