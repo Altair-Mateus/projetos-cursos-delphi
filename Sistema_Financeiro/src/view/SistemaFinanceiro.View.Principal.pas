@@ -8,7 +8,7 @@ uses
   SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls, System.ImageList,
   Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha,
-  SistemaFinanceiro.View.Caixa;
+  SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa;
 
 type
   TfrmPrincipal = class(TForm)
@@ -29,12 +29,14 @@ type
     btnCaixa: TButton;
     mnuFinanceiro: TMenuItem;
     Caixa1: TMenuItem;
+    SaldodoCaixa1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnCaixaClick(Sender: TObject);
     procedure Caixa1Click(Sender: TObject);
+    procedure SaldodoCaixa1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -209,6 +211,26 @@ begin
     FreeAndNil(frmUsuarios);
 
   end;
+end;
+
+procedure TfrmPrincipal.SaldodoCaixa1Click(Sender: TObject);
+begin
+
+  //  Cria o Form
+  frmSaldoCaixa := TfrmSaldoCaixa.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmSaldoCaixa.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmSaldoCaixa);
+
+  end;
+
 end;
 
 end.

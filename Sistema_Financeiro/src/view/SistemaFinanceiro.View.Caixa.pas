@@ -226,7 +226,7 @@ begin
   end;
 
   DataModuleCaixa.ClientDataSetCaixa.Close;
-  DataModuleCaixa.ClientDataSetCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroPesquisa + LFiltroTipo + 'ORDER BY 1';
+  DataModuleCaixa.ClientDataSetCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroPesquisa + LFiltroTipo + 'ORDER BY 1 DESC';
   DataModuleCaixa.ClientDataSetCaixa.Open;
 
   HabilitaBotoes;

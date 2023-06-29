@@ -1,33 +1,35 @@
 inherited frmCaixa: TfrmCaixa
   Caption = 'Caixa'
-  ClientHeight = 578
-  ClientWidth = 1096
+  ClientHeight = 616
+  ClientWidth = 1108
   WindowState = wsMaximized
-  ExplicitWidth = 1108
-  ExplicitHeight = 616
+  ExplicitWidth = 1120
+  ExplicitHeight = 654
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 1096
-    Height = 578
-    ExplicitWidth = 803
-    ExplicitHeight = 577
+    Width = 1108
+    Height = 616
+    ExplicitWidth = 1104
+    ExplicitHeight = 615
     inherited CardCadastro: TCard
-      Width = 1094
-      Height = 576
-      ExplicitWidth = 805
-      ExplicitHeight = 576
+      Width = 1106
+      Height = 614
+      ExplicitWidth = 1106
+      ExplicitHeight = 614
       inherited pnlBotoesCad: TPanel
-        Top = 507
-        Width = 1094
-        ExplicitTop = 506
+        Top = 545
+        Width = 1106
+        ExplicitTop = 545
+        ExplicitWidth = 1106
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1094
-        Height = 466
-        ExplicitHeight = 465
+        Width = 1106
+        Height = 504
+        ExplicitWidth = 1106
+        ExplicitHeight = 504
         object lblNDoc: TLabel
           Left = 40
           Top = 48
@@ -133,7 +135,8 @@ inherited frmCaixa: TfrmCaixa
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1094
+        Width = 1106
+        ExplicitWidth = 1106
         inherited Labeltitulo: TLabel
           Width = 325
           Caption = 'Inserindo um novo Lan'#231'amento no Caixa'
@@ -143,13 +146,13 @@ inherited frmCaixa: TfrmCaixa
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1094
-      Height = 576
-      ExplicitWidth = 801
-      ExplicitHeight = 576
+      Width = 1106
+      Height = 614
+      ExplicitWidth = 1102
+      ExplicitHeight = 613
       inherited pnlPesquisa: TPanel
-        Width = 1094
-        ExplicitWidth = 805
+        Width = 1106
+        ExplicitWidth = 1102
         object lblTipo: TLabel [1]
           Left = 392
           Top = 15
@@ -167,10 +170,9 @@ inherited frmCaixa: TfrmCaixa
           ParentFont = False
         end
         inherited btnPesquisae: TButton
-          Left = 970
+          Left = 982
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 972
-          ExplicitTop = 3
+          ExplicitLeft = 978
         end
         object cbTipoLcto: TComboBox
           Left = 392
@@ -188,30 +190,26 @@ inherited frmCaixa: TfrmCaixa
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 507
-        Width = 1094
-        ExplicitTop = 507
-        ExplicitWidth = 805
+        Top = 545
+        Width = 1106
+        ExplicitTop = 544
+        ExplicitWidth = 1102
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
-        inherited btnImprimir: TButton
-          ExplicitLeft = 367
-          ExplicitTop = 5
-        end
         inherited btnSair: TButton
-          Left = 973
-          ExplicitLeft = 684
+          Left = 985
+          ExplicitLeft = 981
         end
       end
       inherited pnlGrid: TPanel
-        Width = 1094
-        Height = 426
-        ExplicitWidth = 805
-        ExplicitHeight = 426
+        Width = 1106
+        Height = 464
+        ExplicitWidth = 1102
+        ExplicitHeight = 463
         inherited DBGrid1: TDBGrid
-          Width = 1092
-          Height = 424
+          Width = 1104
+          Height = 462
           DataSource = DataSourceCaixa
           Columns = <
             item

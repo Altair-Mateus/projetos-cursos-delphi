@@ -20,7 +20,7 @@ object frmPrincipal: TfrmPrincipal
     Left = 10
     Top = 10
     Width = 970
-    Height = 142
+    Height = 191
     Margins.Left = 10
     Margins.Top = 10
     Margins.Right = 10
@@ -29,14 +29,13 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 966
   end
   object pnlAtalhos: TPanel
     AlignWithMargins = True
     Left = 10
-    Top = 165
+    Top = 214
     Width = 970
-    Height = 238
+    Height = 189
     Margins.Left = 10
     Margins.Right = 10
     Align = alClient
@@ -44,6 +43,7 @@ object frmPrincipal: TfrmPrincipal
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seClient]
+    ExplicitTop = 165
     ExplicitWidth = 966
     ExplicitHeight = 237
     object btnusuarios: TButton
@@ -379,18 +379,22 @@ object frmPrincipal: TfrmPrincipal
         OnClick = mnuUsuariosClick
       end
     end
-    object mnuRelatorios: TMenuItem
-      Caption = 'Relat'#243'rios'
-    end
-    object mnuAjuda: TMenuItem
-      Caption = 'Ajuda'
-    end
     object mnuFinanceiro: TMenuItem
       Caption = 'Financeiro'
       object Caixa1: TMenuItem
         Caption = 'Caixa'
         OnClick = Caixa1Click
       end
+    end
+    object mnuRelatorios: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object SaldodoCaixa1: TMenuItem
+        Caption = 'Saldo do Caixa'
+        OnClick = SaldodoCaixa1Click
+      end
+    end
+    object mnuAjuda: TMenuItem
+      Caption = 'Ajuda'
     end
   end
   object ImageList1: TImageList

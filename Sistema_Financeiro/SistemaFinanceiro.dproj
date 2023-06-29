@@ -147,6 +147,11 @@
             <Form>frmCaixa</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.SaldoCaixa.pas">
+            <Form>frmSaldoCaixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.ResumoCaixa.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

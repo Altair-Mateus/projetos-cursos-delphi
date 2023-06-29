@@ -10,6 +10,7 @@ type
 
     class function GetId : String;
     class function LikeFind(Pesquisa: String; Grid: TDBGrid) : String;
+    class function FormatoMoeda(Valor: Currency) : String;
 
   end;
 
@@ -19,6 +20,12 @@ uses
   System.SysUtils;
 
 { TUtilitario }
+
+class function TUtilitario.FormatoMoeda(Valor: Currency): String;
+begin
+
+  Result := Format('%m', [Valor]);
+end;
 
 class function TUtilitario.GetId: String;
 begin
