@@ -16,10 +16,10 @@ type
   TfrmUsuarios = class(TfrmCadastroPadrao)
     DataSourceUsuarios: TDataSource;
     LabelNome: TLabel;
-    EditNome: TEdit;
+    edtNome: TEdit;
     LabelLogin: TLabel;
-    EditLogin: TEdit;
-    ToggleSwitchStatus: TToggleSwitch;
+    edtLogin: TEdit;
+    ToggleStatus: TToggleSwitch;
     LabelStatus: TLabel;
     PopupMenu: TPopupMenu;
     mnuLimpaSenha: TMenuItem;
@@ -31,10 +31,12 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure mnuLimpaSenhaClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
     procedure HabilitaBotoes;
+    procedure EditarUsuario;
 
   public
     { Public declarations }
@@ -60,30 +62,9 @@ uses
 procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
 
-  //  Coloca o dataset em modo de edição
-  DataModuleUsuarios.ClientDataSetUsuarios.Edit;
-
   inherited;
 
-    //  Coloca o nome do usuario no titulo
-    Labeltitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
-
-    //  Carrega os dados
-    EditNome.Text  := DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
-    EditLogin.Text := DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString;
-
-    if DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString = 'A' then
-    begin
-
-      ToggleSwitchStatus.State := tssOn;
-
-    end
-    else
-    begin
-
-      ToggleSwitchStatus.State := tssOff;
-
-    end;
+  EditarUsuario;
 
 end;
 
@@ -145,6 +126,8 @@ begin
   DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
   DataModuleUsuarios.GeraCodigo;
 
+  edtNome.SetFocus;
+
 end;
 
 procedure TfrmUsuarios.btnPesquisaeClick(Sender: TObject);
@@ -152,6 +135,7 @@ begin
   inherited;
 
   Pesquisar;
+
 end;
 
 procedure TfrmUsuarios.btnSalvarClick(Sender: TObject);
@@ -176,7 +160,7 @@ begin
 
 
   //  Define o status do usuario
-  if ToggleSwitchStatus.State = tssOn then
+  if ToggleStatus.State = tssOn then
   begin
 
     LStatus := 'A';
@@ -190,8 +174,8 @@ begin
   end;
 
   //  Passando os dados para o dataset
-  DataModuleUsuarios.ClientDataSetUsuariosnome.AsString := Trim(EditNome.Text);
-  DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString := Trim(EditLogin.Text);
+  DataModuleUsuarios.ClientDataSetUsuariosnome.AsString := Trim(edtNome.Text);
+  DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString := Trim(edtLogin.Text);
   DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString := LStatus;
 
   //  Gravando no banco de dados
@@ -205,6 +189,42 @@ begin
   Pesquisar;
 
   inherited;
+end;
+
+procedure TfrmUsuarios.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+
+  EditarUsuario;
+
+end;
+
+procedure TfrmUsuarios.EditarUsuario;
+begin
+
+  //  Coloca o dataset em modo de edição
+  DataModuleUsuarios.ClientDataSetUsuarios.Edit;
+
+  //  Coloca o nome do usuario no titulo
+  Labeltitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
+
+  //  Carrega os dados
+  edtNome.Text  := DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
+  edtLogin.Text := DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString;
+
+  if DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString = 'A' then
+  begin
+
+  ToggleStatus.State := tssOn;
+
+  end
+  else
+  begin
+
+    ToggleStatus.State := tssOff;
+
+  end;
+
 end;
 
 procedure TfrmUsuarios.HabilitaBotoes;
@@ -255,29 +275,29 @@ end;
 
 procedure TfrmUsuarios.ValidaCampos;
 begin
-if Trim(EditNome.Text) = '' then
+if Trim(edtNome.Text) = '' then
   begin
 
     Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditNome.SetFocus;
+    edtNome.SetFocus;
 
     abort;
   end;
 
-  if Trim(EditLogin.Text) = '' then
+  if Trim(edtLogin.Text) = '' then
   begin
 
     Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditLogin.SetFocus;
+    edtLogin.SetFocus;
 
     abort;
   end;
 
-  if DataModuleUsuarios.VerificaLogin(Trim(EditLogin.Text), DataModuleUsuarios.ClientDataSetUsuarios.FieldByName('ID').AsString) then
+  if DataModuleUsuarios.VerificaLogin(Trim(edtLogin.Text), DataModuleUsuarios.ClientDataSetUsuarios.FieldByName('ID').AsString) then
   begin
 
-    Application.MessageBox(PWidechar(Format('Login %s já cadastrado!', [EditLogin.Text])), 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    EditLogin.SetFocus;
+    Application.MessageBox(PWidechar(Format('Login %s já cadastrado!', [edtLogin.Text])), 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtLogin.SetFocus;
 
     abort;
   end;

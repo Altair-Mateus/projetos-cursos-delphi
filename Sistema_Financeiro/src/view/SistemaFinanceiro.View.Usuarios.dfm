@@ -1,12 +1,11 @@
 inherited frmUsuarios: TfrmUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
-  ClientHeight = 510
   ClientWidth = 815
+  ExplicitTop = -97
   ExplicitWidth = 827
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
-    Height = 510
     ExplicitWidth = 811
     inherited CardCadastro: TCard
       Width = 813
@@ -60,7 +59,7 @@ inherited frmUsuarios: TfrmUsuarios
           Visible = False
           WordWrap = True
         end
-        object EditNome: TEdit
+        object edtNome: TEdit
           Left = 32
           Top = 65
           Width = 449
@@ -69,7 +68,7 @@ inherited frmUsuarios: TfrmUsuarios
           MaxLength = 100
           TabOrder = 0
         end
-        object EditLogin: TEdit
+        object edtLogin: TEdit
           Left = 32
           Top = 137
           Width = 209
@@ -78,12 +77,12 @@ inherited frmUsuarios: TfrmUsuarios
           MaxLength = 20
           TabOrder = 1
         end
-        object ToggleSwitchStatus: TToggleSwitch
+        object ToggleStatus: TToggleSwitch
           Left = 107
           Top = 190
           Width = 105
           Height = 21
-          Color = 9685681
+          Color = 9750962
           DisabledColor = 5737262
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -145,6 +144,7 @@ inherited frmUsuarios: TfrmUsuarios
           Margins.Top = 0
           DataSource = DataSourceUsuarios
           PopupMenu = PopupMenu
+          OnDblClick = DBGrid1DblClick
           Columns = <
             item
               Expanded = False

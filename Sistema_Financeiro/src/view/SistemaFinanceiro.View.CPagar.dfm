@@ -1,34 +1,36 @@
 inherited frmContasPagar: TfrmContasPagar
+  Left = -44
+  Top = -30
   Caption = 'Contas a Pagar'
-  ClientHeight = 781
+  ClientHeight = 647
   ClientWidth = 1045
+  Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -77
   ExplicitWidth = 1057
-  ExplicitHeight = 819
+  ExplicitHeight = 685
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1045
-    Height = 781
+    Height = 647
     ActiveCard = CardCadastro
-    ExplicitWidth = 795
-    ExplicitHeight = 508
+    ExplicitWidth = 1041
+    ExplicitHeight = 780
     inherited CardCadastro: TCard
       Width = 1043
-      Height = 779
-      ExplicitWidth = 797
-      ExplicitHeight = 507
+      Height = 645
+      ExplicitWidth = 1039
+      ExplicitHeight = 778
       inherited pnlBotoesCad: TPanel
-        Top = 710
+        Top = 576
         Width = 1043
-        ExplicitTop = 438
-        ExplicitWidth = 797
+        ExplicitTop = 709
+        ExplicitWidth = 1039
       end
       inherited PanelCampos: TPanel
         Width = 1043
-        Height = 669
-        ExplicitWidth = 1043
-        ExplicitHeight = 632
+        Height = 535
+        ExplicitWidth = 1039
+        ExplicitHeight = 668
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -119,7 +121,6 @@ inherited frmContasPagar: TfrmContasPagar
             Caption = 'cardParcelaUnica'
             CardIndex = 0
             TabOrder = 0
-            ExplicitWidth = 609
             object lblNDoc: TLabel
               Left = 2
               Top = 0
@@ -193,8 +194,6 @@ inherited frmContasPagar: TfrmContasPagar
             Caption = 'cardParcelamento'
             CardIndex = 1
             TabOrder = 1
-            ExplicitWidth = 185
-            ExplicitHeight = 41
             object Label1: TLabel
               Left = 4
               Top = 7
@@ -264,44 +263,44 @@ inherited frmContasPagar: TfrmContasPagar
       end
       inherited PanelTitulo: TPanel
         Width = 1043
-        ExplicitWidth = 797
+        ExplicitWidth = 1039
       end
     end
     inherited CardPesquisa: TCard
       Width = 1043
-      Height = 779
-      ExplicitWidth = 793
-      ExplicitHeight = 506
+      Height = 645
+      ExplicitWidth = 1043
+      ExplicitHeight = 779
       inherited pnlPesquisa: TPanel
         Width = 1043
-        ExplicitWidth = 793
+        ExplicitWidth = 1043
         inherited btnPesquisae: TButton
           Left = 919
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 669
+          ExplicitLeft = 919
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 710
+        Top = 576
         Width = 1043
-        ExplicitTop = 437
-        ExplicitWidth = 793
+        ExplicitTop = 710
+        ExplicitWidth = 1043
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 922
-          ExplicitLeft = 672
+          ExplicitLeft = 922
         end
       end
       inherited pnlGrid: TPanel
         Width = 1043
-        Height = 629
-        ExplicitWidth = 793
-        ExplicitHeight = 356
+        Height = 495
+        ExplicitWidth = 1043
+        ExplicitHeight = 629
         inherited DBGrid1: TDBGrid
           Width = 1041
-          Height = 627
+          Height = 493
           DataSource = DataSourceCPagar
           Columns = <
             item
@@ -328,14 +327,12 @@ inherited frmContasPagar: TfrmContasPagar
               Expanded = False
               FieldName = 'PARCELA'
               Title.Caption = 'Parcela'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'STATUS'
               Title.Caption = 'Status'
-              Width = 64
               Visible = True
             end
             item

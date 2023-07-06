@@ -17,6 +17,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   Font.Name = 'Tahoma'
   Font.Style = []
   Position = poScreenCenter
+  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 19
   object CardPanelPrincipal: TCardPanel
@@ -275,6 +276,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDrawColumnCell = DBGrid1DrawColumnCell
+          OnDblClick = DBGrid1DblClick
         end
       end
     end

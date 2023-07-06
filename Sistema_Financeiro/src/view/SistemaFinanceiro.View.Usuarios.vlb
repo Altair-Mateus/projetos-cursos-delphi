@@ -70,25 +70,25 @@ Coordinates=10,10,95,58
 [LabelLogin]
 Coordinates=10,78,78,58
 
-[EditLogin]
-Coordinates=471,10,68,58
-
 [PanelTitulo]
 Coordinates=208,10,79,58
 
 [Labeltitulo]
 Coordinates=387,10,74,58
 
-[ToggleSwitchStatus]
-Coordinates=105,350,128,36
-Visible=True
-
 [LabelNome]
 Coordinates=297,10,80,58
 
-[EditNome]
-Coordinates=342,78,71,58
-
 []
 Coordinates=115,10,83,58
+
+[edtNome]
+Coordinates=342,78,71,58
+
+[edtLogin]
+Coordinates=471,10,68,58
+
+[ToggleStatus]
+Coordinates=105,350,128,36
+Visible=True
 

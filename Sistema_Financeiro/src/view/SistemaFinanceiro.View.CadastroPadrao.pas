@@ -39,6 +39,8 @@ type
     procedure btnSairClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
 
@@ -51,6 +53,7 @@ type
   protected
 
     procedure Pesquisar; virtual;
+    procedure EditKeyPress(Sender: TObject; var Key: Char);
 
   end;
 
@@ -100,6 +103,16 @@ begin
 
 end;
 
+procedure TfrmCadastroPadrao.DBGrid1DblClick(Sender: TObject);
+begin
+
+  ValidaSelecao;
+
+  //  Abre a tela de cadastro
+  CardPanelPrincipal.ActiveCard := CardCadastro;
+
+end;
+
 procedure TfrmCadastroPadrao.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   begin
   if (gdSelected in State) then
@@ -112,6 +125,46 @@ procedure TfrmCadastroPadrao.DBGrid1DrawColumnCell(Sender: TObject; const Rect: 
   DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
+
+procedure TfrmCadastroPadrao.EditKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+
+    //  Verifica se a tecla pressionada é o Enter
+
+    //  Cancela o efeito do enter
+    Key := #0;
+
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+end;
+
+procedure TfrmCadastroPadrao.FormCreate(Sender: TObject);
+var
+  I : Integer;
+
+begin
+
+  //  Percorre os componentes TEdit
+  for I := 0 to ComponentCount - 1 do
+  begin
+
+    if Components[I] is TEdit then
+    begin
+
+      //  Cria o evento OnKeyPress para cada Edit encontrado
+      TEdit(Components[I]).OnKeyPress := EditKeyPress;
+
+    end;
+
+  end;
+
+
+end;
 
 procedure TfrmCadastroPadrao.FormShow(Sender: TObject);
 begin

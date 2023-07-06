@@ -3,13 +3,13 @@ inherited frmCaixa: TfrmCaixa
   ClientHeight = 616
   ClientWidth = 1108
   WindowState = wsMaximized
+  ExplicitTop = -98
   ExplicitWidth = 1120
   ExplicitHeight = 654
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1108
     Height = 616
-    ActiveCard = CardCadastro
     ExplicitWidth = 1104
     ExplicitHeight = 615
     inherited CardCadastro: TCard

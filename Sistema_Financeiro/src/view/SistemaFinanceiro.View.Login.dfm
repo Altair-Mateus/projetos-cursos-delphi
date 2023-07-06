@@ -12,6 +12,7 @@ object frmLogin: TfrmLogin
   Font.Name = 'Tahoma'
   Font.Style = []
   Position = poScreenCenter
+  OnCreate = FormCreate
   TextHeight = 13
   object imgIniciando: TImage
     Left = 407

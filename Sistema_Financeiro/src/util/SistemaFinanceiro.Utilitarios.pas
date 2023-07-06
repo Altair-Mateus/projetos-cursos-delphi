@@ -3,7 +3,7 @@ unit SistemaFinanceiro.Utilitarios;
 interface
 
 uses
-  Vcl.DBGrids;
+  Vcl.DBGrids, Vcl.Controls;
 
 type
   TUtilitario = class

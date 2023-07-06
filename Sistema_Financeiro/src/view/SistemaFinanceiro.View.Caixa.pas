@@ -28,13 +28,15 @@ type
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
 
     procedure ValidaCampos;
     procedure HabilitaBotoes;
+    procedure EditarRegCaixa;
 
   public
     { Public declarations }
@@ -58,35 +60,9 @@ uses
 
 procedure TfrmCaixa.btnAlterarClick(Sender: TObject);
 begin
-
-  //  Coloca o dataset em modo de edição
-  DataModuleCaixa.ClientDataSetCaixa.Edit;
-
   inherited;
 
-  //  Coloca o numero do registro no titulo
-  Labeltitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
-
-  //  Carrega os dados
-  edtNDoc.Text := DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString;
-  memDesc.Text := DataModuleCaixa.ClientDataSetCaixadescricao.AsString;
-  edtValor.Text := DataModuleCaixa.ClientDataSetCaixavalor.AsString;
-  DateTimePicker.Date := DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime;
-
-  if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'R' then
-  begin
-
-    RadioGroup.ItemIndex := 0;
-
-  end
-    else if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'D' then
-    begin
-
-      RadioGroup.ItemIndex := 1;
-
-    end;
-
-
+  EditarRegCaixa;
 
 end;
 
@@ -148,6 +124,8 @@ begin
   //  Coloca a data atual no datetimepicker
   DateTimePicker.Date := now;
 
+  edtNDoc.SetFocus;
+
 end;
 
 procedure TfrmCaixa.btnPesquisaeClick(Sender: TObject);
@@ -195,6 +173,44 @@ begin
   Pesquisar;
 
   inherited;
+
+end;
+
+procedure TfrmCaixa.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+
+  EditarRegCaixa;
+
+end;
+
+procedure TfrmCaixa.EditarRegCaixa;
+begin
+
+  //  Coloca o dataset em modo de edição
+  DataModuleCaixa.ClientDataSetCaixa.Edit;
+
+  //  Coloca o numero do registro no titulo
+  Labeltitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
+
+  //  Carrega os dados
+  edtNDoc.Text := DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString;
+  memDesc.Text := DataModuleCaixa.ClientDataSetCaixadescricao.AsString;
+  edtValor.Text := DataModuleCaixa.ClientDataSetCaixavalor.AsString;
+  DateTimePicker.Date := DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime;
+
+  if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'R' then
+  begin
+
+    RadioGroup.ItemIndex := 0;
+
+  end
+    else if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'D' then
+    begin
+
+      RadioGroup.ItemIndex := 1;
+
+    end;
 
 end;
 

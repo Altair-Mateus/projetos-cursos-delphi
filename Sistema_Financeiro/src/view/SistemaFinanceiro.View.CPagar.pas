@@ -40,6 +40,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -100,6 +101,13 @@ begin
   end;
 
 
+end;
+
+procedure TfrmContasPagar.btnIncluirClick(Sender: TObject);
+begin
+  inherited;
+
+  memDesc.SetFocus;
 end;
 
 procedure TfrmContasPagar.btnPesquisaeClick(Sender: TObject);

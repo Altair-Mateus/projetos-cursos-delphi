@@ -26,10 +26,12 @@ type
     procedure btnEntrarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
 
     procedure ValidaCampos;
+    procedure EditKeyPress(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
@@ -76,6 +78,46 @@ begin
     end;
 
   end;
+
+end;
+
+procedure TfrmLogin.EditKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+
+    //  Verifica se a tecla pressionada é o Enter
+
+    //  Cancela o efeito do enter
+    Key := #0;
+
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+end;
+
+procedure TfrmLogin.FormCreate(Sender: TObject);
+var
+  I : Integer;
+
+begin
+
+  //  Percorre os componentes TEdit
+  for I := 0 to ComponentCount - 1 do
+  begin
+
+    if Components[I] is TEdit then
+    begin
+
+      //  Cria o evento OnKeyPress para cada Edit encontrado
+      TEdit(Components[I]).OnKeyPress := EditKeyPress;
+
+    end;
+
+  end;
+
 
 end;
 
