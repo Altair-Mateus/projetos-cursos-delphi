@@ -150,9 +150,7 @@ begin
 
      FDQueryId.Close;
      FDQueryId.sql.Clear;
-     FDQueryId.SQL.Add('select max(id) as id from usuarios');
-     FDQueryId.Open;
-
+     FDQueryId.Open('select max(id) as id from usuarios');
 
     //  Ultimo codigo usado + 1
     cod := FDQueryId.FieldByName('id').AsInteger + 1;

@@ -1,431 +1,912 @@
-object frmSaldoCaixa: TfrmSaldoCaixa
-  Left = 0
-  Top = 0
-  Margins.Left = 0
-  Margins.Top = 0
-  Margins.Right = 0
-  Margins.Bottom = 0
-  Caption = 'Saldo do Caixa'
-  ClientHeight = 396
-  ClientWidth = 532
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -16
-  Font.Name = 'Tahoma'
-  Font.Style = []
-  Position = poScreenCenter
-  OnShow = FormShow
+inherited frmContasPagar: TfrmContasPagar
+  Caption = 'Contas a Pagar'
+  ClientHeight = 781
+  ClientWidth = 1045
+  WindowState = wsMaximized
+  ExplicitTop = -77
+  ExplicitWidth = 1057
+  ExplicitHeight = 819
   TextHeight = 19
-  object pnlPrincipal: TPanel
-    Left = 0
-    Top = 0
-    Width = 532
-    Height = 396
-    Align = alClient
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 0
-    ExplicitWidth = 528
-    ExplicitHeight = 395
-    object pnlPesquisa: TPanel
-      Left = 1
-      Top = 1
-      Width = 530
-      Height = 81
-      Align = alTop
-      Color = 5737262
-      ParentBackground = False
-      TabOrder = 0
-      ExplicitWidth = 526
-      object lblDataInicial: TLabel
-        Left = 16
-        Top = 15
-        Width = 79
-        Height = 19
-        Align = alCustom
-        Caption = 'Data Inicial'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
+  inherited CardPanelPrincipal: TCardPanel
+    Width = 1045
+    Height = 781
+    ActiveCard = CardCadastro
+    ExplicitWidth = 795
+    ExplicitHeight = 508
+    inherited CardCadastro: TCard
+      Width = 1043
+      Height = 779
+      ExplicitWidth = 797
+      ExplicitHeight = 507
+      inherited pnlBotoesCad: TPanel
+        Top = 710
+        Width = 1043
+        ExplicitTop = 438
+        ExplicitWidth = 797
       end
-      object lblDataFinal: TLabel
-        Left = 184
-        Top = 15
-        Width = 70
-        Height = 19
-        Align = alCustom
-        Caption = 'Data Final'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
+      inherited PanelCampos: TPanel
+        Width = 1043
+        Height = 669
+        ExplicitWidth = 1043
+        ExplicitHeight = 632
+        object lblDesc: TLabel
+          Left = 44
+          Top = 32
+          Width = 67
+          Height = 19
+          Caption = 'Descri'#231#227'o'
+        end
+        object lblDataCompra: TLabel
+          Left = 257
+          Top = 159
+          Width = 120
+          Height = 19
+          Caption = ' Data da Compra'
+        end
+        object lblValorCompra: TLabel
+          Left = 42
+          Top = 159
+          Width = 144
+          Height = 19
+          Caption = 'Valor da Compra R$'
+        end
+        object lblParcelamento: TLabel
+          Left = 42
+          Top = 249
+          Width = 95
+          Height = 19
+          Caption = 'Parcelamento'
+        end
+        object memDesc: TMemo
+          Left = 42
+          Top = 57
+          Width = 639
+          Height = 64
+          MaxLength = 200
+          TabOrder = 0
+        end
+        object dateCompra: TDateTimePicker
+          Left = 256
+          Top = 184
+          Width = 186
+          Height = 27
+          Date = 45099.000000000000000000
+          Time = 0.866143263890990100
+          TabOrder = 1
+        end
+        object edtValorCompra: TEdit
+          Left = 42
+          Top = 184
+          Width = 185
+          Height = 27
+          Color = clWhite
+          MaxLength = 20
+          TabOrder = 2
+        end
+        object toggleParcelamento: TToggleSwitch
+          Left = 168
+          Top = 249
+          Width = 84
+          Height = 21
+          Color = 9750962
+          DisabledColor = 5737262
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBtnText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          FrameColor = 5737262
+          ParentFont = False
+          StateCaptions.CaptionOn = 'Sim'
+          StateCaptions.CaptionOff = 'N'#227'o'
+          TabOrder = 3
+          ThumbColor = 5737262
+        end
+        object CardPanelParcela: TCardPanel
+          Left = 40
+          Top = 296
+          Width = 793
+          Height = 249
+          ActiveCard = cardParcelamento
+          BevelOuter = bvNone
+          Caption = 'CardPanel1'
+          TabOrder = 4
+          object cardParcelaUnica: TCard
+            Left = 0
+            Top = 0
+            Width = 793
+            Height = 249
+            Caption = 'cardParcelaUnica'
+            CardIndex = 0
+            TabOrder = 0
+            ExplicitWidth = 609
+            object lblNDoc: TLabel
+              Left = 2
+              Top = 0
+              Width = 105
+              Height = 19
+              Caption = 'N'#186' Documento'
+            end
+            object lblParcela: TLabel
+              Left = 225
+              Top = 0
+              Width = 50
+              Height = 19
+              Caption = 'Parcela'
+            end
+            object lblValorParcela: TLabel
+              Left = 0
+              Top = 77
+              Width = 138
+              Height = 19
+              Caption = 'Valor da Parcela R$'
+            end
+            object lblVencimento: TLabel
+              Left = 225
+              Top = 77
+              Width = 83
+              Height = 19
+              Caption = 'Vencimento'
+            end
+            object edtNDoc: TEdit
+              Left = 2
+              Top = 25
+              Width = 185
+              Height = 27
+              Color = clWhite
+              MaxLength = 20
+              TabOrder = 0
+            end
+            object Edit1: TEdit
+              Left = 225
+              Top = 25
+              Width = 185
+              Height = 27
+              Color = clWhite
+              MaxLength = 20
+              TabOrder = 1
+            end
+            object Edit3: TEdit
+              Left = 0
+              Top = 102
+              Width = 185
+              Height = 27
+              Color = clWhite
+              MaxLength = 20
+              TabOrder = 2
+            end
+            object dateVencimento: TDateTimePicker
+              Left = 225
+              Top = 102
+              Width = 185
+              Height = 27
+              Date = 45099.000000000000000000
+              Time = 0.866143263890990100
+              TabOrder = 3
+            end
+          end
+          object cardParcelamento: TCard
+            Left = 0
+            Top = 0
+            Width = 793
+            Height = 249
+            Caption = 'cardParcelamento'
+            CardIndex = 1
+            TabOrder = 1
+            ExplicitWidth = 185
+            ExplicitHeight = 41
+            object Label1: TLabel
+              Left = 4
+              Top = 7
+              Width = 144
+              Height = 19
+              Caption = 'Valor da Compra R$'
+            end
+            object Label2: TLabel
+              Left = 217
+              Top = 7
+              Width = 144
+              Height = 19
+              Caption = 'Valor da Compra R$'
+            end
+            object Edit2: TEdit
+              Left = 4
+              Top = 32
+              Width = 185
+              Height = 27
+              Color = clWhite
+              MaxLength = 20
+              TabOrder = 0
+            end
+            object Edit4: TEdit
+              Left = 217
+              Top = 32
+              Width = 185
+              Height = 27
+              Color = clWhite
+              MaxLength = 20
+              TabOrder = 1
+            end
+            object btnGerar: TButton
+              Left = 491
+              Top = 0
+              Width = 100
+              Height = 57
+              Caption = 'Gerar'
+              ImageIndex = 7
+              Images = ImageList1
+              TabOrder = 2
+            end
+            object btnLimpar: TButton
+              Left = 608
+              Top = 0
+              Width = 100
+              Height = 57
+              Caption = 'Limpar'
+              ImageIndex = 8
+              Images = ImageList1
+              TabOrder = 3
+            end
+            object DBGridParcelas: TDBGrid
+              Left = 4
+              Top = 96
+              Width = 704
+              Height = 129
+              TabOrder = 4
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -16
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+            end
+          end
+        end
       end
-      object btnPesquisae: TButton
-        AlignWithMargins = True
-        Left = 405
-        Top = 6
-        Width = 121
-        Height = 69
-        Margins.Top = 5
-        Margins.Bottom = 5
-        Align = alRight
-        Caption = 'Pesquisar'
-        ImageIndex = 5
-        Images = ImageList1
-        TabOrder = 0
-        OnClick = btnPesquisaeClick
-        ExplicitLeft = 401
-      end
-      object dateInicial: TDateTimePicker
-        Left = 16
-        Top = 40
-        Width = 129
-        Height = 27
-        Date = 45104.000000000000000000
-        Time = 0.878931481478503000
-        TabOrder = 1
-      end
-      object dateFinal: TDateTimePicker
-        Left = 184
-        Top = 40
-        Width = 129
-        Height = 27
-        Date = 45104.000000000000000000
-        Time = 0.878931481478503000
-        TabOrder = 2
+      inherited PanelTitulo: TPanel
+        Width = 1043
+        ExplicitWidth = 797
       end
     end
-    object pnlRelat: TPanel
-      Left = 1
-      Top = 82
-      Width = 530
-      Height = 313
-      Align = alClient
-      TabOrder = 1
-      ExplicitWidth = 526
-      ExplicitHeight = 312
-      object StackPanel1: TStackPanel
-        Left = 1
-        Top = 1
-        Width = 528
-        Height = 311
-        Align = alClient
-        Color = clWhite
-        ControlCollection = <
-          item
-            Control = pnlSaldoInicial
-            HorizontalPositioning = sphpFill
-            VerticalPositioning = spvpFill
-          end
-          item
-            Control = pnlEntradas
-            HorizontalPositioning = sphpFill
-            VerticalPositioning = spvpFill
-          end
-          item
-            Control = pnlSaidas
-            HorizontalPositioning = sphpFill
-            VerticalPositioning = spvpFill
-          end
-          item
-            Control = pnlSaldoParcial
-            HorizontalPositioning = sphpFill
-            VerticalPositioning = spvpFill
-          end
-          item
-            Control = pnlSaldoFinal
-            HorizontalPositioning = sphpFill
-            VerticalPositioning = spvpFill
-          end>
-        Padding.Left = 20
-        Padding.Top = 10
-        Padding.Right = 20
-        ParentBackground = False
-        Spacing = 15
-        TabOrder = 0
-        ExplicitWidth = 524
-        ExplicitHeight = 310
-        object pnlSaldoInicial: TPanel
-          Left = 21
-          Top = 11
-          Width = 486
-          Height = 41
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          ParentBackground = False
-          TabOrder = 0
-          object lblSaldoInicial: TLabel
-            Left = 0
-            Top = 0
-            Width = 225
-            Height = 41
-            Align = alLeft
-            Caption = 'Saldo Anterior do Caixa'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-          object lblValorSaldoInicial: TLabel
-            Left = 460
-            Top = 0
-            Width = 26
-            Height = 41
-            Align = alRight
-            Caption = 'R$'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
+    inherited CardPesquisa: TCard
+      Width = 1043
+      Height = 779
+      ExplicitWidth = 793
+      ExplicitHeight = 506
+      inherited pnlPesquisa: TPanel
+        Width = 1043
+        ExplicitWidth = 793
+        inherited btnPesquisae: TButton
+          Left = 919
+          OnClick = btnPesquisaeClick
+          ExplicitLeft = 669
         end
-        object pnlEntradas: TPanel
-          Left = 21
-          Top = 67
-          Width = 486
-          Height = 41
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 4
-          object lblTotalEntradas: TLabel
-            Left = 0
-            Top = 0
-            Width = 148
-            Height = 41
-            Align = alLeft
-            Caption = 'Total de Entradas'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 5737262
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-          object lblValorTotalEntradas: TLabel
-            Left = 464
-            Top = 0
-            Width = 22
-            Height = 41
-            Align = alRight
-            Caption = 'R$'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 5737262
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
+      end
+      inherited pnlBotoes: TPanel
+        Top = 710
+        Width = 1043
+        ExplicitTop = 437
+        ExplicitWidth = 793
+        inherited btnExcluir: TButton
+          OnClick = btnExcluirClick
         end
-        object pnlSaidas: TPanel
-          Left = 21
-          Top = 123
-          Width = 486
-          Height = 41
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 3
-          object lblTotalSaidas: TLabel
-            Left = 0
-            Top = 0
-            Width = 128
-            Height = 41
-            Align = alLeft
-            Caption = 'Total de Sa'#237'das'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clRed
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-          object lblValorTotalSaidas: TLabel
-            Left = 464
-            Top = 0
-            Width = 22
-            Height = 41
-            Align = alRight
-            Caption = 'R$'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clRed
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
+        inherited btnSair: TButton
+          Left = 922
+          ExplicitLeft = 672
         end
-        object pnlSaldoParcial: TPanel
-          Left = 21
-          Top = 179
-          Width = 486
-          Height = 41
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 2
-          object lblSaldoParcial: TLabel
-            Left = 0
-            Top = 0
-            Width = 123
-            Height = 41
-            Align = alLeft
-            Caption = 'Saldo Parcial'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-          object lblValorSaldoParcial: TLabel
-            Left = 460
-            Top = 0
-            Width = 26
-            Height = 41
-            Align = alRight
-            Caption = 'R$'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-        end
-        object pnlSaldoFinal: TPanel
-          Left = 21
-          Top = 235
-          Width = 486
-          Height = 41
-          Align = alClient
-          BevelOuter = bvNone
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 1
-          object lblSaldoFinal: TLabel
-            Left = 0
-            Top = 0
-            Width = 105
-            Height = 41
-            Align = alLeft
-            Caption = 'Saldo Final'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
-          object lblValorSaldoFinal: TLabel
-            Left = 460
-            Top = 0
-            Width = 26
-            Height = 41
-            Align = alRight
-            Caption = 'R$'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-            ExplicitHeight = 23
-          end
+      end
+      inherited pnlGrid: TPanel
+        Width = 1043
+        Height = 629
+        ExplicitWidth = 793
+        ExplicitHeight = 356
+        inherited DBGrid1: TDBGrid
+          Width = 1041
+          Height = 627
+          DataSource = DataSourceCPagar
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Width = 36
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NUMERO_DOC'
+              Title.Caption = 'N'#186' Documento'
+              Width = 144
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Descri'#231#227'o'
+              Width = 300
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PARCELA'
+              Title.Caption = 'Parcela'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'STATUS'
+              Title.Caption = 'Status'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_VENCIMENTO'
+              Title.Caption = ' Vencimento'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_PARCELA'
+              Title.Caption = 'Valor da Parcela'
+              Width = 125
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_COMPRA'
+              Title.Caption = 'Valor da Compra'
+              Width = 136
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_COMPRA'
+              Title.Caption = 'Data da Compra'
+              Width = 134
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_CADASTRO'
+              Title.Caption = 'Data de Cadastro'
+              Width = 139
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_PAGAMENTO'
+              Title.Caption = 'Data de Pagamento'
+              Width = 149
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_ABATIDO'
+              Title.Caption = 'Valor Abatido'
+              Width = 107
+              Visible = True
+            end>
         end
       end
     end
   end
-  object ImageList1: TImageList
-    ColorDepth = cd32Bit
-    Height = 32
-    Width = 32
-    Left = 392
-    Top = 112
+  inherited ImageList1: TImageList
     Bitmap = {
-      494C010107000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000800000004000000001002000000000000080
+      494C010109001800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      00000000000036000000280000008000000060000000010020000000000000C0
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F1EFEDFFF1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EF
+      EDFFD0CECCED0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000051E3FFFF51E3FFFF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EF
+      EDFFF1EFEDFFF1EFEDFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000051E3FFFF51E3FFFF51E3FFFF0000000F0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF00000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000F1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000266B78AF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000
+      000000000000000000000000000000000000000000000000000000000000F1EF
+      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000091908FC600000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF4EDAF5FA000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000051E3FFFF51E3FFFF51E3FFFF35B2FFFF35B2FFFF51E3FFFF51E3FFFF51E3
+      FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF000000000000000000000000AAB0
+      FFFFAAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000966B
+      5AE7B7836DFF51E3FFFF51E3FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF35B2
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000000000000000AAB0
+      FFFF51E3FFFFAAB0FFFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000B783
+      6DFFB7836DFFB7836DFFB7836DFF51E3FFFF51E3FFFF51E3FFFF35B2FFFF35B2
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF51E3FFFF00000000000000000000000000000000000000000000
+      0000AAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000B783
+      6DFFB7836DFFB7836DFFB7836DFFB7836DFFB7836DFF51E3FFFF35B2FFFF51E3
+      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF51E3FFFF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB7846EFF51E3
+      FFFF51E3FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
+      FFFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
+      6DFF39B9FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000
+      00000000000000000000AAB0FFFFAAB0FFFF2426377700000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
+      6DFFB7836DFFB7836DFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF000000000000
+      00000000000000000000AAB0FFFFAAB0FFFFAAB0FFFF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
+      6DFFB7836DFFB7836DFFB7836DFFB7836DFF51E3FFFF00000000000000000000
+      000000000000AAB0FFFFAAB0FFFF51E3FFFFAAB0FFFF434565A1000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF00000005B783
+      6DFFB7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
+      00000000000000000000AAB0FFFFAAB0FFFFAAB0FFFF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF000000000000
+      000000000000B7836DFFB7836DFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000636795C300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000B7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000AAB0
+      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000B783
+      6DFFB7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000AAB0
+      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000B7836DFFB783
+      6DFFB7836DFFB7836DFFB7836DFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000AAB0FFFFAAB0
+      FFFF51E3FFFF51E3FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000B7836DFFB783
+      6DFFB7836DFFB7836DFFB7836DFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000AAB0FFFFAAB0
+      FFFFAAB0FFFF51E3FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000B7836DFFB7836DFFB783
+      6DFFB7836DFFB7836DFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000AAB0
+      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000B7836DFF00000000B783
+      6DFFB7836DFF916756E300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000AAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000009E705EEDB7836DFF000000000000
+      0000B7836DFF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000B7836DFFB7836DFFB783
+      6DFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000B17F69FB0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -440,7 +921,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       D9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEDE8D3AEEDE8D
       3AEEDE8D3AEE0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000076C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4
@@ -456,7 +937,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FF000000FF000000FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -470,10 +951,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000FF0000
+      00FF0000000800000000000000FF000000FF000000FF000000FF000000FF0000
+      00FF0000000000000000000000FF000000FF000000FFFBD000FF000000FF0000
+      00FF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF7DC7FFFF76C4FFFF76C4FFFF76C4
@@ -487,9 +968,9 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FF000000FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
@@ -502,11 +983,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFEAE7D9FFEAE7
       D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7
       D9FFEAE7D9FFEAE7D9FFEAE7D9FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB00000000000000FF000000000000
+      00CD000000FF000000FF000000FF000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FFFBD000FF000000FF00000085000000000000000000000000000000000000
+      00FF000000FF000000FF00000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -519,10 +1000,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FF403500FF000000FF000000000000000000000000000000FF000000FF43C3
+      FFFF43C3FFFF000000FF000000FF000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -534,11 +1015,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
+      00FF0000003500000000000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FFFBD000FFFBD000FF0000
+      00FF000000FF000000000000000000000000000000FF40BBF5FF76E1FFFF43C3
+      FFFF43C3FFFF43C3FFFF43C3FFFF000000FF0000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -552,9 +1033,9 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       2BFF322F2BFF322F2BFF322F2BFFEAE7D9FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      000000000000000000000000000000000000000000FFFBD000FF000000FF0000
+      000000000000000000000000000000000000000000FF76E1FFFF76E1FFFF0000
+      00FF000000FF43C3FFFF43C3FFFF194A61FF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFFFF8823FFFF88
@@ -566,11 +1047,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
+      00FF000000FF000000FF00000000000000FF000000FF00000000000000000000
+      000000000000000000000000000000000000000000FF000000FF000000000000
+      000000000000000000000000000000000000000000FF76E1FFFF000000FFFFFB
+      F2FFFFFBF2FF000000FF43C3FFFF43C3FFFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFFFF8823FFFF88
@@ -583,10 +1064,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      0000000000000000000000000000000000000000000000000000000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF33626FFFE3DFD7FF0000
+      00FFFFFBF2FFFFFBF2FF000000FF43C3FFFF0000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF7DC8FFFF76C4FFFF76C4FFFFCE5D00FFF06C
@@ -599,10 +1080,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      0000000000000000000000000000000000000000000000000000000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF76E1FFFF000000FF60B8
+      D0FF000000FF000000FF000000FF43C3FFFF0000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFFCE5D00FFF06C
@@ -615,10 +1096,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      00000000000000000000000000FF000000FF0000000000000000000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF76E1FFFF76E1FFFF76E1
+      FFFF76E1FFFF76E1FFFF43C3FFFF43C3FFFF0000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFFCF5E00FFF06C
@@ -631,10 +1112,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      00000000000000000000000000FFFBD000FF000000FF00000000000000FF2DE6
+      A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF67C4DEFF76E1FFFF76E1
+      FFFF76E1FFFF76E1FFFF43C3FFFF000000FF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFFF88
@@ -646,11 +1127,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000A2000000FF000000FF0000
+      00FF000000FF000000FF000000FFFBD000FFFBD000FF000000FF000000FF2DE6
+      A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF0000
+      00FF000000FF1E9A6CFF000000FF2AD999FF2DE6A2FF0D442FFF000000FF0000
+      00FF000000FF000000FF000000FF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -662,11 +1143,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
+      61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FF000000FF0000
+      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF1D98
+      6AFF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -678,11 +1159,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -694,11 +1175,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FF000000FF0000
+      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -710,11 +1191,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000E0000000FF000000FF0000
+      0000000000FA000000FF000000FFFBD000FFFBD000FF000000FF000000FF2DE6
+      A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF0000
+      00FF000000FF2DE6A2FF000000FF0B3A28FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FF23AC5DFFFF8823FFFF8823FF231B
@@ -727,10 +1208,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      00000000000000000000000000FFFBD000FF000000FF00000000000000FF2DE6
+      A2FF010705FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF0B3D2BFF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF000000FF000000FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFFF8823FFFF8823FFFF8823FFFF8823FF23AC5DFFFF8823FFFF8823FF231B
@@ -743,10 +1224,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      00000000000000000000000000FF000000FF0000000000000000000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF000000FF082D1FFF082D1FFF082D1FFF082D1FFF082D
+      1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D
+      1FFF000000FF2DE6A2FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -758,11 +1239,11 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FFFFA242FF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB000000DC000000FF000000000000
+      00FF000000FF0000008300000000000000000000000000000000000000FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
+      A2FF2DE6A2FF2DE6A2FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -775,10 +1256,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF2DE6A2FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF0000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFFF06C00FFF06C
@@ -792,7 +1273,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FF000000FF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -808,7 +1289,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FFFBD000FF000000FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -822,10 +1303,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
+      00FF0000009200000000000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FFFBD000FFFBD000FF0000
+      00FF000000FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -839,9 +1320,9 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FF000000FF000000FF00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFF1098FFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -854,10 +1335,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FF000000000000000C000000FF000000000000
+      00FF000000FF000000FF000000FF000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FFFBD000FF000000FF000000FD000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFF1098FFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -871,9 +1352,9 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
+      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
+      00FF000000FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFF1098FFFF1098FFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -886,10 +1367,10 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FF00000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FF00000000000000000000000000000000000000FF0000
+      00FF000000C900000000000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FFFBD000FF8D7400FF0000
+      00FF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -904,7 +1385,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FF000000FF000000FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -920,7 +1401,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000FF0000001A000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1451,7 +1932,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000080000000400000000100010000000000000400000000000000000000
+      2800000080000000600000000100010000000000000600000000000000000000
       000000000000000000000000FFFFFF0000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1485,6 +1966,27 @@ object frmSaldoCaixa: TfrmSaldoCaixa
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object DataSourceCPagar: TDataSource
+    DataSet = DataModuleCPagar.ClientDataSetCPagar
+    Left = 680
+    Top = 256
   end
 end

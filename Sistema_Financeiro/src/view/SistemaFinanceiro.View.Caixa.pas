@@ -133,7 +133,7 @@ procedure TfrmCaixa.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
-
+  Labeltitulo.Caption := 'Inserindo um novo Lançamento no Caixa';
 
   if not (DataModuleCaixa.ClientDataSetCaixa.State in [dsInsert, dsEdit]) then
   begin
@@ -147,9 +147,6 @@ begin
 
   //  Coloca a data atual no datetimepicker
   DateTimePicker.Date := now;
-
-  //  Coloca o tipo de lançamento como nulo
-//  RadioGroup.ItemIndex := -1;
 
 end;
 

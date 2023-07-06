@@ -152,6 +152,15 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.ResumoCaixa.pas"/>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmCPagar.pas">
+            <Form>DataModuleCPagar</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.CPagar.pas">
+            <Form>frmContasPagar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -1,19 +1,18 @@
 inherited frmUsuarios: TfrmUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
+  ClientHeight = 510
   ClientWidth = 815
   ExplicitWidth = 827
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
+    Height = 510
     ExplicitWidth = 811
-    ExplicitHeight = 508
     inherited CardCadastro: TCard
       Width = 813
       ExplicitWidth = 813
-      ExplicitHeight = 507
       inherited pnlBotoesCad: TPanel
         Width = 813
-        ExplicitTop = 438
         ExplicitWidth = 813
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
@@ -22,7 +21,6 @@ inherited frmUsuarios: TfrmUsuarios
       inherited PanelCampos: TPanel
         Width = 813
         ExplicitWidth = 813
-        ExplicitHeight = 397
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -192,7 +190,7 @@ inherited frmUsuarios: TfrmUsuarios
     Left = 728
     Top = 216
     object mnuLimpaSenha: TMenuItem
-      Caption = 'Limpar Senha'
+      Caption = 'Resetar Senha'
       OnClick = mnuLimpaSenhaClick
     end
   end

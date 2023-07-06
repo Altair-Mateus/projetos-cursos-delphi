@@ -28,6 +28,7 @@ object DataModuleCaixa: TDataModuleCaixa
     end
     object ClientDataSetCaixavalor: TFMTBCDField
       FieldName = 'valor'
+      DisplayFormat = '#,##0.00'
       Size = 18
     end
     object ClientDataSetCaixanumero_doc: TWideStringField
