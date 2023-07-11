@@ -31,7 +31,7 @@ type
     btnCancelar: TButton;
     PanelCampos: TPanel;
     PanelTitulo: TPanel;
-    Labeltitulo: TLabel;
+    lblTitulo: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);

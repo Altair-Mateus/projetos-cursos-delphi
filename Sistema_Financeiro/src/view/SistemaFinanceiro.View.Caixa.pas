@@ -109,7 +109,7 @@ procedure TfrmCaixa.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
-  Labeltitulo.Caption := 'Inserindo um novo Lançamento no Caixa';
+  lblTitulo.Caption := 'Inserindo um novo Lançamento no Caixa';
 
   if not (DataModuleCaixa.ClientDataSetCaixa.State in [dsInsert, dsEdit]) then
   begin
@@ -118,11 +118,6 @@ begin
     DataModuleCaixa.ClientDataSetCaixa.Insert;
 
   end;
-
-  DataModuleCaixa.GeraCodigo;
-
-  //  Coloca a data atual no datetimepicker
-  DateTimePicker.Date := now;
 
   edtNDoc.SetFocus;
 
@@ -162,6 +157,17 @@ begin
 
     end;
 
+  if DataModuleCaixa.ClientDataSetCaixa.State in [dsInsert] then
+  begin
+
+    DataModuleCaixa.GeraCodigo;
+
+    //  Coloca a data atual no datetimepicker
+    DateTimePicker.Date := now;
+
+  end;
+
+
   //  Gravando no banco de dados
   DataModuleCaixa.ClientDataSetCaixa.Post;
   DataModuleCaixa.ClientDataSetCaixa.ApplyUpdates(0);
@@ -191,7 +197,7 @@ begin
   DataModuleCaixa.ClientDataSetCaixa.Edit;
 
   //  Coloca o numero do registro no titulo
-  Labeltitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
+  lblTitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
 
   //  Carrega os dados
   edtNDoc.Text := DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString;

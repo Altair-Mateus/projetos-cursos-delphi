@@ -113,7 +113,7 @@ begin
   inherited;
 
   lblAvisoSenha.Visible := True;
-  Labeltitulo.Caption := 'Inserindo um novo usuário';
+  lblTitulo.Caption := 'Inserindo um novo usuário';
 
   if not (DataModuleUsuarios.ClientDataSetUsuarios.State in [ dsEdit, dsInsert]) then
   begin
@@ -122,9 +122,6 @@ begin
     DataModuleUsuarios.ClientDataSetUsuarios.Insert;
 
   end;
-
-  DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
-  DataModuleUsuarios.GeraCodigo;
 
   edtNome.SetFocus;
 
@@ -155,6 +152,8 @@ begin
 
     DataModuleUsuarios.ClientDataSetUsuariossenha.AsString := TBCrypt.GenerateHash(DataModuleUsuarios.TEMP_PASSWORD);
     DataModuleUsuarios.ClientDataSetUsuariossenha_temp.AsString := 'S';
+    DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
+    DataModuleUsuarios.GeraCodigo;
 
   end;
 
@@ -206,7 +205,7 @@ begin
   DataModuleUsuarios.ClientDataSetUsuarios.Edit;
 
   //  Coloca o nome do usuario no titulo
-  Labeltitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
+  lblTitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
 
   //  Carrega os dados
   edtNome.Text  := DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
@@ -275,14 +274,14 @@ end;
 
 procedure TfrmUsuarios.ValidaCampos;
 begin
-if Trim(edtNome.Text) = '' then
-  begin
+  if Trim(edtNome.Text) = '' then
+    begin
 
-    Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    edtNome.SetFocus;
+      Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      edtNome.SetFocus;
 
-    abort;
-  end;
+      abort;
+    end;
 
   if Trim(edtLogin.Text) = '' then
   begin

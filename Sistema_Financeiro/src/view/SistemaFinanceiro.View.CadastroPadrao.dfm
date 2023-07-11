@@ -46,6 +46,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Width = 801
         Height = 69
         Align = alBottom
+        Color = 5934638
+        ParentBackground = False
         TabOrder = 0
         object btnSalvar: TButton
           Left = 1
@@ -97,13 +99,13 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Color = 5737262
         ParentBackground = False
         TabOrder = 2
-        object Labeltitulo: TLabel
+        object lblTitulo: TLabel
           Left = 16
           Top = 9
           Width = 98
           Height = 23
           Caption = 'TITULO TELA'
-          Color = 5868590
+          Color = 5934638
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindow
           Font.Height = -19
@@ -181,26 +183,33 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         Width = 801
         Height = 69
         Align = alBottom
+        Color = clWindow
+        ParentBackground = False
         TabOrder = 1
         ExplicitTop = 438
         ExplicitWidth = 797
         object btnIncluir: TButton
-          Left = 1
-          Top = 1
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
           Width = 120
-          Height = 67
+          Height = 61
           Align = alLeft
           Caption = 'Incluir'
           ImageIndex = 0
           Images = ImageList1
           TabOrder = 0
           OnClick = btnIncluirClick
+          ExplicitLeft = 1
+          ExplicitTop = 1
+          ExplicitHeight = 67
         end
         object btnAlterar: TButton
-          Left = 121
-          Top = 1
+          AlignWithMargins = True
+          Left = 130
+          Top = 4
           Width = 120
-          Height = 67
+          Height = 61
           Align = alLeft
           Caption = 'Alterar'
           Enabled = False
@@ -208,35 +217,48 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 1
           OnClick = btnAlterarClick
+          ExplicitLeft = 121
+          ExplicitTop = 1
+          ExplicitHeight = 67
         end
         object btnExcluir: TButton
-          Left = 241
-          Top = 1
+          AlignWithMargins = True
+          Left = 256
+          Top = 4
           Width = 120
-          Height = 67
+          Height = 61
           Align = alLeft
           Caption = 'Excluir'
           Enabled = False
           ImageIndex = 2
           Images = ImageList1
           TabOrder = 2
+          ExplicitLeft = 241
+          ExplicitTop = 1
+          ExplicitHeight = 67
         end
         object btnImprimir: TButton
-          Left = 361
-          Top = 1
+          AlignWithMargins = True
+          Left = 382
+          Top = 4
           Width = 120
-          Height = 67
+          Height = 61
           Align = alLeft
           Caption = 'Imprimir'
+          Enabled = False
           ImageIndex = 4
           Images = ImageList1
           TabOrder = 3
+          ExplicitLeft = 361
+          ExplicitTop = 1
+          ExplicitHeight = 67
         end
         object btnSair: TButton
-          Left = 680
-          Top = 1
+          AlignWithMargins = True
+          Left = 677
+          Top = 4
           Width = 120
-          Height = 67
+          Height = 61
           Align = alRight
           Caption = 'SAIR'
           ImageIndex = 3
@@ -244,6 +266,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           TabOrder = 4
           OnClick = btnSairClick
           ExplicitLeft = 676
+          ExplicitTop = 1
+          ExplicitHeight = 67
         end
       end
       object pnlGrid: TPanel

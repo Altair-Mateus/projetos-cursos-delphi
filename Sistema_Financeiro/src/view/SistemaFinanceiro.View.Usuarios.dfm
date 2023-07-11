@@ -1,12 +1,15 @@
 inherited frmUsuarios: TfrmUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
+  ClientHeight = 511
   ClientWidth = 815
-  ExplicitTop = -97
   ExplicitWidth = 827
+  ExplicitHeight = 549
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
+    Height = 511
     ExplicitWidth = 811
+    ExplicitHeight = 510
     inherited CardCadastro: TCard
       Width = 813
       ExplicitWidth = 813
@@ -101,17 +104,17 @@ inherited frmUsuarios: TfrmUsuarios
       inherited PanelTitulo: TPanel
         Width = 813
         ExplicitWidth = 813
-        inherited Labeltitulo: TLabel
+        inherited lblTitulo: TLabel
           Width = 211
           Caption = 'Inserindo um novo usu'#225'rio'
-          Color = 5934638
           ExplicitWidth = 211
         end
       end
     end
     inherited CardPesquisa: TCard
       Width = 813
-      ExplicitWidth = 809
+      Height = 509
+      ExplicitWidth = 813
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0
@@ -126,25 +129,26 @@ inherited frmUsuarios: TfrmUsuarios
         end
       end
       inherited pnlBotoes: TPanel
+        Top = 440
         Width = 813
-        ExplicitWidth = 809
+        ExplicitWidth = 813
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
-          Left = 692
-          ExplicitLeft = 688
+          Left = 689
+          ExplicitLeft = 685
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
-        ExplicitWidth = 809
+        Height = 359
+        ExplicitWidth = 813
         inherited DBGrid1: TDBGrid
           Width = 811
           Margins.Top = 0
           DataSource = DataSourceUsuarios
           PopupMenu = PopupMenu
-          OnDblClick = DBGrid1DblClick
           Columns = <
             item
               Expanded = False

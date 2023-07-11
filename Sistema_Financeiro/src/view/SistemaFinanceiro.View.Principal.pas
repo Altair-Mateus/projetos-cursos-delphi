@@ -203,7 +203,7 @@ begin
 
   end;
 
-  //  Cria o Form do splash
+  //  Cria o Form do Login
   frmLogin := TfrmLogin.Create(Self);
 
   try

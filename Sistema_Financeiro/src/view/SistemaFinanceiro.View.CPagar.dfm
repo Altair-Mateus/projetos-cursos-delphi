@@ -1,36 +1,38 @@
 inherited frmContasPagar: TfrmContasPagar
-  Left = -44
-  Top = -30
   Caption = 'Contas a Pagar'
-  ClientHeight = 647
+  ClientHeight = 656
   ClientWidth = 1045
   Position = poDesigned
   WindowState = wsMaximized
   ExplicitWidth = 1057
-  ExplicitHeight = 685
+  ExplicitHeight = 694
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1045
-    Height = 647
+    Height = 656
     ActiveCard = CardCadastro
     ExplicitWidth = 1041
-    ExplicitHeight = 780
+    ExplicitHeight = 646
     inherited CardCadastro: TCard
       Width = 1043
-      Height = 645
+      Height = 654
       ExplicitWidth = 1039
-      ExplicitHeight = 778
+      ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
-        Top = 576
+        Top = 585
         Width = 1043
-        ExplicitTop = 709
+        ExplicitTop = 575
         ExplicitWidth = 1039
+        inherited btnSalvar: TButton
+          OnClick = btnSalvarClick
+        end
       end
       inherited PanelCampos: TPanel
         Width = 1043
-        Height = 535
-        ExplicitWidth = 1039
-        ExplicitHeight = 668
+        Height = 544
+        ExplicitLeft = -16
+        ExplicitWidth = 1043
+        ExplicitHeight = 544
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -103,6 +105,7 @@ inherited frmContasPagar: TfrmContasPagar
           StateCaptions.CaptionOff = 'N'#227'o'
           TabOrder = 3
           ThumbColor = 5737262
+          OnClick = toggleParcelamentoClick
         end
         object CardPanelParcela: TCardPanel
           Left = 40
@@ -158,7 +161,7 @@ inherited frmContasPagar: TfrmContasPagar
               MaxLength = 20
               TabOrder = 0
             end
-            object Edit1: TEdit
+            object edtParcela: TEdit
               Left = 225
               Top = 25
               Width = 185
@@ -167,7 +170,7 @@ inherited frmContasPagar: TfrmContasPagar
               MaxLength = 20
               TabOrder = 1
             end
-            object Edit3: TEdit
+            object edtValorParcela: TEdit
               Left = 0
               Top = 102
               Width = 185
@@ -194,30 +197,30 @@ inherited frmContasPagar: TfrmContasPagar
             Caption = 'cardParcelamento'
             CardIndex = 1
             TabOrder = 1
-            object Label1: TLabel
+            object lblQtdParcelas: TLabel
               Left = 4
               Top = 7
-              Width = 144
+              Width = 165
               Height = 19
-              Caption = 'Valor da Compra R$'
+              Caption = 'Quantidade de Parcelas'
             end
-            object Label2: TLabel
+            object lblIntervaloDias: TLabel
               Left = 217
               Top = 7
-              Width = 144
+              Width = 125
               Height = 19
-              Caption = 'Valor da Compra R$'
+              Caption = 'Intervalo em Dias'
             end
-            object Edit2: TEdit
+            object edtQtdParcelas: TEdit
               Left = 4
               Top = 32
-              Width = 185
+              Width = 183
               Height = 27
               Color = clWhite
               MaxLength = 20
               TabOrder = 0
             end
-            object Edit4: TEdit
+            object edtIntervaloDias: TEdit
               Left = 217
               Top = 32
               Width = 185
@@ -251,6 +254,8 @@ inherited frmContasPagar: TfrmContasPagar
               Top = 96
               Width = 704
               Height = 129
+              Color = clCream
+              FixedColor = clCream
               TabOrder = 4
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
@@ -264,13 +269,17 @@ inherited frmContasPagar: TfrmContasPagar
       inherited PanelTitulo: TPanel
         Width = 1043
         ExplicitWidth = 1039
+        inherited lblTitulo: TLabel
+          Left = 23
+          ExplicitLeft = 23
+        end
       end
     end
     inherited CardPesquisa: TCard
       Width = 1043
-      Height = 645
+      Height = 654
       ExplicitWidth = 1043
-      ExplicitHeight = 779
+      ExplicitHeight = 645
       inherited pnlPesquisa: TPanel
         Width = 1043
         ExplicitWidth = 1043
@@ -281,26 +290,46 @@ inherited frmContasPagar: TfrmContasPagar
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 576
+        Top = 585
         Width = 1043
-        ExplicitTop = 710
+        ExplicitTop = 576
         ExplicitWidth = 1043
+        inherited btnIncluir: TButton
+          ExplicitLeft = 4
+          ExplicitTop = 4
+          ExplicitHeight = 61
+        end
+        inherited btnAlterar: TButton
+          ExplicitLeft = 130
+          ExplicitTop = 4
+          ExplicitHeight = 61
+        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
+          ExplicitLeft = 256
+          ExplicitTop = 4
+          ExplicitHeight = 61
+        end
+        inherited btnImprimir: TButton
+          ExplicitLeft = 382
+          ExplicitTop = 4
+          ExplicitHeight = 61
         end
         inherited btnSair: TButton
-          Left = 922
-          ExplicitLeft = 922
+          Left = 919
+          ExplicitLeft = 919
+          ExplicitTop = 4
+          ExplicitHeight = 61
         end
       end
       inherited pnlGrid: TPanel
         Width = 1043
-        Height = 495
+        Height = 504
         ExplicitWidth = 1043
-        ExplicitHeight = 629
+        ExplicitHeight = 495
         inherited DBGrid1: TDBGrid
           Width = 1041
-          Height = 493
+          Height = 502
           DataSource = DataSourceCPagar
           Columns = <
             item
