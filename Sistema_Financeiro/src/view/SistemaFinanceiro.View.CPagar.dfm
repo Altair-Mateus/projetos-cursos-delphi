@@ -12,16 +12,16 @@ inherited frmContasPagar: TfrmContasPagar
     Height = 656
     ActiveCard = CardCadastro
     ExplicitWidth = 1041
-    ExplicitHeight = 646
+    ExplicitHeight = 655
     inherited CardCadastro: TCard
       Width = 1043
       Height = 654
       ExplicitWidth = 1039
-      ExplicitHeight = 644
+      ExplicitHeight = 653
       inherited pnlBotoesCad: TPanel
         Top = 585
         Width = 1043
-        ExplicitTop = 575
+        ExplicitTop = 584
         ExplicitWidth = 1039
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
@@ -30,9 +30,8 @@ inherited frmContasPagar: TfrmContasPagar
       inherited PanelCampos: TPanel
         Width = 1043
         Height = 544
-        ExplicitLeft = -16
-        ExplicitWidth = 1043
-        ExplicitHeight = 544
+        ExplicitWidth = 1039
+        ExplicitHeight = 543
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -84,7 +83,7 @@ inherited frmContasPagar: TfrmContasPagar
           Width = 185
           Height = 27
           Color = clWhite
-          MaxLength = 20
+          MaxLength = 16
           TabOrder = 2
         end
         object toggleParcelamento: TToggleSwitch
@@ -167,7 +166,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 185
               Height = 27
               Color = clWhite
-              MaxLength = 20
+              MaxLength = 10
               TabOrder = 1
             end
             object edtValorParcela: TEdit
@@ -176,7 +175,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 185
               Height = 27
               Color = clWhite
-              MaxLength = 20
+              MaxLength = 16
               TabOrder = 2
             end
             object dateVencimento: TDateTimePicker
@@ -217,7 +216,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 183
               Height = 27
               Color = clWhite
-              MaxLength = 20
+              MaxLength = 10
               TabOrder = 0
             end
             object edtIntervaloDias: TEdit
@@ -226,7 +225,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 185
               Height = 27
               Color = clWhite
-              MaxLength = 20
+              MaxLength = 10
               TabOrder = 1
             end
             object btnGerar: TButton
@@ -238,6 +237,7 @@ inherited frmContasPagar: TfrmContasPagar
               ImageIndex = 7
               Images = ImageList1
               TabOrder = 2
+              OnClick = btnGerarClick
             end
             object btnLimpar: TButton
               Left = 608
@@ -255,6 +255,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 704
               Height = 129
               Color = clCream
+              DataSource = dsParcelas
               FixedColor = clCream
               TabOrder = 4
               TitleFont.Charset = DEFAULT_CHARSET
@@ -262,6 +263,32 @@ inherited frmContasPagar: TfrmContasPagar
               TitleFont.Height = -16
               TitleFont.Name = 'Tahoma'
               TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'PARCELA'
+                  Title.Caption = 'Parcela'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VENCIMENTO'
+                  Title.Caption = 'Vencimento'
+                  Width = 113
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DOCUMENTO'
+                  Title.Caption = 'N'#186' Documento'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VALOR'
+                  Title.Caption = 'Valor R$'
+                  Visible = True
+                end>
             end
           end
         end
@@ -279,7 +306,7 @@ inherited frmContasPagar: TfrmContasPagar
       Width = 1043
       Height = 654
       ExplicitWidth = 1043
-      ExplicitHeight = 645
+      ExplicitHeight = 654
       inherited pnlPesquisa: TPanel
         Width = 1043
         ExplicitWidth = 1043
@@ -292,7 +319,7 @@ inherited frmContasPagar: TfrmContasPagar
       inherited pnlBotoes: TPanel
         Top = 585
         Width = 1043
-        ExplicitTop = 576
+        ExplicitTop = 585
         ExplicitWidth = 1043
         inherited btnIncluir: TButton
           ExplicitLeft = 4
@@ -326,7 +353,7 @@ inherited frmContasPagar: TfrmContasPagar
         Width = 1043
         Height = 504
         ExplicitWidth = 1043
-        ExplicitHeight = 495
+        ExplicitHeight = 504
         inherited DBGrid1: TDBGrid
           Width = 1041
           Height = 502
@@ -362,6 +389,7 @@ inherited frmContasPagar: TfrmContasPagar
               Expanded = False
               FieldName = 'STATUS'
               Title.Caption = 'Status'
+              Width = 64
               Visible = True
             end
             item
@@ -2014,5 +2042,37 @@ inherited frmContasPagar: TfrmContasPagar
     DataSet = DataModuleCPagar.ClientDataSetCPagar
     Left = 680
     Top = 256
+  end
+  object cdsParcelas: TClientDataSet
+    PersistDataPacket.Data = {
+      7D0000009619E0BD0100000018000000040000000000030000007D0007504152
+      43454C4104000100000000000556414C4F520800040000000100075355425459
+      50450200490006004D6F6E6579000A56454E43494D454E544F04000600000000
+      0009444F43554D454E544F01004A000000010005574944544802000200280000
+      00}
+    Active = True
+    Aggregates = <>
+    IndexFieldNames = 'Parcela'
+    Params = <>
+    Left = 905
+    Top = 378
+    object cdsParcelasPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+    end
+    object cdsParcelasVALOR: TCurrencyField
+      FieldName = 'VALOR'
+      DisplayFormat = '#,##0.00'
+    end
+    object cdsParcelasVENCIMENTO: TDateField
+      FieldName = 'VENCIMENTO'
+    end
+    object cdsParcelasDOCUMENTO: TWideStringField
+      FieldName = 'DOCUMENTO'
+    end
+  end
+  object dsParcelas: TDataSource
+    DataSet = cdsParcelas
+    Left = 913
+    Top = 450
   end
 end

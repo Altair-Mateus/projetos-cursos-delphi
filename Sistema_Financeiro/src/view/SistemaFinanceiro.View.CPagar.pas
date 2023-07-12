@@ -3,10 +3,10 @@ unit SistemaFinanceiro.View.CPagar;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils;
 
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
@@ -37,14 +37,20 @@ type
     btnGerar: TButton;
     btnLimpar: TButton;
     DBGridParcelas: TDBGrid;
+    cdsParcelas: TClientDataSet;
+    dsParcelas: TDataSource;
+    cdsParcelasPARCELA: TIntegerField;
+    cdsParcelasVALOR: TCurrencyField;
+    cdsParcelasVENCIMENTO: TDateField;
+    cdsParcelasDOCUMENTO: TWideStringField;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure toggleParcelamentoClick(Sender: TObject);
+    procedure btnGerarClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -67,7 +73,8 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Utilitarios;
+uses SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Utilitarios,
+  System.DateUtils;
 
 { TfrmCadastroPadrao1 }
 
@@ -123,12 +130,94 @@ begin
   try
 
     //  Excluindo registro
-    DataModuleCPagar.ClientDataSetCPagar.Delete;
+//    DataModuleCPagar.ClientDataSetCPagar.Delete;
+
+    DataModuleCPagar.ClientDataSetCPagar.Edit;
+    DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString := 'C';
+    DataModuleCPagar.ClientDataSetCPagar.Post;
     DataModuleCPagar.ClientDataSetCPagar.ApplyUpdates(0);
+
+    Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+    Pesquisar;
 
   except on E: Exception do
 
-    Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir registro!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWidechar(E.Message), 'Erro ao cancelar documento!', MB_OK + MB_ICONERROR);
+
+  end;
+
+
+end;
+
+procedure TfrmContasPagar.btnGerarClick(Sender: TObject);
+var
+  QtdParcelas   : Integer;
+  IntervaloDias : Integer;
+  ValorCompra   : Currency;
+  ValorParcela  : Currency;
+  ValorResiduo  : Currency;
+  Contador      : Integer;
+
+begin
+
+  //  Valida campos
+  if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
+  begin
+
+    edtValorCompra.SetFocus;
+    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
+  begin
+
+    edtParcela.SetFocus;
+    Application.MessageBox('Números de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
+  begin
+
+    edtIntervaloDias.SetFocus;
+    Application.MessageBox('Intervalo de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+
+  //  Calculando valores das parcelas
+  //  Trunca o valor final das parcelas
+  ValorParcela := (Trunc(ValorCompra / QtdParcelas * 100)) / 100;
+
+  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
+  ValorResiduo := ValorCompra - (ValorParcela * QtdParcelas);
+
+
+  //  Esvaziando data set
+  cdsParcelas.EmptyDataSet;
+
+  for Contador := 1 to QtdParcelas do
+  begin
+
+    cdsParcelas.Insert;
+    cdsParcelasPARCELA.AsInteger := Contador;
+
+    //  Adiciona o valor do residuo na primeira parcela
+    cdsParcelasVALOR.AsCurrency  := ValorParcela + ValorResiduo;
+    ValorResiduo := 0;  //  Zera o valor de residuo
+
+    //  Define a data de vencimento
+    cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+
+    cdsParcelas.Post;
 
   end;
 
@@ -168,6 +257,30 @@ begin
 end;
 
 procedure TfrmContasPagar.btnSalvarClick(Sender: TObject);
+begin
+
+  if toggleParcelamento.State = tssOff then
+  begin
+
+    CadParcelaUnica;
+
+  end
+    else
+    begin
+      CadParcelamento;
+    end;
+
+  //  Retorna ao card de pesquisa
+  CardPanelParcela.ActiveCard := CardPesquisa;
+
+  //  Atualiza a lista
+  Pesquisar;
+
+  inherited;
+
+end;
+
+procedure TfrmContasPagar.CadParcelamento;
 var
   Parcela : Integer;
   ValorCompra : Currency;
@@ -213,17 +326,89 @@ begin
 
   end;
 
-  inherited;
-
-end;
-
-procedure TfrmContasPagar.CadParcelamento;
-begin
-
 end;
 
 procedure TfrmContasPagar.CadParcelaUnica;
+var
+  Parcela : Integer;
+  ValorCompra : Currency;
+  ValorParcela : Currency;
+
 begin
+
+  //  Valida campos obrigatorios
+  if Trim(memDesc.Text) = '' then
+  begin
+
+    Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    memDesc.SetFocus;
+
+    abort;
+  end;
+
+  if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
+  begin
+
+    edtValorCompra.SetFocus;
+    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+  end;
+
+  if not TryStrToInt(edtParcela.Text, Parcela) then
+  begin
+
+    edtParcela.SetFocus;
+    Application.MessageBox('Número da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+  end;
+
+  if dateVencimento.Date < dateCompra.Date then
+  begin
+
+    dateVencimento.SetFocus;
+    Application.MessageBox('Data de vencimento não pode ser inferior a data de compra!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  if not TryStrToCurr(edtValorParcela.Text, ValorParcela) then
+  begin
+
+    edtValorParcela.SetFocus;
+    Application.MessageBox('Valor da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+  end;
+
+
+  //  Se for um novo registro irá gerar o código, status em aberto
+  //  e setar 0 no valor abatido
+  if DataSourceCPagar.State in [dsInsert] then
+  begin
+
+    DataModuleCPagar.GeraCodigo;
+    DataModuleCPagar.ClientDataSetCPagarDATA_CADASTRO.AsDateTime := now;
+    DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString          := 'A';
+    DataModuleCPagar.ClientDataSetCPagarVALOR_ABATIDO.AsCurrency := 0;
+
+  end;
+
+  //  Passando os dados para o dataset
+  DataModuleCPagar.ClientDataSetCPagarNUMERO_DOC.AsString        := Trim(edtNDoc.Text);
+  DataModuleCPagar.ClientDataSetCPagarDESCRICAO.AsString         := Trim(memDesc.Text);
+  DataModuleCPagar.ClientDataSetCPagarVALOR_COMPRA.AsCurrency    := ValorCompra;
+  DataModuleCPagar.ClientDataSetCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
+  DataModuleCPagar.ClientDataSetCPagarPARCELA.AsCurrency         := Parcela;
+  DataModuleCPagar.ClientDataSetCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
+  DataModuleCPagar.ClientDataSetCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+
+  //  Gravando no BD
+  DataModuleCPagar.ClientDataSetCPagar.Post;
+  DataModuleCPagar.ClientDataSetCPagar.ApplyUpdates(0);
+
 
 end;
 
@@ -256,22 +441,14 @@ begin
   lblTitulo.Caption := 'Alterando Registro Nº ' + DataModuleCPagar.ClientDataSetCPagarID.AsString;
 
   //  Carrega os dados
-  edtNDoc.Text := DataModuleCPagar.ClientDataSetCPagarNUMERO_DOC.AsString;
-  memDesc.Text := DataModuleCPagar.ClientDataSetCPagarDESCRICAO.AsString;
-  edtValorCompra.Text := DataModuleCPagar.ClientDataSetCPagarVALOR_COMPRA.AsString;
-  edtParcela.Text := DataModuleCPagar.ClientDataSetCPagarPARCELA.AsString;
+  edtNDoc.Text         := DataModuleCPagar.ClientDataSetCPagarNUMERO_DOC.AsString;
+  memDesc.Text         := DataModuleCPagar.ClientDataSetCPagarDESCRICAO.AsString;
+  edtValorCompra.Text  := DataModuleCPagar.ClientDataSetCPagarVALOR_COMPRA.AsString;
+  edtParcela.Text      := DataModuleCPagar.ClientDataSetCPagarPARCELA.AsString;
   edtValorParcela.Text := DataModuleCPagar.ClientDataSetCPagarVALOR_PARCELA.AsString;
-  dateVencimento.Date := DataModuleCPagar.ClientDataSetCPagarDATA_VENCIMENTO.AsDateTime;
-  dateCompra.Date := DataModuleCPagar.ClientDataSetCPagarDATA_COMPRA.AsDateTime;
+  dateVencimento.Date  := DataModuleCPagar.ClientDataSetCPagarDATA_VENCIMENTO.AsDateTime;
+  dateCompra.Date      := DataModuleCPagar.ClientDataSetCPagarDATA_COMPRA.AsDateTime;
 
-
-end;
-
-procedure TfrmContasPagar.FormCreate(Sender: TObject);
-begin
-  inherited;
-
-  CardPanelParcela.ActiveCard := cardParcelaUnica;
 
 end;
 

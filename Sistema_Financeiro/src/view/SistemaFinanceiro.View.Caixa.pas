@@ -119,6 +119,8 @@ begin
 
   end;
 
+  //  Coloca a data atual no datetimepicker
+  DateTimePicker.Date := now;
   edtNDoc.SetFocus;
 
 end;
@@ -139,10 +141,10 @@ begin
   ValidaCampos;
 
   //  Passando os dados para o dataset
-  DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime := DateTimePicker.DateTime;
-  DataModuleCaixa.ClientDataSetCaixavalor.AsFloat := StrToFloat(Trim(edtValor.text));
-  DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString := Trim(edtNDoc.text);
-  DataModuleCaixa.ClientDataSetCaixadescricao.AsString := Trim(memDesc.text);
+  DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime := DateTimePicker.Date;
+  DataModuleCaixa.ClientDataSetCaixavalor.AsFloat            := StrToFloat(Trim(edtValor.text));
+  DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString      := Trim(edtNDoc.text);
+  DataModuleCaixa.ClientDataSetCaixadescricao.AsString       := Trim(memDesc.text);
 
   if RadioGroup.ItemIndex = 0 then
   begin
@@ -162,9 +164,6 @@ begin
 
     DataModuleCaixa.GeraCodigo;
 
-    //  Coloca a data atual no datetimepicker
-    DateTimePicker.Date := now;
-
   end;
 
 
@@ -175,7 +174,7 @@ begin
   //  Retorna ao cardPesquisa;
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
-  //  Atualiza a lista por ordem de usuario
+  //  Atualiza a lista
   Pesquisar;
 
   inherited;
