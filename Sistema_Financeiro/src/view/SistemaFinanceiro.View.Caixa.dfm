@@ -193,32 +193,12 @@ inherited frmCaixa: TfrmCaixa
         Width = 1106
         ExplicitTop = 544
         ExplicitWidth = 1102
-        inherited btnIncluir: TButton
-          ExplicitLeft = 4
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
-        inherited btnAlterar: TButton
-          ExplicitLeft = 130
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
-          ExplicitLeft = 256
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
-        inherited btnImprimir: TButton
-          ExplicitLeft = 382
-          ExplicitTop = 4
-          ExplicitHeight = 61
         end
         inherited btnSair: TButton
           Left = 982
           ExplicitLeft = 978
-          ExplicitTop = 4
-          ExplicitHeight = 61
         end
       end
       inherited pnlGrid: TPanel

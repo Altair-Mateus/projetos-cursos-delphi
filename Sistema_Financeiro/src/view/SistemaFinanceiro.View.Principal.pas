@@ -34,6 +34,12 @@ type
     ContasaPagar1: TMenuItem;
     N1: TMenuItem;
     ContasaReceber1: TMenuItem;
+    pnlSaldoParcial: TPanel;
+    lblSaldoParcial: TLabel;
+    lblValor: TLabel;
+    lblAviso: TLabel;
+    imgLucro: TImage;
+    imgPerda: TImage;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
@@ -43,6 +49,7 @@ type
     procedure SaldodoCaixa1Click(Sender: TObject);
     procedure btnCPClick(Sender: TObject);
     procedure ContasaPagar1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     procedure ExibeTelaUsuario;
@@ -50,6 +57,7 @@ type
     procedure ExibeTelaCReceber;
     procedure ExibeTelaCaixa;
     procedure ExibeTelaSaldoCaixa;
+    procedure ResumoMensalCaixa;
 
   public
     { Public declarations }
@@ -62,7 +70,12 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmUsuarios;
+uses
+
+  SistemaFinanceiro.Model.dmUsuarios,
+  SistemaFinanceiro.Model.dmCaixa,
+  System.DateUtils, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
+  SistemaFinanceiro.Utilitarios;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
@@ -221,6 +234,7 @@ begin
 
   finally
 
+
     //  Libera da memoria
     FreeAndNil(frmLogin);
 
@@ -256,6 +270,25 @@ begin
 
   //  Mostra o Usuario logado
   lblUserLogado.Caption := DataModuleUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
+
+
+  ResumoMensalCaixa;
+
+  KeyPreview := True;
+
+end;
+
+procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ if Key = VK_F5 then
+  begin
+
+    //  Atualiza os valores da tela inicial
+    ResumoMensalCaixa;
+
+  end;
+
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
@@ -269,6 +302,23 @@ procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);
 begin
 
   ExibeTelaUsuario;
+
+end;
+
+procedure TfrmPrincipal.ResumoMensalCaixa;
+var
+  ResumoCaixa : TModelResumoCaixa;
+  DataInicial : TDateTime;
+  DataFinal   : TDateTime;
+
+begin
+
+  DataInicial := StartOfTheMonth(Now);
+  DataFinal   := EndOfTheMonth(Now);
+
+  ResumoCaixa := DataModuleCaixa.ResumoCaixa(DataInicial, DataFinal);
+
+  lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
 
 end;
 
