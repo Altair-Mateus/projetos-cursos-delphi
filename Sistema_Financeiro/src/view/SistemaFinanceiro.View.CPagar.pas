@@ -54,6 +54,10 @@ type
     procedure toggleParcelamentoClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure edtValorCompraExit(Sender: TObject);
+    procedure edtValorParcelaExit(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -195,7 +199,7 @@ begin
 
   //  Calculando valores das parcelas
   //  Trunca o valor final das parcelas
-  ValorParcela := (Trunc(ValorCompra / QtdParcelas * 100)) / 100;
+  ValorParcela := (Trunc(ValorCompra / QtdParcelas * 100) / 100);
 
   //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
   ValorResiduo := ValorCompra - (ValorParcela * QtdParcelas);
@@ -228,8 +232,6 @@ procedure TfrmContasPagar.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
-  
-
   lblTitulo.Caption := 'Inserindo um novo lançamento no Contas a Pagar';
 
   if not (dmCPagar.cdsCPagar.State in [dsInsert, dsEdit]) then
@@ -249,7 +251,17 @@ begin
   dateVencimento.Date := now + 7;
 
   toggleParcelamento.State := tssOff;
+  toggleParcelamento.Enabled := True;
   edtParcela.Text := '1';
+
+  //  Esvaziando data set de parcelas
+  cdsParcelas.EmptyDataSet;
+
+end;
+
+procedure TfrmContasPagar.btnLimparClick(Sender: TObject);
+begin
+  inherited;
 
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
@@ -381,6 +393,21 @@ var
 
 begin
 
+  //  Se for um novo registro irá gerar o código, status em aberto
+  //  e setar 0 no valor abatido
+  if DataSourceCPagar.State in [dsInsert] then
+  begin
+
+    dmCPagar.GeraCodigo;
+    dmCPagar.cdsCPagarDATA_CADASTRO.AsDateTime := now;
+    dmCPagar.cdsCPagarSTATUS.AsString          := 'A';
+    dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
+
+    //  Se for parcela unica pega o mesmo valor da compra
+    edtValorParcela.Text := edtValorCompra.Text;
+
+  end;
+
   //  Valida campos obrigatorios
   if Trim(memDesc.Text) = '' then
   begin
@@ -428,18 +455,6 @@ begin
     abort;
   end;
 
-
-  //  Se for um novo registro irá gerar o código, status em aberto
-  //  e setar 0 no valor abatido
-  if DataSourceCPagar.State in [dsInsert] then
-  begin
-
-    dmCPagar.GeraCodigo;
-    dmCPagar.cdsCPagarDATA_CADASTRO.AsDateTime := now;
-    dmCPagar.cdsCPagarSTATUS.AsString          := 'A';
-    dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
-
-  end;
 
   //  Passando os dados para o dataset
   dmCPagar.cdsCPagarNUMERO_DOC.AsString        := Trim(edtNDoc.Text);
@@ -500,15 +515,45 @@ begin
   // Coloca o numero do registro no titulo
   lblTitulo.Caption := 'Alterando Registro Nº ' + dmCPagar.cdsCPagarID.AsString;
 
+  //  Bloqueia o toogle
+  toggleParcelamento.Enabled  := False;
+  toggleParcelamento.State    := tssOff;
+  CardPanelParcela.ActiveCard := cardParcelaUnica;
+
   //  Carrega os dados
   edtNDoc.Text         := dmCPagar.cdsCPagarNUMERO_DOC.AsString;
   memDesc.Text         := dmCPagar.cdsCPagarDESCRICAO.AsString;
-  edtValorCompra.Text  := dmCPagar.cdsCPagarVALOR_COMPRA.AsString;
+  edtValorCompra.Text  := TUtilitario.FormatarValor(dmCPagar.cdsCPagarVALOR_COMPRA.AsCurrency);
   edtParcela.Text      := dmCPagar.cdsCPagarPARCELA.AsString;
-  edtValorParcela.Text := dmCPagar.cdsCPagarVALOR_PARCELA.AsString;
+  edtValorParcela.Text := TUtilitario.FormatarValor(dmCPagar.cdsCPagarVALOR_PARCELA.AsString);
   dateVencimento.Date  := dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime;
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
 
+
+end;
+
+procedure TfrmContasPagar.edtValorCompraExit(Sender: TObject);
+begin
+  inherited;
+
+  edtValorCompra.Text := TUtilitario.FormatarValor(edtValorCompra.Text);
+
+end;
+
+procedure TfrmContasPagar.edtValorParcelaExit(Sender: TObject);
+begin
+  inherited;
+
+  edtValorParcela.Text := TUtilitario.FormatarValor(edtValorParcela.Text);
+
+end;
+
+procedure TfrmContasPagar.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  edtValorCompra.OnKeyPress  := TUtilitario.KeyPressValor;
+  edtValorParcela.OnKeyPress := TUtilitario.KeyPressValor;
 
 end;
 

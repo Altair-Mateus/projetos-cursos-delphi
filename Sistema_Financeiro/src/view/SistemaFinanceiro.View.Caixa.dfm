@@ -9,6 +9,7 @@ inherited frmCaixa: TfrmCaixa
   inherited CardPanelPrincipal: TCardPanel
     Width = 1108
     Height = 616
+    ActiveCard = CardCadastro
     ExplicitWidth = 1104
     ExplicitHeight = 615
     inherited CardCadastro: TCard
@@ -103,6 +104,7 @@ inherited frmCaixa: TfrmCaixa
           Color = clWhite
           MaxLength = 16
           TabOrder = 1
+          OnExit = edtValorExit
         end
         object RadioGroup: TRadioGroup
           Left = 40

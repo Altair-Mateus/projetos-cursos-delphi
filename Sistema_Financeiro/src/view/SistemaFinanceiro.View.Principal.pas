@@ -40,6 +40,7 @@ type
     lblAviso: TLabel;
     imgLucro: TImage;
     imgPerda: TImage;
+    lblData: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
@@ -319,6 +320,23 @@ begin
   ResumoCaixa := DataModuleCaixa.ResumoCaixa(DataInicial, DataFinal);
 
   lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
+
+  if ResumoCaixa.SaldoParcial >= 0 then
+  begin
+
+    imgLucro.Visible := True;
+    imgPerda.Visible := False;
+    pnlSaldoParcial.Color :=  $006FE76E;
+
+  end
+    else
+    begin
+
+      imgLucro.Visible := False;
+      imgPerda.Visible := True;
+      pnlSaldoParcial.Color :=  $003838F7;
+
+    end;
 
 end;
 

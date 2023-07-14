@@ -31,6 +31,8 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure edtValorExit(Sender: TObject);
   private
     { Private declarations }
 
@@ -216,6 +218,22 @@ begin
       RadioGroup.ItemIndex := 1;
 
     end;
+
+end;
+
+procedure TfrmCaixa.edtValorExit(Sender: TObject);
+begin
+  inherited;
+
+   edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
+
+end;
+
+procedure TfrmCaixa.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  edtValor.OnKeyPress := TUtilitario.KeyPressValor;
 
 end;
 

@@ -68,9 +68,9 @@ object frmPrincipal: TfrmPrincipal
         ExplicitTop = 0
       end
       object lblValor: TLabel
-        Left = 88
+        Left = 120
         Top = 73
-        Width = 169
+        Width = 157
         Height = 49
         Margins.Top = 150
         Margins.Bottom = 10
@@ -108,8 +108,8 @@ object frmPrincipal: TfrmPrincipal
         ExplicitWidth = 130
       end
       object imgLucro: TImage
-        Left = 38
-        Top = 56
+        Left = 22
+        Top = 49
         Width = 80
         Height = 80
         Picture.Data = {
@@ -1278,8 +1278,8 @@ object frmPrincipal: TfrmPrincipal
         Visible = False
       end
       object imgPerda: TImage
-        Left = 38
-        Top = 56
+        Left = 22
+        Top = 49
         Width = 80
         Height = 80
         Picture.Data = {
@@ -2520,6 +2520,24 @@ object frmPrincipal: TfrmPrincipal
           E8C6BEFD06DDA0BF31FD3FB12185391091DCB40000000049454E44AE426082}
         Stretch = True
         Visible = False
+      end
+      object lblData: TLabel
+        AlignWithMargins = True
+        Left = 150
+        Top = 41
+        Width = 139
+        Height = 13
+        Margins.Top = 15
+        Alignment = taRightJustify
+        Caption = '1'#186' ao '#218'ltimo dia do m'#234's atual'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
       end
     end
   end

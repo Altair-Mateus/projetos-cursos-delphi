@@ -11,15 +11,47 @@ type
     class function GetId : String;
     class function LikeFind(Pesquisa: String; Grid: TDBGrid) : String;
     class function FormatoMoeda(Valor: Currency) : String;
+    class function FormatarValor(Valor: Currency; Decimais : Integer = 2) : string; overload;
+    class function FormatarValor(Valor: String; Decimais : Integer = 2) : string; overload;
+    class function TruncarValor(Valor: Currency; Decimais : Integer = 2) : Currency;
+
+    class procedure KeyPressValor(Sender: TObject; var Key: Char);
 
   end;
 
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils,
+  System.Math,
+  Vcl.StdCtrls;
 
 { TUtilitario }
+
+class function TUtilitario.FormatarValor(Valor: Currency;
+  Decimais: Integer): string;
+begin
+
+  Valor := TruncarValor(Valor, Decimais);
+
+  Result := FormatCurr('0.' + StringOfChar('0', Decimais), Valor);
+
+end;
+
+class function TUtilitario.FormatarValor(Valor: String;
+  Decimais: Integer): string;
+var
+  LValor : Currency;
+
+begin
+
+  LValor :=0;
+
+  TryStrToCurr(Valor, Lvalor);
+
+  Result := FormatarValor(LValor, Decimais);
+
+end;
 
 class function TUtilitario.FormatoMoeda(Valor: Currency): String;
 begin
@@ -32,6 +64,30 @@ begin
 
   Result := TGUID.NewGuid.ToString;
 
+end;
+
+class procedure TUtilitario.KeyPressValor(Sender: TObject; var Key: Char);
+begin
+
+  //  Se for digitado um ponto, será convertido para virgula
+  if Key = FormatSettings.ThousandSeparator then
+   begin
+      Key := #0;
+    end;
+
+
+  // Permite apenas digitar os caracteres dentro do charinset
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8])) then
+  begin
+    Key := #0;
+  end;
+
+
+  // Valida se já existe o ponto decimal
+  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
+  begin
+    Key := #0;
+  end;
 end;
 
 class function TUtilitario.LikeFind(Pesquisa: String; Grid: TDBGrid): String;
@@ -62,6 +118,19 @@ begin
   end;
 
   Result := ' AND (' + Copy(Result, 1, Length(Result) - 4) + ')';
+
+end;
+
+class function TUtilitario.TruncarValor(Valor: Currency;
+  Decimais: Integer): Currency;
+var
+  LFator: Double;
+
+begin
+
+  LFator := Power(10, Decimais);
+
+  Result := Trunc(Valor * LFator) / LFator;
 
 end;
 
