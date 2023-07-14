@@ -200,9 +200,6 @@ begin
       TRadioGroup(Components[Contador]).ItemIndex := -1;
     end;
 
-
-
-
   end;
 
 

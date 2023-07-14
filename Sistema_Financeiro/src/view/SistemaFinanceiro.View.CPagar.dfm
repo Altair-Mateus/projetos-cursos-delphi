@@ -4,13 +4,14 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1045
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitLeft = -284
+  ExplicitTop = 1
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1045
     Height = 656
-    ActiveCard = CardCadastro
     ExplicitWidth = 1041
     ExplicitHeight = 655
     inherited CardCadastro: TCard
@@ -40,7 +41,7 @@ inherited frmContasPagar: TfrmContasPagar
           Caption = 'Descri'#231#227'o'
         end
         object lblDataCompra: TLabel
-          Left = 257
+          Left = 249
           Top = 159
           Width = 120
           Height = 19
@@ -75,7 +76,7 @@ inherited frmContasPagar: TfrmContasPagar
           Height = 27
           Date = 45099.000000000000000000
           Time = 0.866143263890990100
-          TabOrder = 1
+          TabOrder = 2
         end
         object edtValorCompra: TEdit
           Left = 42
@@ -84,7 +85,7 @@ inherited frmContasPagar: TfrmContasPagar
           Height = 27
           Color = clWhite
           MaxLength = 16
-          TabOrder = 2
+          TabOrder = 1
         end
         object toggleParcelamento: TToggleSwitch
           Left = 168
@@ -111,7 +112,7 @@ inherited frmContasPagar: TfrmContasPagar
           Top = 296
           Width = 793
           Height = 249
-          ActiveCard = cardParcelamento
+          ActiveCard = cardParcelaUnica
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 4
@@ -250,7 +251,7 @@ inherited frmContasPagar: TfrmContasPagar
               TabOrder = 3
             end
             object DBGridParcelas: TDBGrid
-              Left = 4
+              Left = 2
               Top = 96
               Width = 704
               Height = 129
@@ -272,15 +273,16 @@ inherited frmContasPagar: TfrmContasPagar
                 end
                 item
                   Expanded = False
-                  FieldName = 'VENCIMENTO'
-                  Title.Caption = 'Vencimento'
+                  FieldName = 'DOCUMENTO'
+                  Title.Caption = 'Documento'
                   Width = 113
                   Visible = True
                 end
                 item
                   Expanded = False
-                  FieldName = 'DOCUMENTO'
-                  Title.Caption = 'N'#186' Documento'
+                  FieldName = 'VENCIMENTO'
+                  Title.Caption = 'Vencimento'
+                  Width = 132
                   Visible = True
                 end
                 item
@@ -310,10 +312,41 @@ inherited frmContasPagar: TfrmContasPagar
       inherited pnlPesquisa: TPanel
         Width = 1043
         ExplicitWidth = 1043
+        object lblStatus: TLabel [1]
+          Left = 390
+          Top = 15
+          Width = 89
+          Height = 19
+          Align = alCustom
+          Caption = 'Status Conta'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         inherited btnPesquisae: TButton
           Left = 919
           OnClick = btnPesquisaeClick
           ExplicitLeft = 919
+        end
+        object cbStatus: TComboBox
+          Left = 390
+          Top = 40
+          Width = 145
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 2
+          Text = 'TODAS'
+          Items.Strings = (
+            'TODAS'
+            'PAGA'
+            'ABERTA'
+            'CANCELADA')
         end
       end
       inherited pnlBotoes: TPanel
@@ -321,32 +354,12 @@ inherited frmContasPagar: TfrmContasPagar
         Width = 1043
         ExplicitTop = 585
         ExplicitWidth = 1043
-        inherited btnIncluir: TButton
-          ExplicitLeft = 4
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
-        inherited btnAlterar: TButton
-          ExplicitLeft = 130
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
-          ExplicitLeft = 256
-          ExplicitTop = 4
-          ExplicitHeight = 61
-        end
-        inherited btnImprimir: TButton
-          ExplicitLeft = 382
-          ExplicitTop = 4
-          ExplicitHeight = 61
         end
         inherited btnSair: TButton
           Left = 919
           ExplicitLeft = 919
-          ExplicitTop = 4
-          ExplicitHeight = 61
         end
       end
       inherited pnlGrid: TPanel
@@ -369,7 +382,7 @@ inherited frmContasPagar: TfrmContasPagar
               Expanded = False
               FieldName = 'NUMERO_DOC'
               Title.Caption = 'N'#186' Documento'
-              Width = 144
+              Width = 117
               Visible = True
             end
             item
@@ -383,13 +396,14 @@ inherited frmContasPagar: TfrmContasPagar
               Expanded = False
               FieldName = 'PARCELA'
               Title.Caption = 'Parcela'
+              Width = 67
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'STATUS'
               Title.Caption = 'Status'
-              Width = 64
+              Width = 61
               Visible = True
             end
             item
@@ -402,15 +416,15 @@ inherited frmContasPagar: TfrmContasPagar
             item
               Expanded = False
               FieldName = 'VALOR_PARCELA'
-              Title.Caption = 'Valor da Parcela'
-              Width = 125
+              Title.Caption = 'Valor Parcela R$'
+              Width = 137
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VALOR_COMPRA'
-              Title.Caption = 'Valor da Compra'
-              Width = 136
+              Title.Caption = 'Valor Compra R$'
+              Width = 142
               Visible = True
             end
             item
@@ -418,13 +432,6 @@ inherited frmContasPagar: TfrmContasPagar
               FieldName = 'DATA_COMPRA'
               Title.Caption = 'Data da Compra'
               Width = 134
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_CADASTRO'
-              Title.Caption = 'Data de Cadastro'
-              Width = 139
               Visible = True
             end
             item
@@ -439,6 +446,13 @@ inherited frmContasPagar: TfrmContasPagar
               FieldName = 'VALOR_ABATIDO'
               Title.Caption = 'Valor Abatido'
               Width = 107
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_CADASTRO'
+              Title.Caption = 'Data de Cadastro'
+              Width = 139
               Visible = True
             end>
         end
@@ -2039,7 +2053,7 @@ inherited frmContasPagar: TfrmContasPagar
       000000000000}
   end
   object DataSourceCPagar: TDataSource
-    DataSet = DataModuleCPagar.ClientDataSetCPagar
+    DataSet = dmCPagar.cdsCPagar
     Left = 680
     Top = 256
   end

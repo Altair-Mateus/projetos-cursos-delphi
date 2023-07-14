@@ -43,6 +43,8 @@ type
     cdsParcelasVALOR: TCurrencyField;
     cdsParcelasVENCIMENTO: TDateField;
     cdsParcelasDOCUMENTO: TWideStringField;
+    cbStatus: TComboBox;
+    lblStatus: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -51,6 +53,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure toggleParcelamentoClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -91,7 +94,7 @@ begin
   inherited;
 
   //  Cancelando inclusão
-  DataModuleCPagar.ClientDataSetCPagar.Cancel;
+  dmCPagar.cdsCPagar.Cancel;
 
 end;
 
@@ -103,21 +106,21 @@ begin
   inherited;
 
   //  Se o documento já foi baixado cancela a exclusão
-  if DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString = 'B' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'B' then
   begin
 
     Application.MessageBox('Documento já baixado não pode ser excluído!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
+
   end;
 
   //  Se o documento foi cancelado, a exclusão é cancelada
-  if DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString = 'C' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'C' then
   begin
 
     Application.MessageBox('Documento já cancelado não pode ser excluído!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
+
   end;
 
   option := Application.MessageBox('Deseja excluir o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
@@ -129,13 +132,10 @@ begin
 
   try
 
-    //  Excluindo registro
-//    DataModuleCPagar.ClientDataSetCPagar.Delete;
-
-    DataModuleCPagar.ClientDataSetCPagar.Edit;
-    DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString := 'C';
-    DataModuleCPagar.ClientDataSetCPagar.Post;
-    DataModuleCPagar.ClientDataSetCPagar.ApplyUpdates(0);
+    dmCPagar.cdsCPagar.Edit;
+    dmCPagar.cdsCPagarSTATUS.AsString := 'C';
+    dmCPagar.cdsCPagar.Post;
+    dmCPagar.cdsCPagar.ApplyUpdates(0);
 
     Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
 
@@ -228,23 +228,31 @@ procedure TfrmContasPagar.btnIncluirClick(Sender: TObject);
 begin
   inherited;
 
-  toggleParcelamento.State := tssOff;
+  
 
   lblTitulo.Caption := 'Inserindo um novo lançamento no Contas a Pagar';
 
-  if not (DataModuleCPagar.ClientDataSetCPagar.State in [dsInsert, dsEdit]) then
+  if not (dmCPagar.cdsCPagar.State in [dsInsert, dsEdit]) then
   begin
 
     //  Colocando o data set em modo de inserção de dados
-    DataModuleCPagar.ClientDataSetCPagar.Insert;
+    dmCPagar.cdsCPagar.Insert;
 
   end;
 
-  DataModuleCPagar.GeraCodigo;
+  dmCPagar.GeraCodigo;
 
   memDesc.SetFocus;
 
- 
+  //  Coloca a data atual no datetimepicker
+  dateCompra.Date := now;
+  dateVencimento.Date := now + 7;
+
+  toggleParcelamento.State := tssOff;
+  edtParcela.Text := '1';
+
+  //  Esvaziando data set de parcelas
+  cdsParcelas.EmptyDataSet;
 
 end;
 
@@ -271,7 +279,7 @@ begin
     end;
 
   //  Retorna ao card de pesquisa
-  CardPanelParcela.ActiveCard := CardPesquisa;
+  CardPanelPrincipal.ActiveCard := CardPesquisa;
 
   //  Atualiza a lista
   Pesquisar;
@@ -282,49 +290,86 @@ end;
 
 procedure TfrmContasPagar.CadParcelamento;
 var
-  Parcela : Integer;
   ValorCompra : Currency;
-  ValorParcela : Currency;
 
 begin
 
-  //  Valida campos obrigatorios
-  if Trim(memDesc.Text) = '' then
-  begin
-
-    Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    memDesc.SetFocus;
-
-    abort;
-  end;
-
+  //  Valida valor da compra
   if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
   begin
-
+  
     edtValorCompra.SetFocus;
-    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
-    abort;
+    Application.MessageBox('Valor da Compra inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;  
+  
   end;
 
-  if not TryStrToInt(edtQtdParcelas.Text, Parcela) then
+  //  Posiciona no primeiro registro do cds
+  cdsParcelas.First;
+
+  //  Valida todos os registros do cds
+  while not cdsParcelas.Eof do
   begin
 
-    edtQtdParcelas.SetFocus;
-    Application.MessageBox('Número de parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    if cdsParcelasPARCELA.AsInteger < 0 then
+    begin
 
-    abort;
+      Application.MessageBox('Número de Parcela Inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+    if cdsParcelasVALOR.AsCurrency < 0.01 then
+    begin
+
+      Application.MessageBox('Valor da Parcela Inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+    //  Avança para o próximo registro
+    cdsParcelas.Next;
+
   end;
 
-  if dateVencimento.Date < dateCompra.Date then
+
+   //  Posiciona no primeiro registro do cds
+  cdsParcelas.First;
+
+  //  Gravando Parcelas
+  while not cdsParcelas.Eof do
   begin
 
-    dateVencimento.SetFocus;
-    Application.MessageBox('Data de vencimento não pode ser inferior a data de compra!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    if dmCPagar.cdsCPagar.State in [dsBrowse, dsInactive] then
+    begin
+      dmCPagar.cdsCPagar.Insert;
+    end;
 
-    abort;
+    dmCPagar.GeraCodigo;
+    dmCPagar.cdsCPagarDATA_CADASTRO.AsDateTime   := now;
+    dmCPagar.cdsCPagarSTATUS.AsString            := 'A';
+    dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency   := 0;
+    dmCPagar.cdsCPagarNUMERO_DOC.AsString        := cdsParcelasDOCUMENTO.AsString;
+    dmCPagar.cdsCPagarDESCRICAO.AsString         := Format('%s - Parcela %d', [memDesc.Text, cdsParcelasPARCELA.AsInteger]);
+    dmCPagar.cdsCPagarVALOR_COMPRA.AsCurrency    := ValorCompra;
+    dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
+    dmCPagar.cdsCPagarPARCELA.AsInteger          := cdsParcelasPARCELA.AsInteger;
+    dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := cdsParcelasVALOR.AsCurrency;
+    dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := cdsParcelasVENCIMENTO.AsDateTime;
+
+    //  Gravando no banco
+    dmCPagar.cdsCPagar.Post;
+    dmCPagar.cdsCPagar.ApplyUpdates(0);
+
+    cdsParcelas.Next;
 
   end;
+
+  Application.MessageBox('Parcelas Cadastradas com Sucesso!!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+  Pesquisar;
+
+  CardPanelPrincipal.ActiveCard := CardPesquisa;
 
 end;
 
@@ -389,65 +434,80 @@ begin
   if DataSourceCPagar.State in [dsInsert] then
   begin
 
-    DataModuleCPagar.GeraCodigo;
-    DataModuleCPagar.ClientDataSetCPagarDATA_CADASTRO.AsDateTime := now;
-    DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString          := 'A';
-    DataModuleCPagar.ClientDataSetCPagarVALOR_ABATIDO.AsCurrency := 0;
+    dmCPagar.GeraCodigo;
+    dmCPagar.cdsCPagarDATA_CADASTRO.AsDateTime := now;
+    dmCPagar.cdsCPagarSTATUS.AsString          := 'A';
+    dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
 
   end;
 
   //  Passando os dados para o dataset
-  DataModuleCPagar.ClientDataSetCPagarNUMERO_DOC.AsString        := Trim(edtNDoc.Text);
-  DataModuleCPagar.ClientDataSetCPagarDESCRICAO.AsString         := Trim(memDesc.Text);
-  DataModuleCPagar.ClientDataSetCPagarVALOR_COMPRA.AsCurrency    := ValorCompra;
-  DataModuleCPagar.ClientDataSetCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
-  DataModuleCPagar.ClientDataSetCPagarPARCELA.AsCurrency         := Parcela;
-  DataModuleCPagar.ClientDataSetCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
-  DataModuleCPagar.ClientDataSetCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+  dmCPagar.cdsCPagarNUMERO_DOC.AsString        := Trim(edtNDoc.Text);
+  dmCPagar.cdsCPagarDESCRICAO.AsString         := Trim(memDesc.Text);
+  dmCPagar.cdsCPagarVALOR_COMPRA.AsCurrency    := ValorCompra;
+  dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
+  dmCPagar.cdsCPagarPARCELA.AsCurrency         := Parcela;
+  dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
+  dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
 
   //  Gravando no BD
-  DataModuleCPagar.ClientDataSetCPagar.Post;
-  DataModuleCPagar.ClientDataSetCPagar.ApplyUpdates(0);
+  dmCPagar.cdsCPagar.Post;
+  dmCPagar.cdsCPagar.ApplyUpdates(0);
 
+
+end;
+
+procedure TfrmContasPagar.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+
+  EditarRegCPagar;
 
 end;
 
 procedure TfrmContasPagar.EditarRegCPagar;
 begin
 
+  //  Esvaziando data set de parcelas
+  cdsParcelas.EmptyDataSet;
+
   //  Se o documento já foi baixado cancela a edição
-  if DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString = 'B' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'B' then
   begin
 
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já baixado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
+
+    
   end;
 
   //  Se o documento foi cancelado, a edição é cancelada
-  if DataModuleCPagar.ClientDataSetCPagarSTATUS.AsString = 'C' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'C' then
   begin
 
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já cancelado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
+
+ 
   end;
 
 
   // Coloca o dataset em modo de edição
-  DataModuleCPagar.ClientDataSetCPagar.Edit;
+  dmCPagar.cdsCPagar.Edit;
 
   // Coloca o numero do registro no titulo
-  lblTitulo.Caption := 'Alterando Registro Nº ' + DataModuleCPagar.ClientDataSetCPagarID.AsString;
+  lblTitulo.Caption := 'Alterando Registro Nº ' + dmCPagar.cdsCPagarID.AsString;
 
   //  Carrega os dados
-  edtNDoc.Text         := DataModuleCPagar.ClientDataSetCPagarNUMERO_DOC.AsString;
-  memDesc.Text         := DataModuleCPagar.ClientDataSetCPagarDESCRICAO.AsString;
-  edtValorCompra.Text  := DataModuleCPagar.ClientDataSetCPagarVALOR_COMPRA.AsString;
-  edtParcela.Text      := DataModuleCPagar.ClientDataSetCPagarPARCELA.AsString;
-  edtValorParcela.Text := DataModuleCPagar.ClientDataSetCPagarVALOR_PARCELA.AsString;
-  dateVencimento.Date  := DataModuleCPagar.ClientDataSetCPagarDATA_VENCIMENTO.AsDateTime;
-  dateCompra.Date      := DataModuleCPagar.ClientDataSetCPagarDATA_COMPRA.AsDateTime;
+  edtNDoc.Text         := dmCPagar.cdsCPagarNUMERO_DOC.AsString;
+  memDesc.Text         := dmCPagar.cdsCPagarDESCRICAO.AsString;
+  edtValorCompra.Text  := dmCPagar.cdsCPagarVALOR_COMPRA.AsString;
+  edtParcela.Text      := dmCPagar.cdsCPagarPARCELA.AsString;
+  edtValorParcela.Text := dmCPagar.cdsCPagarVALOR_PARCELA.AsString;
+  dateVencimento.Date  := dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime;
+  dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
 
 
 end;
@@ -463,14 +523,23 @@ end;
 procedure TfrmContasPagar.Pesquisar;
 var
   LFiltroPesquisa: String;
+  LFiltroTipo : String;
 
 begin
 
   LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
 
-  DataModuleCPagar.ClientDataSetCPagar.Close;
-  DataModuleCPagar.ClientDataSetCPagar.CommandText := 'SELECT * FROM CONTAS_PAGAR WHERE 1 = 1 ' + LFiltroPesquisa + ' ORDER BY 1';
-  DataModuleCPagar.ClientDataSetCPagar.Open;
+  case cbStatus.ItemIndex of
+
+    1 : LFiltroTipo := ' AND STATUS = ''P'' ';
+    2 : LFiltroTipo := ' AND STATUS = ''A'' ';
+    3 : LFiltroTipo := ' AND STATUS = ''C'' ';
+    
+  end;
+
+  dmCPagar.cdsCPagar.Close;
+  dmCPagar.cdsCPagar.CommandText := 'SELECT * FROM CONTAS_PAGAR WHERE 1 = 1 ' + LFiltroPesquisa + LFiltroTipo + ' ORDER BY 1 DESC';
+  dmCPagar.cdsCPagar.Open;
 
   HabilitaBotoes;
 

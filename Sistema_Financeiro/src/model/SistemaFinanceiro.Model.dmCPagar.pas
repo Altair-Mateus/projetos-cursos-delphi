@@ -10,22 +10,22 @@ uses
   Datasnap.DBClient;
 
 type
-  TDataModuleCPagar = class(TDataModule)
+  TdmCPagar = class(TDataModule)
     FDQueryCPagar: TFDQuery;
     DataSetProviderCPagar: TDataSetProvider;
-    ClientDataSetCPagar: TClientDataSet;
-    ClientDataSetCPagarID: TIntegerField;
-    ClientDataSetCPagarNUMERO_DOC: TWideStringField;
-    ClientDataSetCPagarDESCRICAO: TWideStringField;
-    ClientDataSetCPagarPARCELA: TIntegerField;
-    ClientDataSetCPagarVALOR_PARCELA: TFMTBCDField;
-    ClientDataSetCPagarVALOR_COMPRA: TFMTBCDField;
-    ClientDataSetCPagarVALOR_ABATIDO: TFMTBCDField;
-    ClientDataSetCPagarDATA_COMPRA: TDateField;
-    ClientDataSetCPagarDATA_CADASTRO: TDateField;
-    ClientDataSetCPagarDATA_VENCIMENTO: TDateField;
-    ClientDataSetCPagarDATA_PAGAMENTO: TDateField;
-    ClientDataSetCPagarSTATUS: TWideStringField;
+    cdsCPagar: TClientDataSet;
+    cdsCPagarID: TIntegerField;
+    cdsCPagarNUMERO_DOC: TWideStringField;
+    cdsCPagarDESCRICAO: TWideStringField;
+    cdsCPagarPARCELA: TIntegerField;
+    cdsCPagarVALOR_PARCELA: TFMTBCDField;
+    cdsCPagarVALOR_COMPRA: TFMTBCDField;
+    cdsCPagarVALOR_ABATIDO: TFMTBCDField;
+    cdsCPagarDATA_COMPRA: TDateField;
+    cdsCPagarDATA_CADASTRO: TDateField;
+    cdsCPagarDATA_VENCIMENTO: TDateField;
+    cdsCPagarDATA_PAGAMENTO: TDateField;
+    cdsCPagarSTATUS: TWideStringField;
   private
     { Private declarations }
   public
@@ -34,7 +34,7 @@ type
   end;
 
 var
-  DataModuleCPagar: TDataModuleCPagar;
+  dmCPagar: TdmCPagar;
 
 implementation
 
@@ -46,7 +46,7 @@ uses SistemaFinanceiro.Model.udmDados;
 
 { TDataModuleCPagar }
 
-procedure TDataModuleCPagar.GeraCodigo;
+procedure TdmCPagar.GeraCodigo;
 var
   FDQueryCPagar : TFDQuery;
   cod : integer;
@@ -68,7 +68,7 @@ begin
     //  Ultimo codigo usado + 1
     cod := FDQueryCPagar.FieldByName('ID').AsInteger + 1;
 
-    ClientDataSetCPagarid.AsInteger := cod;
+    cdsCPagarid.AsInteger := cod;
 
     //  Insere o registro no final da tabela
     FDQueryCPagar.Append;

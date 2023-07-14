@@ -3,7 +3,6 @@ inherited frmCaixa: TfrmCaixa
   ClientHeight = 616
   ClientWidth = 1108
   WindowState = wsMaximized
-  ExplicitTop = -83
   ExplicitWidth = 1120
   ExplicitHeight = 654
   TextHeight = 19

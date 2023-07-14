@@ -1,4 +1,4 @@
-object DataModuleCPagar: TDataModuleCPagar
+object dmCPagar: TdmCPagar
   Height = 480
   Width = 640
   object FDQueryCPagar: TFDQuery
@@ -14,65 +14,65 @@ object DataModuleCPagar: TDataModuleCPagar
     Left = 304
     Top = 200
   end
-  object ClientDataSetCPagar: TClientDataSet
+  object cdsCPagar: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderCPagar'
     Left = 464
     Top = 200
-    object ClientDataSetCPagarID: TIntegerField
+    object cdsCPagarID: TIntegerField
       FieldName = 'ID'
       Required = True
     end
-    object ClientDataSetCPagarNUMERO_DOC: TWideStringField
+    object cdsCPagarNUMERO_DOC: TWideStringField
       FieldName = 'NUMERO_DOC'
       Required = True
     end
-    object ClientDataSetCPagarDESCRICAO: TWideStringField
+    object cdsCPagarDESCRICAO: TWideStringField
       FieldName = 'DESCRICAO'
       Size = 200
     end
-    object ClientDataSetCPagarPARCELA: TIntegerField
+    object cdsCPagarPARCELA: TIntegerField
       FieldName = 'PARCELA'
       Required = True
     end
-    object ClientDataSetCPagarVALOR_PARCELA: TFMTBCDField
+    object cdsCPagarVALOR_PARCELA: TFMTBCDField
       FieldName = 'VALOR_PARCELA'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
-    object ClientDataSetCPagarVALOR_COMPRA: TFMTBCDField
+    object cdsCPagarVALOR_COMPRA: TFMTBCDField
       FieldName = 'VALOR_COMPRA'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
-    object ClientDataSetCPagarVALOR_ABATIDO: TFMTBCDField
+    object cdsCPagarVALOR_ABATIDO: TFMTBCDField
       FieldName = 'VALOR_ABATIDO'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
-    object ClientDataSetCPagarDATA_COMPRA: TDateField
+    object cdsCPagarDATA_COMPRA: TDateField
       FieldName = 'DATA_COMPRA'
       Required = True
     end
-    object ClientDataSetCPagarDATA_CADASTRO: TDateField
+    object cdsCPagarDATA_CADASTRO: TDateField
       FieldName = 'DATA_CADASTRO'
       Required = True
     end
-    object ClientDataSetCPagarDATA_VENCIMENTO: TDateField
+    object cdsCPagarDATA_VENCIMENTO: TDateField
       FieldName = 'DATA_VENCIMENTO'
       Required = True
     end
-    object ClientDataSetCPagarDATA_PAGAMENTO: TDateField
+    object cdsCPagarDATA_PAGAMENTO: TDateField
       FieldName = 'DATA_PAGAMENTO'
     end
-    object ClientDataSetCPagarSTATUS: TWideStringField
+    object cdsCPagarSTATUS: TWideStringField
       FieldName = 'STATUS'
       Required = True
       FixedChar = True

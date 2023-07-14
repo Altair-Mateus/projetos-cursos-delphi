@@ -153,7 +153,7 @@
         </DCCReference>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.ResumoCaixa.pas"/>
         <DCCReference Include="src\model\SistemaFinanceiro.Model.dmCPagar.pas">
-            <Form>DataModuleCPagar</Form>
+            <Form>dmCPagar</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>

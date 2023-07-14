@@ -200,9 +200,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 0
           OnClick = btnIncluirClick
-          ExplicitLeft = 1
-          ExplicitTop = 1
-          ExplicitHeight = 67
         end
         object btnAlterar: TButton
           AlignWithMargins = True
@@ -217,9 +214,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 1
           OnClick = btnAlterarClick
-          ExplicitLeft = 121
-          ExplicitTop = 1
-          ExplicitHeight = 67
         end
         object btnExcluir: TButton
           AlignWithMargins = True
@@ -233,9 +227,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 2
           Images = ImageList1
           TabOrder = 2
-          ExplicitLeft = 241
-          ExplicitTop = 1
-          ExplicitHeight = 67
         end
         object btnImprimir: TButton
           AlignWithMargins = True
@@ -249,9 +240,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           ImageIndex = 4
           Images = ImageList1
           TabOrder = 3
-          ExplicitLeft = 361
-          ExplicitTop = 1
-          ExplicitHeight = 67
         end
         object btnSair: TButton
           AlignWithMargins = True
@@ -265,9 +253,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
           Images = ImageList1
           TabOrder = 4
           OnClick = btnSairClick
-          ExplicitLeft = 676
-          ExplicitTop = 1
-          ExplicitHeight = 67
+          ExplicitLeft = 673
         end
       end
       object pnlGrid: TPanel
