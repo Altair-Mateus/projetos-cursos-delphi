@@ -65,13 +65,13 @@ object frmPrincipal: TfrmPrincipal
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitTop = 0
+        ExplicitWidth = 183
       end
       object lblValor: TLabel
-        Left = 120
-        Top = 73
-        Width = 157
-        Height = 49
+        Left = 190
+        Top = 89
+        Width = 87
+        Height = 29
         Margins.Top = 150
         Margins.Bottom = 10
         Alignment = taRightJustify
@@ -85,31 +85,9 @@ object frmPrincipal: TfrmPrincipal
         ParentColor = False
         ParentFont = False
       end
-      object lblAviso: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 147
-        Width = 293
-        Height = 13
-        Margins.Top = 15
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Pressione F5 para atualizar'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        ExplicitLeft = 4
-        ExplicitTop = 146
-        ExplicitWidth = 130
-      end
       object imgLucro: TImage
         Left = 22
-        Top = 49
+        Top = 57
         Width = 80
         Height = 80
         Picture.Data = {
@@ -1279,7 +1257,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object imgPerda: TImage
         Left = 22
-        Top = 49
+        Top = 57
         Width = 80
         Height = 80
         Picture.Data = {

@@ -37,7 +37,6 @@ type
     pnlSaldoParcial: TPanel;
     lblSaldoParcial: TLabel;
     lblValor: TLabel;
-    lblAviso: TLabel;
     imgLucro: TImage;
     imgPerda: TImage;
     lblData: TLabel;
@@ -58,10 +57,11 @@ type
     procedure ExibeTelaCReceber;
     procedure ExibeTelaCaixa;
     procedure ExibeTelaSaldoCaixa;
-    procedure ResumoMensalCaixa;
+
 
   public
     { Public declarations }
+    procedure ResumoMensalCaixa;
   end;
 
 var
@@ -242,14 +242,14 @@ begin
   end;
 
 
-  if DataModuleUsuarios.GetUsuarioLogado.Senha_Temp then
+  if dmUsuarios.GetUsuarioLogado.Senha_Temp then
   begin
 
     frmRedefinirSenha := TfrmRedefinirSenha.Create(nil);
 
     try
 
-      frmRedefinirSenha.Usuario := DataModuleUsuarios.GetUsuarioLogado;
+      frmRedefinirSenha.Usuario := dmUsuarios.GetUsuarioLogado;
 
       frmRedefinirSenha.ShowModal;
 
@@ -270,7 +270,7 @@ begin
 
 
   //  Mostra o Usuario logado
-  lblUserLogado.Caption := DataModuleUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
+  lblUserLogado.Caption := dmUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
 
 
   ResumoMensalCaixa;
@@ -317,7 +317,7 @@ begin
   DataInicial := StartOfTheMonth(Now);
   DataFinal   := EndOfTheMonth(Now);
 
-  ResumoCaixa := DataModuleCaixa.ResumoCaixa(DataInicial, DataFinal);
+  ResumoCaixa := dmCaixa.ResumoCaixa(DataInicial, DataFinal);
 
   lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
 

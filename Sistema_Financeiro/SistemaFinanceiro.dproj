@@ -124,7 +124,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\SistemaFinanceiro.Model.dmUsuarios.pas">
-            <Form>DataModuleUsuarios</Form>
+            <Form>dmUsuarios</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -139,7 +139,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\SistemaFinanceiro.Model.dmCaixa.pas">
-            <Form>DataModuleCaixa</Form>
+            <Form>dmCaixa</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -159,6 +159,15 @@
         </DCCReference>
         <DCCReference Include="src\view\SistemaFinanceiro.View.CPagar.pas">
             <Form>frmContasPagar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmCReceber.pas">
+            <Form>dmCReceber</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.CReceber.pas">
+            <Form>frmContasReceber</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

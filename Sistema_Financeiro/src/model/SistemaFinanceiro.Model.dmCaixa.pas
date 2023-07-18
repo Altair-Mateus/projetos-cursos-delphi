@@ -10,16 +10,16 @@ uses
   SistemaFinanceiro.Model.Entidades.ResumoCaixa;
 
 type
-  TDataModuleCaixa = class(TDataModule)
+  TdmCaixa = class(TDataModule)
     FDQueryCaixa: TFDQuery;
     DataSetProviderCaixa: TDataSetProvider;
-    ClientDataSetCaixa: TClientDataSet;
-    ClientDataSetCaixaid: TIntegerField;
-    ClientDataSetCaixadata_cadastro: TDateField;
-    ClientDataSetCaixavalor: TFMTBCDField;
-    ClientDataSetCaixanumero_doc: TWideStringField;
-    ClientDataSetCaixadescricao: TWideStringField;
-    ClientDataSetCaixatipo: TWideStringField;
+    cdsCaixa: TClientDataSet;
+    cdsCaixaid: TIntegerField;
+    cdsCaixadata_cadastro: TDateField;
+    cdsCaixavalor: TFMTBCDField;
+    cdsCaixanumero_doc: TWideStringField;
+    cdsCaixadescricao: TWideStringField;
+    cdsCaixatipo: TWideStringField;
   private
     { Private declarations }
 
@@ -37,7 +37,7 @@ type
   end;
 
 var
-  DataModuleCaixa: TDataModuleCaixa;
+  dmCaixa: TdmCaixa;
 
 implementation
 
@@ -50,7 +50,7 @@ uses
 
 { TDataModule2 }
 
-procedure TDataModuleCaixa.GeraCodigo;
+procedure TdmCaixa.GeraCodigo;
 var
   cod: Integer;
   FDQueryId: TFDQuery;
@@ -72,7 +72,7 @@ begin
     //  Ultimo codigo usado + 1
     cod := FDQueryId.FieldByName('ID').AsInteger + 1;
 
-    ClientDataSetCaixaid.AsInteger := cod;
+    cdsCaixaid.AsInteger := cod;
 
     //  Insere o registro no final da tabela
     FDQueryId.Append;
@@ -86,7 +86,7 @@ begin
 
 end;
 
-function TDataModuleCaixa.GetSaldoAnteriorCaixa(Data: TDate): Currency;
+function TdmCaixa.GetSaldoAnteriorCaixa(Data: TDate): Currency;
 var
   FDQueryCaixa : TFDQuery;
   TotalEntradas : Currency;
@@ -138,7 +138,7 @@ begin
 
 end;
 
-function TDataModuleCaixa.GetTotalEntradasCaixa(DataInicial,
+function TdmCaixa.GetTotalEntradasCaixa(DataInicial,
   DataFinal: TDate): Currency;
 var
   FDqueryCaixa : TFDQuery;
@@ -177,7 +177,7 @@ begin
 
 end;
 
-function TDataModuleCaixa.GetTotalSaidasCaixa(DataInicial,
+function TdmCaixa.GetTotalSaidasCaixa(DataInicial,
   DataFinal: TDate): Currency;
 var
  FDqueryCaixa : TFDQuery;
@@ -213,7 +213,7 @@ begin
 
 end;
 
-function TDataModuleCaixa.ResumoCaixa(DataInicial,
+function TdmCaixa.ResumoCaixa(DataInicial,
   DataFinal: TDate): TModelResumoCaixa;
 begin
 

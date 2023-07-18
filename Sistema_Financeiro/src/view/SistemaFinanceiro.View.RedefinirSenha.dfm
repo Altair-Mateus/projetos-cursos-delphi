@@ -11,10 +11,9 @@ object frmRedefinirSenha: TfrmRedefinirSenha
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object pnlLogin: TPanel
     Left = 0
@@ -306,7 +305,7 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Left = 4
       Top = 92
       Width = 321
-      Height = 33
+      Height = 29
       Align = alTop
       Alignment = taCenter
       Caption = 'Usu'#225'rio'
@@ -316,9 +315,7 @@ object frmRedefinirSenha: TfrmRedefinirSenha
       Font.Name = 'Calibri'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 1
-      ExplicitTop = 89
-      ExplicitWidth = 327
+      ExplicitWidth = 76
     end
     object lblRedefina: TLabel
       Left = 62

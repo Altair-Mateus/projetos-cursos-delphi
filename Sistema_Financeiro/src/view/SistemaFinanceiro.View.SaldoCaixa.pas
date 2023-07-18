@@ -87,7 +87,7 @@ var
 
 begin
 
-  ResumoCaixa := DataModuleCaixa.ResumoCaixa(dateInicial.Date, dateFinal.Date);
+  ResumoCaixa := dmCaixa.ResumoCaixa(dateInicial.Date, dateFinal.Date);
 
   try
 

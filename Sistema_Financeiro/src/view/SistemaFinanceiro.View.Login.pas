@@ -64,7 +64,7 @@ begin
 
   try
 
-    DataModuleUsuarios.EfetuaLogin(Trim(EditLogin.Text), Trim(EditSenha.Text));
+    dmUsuarios.EfetuaLogin(Trim(EditLogin.Text), Trim(EditSenha.Text));
     ModalResult := mrOk;
 
   except

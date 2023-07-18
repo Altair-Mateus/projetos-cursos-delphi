@@ -27,12 +27,14 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
     FUsuario: TModelUsuario;
 
     procedure SetUsuario(const Value: TModelUsuario);
     procedure ValidaCampos;
+    procedure EditKeyPress(Sender: TObject; var Key: Char);
 
     { Private declarations }
   public
@@ -66,10 +68,47 @@ begin
   ValidaCampos;
 
   Usuario.Senha := Trim(edtSenha.Text);
-  DataModuleUsuarios.RedefinirSenha(Usuario);
+  dmUsuarios.RedefinirSenha(Usuario);
   Application.MessageBox('Senha Alterada!', 'Sucesso', MB_OK + MB_ICONINFORMATION);
 
   ModalResult := mrOk;
+
+end;
+
+procedure TfrmRedefinirSenha.EditKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+  begin
+
+    //  Verifica se a tecla pressionada é o Enter
+
+    //  Cancela o efeito do enter
+    Key := #0;
+
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+end;
+
+procedure TfrmRedefinirSenha.FormCreate(Sender: TObject);
+var
+  I : Integer;
+
+begin
+
+  //  Percorre os componentes TEdit
+  for I := 0 to ComponentCount - 1 do
+  begin
+
+    if Components[I] is TEdit then
+    begin
+
+      //  Cria o evento OnKeyPress para cada Edit encontrado
+      TEdit(Components[I]).OnKeyPress := EditKeyPress;
+
+    end;
+
+  end;
 
 end;
 

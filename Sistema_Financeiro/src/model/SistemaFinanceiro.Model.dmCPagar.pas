@@ -48,35 +48,35 @@ uses SistemaFinanceiro.Model.udmDados;
 
 procedure TdmCPagar.GeraCodigo;
 var
-  FDQueryCPagar : TFDQuery;
+  FDQueryId : TFDQuery;
   cod : integer;
 
 begin
 
   cod := 0;
-  FDQueryCPagar := TFDQuery.Create(nil);
+  FDQueryId := TFDQuery.Create(nil);
 
   try
 
     //  Estabelece a conexao com o banco
-    FDQueryCPagar.Connection := DataModule1.FDConnection;
+    FDQueryId.Connection := DataModule1.FDConnection;
 
-    FDQueryCPagar.Close;
-    FDQueryCPagar.SQL.Clear;
-    FDQueryCPagar.Open('SELECT MAX(ID) AS ID FROM CONTAS_PAGAR');
+    FDQueryId.Close;
+    FDQueryId.SQL.Clear;
+    FDQueryId.Open('SELECT MAX(ID) AS ID FROM CONTAS_PAGAR');
 
     //  Ultimo codigo usado + 1
-    cod := FDQueryCPagar.FieldByName('ID').AsInteger + 1;
+    cod := FDQueryId.FieldByName('ID').AsInteger + 1;
 
     cdsCPagarid.AsInteger := cod;
 
     //  Insere o registro no final da tabela
-    FDQueryCPagar.Append;
+    FDQueryId.Append;
 
   finally
 
-    FDQueryCPagar.Close;
-    FDQueryCPagar.Free;
+    FDQueryId.Close;
+    FDQueryId.Free;
 
   end;
 

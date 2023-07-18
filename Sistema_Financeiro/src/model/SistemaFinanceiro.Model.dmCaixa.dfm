@@ -1,4 +1,4 @@
-object DataModuleCaixa: TDataModuleCaixa
+object dmCaixa: TdmCaixa
   Height = 480
   Width = 640
   object FDQueryCaixa: TFDQuery
@@ -14,31 +14,31 @@ object DataModuleCaixa: TDataModuleCaixa
     Left = 320
     Top = 168
   end
-  object ClientDataSetCaixa: TClientDataSet
+  object cdsCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderCaixa'
     Left = 496
     Top = 168
-    object ClientDataSetCaixaid: TIntegerField
+    object cdsCaixaid: TIntegerField
       FieldName = 'id'
     end
-    object ClientDataSetCaixadata_cadastro: TDateField
+    object cdsCaixadata_cadastro: TDateField
       FieldName = 'data_cadastro'
     end
-    object ClientDataSetCaixavalor: TFMTBCDField
+    object cdsCaixavalor: TFMTBCDField
       FieldName = 'valor'
       DisplayFormat = '#,##0.00'
       Size = 18
     end
-    object ClientDataSetCaixanumero_doc: TWideStringField
+    object cdsCaixanumero_doc: TWideStringField
       FieldName = 'numero_doc'
     end
-    object ClientDataSetCaixadescricao: TWideStringField
+    object cdsCaixadescricao: TWideStringField
       FieldName = 'descricao'
       Size = 200
     end
-    object ClientDataSetCaixatipo: TWideStringField
+    object cdsCaixatipo: TWideStringField
       FieldName = 'tipo'
       Size = 1
     end

@@ -73,7 +73,7 @@ begin
   inherited;
 
   //  Cancelando inclusão
-  DataModuleUsuarios.ClientDataSetUsuarios.Cancel;
+  dmUsuarios.cdsUsuarios.Cancel;
 
 end;
 
@@ -96,8 +96,8 @@ begin
   try
 
     //  Excluindo registro
-    DataModuleUsuarios.ClientDataSetUsuarios.Delete;
-    DataModuleUsuarios.ClientDataSetUsuarios.ApplyUpdates(0);
+    dmUsuarios.cdsUsuarios.Delete;
+    dmUsuarios.cdsUsuarios.ApplyUpdates(0);
 
   except on E : Exception do
 
@@ -115,11 +115,11 @@ begin
   lblAvisoSenha.Visible := True;
   lblTitulo.Caption := 'Inserindo um novo usuário';
 
-  if not (DataModuleUsuarios.ClientDataSetUsuarios.State in [ dsEdit, dsInsert]) then
+  if not (dmUsuarios.cdsUsuarios.State in [ dsEdit, dsInsert]) then
   begin
 
     //  Colocando o data set em modo de inserção de dados
-    DataModuleUsuarios.ClientDataSetUsuarios.Insert;
+    dmUsuarios.cdsUsuarios.Insert;
 
   end;
 
@@ -147,13 +147,13 @@ begin
   ValidaCampos;
 
   //  Se for um novo usuário será colocado a senha temporária
-  if DataModuleUsuarios.ClientDataSetUsuarios.State in [dsInsert] then
+  if dmUsuarios.cdsUsuarios.State in [dsInsert] then
   begin
 
-    DataModuleUsuarios.ClientDataSetUsuariossenha.AsString := TBCrypt.GenerateHash(DataModuleUsuarios.TEMP_PASSWORD);
-    DataModuleUsuarios.ClientDataSetUsuariossenha_temp.AsString := 'S';
-    DataModuleUsuarios.ClientDataSetUsuariosdata_cadastro.AsDateTime := now;
-    DataModuleUsuarios.GeraCodigo;
+    dmUsuarios.cdsUsuariossenha.AsString := TBCrypt.GenerateHash(dmUsuarios.TEMP_PASSWORD);
+    dmUsuarios.cdsUsuariossenha_temp.AsString := 'S';
+    dmUsuarios.cdsUsuariosdata_cadastro.AsDateTime := now;
+    dmUsuarios.GeraCodigo;
 
   end;
 
@@ -173,13 +173,13 @@ begin
   end;
 
   //  Passando os dados para o dataset
-  DataModuleUsuarios.ClientDataSetUsuariosnome.AsString := Trim(edtNome.Text);
-  DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString := Trim(edtLogin.Text);
-  DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString := LStatus;
+  dmUsuarios.cdsUsuariosnome.AsString := Trim(edtNome.Text);
+  dmUsuarios.cdsUsuarioslogin.AsString := Trim(edtLogin.Text);
+  dmUsuarios.cdsUsuariosstatus.AsString := LStatus;
 
   //  Gravando no banco de dados
-  DataModuleUsuarios.ClientDataSetUsuarios.Post;
-  DataModuleUsuarios.ClientDataSetUsuarios.ApplyUpdates(0);
+  dmUsuarios.cdsUsuarios.Post;
+  dmUsuarios.cdsUsuarios.ApplyUpdates(0);
 
   //  Retorna ao cardPesquisa;
   CardPanelPrincipal.ActiveCard := CardPesquisa;
@@ -202,16 +202,16 @@ procedure TfrmUsuarios.EditarUsuario;
 begin
 
   //  Coloca o dataset em modo de edição
-  DataModuleUsuarios.ClientDataSetUsuarios.Edit;
+  dmUsuarios.cdsUsuarios.Edit;
 
   //  Coloca o nome do usuario no titulo
-  lblTitulo.Caption := DataModuleUsuarios.ClientDataSetUsuariosid.AsString + ' - ' + DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
+  lblTitulo.Caption := dmUsuarios.cdsUsuariosid.AsString + ' - ' + dmUsuarios.cdsUsuariosnome.AsString;
 
   //  Carrega os dados
-  edtNome.Text  := DataModuleUsuarios.ClientDataSetUsuariosnome.AsString;
-  edtLogin.Text := DataModuleUsuarios.ClientDataSetUsuarioslogin.AsString;
+  edtNome.Text  := dmUsuarios.cdsUsuariosnome.AsString;
+  edtLogin.Text := dmUsuarios.cdsUsuarioslogin.AsString;
 
-  if DataModuleUsuarios.ClientDataSetUsuariosstatus.AsString = 'A' then
+  if dmUsuarios.cdsUsuariosstatus.AsString = 'A' then
   begin
 
   ToggleStatus.State := tssOn;
@@ -241,7 +241,7 @@ begin
   if not DataSourceUsuarios.DataSet.IsEmpty then
   begin
 
-    DataModuleUsuarios.LimparSenhaTemp(DataSourceUsuarios.DataSet.FieldByName('ID').AsString);
+    dmUsuarios.LimparSenhaTemp(DataSourceUsuarios.DataSet.FieldByName('ID').AsString);
 
     Application.MessageBox
     (
@@ -263,9 +263,9 @@ begin
 
   LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
 
-  DataModuleUsuarios.ClientDataSetUsuarios.Close;
-  DataModuleUsuarios.ClientDataSetUsuarios.CommandText := 'SELECT * FROM USUARIOS WHERE 1 = 1' + LFiltroPesquisa + 'ORDER BY 1';
-  DataModuleUsuarios.ClientDataSetUsuarios.Open;
+  dmUsuarios.cdsUsuarios.Close;
+  dmUsuarios.cdsUsuarios.CommandText := 'SELECT * FROM USUARIOS WHERE 1 = 1' + LFiltroPesquisa + 'ORDER BY 1';
+  dmUsuarios.cdsUsuarios.Open;
 
   HabilitaBotoes;
 
@@ -292,7 +292,7 @@ begin
     abort;
   end;
 
-  if DataModuleUsuarios.VerificaLogin(Trim(edtLogin.Text), DataModuleUsuarios.ClientDataSetUsuarios.FieldByName('ID').AsString) then
+  if dmUsuarios.VerificaLogin(Trim(edtLogin.Text), dmUsuarios.cdsUsuarios.FieldByName('ID').AsString) then
   begin
 
     Application.MessageBox(PWidechar(Format('Login %s já cadastrado!', [edtLogin.Text])), 'Atenção', MB_OK + MB_ICONEXCLAMATION);

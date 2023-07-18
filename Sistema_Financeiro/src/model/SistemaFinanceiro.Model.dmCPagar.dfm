@@ -18,7 +18,7 @@ object dmCPagar: TdmCPagar
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderCPagar'
-    Left = 464
+    Left = 448
     Top = 200
     object cdsCPagarID: TIntegerField
       FieldName = 'ID'

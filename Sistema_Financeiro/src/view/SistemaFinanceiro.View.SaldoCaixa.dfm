@@ -6,8 +6,8 @@ object frmSaldoCaixa: TfrmSaldoCaixa
   Margins.Right = 0
   Margins.Bottom = 0
   Caption = 'Saldo do Caixa'
-  ClientHeight = 396
-  ClientWidth = 532
+  ClientHeight = 395
+  ClientWidth = 528
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,14 +20,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 532
-    Height = 396
+    Width = 528
+    Height = 395
     Align = alClient
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 528
-    ExplicitHeight = 395
     object pnlPesquisa: TPanel
       Left = 1
       Top = 1
@@ -169,7 +167,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             Left = 0
             Top = 0
             Width = 225
-            Height = 41
+            Height = 23
             Align = alLeft
             Caption = 'Saldo Anterior do Caixa'
             Color = clWhite
@@ -181,13 +179,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
           object lblValorSaldoInicial: TLabel
             Left = 460
             Top = 0
             Width = 26
-            Height = 41
+            Height = 23
             Align = alRight
             Caption = 'R$'
             Color = clWhite
@@ -199,7 +196,6 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
         end
         object pnlEntradas: TPanel
@@ -222,7 +218,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             Left = 0
             Top = 0
             Width = 148
-            Height = 41
+            Height = 23
             Align = alLeft
             Caption = 'Total de Entradas'
             Color = clWhite
@@ -234,13 +230,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
           object lblValorTotalEntradas: TLabel
             Left = 464
             Top = 0
             Width = 22
-            Height = 41
+            Height = 23
             Align = alRight
             Caption = 'R$'
             Color = clWhite
@@ -252,7 +247,6 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
         end
         object pnlSaidas: TPanel
@@ -275,7 +269,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             Left = 0
             Top = 0
             Width = 128
-            Height = 41
+            Height = 23
             Align = alLeft
             Caption = 'Total de Sa'#237'das'
             Color = clWhite
@@ -287,13 +281,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
           object lblValorTotalSaidas: TLabel
             Left = 464
             Top = 0
             Width = 22
-            Height = 41
+            Height = 23
             Align = alRight
             Caption = 'R$'
             Color = clWhite
@@ -305,7 +298,6 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
         end
         object pnlSaldoParcial: TPanel
@@ -328,7 +320,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             Left = 0
             Top = 0
             Width = 123
-            Height = 41
+            Height = 23
             Align = alLeft
             Caption = 'Saldo Parcial'
             Color = clWhite
@@ -340,13 +332,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
           object lblValorSaldoParcial: TLabel
             Left = 460
             Top = 0
             Width = 26
-            Height = 41
+            Height = 23
             Align = alRight
             Caption = 'R$'
             Color = clWhite
@@ -358,7 +349,6 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
         end
         object pnlSaldoFinal: TPanel
@@ -381,7 +371,7 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             Left = 0
             Top = 0
             Width = 105
-            Height = 41
+            Height = 23
             Align = alLeft
             Caption = 'Saldo Final'
             Color = clWhite
@@ -393,13 +383,12 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
           object lblValorSaldoFinal: TLabel
             Left = 460
             Top = 0
             Width = 26
-            Height = 41
+            Height = 23
             Align = alRight
             Caption = 'R$'
             Color = clWhite
@@ -411,7 +400,6 @@ object frmSaldoCaixa: TfrmSaldoCaixa
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 23
           end
         end
       end

@@ -11,17 +11,17 @@ uses
   SistemaFinanceiro.Model.Entidades.Usuario;
 
 type
-  TDataModuleUsuarios = class(TDataModule)
+  TdmUsuarios = class(TDataModule)
     FDQueryUsuarios: TFDQuery;
-    ClientDataSetUsuarios: TClientDataSet;
+    cdsUsuarios: TClientDataSet;
     DataSetProviderUsuarios: TDataSetProvider;
-    ClientDataSetUsuariosid: TIntegerField;
-    ClientDataSetUsuariosdata_cadastro: TDateField;
-    ClientDataSetUsuariosnome: TWideStringField;
-    ClientDataSetUsuarioslogin: TWideStringField;
-    ClientDataSetUsuariossenha: TWideStringField;
-    ClientDataSetUsuariosstatus: TWideStringField;
-    ClientDataSetUsuariossenha_temp: TWideStringField;
+    cdsUsuariosid: TIntegerField;
+    cdsUsuariosdata_cadastro: TDateField;
+    cdsUsuariosnome: TWideStringField;
+    cdsUsuarioslogin: TWideStringField;
+    cdsUsuariossenha: TWideStringField;
+    cdsUsuariosstatus: TWideStringField;
+    cdsUsuariossenha_temp: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -42,7 +42,7 @@ type
   end;
 
 var
-  DataModuleUsuarios: TDataModuleUsuarios;
+  dmUsuarios: TdmUsuarios;
 
 implementation
 
@@ -55,7 +55,7 @@ uses
 
 { TDataModuleUsuarios }
 
-procedure TDataModuleUsuarios.DataModuleCreate(Sender: TObject);
+procedure TdmUsuarios.DataModuleCreate(Sender: TObject);
 begin
 
   //  Instanciando o objeto
@@ -63,7 +63,7 @@ begin
 
 end;
 
-procedure TDataModuleUsuarios.DataModuleDestroy(Sender: TObject);
+procedure TdmUsuarios.DataModuleDestroy(Sender: TObject);
 begin
 
   //  Liberando da memoria
@@ -71,7 +71,7 @@ begin
 
 end;
 
-procedure TDataModuleUsuarios.EfetuaLogin(Login, Senha: String);
+procedure TdmUsuarios.EfetuaLogin(Login, Senha: String);
 var
   FDQueryLogin : TFDQuery;
 
@@ -133,7 +133,7 @@ begin
 
 end;
 
-procedure TDataModuleUsuarios.GeraCodigo;
+procedure TdmUsuarios.GeraCodigo;
 var
   cod: integer;
   FDQueryId : TFDQuery;
@@ -155,7 +155,7 @@ begin
     //  Ultimo codigo usado + 1
     cod := FDQueryId.FieldByName('id').AsInteger + 1;
 
-    ClientDataSetUsuariosid.AsInteger := cod;
+    cdsUsuariosid.AsInteger := cod;
 
     //  Insere o registro no final da tabela
     FDQueryId.Append();
@@ -169,13 +169,13 @@ begin
 
 end;
 
-function TDataModuleUsuarios.GetUsuarioLogado: TModelUsuario;
+function TdmUsuarios.GetUsuarioLogado: TModelUsuario;
 begin
   Result := FUsuario;
 end;
 
 
-procedure TDataModuleUsuarios.LimparSenhaTemp(IdUsuario: String);
+procedure TdmUsuarios.LimparSenhaTemp(IdUsuario: String);
 var
 
   FDQuery : TFDQuery;
@@ -208,7 +208,7 @@ begin
 
 end;
 
-procedure TDataModuleUsuarios.RedefinirSenha(Usuario: TModelUsuario);
+procedure TdmUsuarios.RedefinirSenha(Usuario: TModelUsuario);
 var
 
   FDQuery : TFDQuery;
@@ -241,7 +241,7 @@ begin
 
 end;
 
-function TDataModuleUsuarios.VerificaLogin(Login, Id: String): Boolean;
+function TdmUsuarios.VerificaLogin(Login, Id: String): Boolean;
 var
 
   FDQueryLogin : TFDQuery;

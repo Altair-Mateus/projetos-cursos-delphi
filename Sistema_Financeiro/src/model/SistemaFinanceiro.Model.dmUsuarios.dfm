@@ -1,4 +1,4 @@
-object DataModuleUsuarios: TDataModuleUsuarios
+object dmUsuarios: TdmUsuarios
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 350
@@ -11,41 +11,41 @@ object DataModuleUsuarios: TDataModuleUsuarios
     Left = 40
     Top = 64
   end
-  object ClientDataSetUsuarios: TClientDataSet
+  object cdsUsuarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'
     Left = 328
     Top = 64
-    object ClientDataSetUsuariosid: TIntegerField
+    object cdsUsuariosid: TIntegerField
       FieldName = 'id'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object ClientDataSetUsuariosdata_cadastro: TDateField
+    object cdsUsuariosdata_cadastro: TDateField
       FieldName = 'data_cadastro'
       Origin = 'DATA_CADASTRO'
     end
-    object ClientDataSetUsuariosnome: TWideStringField
+    object cdsUsuariosnome: TWideStringField
       FieldName = 'nome'
       Origin = 'NOME'
       Size = 100
     end
-    object ClientDataSetUsuarioslogin: TWideStringField
+    object cdsUsuarioslogin: TWideStringField
       FieldName = 'login'
       Origin = 'LOGIN'
     end
-    object ClientDataSetUsuariossenha: TWideStringField
+    object cdsUsuariossenha: TWideStringField
       FieldName = 'senha'
       Origin = 'SENHA'
       Size = 60
     end
-    object ClientDataSetUsuariosstatus: TWideStringField
+    object cdsUsuariosstatus: TWideStringField
       FieldName = 'status'
       Origin = 'STATUS'
       Size = 1
     end
-    object ClientDataSetUsuariossenha_temp: TWideStringField
+    object cdsUsuariossenha_temp: TWideStringField
       FieldName = 'senha_temp'
       Origin = 'SENHA_TEMP'
       Size = 1

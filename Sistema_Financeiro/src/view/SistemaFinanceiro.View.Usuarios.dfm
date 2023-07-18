@@ -12,9 +12,13 @@ inherited frmUsuarios: TfrmUsuarios
     ExplicitHeight = 510
     inherited CardCadastro: TCard
       Width = 813
+      Height = 509
       ExplicitWidth = 813
+      ExplicitHeight = 509
       inherited pnlBotoesCad: TPanel
+        Top = 440
         Width = 813
+        ExplicitTop = 440
         ExplicitWidth = 813
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
@@ -22,7 +26,9 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelCampos: TPanel
         Width = 813
+        Height = 399
         ExplicitWidth = 813
+        ExplicitHeight = 399
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -114,7 +120,8 @@ inherited frmUsuarios: TfrmUsuarios
     inherited CardPesquisa: TCard
       Width = 813
       Height = 509
-      ExplicitWidth = 813
+      ExplicitWidth = 809
+      ExplicitHeight = 508
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0
@@ -131,7 +138,8 @@ inherited frmUsuarios: TfrmUsuarios
       inherited pnlBotoes: TPanel
         Top = 440
         Width = 813
-        ExplicitWidth = 813
+        ExplicitTop = 439
+        ExplicitWidth = 809
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -143,9 +151,11 @@ inherited frmUsuarios: TfrmUsuarios
       inherited pnlGrid: TPanel
         Width = 813
         Height = 359
-        ExplicitWidth = 813
+        ExplicitWidth = 809
+        ExplicitHeight = 358
         inherited DBGrid1: TDBGrid
           Width = 811
+          Height = 357
           Margins.Top = 0
           DataSource = DataSourceUsuarios
           PopupMenu = PopupMenu
@@ -186,7 +196,7 @@ inherited frmUsuarios: TfrmUsuarios
     Top = 96
   end
   object DataSourceUsuarios: TDataSource
-    DataSet = DataModuleUsuarios.ClientDataSetUsuarios
+    DataSet = dmUsuarios.cdsUsuarios
     Left = 728
     Top = 152
   end

@@ -9,7 +9,6 @@ inherited frmCaixa: TfrmCaixa
   inherited CardPanelPrincipal: TCardPanel
     Width = 1108
     Height = 616
-    ActiveCard = CardCadastro
     ExplicitWidth = 1104
     ExplicitHeight = 615
     inherited CardCadastro: TCard
@@ -264,7 +263,7 @@ inherited frmCaixa: TfrmCaixa
     Top = 168
   end
   object DataSourceCaixa: TDataSource
-    DataSet = DataModuleCaixa.ClientDataSetCaixa
+    DataSet = dmCaixa.cdsCaixa
     Left = 744
     Top = 240
   end

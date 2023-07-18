@@ -58,7 +58,7 @@ implementation
 
 uses
   SistemaFinanceiro.Model.dmCaixa,
-  SistemaFinanceiro.Utilitarios;
+  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.View.Principal;
 
 procedure TfrmCaixa.btnAlterarClick(Sender: TObject);
 begin
@@ -73,7 +73,7 @@ begin
   inherited;
 
   //  Cancelando inclusão
-  DataModuleCaixa.ClientDataSetCaixa.Cancel;
+  dmCaixa.cdsCaixa.Cancel;
 
 end;
 
@@ -96,14 +96,19 @@ begin
   try
 
     //  Excluindo registro
-    DataModuleCaixa.ClientDataSetCaixa.Delete;
-    DataModuleCaixa.ClientDataSetCaixa.ApplyUpdates(0);
+    dmCaixa.cdsCaixa.Delete;
+    dmCaixa.cdsCaixa.ApplyUpdates(0);
+
+    //  Atualiza relatorio tela principal
+    frmPrincipal.ResumoMensalCaixa;
 
   except on E : Exception do
 
     Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir lançamento do caixa', MB_OK + MB_ICONERROR);
 
   end;
+
+
 
 end;
 
@@ -113,11 +118,11 @@ begin
 
   lblTitulo.Caption := 'Inserindo um novo Lançamento no Caixa';
 
-  if not (DataModuleCaixa.ClientDataSetCaixa.State in [dsInsert, dsEdit]) then
+  if not (dmCaixa.cdsCaixa.State in [dsInsert, dsEdit]) then
   begin
 
     //  Colocando o data set em modo de inserção de dados
-    DataModuleCaixa.ClientDataSetCaixa.Insert;
+    dmCaixa.cdsCaixa.Insert;
 
   end;
 
@@ -143,41 +148,44 @@ begin
   ValidaCampos;
 
   //  Passando os dados para o dataset
-  DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime := DateTimePicker.Date;
-  DataModuleCaixa.ClientDataSetCaixavalor.AsFloat            := StrToFloat(Trim(edtValor.text));
-  DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString      := Trim(edtNDoc.text);
-  DataModuleCaixa.ClientDataSetCaixadescricao.AsString       := Trim(memDesc.text);
+  dmCaixa.cdsCaixadata_cadastro.AsDateTime := DateTimePicker.Date;
+  dmCaixa.cdsCaixavalor.AsFloat            := StrToFloat(Trim(edtValor.text));
+  dmCaixa.cdsCaixanumero_doc.AsString      := Trim(edtNDoc.text);
+  dmCaixa.cdsCaixadescricao.AsString       := Trim(memDesc.text);
 
   if RadioGroup.ItemIndex = 0 then
   begin
 
-    DataModuleCaixa.ClientDataSetCaixatipo.AsString := 'R';
+    dmCaixa.cdsCaixatipo.AsString := 'R';
 
   end
     else if RadioGroup.ItemIndex = 1 then
     begin
 
-      DataModuleCaixa.ClientDataSetCaixatipo.AsString := 'D';
+      dmCaixa.cdsCaixatipo.AsString := 'D';
 
     end;
 
-  if DataModuleCaixa.ClientDataSetCaixa.State in [dsInsert] then
+  if dmCaixa.cdsCaixa.State in [dsInsert] then
   begin
 
-    DataModuleCaixa.GeraCodigo;
+    dmCaixa.GeraCodigo;
 
   end;
 
 
   //  Gravando no banco de dados
-  DataModuleCaixa.ClientDataSetCaixa.Post;
-  DataModuleCaixa.ClientDataSetCaixa.ApplyUpdates(0);
+  dmCaixa.cdsCaixa.Post;
+  dmCaixa.cdsCaixa.ApplyUpdates(0);
 
   //  Retorna ao cardPesquisa;
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
   //  Atualiza a lista
   Pesquisar;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.ResumoMensalCaixa;
 
   inherited;
 
@@ -195,24 +203,24 @@ procedure TfrmCaixa.EditarRegCaixa;
 begin
 
   //  Coloca o dataset em modo de edição
-  DataModuleCaixa.ClientDataSetCaixa.Edit;
+  dmCaixa.cdsCaixa.Edit;
 
   //  Coloca o numero do registro no titulo
-  lblTitulo.Caption := 'Alterando lançamento Nº '+ DataModuleCaixa.ClientDataSetCaixaid.AsString;
+  lblTitulo.Caption := 'Alterando lançamento Nº '+ dmCaixa.cdsCaixaid.AsString;
 
   //  Carrega os dados
-  edtNDoc.Text := DataModuleCaixa.ClientDataSetCaixanumero_doc.AsString;
-  memDesc.Text := DataModuleCaixa.ClientDataSetCaixadescricao.AsString;
-  edtValor.Text := DataModuleCaixa.ClientDataSetCaixavalor.AsString;
-  DateTimePicker.Date := DataModuleCaixa.ClientDataSetCaixadata_cadastro.AsDateTime;
+  edtNDoc.Text        := dmCaixa.cdsCaixanumero_doc.AsString;
+  memDesc.Text        := dmCaixa.cdsCaixadescricao.AsString;
+  edtValor.Text       := dmCaixa.cdsCaixavalor.AsString;
+  DateTimePicker.Date := dmCaixa.cdsCaixadata_cadastro.AsDateTime;
 
-  if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'R' then
+  if dmCaixa.cdsCaixatipo.AsString = 'R' then
   begin
 
     RadioGroup.ItemIndex := 0;
 
   end
-    else if DataModuleCaixa.ClientDataSetCaixatipo.AsString = 'D' then
+    else if dmCaixa.cdsCaixatipo.AsString = 'D' then
     begin
 
       RadioGroup.ItemIndex := 1;
@@ -261,9 +269,9 @@ begin
 
   end;
 
-  DataModuleCaixa.ClientDataSetCaixa.Close;
-  DataModuleCaixa.ClientDataSetCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroPesquisa + LFiltroTipo + 'ORDER BY 1 DESC';
-  DataModuleCaixa.ClientDataSetCaixa.Open;
+  dmCaixa.cdsCaixa.Close;
+  dmCaixa.cdsCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroPesquisa + LFiltroTipo + 'ORDER BY 1 DESC';
+  dmCaixa.cdsCaixa.Open;
 
   HabilitaBotoes;
 

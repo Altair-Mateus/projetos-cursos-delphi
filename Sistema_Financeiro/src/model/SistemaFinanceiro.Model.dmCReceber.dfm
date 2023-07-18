@@ -1,0 +1,78 @@
+object dmCReceber: TdmCReceber
+  Height = 480
+  Width = 640
+  object FDQueryCReceber: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_RECEBER;')
+    Left = 128
+    Top = 176
+  end
+  object cdsCReceber: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProviderCReceber'
+    Left = 472
+    Top = 176
+    object cdsCReceberID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCReceberNUMERO_DOCUMENTO: TWideStringField
+      FieldName = 'NUMERO_DOCUMENTO'
+    end
+    object cdsCReceberDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 200
+    end
+    object cdsCReceberPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Required = True
+    end
+    object cdsCReceberVALOR_PARCELA: TFMTBCDField
+      FieldName = 'VALOR_PARCELA'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object cdsCReceberVALOR_VENDA: TFMTBCDField
+      FieldName = 'VALOR_VENDA'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object cdsCReceberVALOR_ABATIDO: TFMTBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object cdsCReceberDATA_COMPRA: TDateField
+      FieldName = 'DATA_COMPRA'
+      Required = True
+    end
+    object cdsCReceberDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Required = True
+    end
+    object cdsCReceberDATA_VENCIMENTO: TDateField
+      FieldName = 'DATA_VENCIMENTO'
+      Required = True
+    end
+    object cdsCReceberDATA_RECEBIMENTO: TDateField
+      FieldName = 'DATA_RECEBIMENTO'
+    end
+    object cdsCReceberSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object DataSetProviderCReceber: TDataSetProvider
+    DataSet = FDQueryCReceber
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 296
+    Top = 176
+  end
+end
