@@ -3,13 +3,14 @@ unit SistemaFinanceiro.View.Principal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
   SistemaFinanceiro.View.Usuarios, SistemaFinanceiro.View.Login, Vcl.ComCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls, System.ImageList,
   Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha,
   SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa,
-  SistemaFinanceiro.View.CPagar;
+  SistemaFinanceiro.View.CPagar,
+  SistemaFinanceiro.View.CReceber;
 
 type
   TfrmPrincipal = class(TForm)
@@ -50,6 +51,8 @@ type
     procedure btnCPClick(Sender: TObject);
     procedure ContasaPagar1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnCRClick(Sender: TObject);
+    procedure ContasaReceber1Click(Sender: TObject);
   private
     { Private declarations }
     procedure ExibeTelaUsuario;
@@ -76,7 +79,7 @@ uses
   SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Model.dmCaixa,
   System.DateUtils, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
-  SistemaFinanceiro.Utilitarios;
+  SistemaFinanceiro.Utilitarios, Winapi.Windows;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
@@ -89,6 +92,13 @@ procedure TfrmPrincipal.btnCPClick(Sender: TObject);
 begin
 
   ExibeTelaCPagar;
+
+end;
+
+procedure TfrmPrincipal.btnCRClick(Sender: TObject);
+begin
+
+  ExibeTelaCReceber;
 
 end;
 
@@ -110,6 +120,13 @@ procedure TfrmPrincipal.ContasaPagar1Click(Sender: TObject);
 begin
 
   ExibeTelaCPagar;
+
+end;
+
+procedure TfrmPrincipal.ContasaReceber1Click(Sender: TObject);
+begin
+
+  ExibeTelaCReceber;
 
 end;
 
@@ -155,6 +172,22 @@ end;
 
 procedure TfrmPrincipal.ExibeTelaCReceber;
 begin
+
+  //  Cria o Form
+  frmContasReceber := TfrmContasReceber.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    frmContasReceber.ShowModal;
+
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmContasReceber);
+
+  end
 
 end;
 

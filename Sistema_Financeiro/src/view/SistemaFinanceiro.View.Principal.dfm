@@ -1253,6 +1253,7 @@ object frmPrincipal: TfrmPrincipal
           7F7F468864348590104039CA518E2B03FF1F4F15D67525499E55000000004945
           4E44AE426082}
         Stretch = True
+        Transparent = True
         Visible = False
       end
       object imgPerda: TImage
@@ -2497,6 +2498,7 @@ object frmPrincipal: TfrmPrincipal
           05F853878B072E8E22DE5360FD6EF2F7F7B71829E5E6E65664666696CA798827
           E8C6BEFD06DDA0BF31FD3FB12185391091DCB40000000049454E44AE426082}
         Stretch = True
+        Transparent = True
         Visible = False
       end
       object lblData: TLabel
@@ -2595,7 +2597,6 @@ object frmPrincipal: TfrmPrincipal
       Align = alCustom
       BiDiMode = bdLeftToRight
       Caption = 'Contas a Receber'
-      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 5737262
       Font.Height = -19
@@ -2605,8 +2606,11 @@ object frmPrincipal: TfrmPrincipal
       Images = ImageList1
       ParentBiDiMode = False
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 2
       WordWrap = True
+      OnClick = btnCRClick
     end
     object btnCaixa: TButton
       Left = 180
@@ -2889,6 +2893,7 @@ object frmPrincipal: TfrmPrincipal
       object ContasaReceber1: TMenuItem
         Caption = 'Contas a Receber'
         ImageIndex = 2
+        OnClick = ContasaReceber1Click
       end
     end
     object mnuRelatorios: TMenuItem

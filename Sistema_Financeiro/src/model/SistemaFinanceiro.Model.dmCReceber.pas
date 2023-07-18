@@ -20,11 +20,11 @@ type
     cdsCReceberVALOR_PARCELA: TFMTBCDField;
     cdsCReceberVALOR_VENDA: TFMTBCDField;
     cdsCReceberVALOR_ABATIDO: TFMTBCDField;
-    cdsCReceberDATA_COMPRA: TDateField;
     cdsCReceberDATA_CADASTRO: TDateField;
     cdsCReceberDATA_VENCIMENTO: TDateField;
     cdsCReceberDATA_RECEBIMENTO: TDateField;
     cdsCReceberSTATUS: TWideStringField;
+    cdsCReceberDATA_VENDA: TDateField;
   private
     { Private declarations }
 

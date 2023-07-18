@@ -32,24 +32,23 @@ object dmCReceber: TdmCReceber
     object cdsCReceberVALOR_PARCELA: TFMTBCDField
       FieldName = 'VALOR_PARCELA'
       Required = True
+      DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
     object cdsCReceberVALOR_VENDA: TFMTBCDField
       FieldName = 'VALOR_VENDA'
       Required = True
+      DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
     end
     object cdsCReceberVALOR_ABATIDO: TFMTBCDField
       FieldName = 'VALOR_ABATIDO'
       Required = True
+      DisplayFormat = '#,##0.00'
       Precision = 18
       Size = 2
-    end
-    object cdsCReceberDATA_COMPRA: TDateField
-      FieldName = 'DATA_COMPRA'
-      Required = True
     end
     object cdsCReceberDATA_CADASTRO: TDateField
       FieldName = 'DATA_CADASTRO'
@@ -67,6 +66,10 @@ object dmCReceber: TdmCReceber
       Required = True
       FixedChar = True
       Size = 1
+    end
+    object cdsCReceberDATA_VENDA: TDateField
+      FieldName = 'DATA_VENDA'
+      Required = True
     end
   end
   object DataSetProviderCReceber: TDataSetProvider

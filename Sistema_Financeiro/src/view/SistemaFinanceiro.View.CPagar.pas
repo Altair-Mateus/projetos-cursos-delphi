@@ -242,6 +242,7 @@ begin
 
   end;
 
+  //  gera a id
   dmCPagar.GeraCodigo;
 
   memDesc.SetFocus;
@@ -252,6 +253,8 @@ begin
 
   toggleParcelamento.State := tssOff;
   toggleParcelamento.Enabled := True;
+
+  //  Seta parcela previamente como 1
   edtParcela.Text := '1';
 
   //  Esvaziando data set de parcelas
