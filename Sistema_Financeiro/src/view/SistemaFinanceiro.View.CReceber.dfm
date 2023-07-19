@@ -3,7 +3,7 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 656
   ClientWidth = 1045
   WindowState = wsMaximized
-  ExplicitTop = -14
+  ExplicitTop = -82
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
@@ -11,16 +11,27 @@ inherited frmContasReceber: TfrmContasReceber
     Width = 1045
     Height = 656
     ActiveCard = CardCadastro
+    ExplicitWidth = 1041
+    ExplicitHeight = 655
     inherited CardCadastro: TCard
       Width = 1043
       Height = 654
+      ExplicitWidth = 1039
+      ExplicitHeight = 653
       inherited pnlBotoesCad: TPanel
         Top = 585
         Width = 1043
+        ExplicitTop = 584
+        ExplicitWidth = 1039
+        inherited btnSalvar: TButton
+          OnClick = btnSalvarClick
+        end
       end
       inherited PanelCampos: TPanel
         Width = 1043
         Height = 544
+        ExplicitWidth = 1039
+        ExplicitHeight = 543
         object lblDataVend: TLabel
           Left = 249
           Top = 159
@@ -181,6 +192,7 @@ inherited frmContasReceber: TfrmContasReceber
               ImageIndex = 7
               Images = ImageList1
               TabOrder = 2
+              OnClick = btnGerarClick
             end
             object btnLimpar: TButton
               Left = 606
@@ -260,28 +272,38 @@ inherited frmContasReceber: TfrmContasReceber
       end
       inherited PanelTitulo: TPanel
         Width = 1043
+        ExplicitWidth = 1039
       end
     end
     inherited CardPesquisa: TCard
       Width = 1043
       Height = 654
+      ExplicitWidth = 1043
+      ExplicitHeight = 654
       inherited pnlPesquisa: TPanel
         Width = 1043
+        ExplicitWidth = 1043
         inherited btnPesquisae: TButton
           Left = 919
           OnClick = btnPesquisaeClick
+          ExplicitLeft = 919
         end
       end
       inherited pnlBotoes: TPanel
         Top = 585
         Width = 1043
+        ExplicitTop = 585
+        ExplicitWidth = 1043
         inherited btnSair: TButton
           Left = 919
+          ExplicitLeft = 919
         end
       end
       inherited pnlGrid: TPanel
         Width = 1043
         Height = 504
+        ExplicitWidth = 1043
+        ExplicitHeight = 504
         inherited DBGrid1: TDBGrid
           Width = 1041
           Height = 502

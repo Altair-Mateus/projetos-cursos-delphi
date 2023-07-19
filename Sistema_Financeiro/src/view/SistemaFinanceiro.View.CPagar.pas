@@ -242,9 +242,6 @@ begin
 
   end;
 
-  //  gera a id
-  dmCPagar.GeraCodigo;
-
   memDesc.SetFocus;
 
   //  Coloca a data atual no datetimepicker
@@ -401,7 +398,9 @@ begin
   if DataSourceCPagar.State in [dsInsert] then
   begin
 
+    //  gera a id
     dmCPagar.GeraCodigo;
+
     dmCPagar.cdsCPagarDATA_CADASTRO.AsDateTime := now;
     dmCPagar.cdsCPagarSTATUS.AsString          := 'A';
     dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
@@ -415,8 +414,8 @@ begin
   if Trim(memDesc.Text) = '' then
   begin
 
-    Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     memDesc.SetFocus;
+    Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
 
     abort;
   end;
