@@ -53,6 +53,9 @@ type
     procedure btnLimparClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -81,6 +84,14 @@ uses
 
 { TfrmContasReceber }
 
+procedure TfrmContasReceber.btnAlterarClick(Sender: TObject);
+begin
+  inherited;
+
+  EditarRegCReceber;
+
+end;
+
 procedure TfrmContasReceber.btnCancelarClick(Sender: TObject);
 begin
   inherited;
@@ -90,16 +101,132 @@ begin
 
 end;
 
+procedure TfrmContasReceber.btnExcluirClick(Sender: TObject);
+var
+  Option : Word;
+
+begin
+
+  //  Se o documento já foi baixado cancela a exclusão
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'B' then
+  begin
+
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
+    Application.MessageBox('Documento já baixado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  //  Se o documento foi cancelado, a exclusão é cancelada
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'C' then
+  begin
+
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
+    Application.MessageBox('Documento já cancelado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+  if option = IDNO then
+  begin
+    exit;
+  end;
+
+  try
+
+    dmCReceber.cdsCReceber.Edit;
+    dmCReceber.cdsCReceberSTATUS.AsString := 'C';
+    dmCReceber.cdsCReceber.Post;
+    dmCReceber.cdsCReceber.ApplyUpdates(0);
+
+    Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+    Pesquisar;
+
+  except on e: Exception do
+
+    Application.MessageBox(PWidechar(E.Message), 'Erro ao cancelar documento!', MB_OK + MB_ICONERROR);
+
+  end;
+
+  inherited;
+
+end;
+
 procedure TfrmContasReceber.btnGerarClick(Sender: TObject);
 var
   QtdParcelas   : Integer;
   IntervaloDias : Integer;
-  ValorVenda   : Currency;
+  ValorVenda    : Currency;
   ValorParcela  : Currency;
   ValorResiduo  : Currency;
   Contador      : Integer;
 
 begin
+
+  //  Valida Campos
+  if not TryStrToCurr(edtValorVenda.Text, ValorVenda) then
+  begin
+
+    edtValorVenda.SetFocus;
+    Application.MessageBox('Valor da Venda Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
+  begin
+
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Quantidade de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
+  begin
+
+    edtIntervaloDias.SetFocus;
+    Application.MessageBox('Intervalor de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+
+  //  Calculando valores das parcelas
+  //  Trunca o valor final das parcelas
+  ValorParcela := (Trunc(ValorVenda / QtdParcelas * 100) / 100);
+
+  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
+  ValorResiduo := ValorVenda - (ValorParcela * QtdParcelas);
+
+  //  Esvaziando data set
+  cdsParcelas.IsEmpty;
+
+  for Contador := 1 to QtdParcelas do
+  begin
+
+    cdsParcelas.Insert;
+    cdsParcelasParcela.AsInteger := Contador;
+
+    //  Adiciona o valor do residuo na primeira parcela
+    cdsParcelasValor.AsCurrency := ValorParcela + ValorResiduo;
+    ValorResiduo := 0;  //  Zera o valor de residuo
+
+    //  Define a data de vencimento
+    cdsParcelasVencimento.AsDateTime := IncDay(dateVenda.Date, IntervaloDias * Contador);
+
+    cdsParcelas.Post;
+
+
+  end;
 
 
 end;
@@ -136,7 +263,7 @@ begin
   edtParcela.Text := '1';
 
   //  Esvazia o dataset das parcelas
-  cdsParcelas.IsEmpty;
+  cdsParcelas.EmptyDataSet;
 
 end;
 
@@ -145,7 +272,7 @@ begin
   inherited;
 
   //  Esvazia o dataset das parcelas
-  cdsParcelas.IsEmpty;
+  cdsParcelas.EmptyDataSet;
 
 end;
 
@@ -357,8 +484,61 @@ begin
 
 end;
 
+procedure TfrmContasReceber.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+
+  EditarRegCReceber;
+
+end;
+
 procedure TfrmContasReceber.EditarRegCReceber;
 begin
+
+  //  Esvazia o cds
+  cdsParcelas.EmptyDataSet;
+
+  //  Se o documento já foi baixado cancela a edição
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'B' then
+  begin
+
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
+    Application.MessageBox('Documento já baixado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  //  Se o documento foi cancelado, a edição é cancelada
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'C' then
+  begin
+
+    CardPanelPrincipal.ActiveCard := CardPesquisa;
+    Application.MessageBox('Documento já cancelado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+
+    abort;
+
+  end;
+
+  // Coloca o dataset em modo de edição
+  dmCReceber.cdsCReceber.Edit;
+
+  // Coloca o numero do registro no titulo
+  lblTitulo.Caption := 'Alterando Registro Nº ' + dmCReceber.cdsCReceberID.AsString;
+
+  //  Bloqueia o toogle
+  toggleParcelamento.Enabled  := False;
+  toggleParcelamento.State    := tssOff;
+  CardPanelParcela.ActiveCard := cardParcelaUnica;
+
+  //  Carrega os dados
+  memDesc.Text         := dmCReceber.cdsCReceberDESCRICAO.AsString;
+  edtValorVenda.Text   := TUtilitario.FormatarValor(dmCReceber.cdsCReceberVALOR_VENDA.AsCurrency);
+  dateVenda.Date       := dmCReceber.cdsCReceberDATA_VENDA.AsDateTime;
+  edtNDoc.Text         := dmCReceber.cdsCReceberNUMERO_DOCUMENTO.AsString;
+  edtParcela.Text      := dmCReceber.cdsCReceberPARCELA.AsString;
+  edtValorParcela.Text := TUtilitario.FormatarValor(dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency);
+  dateVencimento.Date  := dmCReceber.cdsCReceberDATA_VENCIMENTO.AsDateTime;
 
 end;
 

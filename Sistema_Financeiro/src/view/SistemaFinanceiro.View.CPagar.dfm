@@ -4,14 +4,13 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1045
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -114
+  ExplicitTop = -138
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1045
     Height = 656
-    ActiveCard = CardCadastro
     ExplicitWidth = 1041
     ExplicitHeight = 655
     inherited CardCadastro: TCard

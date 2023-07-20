@@ -3,14 +3,12 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 656
   ClientWidth = 1045
   WindowState = wsMaximized
-  ExplicitTop = -82
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1045
     Height = 656
-    ActiveCard = CardCadastro
     ExplicitWidth = 1041
     ExplicitHeight = 655
     inherited CardCadastro: TCard
@@ -294,6 +292,9 @@ inherited frmContasReceber: TfrmContasReceber
         Width = 1043
         ExplicitTop = 585
         ExplicitWidth = 1043
+        inherited btnExcluir: TButton
+          OnClick = btnExcluirClick
+        end
         inherited btnSair: TButton
           Left = 919
           ExplicitLeft = 919
@@ -2005,6 +2006,7 @@ inherited frmContasReceber: TfrmContasReceber
       00}
     Active = True
     Aggregates = <>
+    IndexFieldNames = 'Parcela'
     Params = <>
     Left = 769
     Top = 442

@@ -113,7 +113,7 @@ begin
   if dmCPagar.cdsCPagarSTATUS.AsString = 'B' then
   begin
 
-    Application.MessageBox('Documento já baixado não pode ser excluído!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Documento já baixado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;
@@ -122,12 +122,12 @@ begin
   if dmCPagar.cdsCPagarSTATUS.AsString = 'C' then
   begin
 
-    Application.MessageBox('Documento já cancelado não pode ser excluído!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Documento já cancelado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;
 
-  option := Application.MessageBox('Deseja excluir o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+  option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
 
   if option = IDNO then
   begin
