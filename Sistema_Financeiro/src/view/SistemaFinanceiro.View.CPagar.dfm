@@ -4,7 +4,6 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1045
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -138
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
@@ -16,13 +15,13 @@ inherited frmContasPagar: TfrmContasPagar
     inherited CardCadastro: TCard
       Width = 1043
       Height = 654
-      ExplicitWidth = 1039
-      ExplicitHeight = 653
+      ExplicitWidth = 1043
+      ExplicitHeight = 654
       inherited pnlBotoesCad: TPanel
         Top = 585
         Width = 1043
-        ExplicitTop = 584
-        ExplicitWidth = 1039
+        ExplicitTop = 585
+        ExplicitWidth = 1043
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -30,8 +29,8 @@ inherited frmContasPagar: TfrmContasPagar
       inherited PanelCampos: TPanel
         Width = 1043
         Height = 544
-        ExplicitWidth = 1039
-        ExplicitHeight = 543
+        ExplicitWidth = 1043
+        ExplicitHeight = 544
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -299,7 +298,7 @@ inherited frmContasPagar: TfrmContasPagar
       end
       inherited PanelTitulo: TPanel
         Width = 1043
-        ExplicitWidth = 1039
+        ExplicitWidth = 1043
         inherited lblTitulo: TLabel
           Left = 23
           ExplicitLeft = 23
@@ -309,11 +308,11 @@ inherited frmContasPagar: TfrmContasPagar
     inherited CardPesquisa: TCard
       Width = 1043
       Height = 654
-      ExplicitWidth = 1043
-      ExplicitHeight = 654
+      ExplicitWidth = 1039
+      ExplicitHeight = 653
       inherited pnlPesquisa: TPanel
         Width = 1043
-        ExplicitWidth = 1043
+        ExplicitWidth = 1039
         object lblStatus: TLabel [1]
           Left = 390
           Top = 15
@@ -333,12 +332,12 @@ inherited frmContasPagar: TfrmContasPagar
         inherited btnPesquisae: TButton
           Left = 919
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 919
+          ExplicitLeft = 915
         end
         object cbStatus: TComboBox
           Left = 390
           Top = 40
-          Width = 145
+          Width = 147
           Height = 27
           Style = csDropDownList
           ItemIndex = 0
@@ -354,21 +353,21 @@ inherited frmContasPagar: TfrmContasPagar
       inherited pnlBotoes: TPanel
         Top = 585
         Width = 1043
-        ExplicitTop = 585
-        ExplicitWidth = 1043
+        ExplicitTop = 584
+        ExplicitWidth = 1039
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 919
-          ExplicitLeft = 919
+          ExplicitLeft = 915
         end
       end
       inherited pnlGrid: TPanel
         Width = 1043
         Height = 504
-        ExplicitWidth = 1043
-        ExplicitHeight = 504
+        ExplicitWidth = 1039
+        ExplicitHeight = 503
         inherited DBGrid1: TDBGrid
           Width = 1041
           Height = 502

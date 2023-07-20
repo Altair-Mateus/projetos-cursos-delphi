@@ -44,7 +44,7 @@ object frmPrincipal: TfrmPrincipal
       Align = alLeft
       Anchors = []
       BevelOuter = bvNone
-      Color = 7333742
+      Color = 51942
       ParentBackground = False
       TabOrder = 0
       object lblSaldoParcial: TLabel

@@ -43,6 +43,8 @@ type
     cdsParcelasDocumento: TWideStringField;
     cdsParcelasVencimento: TDateField;
     cdsParcelasValor: TCurrencyField;
+    cbStatus: TComboBox;
+    lblStatus: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -579,11 +581,22 @@ end;
 procedure TfrmContasReceber.Pesquisar;
 var
   LFiltroPesquisa: String;
+  LFiltroTipo : String;
 
 begin
 
+  LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
+
+  case cbStatus.ItemIndex of
+
+    1 : LFiltroTipo := ' AND STATUS = ''P'' ';
+    2 : LFiltroTipo := ' AND STATUS = ''A'' ';
+    3 : LFiltroTipo := ' AND STATUS = ''C'' ';
+
+  end;
+
   dmCReceber.cdsCReceber.Close;
-  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 ' + LFiltroPesquisa + ' ORDER BY 1 DESC';
+  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 ' + LFiltroPesquisa + LFiltroTipo + ' ORDER BY 1 DESC';
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;

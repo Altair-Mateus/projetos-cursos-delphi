@@ -379,7 +379,7 @@ begin
         imgLucro.Visible  := False;
         imgPerda.Visible  := False;
         imgNormal.Visible := True;
-        pnlSaldoParcial.Color :=  $0049F7F8;
+        pnlSaldoParcial.Color :=  $0000CAE6;
 
       end;
 

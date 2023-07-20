@@ -211,7 +211,7 @@ begin
   //  Carrega os dados
   edtNDoc.Text        := dmCaixa.cdsCaixanumero_doc.AsString;
   memDesc.Text        := dmCaixa.cdsCaixadescricao.AsString;
-  edtValor.Text       := dmCaixa.cdsCaixavalor.AsString;
+  edtValor.Text       := TUtilitario.FormatarValor(dmCaixa.cdsCaixavalor.AsCurrency);
   DateTimePicker.Date := dmCaixa.cdsCaixadata_cadastro.AsDateTime;
 
   if dmCaixa.cdsCaixatipo.AsString = 'R' then
