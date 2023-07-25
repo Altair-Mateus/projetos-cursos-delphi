@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
+  SistemaFinanceiro.View.BaixarCP, Vcl.Menus;
 
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
@@ -45,6 +46,9 @@ type
     cdsParcelasDOCUMENTO: TWideStringField;
     cbStatus: TComboBox;
     lblStatus: TLabel;
+    btnBaixarCP: TButton;
+    PopupMenu1: TPopupMenu;
+    Baixar1: TMenuItem;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -58,12 +62,15 @@ type
     procedure FormCreate(Sender: TObject);
     procedure edtValorCompraExit(Sender: TObject);
     procedure edtValorParcelaExit(Sender: TObject);
+    procedure Baixar1Click(Sender: TObject);
+    procedure btnBaixarCPClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
     procedure CadParcelaUnica;
     procedure CadParcelamento;
     procedure EditarRegCPagar;
+    procedure ExibeTelaBaixar;
 
   public
     { Public declarations }
@@ -80,16 +87,36 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Utilitarios,
+uses
+  SistemaFinanceiro.Model.dmCPagar,
+  SistemaFinanceiro.Utilitarios,
   System.DateUtils;
 
 { TfrmCadastroPadrao1 }
+
+procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
+begin
+  inherited;
+
+  ExibeTelaBaixar;
+  Pesquisar;
+
+end;
 
 procedure TfrmContasPagar.btnAlterarClick(Sender: TObject);
 begin
   inherited;
 
   EditarRegCPagar;
+
+end;
+
+procedure TfrmContasPagar.btnBaixarCPClick(Sender: TObject);
+begin
+  inherited;
+
+  ExibeTelaBaixar;
+  Pesquisar;
 
 end;
 
@@ -547,6 +574,26 @@ begin
   inherited;
 
   edtValorParcela.Text := TUtilitario.FormatarValor(edtValorParcela.Text);
+
+end;
+
+procedure TfrmContasPagar.ExibeTelaBaixar;
+begin
+  //  Cria o Form
+  frmBaixarCP := TfrmBaixarCP.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    frmBaixarCP.ShowModal;
+
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmBaixarCP);
+
+  end
 
 end;
 

@@ -42,6 +42,7 @@ type
     imgPerda: TImage;
     lblData: TLabel;
     imgNormal: TImage;
+    ImageListMenu: TImageList;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);

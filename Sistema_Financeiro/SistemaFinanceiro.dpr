@@ -19,7 +19,9 @@ uses
   SistemaFinanceiro.Model.dmCPagar in 'src\model\SistemaFinanceiro.Model.dmCPagar.pas' {dmCPagar: TDataModule},
   SistemaFinanceiro.View.CPagar in 'src\view\SistemaFinanceiro.View.CPagar.pas' {frmContasPagar},
   SistemaFinanceiro.Model.dmCReceber in 'src\model\SistemaFinanceiro.Model.dmCReceber.pas' {dmCReceber: TDataModule},
-  SistemaFinanceiro.View.CReceber in 'src\view\SistemaFinanceiro.View.CReceber.pas' {frmContasReceber};
+  SistemaFinanceiro.View.CReceber in 'src\view\SistemaFinanceiro.View.CReceber.pas' {frmContasReceber},
+  SistemaFinanceiro.View.BaixarCP in 'src\view\SistemaFinanceiro.View.BaixarCP.pas' {frmBaixarCP},
+  SistemaFinanceiro.Model.Entidades.CP in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas';
 
 {$R *.res}
 
@@ -34,5 +36,6 @@ begin
   Application.CreateForm(TfrmContasPagar, frmContasPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
   Application.CreateForm(TfrmContasReceber, frmContasReceber);
+  Application.CreateForm(TfrmBaixarCP, frmBaixarCP);
   Application.Run;
 end.

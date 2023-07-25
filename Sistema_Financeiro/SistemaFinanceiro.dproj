@@ -170,6 +170,11 @@
             <Form>frmContasReceber</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BaixarCP.pas">
+            <Form>frmBaixarCP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

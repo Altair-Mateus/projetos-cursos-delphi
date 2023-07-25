@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.Provider,
-  Datasnap.DBClient;
+  Datasnap.DBClient, SistemaFinanceiro.Model.Entidades.CP;
 
 type
   TdmCPagar = class(TDataModule)
@@ -31,6 +31,8 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
+    function GetCP(Id : String) : TModelCP;
+
   end;
 
 var
@@ -77,6 +79,28 @@ begin
 
     FDQueryId.Close;
     FDQueryId.Free;
+
+  end;
+
+end;
+
+function TdmCPagar.GetCP(Id: String): TModelCP;
+var
+  FDQueryCP : TFDQuery;
+
+begin
+
+  FDQueryCP := TFDQuery.Create(Nil);
+
+  try
+
+    //  Estabelece a conexão
+    FDQueryCP.Connection := DataModule1.FDConnection;
+
+  finally
+
+    FDQueryCP.Close;
+    FDQueryCP.Free;
 
   end;
 
