@@ -84,27 +84,92 @@ begin
     if ContaPagar.ValorAbatido >= ContaPagar.ValorParcela then
     begin
 
-      ContaPagar.Status := 'B';
+      ContaPagar.Status := 'P';
       ContaPagar.DataPagamento := BaixaCP.Data;
 
     end;
 
     try
-      //  Montando o SQL para persisitr os dados na tabela Contas_pagar
-      SQLUpdate := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = :VALORABATIDO, ' +
-              ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
-              ' DATA_PAGAMENTO = :DATAPGTO' +
-              ' WHERE ID = :IDCP; ';
 
-      FDQueryCP.Close;
-      FDQueryCP.SQL.Clear;
-      FDQueryCP.SQL.Add(SQLUpdate);
+      //  Se o valor pago for parcial irá colocar status como Paga e irá
+      //  Criar uma nova duplicata com o valor restante
+      if ContaPagar.ValorAbatido < ContaPagar.ValorParcela then
+      begin
 
-      FDQueryCP.ParamByName('VALORABATIDO').AsCurrency := ContaPagar.ValorAbatido;
-      FDQueryCP.ParamByName('VALORPARCELA').AsCurrency := ContaPagar.ValorParcela;
-      FDQueryCP.ParamByName('STATUS').AsString         := ContaPagar.Status;
-      FDQueryCP.ParamByName('DATAPGTO').AsDate         := BaixaCP.Data;
-      FDQueryCP.ParamByName('IDCP').AsString           := ContaPagar.ID;
+        //  Inseriando nova duplcata parcial
+         if not (cdsCPagar.State in [dsInsert, dsEdit]) then
+        begin
+
+          //  Colocando o data set em modo de inserção de dados
+          cdsCPagar.Insert;
+
+        end;
+
+        //  gera a id
+        GeraCodigo;
+
+        cdsCPagarDATA_CADASTRO.AsDateTime := now;
+        cdsCPagarSTATUS.AsString          := 'A';
+        cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
+
+         //  Passando os dados para o dataset
+        cdsCPagarNUMERO_DOC.AsString        := ContaPagar.Doc;
+        cdsCPagarDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaPagar.ID, ContaPagar.Doc]);
+        cdsCPagarVALOR_COMPRA.AsCurrency    := ContaPagar.ValorCompra;
+        cdsCPagarDATA_COMPRA.AsDateTime     := ContaPagar.DataCompra;
+        cdsCPagarPARCELA.AsInteger          := 1;
+        cdsCPagarVALOR_PARCELA.AsCurrency   := ContaPagar.ValorParcela - BaixaCP.Valor;
+        cdsCPagarDATA_VENCIMENTO.AsDateTime := ContaPagar.DataVencimento;
+
+        //  Gravando no BD
+        cdsCPagar.Post;
+        cdsCPagar.ApplyUpdates(0);
+
+
+        // Montando o SQL para atualizar a duplicata anterior
+        SQLUpdate := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = :VALORABATIDO, ' +
+                ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
+                ' DATA_PAGAMENTO = :DATAPGTO' +
+                ' WHERE ID = :IDCP; ';
+
+        FDQueryCP.Close;
+        FDQueryCP.SQL.Clear;
+        FDQueryCP.SQL.Add(SQLUpdate);
+
+        FDQueryCP.ParamByName('VALORABATIDO').AsCurrency := ContaPagar.ValorAbatido;
+        FDQueryCP.ParamByName('VALORPARCELA').AsCurrency := ContaPagar.ValorParcela;
+        FDQueryCP.ParamByName('STATUS').AsString         := 'P';
+        FDQueryCP.ParamByName('DATAPGTO').AsDate         := BaixaCP.Data;
+        FDQueryCP.ParamByName('IDCP').AsString           := ContaPagar.ID;
+
+        FDQueryCP.Prepare;
+        FDQueryCP.ExecSQL;
+
+      end;
+
+      //  Se o valor pago for total
+      if ContaPagar.ValorAbatido = ContaPagar.ValorParcela then
+      begin
+
+        SQLUpdate := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = :VALORABATIDO, ' +
+                ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
+                ' DATA_PAGAMENTO = :DATAPGTO' +
+                ' WHERE ID = :IDCP; ';
+
+        FDQueryCP.Close;
+        FDQueryCP.SQL.Clear;
+        FDQueryCP.SQL.Add(SQLUpdate);
+
+        FDQueryCP.ParamByName('VALORABATIDO').AsCurrency := ContaPagar.ValorAbatido;
+        FDQueryCP.ParamByName('VALORPARCELA').AsCurrency := ContaPagar.ValorParcela;
+        FDQueryCP.ParamByName('STATUS').AsString         := ContaPagar.Status;
+        FDQueryCP.ParamByName('DATAPGTO').AsDate         := BaixaCP.Data;
+        FDQueryCP.ParamByName('IDCP').AsString           := ContaPagar.ID;
+
+        FDQueryCP.Prepare;
+        FDQueryCP.ExecSQL;
+
+      end;
 
 
       //  Montando o SQL para persisitr os dados na tabela Contas_pagar_detalhe
@@ -121,8 +186,7 @@ begin
       FDQueryCpDet.ParamByName('DATA').AsDate       := BaixaCP.Data;
       FDQueryCpDet.ParamByName('USUARIO').AsString  := BaixaCP.Usuario;
 
-      FDQueryCP.Prepare;
-      FDQueryCP.ExecSQL;
+
 
       FDQueryCpDet.Prepare;
       FDQueryCpDet.ExecSQL;

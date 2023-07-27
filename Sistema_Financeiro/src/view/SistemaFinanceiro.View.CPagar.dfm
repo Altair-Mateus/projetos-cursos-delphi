@@ -388,6 +388,7 @@ inherited frmContasPagar: TfrmContasPagar
         inherited DBGrid1: TDBGrid
           Width = 1037
           Height = 501
+          Color = clWhite
           DataSource = DataSourceCPagar
           PopupMenu = PopupMenu1
           Columns = <

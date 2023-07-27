@@ -73,6 +73,7 @@ begin
 
   FID := ID;
 
+  //  Valida ID do CP
   if FID < 0 then
   begin
     raise Exception.Create('ID do contas a pagar Inválido!');
@@ -81,11 +82,13 @@ begin
   ContaPagar := dmCPagar.GetCP(FID);
   try
 
-    if ContaPagar.Status = 'B' then
+    //  Se o status já for B irá ignorar
+    if ContaPagar.Status = 'P' then
     begin
-      raise Exception.Create('Não é possível baixar uma conta já baixada!');
+      raise Exception.Create('Não é possível baixar uma conta já Paga!');
     end;
 
+    //  Se o status já for C irá ignorar
     if ContaPagar.Status = 'C' then
     begin
       raise Exception.Create('Não é possível baixar uma conta cancelada!');
@@ -93,11 +96,11 @@ begin
 
 
     //  Carregando dados para as labels
-    lblIdConta.Caption      := IntToStr(FID);
-    lblParcela.Caption      := IntToStr(ContaPagar.Parcela);
-    lblVencimento.Caption   := FormatDateTime('dd/mm/yyyy', ContaPagar.DataVencimento);
-    lblValorParcela.Caption := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
-    lblValorAbatido.Caption := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
+    lblIdConta.Caption       := IntToStr(FID);
+    lblParcela.Caption       := IntToStr(ContaPagar.Parcela);
+    lblVencimento.Caption    := FormatDateTime('dd/mm/yyyy', ContaPagar.DataVencimento);
+    lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
+    lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
 
     if ContaPagar.Doc = '' then
@@ -112,10 +115,12 @@ begin
     edtObs.Text := '';
     edtValor.Text := '';
 
-
+    //  Exibe a Tela
     Self.ShowModal;
+
   finally
 
+    //  Libera da memoria
     ContaPagar.Free;
 
   end;
@@ -137,6 +142,7 @@ var
 
 begin
 
+  //  Validações dos campos
   if Trim(edtObs.Text) = '' then
   begin
 
@@ -158,11 +164,20 @@ begin
   ValorAbater := 0;
   TryStrToCurr(edtValor.Text, ValorAbater);
 
-  if ValorAbater <= 0 then
+  if ValorAbater <= 0  then
   begin
 
     edtValor.SetFocus;
     Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
+
+  if ValorAbater > dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency  then
+  begin
+
+    edtValor.SetFocus;
+    Application.MessageBox('Valor pago não pode ser maior que o valor da parcela!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
 
   end;
@@ -175,7 +190,6 @@ begin
     CpDetalhe.Detalhes := Trim(edtObs.Text);
     CpDetalhe.Valor    := ValorAbater;
     CpDetalhe.Data     := datePgto.Date;
-    ShowMessage(datetostr(datePgto.Date));
     CpDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
 
     try

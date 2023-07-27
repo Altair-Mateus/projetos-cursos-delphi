@@ -64,6 +64,8 @@ type
     procedure edtValorParcelaExit(Sender: TObject);
     procedure Baixar1Click(Sender: TObject);
     procedure btnBaixarCPClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -137,10 +139,10 @@ begin
   inherited;
 
   //  Se o documento já foi baixado cancela a exclusão
-  if dmCPagar.cdsCPagarSTATUS.AsString = 'B' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'P' then
   begin
 
-    Application.MessageBox('Documento já baixado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Documento já pago não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;
@@ -490,7 +492,7 @@ begin
   dmCPagar.cdsCPagarDESCRICAO.AsString         := Trim(memDesc.Text);
   dmCPagar.cdsCPagarVALOR_COMPRA.AsCurrency    := ValorCompra;
   dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
-  dmCPagar.cdsCPagarPARCELA.AsCurrency         := Parcela;
+  dmCPagar.cdsCPagarPARCELA.AsInteger          := Parcela;
   dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
   dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
 
@@ -509,6 +511,39 @@ begin
 
 end;
 
+procedure TfrmContasPagar.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+
+  //  Altera a cor das duplicatas vencidas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+      (DBGrid1.DataSource.DataSet.FieldByName('DATA_VENCIMENTO').AsDateTime < Date)
+      and (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'A')then
+  begin
+    DBGrid1.Canvas.Font.Color := clRed;  // Define a cor do texto da célula
+  end;
+
+  //  Altera a cor das duplicatas pagas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'P')then
+  begin
+    DBGrid1.Canvas.Font.Color := clHotLight;  // Define a cor do texto da célula
+  end;
+
+  //  Altera a cor das duplicatas canceladas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'C')then
+  begin
+    DBGrid1.Canvas.Font.Color := $00E68AE5;  // Define a cor do texto da célula
+  end;
+
+  // Desenha a célula com as propriedades de cor atualizadas
+  DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  inherited;
+
+end;
+
 procedure TfrmContasPagar.EditarRegCPagar;
 begin
 
@@ -516,11 +551,11 @@ begin
   cdsParcelas.EmptyDataSet;
 
   //  Se o documento já foi baixado cancela a edição
-  if dmCPagar.cdsCPagarSTATUS.AsString = 'B' then
+  if dmCPagar.cdsCPagarSTATUS.AsString = 'P' then
   begin
 
     CardPanelPrincipal.ActiveCard := CardPesquisa;
-    Application.MessageBox('Documento já baixado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Documento já pago não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
     

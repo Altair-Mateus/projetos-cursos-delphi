@@ -24,8 +24,8 @@ object frmBaixarCP: TfrmBaixarCP
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 435
-    ExplicitHeight = 557
+    ExplicitWidth = 516
+    ExplicitHeight = 593
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11
@@ -40,6 +40,7 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 494
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
@@ -56,8 +57,7 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        ExplicitWidth = 371
-        ExplicitHeight = 268
+        ExplicitWidth = 452
         object lblNDoc: TLabel
           Left = 60
           Top = 72
@@ -214,8 +214,7 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 331
-      ExplicitWidth = 413
+      ExplicitWidth = 494
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
@@ -229,7 +228,7 @@ object frmBaixarCP: TfrmBaixarCP
         Align = alClient
         Caption = 'Detalhes'
         TabOrder = 0
-        ExplicitWidth = 371
+        ExplicitWidth = 452
         object lblObs: TLabel
           Left = 28
           Top = 32
@@ -286,8 +285,8 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 486
-      ExplicitWidth = 433
+      ExplicitTop = 522
+      ExplicitWidth = 514
       object btnConfirmar: TButton
         AlignWithMargins = True
         Left = 131
@@ -304,8 +303,6 @@ object frmBaixarCP: TfrmBaixarCP
         Images = ImageList1
         TabOrder = 0
         OnClick = btnConfirmarClick
-        ExplicitLeft = 99
-        ExplicitTop = -7
       end
       object btnCancelar: TButton
         AlignWithMargins = True
@@ -325,7 +322,7 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBiDiMode = False
         TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 222
+        ExplicitLeft = 263
       end
     end
   end
