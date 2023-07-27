@@ -579,21 +579,8 @@ end;
 
 procedure TfrmContasPagar.ExibeTelaBaixar;
 begin
-  //  Cria o Form
-  frmBaixarCP := TfrmBaixarCP.Create(Self);
 
-  try
-
-    //  Exibe o Form
-    frmBaixarCP.ShowModal;
-
-
-  finally
-
-    //  Libera da memoria
-    FreeAndNil(frmBaixarCP);
-
-  end
+  frmBaixarCP.BaixarCP(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
 
 end;
 

@@ -175,6 +175,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas"/>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.Detalhe.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

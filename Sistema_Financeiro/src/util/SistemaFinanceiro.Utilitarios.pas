@@ -63,6 +63,8 @@ class function TUtilitario.GetId: String;
 begin
 
   Result := TGUID.NewGuid.ToString;
+  Result := StringReplace(Result, '{', '', [rfReplaceAll]);
+  Result := StringReplace(Result, '}', '', [rfReplaceAll]);
 
 end;
 

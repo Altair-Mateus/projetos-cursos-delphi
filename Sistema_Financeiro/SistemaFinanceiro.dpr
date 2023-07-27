@@ -21,7 +21,8 @@ uses
   SistemaFinanceiro.Model.dmCReceber in 'src\model\SistemaFinanceiro.Model.dmCReceber.pas' {dmCReceber: TDataModule},
   SistemaFinanceiro.View.CReceber in 'src\view\SistemaFinanceiro.View.CReceber.pas' {frmContasReceber},
   SistemaFinanceiro.View.BaixarCP in 'src\view\SistemaFinanceiro.View.BaixarCP.pas' {frmBaixarCP},
-  SistemaFinanceiro.Model.Entidades.CP in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas';
+  SistemaFinanceiro.Model.Entidades.CP in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas',
+  SistemaFinanceiro.Model.Entidades.CP.Detalhe in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.Detalhe.pas';
 
 {$R *.res}
 

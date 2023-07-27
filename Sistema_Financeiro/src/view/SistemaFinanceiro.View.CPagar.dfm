@@ -1,36 +1,36 @@
 inherited frmContasPagar: TfrmContasPagar
   Caption = 'Contas a Pagar'
-  ClientHeight = 656
-  ClientWidth = 1045
+  ClientHeight = 655
+  ClientWidth = 1041
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitWidth = 1057
-  ExplicitHeight = 694
+  ExplicitWidth = 1053
+  ExplicitHeight = 693
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 1045
-    Height = 656
-    ExplicitWidth = 1041
-    ExplicitHeight = 655
+    Width = 1041
+    Height = 655
+    ExplicitWidth = 1037
+    ExplicitHeight = 654
     inherited CardCadastro: TCard
-      Width = 1043
-      Height = 654
-      ExplicitWidth = 1043
-      ExplicitHeight = 654
+      Width = 1039
+      Height = 653
+      ExplicitWidth = 1039
+      ExplicitHeight = 653
       inherited pnlBotoesCad: TPanel
-        Top = 585
-        Width = 1043
-        ExplicitTop = 585
-        ExplicitWidth = 1043
+        Top = 584
+        Width = 1039
+        ExplicitTop = 584
+        ExplicitWidth = 1039
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1043
-        Height = 544
-        ExplicitWidth = 1043
-        ExplicitHeight = 544
+        Width = 1039
+        Height = 543
+        ExplicitWidth = 1039
+        ExplicitHeight = 543
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -297,8 +297,8 @@ inherited frmContasPagar: TfrmContasPagar
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1043
-        ExplicitWidth = 1043
+        Width = 1039
+        ExplicitWidth = 1039
         inherited lblTitulo: TLabel
           Left = 23
           ExplicitLeft = 23
@@ -306,13 +306,13 @@ inherited frmContasPagar: TfrmContasPagar
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1043
-      Height = 654
-      ExplicitWidth = 1039
-      ExplicitHeight = 653
+      Width = 1039
+      Height = 653
+      ExplicitWidth = 1035
+      ExplicitHeight = 652
       inherited pnlPesquisa: TPanel
-        Width = 1043
-        ExplicitWidth = 1039
+        Width = 1039
+        ExplicitWidth = 1035
         object lblStatus: TLabel [1]
           Left = 390
           Top = 15
@@ -330,9 +330,9 @@ inherited frmContasPagar: TfrmContasPagar
           ParentFont = False
         end
         inherited btnPesquisae: TButton
-          Left = 792
+          Left = 788
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 788
+          ExplicitLeft = 784
         end
         object cbStatus: TComboBox
           Left = 390
@@ -351,7 +351,7 @@ inherited frmContasPagar: TfrmContasPagar
         end
         object btnBaixarCP: TButton
           AlignWithMargins = True
-          Left = 919
+          Left = 915
           Top = 5
           Width = 121
           Height = 71
@@ -364,30 +364,30 @@ inherited frmContasPagar: TfrmContasPagar
           TabOrder = 3
           WordWrap = True
           OnClick = btnBaixarCPClick
-          ExplicitLeft = 915
+          ExplicitLeft = 911
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 585
-        Width = 1043
-        ExplicitTop = 584
-        ExplicitWidth = 1039
+        Top = 584
+        Width = 1039
+        ExplicitTop = 583
+        ExplicitWidth = 1035
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
-          Left = 919
-          ExplicitLeft = 915
+          Left = 915
+          ExplicitLeft = 911
         end
       end
       inherited pnlGrid: TPanel
-        Width = 1043
-        Height = 504
-        ExplicitWidth = 1039
-        ExplicitHeight = 503
+        Width = 1039
+        Height = 503
+        ExplicitWidth = 1035
+        ExplicitHeight = 502
         inherited DBGrid1: TDBGrid
-          Width = 1041
-          Height = 502
+          Width = 1037
+          Height = 501
           DataSource = DataSourceCPagar
           PopupMenu = PopupMenu1
           Columns = <

@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.Provider,
-  Datasnap.DBClient, SistemaFinanceiro.Model.Entidades.CP;
+  Datasnap.DBClient, SistemaFinanceiro.Model.Entidades.CP,
+  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.Dialogs;
 
 type
   TdmCPagar = class(TDataModule)
@@ -31,7 +32,10 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
-    function GetCP(Id : String) : TModelCP;
+    function GeraCodigoCPDetalhe : Integer;
+    procedure BaixarCP(BaixaCP : TModelCpDetalhe);
+    function GetCP(Id : Integer) : TModelCP;
+
 
   end;
 
@@ -47,6 +51,96 @@ uses SistemaFinanceiro.Model.udmDados;
 {$R *.dfm}
 
 { TDataModuleCPagar }
+
+procedure TdmCPagar.BaixarCP(BaixaCP: TModelCpDetalhe);
+var
+  ContaPagar : TModelCP;
+  FDQueryCP : TFDQuery;
+  FDQueryCpDet : TFDQuery;
+  SQLUpdate : String;
+  SQLInsert : String;
+
+begin
+
+  ContaPagar := GetCP(BaixaCP.IdCP);
+  FDQueryCP := TFDQuery.Create(nil);
+  FDQueryCpDet := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece conexão com o banco
+    FDQueryCP.Connection := DataModule1.FDConnection;
+    FDQueryCpDet.Connection := DataModule1.FDConnection;
+
+    if ContaPagar.ID = '' then
+    begin
+      raise Exception.Create('Conta a pagar não encontrada!');
+    end;
+
+
+    ContaPagar.ValorAbatido := ContaPagar.ValorAbatido + BaixaCP.Valor;
+
+    //  Caso o valor abatido já seja igual ao valor da parcela
+    if ContaPagar.ValorAbatido >= ContaPagar.ValorParcela then
+    begin
+
+      ContaPagar.Status := 'B';
+      ContaPagar.DataPagamento := BaixaCP.Data;
+
+    end;
+
+    try
+      //  Montando o SQL para persisitr os dados na tabela Contas_pagar
+      SQLUpdate := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = :VALORABATIDO, ' +
+              ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
+              ' DATA_PAGAMENTO = :DATAPGTO' +
+              ' WHERE ID = :IDCP; ';
+
+      FDQueryCP.Close;
+      FDQueryCP.SQL.Clear;
+      FDQueryCP.SQL.Add(SQLUpdate);
+
+      FDQueryCP.ParamByName('VALORABATIDO').AsCurrency := ContaPagar.ValorAbatido;
+      FDQueryCP.ParamByName('VALORPARCELA').AsCurrency := ContaPagar.ValorParcela;
+      FDQueryCP.ParamByName('STATUS').AsString         := ContaPagar.Status;
+      FDQueryCP.ParamByName('DATAPGTO').AsDate         := BaixaCP.Data;
+      FDQueryCP.ParamByName('IDCP').AsString           := ContaPagar.ID;
+
+
+      //  Montando o SQL para persisitr os dados na tabela Contas_pagar_detalhe
+      SQLInsert := 'INSERT INTO CONTAS_PAGAR_DETALHE (ID, ID_CONTA_PAGAR, DETALHES, ' +
+             ' VALOR, DATA, USUARIO) VALUES (:ID, :IDCP, :DETALHES, :VALOR, ' +
+             ' :DATA, :USUARIO)';
+
+      FDQueryCpDet.SQL.Add(SQLInsert);
+
+      FDQueryCpDet.ParamByName('ID').AsInteger      := GeraCodigoCPDetalhe;
+      FDQueryCpDet.ParamByName('IDCP').AsInteger    := BaixaCP.IdCP;
+      FDQueryCpDet.ParamByName('DETALHES').AsString := BaixaCP.Detalhes;
+      FDQueryCpDet.ParamByName('VALOR').AsCurrency  := BaixaCP.Valor;
+      FDQueryCpDet.ParamByName('DATA').AsDate       := BaixaCP.Data;
+      FDQueryCpDet.ParamByName('USUARIO').AsString  := BaixaCP.Usuario;
+
+      FDQueryCP.Prepare;
+      FDQueryCP.ExecSQL;
+
+      FDQueryCpDet.Prepare;
+      FDQueryCpDet.ExecSQL;
+
+    finally
+
+      FDQueryCP.Close;
+      FDQueryCP.Free;
+      FDQueryCpDet.Free;
+
+    end;
+
+  finally
+    ContaPagar.Free;
+  end;
+
+end;
+
 
 procedure TdmCPagar.GeraCodigo;
 var
@@ -84,7 +178,41 @@ begin
 
 end;
 
-function TdmCPagar.GetCP(Id: String): TModelCP;
+
+function TdmCPagar.GeraCodigoCPDetalhe: Integer;
+var
+  FDQueryIdDet : TFDQuery;
+
+begin
+
+  Result := 0;
+  FDQueryIdDet := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryIdDet.Connection := DataModule1.FDConnection;
+
+    FDQueryIdDet.Close;
+    FDQueryIdDet.SQL.Clear;
+    FDQueryIdDet.Open('SELECT MAX(ID) AS ID FROM CONTAS_PAGAR_DETALHE');
+
+    //  Ultimo codigo usado + 1
+    Result := FDQueryIdDet.FieldByName('ID').AsInteger + 1;
+
+    //  Insere o registro no final da tabela
+    FDQueryIdDet.Append;
+
+  finally
+
+    FDQueryIdDet.Close;
+    FDQueryIdDet.Free;
+
+  end
+
+end;
+
+function TdmCPagar.GetCP(Id: Integer): TModelCP;
 var
   FDQueryCP : TFDQuery;
 
@@ -96,6 +224,39 @@ begin
 
     //  Estabelece a conexão
     FDQueryCP.Connection := DataModule1.FDConnection;
+
+    FDQueryCP.Close;
+    FDQueryCP.SQL.Clear;
+    FDQueryCP.SQL.Add('SELECT * FROM CONTAS_PAGAR WHERE ID = :ID');
+
+    FDQueryCP.ParamByName('ID').AsInteger := Id;
+    FDQueryCP.Open;
+
+    Result := TModelCP.Create;
+
+    try
+
+      Result.ID             := FDQueryCP.FieldByName('ID').AsString;
+      Result.Doc            := FDQueryCP.FieldByName('NUMERO_DOC').AsString;
+      Result.Desc           := FDQueryCP.FieldByName('DESCRICAO').AsString;
+      Result.Parcela        := FDQueryCP.FieldByName('PARCELA').AsInteger;
+      Result.ValorParcela   := FDQueryCP.FieldByName('VALOR_PARCELA').AsCurrency;
+      Result.ValorCompra    := FDQueryCP.FieldByName('VALOR_COMPRA').AsCurrency;
+      Result.ValorAbatido   := FDQueryCP.FieldByName('VALOR_ABATIDO').AsCurrency;
+      Result.DataCompra     := FDQueryCP.FieldByName('DATA_COMPRA').AsDateTime;
+      Result.DataCadastro   := FDQueryCP.FieldByName('DATA_CADASTRO').AsDateTime;
+      Result.DataVencimento := FDQueryCP.FieldByName('DATA_VENCIMENTO').AsDateTime;
+      Result.DataPagamento  := FDQueryCP.FieldByName('DATA_PAGAMENTO').AsDateTime;
+      Result.Status         := FDQueryCP.FieldByName('STATUS').AsString;
+
+
+    except
+
+      Result.Free;
+      raise;
+
+    end;
+
 
   finally
 
