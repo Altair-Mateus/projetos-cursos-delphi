@@ -45,6 +45,15 @@ type
     cdsParcelasValor: TCurrencyField;
     cbStatus: TComboBox;
     lblStatus: TLabel;
+    gbLegenda: TGroupBox;
+    lblPagas: TLabel;
+    lblVencida: TLabel;
+    lblCancelada: TLabel;
+    lblNormal: TLabel;
+    pnlPagas: TPanel;
+    pnlVencida: TPanel;
+    pnlNormal: TPanel;
+    pnlCancelada: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -58,6 +67,8 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -491,6 +502,38 @@ begin
   inherited;
 
   EditarRegCReceber;
+
+end;
+
+procedure TfrmContasReceber.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  //  Altera a cor das duplicatas vencidas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+      (DBGrid1.DataSource.DataSet.FieldByName('DATA_VENCIMENTO').AsDateTime < Date)
+      and (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'A')then
+  begin
+    DBGrid1.Canvas.Font.Color := clRed;  // Define a cor do texto da célula
+  end;
+
+  //  Altera a cor das duplicatas pagas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'P')then
+  begin
+    DBGrid1.Canvas.Font.Color := clHotLight;  // Define a cor do texto da célula
+  end;
+
+  //  Altera a cor das duplicatas canceladas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'C')then
+  begin
+    DBGrid1.Canvas.Font.Color := $00E68AE5;  // Define a cor do texto da célula
+  end;
+
+  // Desenha a célula com as propriedades de cor atualizadas
+  DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  inherited;
 
 end;
 

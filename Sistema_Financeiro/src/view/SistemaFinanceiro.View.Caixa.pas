@@ -24,6 +24,11 @@ type
     memDesc: TMemo;
     cbTipoLcto: TComboBox;
     lblTipo: TLabel;
+    gbLegenda: TGroupBox;
+    lblCorReceita: TLabel;
+    lblCorDespesa: TLabel;
+    pnlReceita: TPanel;
+    pnlVencida: TPanel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -33,6 +38,8 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
 
@@ -196,6 +203,31 @@ begin
   inherited;
 
   EditarRegCaixa;
+
+end;
+
+procedure TfrmCaixa.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+
+  //  Altera a cor das receitas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('TIPO').AsString = 'R')then
+  begin
+    DBGrid1.Canvas.Font.Color := clHotLight;  // Define a cor do texto da célula
+  end;
+
+  //  Altera a cor das receitas
+  if (not DBGrid1.DataSource.DataSet.IsEmpty) and
+     (DBGrid1.DataSource.DataSet.FieldByName('TIPO').AsString = 'D')then
+  begin
+    DBGrid1.Canvas.Font.Color := $004F50FF;  // Define a cor do texto da célula
+  end;
+
+  // Desenha a célula com as propriedades de cor atualizadas
+  DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  inherited;
 
 end;
 

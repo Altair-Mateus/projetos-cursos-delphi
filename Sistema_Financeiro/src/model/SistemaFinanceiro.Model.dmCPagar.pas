@@ -117,7 +117,7 @@ begin
         cdsCPagarDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaPagar.ID, ContaPagar.Doc]);
         cdsCPagarVALOR_COMPRA.AsCurrency    := ContaPagar.ValorCompra;
         cdsCPagarDATA_COMPRA.AsDateTime     := ContaPagar.DataCompra;
-        cdsCPagarPARCELA.AsInteger          := 1;
+        cdsCPagarPARCELA.AsInteger          := ContaPagar.Parcela;
         cdsCPagarVALOR_PARCELA.AsCurrency   := ContaPagar.ValorParcela - BaixaCP.Valor;
         cdsCPagarDATA_VENCIMENTO.AsDateTime := ContaPagar.DataVencimento;
 

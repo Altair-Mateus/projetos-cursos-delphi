@@ -3,7 +3,8 @@ inherited frmCaixa: TfrmCaixa
   ClientHeight = 616
   ClientWidth = 1108
   WindowState = wsMaximized
-  ExplicitTop = -88
+  ExplicitLeft = -347
+  ExplicitTop = -115
   ExplicitWidth = 1120
   ExplicitHeight = 654
   TextHeight = 19
@@ -201,6 +202,54 @@ inherited frmCaixa: TfrmCaixa
         inherited btnSair: TButton
           Left = 982
           ExplicitLeft = 978
+        end
+        object gbLegenda: TGroupBox
+          AlignWithMargins = True
+          Left = 848
+          Top = 4
+          Width = 128
+          Height = 61
+          Align = alRight
+          Caption = 'Legendas'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+          object lblCorReceita: TLabel
+            Left = 31
+            Top = 16
+            Width = 41
+            Height = 13
+            Caption = 'Receitas'
+          end
+          object lblCorDespesa: TLabel
+            Left = 31
+            Top = 36
+            Width = 46
+            Height = 13
+            Caption = 'Despesas'
+          end
+          object pnlReceita: TPanel
+            Left = 11
+            Top = 17
+            Width = 14
+            Height = 14
+            Color = clHotLight
+            ParentBackground = False
+            TabOrder = 0
+          end
+          object pnlVencida: TPanel
+            Left = 11
+            Top = 37
+            Width = 14
+            Height = 14
+            Color = 5198079
+            ParentBackground = False
+            TabOrder = 1
+          end
         end
       end
       inherited pnlGrid: TPanel

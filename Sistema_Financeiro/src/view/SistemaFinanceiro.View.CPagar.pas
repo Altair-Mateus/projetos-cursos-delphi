@@ -49,6 +49,15 @@ type
     btnBaixarCP: TButton;
     PopupMenu1: TPopupMenu;
     Baixar1: TMenuItem;
+    gbLegenda: TGroupBox;
+    pnlPagas: TPanel;
+    lblPagas: TLabel;
+    pnlVencida: TPanel;
+    lblVencida: TLabel;
+    lblCancelada: TLabel;
+    lblNormal: TLabel;
+    pnlNormal: TPanel;
+    pnlCancelada: TPanel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);

@@ -4,6 +4,8 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1041
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitLeft = -280
+  ExplicitTop = -154
   ExplicitWidth = 1053
   ExplicitHeight = 693
   TextHeight = 19
@@ -378,6 +380,86 @@ inherited frmContasPagar: TfrmContasPagar
         inherited btnSair: TButton
           Left = 915
           ExplicitLeft = 911
+        end
+        object gbLegenda: TGroupBox
+          AlignWithMargins = True
+          Left = 672
+          Top = 4
+          Width = 237
+          Height = 61
+          Align = alRight
+          Caption = 'Legendas'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+          object lblPagas: TLabel
+            Left = 31
+            Top = 16
+            Width = 56
+            Height = 13
+            Caption = 'Conta Paga'
+          end
+          object lblVencida: TLabel
+            Left = 31
+            Top = 36
+            Width = 69
+            Height = 13
+            Caption = 'Conta Vencida'
+          end
+          object lblCancelada: TLabel
+            Left = 143
+            Top = 16
+            Width = 82
+            Height = 13
+            Caption = 'Conta Cancelada'
+          end
+          object lblNormal: TLabel
+            Left = 143
+            Top = 36
+            Width = 65
+            Height = 13
+            Caption = 'Conta Normal'
+          end
+          object pnlPagas: TPanel
+            Left = 11
+            Top = 17
+            Width = 14
+            Height = 14
+            Color = clHotLight
+            ParentBackground = False
+            TabOrder = 0
+          end
+          object pnlVencida: TPanel
+            Left = 11
+            Top = 37
+            Width = 14
+            Height = 14
+            Color = clRed
+            ParentBackground = False
+            TabOrder = 1
+          end
+          object pnlNormal: TPanel
+            Left = 123
+            Top = 37
+            Width = 14
+            Height = 14
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 2
+          end
+          object pnlCancelada: TPanel
+            Left = 123
+            Top = 17
+            Width = 14
+            Height = 14
+            Color = 15109094
+            ParentBackground = False
+            TabOrder = 3
+          end
         end
       end
       inherited pnlGrid: TPanel
