@@ -6,7 +6,9 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
-  Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  SistemaFinanceiro.Model.Entidades.CR.Detalhe,
+  SistemaFinanceiro.Model.Entidades.CR;
 
 type
   TdmCReceber = class(TDataModule)
@@ -31,6 +33,9 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
+    function GeraCodigoCRDetalhe : Integer;
+    procedure BaixarCR(BaixaCR : TModelCrDetalhe);
+    function GetCR(Id : Integer) : TModelCR;
 
   end;
 
@@ -46,6 +51,158 @@ uses SistemaFinanceiro.Model.udmDados;
 {$R *.dfm}
 
 { TdmCReceber }
+
+procedure TdmCReceber.BaixarCR(BaixaCR: TModelCrDetalhe);
+var
+  ContaReceber : TModelCR;
+  FDQueryCR : TFDQuery;
+  FDQueryCrDet : TFDQuery;
+  SQLUpdate : String;
+  SQLInsert : String;
+
+begin
+
+  ContaReceber := GetCR(BaixaCR.IdCR);
+  FDQueryCR := TFDQuery.Create(nil);
+  FDQueryCrDet := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece conexão com o banco
+    FDQueryCR.Connection := DataModule1.FDConnection;
+    FDQueryCrDet.Connection := DataModule1.FDConnection;
+
+    if ContaReceber.ID = '' then
+    begin
+      raise Exception.Create('Conta a receber não encontrada!');
+    end;
+
+
+    ContaReceber.ValorAbatido := ContaReceber.ValorAbatido + BaixaCR.Valor;
+
+    //  Caso o valor abatido já seja igual ao valor da parcela
+    if ContaReceber.ValorAbatido >= ContaReceber.ValorParcela then
+    begin
+
+      ContaReceber.Status := 'P';
+      ContaReceber.DataRecebimento := BaixaCR.Data;
+
+    end;
+
+    try
+
+      //  Se o valor pago for parcial irá colocar status como Paga e irá
+      //  Criar uma nova duplicata com o valor restante
+      if ContaReceber.ValorAbatido < ContaReceber.ValorParcela then
+      begin
+
+        //  Inseriando nova duplcata parcial
+         if not (cdsCReceber.State in [dsInsert, dsEdit]) then
+        begin
+
+          //  Colocando o data set em modo de inserção de dados
+          cdsCReceber.Insert;
+
+        end;
+
+        //  gera a id
+        GeraCodigo;
+
+        cdsCReceberDATA_CADASTRO.AsDateTime := now;
+        cdsCReceberSTATUS.AsString          := 'A';
+        cdsCReceberVALOR_ABATIDO.AsCurrency := 0;
+
+         //  Passando os dados para o dataset
+        cdsCReceberNUMERO_DOCUMENTO.AsString  := ContaReceber.Doc;
+        cdsCReceberDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaReceber.ID, ContaReceber.Doc]);
+        cdsCReceberVALOR_VENDA.AsCurrency     := ContaReceber.ValorVenda;
+        cdsCReceberDATA_VENDA.AsDateTime      := ContaReceber.DataVenda;
+        cdsCReceberPARCELA.AsInteger          := ContaReceber.Parcela;
+        cdsCReceberVALOR_PARCELA.AsCurrency   := ContaReceber.ValorParcela - BaixaCR.Valor;
+        cdsCReceberDATA_VENCIMENTO.AsDateTime := ContaReceber.DataVencimento;
+
+        //  Gravando no BD
+        cdsCReceber.Post;
+        cdsCReceber.ApplyUpdates(0);
+
+
+        // Montando o SQL para atualizar a duplicata anterior
+        SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
+                ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
+                ' DATA_RECEBIMENTO = :DATAREC' +
+                ' WHERE ID = :IDCR; ';
+
+        FDQueryCR.Close;
+        FDQueryCR.SQL.Clear;
+        FDQueryCR.SQL.Add(SQLUpdate);
+
+        FDQueryCR.ParamByName('VALORABATIDO').AsCurrency := ContaReceber.ValorAbatido;
+        FDQueryCR.ParamByName('VALORPARCELA').AsCurrency := ContaReceber.ValorParcela;
+        FDQueryCR.ParamByName('STATUS').AsString         := 'P';
+        FDQueryCR.ParamByName('DATAREC').AsDate          := BaixaCr.Data;
+        FDQueryCR.ParamByName('IDCR').AsString           := ContaReceber.ID;
+
+        FDQueryCR.Prepare;
+        FDQueryCR.ExecSQL;
+
+      end;
+
+      //  Se o valor pago for total
+      if ContaReceber.ValorAbatido = ContaReceber.ValorParcela then
+      begin
+
+        SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
+                ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
+                ' DATA_RECEBIMENTO = :DATAREC' +
+                ' WHERE ID = :IDCR; ';
+
+        FDQueryCR.Close;
+        FDQueryCR.SQL.Clear;
+        FDQueryCR.SQL.Add(SQLUpdate);
+
+        FDQueryCR.ParamByName('VALORABATIDO').AsCurrency := ContaReceber.ValorAbatido;
+        FDQueryCR.ParamByName('VALORPARCELA').AsCurrency := ContaReceber.ValorParcela;
+        FDQueryCR.ParamByName('STATUS').AsString         := ContaReceber.Status;
+        FDQueryCR.ParamByName('DATAREC').AsDate          := BaixaCR.Data;
+        FDQueryCR.ParamByName('IDCR').AsString          := ContaReceber.ID;
+
+        FDQueryCR.Prepare;
+        FDQueryCR.ExecSQL;
+
+      end;
+
+
+      //  Montando o SQL para persisitr os dados na tabela Contas_receber_detalhe
+      SQLInsert := 'INSERT INTO CONTAS_RECEBER_DETALHE (ID, ID_CONTA_RECEBER, DETALHES, ' +
+             ' VALOR, DATA, USUARIO) VALUES (:ID, :IDCR, :DETALHES, :VALOR, ' +
+             ' :DATA, :USUARIO)';
+
+      FDQueryCrDet.SQL.Add(SQLInsert);
+
+      FDQueryCrDet.ParamByName('ID').AsInteger      := GeraCodigoCRDetalhe;
+      FDQueryCrDet.ParamByName('IDCR').AsInteger    := BaixaCR.IdCR;
+      FDQueryCrDet.ParamByName('DETALHES').AsString := BaixaCR.Detalhes;
+      FDQueryCrDet.ParamByName('VALOR').AsCurrency  := BaixaCR.Valor;
+      FDQueryCrDet.ParamByName('DATA').AsDate       := BaixaCR.Data;
+      FDQueryCrDet.ParamByName('USUARIO').AsString  := BaixaCR.Usuario;
+
+
+      FDQueryCrDet.Prepare;
+      FDQueryCrDet.ExecSQL;
+
+    finally
+
+      FDQueryCR.Close;
+      FDQueryCR.Free;
+      FDQueryCrDet.Free;
+
+    end;
+
+  finally
+    ContaReceber.Free;
+  end;
+
+end;
 
 procedure TdmCReceber.GeraCodigo;
 var
@@ -81,6 +238,92 @@ begin
 
   end;
 
+
+end;
+
+function TdmCReceber.GeraCodigoCRDetalhe: Integer;
+var
+  FDQueryIdDet : TFDQuery;
+
+begin
+
+  Result := 0;
+  FDQueryIdDet := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryIdDet.Connection := DataModule1.FDConnection;
+
+    FDQueryIdDet.Close;
+    FDQueryIdDet.SQL.Clear;
+    FDQueryIdDet.Open('SELECT MAX(ID) AS ID FROM CONTAS_RECEBER_DETALHE');
+
+    //  Ultimo codigo usado + 1
+    Result := FDQueryIdDet.FieldByName('ID').AsInteger + 1;
+
+    //  Insere o registro no final da tabela
+    FDQueryIdDet.Append;
+
+  finally
+
+    FDQueryIdDet.Close;
+    FDQueryIdDet.Free;
+
+  end
+
+end;
+
+function TdmCReceber.GetCR(Id: Integer): TModelCR;
+var
+  FDQueryCR : TFDQuery;
+
+begin
+
+  FDQueryCR := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexão
+    FDQueryCR.Connection := DataModule1.FDConnection;
+
+    FDQueryCR.Close;
+    FDQueryCR.SQL.Clear;
+    FDQueryCR.SQL.Add('SELECT * FROM CONTAS_RECEBER WHERE ID = :ID');
+
+    FDQueryCR.ParamByName('ID').AsInteger := Id;
+    FDQueryCR.Open;
+
+    Result := TModelCR.Create;
+
+    try
+
+      Result.ID              := FDQueryCR.FieldByName('ID').AsString;
+      Result.Doc             := FDQueryCR.FieldByName('NUMERO_DOCUMENTO').AsString;
+      Result.Desc            := FDQueryCR.FieldByName('DESCRICAO').AsString;
+      Result.Parcela         := FDQueryCR.FieldByName('PARCELA').AsInteger;
+      Result.ValorVenda      := FDQueryCR.FieldByName('VALOR_VENDA').AsCurrency;
+      Result.ValorAbatido    := FDQueryCR.FieldByName('VALOR_ABATIDO').AsCurrency;
+      Result.ValorParcela    := FDQueryCR.FieldByName('VALOR_PARCELA').AsCurrency;
+      Result.DataVenda       := FDQueryCR.FieldByName('DATA_VENDA').AsDateTime;
+      Result.DataCadastro    := FDQueryCR.FieldByName('DATA_CADASTRO').AsDateTime;
+      Result.DataVencimento  := FDQueryCR.FieldByName('DATA_VENCIMENTO').AsDateTime;
+      Result.DataRecebimento := FDQueryCR.FieldByName('DATA_RECEBIMENTO').AsDateTime;
+      Result.Status          := FDQueryCR.FieldByName('STATUS').AsString;
+
+    except
+
+      Result.Free;
+      raise;
+
+    end;
+
+  finally
+
+    FDQueryCR.Close;
+    FDQueryCR.Free;
+
+  end;
 
 end;
 

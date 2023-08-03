@@ -4,8 +4,6 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1041
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitLeft = -280
-  ExplicitTop = -154
   ExplicitWidth = 1053
   ExplicitHeight = 693
   TextHeight = 19
@@ -41,7 +39,7 @@ inherited frmContasPagar: TfrmContasPagar
           Caption = 'Descri'#231#227'o'
         end
         object lblDataCompra: TLabel
-          Left = 249
+          Left = 258
           Top = 159
           Width = 120
           Height = 19
@@ -61,6 +59,13 @@ inherited frmContasPagar: TfrmContasPagar
           Height = 19
           Caption = 'Parcelamento'
         end
+        object lblNDoc: TLabel
+          Left = 496
+          Top = 159
+          Width = 105
+          Height = 19
+          Caption = 'N'#186' Documento'
+        end
         object memDesc: TMemo
           Left = 42
           Top = 57
@@ -70,7 +75,7 @@ inherited frmContasPagar: TfrmContasPagar
           TabOrder = 0
         end
         object dateCompra: TDateTimePicker
-          Left = 256
+          Left = 265
           Top = 184
           Width = 186
           Height = 27
@@ -104,7 +109,7 @@ inherited frmContasPagar: TfrmContasPagar
           ParentFont = False
           StateCaptions.CaptionOn = 'Sim'
           StateCaptions.CaptionOff = 'N'#227'o'
-          TabOrder = 3
+          TabOrder = 4
           ThumbColor = 5737262
           OnClick = toggleParcelamentoClick
         end
@@ -116,7 +121,7 @@ inherited frmContasPagar: TfrmContasPagar
           ActiveCard = cardParcelamento
           BevelOuter = bvNone
           Caption = 'CardPanel1'
-          TabOrder = 4
+          TabOrder = 5
           object cardParcelaUnica: TCard
             Left = 0
             Top = 0
@@ -125,70 +130,54 @@ inherited frmContasPagar: TfrmContasPagar
             Caption = 'cardParcelaUnica'
             CardIndex = 0
             TabOrder = 0
-            object lblNDoc: TLabel
-              Left = 2
-              Top = 0
-              Width = 105
-              Height = 19
-              Caption = 'N'#186' Documento'
-            end
             object lblParcela: TLabel
-              Left = 225
+              Left = 0
               Top = 0
               Width = 50
               Height = 19
               Caption = 'Parcela'
             end
             object lblValorParcela: TLabel
-              Left = 0
-              Top = 77
+              Left = 218
+              Top = 0
               Width = 138
               Height = 19
               Caption = 'Valor da Parcela R$'
             end
             object lblVencimento: TLabel
-              Left = 225
-              Top = 77
+              Left = 0
+              Top = 69
               Width = 83
               Height = 19
               Caption = 'Vencimento'
             end
-            object edtNDoc: TEdit
-              Left = 2
-              Top = 25
-              Width = 185
-              Height = 27
-              Color = clWhite
-              MaxLength = 20
-              TabOrder = 0
-            end
             object edtParcela: TEdit
-              Left = 225
+              Left = 0
               Top = 25
               Width = 185
               Height = 27
               Color = clWhite
               MaxLength = 10
-              TabOrder = 1
+              TabOrder = 0
             end
             object edtValorParcela: TEdit
-              Left = 0
-              Top = 102
+              Left = 218
+              Top = 25
               Width = 185
               Height = 27
               Color = clWhite
               MaxLength = 16
-              TabOrder = 2
+              TabOrder = 1
               OnExit = edtValorParcelaExit
             end
             object dateVencimento: TDateTimePicker
-              Left = 225
-              Top = 102
+              Left = 0
+              Top = 94
               Width = 185
               Height = 27
               Date = 45099.000000000000000000
               Time = 0.866143263890990100
-              TabOrder = 3
+              TabOrder = 2
             end
           end
           object cardParcelamento: TCard
@@ -297,6 +286,15 @@ inherited frmContasPagar: TfrmContasPagar
             end
           end
         end
+        object edtNDoc: TEdit
+          Left = 496
+          Top = 184
+          Width = 185
+          Height = 27
+          Color = clWhite
+          MaxLength = 20
+          TabOrder = 3
+        end
       end
       inherited PanelTitulo: TPanel
         Width = 1039
@@ -396,6 +394,7 @@ inherited frmContasPagar: TfrmContasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ExplicitLeft = 668
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -562,6 +561,7 @@ inherited frmContasPagar: TfrmContasPagar
     end
   end
   inherited ImageList1: TImageList
+    Left = 832
     Bitmap = {
       494C01010A001800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
@@ -2156,7 +2156,7 @@ inherited frmContasPagar: TfrmContasPagar
   end
   object DataSourceCPagar: TDataSource
     DataSet = dmCPagar.cdsCPagar
-    Left = 680
+    Left = 832
     Top = 256
   end
   object cdsParcelas: TClientDataSet
@@ -2193,7 +2193,7 @@ inherited frmContasPagar: TfrmContasPagar
   end
   object PopupMenu1: TPopupMenu
     Images = ImageList1
-    Left = 681
+    Left = 833
     Top = 338
     object Baixar1: TMenuItem
       Caption = 'Baixar'

@@ -1,24 +1,20 @@
-unit SistemaFinanceiro.View.BaixarCP;
+unit SistemaFinanceiro.View.BaixarCR;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  System.ImageList, Vcl.ImgList, SistemaFinanceiro.Model.Entidades.CP,
-  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
+  SistemaFinanceiro.Model.Entidades.CR.Detalhe,
+  SistemaFinanceiro.Model.Entidades.CR;
 
 type
-  TfrmBaixarCP = class(TForm)
+  TfrmBaixarCR = class(TForm)
+    ImageList1: TImageList;
     pnlPrincipal: TPanel;
     pnlDocInfo: TPanel;
-    pnlDetalhes: TPanel;
-    pnlBotoes: TPanel;
-    btnConfirmar: TButton;
-    btnCancelar: TButton;
-    ImageList1: TImageList;
     gbDocInfo: TGroupBox;
-    gbDetalhes: TGroupBox;
     lblNDoc: TLabel;
     lblParc: TLabel;
     lblVenc: TLabel;
@@ -29,69 +25,71 @@ type
     lblVencimento: TLabel;
     lblValorParcela: TLabel;
     lblValorAbatido: TLabel;
-    lblObs: TLabel;
-    lblValor: TLabel;
-    edtObs: TEdit;
-    edtValor: TEdit;
     lblId: TLabel;
     lblIdConta: TLabel;
-    lblData: TLabel;
-    datePgto: TDateTimePicker;
     lblValorRestante: TLabel;
     lblVRestante: TLabel;
+    pnlDetalhes: TPanel;
+    gbDetalhes: TGroupBox;
+    lblObs: TLabel;
+    lblValor: TLabel;
+    lblData: TLabel;
+    edtObs: TEdit;
+    edtValor: TEdit;
+    datePgto: TDateTimePicker;
+    pnlBotoes: TPanel;
+    btnConfirmar: TButton;
+    btnCancelar: TButton;
+    procedure FormCreate(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure edtValorExit(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
 
   public
     { Public declarations }
-    procedure BaixarCP(Id: Integer);
+    procedure BaixarCR(Id: Integer);
 
   end;
 
 var
-  frmBaixarCP: TfrmBaixarCP;
+  frmBaixarCR: TfrmBaixarCR;
 
 implementation
 
 {$R *.dfm}
 
 uses
-  SistemaFinanceiro.Model.dmCPagar,
+  SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Utilitarios,
-  SistemaFinanceiro.Model.dmUsuarios;
+  SistemaFinanceiro.Model.dmCReceber;
 
-{ TfrmBaixarCP }
-
-procedure TfrmBaixarCP.BaixarCP(Id: Integer);
+procedure TfrmBaixarCR.BaixarCR(Id: Integer);
 var
-  ContaPagar : TModelCP;
+  ContaReceber : TModelCR;
 
 begin
 
-  FID := ID;
+  FID := Id;
 
-  //  Valida ID do CP
+  //  Valida ID do CR
   if FID < 0 then
   begin
-    raise Exception.Create('ID do contas a pagar Inválido!');
+    raise Exception.Create('ID do contas a receber Inválido!');
   end;
 
-  ContaPagar := dmCPagar.GetCP(FID);
+  ContaReceber := dmCReceber.GetCR(FID);
   try
 
     //  Se o status já for B irá ignorar
-    if ContaPagar.Status = 'P' then
+    if ContaReceber.Status = 'P' then
     begin
       raise Exception.Create('Não é possível baixar uma conta já Paga!');
     end;
 
     //  Se o status já for C irá ignorar
-    if ContaPagar.Status = 'C' then
+    if ContaReceber.Status = 'C' then
     begin
       raise Exception.Create('Não é possível baixar uma conta cancelada!');
     end;
@@ -99,19 +97,19 @@ begin
 
     //  Carregando dados para as labels
     lblIdConta.Caption       := IntToStr(FID);
-    lblParcela.Caption       := IntToStr(ContaPagar.Parcela);
-    lblVencimento.Caption    := FormatDateTime('dd/mm/yyyy', ContaPagar.DataVencimento);
-    lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
-    lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
-    lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
+    lblParcela.Caption       := IntToStr(ContaReceber.Parcela);
+    lblVencimento.Caption    := FormatDateTime('dd/mm/yyyy', ContaReceber.DataVencimento);
+    lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorParcela);
+    lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorAbatido);
+    lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaReceber.ValorParcela - ContaReceber.ValorAbatido));
 
-    if ContaPagar.Doc = '' then
+    if ContaReceber.Doc = '' then
     begin
       lblDoc.Caption := 'Não Informado';
     end
       else
       begin
-        lblDoc.Caption := ContaPagar.Doc;
+        lblDoc.Caption := ContaReceber.Doc;
       end;
 
     edtObs.Text := '';
@@ -123,23 +121,24 @@ begin
   finally
 
     //  Libera da memoria
-    ContaPagar.Free;
+    ContaReceber.Free;
 
   end;
 
 
+
 end;
 
-procedure TfrmBaixarCP.btnCancelarClick(Sender: TObject);
+procedure TfrmBaixarCR.btnCancelarClick(Sender: TObject);
 begin
 
   ModalResult := mrCancel;
 
 end;
 
-procedure TfrmBaixarCP.btnConfirmarClick(Sender: TObject);
+procedure TfrmBaixarCR.btnConfirmarClick(Sender: TObject);
 var
-  CpDetalhe : TModelCpDetalhe;
+  CrDetalhe : TModelCrDetalhe;
   ValorAbater : Currency;
 
 begin
@@ -175,7 +174,7 @@ begin
 
   end;
 
-  if ValorAbater > dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency  then
+  if ValorAbater > dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency  then
   begin
 
     edtValor.SetFocus;
@@ -184,19 +183,19 @@ begin
 
   end;
 
-  CpDetalhe := TModelCpDetalhe.Create;
+  CrDetalhe := TModelCrDetalhe.Create;
 
   try
 
-    CpDetalhe.IdCP     := FID;
-    CpDetalhe.Detalhes := Trim(edtObs.Text);
-    CpDetalhe.Valor    := ValorAbater;
-    CpDetalhe.Data     := datePgto.Date;
-    CpDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+    CrDetalhe.IdCr     := FID;
+    CrDetalhe.Detalhes := Trim(edtObs.Text);
+    CrDetalhe.Valor    := ValorAbater;
+    CrDetalhe.Data     := datePgto.Date;
+    CrDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
 
     try
 
-      dmCPagar.BaixarCP(CpDetalhe);
+      dmCReceber.BaixarCR(CrDetalhe);
       Application.MessageBox('Conta baixada com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
 
       ModalResult := mrOk;
@@ -209,20 +208,14 @@ begin
 
   finally
 
-    CpDetalhe.Free;
+    CrDetalhe.Free;
 
   end;
 
-end;
-
-procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
-begin
-
-  edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
 
 end;
 
-procedure TfrmBaixarCP.FormCreate(Sender: TObject);
+procedure TfrmBaixarCR.FormCreate(Sender: TObject);
 begin
 
   edtValor.OnKeyPress := TUtilitario.KeyPressValor;

@@ -23,8 +23,6 @@ type
     CardPanelParcela: TCardPanel;
     cardParcelaUnica: TCard;
     cardParcelamento: TCard;
-    lblNDoc: TLabel;
-    edtNDoc: TEdit;
     lblParcela: TLabel;
     edtParcela: TEdit;
     edtValorParcela: TEdit;
@@ -58,6 +56,8 @@ type
     lblNormal: TLabel;
     pnlNormal: TPanel;
     pnlCancelada: TPanel;
+    edtNDoc: TEdit;
+    lblNDoc: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -110,7 +110,6 @@ begin
   inherited;
 
   ExibeTelaBaixar;
-  Pesquisar;
 
 end;
 
@@ -127,7 +126,7 @@ begin
   inherited;
 
   ExibeTelaBaixar;
-  Pesquisar;
+
 
 end;
 
@@ -258,6 +257,9 @@ begin
 
     //  Define a data de vencimento
     cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+
+    //  Define o numero do doc
+    cdsParcelasDOCUMENTO.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
 
     cdsParcelas.Post;
 
@@ -625,6 +627,7 @@ procedure TfrmContasPagar.ExibeTelaBaixar;
 begin
 
   frmBaixarCP.BaixarCP(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+  Pesquisar;
 
 end;
 

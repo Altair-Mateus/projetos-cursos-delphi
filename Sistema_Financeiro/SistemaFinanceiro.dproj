@@ -176,6 +176,12 @@
         </DCCReference>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.pas"/>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.Detalhe.pas"/>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.pas"/>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.Detalhe.pas"/>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BaixarCR.pas">
+            <Form>frmBaixarCR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

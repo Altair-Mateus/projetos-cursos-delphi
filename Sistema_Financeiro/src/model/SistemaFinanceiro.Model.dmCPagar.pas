@@ -29,6 +29,7 @@ type
     cdsCPagarSTATUS: TWideStringField;
   private
     { Private declarations }
+
   public
     { Public declarations }
     procedure GeraCodigo;
@@ -185,7 +186,6 @@ begin
       FDQueryCpDet.ParamByName('VALOR').AsCurrency  := BaixaCP.Valor;
       FDQueryCpDet.ParamByName('DATA').AsDate       := BaixaCP.Data;
       FDQueryCpDet.ParamByName('USUARIO').AsString  := BaixaCP.Usuario;
-
 
 
       FDQueryCpDet.Prepare;
