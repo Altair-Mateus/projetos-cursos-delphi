@@ -1,5 +1,4 @@
 program SistemaFinanceiro;
-
 uses
   Vcl.Forms,
   SistemaFinanceiro.View.Principal in 'src\view\SistemaFinanceiro.View.Principal.pas' {frmPrincipal},
@@ -25,10 +24,10 @@ uses
   SistemaFinanceiro.Model.Entidades.CP.Detalhe in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CP.Detalhe.pas',
   SistemaFinanceiro.Model.Entidades.CR in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.pas',
   SistemaFinanceiro.Model.Entidades.CR.Detalhe in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.Detalhe.pas',
-  SistemaFinanceiro.View.BaixarCR in 'src\view\SistemaFinanceiro.View.BaixarCR.pas' {frmBaixarCR};
+  SistemaFinanceiro.View.BaixarCR in 'src\view\SistemaFinanceiro.View.BaixarCR.pas' {frmBaixarCR},
+  SistemaFinanceiro.View.ConsultarCr in 'src\view\SistemaFinanceiro.View.ConsultarCr.pas' {frmConsultarCr};
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
@@ -42,5 +41,6 @@ begin
   Application.CreateForm(TfrmContasReceber, frmContasReceber);
   Application.CreateForm(TfrmBaixarCP, frmBaixarCP);
   Application.CreateForm(TfrmBaixarCR, frmBaixarCR);
+  Application.CreateForm(TfrmConsultarCr, frmConsultarCr);
   Application.Run;
 end.

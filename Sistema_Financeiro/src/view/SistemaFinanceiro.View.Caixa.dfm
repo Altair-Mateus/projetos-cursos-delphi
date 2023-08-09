@@ -3,8 +3,6 @@ inherited frmCaixa: TfrmCaixa
   ClientHeight = 616
   ClientWidth = 1108
   WindowState = wsMaximized
-  ExplicitLeft = -347
-  ExplicitTop = -115
   ExplicitWidth = 1120
   ExplicitHeight = 654
   TextHeight = 19
@@ -218,6 +216,7 @@ inherited frmCaixa: TfrmCaixa
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ExplicitLeft = 844
           object lblCorReceita: TLabel
             Left = 31
             Top = 16

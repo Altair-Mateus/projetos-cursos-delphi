@@ -1,777 +1,213 @@
-inherited frmContasPagar: TfrmContasPagar
-  Caption = 'Contas a Pagar'
-  ClientHeight = 655
-  ClientWidth = 1041
-  Position = poDesigned
-  WindowState = wsMaximized
-  ExplicitLeft = -280
-  ExplicitWidth = 1053
-  ExplicitHeight = 693
+object frmConsultarCr: TfrmConsultarCr
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSingle
+  Caption = 'Consulta Contas a Receber'
+  ClientHeight = 498
+  ClientWidth = 772
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Position = poScreenCenter
   TextHeight = 19
-  inherited CardPanelPrincipal: TCardPanel
-    Width = 1041
-    Height = 655
-    ExplicitWidth = 1037
-    ExplicitHeight = 654
-    inherited CardCadastro: TCard
-      Width = 1039
-      Height = 653
-      ExplicitWidth = 1039
-      ExplicitHeight = 653
-      inherited pnlBotoesCad: TPanel
-        Top = 584
-        Width = 1039
-        ExplicitTop = 584
-        ExplicitWidth = 1039
-        inherited btnSalvar: TButton
-          OnClick = btnSalvarClick
-        end
-      end
-      inherited PanelCampos: TPanel
-        Width = 1039
-        Height = 543
-        ExplicitWidth = 1039
-        ExplicitHeight = 543
-        object lblDesc: TLabel
-          Left = 44
-          Top = 32
-          Width = 67
-          Height = 19
-          Caption = 'Descri'#231#227'o'
-        end
-        object lblDataCompra: TLabel
-          Left = 258
-          Top = 159
-          Width = 120
-          Height = 19
-          Caption = ' Data da Compra'
-        end
-        object lblValorCompra: TLabel
-          Left = 42
-          Top = 159
-          Width = 144
-          Height = 19
-          Caption = 'Valor da Compra R$'
-        end
-        object lblParcelamento: TLabel
-          Left = 42
-          Top = 249
-          Width = 95
-          Height = 19
-          Caption = 'Parcelamento'
-        end
-        object lblNDoc: TLabel
-          Left = 496
-          Top = 159
-          Width = 105
-          Height = 19
-          Caption = 'N'#186' Documento'
-        end
-        object memDesc: TMemo
-          Left = 42
-          Top = 57
-          Width = 639
-          Height = 64
-          MaxLength = 200
-          TabOrder = 0
-        end
-        object dateCompra: TDateTimePicker
-          Left = 265
-          Top = 184
-          Width = 186
-          Height = 27
-          Date = 45099.000000000000000000
-          Time = 0.866143263890990100
-          TabOrder = 2
-        end
-        object edtValorCompra: TEdit
-          Left = 42
-          Top = 184
-          Width = 185
-          Height = 27
-          Color = clWhite
-          MaxLength = 16
-          TabOrder = 1
-          OnExit = edtValorCompraExit
-        end
-        object toggleParcelamento: TToggleSwitch
-          Left = 168
-          Top = 249
-          Width = 84
-          Height = 21
-          Color = 9750962
-          DisabledColor = 5737262
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBtnText
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          FrameColor = 5737262
-          ParentFont = False
-          StateCaptions.CaptionOn = 'Sim'
-          StateCaptions.CaptionOff = 'N'#227'o'
-          TabOrder = 4
-          ThumbColor = 5737262
-          OnClick = toggleParcelamentoClick
-        end
-        object CardPanelParcela: TCardPanel
-          Left = 40
-          Top = 296
-          Width = 793
-          Height = 249
-          ActiveCard = cardParcelamento
-          BevelOuter = bvNone
-          Caption = 'CardPanel1'
-          TabOrder = 5
-          object cardParcelaUnica: TCard
-            Left = 0
-            Top = 0
-            Width = 793
-            Height = 249
-            Caption = 'cardParcelaUnica'
-            CardIndex = 0
-            TabOrder = 0
-            object lblParcela: TLabel
-              Left = 0
-              Top = 0
-              Width = 50
-              Height = 19
-              Caption = 'Parcela'
-            end
-            object lblValorParcela: TLabel
-              Left = 218
-              Top = 0
-              Width = 138
-              Height = 19
-              Caption = 'Valor da Parcela R$'
-            end
-            object lblVencimento: TLabel
-              Left = 0
-              Top = 69
-              Width = 83
-              Height = 19
-              Caption = 'Vencimento'
-            end
-            object edtParcela: TEdit
-              Left = 0
-              Top = 25
-              Width = 185
-              Height = 27
-              Color = clWhite
-              MaxLength = 10
-              TabOrder = 0
-            end
-            object edtValorParcela: TEdit
-              Left = 218
-              Top = 25
-              Width = 185
-              Height = 27
-              Color = clWhite
-              MaxLength = 16
-              TabOrder = 1
-              OnExit = edtValorParcelaExit
-            end
-            object dateVencimento: TDateTimePicker
-              Left = 0
-              Top = 94
-              Width = 185
-              Height = 27
-              Date = 45099.000000000000000000
-              Time = 0.866143263890990100
-              TabOrder = 2
-            end
-          end
-          object cardParcelamento: TCard
-            Left = 0
-            Top = 0
-            Width = 793
-            Height = 249
-            Caption = 'cardParcelamento'
-            CardIndex = 1
-            TabOrder = 1
-            object lblQtdParcelas: TLabel
-              Left = 4
-              Top = 7
-              Width = 165
-              Height = 19
-              Caption = 'Quantidade de Parcelas'
-            end
-            object lblIntervaloDias: TLabel
-              Left = 217
-              Top = 7
-              Width = 125
-              Height = 19
-              Caption = 'Intervalo em Dias'
-            end
-            object edtQtdParcelas: TEdit
-              Left = 4
-              Top = 32
-              Width = 183
-              Height = 27
-              Color = clWhite
-              MaxLength = 10
-              TabOrder = 0
-            end
-            object edtIntervaloDias: TEdit
-              Left = 217
-              Top = 32
-              Width = 185
-              Height = 27
-              Color = clWhite
-              MaxLength = 10
-              TabOrder = 1
-            end
-            object btnGerar: TButton
-              Left = 491
-              Top = 0
-              Width = 100
-              Height = 57
-              Caption = 'Gerar'
-              ImageIndex = 7
-              Images = ImageList1
-              TabOrder = 2
-              OnClick = btnGerarClick
-            end
-            object btnLimpar: TButton
-              Left = 608
-              Top = 0
-              Width = 100
-              Height = 57
-              Caption = 'Limpar'
-              ImageIndex = 8
-              Images = ImageList1
-              TabOrder = 3
-              OnClick = btnLimparClick
-            end
-            object DBGridParcelas: TDBGrid
-              Left = 2
-              Top = 96
-              Width = 704
-              Height = 129
-              Color = clCream
-              DataSource = dsParcelas
-              FixedColor = clCream
-              TabOrder = 4
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -16
-              TitleFont.Name = 'Tahoma'
-              TitleFont.Style = []
-              Columns = <
-                item
-                  Expanded = False
-                  FieldName = 'PARCELA'
-                  Title.Caption = 'Parcela'
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'DOCUMENTO'
-                  Title.Caption = 'Documento'
-                  Width = 113
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'VENCIMENTO'
-                  Title.Caption = 'Vencimento'
-                  Width = 132
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'VALOR'
-                  Title.Caption = 'Valor R$'
-                  Visible = True
-                end>
-            end
-          end
-        end
-        object edtNDoc: TEdit
-          Left = 496
-          Top = 184
-          Width = 185
-          Height = 27
-          Color = clWhite
-          MaxLength = 20
-          TabOrder = 3
-        end
-      end
-      inherited PanelTitulo: TPanel
-        Width = 1039
-        ExplicitWidth = 1039
-        inherited lblTitulo: TLabel
-          Left = 23
-          ExplicitLeft = 23
-        end
-      end
+  object pnlPesquisa: TPanel
+    Left = 0
+    Top = 0
+    Width = 772
+    Height = 81
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 5737262
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = -334
+    ExplicitWidth = 1106
+    object lblPesquisar: TLabel
+      Left = 16
+      Top = 16
+      Width = 73
+      Height = 19
+      Align = alCustom
+      Caption = 'Pesquisar:'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
     end
-    inherited CardPesquisa: TCard
-      Width = 1039
-      Height = 653
-      ExplicitWidth = 1035
-      ExplicitHeight = 652
-      inherited pnlPesquisa: TPanel
-        Width = 1039
-        Height = 145
-        ExplicitWidth = 1039
-        ExplicitHeight = 145
-        object lblStatus: TLabel [1]
-          Left = 353
-          Top = 13
-          Width = 89
-          Height = 19
-          Align = alCustom
-          Caption = 'Status Conta'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-        end
-        object lblData: TLabel [2]
-          Left = 353
-          Top = 71
-          Width = 98
-          Height = 19
-          Align = alCustom
-          Caption = 'Filtrar data de'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-        end
-        object lblDataFinal: TLabel [3]
-          Left = 176
-          Top = 71
-          Width = 70
-          Height = 19
-          Align = alCustom
-          Caption = 'Data Final'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-        end
-        object lblDataInicial: TLabel [4]
-          Left = 16
-          Top = 71
-          Width = 79
-          Height = 19
-          Align = alCustom
-          Caption = 'Data Inicial'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-        end
-        inherited edtPesquisar: TEdit
-          Width = 297
-          ExplicitWidth = 297
-        end
-        inherited btnPesquisae: TButton
-          Left = 915
-          Top = 30
-          Height = 85
-          Margins.Top = 30
-          Margins.Bottom = 30
-          OnClick = btnPesquisaeClick
-          ExplicitLeft = 784
-        end
-        object cbStatus: TComboBox
-          Left = 353
-          Top = 38
-          Width = 173
-          Height = 27
-          Style = csDropDownList
-          ItemIndex = 0
-          TabOrder = 2
-          Text = 'TODAS'
-          Items.Strings = (
-            'TODAS'
-            'PAGA'
-            'ABERTA'
-            'CANCELADA')
-        end
-        object gbFiltros: TGroupBox
-          Left = 567
-          Top = 14
-          Width = 236
-          Height = 109
-          Caption = 'Ordenar consulta por'
-          Color = clWhite
-          DefaultHeaderFont = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          HeaderFont.Charset = DEFAULT_CHARSET
-          HeaderFont.Color = clWhite
-          HeaderFont.Height = -16
-          HeaderFont.Name = 'Tahoma'
-          HeaderFont.Style = []
-          ParentBackground = False
-          ParentColor = False
-          ParentFont = False
-          TabOrder = 3
-          object rbDataVenc: TRadioButton
-            Left = 3
-            Top = 33
-            Width = 118
-            Height = 17
-            Caption = 'Data Vencimento'
-            Color = 5934893
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 0
-          end
-          object rbValorParcela: TRadioButton
-            Left = 127
-            Top = 33
-            Width = 118
-            Height = 17
-            Caption = 'Valor Parcela'
-            Color = 5934893
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 1
-          end
-          object rbValorCompra: TRadioButton
-            Left = 127
-            Top = 61
-            Width = 118
-            Height = 17
-            Caption = 'Valor Compra'
-            Color = 5934893
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 2
-          end
-          object rbDataCompra: TRadioButton
-            Left = 3
-            Top = 61
-            Width = 118
-            Height = 17
-            Caption = 'Data Compra'
-            Color = 5934893
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 3
-          end
-          object rbId: TRadioButton
-            Left = 3
-            Top = 90
-            Width = 118
-            Height = 17
-            Caption = 'ID'
-            Checked = True
-            Color = 5934893
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 4
-            TabStop = True
-          end
-        end
-        object cbData: TComboBox
-          Left = 353
-          Top = 96
-          Width = 173
-          Height = 27
-          Style = csDropDownList
-          ItemIndex = 0
-          TabOrder = 4
-          Text = 'DATA COMPRA'
-          Items.Strings = (
-            'DATA COMPRA'
-            'DATA VENCIMENTO'
-            'DATA PAGAMENTO'
-            'DATA CADASTRO')
-        end
-        object dateFinal: TDateTimePicker
-          Left = 176
-          Top = 96
-          Width = 137
-          Height = 27
-          Date = 45146.000000000000000000
-          Time = 0.872988819442980500
-          ShowCheckbox = True
-          TabOrder = 5
-        end
-        object dateInicial: TDateTimePicker
-          Left = 16
-          Top = 96
-          Width = 137
-          Height = 27
-          Date = 45146.000000000000000000
-          Time = 0.872988819442980500
-          ShowCheckbox = True
-          TabOrder = 6
-        end
-      end
-      inherited pnlBotoes: TPanel
-        Top = 584
-        Width = 1039
-        ExplicitTop = 583
-        ExplicitWidth = 1035
-        inherited btnExcluir: TButton
-          OnClick = btnExcluirClick
-        end
-        inherited btnSair: TButton
-          Left = 915
-          ExplicitLeft = 911
-        end
-        object gbLegenda: TGroupBox
-          AlignWithMargins = True
-          Left = 672
-          Top = 4
-          Width = 237
-          Height = 61
-          Align = alRight
-          Caption = 'Legendas'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 5
-          ExplicitLeft = 668
-          object lblPagas: TLabel
-            Left = 31
-            Top = 16
-            Width = 56
-            Height = 13
-            Caption = 'Conta Paga'
-          end
-          object lblVencida: TLabel
-            Left = 31
-            Top = 36
-            Width = 69
-            Height = 13
-            Caption = 'Conta Vencida'
-          end
-          object lblCancelada: TLabel
-            Left = 143
-            Top = 16
-            Width = 82
-            Height = 13
-            Caption = 'Conta Cancelada'
-          end
-          object lblNormal: TLabel
-            Left = 143
-            Top = 36
-            Width = 65
-            Height = 13
-            Caption = 'Conta Normal'
-          end
-          object pnlPagas: TPanel
-            Left = 11
-            Top = 17
-            Width = 14
-            Height = 14
-            Color = clHotLight
-            ParentBackground = False
-            TabOrder = 0
-          end
-          object pnlVencida: TPanel
-            Left = 11
-            Top = 37
-            Width = 14
-            Height = 14
-            Color = clRed
-            ParentBackground = False
-            TabOrder = 1
-          end
-          object pnlNormal: TPanel
-            Left = 123
-            Top = 37
-            Width = 14
-            Height = 14
-            Color = clBlack
-            ParentBackground = False
-            TabOrder = 2
-          end
-          object pnlCancelada: TPanel
-            Left = 123
-            Top = 17
-            Width = 14
-            Height = 14
-            Color = 15109094
-            ParentBackground = False
-            TabOrder = 3
-          end
-        end
-        object btnBaixarCP: TButton
-          AlignWithMargins = True
-          Left = 508
-          Top = 6
-          Width = 121
-          Height = 57
-          Margins.Top = 5
-          Margins.Bottom = 5
-          Align = alLeft
-          Caption = 'Baixar '
-          ImageIndex = 9
-          Images = ImageList1
-          TabOrder = 6
-          WordWrap = True
-          OnClick = btnBaixarCPClick
-          ExplicitLeft = 915
-          ExplicitTop = 3
-          ExplicitHeight = 135
-        end
-      end
-      inherited pnlGrid: TPanel
-        Top = 145
-        Width = 1039
-        Height = 439
-        ExplicitWidth = 1035
-        ExplicitHeight = 502
-        inherited DBGrid1: TDBGrid
-          Width = 1037
-          Height = 437
-          Color = clWhite
-          DataSource = DataSourceCPagar
-          PopupMenu = PopupMenu1
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID'
-              Width = 36
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NUMERO_DOC'
-              Title.Caption = 'N'#186' Documento'
-              Width = 117
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DESCRICAO'
-              Title.Caption = 'Descri'#231#227'o'
-              Width = 300
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PARCELA'
-              Title.Caption = 'Parcela'
-              Width = 67
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'STATUS'
-              Title.Caption = 'Status'
-              Width = 61
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_VENCIMENTO'
-              Title.Caption = ' Vencimento'
-              Width = 109
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VALOR_PARCELA'
-              Title.Caption = 'Valor Parcela R$'
-              Width = 137
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VALOR_COMPRA'
-              Title.Caption = 'Valor Compra R$'
-              Width = 142
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_COMPRA'
-              Title.Caption = 'Data da Compra'
-              Width = 134
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_PAGAMENTO'
-              Title.Caption = 'Data de Pagamento'
-              Width = 149
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VALOR_ABATIDO'
-              Title.Caption = 'Valor Abatido'
-              Width = 107
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_CADASTRO'
-              Title.Caption = 'Data de Cadastro'
-              Width = 139
-              Visible = True
-            end>
-        end
-      end
+    object lblDataInicial: TLabel
+      Left = 208
+      Top = 15
+      Width = 79
+      Height = 19
+      Align = alCustom
+      Caption = 'Data Inicial'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblDataFinal: TLabel
+      Left = 368
+      Top = 15
+      Width = 70
+      Height = 19
+      Align = alCustom
+      Caption = 'Data Final'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object edtPesquisar: TEdit
+      Left = 16
+      Top = 40
+      Width = 177
+      Height = 27
+      Align = alCustom
+      TabOrder = 0
+    end
+    object btnPesquisae: TButton
+      AlignWithMargins = True
+      Left = 648
+      Top = 5
+      Width = 121
+      Height = 71
+      Margins.Top = 5
+      Margins.Bottom = 5
+      Align = alRight
+      Caption = 'Pesquisar'
+      ImageIndex = 5
+      Images = ImageList1
+      TabOrder = 1
+      ExplicitLeft = 982
+    end
+    object dateInicial: TDateTimePicker
+      Left = 208
+      Top = 40
+      Width = 137
+      Height = 27
+      Date = 45146.000000000000000000
+      Time = 0.872988819442980500
+      ShowCheckbox = True
+      TabOrder = 2
+    end
+    object dateFinal: TDateTimePicker
+      Left = 368
+      Top = 40
+      Width = 137
+      Height = 27
+      Date = 45146.000000000000000000
+      Time = 0.872988819442980500
+      ShowCheckbox = True
+      TabOrder = 3
     end
   end
-  inherited ImageList1: TImageList
-    Left = 832
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 429
+    Width = 772
+    Height = 69
+    Align = alBottom
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitLeft = -334
+    ExplicitTop = 373
+    ExplicitWidth = 1106
+    object btnSair: TButton
+      AlignWithMargins = True
+      Left = 648
+      Top = 4
+      Width = 120
+      Height = 61
+      Align = alRight
+      Caption = 'SAIR'
+      ImageIndex = 3
+      Images = ImageList1
+      TabOrder = 0
+      ExplicitLeft = 673
+      ExplicitTop = 12
+    end
+    object btnBaixarCR: TButton
+      AlignWithMargins = True
+      Left = 521
+      Top = 6
+      Width = 121
+      Height = 57
+      Margins.Top = 5
+      Margins.Bottom = 5
+      Align = alRight
+      Caption = 'Baixar '
+      ImageIndex = 7
+      Images = ImageList1
+      TabOrder = 1
+      WordWrap = True
+      ExplicitLeft = 915
+      ExplicitTop = 5
+      ExplicitHeight = 71
+    end
+  end
+  object pnlGrid: TPanel
+    Left = 0
+    Top = 81
+    Width = 772
+    Height = 348
+    Align = alClient
+    TabOrder = 2
+    ExplicitLeft = -271
+    ExplicitTop = -62
+    ExplicitWidth = 1043
+    ExplicitHeight = 504
+    object Image1: TImage
+      Left = 640
+      Top = 152
+      Width = 105
+      Height = 105
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 770
+      Height = 346
+      Align = alClient
+      DataSource = DataSourceConsultaCr
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+  object ImageList1: TImageList
+    ColorDepth = cd32Bit
+    Height = 32
+    Width = 32
+    Left = 704
+    Top = 168
     Bitmap = {
-      494C01010A001800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108001800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000F1EFEDFFF1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EF
-      EDFFD0CECCED0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -784,13 +220,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000051E3FFFF51E3FFFF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EFEDFFF1EF
-      EDFFF1EFEDFFF1EFEDFF00000000000000000000000000000000000000000000
-      00000000000000000000413024FF000000000000000000000000413024FF0000
-      00000000000000000000413024FF000000000000000000000000413024FF0000
-      00000000000000000000413024FF000000000000000000000000413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -800,13 +230,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000051E3FFFF51E3FFFF51E3FFFF0000000F0000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
-      00000000000000000000FCECDEFF413024FF00000000DDCDBFFFFCECDEFF4130
-      24FF00000000756458FFFCECDEFF413024FF00000000423125FFFCECDEFF4130
-      24FF00000000413024FFFCECDEFF413024FF00000000413024FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -816,13 +240,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EFEDFFF1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
-      00000000000000000000FCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
-      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
-      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -832,13 +249,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF00000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000F1EFEDFFF1EFEDFFF1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFFFCEC
-      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
-      DEFFFCECDEFFFCECDEFFDE6E18FFFCD9C0FFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -848,13 +258,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000F1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
-      DEFFFCECDEFF413024FFF27617FF413024FFFCE1CCFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -864,13 +267,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000266B78AF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000
-      000000000000000000000000000000000000000000000000000000000000F1EF
-      EDFFF1EFEDFFF1EFEDFFF1EFEDFF000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
-      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FFFCEC
-      DEFF4A392CFFF27617FFF27617FF413024FF413024FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -880,13 +276,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000091908FC600000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF1E9FFFCECDEFFFCECDEFFFCECDEFFFCEC
-      DEFF413024FF413024FFF27617FFFCD9C0FFF27617FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -896,13 +286,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFFFCEC
-      DEFFF7E7D9FFFCECDEFFF27617FF413024FF563822FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -912,13 +296,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF4EDAF5FA000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCEC
-      DEFFFCECDEFFD06919FFF27617FF413024FFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -928,13 +306,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCEC
-      DEFF413024FF413024FFF27617FFFCD9C0FF413024FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -944,13 +316,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000051E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FF413024FF413024FFF27617FFFBD7BEFFF27617FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -960,13 +326,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000051E3FFFF51E3FFFF51E3FFFF35B2FFFF35B2FFFF51E3FFFF51E3FFFF51E3
-      FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF000000000000000000000000AAB0
-      FFFFAAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFF27617FFF27617FFF27617FF413024FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -975,14 +334,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000966B
-      5AE7B7836DFF51E3FFFF51E3FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF35B2
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF00000000000000000000000000000000AAB0
-      FFFF51E3FFFFAAB0FFFF00000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFF27617FFFBD8BFFFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -991,14 +342,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000B783
-      6DFFB7836DFFB7836DFFB7836DFF51E3FFFF51E3FFFF51E3FFFF35B2FFFF35B2
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF51E3FFFF00000000000000000000000000000000000000000000
-      0000AAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
-      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FF4130
-      24FFFCF5F0FFFCF5F0FF413024FFFCECDEFFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1007,14 +350,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000B783
-      6DFFB7836DFFB7836DFFB7836DFFB7836DFFB7836DFF51E3FFFF35B2FFFF51E3
-      FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF51E3FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1024,13 +360,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB7846EFF51E3
-      FFFF51E3FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3
-      FFFF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1040,13 +370,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
-      6DFF39B9FFFF35B2FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF0000
-      00000000000000000000AAB0FFFFAAB0FFFF2426377700000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
-      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FF4130
-      24FF413024FF413024FF413024FFFCF5F0FFFCF5F0FFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1056,13 +380,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
-      6DFFB7836DFFB7836DFF51E3FFFF51E3FFFF51E3FFFF51E3FFFF000000000000
-      00000000000000000000AAB0FFFFAAB0FFFFAAB0FFFF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5EFFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1072,13 +390,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFFB783
-      6DFFB7836DFFB7836DFFB7836DFFB7836DFF51E3FFFF00000000000000000000
-      000000000000AAB0FFFFAAB0FFFF51E3FFFFAAB0FFFF434565A1000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FFFCF5F0FF423125FF413024FF413024FF413024FF6F5A4BFFFCF5
-      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1088,13 +400,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF00000005B783
-      6DFFB7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
-      00000000000000000000AAB0FFFFAAB0FFFFAAB0FFFF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FFFCF5F0FF545F19FF7DC900FF7DC900FF7DC900FF7DC900FF7DC900FF4130
-      24FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1104,13 +410,8 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF000000000000
-      000000000000B7836DFFB7836DFF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
-      F0FF63960FFF7DE100FF7DE100FF7DE100FF7DE100FF7DC900FF7DC900FF7DC9
-      00FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1120,13 +421,8 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000B7836DFFB7836DFFB7836DFFB7836DFFB7836DFF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000636795C300000000000000000000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF4130
-      24FF7DE100FF7DE100FF413024FF413024FF7DE100FF7DE100FF7DCD00FF7DC9
-      00FF7DC900FF705B4CFFFCE2CFFFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1136,13 +432,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000B7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000AAB0
-      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
-      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF463F
-      21FF7DE100FF413024FFFCF5F0FFFCF5F0FFFCF5F0FF423323FF7DE100FF7DC9
-      00FF7DC900FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1151,14 +441,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000B783
-      6DFFB7836DFFB7836DFFB7836DFFB7836DFF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000AAB0
-      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
-      00000000000000000000E1D8D2FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF7CDD
-      00FF7DE100FFFCF5F0FFA5B17AFF659B0EFFDADDC1FFFCF5F0FF413024FF7DE1
-      00FF7DC900FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FF413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1167,14 +450,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000B7836DFFB783
-      6DFFB7836DFFB7836DFFB7836DFF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000AAB0FFFFAAB0
-      FFFF51E3FFFF51E3FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
-      000000000000000000003E2E23F9DED7D0FFFCF5F0FFFCF5F0FFFCF5F0FF5261
-      1AFF7DE100FF413024FF7DE100FF7DE100FF7DE100FF413024FFFCF5F0FFFCF5
-      F0FF7DE100FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFBAB0A8FF0302023E0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1183,14 +459,7 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000B7836DFFB783
-      6DFFB7836DFFB7836DFFB7836DFF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000AAB0FFFFAAB0
-      FFFFAAB0FFFF51E3FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000004130
-      24FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF64970FFF4C4A
-      25FF7DE100FF413024FE00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1199,14 +468,8 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000B7836DFFB7836DFFB783
-      6DFFB7836DFFB7836DFF00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000AAB0
-      FFFFAAB0FFFFAAB0FFFFAAB0FFFFAAB0FFFF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00007DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE1
-      00FF546818FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1215,14 +478,9 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000B7836DFF00000000B783
-      6DFFB7836DFF916756E300000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000AAB0FFFFAAB0FFFF00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000077DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF6392
-      10FF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1231,13 +489,10 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000009E705EEDB7836DFF000000000000
-      0000B7836DFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000413024FF52611AFF7CDD00FF463E21FF413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1247,8 +502,6 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000B7836DFFB7836DFFB783
-      6DFF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1263,7 +516,193 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000B17F69FB0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1293,7 +732,7 @@ inherited frmContasPagar: TfrmContasPagar
       D9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEF6EDD9FEDE8D3AEEDE8D
       3AEEDE8D3AEE0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000076C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4
@@ -1308,9 +747,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FF000000FF000000FF0000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000413024FF000000000000000000000000413024FF0000
+      00000000000000000000413024FF000000000000000000000000413024FF0000
+      00000000000000000000413024FF000000000000000000000000413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4
@@ -1323,10 +762,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000FF0000
-      00FF0000000800000000000000FF000000FF000000FF000000FF000000FF0000
-      00FF0000000000000000000000FF000000FF000000FFFBD000FF000000FF0000
-      00FF000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
+      00000000000000000000FCECDEFF413024FF00000000DDCDBFFFFCECDEFF4130
+      24FF00000000756458FFFCECDEFF413024FF00000000423125FFFCECDEFF4130
+      24FF00000000413024FFFCECDEFF413024FF00000000413024FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF7DC7FFFF76C4FFFF76C4FFFF76C4
@@ -1340,9 +779,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FF000000FF0000000000000000000000000000000000000000000000000000
+      00000000000000000000FCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
+      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
+      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
@@ -1355,11 +794,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFEAE7D9FFEAE7
       D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7D9FFEAE7
       D9FFEAE7D9FFEAE7D9FFEAE7D9FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB00000000000000FF000000000000
-      00CD000000FF000000FF000000FF000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FFFBD000FF000000FF00000085000000000000000000000000000000000000
-      00FF000000FF000000FF00000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFFFCEC
+      DEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
+      DEFFFCECDEFFFCECDEFFDE6E18FFFCD9C0FFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -1372,10 +811,10 @@ inherited frmContasPagar: TfrmContasPagar
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FF403500FF000000FF000000000000000000000000000000FF000000FF43C3
-      FFFF43C3FFFF000000FF000000FF000000000000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCECDEFFFCEC
+      DEFFFCECDEFF413024FFF27617FF413024FFFCE1CCFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -1387,11 +826,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
-      00FF0000003500000000000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FFFBD000FFFBD000FF0000
-      00FF000000FF000000000000000000000000000000FF40BBF5FF76E1FFFF43C3
-      FFFF43C3FFFF43C3FFFF43C3FFFF000000FF0000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
+      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FFFCEC
+      DEFF4A392CFFF27617FFF27617FF413024FF413024FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF76C4FFFF76C4FFFF76C4FFFF000000000000
@@ -1404,10 +843,10 @@ inherited frmContasPagar: TfrmContasPagar
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFFEAE7D9FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FFFBD000FF000000FF0000
-      000000000000000000000000000000000000000000FF76E1FFFF76E1FFFF0000
-      00FF000000FF43C3FFFF43C3FFFF194A61FF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF1E9FFFCECDEFFFCECDEFFFCECDEFFFCEC
+      DEFF413024FF413024FFF27617FFFCD9C0FFF27617FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFF76C4FFFFFF8823FFFF88
@@ -1419,11 +858,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
-      00FF000000FF000000FF00000000000000FF000000FF00000000000000000000
-      000000000000000000000000000000000000000000FF000000FF000000000000
-      000000000000000000000000000000000000000000FF76E1FFFF000000FFFFFB
-      F2FFFFFBF2FF000000FF43C3FFFF43C3FFFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFFFCEC
+      DEFFF7E7D9FFFCECDEFFF27617FF413024FF563822FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFF76C4FFFFFF8823FFFF88
@@ -1436,10 +875,10 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF33626FFFE3DFD7FF0000
-      00FFFFFBF2FFFFFBF2FF000000FF43C3FFFF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCEC
+      DEFFFCECDEFFD06919FFF27617FF413024FFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098FFFF1098
       FFFF1098FFFF1098FFFF1098FFFF7DC8FFFF76C4FFFF76C4FFFFCE5D00FFF06C
@@ -1452,10 +891,10 @@ inherited frmContasPagar: TfrmContasPagar
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF76E1FFFF000000FF60B8
-      D0FF000000FF000000FF000000FF43C3FFFF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCEC
+      DEFF413024FF413024FFF27617FFFCD9C0FF413024FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFFCE5D00FFF06C
@@ -1468,10 +907,10 @@ inherited frmContasPagar: TfrmContasPagar
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      00000000000000000000000000FF000000FF0000000000000000000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF76E1FFFF76E1FFFF76E1
-      FFFF76E1FFFF76E1FFFF43C3FFFF43C3FFFF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FF413024FF413024FFF27617FFFBD7BEFFF27617FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFF06C00FFCE5D00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFF76C4FFFFCF5E00FFF06C
@@ -1484,10 +923,10 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      00000000000000000000000000FFFBD000FF000000FF00000000000000FF2DE6
-      A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF67C4DEFF76E1FFFF76E1
-      FFFF76E1FFFF76E1FFFF43C3FFFF000000FF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFF27617FFF27617FFF27617FF413024FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFFF88
@@ -1499,11 +938,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000A2000000FF000000FF0000
-      00FF000000FF000000FF000000FFFBD000FFFBD000FF000000FF000000FF2DE6
-      A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF0000
-      00FF000000FF1E9A6CFF000000FF2AD999FF2DE6A2FF0D442FFF000000FF0000
-      00FF000000FF000000FF000000FF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFF27617FFFBD8BFFFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1515,11 +954,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
-      61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FF000000FF0000
-      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF1D98
-      6AFF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
+      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FF4130
+      24FFFCF5F0FFFCF5F0FF413024FFFCECDEFFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1531,11 +970,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1547,11 +986,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FF000000FF0000
-      00FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCECDEFFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1563,11 +1002,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000E0000000FF000000FF0000
-      0000000000FA000000FF000000FFFBD000FFFBD000FF000000FF000000FF2DE6
-      A2FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF0000
-      00FF000000FF2DE6A2FF000000FF0B3A28FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FF413024FF413024FF4130
+      24FF413024FF413024FF413024FF413024FF413024FF413024FF413024FF4130
+      24FF413024FF413024FF413024FFFCF5F0FFFCF5F0FFFCECDEFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FF23AC5DFFFF8823FFFF8823FF231B
@@ -1580,10 +1019,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      00000000000000000000000000FFFBD000FF000000FF00000000000000FF2DE6
-      A2FF010705FF000000FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF0B3D2BFF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF000000FF000000FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5EFFF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C00FFF06C
       00FFFF8823FFFF8823FFFF8823FFFF8823FF23AC5DFFFF8823FFFF8823FF231B
@@ -1596,10 +1035,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      00000000000000000000000000FF000000FF0000000000000000000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF000000FF082D1FFF082D1FFF082D1FFF082D1FFF082D
-      1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D1FFF082D
-      1FFF000000FF2DE6A2FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FFFCF5F0FF423125FF413024FF413024FF413024FF6F5A4BFFFCF5
+      F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1611,11 +1050,11 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FFFFA242FF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFFFFA242FFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB000000DC000000FF000000000000
-      00FF000000FF0000008300000000000000000000000000000000000000FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6A2FF2DE6
-      A2FF2DE6A2FF2DE6A2FF26C78BFF26C78BFF0000000000000000FF8823FFFF88
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FFFCF5F0FF545F19FF7DC900FF7DC900FF7DC900FF7DC900FF7DC900FF4130
+      24FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
+      0000000000000000000000000000000000000000000000000000FF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
       23FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF8823FFFF88
@@ -1628,10 +1067,10 @@ inherited frmContasPagar: TfrmContasPagar
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F
       2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF2DE6A2FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF0000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5
+      F0FF63960FFF7DE100FF7DE100FF7DE100FF7DE100FF7DC900FF7DC900FF7DC9
+      00FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFF76C4FFFFF06C00FFF06C
@@ -1644,9 +1083,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FF000000FF000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF4130
+      24FF7DE100FF7DE100FF413024FF413024FF7DE100FF7DE100FF7DCD00FF7DC9
+      00FF7DC900FF705B4CFFFCE2CFFFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1660,9 +1099,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FF322F2BFF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FFFBD000FF000000FF0000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF463F
+      21FF7DE100FF413024FFFCF5F0FFFCF5F0FFFCF5F0FF423323FF7DE100FF7DC9
+      00FF7DC900FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FF423125FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1675,10 +1114,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000FF0000
-      00FF0000009200000000000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FFFBD000FFFBD000FF0000
-      00FF000000FF0000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
+      00000000000000000000E1D8D2FFFCF5F0FFFCF5F0FFFCF5F0FFFCF5F0FF7CDD
+      00FF7DE100FFFCF5F0FFA5B17AFF659B0EFFDADDC1FFFCF5F0FF413024FF7DE1
+      00FF7DC900FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFFCF5F0FF413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1692,9 +1131,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FFD88938EB0000000000000000000000000000
-      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FF000000FF000000FF00000000000000000000000000000000000000000000
+      000000000000000000003E2E23F9DED7D0FFFCF5F0FFFCF5F0FFFCF5F0FF5261
+      1AFF7DE100FF413024FF7DE100FF7DE100FF7DE100FF413024FFFCF5F0FFFCF5
+      F0FF7DE100FF413024FFFCD9C0FFFCF5F0FFFCF5F0FFBAB0A8FF0302023E0000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000F06C00FFF06C00FFAADAFFFF1098FFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1707,10 +1146,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FFFFA242FF000000000000000C000000FF000000000000
-      00FF000000FF000000FF000000FF000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FFFBD000FF000000FF000000FD000000000000000000000000000000000000
+      42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000004130
+      24FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF64970FFF4C4A
+      25FF7DE100FF413024FE00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFF1098FFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1724,9 +1163,9 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FFFFA242FFFFA242FF000000000000000000000000000000000000
-      0000000000000000000000000000000000FFFBDB61FFFBDB61FFFBDB61FFFBDB
-      61FFFBDB61FFFBDB61FFFBD000FFFBD000FFFBD000FFFBD000FFFBD000FFFBD0
-      00FF000000FF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00007DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE1
+      00FF546818FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFF1098FFFF1098FFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1739,10 +1178,10 @@ inherited frmContasPagar: TfrmContasPagar
       42FFFFA242FFFFA242FFFFA242FF322F2BFFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4E5FFF7F4
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
-      42FFFFA242FFFFA242FF00000000000000000000000000000000000000FF0000
-      00FF000000C900000000000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FFFBD000FF8D7400FF0000
-      00FF000000000000000000000000000000000000000000000000000000000000
+      42FFFFA242FFFFA242FF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000077DE100FF7DE100FF7DE100FF7DE100FF7DE100FF7DE100FF6392
+      10FF000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000AADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
       FFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADAFFFFAADA
@@ -1757,7 +1196,7 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FFFFA2
       42FFFFA242FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FF000000FF000000FF0000
+      00000000000000000000413024FF52611AFF7CDD00FF463E21FF413024FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1773,7 +1212,7 @@ inherited frmContasPagar: TfrmContasPagar
       E5FFF7F4E5FF322F2BFF322F2BFFF7F4E5FFE4E1D3FF322F2BFFFFA242FF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000FF0000001A000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2356,51 +1795,8 @@ inherited frmContasPagar: TfrmContasPagar
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object DataSourceCPagar: TDataSource
-    DataSet = dmCPagar.cdsCPagar
-    Left = 832
-    Top = 256
-  end
-  object cdsParcelas: TClientDataSet
-    PersistDataPacket.Data = {
-      7D0000009619E0BD0100000018000000040000000000030000007D0007504152
-      43454C4104000100000000000556414C4F520800040000000100075355425459
-      50450200490006004D6F6E6579000A56454E43494D454E544F04000600000000
-      0009444F43554D454E544F01004A000000010005574944544802000200280000
-      00}
-    Active = True
-    Aggregates = <>
-    IndexFieldNames = 'Parcela'
-    Params = <>
-    Left = 905
-    Top = 378
-    object cdsParcelasPARCELA: TIntegerField
-      FieldName = 'PARCELA'
-    end
-    object cdsParcelasVALOR: TCurrencyField
-      FieldName = 'VALOR'
-      DisplayFormat = '#,##0.00'
-    end
-    object cdsParcelasVENCIMENTO: TDateField
-      FieldName = 'VENCIMENTO'
-    end
-    object cdsParcelasDOCUMENTO: TWideStringField
-      FieldName = 'DOCUMENTO'
-    end
-  end
-  object dsParcelas: TDataSource
-    DataSet = cdsParcelas
-    Left = 913
-    Top = 450
-  end
-  object PopupMenu1: TPopupMenu
-    Images = ImageList1
-    Left = 833
-    Top = 338
-    object Baixar1: TMenuItem
-      Caption = 'Baixar'
-      ImageIndex = 9
-      OnClick = Baixar1Click
-    end
+  object DataSourceConsultaCr: TDataSource
+    Left = 688
+    Top = 241
   end
 end

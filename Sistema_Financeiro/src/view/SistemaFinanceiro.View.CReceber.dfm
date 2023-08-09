@@ -3,6 +3,7 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 656
   ClientWidth = 1045
   WindowState = wsMaximized
+  ExplicitLeft = -3
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
@@ -280,10 +281,12 @@ inherited frmContasReceber: TfrmContasReceber
       ExplicitHeight = 653
       inherited pnlPesquisa: TPanel
         Width = 1043
-        ExplicitWidth = 1039
+        Height = 137
+        ExplicitWidth = 1043
+        ExplicitHeight = 137
         object lblStatus: TLabel [1]
-          Left = 390
-          Top = 15
+          Left = 352
+          Top = 14
           Width = 89
           Height = 19
           Align = alCustom
@@ -297,15 +300,71 @@ inherited frmContasReceber: TfrmContasReceber
           ParentColor = False
           ParentFont = False
         end
+        object lblDataInicial: TLabel [2]
+          Left = 16
+          Top = 71
+          Width = 79
+          Height = 19
+          Align = alCustom
+          Caption = 'Data Inicial'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object lblDataFinal: TLabel [3]
+          Left = 176
+          Top = 71
+          Width = 70
+          Height = 19
+          Align = alCustom
+          Caption = 'Data Final'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object lblData: TLabel [4]
+          Left = 353
+          Top = 71
+          Width = 98
+          Height = 19
+          Align = alCustom
+          Caption = 'Filtrar data de'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        inherited edtPesquisar: TEdit
+          Width = 297
+          ExplicitWidth = 297
+        end
         inherited btnPesquisae: TButton
-          Left = 792
+          Left = 919
+          Top = 30
+          Height = 77
+          Margins.Top = 30
+          Margins.Bottom = 30
           OnClick = btnPesquisaeClick
           ExplicitLeft = 788
         end
         object cbStatus: TComboBox
-          Left = 390
-          Top = 40
-          Width = 145
+          Left = 352
+          Top = 39
+          Width = 174
           Height = 27
           Style = csDropDownList
           ItemIndex = 0
@@ -317,29 +376,153 @@ inherited frmContasReceber: TfrmContasReceber
             'ABERTA'
             'CANCELADA')
         end
-        object btnBaixarCR: TButton
-          AlignWithMargins = True
-          Left = 919
-          Top = 5
-          Width = 121
-          Height = 71
-          Margins.Top = 5
-          Margins.Bottom = 5
-          Align = alRight
-          Caption = 'Baixar '
-          ImageIndex = 9
-          Images = ImageList1
+        object gbFiltros: TGroupBox
+          Left = 567
+          Top = 14
+          Width = 236
+          Height = 109
+          Caption = 'Ordenar consulta por'
+          Color = clWhite
+          DefaultHeaderFont = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          HeaderFont.Charset = DEFAULT_CHARSET
+          HeaderFont.Color = clWhite
+          HeaderFont.Height = -16
+          HeaderFont.Name = 'Tahoma'
+          HeaderFont.Style = []
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
           TabOrder = 3
-          WordWrap = True
-          OnClick = btnBaixarCRClick
-          ExplicitLeft = 915
+          object rbDataVenc: TRadioButton
+            Left = 3
+            Top = 33
+            Width = 118
+            Height = 17
+            Caption = 'Data Vencimento'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+          end
+          object rbValorParcela: TRadioButton
+            Left = 127
+            Top = 33
+            Width = 118
+            Height = 17
+            Caption = 'Valor Parcela'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 1
+          end
+          object rbValorVenda: TRadioButton
+            Left = 127
+            Top = 61
+            Width = 118
+            Height = 17
+            Caption = 'Valor Venda'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 2
+          end
+          object rbDataVenda: TRadioButton
+            Left = 3
+            Top = 61
+            Width = 118
+            Height = 17
+            Caption = 'Data Venda'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 3
+          end
+          object rbId: TRadioButton
+            Left = 3
+            Top = 90
+            Width = 118
+            Height = 17
+            Caption = 'ID'
+            Checked = True
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 4
+            TabStop = True
+          end
+        end
+        object dateInicial: TDateTimePicker
+          Left = 16
+          Top = 96
+          Width = 137
+          Height = 27
+          Date = 45146.000000000000000000
+          Time = 0.872988819442980500
+          ShowCheckbox = True
+          TabOrder = 4
+        end
+        object dateFinal: TDateTimePicker
+          Left = 176
+          Top = 96
+          Width = 137
+          Height = 27
+          Date = 45146.000000000000000000
+          Time = 0.872988819442980500
+          ShowCheckbox = True
+          TabOrder = 5
+        end
+        object cbData: TComboBox
+          Left = 353
+          Top = 96
+          Width = 173
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 6
+          Text = 'DATA VENDA'
+          Items.Strings = (
+            'DATA VENDA'
+            'DATA VENCIMENTO'
+            'DATA PAGAMENTO'
+            'DATA CADASTRO')
         end
       end
       inherited pnlBotoes: TPanel
         Top = 585
         Width = 1043
-        ExplicitTop = 584
-        ExplicitWidth = 1039
+        ExplicitLeft = -3
+        ExplicitTop = 590
+        ExplicitWidth = 1043
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -428,15 +611,32 @@ inherited frmContasReceber: TfrmContasReceber
             TabOrder = 3
           end
         end
+        object btnBaixarCR: TButton
+          AlignWithMargins = True
+          Left = 508
+          Top = 4
+          Width = 121
+          Height = 61
+          Align = alLeft
+          Caption = 'Baixar '
+          ImageIndex = 9
+          Images = ImageList1
+          TabOrder = 6
+          WordWrap = True
+          OnClick = btnBaixarCRClick
+          ExplicitLeft = 878
+          ExplicitTop = -4
+        end
       end
       inherited pnlGrid: TPanel
+        Top = 137
         Width = 1043
-        Height = 504
+        Height = 448
         ExplicitWidth = 1039
         ExplicitHeight = 503
         inherited DBGrid1: TDBGrid
           Width = 1041
-          Height = 502
+          Height = 446
           DataSource = DataSourceCReceber
           PopupMenu = PopupMenu1
           Columns = <

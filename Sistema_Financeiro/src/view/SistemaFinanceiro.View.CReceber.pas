@@ -54,7 +54,19 @@ type
     lblNDoc: TLabel;
     PopupMenu1: TPopupMenu;
     Baixar1: TMenuItem;
+    gbFiltros: TGroupBox;
+    rbDataVenc: TRadioButton;
+    rbValorParcela: TRadioButton;
+    lblDataInicial: TLabel;
+    dateInicial: TDateTimePicker;
+    lblDataFinal: TLabel;
+    dateFinal: TDateTimePicker;
+    cbData: TComboBox;
+    lblData: TLabel;
+    rbValorVenda: TRadioButton;
+    rbDataVenda: TRadioButton;
     btnBaixarCR: TButton;
+    rbId: TRadioButton;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -579,6 +591,9 @@ begin
   edtValorVenda.OnKeyPress   := TUtilitario.KeyPressValor;
   edtValorParcela.OnKeyPress := TUtilitario.KeyPressValor;
 
+  //  Define as datas da consulta
+  dateInicial.Date := StartOfTheMonth(Now);
+  dateFinal.Date   := EndOfTheMonth(Now);
 end;
 
 procedure TfrmContasReceber.HabilitaBotoes;
@@ -590,24 +605,79 @@ end;
 
 procedure TfrmContasReceber.Pesquisar;
 var
-  LFiltroPesquisa: String;
-  LFiltroTipo : String;
+  LFiltroEdit: String;
+  LFiltro : String;
+  LOrdem : String;
 begin
 
-  LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
+  LFiltroEdit := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
+  LFiltro := '';
+  LOrdem := '';
 
+  dmCReceber.cdsCReceber.Params.Clear;
+
+  //  Pesquisa por tipo
   case cbStatus.ItemIndex of
-    1 : LFiltroTipo := ' AND STATUS = ''P'' ';
-    2 : LFiltroTipo := ' AND STATUS = ''A'' ';
-    3 : LFiltroTipo := ' AND STATUS = ''C'' ';
+    1 : LFiltro := LFiltro + ' AND STATUS = ''P'' ';
+    2 : LFiltro := LFiltro + ' AND STATUS = ''A'' ';
+    3 : LFiltro := LFiltro + ' AND STATUS = ''C'' ';
   end;
 
+  //  Pesquisa por data
+  if (dateInicial.Checked) and (dateFinal.Checked) then
+  begin
+
+    case cbData.ItemIndex of
+
+      0 : LFiltro := LFiltro + ' AND DATA_VENDA BETWEEN :DTINI AND :DTFIM ';
+      1 : LFiltro := LFiltro + ' AND DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
+      2 : LFiltro := LFiltro + ' AND DATA_RECEBIMENTO BETWEEN :DTINI AND :DTFIM ';
+      3 : LFiltro := LFiltro + ' AND DATA_CADASTRO BETWEEN :DTINI AND :DTFIM ';
+
+    end;
+
+    //  Criando os parametros
+    dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DTINI', TParamType.ptInput);
+    dmCReceber.cdsCReceber.ParamByName('DTINI').AsDate := dateInicial.Date;
+    dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DTFIM', TParamType.ptInput);
+    dmCReceber.cdsCReceber.ParamByName('DTFIM').AsDate := dateFinal.Date;
+  end;
+
+  //  Ordem de pesquisa
+  if rbId.Checked then
+  begin
+    lOrdem := ' ORDER BY ID DESC';
+  end
+    else if rbDataVenc.Checked then
+    begin
+      lOrdem := ' ORDER BY DATA_VENCIMENTO';
+    end
+      else if rbValorParcela.Checked then
+      begin
+        lOrdem := ' ORDER BY VALOR_PARCELA';
+      end
+        else if rbValorVenda.Checked then
+        begin
+          lOrdem := ' ORDER BY VALOR_VENDA';
+        end
+          else if rbDataVenda.Checked then
+          begin
+            lOrdem := ' ORDER BY DATA_VENDA';
+          end
+            else
+            begin
+              lOrdem := ' ORDER BY ID DESC';
+            end;
+
+
+
+
   dmCReceber.cdsCReceber.Close;
-  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 ' + LFiltroPesquisa + LFiltroTipo + ' ORDER BY 1 DESC';
+  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 ' + LFiltroEdit + LFiltro + LOrdem;
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;
-  inherited;
+
 
 end;
 procedure TfrmContasReceber.toggleParcelamentoClick(Sender: TObject);
