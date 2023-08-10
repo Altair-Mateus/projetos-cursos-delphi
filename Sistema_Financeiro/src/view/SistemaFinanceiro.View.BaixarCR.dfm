@@ -22,10 +22,8 @@ object frmBaixarCR: TfrmBaixarCR
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = -16
-    ExplicitWidth = 628
-    ExplicitHeight = 442
+    ExplicitWidth = 516
+    ExplicitHeight = 593
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11
@@ -40,6 +38,7 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 494
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
@@ -56,6 +55,7 @@ object frmBaixarCR: TfrmBaixarCR
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
+        ExplicitWidth = 452
         object lblNDoc: TLabel
           Left = 60
           Top = 72
@@ -212,6 +212,7 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 494
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
@@ -225,6 +226,7 @@ object frmBaixarCR: TfrmBaixarCR
         Align = alClient
         Caption = 'Detalhes'
         TabOrder = 0
+        ExplicitWidth = 452
         object lblObs: TLabel
           Left = 28
           Top = 32
@@ -258,7 +260,7 @@ object frmBaixarCR: TfrmBaixarCR
           Top = 64
           Width = 87
           Height = 27
-          TabOrder = 1
+          TabOrder = 2
         end
         object datePgto: TDateTimePicker
           Left = 136
@@ -267,7 +269,7 @@ object frmBaixarCR: TfrmBaixarCR
           Height = 27
           Date = 45133.000000000000000000
           Time = 0.840443912034970700
-          TabOrder = 2
+          TabOrder = 1
         end
       end
     end
@@ -280,6 +282,8 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
+      ExplicitTop = 522
+      ExplicitWidth = 514
       object btnConfirmar: TButton
         AlignWithMargins = True
         Left = 131
@@ -315,6 +319,7 @@ object frmBaixarCR: TfrmBaixarCR
         ParentBiDiMode = False
         TabOrder = 1
         OnClick = btnCancelarClick
+        ExplicitLeft = 263
       end
     end
   end

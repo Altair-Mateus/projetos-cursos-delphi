@@ -105,7 +105,8 @@ implementation
 {$R *.dfm}
 uses
   SistemaFinanceiro.Model.dmCReceber,
-  SistemaFinanceiro.Utilitarios, System.DateUtils;
+  SistemaFinanceiro.Utilitarios, System.DateUtils,
+  SistemaFinanceiro.View.Principal;
 
 { TfrmContasReceber }
 
@@ -178,6 +179,9 @@ begin
 
     Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
     Pesquisar;
+
+    //  Atualiza o relatorio na tela inicial
+    frmPrincipal.TotalCR;
 
   except on e: Exception do
     Application.MessageBox(PWidechar(E.Message), 'Erro ao cancelar documento!', MB_OK + MB_ICONERROR);
@@ -340,6 +344,9 @@ begin
   //  Atualiza a lista
   Pesquisar;
 
+  //  Atualiza o relatorio na tela inicial
+  frmPrincipal.TotalCR;
+
   inherited;
 end;
 
@@ -358,6 +365,15 @@ begin
 
   //  Posiciona no reg 1 do cds
   cdsParcelas.First;
+
+  if cdsParcelas.IsEmpty then
+  begin
+
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Parcelas não geradas!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
 
   //  Valida todos os reg do cds
   while not cdsParcelas.Eof do
@@ -614,12 +630,16 @@ end;
 procedure TfrmContasReceber.FormCreate(Sender: TObject);
 begin
   inherited;
+
+  dmCReceber.cdsCReceber.Active := True;
+
   edtValorVenda.OnKeyPress   := TUtilitario.KeyPressValor;
   edtValorParcela.OnKeyPress := TUtilitario.KeyPressValor;
 
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
+
 end;
 
 procedure TfrmContasReceber.HabilitaBotoes;

@@ -36,11 +36,8 @@ begin
   Application.CreateForm(TdmCaixa, dmCaixa);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmCPagar, dmCPagar);
-  Application.CreateForm(TfrmContasPagar, frmContasPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
-  Application.CreateForm(TfrmContasReceber, frmContasReceber);
   Application.CreateForm(TfrmBaixarCP, frmBaixarCP);
   Application.CreateForm(TfrmBaixarCR, frmBaixarCR);
-  Application.CreateForm(TfrmConsultarCr, frmConsultarCr);
   Application.Run;
 end.

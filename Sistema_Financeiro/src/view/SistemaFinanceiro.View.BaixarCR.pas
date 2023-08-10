@@ -50,6 +50,7 @@ type
   public
     { Public declarations }
     procedure BaixarCR(Id: Integer);
+    procedure EditKeyPress(Sender: TObject; var Key: Char);
 
   end;
 
@@ -80,6 +81,7 @@ begin
   end;
 
   ContaReceber := dmCReceber.GetCR(FID);
+
   try
 
     //  Se o status já for B irá ignorar
@@ -93,6 +95,7 @@ begin
     begin
       raise Exception.Create('Não é possível baixar uma conta cancelada!');
     end;
+
 
 
     //  Carregando dados para as labels
@@ -140,83 +143,83 @@ procedure TfrmBaixarCR.btnConfirmarClick(Sender: TObject);
 var
   CrDetalhe : TModelCrDetalhe;
   ValorAbater : Currency;
-
 begin
-
   //  Validações dos campos
   if Trim(edtObs.Text) = '' then
   begin
-
     edtObs.SetFocus;
     Application.MessageBox('A observação não pode estar vazia!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
-
   end;
-
   if datePgto.Date > Date then
   begin
-
     datePgto.SetFocus;
     Application.MessageBox('A data de pagamento não pode ser maior que a data atual', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
-
   end;
-
   ValorAbater := 0;
   TryStrToCurr(edtValor.Text, ValorAbater);
-
   if ValorAbater <= 0  then
   begin
-
     edtValor.SetFocus;
     Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
-
   end;
-
   if ValorAbater > dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency  then
   begin
-
     edtValor.SetFocus;
     Application.MessageBox('Valor pago não pode ser maior que o valor da parcela!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
-
   end;
-
   CrDetalhe := TModelCrDetalhe.Create;
-
   try
-
     CrDetalhe.IdCr     := FID;
     CrDetalhe.Detalhes := Trim(edtObs.Text);
     CrDetalhe.Valor    := ValorAbater;
     CrDetalhe.Data     := datePgto.Date;
     CrDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
-
     try
-
       dmCReceber.BaixarCR(CrDetalhe);
       Application.MessageBox('Conta baixada com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
-
       ModalResult := mrOk;
-
     except on E : Exception do
-
       Application.MessageBox(PWideChar(E.Message), 'Erro ao baixar documento!', MB_OK + MB_ICONWARNING);
-
     end;
-
   finally
-
     CrDetalhe.Free;
-
   end;
 
 
 end;
 
-procedure TfrmBaixarCR.FormCreate(Sender: TObject);
+procedure TfrmBaixarCR.EditKeyPress(Sender: TObject; var Key: Char);
 begin
+
+  if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+end;
+
+procedure TfrmBaixarCR.FormCreate(Sender: TObject);
+var
+  I : Integer;
+begin
+
+  //  Percorre os componentes TEdit
+  for I := 0 to ComponentCount - 1 do
+  begin
+    if (Components[I] is TEdit) or (Components[I] is TDateTimePicker) then
+    begin
+      //  Cria o evento OnKeyPress para cada Edit encontrado
+      TEdit(Components[I]).OnKeyPress := EditKeyPress;
+    end;
+  end;
 
   edtValor.OnKeyPress := TUtilitario.KeyPressValor;
 

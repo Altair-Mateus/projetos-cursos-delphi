@@ -15,7 +15,7 @@ type
   private
     { Private declarations }
 
-    const ARQUIVOCONFIGURACAO = 'ConfigBanco.cfg';
+    const ARQUIVOCONFIGURACAO = 'ConfigBanco.ini';
 
   public
     { Public declarations }
@@ -23,6 +23,7 @@ type
     procedure CarregarConfiguracoes;
     procedure ConectarBd;
     procedure DesconectarBd;
+    procedure Conexao;
 
   end;
 
@@ -84,14 +85,32 @@ end;
 procedure TDataModule1.ConectarBd;
 begin
 
-  FDConnection.Connected;
+
+  FDConnection.Connected := True;
+
+end;
+
+procedure TDataModule1.Conexao;
+begin
+
+  if FileExists(ARQUIVOCONFIGURACAO) then
+  begin
+    FDConnection.Params.LoadFromFile(ARQUIVOCONFIGURACAO);
+  end
+  else
+  begin
+    FDConnection.Params.SaveToFile(ARQUIVOCONFIGURACAO);
+  end;
 
 end;
 
 procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
 
-  CarregarConfiguracoes;
+//  CarregarConfiguracoes;
+
+  FDConnection.Params.Clear;
+  Conexao;
   ConectarBd;
 
 end;

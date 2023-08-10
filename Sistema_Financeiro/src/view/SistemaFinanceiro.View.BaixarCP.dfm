@@ -262,7 +262,7 @@ object frmBaixarCP: TfrmBaixarCP
           Top = 64
           Width = 87
           Height = 27
-          TabOrder = 1
+          TabOrder = 2
           OnExit = edtValorExit
         end
         object datePgto: TDateTimePicker
@@ -272,7 +272,7 @@ object frmBaixarCP: TfrmBaixarCP
           Height = 27
           Date = 45133.000000000000000000
           Time = 0.840443912034970700
-          TabOrder = 2
+          TabOrder = 1
         end
       end
     end

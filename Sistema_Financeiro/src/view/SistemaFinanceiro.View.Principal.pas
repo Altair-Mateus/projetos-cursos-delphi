@@ -1,7 +1,5 @@
 unit SistemaFinanceiro.View.Principal;
-
 interface
-
 uses
   Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, SistemaFinanceiro.View.Splash,
@@ -48,6 +46,12 @@ type
     lblValorCP: TLabel;
     Image2: TImage;
     Label3: TLabel;
+    pnlCR: TPanel;
+    lblCR: TLabel;
+    lblValorCR: TLabel;
+    Image3: TImage;
+    Label4: TLabel;
+
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
@@ -60,6 +64,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnCRClick(Sender: TObject);
     procedure ContasaReceber1Click(Sender: TObject);
+
   private
     { Private declarations }
     procedure ExibeTelaUsuario;
@@ -68,7 +73,6 @@ type
     procedure ExibeTelaCaixa;
     procedure ExibeTelaSaldoCaixa;
 
-
   public
     { Public declarations }
     procedure ResumoMensalCaixa;
@@ -76,69 +80,51 @@ type
     procedure TotalCR;
 
   end;
-
 var
   frmPrincipal: TfrmPrincipal;
 
 implementation
-
 {$R *.dfm}
-
 uses
-
   SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Model.dmCaixa,
   System.DateUtils, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
   SistemaFinanceiro.Utilitarios, Winapi.Windows,
-  SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Model.dmCReceber;
+  SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Model.dmCReceber, MidasLib;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
-
   ExibeTelaCaixa;
-
 end;
 
 procedure TfrmPrincipal.btnCPClick(Sender: TObject);
 begin
-
   ExibeTelaCPagar;
-
 end;
 
 procedure TfrmPrincipal.btnCRClick(Sender: TObject);
 begin
-
   ExibeTelaCReceber;
-
 end;
 
 procedure TfrmPrincipal.btnusuariosClick(Sender: TObject);
 begin
-
   ExibeTelaUsuario;
-
 end;
 
 procedure TfrmPrincipal.Caixa1Click(Sender: TObject);
 begin
-
   ExibeTelaCaixa;
-
 end;
 
 procedure TfrmPrincipal.ContasaPagar1Click(Sender: TObject);
 begin
-
   ExibeTelaCPagar;
-
 end;
 
 procedure TfrmPrincipal.ContasaReceber1Click(Sender: TObject);
 begin
-
   ExibeTelaCReceber;
-
 end;
 
 procedure TfrmPrincipal.ExibeTelaCaixa;
@@ -178,7 +164,6 @@ begin
     FreeAndNil(frmContasPagar);
 
   end;
-
 end;
 
 procedure TfrmPrincipal.ExibeTelaCReceber;
@@ -192,14 +177,12 @@ begin
     //  Exibe o Form
     frmContasReceber.ShowModal;
 
-
   finally
 
     //  Libera da memoria
     FreeAndNil(frmContasReceber);
 
   end
-
 end;
 
 procedure TfrmPrincipal.ExibeTelaSaldoCaixa;
@@ -219,7 +202,6 @@ begin
     FreeAndNil(frmSaldoCaixa);
 
   end;
-
 end;
 
 procedure TfrmPrincipal.ExibeTelaUsuario;
@@ -233,14 +215,11 @@ begin
     //  Exibe o Form
     frmUsuarios.ShowModal;
 
-
   finally
 
     //  Libera da memoria
     FreeAndNil(frmUsuarios);
-
   end
-
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -271,20 +250,15 @@ begin
 
     if frmLogin.ModalResult <> mrOk then
     begin
-
       Application.Terminate;
-
     end;
 
-
   finally
-
 
     //  Libera da memoria
     FreeAndNil(frmLogin);
 
   end;
-
 
   if dmUsuarios.GetUsuarioLogado.Senha_Temp then
   begin
@@ -294,40 +268,31 @@ begin
     try
 
       frmRedefinirSenha.Usuario := dmUsuarios.GetUsuarioLogado;
-
       frmRedefinirSenha.ShowModal;
 
       if frmRedefinirSenha.ModalResult <> mrOk then
       begin
-
         Application.Terminate;
-
       end;
 
     finally
-
       FreeAndNil(frmRedefinirSenha);
-
     end;
-
   end;
-
 
   //  Mostra o Usuario logado
   lblUserLogado.Caption := dmUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
 
-
   ResumoMensalCaixa;
   TotalCP;
   TotalCR;
-
   KeyPreview := True;
 
 end;
-
 procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+
  if Key = VK_F5 then
   begin
 
@@ -337,21 +302,16 @@ begin
     TotalCR;
 
   end;
-
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-
   lblUserLogado.Caption := '';
-
 end;
 
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);
 begin
-
   ExibeTelaUsuario;
-
 end;
 
 procedure TfrmPrincipal.ResumoMensalCaixa;
@@ -364,9 +324,7 @@ begin
 
   DataInicial := StartOfTheMonth(Now);
   DataFinal   := EndOfTheMonth(Now);
-
   ResumoCaixa := dmCaixa.ResumoCaixa(DataInicial, DataFinal);
-
   lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
 
   if ResumoCaixa.SaldoParcial > 0 then
@@ -396,35 +354,37 @@ begin
         pnlSaldoParcial.Color :=  $0000CAE6;
 
       end;
-
 end;
 
 procedure TfrmPrincipal.SaldodoCaixa1Click(Sender: TObject);
 begin
-
   ExibeTelaSaldoCaixa;
-
 end;
 
 procedure TfrmPrincipal.TotalCP;
 var
   DataInicial : TDateTime;
   DataFinal   : TDateTime;
-  Valor       : String;
-
 begin
 
   DataInicial := StartOfTheMonth(Now);
   DataFinal   := EndOfTheMonth(Now);
-
-  Valor := CurrToStr(dmCPagar.TotalCP(DataInicial, DataFinal));
 
   lblValorCP.Caption := TUtilitario.FormatoMoeda(dmCPagar.TotalCP(DataInicial, DataFinal));
 
 end;
 
 procedure TfrmPrincipal.TotalCR;
+var
+  DataInicial : TDateTime;
+  DataFinal   : TDateTime;
+
 begin
+
+  DataInicial := StartOfTheMonth(Now);
+  DataFinal   := EndOfTheMonth(Now);
+
+  lblValorCR.Caption := TUtilitario.FormatoMoeda(dmCReceber.TotalCR(DataInicial, DataFinal));
 
 end;
 

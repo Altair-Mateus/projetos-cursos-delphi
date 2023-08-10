@@ -13,6 +13,7 @@ object dmUsuarios: TdmUsuarios
   end
   object cdsUsuarios: TClientDataSet
     Aggregates = <>
+    ObjectView = False
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'
     Left = 328

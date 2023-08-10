@@ -90,6 +90,8 @@ begin
   begin
     Key := #0;
   end;
+
+
 end;
 
 class function TUtilitario.LikeFind(Pesquisa: String; Grid: TDBGrid): String;

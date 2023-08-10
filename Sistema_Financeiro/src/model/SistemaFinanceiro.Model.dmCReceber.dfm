@@ -16,22 +16,28 @@ object dmCReceber: TdmCReceber
     Top = 176
     object cdsCReceberID: TIntegerField
       FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCReceberNUMERO_DOCUMENTO: TWideStringField
       FieldName = 'NUMERO_DOCUMENTO'
+      Origin = 'NUMERO_DOCUMENTO'
     end
     object cdsCReceberDESCRICAO: TWideStringField
       FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
       Size = 200
     end
     object cdsCReceberPARCELA: TIntegerField
       Alignment = taCenter
       FieldName = 'PARCELA'
+      Origin = 'PARCELA'
       Required = True
     end
     object cdsCReceberVALOR_PARCELA: TFMTBCDField
       FieldName = 'VALOR_PARCELA'
+      Origin = 'VALOR_PARCELA'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
@@ -39,6 +45,7 @@ object dmCReceber: TdmCReceber
     end
     object cdsCReceberVALOR_VENDA: TFMTBCDField
       FieldName = 'VALOR_VENDA'
+      Origin = 'VALOR_VENDA'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
@@ -46,6 +53,7 @@ object dmCReceber: TdmCReceber
     end
     object cdsCReceberVALOR_ABATIDO: TFMTBCDField
       FieldName = 'VALOR_ABATIDO'
+      Origin = 'VALOR_ABATIDO'
       Required = True
       DisplayFormat = '#,##0.00'
       Precision = 18
@@ -54,20 +62,24 @@ object dmCReceber: TdmCReceber
     object cdsCReceberDATA_CADASTRO: TDateField
       Alignment = taCenter
       FieldName = 'DATA_CADASTRO'
+      Origin = 'DATA_CADASTRO'
       Required = True
     end
     object cdsCReceberDATA_VENCIMENTO: TDateField
       Alignment = taCenter
       FieldName = 'DATA_VENCIMENTO'
+      Origin = 'DATA_VENCIMENTO'
       Required = True
     end
     object cdsCReceberDATA_RECEBIMENTO: TDateField
       Alignment = taCenter
       FieldName = 'DATA_RECEBIMENTO'
+      Origin = 'DATA_RECEBIMENTO'
     end
     object cdsCReceberSTATUS: TWideStringField
       Alignment = taCenter
       FieldName = 'STATUS'
+      Origin = 'STATUS'
       Required = True
       FixedChar = True
       Size = 1
@@ -75,6 +87,7 @@ object dmCReceber: TdmCReceber
     object cdsCReceberDATA_VENDA: TDateField
       Alignment = taCenter
       FieldName = 'DATA_VENDA'
+      Origin = 'DATA_VENDA'
       Required = True
     end
   end

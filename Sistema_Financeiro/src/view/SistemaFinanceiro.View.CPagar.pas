@@ -180,6 +180,8 @@ begin
     Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
 
     Pesquisar;
+    //  Atualiza o relatorio na tela inicial
+    frmPrincipal.TotalCP;
 
   except on E: Exception do
     Application.MessageBox(PWidechar(E.Message), 'Erro ao cancelar documento!', MB_OK + MB_ICONERROR);
@@ -359,6 +361,15 @@ begin
 
   //  Posiciona no primeiro registro do cds
   cdsParcelas.First;
+
+  if cdsParcelas.IsEmpty then
+  begin
+
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Parcelas não geradas!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
 
   //  Valida todos os registros do cds
   while not cdsParcelas.Eof do
