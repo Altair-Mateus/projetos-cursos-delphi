@@ -52,8 +52,6 @@ type
     pnlCancelada: TPanel;
     edtNDoc: TEdit;
     lblNDoc: TLabel;
-    PopupMenu1: TPopupMenu;
-    Baixar1: TMenuItem;
     gbFiltros: TGroupBox;
     rbDataVenc: TRadioButton;
     rbValorParcela: TRadioButton;
@@ -245,11 +243,18 @@ begin
     cdsParcelasVencimento.AsDateTime := IncDay(dateVenda.Date, IntervaloDias * Contador);
 
     //  Define o numero do documento
-    cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    if not (edtNDoc.Text = '') then
+    begin
+      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    end;
 
     cdsParcelas.Post;
 
   end;
+
+  //  Bloqueia os edits
+  edtQtdParcelas.Enabled := False;
+  edtIntervaloDias.Enabled := False;
 
 end;
 
@@ -282,6 +287,9 @@ begin
   toggleParcelamento.State := tssOff;
   toggleParcelamento.Enabled := True;
 
+  edtParcela.Enabled := False;
+  edtValorParcela.Enabled := False;
+
   //  Seta previamente a parcela
   edtParcela.Text := '1';
 
@@ -296,6 +304,13 @@ begin
 
   //  Esvazia o dataset das parcelas
   cdsParcelas.EmptyDataSet;
+
+  //  Libera os edits
+  edtQtdParcelas.Enabled := True;
+  edtIntervaloDias.Enabled := True;
+
+  edtQtdParcelas.Text := '';
+  edtIntervaloDias.Text := '';
 
 end;
 
@@ -522,6 +537,9 @@ end;
 procedure TfrmContasReceber.EditarRegCReceber;
 begin
 
+  edtParcela.Enabled := True;
+  edtValorParcela.Enabled := True;
+
   //  Esvazia o cds
   cdsParcelas.EmptyDataSet;
 
@@ -575,6 +593,14 @@ begin
   inherited;
   edtValorVenda.Text := TUtilitario.FormatarValor(edtValorVenda.Text);
 
+  if dmCReceber.cdsCReceber.State in [dsInsert] then
+  begin
+
+    //  Se ao inserir Parcela unica pega o mesmo valor da venda
+    edtValorParcela.Text := TUtilitario.FormatarValor(edtValorVenda.Text);
+
+  end;
+
 end;
 
 procedure TfrmContasReceber.ExibeTelaBaixar;
@@ -600,6 +626,7 @@ procedure TfrmContasReceber.HabilitaBotoes;
 begin
   btnAlterar.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
+  btnBaixarCR.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
 
 end;
 
@@ -609,6 +636,35 @@ var
   LFiltro : String;
   LOrdem : String;
 begin
+
+  //  Validações
+  if dateInicial.Date > dateFinal.Date then
+  begin
+
+    dateFinal.SetFocus;
+    Application.MessageBox('Data Inicial não pode ser maior que a data Final!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+  if cbStatus.ItemIndex < 0 then
+  begin
+
+    cbStatus.SetFocus;
+    Application.MessageBox('Selecione um tipo de STATUS!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+  if cbData.ItemIndex < 0 then
+   begin
+
+    cbData.SetFocus;
+    Application.MessageBox('Selecione um tipo de DATA!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
 
   LFiltroEdit := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
   LFiltro := '';
@@ -650,19 +706,19 @@ begin
   end
     else if rbDataVenc.Checked then
     begin
-      lOrdem := ' ORDER BY DATA_VENCIMENTO';
+      lOrdem := ' ORDER BY DATA_VENCIMENTO DESC';
     end
       else if rbValorParcela.Checked then
       begin
-        lOrdem := ' ORDER BY VALOR_PARCELA';
+        lOrdem := ' ORDER BY VALOR_PARCELA DESC';
       end
         else if rbValorVenda.Checked then
         begin
-          lOrdem := ' ORDER BY VALOR_VENDA';
+          lOrdem := ' ORDER BY VALOR_VENDA DESC';
         end
           else if rbDataVenda.Checked then
           begin
-            lOrdem := ' ORDER BY DATA_VENDA';
+            lOrdem := ' ORDER BY DATA_VENDA DESC';
           end
             else
             begin

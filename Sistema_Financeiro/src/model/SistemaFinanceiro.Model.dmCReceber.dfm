@@ -26,6 +26,7 @@ object dmCReceber: TdmCReceber
       Size = 200
     end
     object cdsCReceberPARCELA: TIntegerField
+      Alignment = taCenter
       FieldName = 'PARCELA'
       Required = True
     end
@@ -51,23 +52,28 @@ object dmCReceber: TdmCReceber
       Size = 2
     end
     object cdsCReceberDATA_CADASTRO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_CADASTRO'
       Required = True
     end
     object cdsCReceberDATA_VENCIMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_VENCIMENTO'
       Required = True
     end
     object cdsCReceberDATA_RECEBIMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_RECEBIMENTO'
     end
     object cdsCReceberSTATUS: TWideStringField
+      Alignment = taCenter
       FieldName = 'STATUS'
       Required = True
       FixedChar = True
       Size = 1
     end
     object cdsCReceberDATA_VENDA: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_VENDA'
       Required = True
     end

@@ -4,7 +4,7 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1041
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitLeft = -280
+  ExplicitTop = -127
   ExplicitWidth = 1053
   ExplicitHeight = 693
   TextHeight = 19
@@ -119,7 +119,7 @@ inherited frmContasPagar: TfrmContasPagar
           Top = 296
           Width = 793
           Height = 249
-          ActiveCard = cardParcelamento
+          ActiveCard = cardParcelaUnica
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 5
@@ -158,6 +158,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 185
               Height = 27
               Color = clWhite
+              Enabled = False
               MaxLength = 10
               TabOrder = 0
             end
@@ -167,6 +168,7 @@ inherited frmContasPagar: TfrmContasPagar
               Width = 185
               Height = 27
               Color = clWhite
+              Enabled = False
               MaxLength = 16
               TabOrder = 1
               OnExit = edtValorParcelaExit
@@ -314,7 +316,7 @@ inherited frmContasPagar: TfrmContasPagar
       inherited pnlPesquisa: TPanel
         Width = 1039
         Height = 145
-        ExplicitWidth = 1039
+        ExplicitWidth = 1035
         ExplicitHeight = 145
         object lblStatus: TLabel [1]
           Left = 353
@@ -391,7 +393,9 @@ inherited frmContasPagar: TfrmContasPagar
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 784
+          ExplicitLeft = 911
+          ExplicitTop = 30
+          ExplicitHeight = 85
         end
         object cbStatus: TComboBox
           Left = 353
@@ -652,28 +656,26 @@ inherited frmContasPagar: TfrmContasPagar
           Margins.Bottom = 5
           Align = alLeft
           Caption = 'Baixar '
+          Enabled = False
           ImageIndex = 9
           Images = ImageList1
           TabOrder = 6
           WordWrap = True
           OnClick = btnBaixarCPClick
-          ExplicitLeft = 915
-          ExplicitTop = 3
-          ExplicitHeight = 135
         end
       end
       inherited pnlGrid: TPanel
         Top = 145
         Width = 1039
         Height = 439
+        ExplicitTop = 145
         ExplicitWidth = 1035
-        ExplicitHeight = 502
+        ExplicitHeight = 438
         inherited DBGrid1: TDBGrid
           Width = 1037
           Height = 437
           Color = clWhite
           DataSource = DataSourceCPagar
-          PopupMenu = PopupMenu1
           Columns = <
             item
               Expanded = False
@@ -2392,15 +2394,5 @@ inherited frmContasPagar: TfrmContasPagar
     DataSet = cdsParcelas
     Left = 913
     Top = 450
-  end
-  object PopupMenu1: TPopupMenu
-    Images = ImageList1
-    Left = 833
-    Top = 338
-    object Baixar1: TMenuItem
-      Caption = 'Baixar'
-      ImageIndex = 9
-      OnClick = Baixar1Click
-    end
   end
 end

@@ -33,6 +33,7 @@ object dmCPagar: TdmCPagar
       Size = 200
     end
     object cdsCPagarPARCELA: TIntegerField
+      Alignment = taCenter
       FieldName = 'PARCELA'
       Required = True
     end
@@ -58,21 +59,26 @@ object dmCPagar: TdmCPagar
       Size = 2
     end
     object cdsCPagarDATA_COMPRA: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_COMPRA'
       Required = True
     end
     object cdsCPagarDATA_CADASTRO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_CADASTRO'
       Required = True
     end
     object cdsCPagarDATA_VENCIMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_VENCIMENTO'
       Required = True
     end
     object cdsCPagarDATA_PAGAMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_PAGAMENTO'
     end
     object cdsCPagarSTATUS: TWideStringField
+      Alignment = taCenter
       FieldName = 'STATUS'
       Required = True
       FixedChar = True

@@ -152,10 +152,12 @@ inherited frmCaixa: TfrmCaixa
       ExplicitHeight = 613
       inherited pnlPesquisa: TPanel
         Width = 1106
+        Height = 145
         ExplicitWidth = 1102
+        ExplicitHeight = 145
         object lblTipo: TLabel [1]
-          Left = 392
-          Top = 15
+          Left = 353
+          Top = 13
           Width = 122
           Height = 19
           Align = alCustom
@@ -169,14 +171,56 @@ inherited frmCaixa: TfrmCaixa
           ParentColor = False
           ParentFont = False
         end
+        object lblDataFinal: TLabel [2]
+          Left = 176
+          Top = 71
+          Width = 70
+          Height = 19
+          Align = alCustom
+          Caption = 'Data Final'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object lblDataInicial: TLabel [3]
+          Left = 16
+          Top = 71
+          Width = 79
+          Height = 19
+          Align = alCustom
+          Caption = 'Data Inicial'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        inherited edtPesquisar: TEdit
+          Width = 297
+          ExplicitWidth = 297
+        end
         inherited btnPesquisae: TButton
           Left = 982
+          Top = 30
+          Height = 85
+          Margins.Top = 30
+          Margins.Bottom = 30
           OnClick = btnPesquisaeClick
           ExplicitLeft = 978
+          ExplicitTop = 30
+          ExplicitHeight = 85
         end
         object cbTipoLcto: TComboBox
-          Left = 392
-          Top = 40
+          Left = 353
+          Top = 38
           Width = 145
           Height = 27
           Style = csDropDownList
@@ -187,6 +231,99 @@ inherited frmCaixa: TfrmCaixa
             'TODOS'
             'RECEITA'
             'DESPESA')
+        end
+        object dateFinal: TDateTimePicker
+          Left = 176
+          Top = 96
+          Width = 137
+          Height = 27
+          Date = 45146.000000000000000000
+          Time = 0.872988819442980500
+          ShowCheckbox = True
+          TabOrder = 3
+        end
+        object dateInicial: TDateTimePicker
+          Left = 16
+          Top = 96
+          Width = 137
+          Height = 27
+          Date = 45146.000000000000000000
+          Time = 0.872988819442980500
+          ShowCheckbox = True
+          TabOrder = 4
+        end
+        object gbFiltros: TGroupBox
+          Left = 567
+          Top = 14
+          Width = 210
+          Height = 67
+          Caption = 'Ordenar consulta por'
+          Color = clWhite
+          DefaultHeaderFont = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          HeaderFont.Charset = DEFAULT_CHARSET
+          HeaderFont.Color = clWhite
+          HeaderFont.Height = -16
+          HeaderFont.Name = 'Tahoma'
+          HeaderFont.Style = []
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 5
+          object rbData: TRadioButton
+            Left = 3
+            Top = 33
+            Width = 118
+            Height = 17
+            Caption = 'Data'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+          end
+          object rbValor: TRadioButton
+            Left = 79
+            Top = 31
+            Width = 50
+            Height = 17
+            Caption = 'Valor'
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 1
+          end
+          object rbId: TRadioButton
+            Left = 155
+            Top = 31
+            Width = 54
+            Height = 17
+            Caption = 'ID'
+            Checked = True
+            Color = 5934893
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 2
+            TabStop = True
+          end
         end
       end
       inherited pnlBotoes: TPanel
@@ -252,13 +389,15 @@ inherited frmCaixa: TfrmCaixa
         end
       end
       inherited pnlGrid: TPanel
+        Top = 145
         Width = 1106
-        Height = 464
+        Height = 400
+        ExplicitTop = 145
         ExplicitWidth = 1102
-        ExplicitHeight = 463
+        ExplicitHeight = 399
         inherited DBGrid1: TDBGrid
           Width = 1104
-          Height = 462
+          Height = 398
           DataSource = DataSourceCaixa
           Columns = <
             item

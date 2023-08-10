@@ -24,6 +24,7 @@ object dmCaixa: TdmCaixa
       FieldName = 'id'
     end
     object cdsCaixadata_cadastro: TDateField
+      Alignment = taCenter
       FieldName = 'data_cadastro'
     end
     object cdsCaixavalor: TFMTBCDField
@@ -39,6 +40,7 @@ object dmCaixa: TdmCaixa
       Size = 200
     end
     object cdsCaixatipo: TWideStringField
+      Alignment = taCenter
       FieldName = 'tipo'
       Size = 1
     end

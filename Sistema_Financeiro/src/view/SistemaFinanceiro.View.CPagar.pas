@@ -1,14 +1,11 @@
 unit SistemaFinanceiro.View.CPagar;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
   SistemaFinanceiro.View.BaixarCP, Vcl.Menus;
-
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
     DataSourceCPagar: TDataSource;
@@ -44,8 +41,6 @@ type
     cdsParcelasDOCUMENTO: TWideStringField;
     cbStatus: TComboBox;
     lblStatus: TLabel;
-    PopupMenu1: TPopupMenu;
-    Baixar1: TMenuItem;
     gbLegenda: TGroupBox;
     pnlPagas: TPanel;
     lblPagas: TLabel;
@@ -87,6 +82,7 @@ type
     procedure btnBaixarCPClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -107,45 +103,41 @@ var
   frmContasPagar: TfrmContasPagar;
 
 implementation
-
 {$R *.dfm}
-
 uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Utilitarios,
-  System.DateUtils;
+  System.DateUtils, SistemaFinanceiro.View.Principal;
 
 { TfrmCadastroPadrao1 }
-
 procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
 begin
-  inherited;
 
+  inherited;
   ExibeTelaBaixar;
 
 end;
 
 procedure TfrmContasPagar.btnAlterarClick(Sender: TObject);
 begin
-  inherited;
 
+  inherited;
   EditarRegCPagar;
 
 end;
 
 procedure TfrmContasPagar.btnBaixarCPClick(Sender: TObject);
 begin
+
   inherited;
-
   ExibeTelaBaixar;
-
 
 end;
 
 procedure TfrmContasPagar.btnCancelarClick(Sender: TObject);
 begin
-  inherited;
 
+  inherited;
   //  Cancelando inclusão
   dmCPagar.cdsCPagar.Cancel;
 
@@ -161,19 +153,15 @@ begin
   //  Se o documento já foi baixado cancela a exclusão
   if dmCPagar.cdsCPagarSTATUS.AsString = 'P' then
   begin
-
     Application.MessageBox('Documento já pago não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
-
   end;
 
   //  Se o documento foi cancelado, a exclusão é cancelada
   if dmCPagar.cdsCPagarSTATUS.AsString = 'C' then
   begin
-
     Application.MessageBox('Documento já cancelado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
-
   end;
 
   option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
@@ -184,7 +172,6 @@ begin
   end;
 
   try
-
     dmCPagar.cdsCPagar.Edit;
     dmCPagar.cdsCPagarSTATUS.AsString := 'C';
     dmCPagar.cdsCPagar.Post;
@@ -195,11 +182,8 @@ begin
     Pesquisar;
 
   except on E: Exception do
-
     Application.MessageBox(PWidechar(E.Message), 'Erro ao cancelar documento!', MB_OK + MB_ICONERROR);
-
   end;
-
 
 end;
 
@@ -217,34 +201,24 @@ begin
   //  Valida campos
   if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
   begin
-
     edtValorCompra.SetFocus;
     Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
-
   end;
 
   if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
   begin
-
     edtParcela.SetFocus;
     Application.MessageBox('Números de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
-
   end;
 
   if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
   begin
-
     edtIntervaloDias.SetFocus;
     Application.MessageBox('Intervalo de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
-
   end;
-
 
   //  Calculando valores das parcelas
   //  Trunca o valor final das parcelas
@@ -252,7 +226,6 @@ begin
 
   //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
   ValorResiduo := ValorCompra - (ValorParcela * QtdParcelas);
-
 
   //  Esvaziando data set
   cdsParcelas.EmptyDataSet;
@@ -271,12 +244,18 @@ begin
     cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
 
     //  Define o numero do doc
-    cdsParcelasDOCUMENTO.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    if not (edtNDoc.Text = '') then
+    begin
+      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    end;
 
     cdsParcelas.Post;
 
   end;
 
+  //  Bloqueia os edits
+  edtQtdParcelas.Enabled := False;
+  edtIntervaloDias.Enabled := False;
 
 end;
 
@@ -303,6 +282,9 @@ begin
   toggleParcelamento.State := tssOff;
   toggleParcelamento.Enabled := True;
 
+  edtParcela.Enabled := False;
+  edtValorParcela.Enabled := False;
+
   //  Seta parcela previamente como 1
   edtParcela.Text := '1';
 
@@ -317,6 +299,13 @@ begin
 
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
+
+  //  Libera os edits
+  edtQtdParcelas.Enabled := True;
+  edtIntervaloDias.Enabled := True;
+
+  edtQtdParcelas.Text := '';
+  edtIntervaloDias.Text := '';
 
 end;
 
@@ -333,9 +322,7 @@ begin
 
   if toggleParcelamento.State = tssOff then
   begin
-
     CadParcelaUnica;
-
   end
     else
     begin
@@ -347,8 +334,10 @@ begin
 
   //  Atualiza a lista
   Pesquisar;
-
   inherited;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.TotalCP;
 
 end;
 
@@ -377,25 +366,20 @@ begin
 
     if cdsParcelasPARCELA.AsInteger < 0 then
     begin
-
       Application.MessageBox('Número de Parcela Inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
       abort;
-
     end;
 
     if cdsParcelasVALOR.AsCurrency < 0.01 then
     begin
-
       Application.MessageBox('Valor da Parcela Inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
       abort;
-
     end;
 
     //  Avança para o próximo registro
     cdsParcelas.Next;
 
   end;
-
 
    //  Posiciona no primeiro registro do cds
   cdsParcelas.First;
@@ -434,7 +418,6 @@ begin
   Pesquisar;
 
   CardPanelPrincipal.ActiveCard := CardPesquisa;
-
 end;
 
 procedure TfrmContasPagar.CadParcelaUnica;
@@ -458,57 +441,46 @@ begin
     dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
 
     //  Se for parcela unica pega o mesmo valor da compra
-    edtValorParcela.Text := edtValorCompra.Text;
+//    edtValorParcela.Text := edtValorCompra.Text;
+
 
   end;
 
   //  Valida campos obrigatorios
   if Trim(memDesc.Text) = '' then
   begin
-
     memDesc.SetFocus;
     Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
   end;
 
   if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
   begin
-
     edtValorCompra.SetFocus;
     Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
   end;
 
   if not TryStrToInt(edtParcela.Text, Parcela) then
   begin
-
     edtParcela.SetFocus;
     Application.MessageBox('Número da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
   end;
 
   if dateVencimento.Date < dateCompra.Date then
   begin
-
     dateVencimento.SetFocus;
     Application.MessageBox('Data de vencimento não pode ser inferior a data de compra!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
-
   end;
 
   if not TryStrToCurr(edtValorParcela.Text, ValorParcela) then
   begin
-
     edtValorParcela.SetFocus;
     Application.MessageBox('Valor da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-
     abort;
   end;
-
 
   //  Passando os dados para o dataset
   dmCPagar.cdsCPagarNUMERO_DOC.AsString        := Trim(edtNDoc.Text);
@@ -522,7 +494,6 @@ begin
   //  Gravando no BD
   dmCPagar.cdsCPagar.Post;
   dmCPagar.cdsCPagar.ApplyUpdates(0);
-
 
 end;
 
@@ -562,7 +533,6 @@ begin
 
   // Desenha a célula com as propriedades de cor atualizadas
   DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-
   inherited;
 
 end;
@@ -570,31 +540,29 @@ end;
 procedure TfrmContasPagar.EditarRegCPagar;
 begin
 
+  edtParcela.Enabled := True;
+  edtValorParcela.Enabled := True;
+
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
 
   //  Se o documento já foi baixado cancela a edição
   if dmCPagar.cdsCPagarSTATUS.AsString = 'P' then
   begin
-
     CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já pago não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
-
     
   end;
 
   //  Se o documento foi cancelado, a edição é cancelada
   if dmCPagar.cdsCPagarSTATUS.AsString = 'C' then
   begin
-
     CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já cancelado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
-
  
   end;
-
 
   // Coloca o dataset em modo de edição
   dmCPagar.cdsCPagar.Edit;
@@ -616,7 +584,6 @@ begin
   dateVencimento.Date  := dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime;
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
 
-
 end;
 
 procedure TfrmContasPagar.edtValorCompraExit(Sender: TObject);
@@ -625,12 +592,19 @@ begin
 
   edtValorCompra.Text := TUtilitario.FormatarValor(edtValorCompra.Text);
 
+  if dmCPagar.cdsCPagar.State in [dsInsert] then
+  begin
+
+    //  Se ao inserir Parcela unica pega o mesmo valor da venda
+    edtValorParcela.Text := TUtilitario.FormatarValor(edtValorCompra.Text);
+
+  end;
+
 end;
 
 procedure TfrmContasPagar.edtValorParcelaExit(Sender: TObject);
 begin
   inherited;
-
   edtValorParcela.Text := TUtilitario.FormatarValor(edtValorParcela.Text);
 
 end;
@@ -640,6 +614,9 @@ begin
 
   frmBaixarCP.BaixarCP(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
   Pesquisar;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.TotalCP
 
 end;
 
@@ -661,15 +638,44 @@ begin
 
   btnAlterar.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
+  btnBaixarCP.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
 
 end;
-
 procedure TfrmContasPagar.Pesquisar;
 var
   LFiltroEdit: String;
   LFiltro : String;
   LOrdem : String;
+
 begin
+
+  //  Validações
+  if dateInicial.Date > dateFinal.Date then
+  begin
+
+    dateFinal.SetFocus;
+    Application.MessageBox('Data Inicial não pode ser maior que a data Final!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+  if cbStatus.ItemIndex < 0 then
+  begin
+
+    cbStatus.SetFocus;
+    Application.MessageBox('Selecione um tipo de STATUS!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+  if cbData.ItemIndex < 0 then
+   begin
+
+    cbData.SetFocus;
+    Application.MessageBox('Selecione um tipo de DATA!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
 
   LFiltroEdit := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
   LFiltro := '';
@@ -730,24 +736,19 @@ begin
               lOrdem := ' ORDER BY ID DESC';
             end;
 
-
   dmCPagar.cdsCPagar.Close;
   dmCPagar.cdsCPagar.CommandText := 'SELECT * FROM CONTAS_PAGAR WHERE 1 = 1 ' + LFiltroEdit + LFiltro + lOrdem;
   dmCPagar.cdsCPagar.Open;
-
   HabilitaBotoes;
-
   inherited;
-
 end;
-
 procedure TfrmContasPagar.toggleParcelamentoClick(Sender: TObject);
 begin
+
   inherited;
 
-   if toggleParcelamento.State = tssOff then
+  if toggleParcelamento.State = tssOff then
   begin
-
     CardPanelParcela.ActiveCard := cardParcelaUnica;
   end
     else if toggleParcelamento.State = tssOn then

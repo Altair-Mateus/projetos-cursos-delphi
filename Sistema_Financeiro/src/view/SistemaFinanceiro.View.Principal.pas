@@ -43,6 +43,11 @@ type
     lblData: TLabel;
     imgNormal: TImage;
     ImageListMenu: TImageList;
+    pnlCP: TPanel;
+    lblCP: TLabel;
+    lblValorCP: TLabel;
+    Image2: TImage;
+    Label3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
     procedure btnusuariosClick(Sender: TObject);
@@ -67,6 +72,9 @@ type
   public
     { Public declarations }
     procedure ResumoMensalCaixa;
+    procedure TotalCP;
+    procedure TotalCR;
+
   end;
 
 var
@@ -81,7 +89,8 @@ uses
   SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Model.dmCaixa,
   System.DateUtils, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
-  SistemaFinanceiro.Utilitarios, Winapi.Windows;
+  SistemaFinanceiro.Utilitarios, Winapi.Windows,
+  SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Model.dmCReceber;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
@@ -309,6 +318,8 @@ begin
 
 
   ResumoMensalCaixa;
+  TotalCP;
+  TotalCR;
 
   KeyPreview := True;
 
@@ -322,6 +333,8 @@ begin
 
     //  Atualiza os valores da tela inicial
     ResumoMensalCaixa;
+    TotalCP;
+    TotalCR;
 
   end;
 
@@ -390,6 +403,28 @@ procedure TfrmPrincipal.SaldodoCaixa1Click(Sender: TObject);
 begin
 
   ExibeTelaSaldoCaixa;
+
+end;
+
+procedure TfrmPrincipal.TotalCP;
+var
+  DataInicial : TDateTime;
+  DataFinal   : TDateTime;
+  Valor       : String;
+
+begin
+
+  DataInicial := StartOfTheMonth(Now);
+  DataFinal   := EndOfTheMonth(Now);
+
+  Valor := CurrToStr(dmCPagar.TotalCP(DataInicial, DataFinal));
+
+  lblValorCP.Caption := TUtilitario.FormatoMoeda(dmCPagar.TotalCP(DataInicial, DataFinal));
+
+end;
+
+procedure TfrmPrincipal.TotalCR;
+begin
 
 end;
 

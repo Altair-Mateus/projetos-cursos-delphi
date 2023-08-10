@@ -3,7 +3,7 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 656
   ClientWidth = 1045
   WindowState = wsMaximized
-  ExplicitLeft = -3
+  ExplicitTop = -138
   ExplicitWidth = 1057
   ExplicitHeight = 694
   TextHeight = 19
@@ -71,7 +71,7 @@ inherited frmContasReceber: TfrmContasReceber
           Top = 295
           Width = 793
           Height = 249
-          ActiveCard = cardParcelamento
+          ActiveCard = cardParcelaUnica
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 5
@@ -282,7 +282,7 @@ inherited frmContasReceber: TfrmContasReceber
       inherited pnlPesquisa: TPanel
         Width = 1043
         Height = 137
-        ExplicitWidth = 1043
+        ExplicitWidth = 1039
         ExplicitHeight = 137
         object lblStatus: TLabel [1]
           Left = 352
@@ -359,7 +359,9 @@ inherited frmContasReceber: TfrmContasReceber
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 788
+          ExplicitLeft = 915
+          ExplicitTop = 30
+          ExplicitHeight = 77
         end
         object cbStatus: TComboBox
           Left = 352
@@ -520,9 +522,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited pnlBotoes: TPanel
         Top = 585
         Width = 1043
-        ExplicitLeft = -3
-        ExplicitTop = 590
-        ExplicitWidth = 1043
+        ExplicitTop = 584
+        ExplicitWidth = 1039
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -619,26 +620,25 @@ inherited frmContasReceber: TfrmContasReceber
           Height = 61
           Align = alLeft
           Caption = 'Baixar '
+          Enabled = False
           ImageIndex = 9
           Images = ImageList1
           TabOrder = 6
           WordWrap = True
           OnClick = btnBaixarCRClick
-          ExplicitLeft = 878
-          ExplicitTop = -4
         end
       end
       inherited pnlGrid: TPanel
         Top = 137
         Width = 1043
         Height = 448
+        ExplicitTop = 137
         ExplicitWidth = 1039
-        ExplicitHeight = 503
+        ExplicitHeight = 447
         inherited DBGrid1: TDBGrid
           Width = 1041
           Height = 446
           DataSource = DataSourceCReceber
-          PopupMenu = PopupMenu1
           Columns = <
             item
               Expanded = False
@@ -663,6 +663,7 @@ inherited frmContasReceber: TfrmContasReceber
             item
               Expanded = False
               FieldName = 'PARCELA'
+              Title.Alignment = taCenter
               Title.Caption = 'Parcela'
               Width = 67
               Visible = True
@@ -670,6 +671,7 @@ inherited frmContasReceber: TfrmContasReceber
             item
               Expanded = False
               FieldName = 'STATUS'
+              Title.Alignment = taCenter
               Title.Caption = 'Status'
               Width = 61
               Visible = True
@@ -2358,15 +2360,5 @@ inherited frmContasReceber: TfrmContasReceber
     DataSet = cdsParcelas
     Left = 769
     Top = 506
-  end
-  object PopupMenu1: TPopupMenu
-    Images = ImageList1
-    Left = 849
-    Top = 394
-    object Baixar1: TMenuItem
-      Caption = 'Baixar'
-      ImageIndex = 9
-      OnClick = Baixar1Click
-    end
   end
 end
