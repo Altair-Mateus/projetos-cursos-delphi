@@ -1,9 +1,9 @@
-object frmConsultarCr: TfrmConsultarCr
+object frmCrDetalhe: TfrmCrDetalhe
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
-  Caption = 'Consulta Contas a Receber'
+  Caption = 'Detalhes Conta Paga'
   ClientHeight = 498
   ClientWidth = 772
   Color = clBtnFace
@@ -18,104 +18,191 @@ object frmConsultarCr: TfrmConsultarCr
     Left = 0
     Top = 0
     Width = 772
-    Height = 81
+    Height = 97
     Align = alTop
     BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -334
-    ExplicitWidth = 1106
-    object lblPesquisar: TLabel
+    object lblTNDoc: TLabel
       Left = 16
       Top = 16
-      Width = 73
+      Width = 149
       Height = 19
-      Align = alCustom
-      Caption = 'Pesquisar:'
-      Color = clWhite
+      Caption = 'N'#186' do Documento:'
+      Color = 5934893
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
       Font.Name = 'Tahoma'
-      Font.Style = []
+      Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
-    object lblDataInicial: TLabel
-      Left = 208
-      Top = 15
-      Width = 79
-      Height = 19
-      Align = alCustom
-      Caption = 'Data Inicial'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblDataFinal: TLabel
-      Left = 368
-      Top = 15
-      Width = 70
-      Height = 19
-      Align = alCustom
-      Caption = 'Data Final'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object edtPesquisar: TEdit
+    object lblTVencimento: TLabel
       Left = 16
-      Top = 40
-      Width = 177
-      Height = 27
-      Align = alCustom
-      TabOrder = 0
+      Top = 41
+      Width = 102
+      Height = 19
+      Caption = 'Vencimento:'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
-    object btnPesquisae: TButton
-      AlignWithMargins = True
-      Left = 648
-      Top = 5
-      Width = 121
-      Height = 71
-      Margins.Top = 5
-      Margins.Bottom = 5
-      Align = alRight
-      Caption = 'Pesquisar'
-      ImageIndex = 5
-      Images = ImageList1
-      TabOrder = 1
-      ExplicitLeft = 982
+    object lblTNumParcela: TLabel
+      Left = 16
+      Top = 66
+      Width = 118
+      Height = 19
+      Caption = 'N'#186' da Parcela:'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
-    object dateInicial: TDateTimePicker
-      Left = 208
-      Top = 40
-      Width = 137
-      Height = 27
-      Date = 45146.000000000000000000
-      Time = 0.872988819442980500
-      ShowCheckbox = True
-      TabOrder = 2
+    object lblNumParcela: TLabel
+      Left = 192
+      Top = 64
+      Width = 101
+      Height = 19
+      Caption = 'lblNumParcela'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
     end
-    object dateFinal: TDateTimePicker
-      Left = 368
-      Top = 40
-      Width = 137
-      Height = 27
-      Date = 45146.000000000000000000
-      Time = 0.872988819442980500
-      ShowCheckbox = True
-      TabOrder = 3
+    object lblVencimento: TLabel
+      Left = 192
+      Top = 39
+      Width = 100
+      Height = 19
+      Caption = 'lblVencimento'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblNumDoc: TLabel
+      Left = 192
+      Top = 14
+      Width = 78
+      Height = 19
+      Caption = 'lblNumDoc'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorVenda: TLabel
+      Left = 568
+      Top = 39
+      Width = 98
+      Height = 19
+      Caption = 'lblValorVenda'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblDesc: TLabel
+      Left = 568
+      Top = 14
+      Width = 50
+      Height = 19
+      Caption = 'lblDesc'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorParcela: TLabel
+      Left = 568
+      Top = 64
+      Width = 104
+      Height = 19
+      Caption = 'lblValorParcela'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTValorParcela: TLabel
+      Left = 408
+      Top = 66
+      Width = 134
+      Height = 19
+      Caption = 'Valor da Parcela'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTValorVenda: TLabel
+      Left = 408
+      Top = 41
+      Width = 130
+      Height = 19
+      Caption = 'Valor da Venda:'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTDesc: TLabel
+      Left = 408
+      Top = 16
+      Width = 84
+      Height = 19
+      Caption = 'Descri'#231#227'o:'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
   end
   object pnlBotoes: TPanel
@@ -127,9 +214,8 @@ object frmConsultarCr: TfrmConsultarCr
     Color = clWindow
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = -334
-    ExplicitTop = 373
-    ExplicitWidth = 1106
+    ExplicitTop = 428
+    ExplicitWidth = 768
     object btnSair: TButton
       AlignWithMargins = True
       Left = 648
@@ -141,39 +227,20 @@ object frmConsultarCr: TfrmConsultarCr
       ImageIndex = 3
       Images = ImageList1
       TabOrder = 0
-      ExplicitLeft = 673
-      ExplicitTop = 12
-    end
-    object btnBaixarCR: TButton
-      AlignWithMargins = True
-      Left = 521
-      Top = 6
-      Width = 121
-      Height = 57
-      Margins.Top = 5
-      Margins.Bottom = 5
-      Align = alRight
-      Caption = 'Baixar '
-      ImageIndex = 7
-      Images = ImageList1
-      TabOrder = 1
-      WordWrap = True
-      ExplicitLeft = 915
-      ExplicitTop = 5
-      ExplicitHeight = 71
+      OnClick = btnSairClick
+      ExplicitLeft = 644
     end
   end
   object pnlGrid: TPanel
     Left = 0
-    Top = 81
+    Top = 97
     Width = 772
-    Height = 348
+    Height = 332
     Align = alClient
     TabOrder = 2
-    ExplicitLeft = -271
-    ExplicitTop = -62
-    ExplicitWidth = 1043
-    ExplicitHeight = 504
+    ExplicitTop = 81
+    ExplicitWidth = 768
+    ExplicitHeight = 347
     object Image1: TImage
       Left = 640
       Top = 152
@@ -184,7 +251,7 @@ object frmConsultarCr: TfrmConsultarCr
       Left = 1
       Top = 1
       Width = 770
-      Height = 346
+      Height = 330
       Align = alClient
       DataSource = DataSourceConsultaCr
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -195,6 +262,33 @@ object frmConsultarCr: TfrmConsultarCr
       TitleFont.Height = -16
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'DETALHES'
+          Title.Caption = 'Detalhes'
+          Width = 209
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Title.Caption = 'Valor Pago R$'
+          Width = 143
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA'
+          Title.Caption = 'Data da Baixa'
+          Width = 123
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Visible = True
+        end>
     end
   end
   object ImageList1: TImageList
@@ -1796,7 +1890,8 @@ object frmConsultarCr: TfrmConsultarCr
       000000000000}
   end
   object DataSourceConsultaCr: TDataSource
-    Left = 688
+    DataSet = dmCReceber.FDQueryCrDetalhe
+    Left = 664
     Top = 241
   end
 end

@@ -25,6 +25,14 @@ type
     cdsCReceberDATA_RECEBIMENTO: TDateField;
     cdsCReceberSTATUS: TWideStringField;
     cdsCReceberDATA_VENDA: TDateField;
+    FDQueryCrDetalhe: TFDQuery;
+    FDQueryCrDetalheID: TIntegerField;
+    FDQueryCrDetalheID_CONTA_RECEBER: TIntegerField;
+    FDQueryCrDetalheDETALHES: TWideStringField;
+    FDQueryCrDetalheVALOR: TFMTBCDField;
+    FDQueryCrDetalheDATA: TDateField;
+    FDQueryCrDetalheUSUARIO: TWideStringField;
+    FDQueryCrDetalheNOME: TWideStringField;
 
   private
     { Private declarations }

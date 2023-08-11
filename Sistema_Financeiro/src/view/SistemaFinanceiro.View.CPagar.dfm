@@ -4,7 +4,6 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1041
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -127
   ExplicitWidth = 1053
   ExplicitHeight = 693
   TextHeight = 19
@@ -749,7 +748,7 @@ inherited frmContasPagar: TfrmContasPagar
             item
               Expanded = False
               FieldName = 'VALOR_ABATIDO'
-              Title.Caption = 'Valor Abatido'
+              Title.Caption = 'Valor Pago R$'
               Width = 107
               Visible = True
             end

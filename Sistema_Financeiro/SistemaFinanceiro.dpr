@@ -25,7 +25,7 @@ uses
   SistemaFinanceiro.Model.Entidades.CR in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.pas',
   SistemaFinanceiro.Model.Entidades.CR.Detalhe in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.CR.Detalhe.pas',
   SistemaFinanceiro.View.BaixarCR in 'src\view\SistemaFinanceiro.View.BaixarCR.pas' {frmBaixarCR},
-  SistemaFinanceiro.View.ConsultarCr in 'src\view\SistemaFinanceiro.View.ConsultarCr.pas' {frmConsultarCr};
+  SistemaFinanceiro.View.CrDetalhe in 'src\view\SistemaFinanceiro.View.CrDetalhe.pas' {frmCrDetalhe};
 
 {$R *.res}
 begin
@@ -39,5 +39,6 @@ begin
   Application.CreateForm(TdmCReceber, dmCReceber);
   Application.CreateForm(TfrmBaixarCP, frmBaixarCP);
   Application.CreateForm(TfrmBaixarCR, frmBaixarCR);
+  Application.CreateForm(TfrmCrDetalhe, frmCrDetalhe);
   Application.Run;
 end.

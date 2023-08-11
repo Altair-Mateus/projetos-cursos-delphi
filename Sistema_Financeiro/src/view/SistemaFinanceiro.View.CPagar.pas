@@ -451,10 +451,6 @@ begin
     dmCPagar.cdsCPagarSTATUS.AsString          := 'A';
     dmCPagar.cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
 
-    //  Se for parcela unica pega o mesmo valor da compra
-//    edtValorParcela.Text := edtValorCompra.Text;
-
-
   end;
 
   //  Valida campos obrigatorios

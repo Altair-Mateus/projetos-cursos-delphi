@@ -87,9 +87,9 @@ object frmBaixarCR: TfrmBaixarCR
         object lblVAbatido: TLabel
           Left = 60
           Top = 230
-          Width = 103
+          Width = 83
           Height = 19
-          Caption = 'Valor Abatido:'
+          Caption = 'Valor Pago:'
         end
         object lblDoc: TLabel
           Left = 244

@@ -182,8 +182,8 @@
             <Form>frmBaixarCR</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\SistemaFinanceiro.View.ConsultarCr.pas">
-            <Form>frmConsultarCr</Form>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.CrDetalhe.pas">
+            <Form>frmCrDetalhe</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

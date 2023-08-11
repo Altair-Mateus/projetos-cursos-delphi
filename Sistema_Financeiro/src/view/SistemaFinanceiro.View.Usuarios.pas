@@ -264,16 +264,10 @@ begin
   dmUsuarios.cdsUsuarios.Params.Clear;
 
   LFiltroPesquisa := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
-//
+
   dmUsuarios.cdsUsuarios.Close;
   dmUsuarios.cdsUsuarios.CommandText := 'SELECT * FROM USUARIOS WHERE 1 = 1' + LFiltroPesquisa + 'ORDER BY 1';
-//  dmUsuarios.cdsUsuarios.CommandText := 'SELECT * FROM USUARIOS WHERE 1 = 1 ORDER BY 1';
   dmUsuarios.cdsUsuarios.Open;
-
-//  dmUsuarios.FDQueryUsuarios.Close;
-//  dmUsuarios.FDQueryUsuarios.SQL.Clear;
-//  dmUsuarios.FDQueryUsuarios.SQL.Add('SELECT * FROM USUARIOS WHERE 1 = 1 ORDER BY 1');
-//  dmUsuarios.FDQueryUsuarios.open;
 
   HabilitaBotoes;
 

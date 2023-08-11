@@ -40,6 +40,7 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
+    procedure edtValorKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FID : Integer;
@@ -181,6 +182,19 @@ end;
 procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
 begin
   edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
+
+end;
+
+procedure TfrmBaixarCP.edtValorKeyPress(Sender: TObject; var Key: Char);
+begin
+if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
 end;
 
 procedure TfrmBaixarCP.FormCreate(Sender: TObject);

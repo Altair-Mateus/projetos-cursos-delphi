@@ -97,4 +97,51 @@ object dmCReceber: TdmCReceber
     Left = 296
     Top = 176
   end
+  object FDQueryCrDetalhe: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_RECEBER_DETALHE;')
+    Left = 112
+    Top = 288
+    object FDQueryCrDetalheID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryCrDetalheID_CONTA_RECEBER: TIntegerField
+      FieldName = 'ID_CONTA_RECEBER'
+      Origin = 'ID_CONTA_RECEBER'
+      Required = True
+    end
+    object FDQueryCrDetalheDETALHES: TWideStringField
+      FieldName = 'DETALHES'
+      Origin = 'DETALHES'
+      Size = 200
+    end
+    object FDQueryCrDetalheVALOR: TFMTBCDField
+      FieldName = 'VALOR'
+      Origin = 'VALOR'
+      Required = True
+      DisplayFormat = '#,##0.00'
+      Precision = 18
+      Size = 2
+    end
+    object FDQueryCrDetalheDATA: TDateField
+      FieldName = 'DATA'
+      Origin = '"DATA"'
+      Required = True
+    end
+    object FDQueryCrDetalheUSUARIO: TWideStringField
+      FieldName = 'USUARIO'
+      Origin = 'USUARIO'
+      Required = True
+      Size = 200
+    end
+    object FDQueryCrDetalheNOME: TWideStringField
+      DisplayLabel = 'Usu'#225'rio'
+      FieldName = 'NOME'
+      Size = 100
+    end
+  end
 end

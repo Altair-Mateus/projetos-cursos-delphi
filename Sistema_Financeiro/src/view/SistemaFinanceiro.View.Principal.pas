@@ -64,6 +64,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnCRClick(Sender: TObject);
     procedure ContasaReceber1Click(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -312,6 +313,11 @@ end;
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);
 begin
   ExibeTelaUsuario;
+end;
+
+procedure TfrmPrincipal.Panel1Click(Sender: TObject);
+begin
+ExibeTelaUsuario;
 end;
 
 procedure TfrmPrincipal.ResumoMensalCaixa;

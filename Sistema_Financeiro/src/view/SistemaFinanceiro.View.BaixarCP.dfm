@@ -89,9 +89,9 @@ object frmBaixarCP: TfrmBaixarCP
         object lblVAbatido: TLabel
           Left = 60
           Top = 230
-          Width = 103
+          Width = 83
           Height = 19
-          Caption = 'Valor Abatido:'
+          Caption = 'Valor Pago:'
         end
         object lblDoc: TLabel
           Left = 244
@@ -264,6 +264,7 @@ object frmBaixarCP: TfrmBaixarCP
           Height = 27
           TabOrder = 2
           OnExit = edtValorExit
+          OnKeyPress = edtValorKeyPress
         end
         object datePgto: TDateTimePicker
           Left = 136

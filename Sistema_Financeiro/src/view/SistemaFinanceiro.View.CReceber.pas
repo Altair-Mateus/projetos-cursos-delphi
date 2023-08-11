@@ -5,7 +5,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.WinXCtrls, Vcl.ComCtrls, Datasnap.DBClient,
-  Vcl.Menus, SistemaFinanceiro.View.BaixarCR;
+  Vcl.Menus, SistemaFinanceiro.View.BaixarCR, SistemaFinanceiro.View.CrDetalhe,
+  Vcl.Imaging.pngimage;
 type
   TfrmContasReceber = class(TfrmCadastroPadrao)
     DataSourceCReceber: TDataSource;
@@ -65,6 +66,9 @@ type
     rbDataVenda: TRadioButton;
     btnBaixarCR: TButton;
     rbId: TRadioButton;
+    btnDetalhes: TButton;
+    Image3: TImage;
+    lblCR: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -82,6 +86,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnBaixarCRClick(Sender: TObject);
     procedure Baixar1Click(Sender: TObject);
+    procedure btnDetalhesClick(Sender: TObject);
+    procedure DataSourceCReceberDataChange(Sender: TObject; Field: TField);
 
   private
     { Private declarations }
@@ -90,6 +96,7 @@ type
     procedure CadParcelaUnica;
     procedure CadParcelamento;
     procedure ExibeTelaBaixar;
+    procedure ExibeDetalhe;
 
   public
     { Public declarations }
@@ -143,6 +150,23 @@ begin
   dmCReceber.cdsCReceber.Cancel;
 
 end;
+procedure TfrmContasReceber.btnDetalhesClick(Sender: TObject);
+begin
+  inherited;
+
+  if DataSourceCReceber.DataSet.FieldByName('STATUS').AsString <> 'P' then
+  begin
+
+    Application.MessageBox('Conta não paga, realize a baixa para ver os detalhes!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
+
+  ExibeDetalhe;
+
+end;
+
 procedure TfrmContasReceber.btnExcluirClick(Sender: TObject);
 var
   Option : Word;
@@ -509,6 +533,16 @@ begin
 
 end;
 
+procedure TfrmContasReceber.DataSourceCReceberDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+
+  btnDetalhes.Enabled := DataSourceCReceber.DataSet.FieldByName('STATUS').AsString = 'P';
+  btnBaixarCR.Enabled := DataSourceCReceber.DataSet.FieldByName('STATUS').AsString = 'A';
+
+end;
+
 procedure TfrmContasReceber.DBGrid1DblClick(Sender: TObject);
 begin
 
@@ -619,6 +653,13 @@ begin
 
 end;
 
+procedure TfrmContasReceber.ExibeDetalhe;
+begin
+
+  frmCrDetalhe.ExibirCRDetalhes(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
+
+end;
+
 procedure TfrmContasReceber.ExibeTelaBaixar;
 begin
 
@@ -647,6 +688,7 @@ begin
   btnAlterar.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnBaixarCR.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
+  btnDetalhes.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
 
 end;
 

@@ -79,7 +79,7 @@ begin
 
 
   // Permite apenas digitar os caracteres dentro do charinset
-  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8])) then
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
   begin
     Key := #0;
   end;
