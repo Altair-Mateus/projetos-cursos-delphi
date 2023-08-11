@@ -5,7 +5,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
-  SistemaFinanceiro.View.BaixarCP, Vcl.Menus;
+  SistemaFinanceiro.View.BaixarCP, Vcl.Menus, SistemaFinanceiro.View.CpDetalhe,
+  Vcl.Imaging.pngimage;
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
     DataSourceCPagar: TDataSource;
@@ -65,6 +66,9 @@ type
     lblDataInicial: TLabel;
     dateInicial: TDateTimePicker;
     btnBaixarCP: TButton;
+    btnDetalhes: TButton;
+    Image2: TImage;
+    lblCP: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -82,6 +86,8 @@ type
     procedure btnBaixarCPClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DataSourceCPagarDataChange(Sender: TObject; Field: TField);
+    procedure btnDetalhesClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -90,6 +96,7 @@ type
     procedure CadParcelamento;
     procedure EditarRegCPagar;
     procedure ExibeTelaBaixar;
+    procedure ExibeDetalhe;
 
   public
     { Public declarations }
@@ -140,6 +147,22 @@ begin
   inherited;
   //  Cancelando inclusão
   dmCPagar.cdsCPagar.Cancel;
+
+end;
+
+procedure TfrmContasPagar.btnDetalhesClick(Sender: TObject);
+begin
+  inherited;
+
+  if DataSourceCPagar.DataSet.FieldByName('STATUS').AsString <> 'P' then
+  begin
+
+    Application.MessageBox('Conta não paga, realize a baixa para ver os detalhes!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
+  ExibeDetalhe;
 
 end;
 
@@ -504,6 +527,16 @@ begin
 
 end;
 
+procedure TfrmContasPagar.DataSourceCPagarDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+
+  btnDetalhes.Enabled := DataSourceCPagar.DataSet.FieldByName('STATUS').AsString = 'P';
+  btnBaixarCP.Enabled := DataSourceCPagar.DataSet.FieldByName('STATUS').AsString = 'A';
+
+end;
+
 procedure TfrmContasPagar.DBGrid1DblClick(Sender: TObject);
 begin
   inherited;
@@ -616,6 +649,13 @@ begin
 
 end;
 
+procedure TfrmContasPagar.ExibeDetalhe;
+begin
+
+  frmCpDetalhe.ExibirCPDetalhes(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+
+end;
+
 procedure TfrmContasPagar.ExibeTelaBaixar;
 begin
 
@@ -623,7 +663,8 @@ begin
   Pesquisar;
 
   //  Atualiza relatorio tela principal
-  frmPrincipal.TotalCP
+  frmPrincipal.TotalCP;
+  frmPrincipal.ResumoMensalCaixa;
 
 end;
 
@@ -646,6 +687,7 @@ begin
   btnAlterar.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnBaixarCP.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
+  btnDetalhes.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
 
 end;
 procedure TfrmContasPagar.Pesquisar;

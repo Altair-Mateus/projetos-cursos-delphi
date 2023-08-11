@@ -85,4 +85,51 @@ object dmCPagar: TdmCPagar
       Size = 1
     end
   end
+  object FDQueryCpDetalhes: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_PAGAR_DETALHE;')
+    Left = 296
+    Top = 288
+    object FDQueryCpDetalhesID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryCpDetalhesID_CONTA_PAGAR: TIntegerField
+      FieldName = 'ID_CONTA_PAGAR'
+      Origin = 'ID_CONTA_PAGAR'
+      Required = True
+    end
+    object FDQueryCpDetalhesDETALHES: TWideStringField
+      FieldName = 'DETALHES'
+      Origin = 'DETALHES'
+      Size = 200
+    end
+    object FDQueryCpDetalhesVALOR: TFMTBCDField
+      FieldName = 'VALOR'
+      Origin = 'VALOR'
+      Required = True
+      DisplayFormat = '#,##0.00'
+      Precision = 18
+      Size = 2
+    end
+    object FDQueryCpDetalhesDATA: TDateField
+      FieldName = 'DATA'
+      Origin = '"DATA"'
+      Required = True
+    end
+    object FDQueryCpDetalhesUSUARIO: TWideStringField
+      FieldName = 'USUARIO'
+      Origin = 'USUARIO'
+      Required = True
+      Size = 200
+    end
+    object FDQueryCpDetalhesNOME: TWideStringField
+      DisplayLabel = 'Usu'#225'rio'
+      FieldName = 'NOME'
+      Size = 100
+    end
+  end
 end

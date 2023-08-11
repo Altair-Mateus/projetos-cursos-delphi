@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient,
-  SistemaFinanceiro.Model.Entidades.ResumoCaixa;
+  SistemaFinanceiro.Model.Entidades.ResumoCaixa, SistemaFinanceiro.Model.Entidades.LancamentoCaixa;
 
 type
   TdmCaixa = class(TDataModule)
@@ -33,6 +33,8 @@ type
     procedure GeraCodigo;
 
     function ResumoCaixa(DataInicial, DataFinal : TDate ) : TModelResumoCaixa;
+    function GeraId : Integer;
+    procedure GravarLancamento(LancCaixa : TModelLancamentoCaixa; SQLGravar : TFDQuery);
 
   end;
 
@@ -76,6 +78,35 @@ begin
 
     //  Insere o registro no final da tabela
     FDQueryId.Append;
+
+  finally
+
+    FDQueryId.Close;
+    FDQueryId.Free;
+
+  end;
+
+end;
+
+function TdmCaixa.GeraId: Integer;
+var
+  FDQueryId: TFDQuery;
+
+begin
+
+  FDQueryId := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryId.Connection := DataModule1.FDConnection;
+
+    FDQueryId.Close;
+    FDQueryId.SQL.Clear;
+    FDQueryId.Open('SELECT MAX(ID) AS ID FROM CAIXA');
+
+    //  Ultimo codigo usado + 1
+    Result := FDQueryId.FieldByName('ID').AsInteger + 1;
 
   finally
 
@@ -210,6 +241,32 @@ begin
     FDqueryCaixa.Free;
 
   end;
+
+end;
+
+procedure TdmCaixa.GravarLancamento(LancCaixa: TModelLancamentoCaixa;
+  SQLGravar: TFDQuery);
+var
+  SQL : String;
+
+begin
+
+  SQL := 'INSERT INTO CAIXA (ID, NUMERO_DOC, DESCRICAO, VALOR, TIPO, DATA_CADASTRO) ' +
+         ' VALUES (:IDCAIXA, :NDOC, :DESC, :VALOR, :TIPO, :DATA)';
+
+  SQLGravar.SQL.Clear;
+  SQLGravar.Params.Clear;
+  SQLGravar.SQL.Add(SQL);
+
+  SQLGravar.ParamByName('IDCAIXA').AsInteger := LancCaixa.ID;
+  SQLGravar.ParamByName('NDOC').AsString     := LancCaixa.NumDoc;
+  SQLGravar.ParamByName('DESC').AsString     := LancCaixa.Desc;
+  SQLGravar.ParamByName('VALOR').AsCurrency  := LancCaixa.Valor;
+  SQLGravar.ParamByName('TIPO').AsString     := LancCaixa.Tipo;
+  SQLGravar.ParamByName('DATA').AsDate       := LancCaixa.DataCadastro;
+
+  SQLGravar.Prepare;
+  SQLGravar.ExecSQL;
 
 end;
 

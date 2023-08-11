@@ -3980,7 +3980,7 @@ object frmPrincipal: TfrmPrincipal
         Margins.Top = 15
         Align = alTop
         Alignment = taCenter
-        Caption = 'Contas a Pagar'
+        Caption = 'Total Contas a Pagar'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -3989,7 +3989,7 @@ object frmPrincipal: TfrmPrincipal
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 126
+        ExplicitWidth = 173
       end
       object lblValorCP: TLabel
         Left = 190
@@ -6717,8 +6717,6 @@ object frmPrincipal: TfrmPrincipal
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 814
-      ExplicitTop = 43
       object lblCR: TLabel
         AlignWithMargins = True
         Left = 3
@@ -6728,7 +6726,7 @@ object frmPrincipal: TfrmPrincipal
         Margins.Top = 15
         Align = alTop
         Alignment = taCenter
-        Caption = 'Contas a Receber'
+        Caption = 'Total Contas a Receber'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -6737,7 +6735,7 @@ object frmPrincipal: TfrmPrincipal
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 147
+        ExplicitWidth = 194
       end
       object lblValorCR: TLabel
         Left = 190

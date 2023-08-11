@@ -173,7 +173,7 @@ var
 begin
 
   //  Se o documento já foi baixado cancela a exclusão
-  if dmCReceber.cdsCReceberSTATUS.AsString = 'B' then
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'P' then
   begin
     CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já baixado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -187,6 +187,7 @@ begin
     Application.MessageBox('Documento já cancelado não pode ser cancelado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
+
 
   option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
 
@@ -665,6 +666,10 @@ begin
 
  frmBaixarCR.BaixarCR(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
  Pesquisar;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.TotalCr;
+  frmPrincipal.ResumoMensalCaixa;
 
 end;
 

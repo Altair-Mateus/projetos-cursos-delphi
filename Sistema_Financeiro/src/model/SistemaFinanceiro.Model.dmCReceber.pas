@@ -53,7 +53,9 @@ var
 implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses SistemaFinanceiro.Model.udmDados;
+uses SistemaFinanceiro.Model.udmDados,
+  SistemaFinanceiro.Model.Entidades.LancamentoCaixa,
+  SistemaFinanceiro.Model.dmCaixa;
 {$R *.dfm}
 { TdmCReceber }
 
@@ -64,16 +66,20 @@ var
   FDQueryCrDet : TFDQuery;
   SQLUpdate : String;
   SQLInsert : String;
+  LancarCaixa : TModelLancamentoCaixa;
+  FDQueryCaixa : TFDQuery;
 
 begin
   ContaReceber := GetCR(BaixaCR.IdCR);
   FDQueryCR := TFDQuery.Create(nil);
   FDQueryCrDet := TFDQuery.Create(nil);
+  FDQueryCaixa := TFDQuery.Create(nil);
 
   try
     //  Estabelece conexão com o banco
     FDQueryCR.Connection := DataModule1.FDConnection;
     FDQueryCrDet.Connection := DataModule1.FDConnection;
+    FDQueryCaixa.Connection := DataModule1.FDConnection;
 
     if ContaReceber.ID = '' then
     begin
@@ -184,6 +190,43 @@ begin
 
       FDQueryCrDet.Prepare;
       FDQueryCrDet.ExecSQL;
+
+      //  Lançando a baixa no caixa
+      LancarCaixa := TModelLancamentoCaixa.Create;
+      try
+
+        LancarCaixa.ID := dmCaixa.GeraId;
+        LancarCaixa.NumDoc := ContaReceber.Doc;
+        LancarCaixa.Desc := Format('Baixa Conta Receber Numero %s - Parcela %d', [ContaReceber.Doc, ContaReceber.Parcela]);
+        LancarCaixa.Valor := BaixaCr.Valor;
+        LancarCaixa.Tipo := 'R';
+        LancarCaixa.DataCadastro := now;
+
+        try
+          DataModule1.FDConnection.StartTransaction;
+          try
+
+            dmCaixa.GravarLancamento(LancarCaixa, FDQueryCaixa);
+            DataModule1.FDConnection.Commit;
+
+          except
+
+            DataModule1.FDConnection.Rollback;
+            raise;
+
+          end;
+        finally
+
+          FDQueryCaixa.Close;
+          FDQueryCaixa.Free;
+
+        end;
+
+      finally
+
+        LancarCaixa.Free;
+
+      end;
 
     finally
 

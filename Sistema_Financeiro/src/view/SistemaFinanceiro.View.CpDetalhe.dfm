@@ -1,8 +1,6 @@
-object frmCrDetalhe: TfrmCrDetalhe
+object frmCpDetalhe: TfrmCpDetalhe
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu, biMaximize]
-  BorderStyle = bsSingle
   Caption = 'Detalhes Conta Paga'
   ClientHeight = 498
   ClientWidth = 772
@@ -14,6 +12,91 @@ object frmCrDetalhe: TfrmCrDetalhe
   Font.Style = []
   Position = poScreenCenter
   TextHeight = 19
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 429
+    Width = 772
+    Height = 69
+    Align = alBottom
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitTop = 428
+    ExplicitWidth = 768
+    object btnSair: TButton
+      AlignWithMargins = True
+      Left = 648
+      Top = 4
+      Width = 120
+      Height = 61
+      Align = alRight
+      Caption = 'SAIR'
+      ImageIndex = 3
+      Images = ImageList1
+      TabOrder = 0
+      OnClick = btnSairClick
+      ExplicitLeft = 644
+    end
+  end
+  object pnlGrid: TPanel
+    Left = 0
+    Top = 97
+    Width = 772
+    Height = 332
+    Align = alClient
+    TabOrder = 1
+    ExplicitWidth = 768
+    ExplicitHeight = 331
+    object Image1: TImage
+      Left = 640
+      Top = 152
+      Width = 105
+      Height = 105
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 770
+      Height = 330
+      Align = alClient
+      DataSource = DataSourceCPDetalhe
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'DETALHES'
+          Title.Caption = 'Detalhes'
+          Width = 209
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Title.Caption = 'Valor Pago R$'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA'
+          Title.Caption = 'Data da Baixa'
+          Width = 123
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Width = 300
+          Visible = True
+        end>
+    end
+  end
   object pnlPesquisa: TPanel
     Left = 0
     Top = 0
@@ -23,7 +106,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
-    TabOrder = 0
+    TabOrder = 2
     ExplicitWidth = 768
     object lblTNDoc: TLabel
       Left = 16
@@ -204,91 +287,6 @@ object frmCrDetalhe: TfrmCrDetalhe
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
-    end
-  end
-  object pnlBotoes: TPanel
-    Left = 0
-    Top = 429
-    Width = 772
-    Height = 69
-    Align = alBottom
-    Color = clWindow
-    ParentBackground = False
-    TabOrder = 1
-    ExplicitTop = 428
-    ExplicitWidth = 768
-    object btnSair: TButton
-      AlignWithMargins = True
-      Left = 648
-      Top = 4
-      Width = 120
-      Height = 61
-      Align = alRight
-      Caption = 'SAIR'
-      ImageIndex = 3
-      Images = ImageList1
-      TabOrder = 0
-      OnClick = btnSairClick
-      ExplicitLeft = 644
-    end
-  end
-  object pnlGrid: TPanel
-    Left = 0
-    Top = 97
-    Width = 772
-    Height = 332
-    Align = alClient
-    TabOrder = 2
-    ExplicitWidth = 768
-    ExplicitHeight = 331
-    object Image1: TImage
-      Left = 640
-      Top = 152
-      Width = 105
-      Height = 105
-    end
-    object DBGrid1: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 770
-      Height = 330
-      Align = alClient
-      DataSource = DataSourceConsultaCr
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      ReadOnly = True
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -16
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'DETALHES'
-          Title.Caption = 'Detalhes'
-          Width = 209
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR'
-          Title.Caption = 'Valor Pago R$'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DATA'
-          Title.Caption = 'Data da Baixa'
-          Width = 123
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOME'
-          Width = 300
-          Visible = True
-        end>
     end
   end
   object ImageList1: TImageList
@@ -1889,9 +1887,9 @@ object frmCrDetalhe: TfrmCrDetalhe
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object DataSourceConsultaCr: TDataSource
-    DataSet = dmCReceber.FDQueryCrDetalhe
-    Left = 664
-    Top = 241
+  object DataSourceCPDetalhe: TDataSource
+    DataSet = dmCPagar.FDQueryCpDetalhes
+    Left = 672
+    Top = 257
   end
 end

@@ -186,6 +186,11 @@
             <Form>frmCrDetalhe</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.CpDetalhe.pas">
+            <Form>frmCpDetalhe</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
