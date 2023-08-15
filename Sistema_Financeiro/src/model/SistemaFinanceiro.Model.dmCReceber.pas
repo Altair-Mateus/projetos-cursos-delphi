@@ -197,7 +197,7 @@ begin
 
         LancarCaixa.ID := dmCaixa.GeraId;
         LancarCaixa.NumDoc := ContaReceber.Doc;
-        LancarCaixa.Desc := Format('Baixa Conta Receber Numero %s - Parcela %d', [ContaReceber.Doc, ContaReceber.Parcela]);
+        LancarCaixa.Desc := Format('Baixa Conta ID Nº %s a Receber - Nº Documento: %s - Parcela: %d', [ContaReceber.ID, ContaReceber.Doc, ContaReceber.Parcela]);
         LancarCaixa.Valor := BaixaCr.Valor;
         LancarCaixa.Tipo := 'R';
         LancarCaixa.DataCadastro := now;

@@ -189,7 +189,7 @@ begin
 
         LancarCaixa.ID := dmCaixa.GeraId;
         LancarCaixa.NumDoc := ContaPagar.Doc;
-        LancarCaixa.Desc := Format('Baixa Conta Pagar Numero %s - Parcela %d', [contaPagar.Doc, ContaPagar.Parcela]);
+        LancarCaixa.Desc := Format('Baixa Conta ID Nº %s Pagar - Nº Documento: %s - Parcela: %d', [ContaPagar.ID, contaPagar.Doc, ContaPagar.Parcela]);
         LancarCaixa.Valor := BaixaCP.Valor;
         LancarCaixa.Tipo := 'D';
         LancarCaixa.DataCadastro := now;

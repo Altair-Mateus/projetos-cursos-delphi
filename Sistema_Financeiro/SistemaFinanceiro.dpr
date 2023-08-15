@@ -27,7 +27,8 @@ uses
   SistemaFinanceiro.View.BaixarCR in 'src\view\SistemaFinanceiro.View.BaixarCR.pas' {frmBaixarCR},
   SistemaFinanceiro.View.CrDetalhe in 'src\view\SistemaFinanceiro.View.CrDetalhe.pas' {frmCrDetalhe},
   SistemaFinanceiro.View.CpDetalhe in 'src\view\SistemaFinanceiro.View.CpDetalhe.pas' {frmCpDetalhe},
-  SistemaFinanceiro.Model.Entidades.LancamentoCaixa in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas';
+  SistemaFinanceiro.Model.Entidades.LancamentoCaixa in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas',
+  SistemaFinanceiro.View.Relatorios.Usuarios in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Usuarios.pas' {frmRelUsuarios};
 
 {$R *.res}
 begin
@@ -43,5 +44,6 @@ begin
   Application.CreateForm(TfrmBaixarCR, frmBaixarCR);
   Application.CreateForm(TfrmCrDetalhe, frmCrDetalhe);
   Application.CreateForm(TfrmCpDetalhe, frmCpDetalhe);
+  Application.CreateForm(TfrmRelUsuarios, frmRelUsuarios);
   Application.Run;
 end.
