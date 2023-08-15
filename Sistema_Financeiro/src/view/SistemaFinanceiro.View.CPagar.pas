@@ -88,6 +88,17 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DataSourceCPagarDataChange(Sender: TObject; Field: TField);
     procedure btnDetalhesClick(Sender: TObject);
+    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dateInicialExit(Sender: TObject);
+    procedure dateFinalExit(Sender: TObject);
+    procedure cbStatusClick(Sender: TObject);
+    procedure cbDataClick(Sender: TObject);
+    procedure rbDataVencClick(Sender: TObject);
+    procedure rbDataCompraClick(Sender: TObject);
+    procedure rbIdClick(Sender: TObject);
+    procedure rbValorParcelaClick(Sender: TObject);
+    procedure rbValorCompraClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -527,6 +538,22 @@ begin
 
 end;
 
+procedure TfrmContasPagar.cbDataClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.cbStatusClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasPagar.DataSourceCPagarDataChange(Sender: TObject;
   Field: TField);
 begin
@@ -534,6 +561,22 @@ begin
 
   btnDetalhes.Enabled := DataSourceCPagar.DataSet.FieldByName('STATUS').AsString = 'P';
   btnBaixarCP.Enabled := DataSourceCPagar.DataSet.FieldByName('STATUS').AsString = 'A';
+
+end;
+
+procedure TfrmContasPagar.dateFinalExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.dateInicialExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 
@@ -626,6 +669,15 @@ begin
 
 end;
 
+procedure TfrmContasPagar.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasPagar.edtValorCompraExit(Sender: TObject);
 begin
   inherited;
@@ -652,14 +704,44 @@ end;
 procedure TfrmContasPagar.ExibeDetalhe;
 begin
 
-  frmCpDetalhe.ExibirCPDetalhes(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+  // cria o form
+  frmCpDetalhe := TfrmCpDetalhe.Create(Self);
+  try
+
+    frmCpDetalhe.ExibirCPDetalhes(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+
+    //  Exibe o form
+    frmCpDetalhe.ShowModal;
+
+  finally
+
+    FreeAndNil(frmCpDetalhe);
+
+  end;
+
 
 end;
 
 procedure TfrmContasPagar.ExibeTelaBaixar;
 begin
 
-  frmBaixarCP.BaixarCP(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+  // Cria o form
+  frmBaixarCP := TfrmBaixarCP.Create(Self);
+
+  try
+
+    frmBaixarCP.BaixarCP(DataSourceCPagar.DataSet.FieldByName('ID').AsInteger);
+
+    //  Exibe o form
+    frmBaixarCP.ShowModal;
+
+  finally
+
+    FreeAndNil(frmBaixarCP);
+
+  end;
+
+
   Pesquisar;
 
   //  Atualiza relatorio tela principal
@@ -791,6 +873,46 @@ begin
   HabilitaBotoes;
   inherited;
 end;
+procedure TfrmContasPagar.rbDataCompraClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.rbDataVencClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.rbIdClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.rbValorCompraClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.rbValorParcelaClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasPagar.toggleParcelamentoClick(Sender: TObject);
 begin
 

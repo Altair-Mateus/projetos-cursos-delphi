@@ -58,16 +58,21 @@ uses
   SistemaFinanceiro.Utilitarios,
   SistemaFinanceiro.Model.dmUsuarios;
 { TfrmBaixarCP }
+
 procedure TfrmBaixarCP.BaixarCP(Id: Integer);
 var
   ContaPagar : TModelCP;
+
 begin
+
   FID := ID;
+
   //  Valida ID do CP
   if FID < 0 then
   begin
     raise Exception.Create('ID do contas a pagar Inválido!');
   end;
+
   ContaPagar := dmCPagar.GetCP(FID);
   try
 
@@ -76,6 +81,7 @@ begin
     begin
       raise Exception.Create('Não é possível baixar uma conta já Paga!');
     end;
+
     //  Se o status já for C irá ignorar
     if ContaPagar.Status = 'C' then
     begin
@@ -101,9 +107,6 @@ begin
 
     edtObs.Text := '';
     edtValor.Text := '';
-
-    //  Exibe a Tela
-    Self.ShowModal;
 
   finally
     //  Libera da memoria

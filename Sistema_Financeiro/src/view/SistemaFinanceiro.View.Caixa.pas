@@ -4,7 +4,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask, Vcl.Imaging.pngimage;
 type
   TfrmCaixa = class(TfrmCadastroPadrao)
     DataSourceCaixa: TDataSource;
@@ -34,6 +34,8 @@ type
     rbData: TRadioButton;
     rbValor: TRadioButton;
     rbId: TRadioButton;
+    imgCaixa: TImage;
+    lblCaixa: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -45,6 +47,14 @@ type
     procedure edtValorExit(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cbTipoLctoClick(Sender: TObject);
+    procedure rbDataClick(Sender: TObject);
+    procedure rbValorClick(Sender: TObject);
+    procedure rbIdClick(Sender: TObject);
+    procedure dateInicialExit(Sender: TObject);
+    procedure dateFinalExit(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -183,6 +193,30 @@ begin
   inherited;
 end;
 
+procedure TfrmCaixa.cbTipoLctoClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmCaixa.dateFinalExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmCaixa.dateInicialExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmCaixa.DBGrid1DblClick(Sender: TObject);
 begin
 
@@ -239,6 +273,15 @@ begin
     begin
       RadioGroup.ItemIndex := 1;
     end;
+
+end;
+
+procedure TfrmCaixa.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 
@@ -352,6 +395,30 @@ begin
 
 
 end;
+procedure TfrmCaixa.rbDataClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmCaixa.rbIdClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmCaixa.rbValorClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmCaixa.ValidaCampos;
 begin
   if Trim(memDesc.Text) = '' then

@@ -129,6 +129,9 @@ inherited frmUsuarios: TfrmUsuarios
         Margins.Right = 0
         Margins.Bottom = 0
         ExplicitWidth = 809
+        inherited edtPesquisar: TEdit
+          OnKeyDown = edtPesquisarKeyDown
+        end
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick

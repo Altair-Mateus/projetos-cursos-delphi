@@ -32,6 +32,8 @@ type
     procedure mnuLimpaSenhaClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -223,6 +225,15 @@ begin
     ToggleStatus.State := tssOff;
 
   end;
+
+end;
+
+procedure TfrmUsuarios.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 

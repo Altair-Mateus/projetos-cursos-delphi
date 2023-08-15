@@ -2,8 +2,8 @@ object frmCpDetalhe: TfrmCpDetalhe
   Left = 0
   Top = 0
   Caption = 'Detalhes Conta Paga'
-  ClientHeight = 498
-  ClientWidth = 772
+  ClientHeight = 497
+  ClientWidth = 768
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,15 +14,13 @@ object frmCpDetalhe: TfrmCpDetalhe
   TextHeight = 19
   object pnlBotoes: TPanel
     Left = 0
-    Top = 429
-    Width = 772
+    Top = 428
+    Width = 768
     Height = 69
     Align = alBottom
     Color = clWindow
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 428
-    ExplicitWidth = 768
     object btnSair: TButton
       AlignWithMargins = True
       Left = 648
@@ -41,12 +39,10 @@ object frmCpDetalhe: TfrmCpDetalhe
   object pnlGrid: TPanel
     Left = 0
     Top = 97
-    Width = 772
-    Height = 332
+    Width = 768
+    Height = 331
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 768
-    ExplicitHeight = 331
     object Image1: TImage
       Left = 640
       Top = 152
@@ -100,14 +96,13 @@ object frmCpDetalhe: TfrmCpDetalhe
   object pnlPesquisa: TPanel
     Left = 0
     Top = 0
-    Width = 772
+    Width = 768
     Height = 97
     Align = alTop
     BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 768
     object lblTNDoc: TLabel
       Left = 16
       Top = 16

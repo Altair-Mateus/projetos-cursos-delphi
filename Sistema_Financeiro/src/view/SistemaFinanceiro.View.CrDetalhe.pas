@@ -115,8 +115,6 @@ begin
   dmCReceber.FDQueryCrDetalhe.Prepare;
   dmCReceber.FDQueryCrDetalhe.Open();
 
-  Self.ShowModal;
-
 end;
 
 end.

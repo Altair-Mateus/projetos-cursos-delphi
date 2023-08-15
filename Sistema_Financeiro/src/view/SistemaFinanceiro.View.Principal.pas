@@ -241,7 +241,7 @@ begin
 
   end;
 
-  //  Cria o Form do Login
+  //Cria o Form do Login
   frmLogin := TfrmLogin.Create(Self);
 
   try

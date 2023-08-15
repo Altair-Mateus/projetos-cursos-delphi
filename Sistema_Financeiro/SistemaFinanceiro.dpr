@@ -40,10 +40,5 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmCPagar, dmCPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
-  Application.CreateForm(TfrmBaixarCP, frmBaixarCP);
-  Application.CreateForm(TfrmBaixarCR, frmBaixarCR);
-  Application.CreateForm(TfrmCrDetalhe, frmCrDetalhe);
-  Application.CreateForm(TfrmCpDetalhe, frmCpDetalhe);
-  Application.CreateForm(TfrmRelUsuarios, frmRelUsuarios);
   Application.Run;
 end.

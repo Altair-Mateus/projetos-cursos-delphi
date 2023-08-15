@@ -4444,6 +4444,7 @@ inherited frmContasReceber: TfrmContasReceber
           Left = 213
           Top = 39
           Width = 297
+          OnKeyDown = edtPesquisarKeyDown
           ExplicitLeft = 213
           ExplicitTop = 39
           ExplicitWidth = 297
@@ -4468,6 +4469,7 @@ inherited frmContasReceber: TfrmContasReceber
           ItemIndex = 0
           TabOrder = 2
           Text = 'TODAS'
+          OnClick = cbStatusClick
           Items.Strings = (
             'TODAS'
             'PAGA'
@@ -4511,6 +4513,7 @@ inherited frmContasReceber: TfrmContasReceber
             ParentColor = False
             ParentFont = False
             TabOrder = 0
+            OnClick = rbDataVencClick
           end
           object rbValorParcela: TRadioButton
             Left = 127
@@ -4527,6 +4530,7 @@ inherited frmContasReceber: TfrmContasReceber
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            OnClick = rbValorParcelaClick
           end
           object rbValorVenda: TRadioButton
             Left = 127
@@ -4543,6 +4547,7 @@ inherited frmContasReceber: TfrmContasReceber
             ParentColor = False
             ParentFont = False
             TabOrder = 2
+            OnClick = rbValorVendaClick
           end
           object rbDataVenda: TRadioButton
             Left = 3
@@ -4559,6 +4564,7 @@ inherited frmContasReceber: TfrmContasReceber
             ParentColor = False
             ParentFont = False
             TabOrder = 3
+            OnClick = rbDataVendaClick
           end
           object rbId: TRadioButton
             Left = 3
@@ -4577,6 +4583,7 @@ inherited frmContasReceber: TfrmContasReceber
             ParentFont = False
             TabOrder = 4
             TabStop = True
+            OnClick = rbIdClick
           end
         end
         object dateInicial: TDateTimePicker
@@ -4588,6 +4595,7 @@ inherited frmContasReceber: TfrmContasReceber
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 4
+          OnExit = dateInicialExit
         end
         object dateFinal: TDateTimePicker
           Left = 373
@@ -4598,6 +4606,7 @@ inherited frmContasReceber: TfrmContasReceber
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 5
+          OnExit = dateFinalExit
         end
         object cbData: TComboBox
           Left = 550
@@ -4608,6 +4617,7 @@ inherited frmContasReceber: TfrmContasReceber
           ItemIndex = 0
           TabOrder = 6
           Text = 'DATA VENDA'
+          OnClick = cbDataClick
           Items.Strings = (
             'DATA VENDA'
             'DATA VENCIMENTO'

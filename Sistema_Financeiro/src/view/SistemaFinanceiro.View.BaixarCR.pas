@@ -118,17 +118,12 @@ begin
     edtObs.Text := '';
     edtValor.Text := '';
 
-    //  Exibe a Tela
-    Self.ShowModal;
-
   finally
 
     //  Libera da memoria
     ContaReceber.Free;
 
   end;
-
-
 
 end;
 

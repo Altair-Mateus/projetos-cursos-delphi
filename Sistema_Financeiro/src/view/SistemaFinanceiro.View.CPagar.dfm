@@ -3076,6 +3076,7 @@ inherited frmContasPagar: TfrmContasPagar
           Left = 192
           Top = 42
           Width = 297
+          OnKeyDown = edtPesquisarKeyDown
           ExplicitLeft = 192
           ExplicitTop = 42
           ExplicitWidth = 297
@@ -3100,6 +3101,7 @@ inherited frmContasPagar: TfrmContasPagar
           ItemIndex = 0
           TabOrder = 2
           Text = 'TODAS'
+          OnClick = cbStatusClick
           Items.Strings = (
             'TODAS'
             'PAGA'
@@ -3143,6 +3145,7 @@ inherited frmContasPagar: TfrmContasPagar
             ParentColor = False
             ParentFont = False
             TabOrder = 0
+            OnClick = rbDataVencClick
           end
           object rbValorParcela: TRadioButton
             Left = 127
@@ -3159,6 +3162,7 @@ inherited frmContasPagar: TfrmContasPagar
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            OnClick = rbValorParcelaClick
           end
           object rbValorCompra: TRadioButton
             Left = 127
@@ -3175,6 +3179,7 @@ inherited frmContasPagar: TfrmContasPagar
             ParentColor = False
             ParentFont = False
             TabOrder = 2
+            OnClick = rbValorCompraClick
           end
           object rbDataCompra: TRadioButton
             Left = 3
@@ -3191,6 +3196,7 @@ inherited frmContasPagar: TfrmContasPagar
             ParentColor = False
             ParentFont = False
             TabOrder = 3
+            OnClick = rbDataCompraClick
           end
           object rbId: TRadioButton
             Left = 3
@@ -3209,6 +3215,7 @@ inherited frmContasPagar: TfrmContasPagar
             ParentFont = False
             TabOrder = 4
             TabStop = True
+            OnClick = rbIdClick
           end
         end
         object cbData: TComboBox
@@ -3220,6 +3227,7 @@ inherited frmContasPagar: TfrmContasPagar
           ItemIndex = 0
           TabOrder = 4
           Text = 'DATA COMPRA'
+          OnClick = cbDataClick
           Items.Strings = (
             'DATA COMPRA'
             'DATA VENCIMENTO'
@@ -3235,6 +3243,7 @@ inherited frmContasPagar: TfrmContasPagar
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 5
+          OnExit = dateFinalExit
         end
         object dateInicial: TDateTimePicker
           Left = 192
@@ -3245,6 +3254,7 @@ inherited frmContasPagar: TfrmContasPagar
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 6
+          OnExit = dateInicialExit
         end
       end
       inherited pnlBotoes: TPanel

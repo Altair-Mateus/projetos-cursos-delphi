@@ -88,6 +88,17 @@ type
     procedure Baixar1Click(Sender: TObject);
     procedure btnDetalhesClick(Sender: TObject);
     procedure DataSourceCReceberDataChange(Sender: TObject; Field: TField);
+    procedure dateInicialExit(Sender: TObject);
+    procedure dateFinalExit(Sender: TObject);
+    procedure cbStatusClick(Sender: TObject);
+    procedure cbDataClick(Sender: TObject);
+    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure rbDataVencClick(Sender: TObject);
+    procedure rbDataVendaClick(Sender: TObject);
+    procedure rbIdClick(Sender: TObject);
+    procedure rbValorParcelaClick(Sender: TObject);
+    procedure rbValorVendaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -534,6 +545,22 @@ begin
 
 end;
 
+procedure TfrmContasReceber.cbDataClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.cbStatusClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasReceber.DataSourceCReceberDataChange(Sender: TObject;
   Field: TField);
 begin
@@ -542,6 +569,21 @@ begin
   btnDetalhes.Enabled := DataSourceCReceber.DataSet.FieldByName('STATUS').AsString = 'P';
   btnBaixarCR.Enabled := DataSourceCReceber.DataSet.FieldByName('STATUS').AsString = 'A';
 
+end;
+
+procedure TfrmContasReceber.dateFinalExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.dateInicialExit(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
 end;
 
 procedure TfrmContasReceber.DBGrid1DblClick(Sender: TObject);
@@ -632,6 +674,15 @@ begin
 
 end;
 
+procedure TfrmContasReceber.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasReceber.edtValorParcelaExit(Sender: TObject);
 begin
   inherited;
@@ -657,15 +708,47 @@ end;
 procedure TfrmContasReceber.ExibeDetalhe;
 begin
 
-  frmCrDetalhe.ExibirCRDetalhes(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
+  // cria o form
+  frmCrDetalhe := TfrmCrDetalhe.Create(self);
+
+  try
+
+    frmCrDetalhe.ExibirCRDetalhes(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
+
+    //  exibe o form
+    frmCrDetalhe.ShowModal;
+
+  finally
+
+    FreeAndNil(frmCrDetalhe);
+
+  end;
+
+
 
 end;
 
 procedure TfrmContasReceber.ExibeTelaBaixar;
 begin
 
- frmBaixarCR.BaixarCR(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
- Pesquisar;
+  //  Cria o form
+  frmBaixarCR := TfrmBaixarCR.Create(Self);
+
+  try
+
+    frmBaixarCR.BaixarCR(DataSourceCReceber.DataSet.FieldByName('ID').AsInteger);
+
+    //  Exibe o form
+    frmBaixarCR.ShowModal;
+
+  finally
+
+    FreeAndNil(frmBaixarCR);
+
+  end;
+
+
+  Pesquisar;
 
   //  Atualiza relatorio tela principal
   frmPrincipal.TotalCr;
@@ -690,6 +773,7 @@ end;
 
 procedure TfrmContasReceber.HabilitaBotoes;
 begin
+
   btnAlterar.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnBaixarCR.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
@@ -803,6 +887,46 @@ begin
 
 
 end;
+procedure TfrmContasReceber.rbDataVencClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.rbDataVendaClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.rbIdClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.rbValorParcelaClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.rbValorVendaClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasReceber.toggleParcelamentoClick(Sender: TObject);
 begin
   inherited;

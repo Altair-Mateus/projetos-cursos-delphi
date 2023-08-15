@@ -114,8 +114,6 @@ begin
   dmCPagar.FDQueryCpDetalhes.Prepare;
   dmCPagar.FDQueryCpDetalhes.Open();
 
-  Self.ShowModal;
-
 end;
 
 
