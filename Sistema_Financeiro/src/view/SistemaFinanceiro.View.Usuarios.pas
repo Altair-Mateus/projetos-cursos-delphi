@@ -1,7 +1,5 @@
 unit SistemaFinanceiro.View.Usuarios;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
@@ -11,7 +9,6 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.WinXCtrls, Vcl.Menus;
-
 type
   TfrmUsuarios = class(TfrmCadastroPadrao)
     DataSourceUsuarios: TDataSource;
@@ -34,6 +31,8 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnImprimirClick(Sender: TObject);
+
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -44,7 +43,6 @@ type
     { Public declarations }
 
   protected
-
     procedure Pesquisar; override;
 
   end;
@@ -52,26 +50,23 @@ type
 var
   frmUsuarios: TfrmUsuarios;
 
-implementation
-
+  implementation
 {$R *.dfm}
-
 uses
-
   SistemaFinanceiro.Model.dmUsuarios,
-  BCrypt, SistemaFinanceiro.Utilitarios;
+  BCrypt, SistemaFinanceiro.Utilitarios,
+  SistemaFinanceiro.View.Relatorios.Usuarios;
 
-procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
+  procedure TfrmUsuarios.btnAlterarClick(Sender: TObject);
 begin
-
   inherited;
-
   EditarUsuario;
 
 end;
 
 procedure TfrmUsuarios.btnCancelarClick(Sender: TObject);
 begin
+
   inherited;
 
   //  Cancelando inclusão
@@ -81,7 +76,6 @@ end;
 
 procedure TfrmUsuarios.btnExcluirClick(Sender: TObject);
 var
-
   option : Word;
 
 begin
@@ -94,7 +88,6 @@ begin
     exit;
   end;
 
-
   try
 
     //  Excluindo registro
@@ -102,10 +95,29 @@ begin
     dmUsuarios.cdsUsuarios.ApplyUpdates(0);
 
   except on E : Exception do
-
     Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir usuário', MB_OK + MB_ICONERROR);
+  end;
+
+end;
+procedure TfrmUsuarios.btnImprimirClick(Sender: TObject);
+begin
+
+  //  Cria o form
+  frmRelUsuarios := TfrmRelUsuarios.Create(Self);
+
+  try
+
+    frmRelUsuarios.DataSourceUsuarios.DataSet := DataSourceUsuarios.DataSet;
+
+    //  Mostra a pre visualização
+    frmRelUsuarios.RLReportUsuarios.Preview;
+
+  finally
+
+    FreeAndNil(frmRelUsuarios);
 
   end;
+
 
 
 end;
@@ -132,18 +144,15 @@ end;
 procedure TfrmUsuarios.btnPesquisaeClick(Sender: TObject);
 begin
   inherited;
-
   Pesquisar;
 
 end;
 
 procedure TfrmUsuarios.btnSalvarClick(Sender: TObject);
 var
-
   LStatus : String;
 
 begin
-
 
   //  Valida os campos obrigatórios
   ValidaCampos;
@@ -151,28 +160,21 @@ begin
   //  Se for um novo usuário será colocado a senha temporária
   if dmUsuarios.cdsUsuarios.State in [dsInsert] then
   begin
-
     dmUsuarios.cdsUsuariossenha.AsString := TBCrypt.GenerateHash(dmUsuarios.TEMP_PASSWORD);
     dmUsuarios.cdsUsuariossenha_temp.AsString := 'S';
     dmUsuarios.cdsUsuariosdata_cadastro.AsDateTime := now;
     dmUsuarios.GeraCodigo;
-
   end;
-
 
   //  Define o status do usuario
   if ToggleStatus.State = tssOn then
   begin
-
     LStatus := 'A';
-
   end
-  else
-  begin
-
-    LStatus := 'I';
-
-  end;
+    else
+    begin
+      LStatus := 'I';
+    end;
 
   //  Passando os dados para o dataset
   dmUsuarios.cdsUsuariosnome.AsString := Trim(edtNome.Text);
@@ -190,6 +192,7 @@ begin
   Pesquisar;
 
   inherited;
+
 end;
 
 procedure TfrmUsuarios.DBGrid1DblClick(Sender: TObject);
@@ -215,16 +218,12 @@ begin
 
   if dmUsuarios.cdsUsuariosstatus.AsString = 'A' then
   begin
-
-  ToggleStatus.State := tssOn;
-
+    ToggleStatus.State := tssOn;
   end
-  else
-  begin
-
-    ToggleStatus.State := tssOff;
-
-  end;
+    else
+    begin
+      ToggleStatus.State := tssOff;
+    end;
 
 end;
 
@@ -259,10 +258,8 @@ begin
       PWideChar(format('Foi definida a senha padrão para o usuário "%s"',
         [DataSourceUsuarios.DataSet.FieldByName('NOME').AsString] )),
       'Atenção', MB_OK + MB_ICONINFORMATION
-
     );
   end;
-
 
 end;
 
@@ -283,26 +280,27 @@ begin
   HabilitaBotoes;
 
   inherited;
-end;
 
+end;
 procedure TfrmUsuarios.ValidaCampos;
 begin
+
   if Trim(edtNome.Text) = '' then
     begin
 
       Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
       edtNome.SetFocus;
-
       abort;
     end;
+
 
   if Trim(edtLogin.Text) = '' then
   begin
 
     Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     edtLogin.SetFocus;
-
     abort;
+
   end;
 
   if dmUsuarios.VerificaLogin(Trim(edtLogin.Text), dmUsuarios.cdsUsuarios.FieldByName('ID').AsString) then
@@ -310,12 +308,10 @@ begin
 
     Application.MessageBox(PWidechar(Format('Login %s já cadastrado!', [edtLogin.Text])), 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     edtLogin.SetFocus;
-
     abort;
   end;
 
 
 end;
-
 
 end.
