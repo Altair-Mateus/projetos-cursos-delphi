@@ -40,21 +40,21 @@ object dmCPagar: TdmCPagar
     object cdsCPagarVALOR_PARCELA: TFMTBCDField
       FieldName = 'VALOR_PARCELA'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
     object cdsCPagarVALOR_COMPRA: TFMTBCDField
       FieldName = 'VALOR_COMPRA'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
     object cdsCPagarVALOR_ABATIDO: TFMTBCDField
       FieldName = 'VALOR_ABATIDO'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
@@ -111,7 +111,7 @@ object dmCPagar: TdmCPagar
       FieldName = 'VALOR'
       Origin = 'VALOR'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end

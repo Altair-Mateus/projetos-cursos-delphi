@@ -99,6 +99,7 @@ type
     procedure rbIdClick(Sender: TObject);
     procedure rbValorParcelaClick(Sender: TObject);
     procedure rbValorVendaClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -124,7 +125,7 @@ implementation
 uses
   SistemaFinanceiro.Model.dmCReceber,
   SistemaFinanceiro.Utilitarios, System.DateUtils,
-  SistemaFinanceiro.View.Principal;
+  SistemaFinanceiro.View.Principal, SistemaFinanceiro.View.Relatorios.Cr;
 
 { TfrmContasReceber }
 
@@ -295,6 +296,27 @@ begin
   //  Bloqueia os edits
   edtQtdParcelas.Enabled := False;
   edtIntervaloDias.Enabled := False;
+
+end;
+
+procedure TfrmContasReceber.btnImprimirClick(Sender: TObject);
+begin
+
+  //  Cria o form
+  frmRelCr := TfrmRelCr.Create(Self);
+
+  try
+
+    frmRelCr.DataSourceCr.DataSet := DataSourceCReceber.DataSet;
+
+    //  Mostra a pre vizualizacao
+    frmRelCr.RLReport.Preview;
+
+  finally
+
+    FreeAndNil(frmRelCr);
+
+  end;
 
 end;
 

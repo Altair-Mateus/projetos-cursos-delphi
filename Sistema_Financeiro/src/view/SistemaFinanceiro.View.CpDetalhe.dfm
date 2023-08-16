@@ -21,9 +21,11 @@ object frmCpDetalhe: TfrmCpDetalhe
     Color = clWindow
     ParentBackground = False
     TabOrder = 0
+    ExplicitTop = 427
+    ExplicitWidth = 764
     object btnSair: TButton
       AlignWithMargins = True
-      Left = 648
+      Left = 644
       Top = 4
       Width = 120
       Height = 61
@@ -33,7 +35,7 @@ object frmCpDetalhe: TfrmCpDetalhe
       Images = ImageList1
       TabOrder = 0
       OnClick = btnSairClick
-      ExplicitLeft = 644
+      ExplicitLeft = 640
     end
   end
   object pnlGrid: TPanel
@@ -43,6 +45,8 @@ object frmCpDetalhe: TfrmCpDetalhe
     Height = 331
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 764
+    ExplicitHeight = 330
     object Image1: TImage
       Left = 640
       Top = 152
@@ -52,8 +56,8 @@ object frmCpDetalhe: TfrmCpDetalhe
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 770
-      Height = 330
+      Width = 766
+      Height = 329
       Align = alClient
       DataSource = DataSourceCPDetalhe
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -75,7 +79,7 @@ object frmCpDetalhe: TfrmCpDetalhe
         item
           Expanded = False
           FieldName = 'VALOR'
-          Title.Caption = 'Valor Pago R$'
+          Title.Caption = 'Valor Pago'
           Visible = True
         end
         item
@@ -103,6 +107,7 @@ object frmCpDetalhe: TfrmCpDetalhe
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 764
     object lblTNDoc: TLabel
       Left = 16
       Top = 16

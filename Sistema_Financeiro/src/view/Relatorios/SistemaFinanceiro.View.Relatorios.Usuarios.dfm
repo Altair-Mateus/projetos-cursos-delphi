@@ -1,92 +1,19 @@
-object frmRelUsuarios: TfrmRelUsuarios
-  Left = 0
-  Top = 0
-  Caption = 'Relat'#243'rio de Usu'#225'rios'
-  ClientHeight = 510
-  ClientWidth = 805
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -16
-  Font.Name = 'Tahoma'
-  Font.Style = []
-  TextHeight = 19
-  object RLReportUsuarios: TRLReport
-    Left = 8
-    Top = 8
-    Width = 794
-    Height = 1123
+inherited frmRelUsuarios: TfrmRelUsuarios
+  Caption = 'frmRelUsuarios'
+  TextHeight = 15
+  inherited RLReport: TRLReport
     DataSource = DataSourceUsuarios
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -13
-    Font.Name = 'Arial'
-    Font.Style = []
-    BeforePrint = RLReportUsuariosBeforePrint
-    object rlbCab: TRLBand
-      Left = 38
-      Top = 38
-      Width = 718
-      Height = 35
-      BandType = btHeader
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = True
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
-      object rllblNomeEmp: TRLLabel
-        Left = 1
-        Top = 1
-        Width = 199
-        Height = 24
-        Align = faLeftTop
-        Caption = 'Sistema Financeiro'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -21
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
-    object rlbTitulo: TRLBand
-      Left = 38
-      Top = 73
-      Width = 718
-      Height = 32
-      BandType = btTitle
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = False
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
-      object rllblTitulo: TRLLabel
+    Font.Height = -16
+    inherited rlbTitulo: TRLBand
+      inherited rllblTitulo: TRLLabel
         Left = 258
-        Top = 0
         Width = 202
-        Height = 24
-        Align = faCenterTop
-        Alignment = taCenter
         Caption = 'Rela'#231#227'o de Usu'#225'rios'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -21
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
+        ExplicitLeft = 258
+        ExplicitWidth = 202
       end
     end
-    object rlbNomeColunas: TRLBand
-      Left = 38
-      Top = 105
-      Width = 718
-      Height = 24
-      BandType = btColumnHeader
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = False
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
+    inherited rlbNomeColunas: TRLBand
       object rllblNome: TRLLabel
         Left = 1
         Top = 0
@@ -116,11 +43,11 @@ object frmRelUsuarios: TfrmRelUsuarios
         ParentFont = False
       end
       object rllblStatus: TRLLabel
-        Left = 659
+        Left = 595
         Top = 0
         Width = 58
         Height = 22
-        Align = faRightTop
+        Align = faTopOnly
         Alignment = taRightJustify
         Caption = 'Status'
         Font.Charset = DEFAULT_CHARSET
@@ -131,105 +58,83 @@ object frmRelUsuarios: TfrmRelUsuarios
         ParentFont = False
       end
     end
-    object rlbDados: TRLBand
-      Left = 38
-      Top = 129
-      Width = 718
-      Height = 20
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = False
-      Borders.DrawRight = True
-      Borders.DrawBottom = False
-      object RLDBText1: TRLDBText
+    inherited rlbDados: TRLBand
+      object rldbtNome: TRLDBText
         Left = 1
         Top = 0
-        Width = 43
-        Height = 16
+        Width = 51
+        Height = 18
         Align = faLeftTop
         DataField = 'NOME'
         DataSource = DataSourceUsuarios
         Text = ''
       end
-      object RLDBText2: TRLDBText
+      object rldbtLogin: TRLDBText
         Left = 354
         Top = 0
-        Width = 43
-        Height = 16
+        Width = 51
+        Height = 18
         Align = faTopOnly
         DataField = 'LOGIN'
         DataSource = DataSourceUsuarios
         Text = ''
       end
-      object RLDBText3: TRLDBText
-        Left = 663
+      object rldbtStatus: TRLDBText
+        Left = 593
         Top = 0
-        Width = 54
-        Height = 16
-        Align = faRightTop
-        Alignment = taRightJustify
+        Width = 66
+        Height = 18
+        Align = faTopOnly
+        Alignment = taJustify
         DataField = 'STATUS'
         DataSource = DataSourceUsuarios
         Text = ''
       end
     end
-    object rlbRodape: TRLBand
-      Left = 38
-      Top = 149
-      Width = 718
-      Height = 38
-      BandType = btColumnFooter
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = True
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
-      object rlsiData: TRLSystemInfo
-        Left = 547
-        Top = 21
-        Width = 74
-        Height = 16
-        Align = faBottomOnly
-        Alignment = taRightJustify
-        Text = 'Data: '
+    inherited rlbRodape: TRLBand
+      inherited rlsiData: TRLSystemInfo
+        Left = 531
+        Top = 19
+        Width = 90
+        Height = 18
+        ExplicitLeft = 531
+        ExplicitTop = 19
+        ExplicitWidth = 90
+        ExplicitHeight = 18
       end
-      object rlsiHora: TRLSystemInfo
-        Left = 627
-        Top = 21
-        Width = 61
-        Height = 16
-        Align = faBottomOnly
-        Info = itHour
-        Text = ' '#224's '
+      inherited rlsiHora: TRLSystemInfo
+        Top = 19
+        Width = 72
+        Height = 18
+        ExplicitTop = 19
+        ExplicitWidth = 72
+        ExplicitHeight = 18
       end
-      object rlsiNumPag: TRLSystemInfo
-        Left = 1
-        Top = 1
-        Width = 131
-        Height = 16
-        Align = faLeftTop
-        Info = itPageNumber
-        Text = 'P'#225'gina '
+      inherited rlsiNumPag: TRLSystemInfo
+        Width = 161
+        Height = 18
+        ExplicitWidth = 161
+        ExplicitHeight = 18
       end
-      object rlsiLastPage: TRLSystemInfo
-        Left = 132
-        Top = 1
-        Width = 130
-        Height = 16
-        Align = faLeftTop
-        Info = itLastPageNumber
-        Text = 'de '
+      inherited rlsiLastPage: TRLSystemInfo
+        Left = 162
+        Width = 159
+        Height = 18
+        ExplicitLeft = 162
+        ExplicitWidth = 159
+        ExplicitHeight = 18
       end
-      object rllblNomeUser: TRLLabel
-        Left = 1
-        Top = 21
-        Width = 85
-        Height = 16
-        Align = faLeftBottom
+      inherited rllblNomeUser: TRLLabel
+        Top = 19
+        Width = 102
+        Height = 18
+        ExplicitTop = 19
+        ExplicitWidth = 102
+        ExplicitHeight = 18
       end
     end
   end
-  object DataSourceUsuarios: TDataSource
+  object DataSourceUsuarios: TDataSource [1]
     Left = 672
     Top = 296
   end

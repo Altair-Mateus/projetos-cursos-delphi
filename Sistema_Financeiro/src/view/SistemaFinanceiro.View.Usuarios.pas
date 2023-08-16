@@ -110,7 +110,7 @@ begin
     frmRelUsuarios.DataSourceUsuarios.DataSet := DataSourceUsuarios.DataSet;
 
     //  Mostra a pre visualização
-    frmRelUsuarios.RLReportUsuarios.Preview;
+    frmRelUsuarios.RLReport.Preview;
 
   finally
 

@@ -28,7 +28,9 @@ uses
   SistemaFinanceiro.View.CrDetalhe in 'src\view\SistemaFinanceiro.View.CrDetalhe.pas' {frmCrDetalhe},
   SistemaFinanceiro.View.CpDetalhe in 'src\view\SistemaFinanceiro.View.CpDetalhe.pas' {frmCpDetalhe},
   SistemaFinanceiro.Model.Entidades.LancamentoCaixa in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas',
-  SistemaFinanceiro.View.Relatorios.Usuarios in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Usuarios.pas' {frmRelUsuarios};
+  SistemaFinanceiro.View.RelatoriosPadrao in 'src\view\Relatorios\SistemaFinanceiro.View.RelatoriosPadrao.pas' {frmRelatorioPadrao},
+  SistemaFinanceiro.View.Relatorios.Usuarios in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Usuarios.pas' {frmRelUsuarios},
+  SistemaFinanceiro.View.Relatorios.Cr in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cr.pas' {frmRelCr};
 
 {$R *.res}
 begin

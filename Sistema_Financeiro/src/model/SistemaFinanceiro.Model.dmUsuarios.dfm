@@ -44,6 +44,7 @@ object dmUsuarios: TdmUsuarios
     object cdsUsuariosstatus: TWideStringField
       FieldName = 'status'
       Origin = 'STATUS'
+      OnGetText = cdsUsuariosstatusGetText
       Size = 1
     end
     object cdsUsuariossenha_temp: TWideStringField

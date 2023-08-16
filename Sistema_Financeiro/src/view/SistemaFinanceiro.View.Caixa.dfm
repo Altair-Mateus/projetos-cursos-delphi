@@ -9,8 +9,8 @@ inherited frmCaixa: TfrmCaixa
   inherited CardPanelPrincipal: TCardPanel
     Width = 1259
     Height = 606
-    ExplicitWidth = 1104
-    ExplicitHeight = 615
+    ExplicitWidth = 1255
+    ExplicitHeight = 605
     inherited CardCadastro: TCard
       Width = 1257
       Height = 604
@@ -148,12 +148,12 @@ inherited frmCaixa: TfrmCaixa
     inherited CardPesquisa: TCard
       Width = 1257
       Height = 604
-      ExplicitWidth = 1102
-      ExplicitHeight = 613
+      ExplicitWidth = 1253
+      ExplicitHeight = 603
       inherited pnlPesquisa: TPanel
         Width = 1257
         Height = 145
-        ExplicitWidth = 1257
+        ExplicitWidth = 1253
         ExplicitHeight = 145
         inherited lblPesquisar: TLabel
           Left = 185
@@ -1671,7 +1671,7 @@ inherited frmCaixa: TfrmCaixa
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 978
+          ExplicitLeft = 1129
           ExplicitTop = 30
           ExplicitHeight = 85
         end
@@ -1792,14 +1792,14 @@ inherited frmCaixa: TfrmCaixa
       inherited pnlBotoes: TPanel
         Top = 535
         Width = 1257
-        ExplicitTop = 544
-        ExplicitWidth = 1102
+        ExplicitTop = 534
+        ExplicitWidth = 1253
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 1133
-          ExplicitLeft = 978
+          ExplicitLeft = 1129
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
@@ -1816,7 +1816,7 @@ inherited frmCaixa: TfrmCaixa
           Font.Style = []
           ParentFont = False
           TabOrder = 5
-          ExplicitLeft = 844
+          ExplicitLeft = 995
           object lblCorReceita: TLabel
             Left = 31
             Top = 16
@@ -1856,8 +1856,8 @@ inherited frmCaixa: TfrmCaixa
         Width = 1257
         Height = 390
         ExplicitTop = 145
-        ExplicitWidth = 1102
-        ExplicitHeight = 399
+        ExplicitWidth = 1253
+        ExplicitHeight = 389
         inherited DBGrid1: TDBGrid
           Width = 1255
           Height = 388
@@ -1901,7 +1901,7 @@ inherited frmCaixa: TfrmCaixa
             item
               Expanded = False
               FieldName = 'valor'
-              Title.Caption = 'Valor R$'
+              Title.Caption = 'Valor'
               Width = 110
               Visible = True
             end>

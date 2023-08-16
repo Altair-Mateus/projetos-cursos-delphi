@@ -273,7 +273,7 @@ object frmCrDetalhe: TfrmCrDetalhe
         item
           Expanded = False
           FieldName = 'VALOR'
-          Title.Caption = 'Valor Pago R$'
+          Title.Caption = 'Valor Pago'
           Visible = True
         end
         item

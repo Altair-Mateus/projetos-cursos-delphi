@@ -4633,6 +4633,10 @@ inherited frmContasReceber: TfrmContasReceber
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
+        inherited btnImprimir: TButton
+          Enabled = True
+          OnClick = btnImprimirClick
+        end
         inherited btnSair: TButton
           Left = 1047
           ExplicitLeft = 1043
@@ -4807,14 +4811,14 @@ inherited frmContasReceber: TfrmContasReceber
             item
               Expanded = False
               FieldName = 'VALOR_PARCELA'
-              Title.Caption = 'Valor Parcela R$'
+              Title.Caption = 'Valor Parcela'
               Width = 137
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VALOR_VENDA'
-              Title.Caption = 'Valor Venda R$'
+              Title.Caption = 'Valor Venda'
               Width = 142
               Visible = True
             end
@@ -4835,7 +4839,7 @@ inherited frmContasReceber: TfrmContasReceber
             item
               Expanded = False
               FieldName = 'VALOR_ABATIDO'
-              Title.Caption = 'Valor Pago R$'
+              Title.Caption = 'Valor Pago'
               Width = 107
               Visible = True
             end

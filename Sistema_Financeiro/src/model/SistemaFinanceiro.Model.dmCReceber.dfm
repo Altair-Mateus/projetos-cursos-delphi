@@ -39,7 +39,7 @@ object dmCReceber: TdmCReceber
       FieldName = 'VALOR_PARCELA'
       Origin = 'VALOR_PARCELA'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
@@ -47,7 +47,7 @@ object dmCReceber: TdmCReceber
       FieldName = 'VALOR_VENDA'
       Origin = 'VALOR_VENDA'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
@@ -55,7 +55,7 @@ object dmCReceber: TdmCReceber
       FieldName = 'VALOR_ABATIDO'
       Origin = 'VALOR_ABATIDO'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end
@@ -123,7 +123,7 @@ object dmCReceber: TdmCReceber
       FieldName = 'VALOR'
       Origin = 'VALOR'
       Required = True
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
       Size = 2
     end

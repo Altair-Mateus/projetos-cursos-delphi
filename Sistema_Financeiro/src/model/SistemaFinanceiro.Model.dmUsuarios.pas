@@ -24,6 +24,8 @@ type
     cdsUsuariossenha_temp: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure cdsUsuariosstatusGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     FUsuario : TModelUsuario;
     { Private declarations }
@@ -54,6 +56,21 @@ uses
 {$R *.dfm}
 
 { TDataModuleUsuarios }
+
+procedure TdmUsuarios.cdsUsuariosstatusGetText(Sender: TField; var Text: string;
+  DisplayText: Boolean);
+begin
+
+  if Sender.AsString = 'A' then
+  begin
+    Text := 'ATIVO';
+  end
+  else if Sender.AsString = 'I' then
+       begin
+         Text := 'INATIVO';
+       end;
+
+end;
 
 procedure TdmUsuarios.DataModuleCreate(Sender: TObject);
 begin

@@ -29,7 +29,7 @@ object dmCaixa: TdmCaixa
     end
     object cdsCaixavalor: TFMTBCDField
       FieldName = 'valor'
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = 'R$ #,##0.00'
       Size = 18
     end
     object cdsCaixanumero_doc: TWideStringField

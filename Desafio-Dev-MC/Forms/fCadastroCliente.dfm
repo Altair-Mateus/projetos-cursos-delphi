@@ -5,20 +5,14 @@ inherited frmCadastroCliente: TfrmCadastroCliente
   inherited Panel1: TPanel
     inherited BitBtnSalvar: TBitBtn
       Top = 10
-      Enabled = False
       ExplicitTop = 10
     end
     inherited BitBtnCancelar: TBitBtn
       Left = 255
-      Enabled = False
       ExplicitLeft = 255
     end
   end
   inherited PanelCampos: TPanel
-    ExplicitLeft = 0
-    ExplicitTop = 65
-    ExplicitWidth = 772
-    ExplicitHeight = 284
     object LabelBairro: TLabel
       Left = 500
       Top = 64

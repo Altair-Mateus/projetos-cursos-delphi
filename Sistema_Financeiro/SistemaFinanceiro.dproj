@@ -191,8 +191,16 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas"/>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.RelatoriosPadrao.pas">
+            <Form>frmRelatorioPadrao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Usuarios.pas">
             <Form>frmRelUsuarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cr.pas">
+            <Form>frmRelCr</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
