@@ -241,6 +241,7 @@ begin
 
   btnAlterar.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
+  btnImprimir.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
 
 end;
 

@@ -147,7 +147,6 @@ inherited frmUsuarios: TfrmUsuarios
           OnClick = btnExcluirClick
         end
         inherited btnImprimir: TButton
-          Enabled = True
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton

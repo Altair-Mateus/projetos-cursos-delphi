@@ -203,6 +203,14 @@
             <Form>frmRelCr</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cp.pas">
+            <Form>frmRelCp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Caixa.pas">
+            <Form>frmRelCaixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

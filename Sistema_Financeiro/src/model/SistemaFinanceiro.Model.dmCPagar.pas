@@ -32,6 +32,10 @@ type
     FDQueryCpDetalhesDATA: TDateField;
     FDQueryCpDetalhesUSUARIO: TWideStringField;
     FDQueryCpDetalhesNOME: TWideStringField;
+    cdsCPagarPARCIAL: TWideStringField;
+    cdsCPagarCP_ORIGEM: TIntegerField;
+    procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     { Private declarations }
   public
@@ -113,14 +117,25 @@ begin
         cdsCPagarSTATUS.AsString          := 'A';
         cdsCPagarVALOR_ABATIDO.AsCurrency := 0;
 
-         //  Passando os dados para o dataset
-        cdsCPagarNUMERO_DOC.AsString        := ContaPagar.Doc;
+
+        //  Passando os dados para o dataset
+        if (ContaPagar.Doc = '') or (ContaPagar.Parcial = 'S' ) then
+        begin
+          cdsCPagarNUMERO_DOC.AsString        := ContaPagar.Doc;
+        end
+        else
+        begin
+          cdsCPagarNUMERO_DOC.AsString  := Format('%s-P', [ContaPagar.Doc]);
+        end;
+
         cdsCPagarDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaPagar.ID, ContaPagar.Doc]);
         cdsCPagarVALOR_COMPRA.AsCurrency    := ContaPagar.ValorCompra;
         cdsCPagarDATA_COMPRA.AsDateTime     := ContaPagar.DataCompra;
         cdsCPagarPARCELA.AsInteger          := ContaPagar.Parcela;
         cdsCPagarVALOR_PARCELA.AsCurrency   := ContaPagar.ValorParcela - BaixaCP.Valor;
         cdsCPagarDATA_VENCIMENTO.AsDateTime := ContaPagar.DataVencimento;
+        cdsCPagarPARCIAL.AsString           := 'S';
+        cdsCPagarCP_ORIGEM.AsString         := ContaPagar.ID;
 
         //  Gravando no BD
         cdsCPagar.Post;
@@ -233,6 +248,26 @@ begin
 
 end;
 
+procedure TdmCPagar.cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
+  DisplayText: Boolean);
+begin
+
+  if Sender.AsString = 'A' then
+  begin
+    Text := 'ABERTA';
+  end
+  else if Sender.AsString = 'P' then
+       begin
+         Text := 'PAGA';
+       end
+       else if Sender.AsString = 'C' then
+            begin
+              Text := 'CANCELADA';
+            end;
+
+
+end;
+
 procedure TdmCPagar.GeraCodigo;
 var
   FDQueryId : TFDQuery;
@@ -330,6 +365,8 @@ begin
       Result.DataVencimento := FDQueryCP.FieldByName('DATA_VENCIMENTO').AsDateTime;
       Result.DataPagamento  := FDQueryCP.FieldByName('DATA_PAGAMENTO').AsDateTime;
       Result.Status         := FDQueryCP.FieldByName('STATUS').AsString;
+      Result.Parcial        := FDQueryCP.FieldByName('PARCIAL').AsString;
+      Result.CpOrigem       := FDQueryCP.FieldByName('CP_ORIGEM').AsInteger;
 
     except
       Result.Free;

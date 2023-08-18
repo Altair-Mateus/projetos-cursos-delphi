@@ -33,6 +33,10 @@ type
     FDQueryCrDetalheDATA: TDateField;
     FDQueryCrDetalheUSUARIO: TWideStringField;
     FDQueryCrDetalheNOME: TWideStringField;
+    cdsCReceberPARCIAL: TWideStringField;
+    cdsCReceberCR_ORIGEM: TIntegerField;
+    procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
 
   private
     { Private declarations }
@@ -118,14 +122,25 @@ begin
         cdsCReceberSTATUS.AsString          := 'A';
         cdsCReceberVALOR_ABATIDO.AsCurrency := 0;
 
-         //  Passando os dados para o dataset
-        cdsCReceberNUMERO_DOCUMENTO.AsString  := ContaReceber.Doc;
+
+        //  Passando os dados para o dataset
+        if (ContaReceber.Doc = '') or (ContaReceber.Parcial = 'S' ) then
+        begin
+          cdsCReceberNUMERO_DOCUMENTO.AsString  := ContaReceber.Doc;
+        end
+        else
+        begin
+          cdsCReceberNUMERO_DOCUMENTO.AsString  := Format('%s-P', [ContaReceber.Doc]);
+        end;
+
         cdsCReceberDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaReceber.ID, ContaReceber.Doc]);
         cdsCReceberVALOR_VENDA.AsCurrency     := ContaReceber.ValorVenda;
         cdsCReceberDATA_VENDA.AsDateTime      := ContaReceber.DataVenda;
         cdsCReceberPARCELA.AsInteger          := ContaReceber.Parcela;
         cdsCReceberVALOR_PARCELA.AsCurrency   := ContaReceber.ValorParcela - BaixaCR.Valor;
         cdsCReceberDATA_VENCIMENTO.AsDateTime := ContaReceber.DataVencimento;
+        cdsCReceberPARCIAL.AsString           := 'S';
+        cdsCReceberCR_ORIGEM.AsString         := ContaReceber.Id;
 
         //  Gravando no BD
         cdsCReceber.Post;
@@ -244,6 +259,25 @@ begin
 
 end;
 
+procedure TdmCReceber.cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
+  DisplayText: Boolean);
+begin
+
+  if Sender.AsString = 'A' then
+  begin
+    Text := 'ABERTA';
+  end
+  else if Sender.AsString = 'P' then
+       begin
+         Text := 'PAGA';
+       end
+       else if Sender.AsString = 'C' then
+            begin
+              Text := 'CANCELADA';
+            end;
+
+end;
+
 procedure TdmCReceber.GeraCodigo;
 var
   FDQueryId : TFDQuery;
@@ -343,6 +377,8 @@ begin
       Result.DataVencimento  := FDQueryCR.FieldByName('DATA_VENCIMENTO').AsDateTime;
       Result.DataRecebimento := FDQueryCR.FieldByName('DATA_RECEBIMENTO').AsDateTime;
       Result.Status          := FDQueryCR.FieldByName('STATUS').AsString;
+      Result.Parcial         := FDQueryCR.FieldByName('PARCIAL').AsString;
+      Result.CrOrigem        := FDQueryCR.FieldByName('CR_ORIGEM').AsInteger;
 
     except
 

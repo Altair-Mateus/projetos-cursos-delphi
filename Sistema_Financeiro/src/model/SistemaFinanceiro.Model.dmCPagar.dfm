@@ -21,6 +21,7 @@ object dmCPagar: TdmCPagar
     Left = 448
     Top = 200
     object cdsCPagarID: TIntegerField
+      Alignment = taLeftJustify
       FieldName = 'ID'
       Required = True
     end
@@ -78,11 +79,19 @@ object dmCPagar: TdmCPagar
       FieldName = 'DATA_PAGAMENTO'
     end
     object cdsCPagarSTATUS: TWideStringField
-      Alignment = taCenter
       FieldName = 'STATUS'
       Required = True
+      OnGetText = cdsCPagarSTATUSGetText
       FixedChar = True
       Size = 1
+    end
+    object cdsCPagarPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object cdsCPagarCP_ORIGEM: TIntegerField
+      FieldName = 'CP_ORIGEM'
     end
   end
   object FDQueryCpDetalhes: TFDQuery

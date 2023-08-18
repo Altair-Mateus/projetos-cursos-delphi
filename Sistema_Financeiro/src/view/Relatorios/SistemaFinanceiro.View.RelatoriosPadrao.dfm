@@ -16,6 +16,7 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
     Top = 0
     Width = 794
     Height = 1123
+    Borders.Sides = sdAll
     DefaultFilter = RLPDFFilter1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -25,19 +26,19 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
     FooterMeasuring = fmAfterHeader
     BeforePrint = RLReportBeforePrint
     object rlbCab: TRLBand
-      Left = 38
-      Top = 38
-      Width = 718
+      Left = 39
+      Top = 39
+      Width = 716
       Height = 35
       BandType = btHeader
       Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = True
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
+      Borders.DrawLeft = False
+      Borders.DrawTop = False
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
       object rllblNomeEmp: TRLLabel
-        Left = 1
-        Top = 1
+        Left = 0
+        Top = 0
         Width = 199
         Height = 24
         Align = faLeftTop
@@ -51,22 +52,22 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       end
     end
     object rlbTitulo: TRLBand
-      Left = 38
-      Top = 73
-      Width = 718
+      Left = 39
+      Top = 74
+      Width = 716
       Height = 32
       BandType = btTitle
       Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = False
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
+      Borders.DrawLeft = False
+      Borders.DrawTop = True
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
       object rllblTitulo: TRLLabel
-        Left = 316
-        Top = 0
+        Left = 315
+        Top = 4
         Width = 86
         Height = 24
-        Align = faCenterTop
+        Align = faCenter
         Alignment = taCenter
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -77,43 +78,43 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       end
     end
     object rlbNomeColunas: TRLBand
-      Left = 38
-      Top = 105
-      Width = 718
+      Left = 39
+      Top = 106
+      Width = 716
       Height = 24
       BandType = btColumnHeader
       Borders.Sides = sdCustom
-      Borders.DrawLeft = True
-      Borders.DrawTop = False
-      Borders.DrawRight = True
+      Borders.DrawLeft = False
+      Borders.DrawTop = True
+      Borders.DrawRight = False
       Borders.DrawBottom = True
     end
     object rlbDados: TRLBand
-      Left = 38
-      Top = 129
-      Width = 718
+      Left = 39
+      Top = 130
+      Width = 716
       Height = 20
       Borders.Sides = sdCustom
-      Borders.DrawLeft = True
+      Borders.DrawLeft = False
       Borders.DrawTop = False
-      Borders.DrawRight = True
+      Borders.DrawRight = False
       Borders.DrawBottom = False
     end
     object rlbRodape: TRLBand
-      Left = 38
-      Top = 149
-      Width = 718
+      Left = 39
+      Top = 150
+      Width = 716
       Height = 38
-      BandType = btColumnFooter
+      BandType = btFooter
       Borders.Sides = sdCustom
-      Borders.DrawLeft = True
+      Borders.DrawLeft = False
       Borders.DrawTop = True
-      Borders.DrawRight = True
-      Borders.DrawBottom = True
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
       object rlsiData: TRLSystemInfo
-        Left = 547
-        Top = 21
-        Width = 74
+        Left = 518
+        Top = 22
+        Width = 103
         Height = 16
         Align = faBottomOnly
         Alignment = taRightJustify
@@ -121,24 +122,24 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       end
       object rlsiHora: TRLSystemInfo
         Left = 619
-        Top = 21
-        Width = 61
+        Top = 22
+        Width = 76
         Height = 16
         Align = faBottomOnly
         Info = itHour
         Text = ' '#224's '
       end
       object rlsiNumPag: TRLSystemInfo
-        Left = 1
+        Left = 0
         Top = 1
-        Width = 131
+        Width = 55
         Height = 16
         Align = faLeftTop
         Info = itPageNumber
         Text = 'P'#225'gina '
       end
       object rlsiLastPage: TRLSystemInfo
-        Left = 132
+        Left = 55
         Top = 1
         Width = 130
         Height = 16
@@ -147,9 +148,9 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
         Text = 'de '
       end
       object rllblNomeUser: TRLLabel
-        Left = 1
-        Top = 21
-        Width = 85
+        Left = 0
+        Top = 22
+        Width = 121
         Height = 16
         Align = faLeftBottom
       end
@@ -161,7 +162,7 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       '021 Fortes Inform'#195#161'tica'
     FileName = 'relatorio'
     DisplayName = 'Documento PDF'
-    Left = 424
-    Top = 328
+    Left = 304
+    Top = 336
   end
 end

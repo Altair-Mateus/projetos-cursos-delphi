@@ -99,6 +99,7 @@ type
     procedure rbIdClick(Sender: TObject);
     procedure rbValorParcelaClick(Sender: TObject);
     procedure rbValorCompraClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -125,7 +126,8 @@ implementation
 uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Utilitarios,
-  System.DateUtils, SistemaFinanceiro.View.Principal;
+  System.DateUtils, SistemaFinanceiro.View.Principal,
+  SistemaFinanceiro.View.Relatorios.Cp;
 
 { TfrmCadastroPadrao1 }
 procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
@@ -295,6 +297,28 @@ begin
 
 end;
 
+procedure TfrmContasPagar.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmRelCp := TfrmRelCp.Create(Self);
+
+  try
+
+    frmRelCp.DataSourceCp.DataSet := DataSourceCPagar.DataSet;
+
+    //  Mostra a pre visualização
+    frmRelCp.RLReport.Preview();
+
+  finally
+
+    FreeAndNil(frmRelCp);
+
+  end;
+
+end;
+
 procedure TfrmContasPagar.btnIncluirClick(Sender: TObject);
 begin
   inherited;
@@ -449,6 +473,7 @@ begin
     dmCPagar.cdsCPagarPARCELA.AsInteger          := cdsParcelasPARCELA.AsInteger;
     dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := cdsParcelasVALOR.AsCurrency;
     dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := cdsParcelasVENCIMENTO.AsDateTime;
+    dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
 
     //  Gravando no banco
     dmCPagar.cdsCPagar.Post;
@@ -531,6 +556,7 @@ begin
   dmCPagar.cdsCPagarPARCELA.AsInteger          := Parcela;
   dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
   dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+  dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
 
   //  Gravando no BD
   dmCPagar.cdsCPagar.Post;
@@ -770,6 +796,7 @@ begin
   btnExcluir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnBaixarCP.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnDetalhes.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
+  btnImprimir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
 
 end;
 procedure TfrmContasPagar.Pesquisar;

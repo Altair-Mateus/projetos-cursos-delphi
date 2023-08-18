@@ -1797,6 +1797,9 @@ inherited frmCaixa: TfrmCaixa
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
+        inherited btnImprimir: TButton
+          OnClick = btnImprimirClick
+        end
         inherited btnSair: TButton
           Left = 1133
           ExplicitLeft = 1129

@@ -15,6 +15,7 @@ object dmCReceber: TdmCReceber
     Left = 472
     Top = 176
     object cdsCReceberID: TIntegerField
+      Alignment = taLeftJustify
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -77,10 +78,10 @@ object dmCReceber: TdmCReceber
       Origin = 'DATA_RECEBIMENTO'
     end
     object cdsCReceberSTATUS: TWideStringField
-      Alignment = taCenter
       FieldName = 'STATUS'
       Origin = 'STATUS'
       Required = True
+      OnGetText = cdsCReceberSTATUSGetText
       FixedChar = True
       Size = 1
     end
@@ -89,6 +90,14 @@ object dmCReceber: TdmCReceber
       FieldName = 'DATA_VENDA'
       Origin = 'DATA_VENDA'
       Required = True
+    end
+    object cdsCReceberPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object cdsCReceberCR_ORIGEM: TIntegerField
+      FieldName = 'CR_ORIGEM'
     end
   end
   object DataSetProviderCReceber: TDataSetProvider

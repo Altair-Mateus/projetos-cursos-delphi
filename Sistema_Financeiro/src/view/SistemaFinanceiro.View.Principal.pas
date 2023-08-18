@@ -66,6 +66,7 @@ type
     procedure ContasaReceber1Click(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
 
+
   private
     { Private declarations }
     procedure ExibeTelaUsuario;
@@ -89,9 +90,13 @@ implementation
 uses
   SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Model.dmCaixa,
-  System.DateUtils, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
-  SistemaFinanceiro.Utilitarios, Winapi.Windows,
-  SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Model.dmCReceber, MidasLib;
+  System.DateUtils,
+  SistemaFinanceiro.Model.Entidades.ResumoCaixa,
+  SistemaFinanceiro.Utilitarios,
+  Winapi.Windows,
+  SistemaFinanceiro.Model.dmCPagar,
+  SistemaFinanceiro.Model.dmCReceber,
+  MidasLib;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin

@@ -1,20 +1,20 @@
 inherited frmContasPagar: TfrmContasPagar
   Caption = 'Contas a Pagar'
-  ClientHeight = 645
-  ClientWidth = 1235
+  ClientHeight = 644
+  ClientWidth = 1231
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitWidth = 1247
-  ExplicitHeight = 683
+  ExplicitWidth = 1243
+  ExplicitHeight = 682
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 1235
-    Height = 645
-    ExplicitWidth = 1231
-    ExplicitHeight = 644
+    Width = 1231
+    Height = 644
+    ExplicitWidth = 1227
+    ExplicitHeight = 643
     inherited CardCadastro: TCard
-      Width = 1233
-      Height = 643
+      Width = 1229
+      Height = 642
       ExplicitWidth = 1233
       ExplicitHeight = 643
       inherited pnlBotoesCad: TPanel
@@ -308,14 +308,14 @@ inherited frmContasPagar: TfrmContasPagar
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1233
-      Height = 643
-      ExplicitWidth = 1229
-      ExplicitHeight = 642
+      Width = 1229
+      Height = 642
+      ExplicitWidth = 1225
+      ExplicitHeight = 641
       inherited pnlPesquisa: TPanel
-        Width = 1233
+        Width = 1229
         Height = 145
-        ExplicitWidth = 1229
+        ExplicitWidth = 1225
         ExplicitHeight = 145
         inherited lblPesquisar: TLabel
           Left = 192
@@ -3082,13 +3082,13 @@ inherited frmContasPagar: TfrmContasPagar
           ExplicitWidth = 297
         end
         inherited btnPesquisae: TButton
-          Left = 1109
+          Left = 1105
           Top = 30
           Height = 85
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1105
+          ExplicitLeft = 1101
           ExplicitTop = 30
           ExplicitHeight = 85
         end
@@ -3258,20 +3258,23 @@ inherited frmContasPagar: TfrmContasPagar
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 574
-        Width = 1233
-        ExplicitTop = 573
-        ExplicitWidth = 1229
+        Top = 573
+        Width = 1229
+        ExplicitTop = 572
+        ExplicitWidth = 1225
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
+        inherited btnImprimir: TButton
+          OnClick = btnImprimirClick
+        end
         inherited btnSair: TButton
-          Left = 1109
-          ExplicitLeft = 1105
+          Left = 1105
+          ExplicitLeft = 1101
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
-          Left = 866
+          Left = 862
           Top = 4
           Width = 237
           Height = 61
@@ -3284,7 +3287,7 @@ inherited frmContasPagar: TfrmContasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 5
-          ExplicitLeft = 862
+          ExplicitLeft = 858
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -3385,14 +3388,14 @@ inherited frmContasPagar: TfrmContasPagar
       end
       inherited pnlGrid: TPanel
         Top = 145
-        Width = 1233
-        Height = 429
+        Width = 1229
+        Height = 428
         ExplicitTop = 145
-        ExplicitWidth = 1229
-        ExplicitHeight = 428
+        ExplicitWidth = 1225
+        ExplicitHeight = 427
         inherited DBGrid1: TDBGrid
-          Width = 1231
-          Height = 427
+          Width = 1227
+          Height = 426
           Color = clWhite
           DataSource = DataSourceCPagar
           Columns = <
@@ -3427,7 +3430,7 @@ inherited frmContasPagar: TfrmContasPagar
               Expanded = False
               FieldName = 'STATUS'
               Title.Caption = 'Status'
-              Width = 61
+              Width = 117
               Visible = True
             end
             item

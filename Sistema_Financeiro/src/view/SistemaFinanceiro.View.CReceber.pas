@@ -475,6 +475,7 @@ begin
     dmCReceber.cdsCReceberPARCELA.AsInteger          := cdsParcelasPARCELA.AsInteger;
     dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency   := cdsParcelasVALOR.AsCurrency;
     dmCReceber.cdsCReceberDATA_VENCIMENTO.AsDateTime := cdsParcelasVENCIMENTO.AsDateTime;
+    dmCReceber.cdsCReceberPARCIAL.AsString           := 'N';
 
     //  Gravando no banco
     dmCReceber.cdsCReceber.Post;
@@ -560,6 +561,7 @@ begin
   dmCReceber.cdsCReceberVALOR_VENDA.AsCurrency     := ValorVenda;
   dmCReceber.cdsCReceberDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
   dmCReceber.cdsCReceberDATA_VENDA.AsDateTime      := dateVenda.Date;
+  dmCReceber.cdsCReceberPARCIAL.AsString           := 'N';
 
   //  Gravando no BD
   dmCReceber.cdsCReceber.Post;
@@ -800,6 +802,7 @@ begin
   btnExcluir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnBaixarCR.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnDetalhes.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
+  btnImprimir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
 
 end;
 

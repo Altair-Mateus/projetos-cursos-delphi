@@ -1,4 +1,4 @@
-unit SistemaFinanceiro.View.Relatorios.Cr;
+unit SistemaFinanceiro.View.Relatorios.Cp;
 
 interface
 
@@ -8,23 +8,23 @@ uses
   RLFilters, RLPDFFilter, RLReport, Data.DB;
 
 type
-  TfrmRelCr = class(TfrmRelatorioPadrao)
-    rllblVencimento: TRLLabel;
+  TfrmRelCp = class(TfrmRelatorioPadrao)
+    rllblId: TRLLabel;
     rllblNDoc: TRLLabel;
+    rllblVencimento: TRLLabel;
     rllblParcela: TRLLabel;
     rllblStatus: TRLLabel;
     rllblValorParcela: TRLLabel;
-    rldbtDataVenc: TRLDBText;
+    rldbtId: TRLDBText;
     rldbtNDoc: TRLDBText;
+    rldbtDataVenc: TRLDBText;
     rldbtParcela: TRLDBText;
     rldbtStatus: TRLDBText;
     rldbtValorParc: TRLDBText;
-    DataSourceCr: TDataSource;
     RLBand1: TRLBand;
     rllblTotal: TRLLabel;
     rllblContador: TRLLabel;
-    rllblId: TRLLabel;
-    rldbtId: TRLDBText;
+    DataSourceCp: TDataSource;
     procedure RLReportBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
@@ -33,16 +33,16 @@ type
   end;
 
 var
-  frmRelCr: TfrmRelCr;
+  frmRelCp: TfrmRelCp;
 
 implementation
 
 {$R *.dfm}
 
-uses
-  SistemaFinanceiro.Utilitarios;
+uses SistemaFinanceiro.Utilitarios;
 
-procedure TfrmRelCr.RLReportBeforePrint(Sender: TObject; var PrintIt: Boolean);
+procedure TfrmRelCp.RLReportBeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
 var
   Soma : Currency;
 
@@ -53,29 +53,27 @@ begin
   Soma := 0;
 
   //  Posiciona no primeiro dado do dataset
-  DataSourceCr.DataSet.First;
+  DataSourceCp.DataSet.First;
 
   //  Soma ate o ultimo registro
-  while not DataSourceCr.DataSet.Eof do
+  while not DataSourceCp.DataSet.Eof do
   begin
 
-    if DataSourceCr.DataSet.FieldByName('STATUS').AsString <> 'C' then
+    if DataSourceCp.DataSet.FieldByName('STATUS').AsString <> 'C' then
     begin
-      Soma := Soma + DataSourceCr.DataSet.FieldByName('VALOR_PARCELA').AsCurrency;
+      Soma := Soma + DataSourceCp.DataSet.FieldByName('VALOR_PARCELA').AsCurrency;
     end;
 
-    //  avança para o proximi
-    DataSourceCr.DataSet.Next;
+    //  avança para o proximo
+    DataSourceCp.DataSet.Next;
 
   end;
 
   //  Exibe a soma
   rllblTotal.Caption := 'Total R$ ' + TUtilitario.FormatarValor(Soma);
 
-
-
   //  Conta a quantidade de contas
-  rllblContador.Caption := 'Total de Registros: ' + IntToStr(DataSourceCr.DataSet.RecordCount);
+  rllblContador.Caption := 'Total de Registros: ' + IntToStr(DataSourceCp.DataSet.RecordCount);
 
 end;
 

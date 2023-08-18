@@ -17,6 +17,8 @@ type
       FDoc: String;
       FDesc: String;
       FParcela: Integer;
+    FParcial: String;
+    FCpOrigem: Integer;
 
       procedure SetID(const Value: String);
       procedure SetDataCadastro(const Value: TDate);
@@ -31,7 +33,9 @@ type
       procedure SetValorCompra(const Value: Currency);
       procedure SetValorParcela(const Value: Currency);
 
-    public
+    procedure SetParcial(const Value: String);
+
+    procedure SetCpOrigem(const Value: Integer);    public
 
       property ID             : String read FID write SetID;
       property Doc            : String read FDoc write SetDoc;
@@ -45,12 +49,18 @@ type
       property DataVencimento : TDate read FDataVencimento write SetDataVencimento;
       property DataPagamento  : TDate read FDataPagamento write SetDataPagamento;
       property Status         : String read FStatus write SetStatus;
-
+      property Parcial        : String read FParcial write SetParcial;
+      property CpOrigem : Integer read FCpOrigem write SetCpOrigem;
   end;
 
 implementation
 
 { TModelCP }
+
+procedure TModelCP.SetCpOrigem(const Value: Integer);
+begin
+  FCpOrigem := Value;
+end;
 
 procedure TModelCP.SetDataCadastro(const Value: TDate);
 begin
@@ -90,6 +100,11 @@ end;
 procedure TModelCP.SetParcela(const Value: Integer);
 begin
   FParcela := Value;
+end;
+
+procedure TModelCP.SetParcial(const Value: String);
+begin
+  FParcial := Value;
 end;
 
 procedure TModelCP.SetStatus(const Value: String);

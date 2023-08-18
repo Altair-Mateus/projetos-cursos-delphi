@@ -30,7 +30,9 @@ uses
   SistemaFinanceiro.Model.Entidades.LancamentoCaixa in 'src\model\Entidades\SistemaFinanceiro.Model.Entidades.LancamentoCaixa.pas',
   SistemaFinanceiro.View.RelatoriosPadrao in 'src\view\Relatorios\SistemaFinanceiro.View.RelatoriosPadrao.pas' {frmRelatorioPadrao},
   SistemaFinanceiro.View.Relatorios.Usuarios in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Usuarios.pas' {frmRelUsuarios},
-  SistemaFinanceiro.View.Relatorios.Cr in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cr.pas' {frmRelCr};
+  SistemaFinanceiro.View.Relatorios.Cr in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cr.pas' {frmRelCr},
+  SistemaFinanceiro.View.Relatorios.Cp in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cp.pas' {frmRelCp},
+  SistemaFinanceiro.View.Relatorios.Caixa in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Caixa.pas' {frmRelCaixa};
 
 {$R *.res}
 begin
@@ -42,5 +44,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmCPagar, dmCPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
+  Application.CreateForm(TfrmRelCp, frmRelCp);
+  Application.CreateForm(TfrmRelCaixa, frmRelCaixa);
   Application.Run;
 end.
