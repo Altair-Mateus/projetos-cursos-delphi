@@ -4,13 +4,14 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1322
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitLeft = -13
+  ExplicitTop = -143
   ExplicitWidth = 1334
   ExplicitHeight = 682
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1322
     Height = 644
+    ActiveCard = CardCadastro
     ExplicitWidth = 1227
     ExplicitHeight = 643
     inherited CardCadastro: TCard
@@ -119,7 +120,7 @@ inherited frmContasPagar: TfrmContasPagar
           Top = 296
           Width = 793
           Height = 249
-          ActiveCard = cardParcelaUnica
+          ActiveCard = cardParcelamento
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 5
@@ -194,30 +195,38 @@ inherited frmContasPagar: TfrmContasPagar
             object lblQtdParcelas: TLabel
               Left = 4
               Top = 7
-              Width = 165
+              Width = 110
               Height = 19
-              Caption = 'Quantidade de Parcelas'
+              Caption = 'Qtd de Parcelas'
             end
             object lblIntervaloDias: TLabel
-              Left = 217
+              Left = 156
               Top = 7
               Width = 125
               Height = 19
               Caption = 'Intervalo em Dias'
             end
+            object lblDiaFixo: TLabel
+              Left = 308
+              Top = 7
+              Width = 145
+              Height = 19
+              Caption = 'Dia Fixo Vencimento'
+              Visible = False
+            end
             object edtQtdParcelas: TEdit
               Left = 4
               Top = 32
-              Width = 183
+              Width = 125
               Height = 27
               Color = clWhite
               MaxLength = 10
               TabOrder = 0
             end
             object edtIntervaloDias: TEdit
-              Left = 217
+              Left = 154
               Top = 32
-              Width = 185
+              Width = 127
               Height = 27
               Color = clWhite
               MaxLength = 10
@@ -231,7 +240,7 @@ inherited frmContasPagar: TfrmContasPagar
               Caption = 'Gerar'
               ImageIndex = 7
               Images = ImageList1
-              TabOrder = 2
+              TabOrder = 3
               OnClick = btnGerarClick
             end
             object btnLimpar: TButton
@@ -242,7 +251,7 @@ inherited frmContasPagar: TfrmContasPagar
               Caption = 'Limpar'
               ImageIndex = 8
               Images = ImageList1
-              TabOrder = 3
+              TabOrder = 4
               OnClick = btnLimparClick
             end
             object DBGridParcelas: TDBGrid
@@ -253,7 +262,7 @@ inherited frmContasPagar: TfrmContasPagar
               Color = clCream
               DataSource = dsParcelas
               FixedColor = clCream
-              TabOrder = 4
+              TabOrder = 5
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
               TitleFont.Height = -16
@@ -286,6 +295,25 @@ inherited frmContasPagar: TfrmContasPagar
                   Title.Caption = 'Valor R$'
                   Visible = True
                 end>
+            end
+            object edtDiaFixoVcto: TEdit
+              Left = 306
+              Top = 32
+              Width = 127
+              Height = 27
+              Color = clWhite
+              MaxLength = 10
+              TabOrder = 2
+              Visible = False
+            end
+            object checkDiaFixoVcto: TCheckBox
+              Left = 4
+              Top = 65
+              Width = 237
+              Height = 17
+              Caption = 'Usar dia Fixo no Vencimento'
+              TabOrder = 6
+              OnClick = checkDiaFixoVctoClick
             end
           end
         end
@@ -3257,6 +3285,45 @@ inherited frmContasPagar: TfrmContasPagar
           TabOrder = 6
           OnExit = dateInicialExit
         end
+        object pnlParciais: TPanel
+          Left = 1011
+          Top = 44
+          Width = 168
+          Height = 57
+          Color = clWhite
+          ParentBackground = False
+          TabOrder = 7
+          object checkParciais: TCheckBox
+            Left = 8
+            Top = 9
+            Width = 145
+            Height = 17
+            Caption = 'Somente Parciais'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            OnClick = checkParciaisClick
+          end
+          object checkVencidas: TCheckBox
+            Left = 8
+            Top = 32
+            Width = 153
+            Height = 17
+            Caption = 'Somente vencidas'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = checkParciaisClick
+          end
+        end
       end
       inherited pnlBotoes: TPanel
         Top = 573
@@ -3485,45 +3552,6 @@ inherited frmContasPagar: TfrmContasPagar
             end>
         end
       end
-    end
-  end
-  object pnlParciais: TPanel [1]
-    Left = 1011
-    Top = 44
-    Width = 168
-    Height = 57
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 1
-    object checkParciais: TCheckBox
-      Left = 8
-      Top = 9
-      Width = 145
-      Height = 17
-      Caption = 'Somente Parciais'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      OnClick = checkParciaisClick
-    end
-    object checkVencidas: TCheckBox
-      Left = 8
-      Top = 32
-      Width = 153
-      Height = 17
-      Caption = 'Somente vencidas'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      OnClick = checkParciaisClick
     end
   end
   inherited ImageList1: TImageList

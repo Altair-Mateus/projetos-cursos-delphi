@@ -19,10 +19,6 @@ type
     edtValorParcela: TEdit;
     dateVencimento: TDateTimePicker;
     cardParcelamento: TCard;
-    lblQtdParcelas: TLabel;
-    lblIntervaloDias: TLabel;
-    edtQtdParcelas: TEdit;
-    edtIntervaloDias: TEdit;
     btnGerar: TButton;
     btnLimpar: TButton;
     DBGridParcelas: TDBGrid;
@@ -72,6 +68,13 @@ type
     pnlParciais: TPanel;
     checkParciais: TCheckBox;
     checkVencidas: TCheckBox;
+    edtDiaFixoVcto: TEdit;
+    lblDiaFixo: TLabel;
+    checkDiaFixoVcto: TCheckBox;
+    edtIntervaloDias: TEdit;
+    lblIntervaloDias: TLabel;
+    edtQtdParcelas: TEdit;
+    lblQtdParcelas: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -104,6 +107,7 @@ type
     procedure rbValorVendaClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure checkParciaisClick(Sender: TObject);
+    procedure checkDiaFixoVctoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -239,11 +243,12 @@ var
   ValorParcela  : Currency;
   ValorResiduo  : Currency;
   Contador      : Integer;
+  DiaFixoVcto   : Integer;
 
 begin
 
   //  Valida Campos
-  if not TryStrToCurr(edtValorVenda.Text, ValorVenda) then
+  if (not TryStrToCurr(edtValorVenda.Text, ValorVenda)) or (ValorVenda <= 0)then
   begin
     edtValorVenda.SetFocus;
     Application.MessageBox('Valor da Venda Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -257,11 +262,28 @@ begin
     abort;
   end;
 
+  if QtdParcelas <= 1 then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
   if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
   begin
     edtIntervaloDias.SetFocus;
     Application.MessageBox('Intervalor de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+  end;
+
+  if checkDiaFixoVcto.Checked then
+  begin
+    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28) or (DiaFixoVcto < 1) then
+    begin
+        edtDiaFixoVcto.SetFocus;
+        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+    end;
   end;
 
   //  Calculando valores das parcelas
@@ -285,7 +307,18 @@ begin
     ValorResiduo := 0;  //  Zera o valor de residuo
 
     //  Define a data de vencimento
-    cdsParcelasVencimento.AsDateTime := IncDay(dateVenda.Date, IntervaloDias * Contador);
+     //  Define a data de vencimento
+    if checkDiaFixoVcto.Checked then
+    begin
+
+      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), DiaFixoVcto);
+
+    end
+    else
+    begin
+      cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateVenda.Date, IntervaloDias *  Contador);
+    end;
+
 
     //  Define o numero do documento
     if not (edtNDoc.Text = '') then
@@ -297,9 +330,12 @@ begin
 
   end;
 
-  //  Bloqueia os edits
+  //  Bloqueios
   edtQtdParcelas.Enabled := False;
   edtIntervaloDias.Enabled := False;
+  edtDiaFixoVcto.Enabled := False;
+  checkDiaFixoVcto.Enabled := False;
+  btnGerar.Enabled := False
 
 end;
 
@@ -371,12 +407,18 @@ begin
   //  Esvazia o dataset das parcelas
   cdsParcelas.EmptyDataSet;
 
-  //  Libera os edits
+  //  Liberações
   edtQtdParcelas.Enabled := True;
   edtIntervaloDias.Enabled := True;
+  edtDiaFixoVcto.Enabled := True;
+  checkDiaFixoVcto.Enabled := True;
+  btnGerar.Enabled := True;
 
   edtQtdParcelas.Text := '';
   edtIntervaloDias.Text := '';
+  edtDiaFixoVcto.Text := '';
+
+  checkDiaFixoVcto.Checked := False;
 
 end;
 
@@ -586,6 +628,34 @@ begin
   inherited;
 
   Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.checkDiaFixoVctoClick(Sender: TObject);
+begin
+  inherited;
+
+  if checkDiaFixoVcto.Checked then
+  begin
+
+    edtDiaFixoVcto.Visible := True;
+    lblDiaFixo.Visible     := True;
+    edtIntervaloDias.Enabled := False;
+    edtIntervaloDias.Text := '30';
+
+    edtDiaFixoVcto.SetFocus;
+
+  end
+  else
+  begin
+
+    edtDiaFixoVcto.Visible := False;
+    lblDiaFixo.Visible     := False;
+    edtIntervaloDias.Enabled := True;
+    edtIntervaloDias.Text := '';
+
+  end;
+
 
 end;
 

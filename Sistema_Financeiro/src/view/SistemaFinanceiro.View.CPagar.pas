@@ -69,6 +69,9 @@ type
     btnDetalhes: TButton;
     Image2: TImage;
     lblCP: TLabel;
+    lblDiaFixo: TLabel;
+    edtDiaFixoVcto: TEdit;
+    checkDiaFixoVcto: TCheckBox;
     pnlParciais: TPanel;
     checkParciais: TCheckBox;
     checkVencidas: TCheckBox;
@@ -104,6 +107,7 @@ type
     procedure rbValorCompraClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure checkParciaisClick(Sender: TObject);
+    procedure checkDiaFixoVctoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -237,11 +241,12 @@ var
   ValorParcela  : Currency;
   ValorResiduo  : Currency;
   Contador      : Integer;
+  DiaFixoVcto   : Integer;
 
 begin
 
   //  Valida campos
-  if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
+  if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
   begin
     edtValorCompra.SetFocus;
     Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -250,16 +255,34 @@ begin
 
   if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
   begin
-    edtParcela.SetFocus;
+    edtQtdParcelas.SetFocus;
     Application.MessageBox('Números de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
+
+  if QtdParcelas <= 1 then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
 
   if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
   begin
     edtIntervaloDias.SetFocus;
     Application.MessageBox('Intervalo de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+  end;
+
+  if checkDiaFixoVcto.Checked then
+  begin
+    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28)  or (DiaFixoVcto < 1) then
+    begin
+        edtDiaFixoVcto.SetFocus;
+        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+    end;
   end;
 
   //  Calculando valores das parcelas
@@ -282,8 +305,20 @@ begin
     cdsParcelasVALOR.AsCurrency  := ValorParcela + ValorResiduo;
     ValorResiduo := 0;  //  Zera o valor de residuo
 
+
+
     //  Define a data de vencimento
-    cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+    if checkDiaFixoVcto.Checked then
+    begin
+
+      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), DiaFixoVcto);
+
+    end
+    else
+    begin
+      cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+    end;
+
 
     //  Define o numero do doc
     if not (edtNDoc.Text = '') then
@@ -295,9 +330,12 @@ begin
 
   end;
 
-  //  Bloqueia os edits
+  //  Bloqueios
   edtQtdParcelas.Enabled := False;
   edtIntervaloDias.Enabled := False;
+  edtDiaFixoVcto.Enabled := False;
+  checkDiaFixoVcto.Enabled := False;
+  btnGerar.Enabled := False
 
 end;
 
@@ -364,12 +402,18 @@ begin
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
 
-  //  Libera os edits
+  //  Liberações
   edtQtdParcelas.Enabled := True;
   edtIntervaloDias.Enabled := True;
+  edtDiaFixoVcto.Enabled := True;
+  checkDiaFixoVcto.Enabled := True;
+  btnGerar.Enabled := True;
 
   edtQtdParcelas.Text := '';
   edtIntervaloDias.Text := '';
+  edtDiaFixoVcto.Text := '';
+
+  checkDiaFixoVcto.Checked := False;
 
 end;
 
@@ -524,14 +568,14 @@ begin
     abort;
   end;
 
-  if not TryStrToCurr(edtValorCompra.Text, ValorCompra) then
+  if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
   begin
     edtValorCompra.SetFocus;
     Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
 
-  if not TryStrToInt(edtParcela.Text, Parcela) then
+  if (not TryStrToInt(edtParcela.Text, Parcela)) or (Parcela <= 0) then
   begin
     edtParcela.SetFocus;
     Application.MessageBox('Número da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -581,6 +625,36 @@ begin
   inherited;
 
   Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.checkDiaFixoVctoClick(Sender: TObject);
+begin
+  inherited;
+
+
+
+  if checkDiaFixoVcto.Checked then
+  begin
+
+    edtDiaFixoVcto.Visible := True;
+    lblDiaFixo.Visible     := True;
+    edtIntervaloDias.Enabled := False;
+    edtIntervaloDias.Text := '30';
+
+    edtDiaFixoVcto.SetFocus;
+
+  end
+  else
+  begin
+
+    edtDiaFixoVcto.Visible := False;
+    lblDiaFixo.Visible     := False;
+    edtIntervaloDias.Enabled := True;
+    edtIntervaloDias.Text := '';
+
+  end;
+
 
 end;
 

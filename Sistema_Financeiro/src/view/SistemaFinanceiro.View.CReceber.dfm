@@ -3,13 +3,14 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitLeft = -82
+  ExplicitTop = -110
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
+    ActiveCard = CardCadastro
     ExplicitWidth = 1169
     ExplicitHeight = 655
     inherited CardCadastro: TCard
@@ -71,7 +72,7 @@ inherited frmContasReceber: TfrmContasReceber
           Top = 295
           Width = 793
           Height = 249
-          ActiveCard = cardParcelaUnica
+          ActiveCard = cardParcelamento
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 5
@@ -141,37 +142,27 @@ inherited frmContasReceber: TfrmContasReceber
             Caption = 'cardParcelamento'
             CardIndex = 1
             TabOrder = 1
-            object lblQtdParcelas: TLabel
-              Left = 4
+            object lblDiaFixo: TLabel
+              Left = 308
               Top = 7
-              Width = 165
+              Width = 145
               Height = 19
-              Caption = 'Quantidade de Parcelas'
+              Caption = 'Dia Fixo Vencimento'
+              Visible = False
             end
             object lblIntervaloDias: TLabel
-              Left = 217
+              Left = 156
               Top = 7
               Width = 125
               Height = 19
               Caption = 'Intervalo em Dias'
             end
-            object edtQtdParcelas: TEdit
+            object lblQtdParcelas: TLabel
               Left = 4
-              Top = 32
-              Width = 183
-              Height = 27
-              Color = clWhite
-              MaxLength = 10
-              TabOrder = 0
-            end
-            object edtIntervaloDias: TEdit
-              Left = 217
-              Top = 32
-              Width = 185
-              Height = 27
-              Color = clWhite
-              MaxLength = 10
-              TabOrder = 1
+              Top = 7
+              Width = 110
+              Height = 19
+              Caption = 'Qtd de Parcelas'
             end
             object btnGerar: TButton
               Left = 491
@@ -181,7 +172,7 @@ inherited frmContasReceber: TfrmContasReceber
               Caption = 'Gerar'
               ImageIndex = 7
               Images = ImageList1
-              TabOrder = 2
+              TabOrder = 3
               OnClick = btnGerarClick
             end
             object btnLimpar: TButton
@@ -192,7 +183,7 @@ inherited frmContasReceber: TfrmContasReceber
               Caption = 'Limpar'
               ImageIndex = 8
               Images = ImageList1
-              TabOrder = 3
+              TabOrder = 4
               OnClick = btnLimparClick
             end
             object DBGridParcelas: TDBGrid
@@ -203,12 +194,49 @@ inherited frmContasReceber: TfrmContasReceber
               Color = clCream
               DataSource = dsParcelas
               FixedColor = clCream
-              TabOrder = 4
+              TabOrder = 5
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
               TitleFont.Height = -16
               TitleFont.Name = 'Tahoma'
               TitleFont.Style = []
+            end
+            object edtDiaFixoVcto: TEdit
+              Left = 306
+              Top = 32
+              Width = 127
+              Height = 27
+              Color = clWhite
+              MaxLength = 10
+              TabOrder = 2
+              Visible = False
+            end
+            object checkDiaFixoVcto: TCheckBox
+              Left = 4
+              Top = 65
+              Width = 237
+              Height = 17
+              Caption = 'Usar dia Fixo no Vencimento'
+              TabOrder = 6
+              OnClick = checkDiaFixoVctoClick
+            end
+            object edtIntervaloDias: TEdit
+              Left = 154
+              Top = 32
+              Width = 127
+              Height = 27
+              Color = clWhite
+              MaxLength = 10
+              TabOrder = 1
+            end
+            object edtQtdParcelas: TEdit
+              Left = 4
+              Top = 32
+              Width = 125
+              Height = 27
+              Color = clWhite
+              MaxLength = 10
+              TabOrder = 0
             end
           end
         end
