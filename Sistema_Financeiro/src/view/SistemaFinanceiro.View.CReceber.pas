@@ -69,6 +69,9 @@ type
     btnDetalhes: TButton;
     Image3: TImage;
     lblCR: TLabel;
+    pnlParciais: TPanel;
+    checkParciais: TCheckBox;
+    checkVencidas: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -100,6 +103,7 @@ type
     procedure rbValorParcelaClick(Sender: TObject);
     procedure rbValorVendaClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure checkParciaisClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -585,6 +589,14 @@ begin
 
 end;
 
+procedure TfrmContasReceber.checkParciaisClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasReceber.DataSourceCReceberDataChange(Sender: TObject;
   Field: TField);
 begin
@@ -661,7 +673,7 @@ begin
   cdsParcelas.EmptyDataSet;
 
   //  Se o documento já foi baixado cancela a edição
-  if dmCReceber.cdsCReceberSTATUS.AsString = 'B' then
+  if dmCReceber.cdsCReceberSTATUS.AsString = 'P' then
   begin
     CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já baixado não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -873,6 +885,26 @@ begin
     dmCReceber.cdsCReceber.ParamByName('DTINI').AsDate := dateInicial.Date;
     dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DTFIM', TParamType.ptInput);
     dmCReceber.cdsCReceber.ParamByName('DTFIM').AsDate := dateFinal.Date;
+  end;
+
+   //  pesquisa parciais
+   if checkParciais.Checked then
+   begin
+
+    LFiltro := LFiltro + ' AND PARCIAL = ''S'' ';
+
+   end;
+
+  //  Pesquisa vencidas
+  if checkVencidas.Checked then
+  begin
+
+    LFiltro := LFiltro + ' AND STATUS = ''A'' AND DATA_VENCIMENTO < :DATUAL ';
+
+    //  Criando os parametros
+    dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DATUAL', TParamType.ptInput);
+    dmCReceber.cdsCReceber.ParamByName('DATUAL').AsDate := NOW;
+
   end;
 
   //  Ordem de pesquisa

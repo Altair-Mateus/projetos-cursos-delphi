@@ -208,6 +208,8 @@ begin
         LancarCaixa.Valor := BaixaCP.Valor;
         LancarCaixa.Tipo := 'D';
         LancarCaixa.DataCadastro := now;
+        LancarCaixa.Origem := 'CP';
+        LancarCaixa.IdOrigem := StrToInt(ContaPagar.ID);
 
         try
           DataModule1.FDConnection.StartTransaction;

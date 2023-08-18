@@ -21,6 +21,7 @@ object dmCaixa: TdmCaixa
     Left = 496
     Top = 168
     object cdsCaixaid: TIntegerField
+      Alignment = taLeftJustify
       FieldName = 'id'
     end
     object cdsCaixadata_cadastro: TDateField
@@ -43,6 +44,14 @@ object dmCaixa: TdmCaixa
       Alignment = taCenter
       FieldName = 'tipo'
       Size = 1
+    end
+    object cdsCaixaORIGEM: TWideStringField
+      FieldName = 'ORIGEM'
+      Required = True
+      Size = 2
+    end
+    object cdsCaixaID_ORIGEM: TIntegerField
+      FieldName = 'ID_ORIGEM'
     end
   end
 end

@@ -11,12 +11,16 @@ type
     FDataCadastro: TDate;
     FDescricao: string;
     FTipo: string;
+    FIdOrigem: Integer;
+    FOrigem: String;
     procedure SetDataCadastro(const Value: TDate);
     procedure SetDescricao(const Value: string);
     procedure SetID(const Value: Integer);
     procedure SetNumeroDoc(const Value: string);
     procedure SetTipo(const Value: string);
     procedure SetValor(const Value: Currency);
+    procedure SetIdOrigem(const Value: Integer);
+    procedure SetOrigem(const Value: String);
 
 
   public
@@ -27,6 +31,8 @@ type
     property Valor : Currency read FValor write SetValor;
     property Tipo : string read FTipo write SetTipo;
     property DataCadastro : TDate read FDataCadastro write SetDataCadastro;
+    property Origem : String read FOrigem write SetOrigem;
+    property IdOrigem : Integer read FIdOrigem write SetIdOrigem;
 
   end;
 
@@ -49,9 +55,19 @@ begin
   FID := Value;
 end;
 
+procedure TModelLancamentoCaixa.SetIdOrigem(const Value: Integer);
+begin
+  FIdOrigem := Value;
+end;
+
 procedure TModelLancamentoCaixa.SetNumeroDoc(const Value: string);
 begin
   FNumeroDoc := Value;
+end;
+
+procedure TModelLancamentoCaixa.SetOrigem(const Value: String);
+begin
+  FOrigem := Value;
 end;
 
 procedure TModelLancamentoCaixa.SetTipo(const Value: string);

@@ -210,12 +210,14 @@ begin
       LancarCaixa := TModelLancamentoCaixa.Create;
       try
 
-        LancarCaixa.ID := dmCaixa.GeraId;
-        LancarCaixa.NumDoc := ContaReceber.Doc;
-        LancarCaixa.Desc := Format('Baixa Conta ID Nº %s a Receber - Nº Documento: %s - Parcela: %d', [ContaReceber.ID, ContaReceber.Doc, ContaReceber.Parcela]);
-        LancarCaixa.Valor := BaixaCr.Valor;
-        LancarCaixa.Tipo := 'R';
+        LancarCaixa.ID           := dmCaixa.GeraId;
+        LancarCaixa.NumDoc       := ContaReceber.Doc;
+        LancarCaixa.Desc         := Format('Baixa Conta ID Nº %s a Receber - Nº Documento: %s - Parcela: %d', [ContaReceber.ID, ContaReceber.Doc, ContaReceber.Parcela]);
+        LancarCaixa.Valor        := BaixaCr.Valor;
+        LancarCaixa.Tipo         := 'R';
         LancarCaixa.DataCadastro := now;
+        LancarCaixa.Origem       := 'CR';
+        LancarCaixa.IdOrigem     := StrToInt(ContaReceber.ID);
 
         try
           DataModule1.FDConnection.StartTransaction;

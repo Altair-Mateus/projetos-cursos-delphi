@@ -1655,6 +1655,22 @@ inherited frmCaixa: TfrmCaixa
           ParentColor = False
           ParentFont = False
         end
+        object lblOrigem: TLabel [6]
+          Left = 522
+          Top = 70
+          Width = 53
+          Height = 19
+          Align = alCustom
+          Caption = 'Origem'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         inherited edtPesquisar: TEdit
           Left = 185
           Top = 37
@@ -1787,6 +1803,22 @@ inherited frmCaixa: TfrmCaixa
             TabStop = True
             OnClick = rbIdClick
           end
+        end
+        object cbOrigem: TComboBox
+          Left = 522
+          Top = 95
+          Width = 145
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 6
+          Text = 'TODAS'
+          OnClick = cbOrigemClick
+          Items.Strings = (
+            'TODAS'
+            'C. RECEBER'
+            'C. PAGAR'
+            'CAIXA')
         end
       end
       inherited pnlBotoes: TPanel

@@ -69,6 +69,9 @@ type
     btnDetalhes: TButton;
     Image2: TImage;
     lblCP: TLabel;
+    pnlParciais: TPanel;
+    checkParciais: TCheckBox;
+    checkVencidas: TCheckBox;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -100,6 +103,7 @@ type
     procedure rbValorParcelaClick(Sender: TObject);
     procedure rbValorCompraClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure checkParciaisClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -580,6 +584,14 @@ begin
 
 end;
 
+procedure TfrmContasPagar.checkParciaisClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasPagar.DataSourceCPagarDataChange(Sender: TObject;
   Field: TField);
 begin
@@ -861,12 +873,33 @@ begin
 
     end;
 
+
     //  Criando os parametros
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftDate, 'DTINI', TParamType.ptInput);
     dmCPagar.cdsCPagar.ParamByName('DTINI').AsDate := dateInicial.Date;
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftDate, 'DTFIM', TParamType.ptInput);
     dmCPagar.cdsCPagar.ParamByName('DTFIM').AsDate := dateFinal.Date;
   end;
+
+   //  Pesquisa parciais
+    if checkParciais.Checked then
+    begin
+
+      LFiltro := LFiltro + ' AND PARCIAL = ''S'' ';
+
+    end;
+
+    //  Pesquisa vencidas
+    if checkVencidas.Checked then
+    begin
+
+      LFiltro := LFiltro + ' AND STATUS = ''A'' AND DATA_VENCIMENTO < :DATUAL ';
+
+      //  Criando os parametros
+      dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftDate, 'DATUAL', TParamType.ptInput);
+      dmCPagar.cdsCPagar.ParamByName('DATUAL').AsDate := NOW;
+
+    end;
 
   //  Ordem de pesquisa
   if rbId.Checked then
@@ -897,7 +930,9 @@ begin
   dmCPagar.cdsCPagar.Close;
   dmCPagar.cdsCPagar.CommandText := 'SELECT * FROM CONTAS_PAGAR WHERE 1 = 1 ' + LFiltroEdit + LFiltro + lOrdem;
   dmCPagar.cdsCPagar.Open;
+
   HabilitaBotoes;
+
   inherited;
 end;
 procedure TfrmContasPagar.rbDataCompraClick(Sender: TObject);

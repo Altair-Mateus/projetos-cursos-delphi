@@ -36,6 +36,8 @@ type
     rbId: TRadioButton;
     imgCaixa: TImage;
     lblCaixa: TLabel;
+    cbOrigem: TComboBox;
+    lblOrigem: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -56,15 +58,20 @@ type
     procedure dateInicialExit(Sender: TObject);
     procedure dateFinalExit(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure cbOrigemClick(Sender: TObject);
+
   private
     { Private declarations }
     procedure ValidaCampos;
     procedure HabilitaBotoes;
     procedure EditarRegCaixa;
+
   public
     { Public declarations }
+
   protected
     procedure Pesquisar; override;
+
   end;
 var
   frmCaixa: TfrmCaixa;
@@ -187,6 +194,7 @@ begin
   dmCaixa.cdsCaixavalor.AsFloat            := StrToFloat(Trim(edtValor.text));
   dmCaixa.cdsCaixanumero_doc.AsString      := Trim(edtNDoc.text);
   dmCaixa.cdsCaixadescricao.AsString       := Trim(memDesc.text);
+  dmCaixa.cdsCaixaORIGEM.AsString          := 'CX';
 
   if RadioGroup.ItemIndex = 0 then
   begin
@@ -214,6 +222,14 @@ begin
   //  Atualiza relatorio tela principal
   frmPrincipal.ResumoMensalCaixa;
   inherited;
+end;
+
+procedure TfrmCaixa.cbOrigemClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
 end;
 
 procedure TfrmCaixa.cbTipoLctoClick(Sender: TObject);
@@ -374,6 +390,15 @@ begin
   case cbTipoLcto.ItemIndex of
     1 : LFiltro := LFiltro + ' AND TIPO = ''R'' ';
     2 : LFiltro := LFiltro + ' AND TIPO = ''D'' ';
+  end;
+
+  //  Pesquisa por origem
+  case cbOrigem.ItemIndex of
+
+    1 : LFiltro := LFiltro + ' AND ORIGEM = ''CR'' ';
+    2 : LFiltro := LFiltro + 'AND ORIGEM = ''CP'' ';
+    3 : LFiltro := LFiltro + 'AND ORIGEM = ''CX'' ';
+
   end;
 
   //  Pesquisa por data

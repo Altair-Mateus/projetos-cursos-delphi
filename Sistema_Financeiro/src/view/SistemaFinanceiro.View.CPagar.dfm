@@ -1,36 +1,37 @@
 inherited frmContasPagar: TfrmContasPagar
   Caption = 'Contas a Pagar'
   ClientHeight = 644
-  ClientWidth = 1231
+  ClientWidth = 1322
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitWidth = 1243
+  ExplicitLeft = -13
+  ExplicitWidth = 1334
   ExplicitHeight = 682
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 1231
+    Width = 1322
     Height = 644
     ExplicitWidth = 1227
     ExplicitHeight = 643
     inherited CardCadastro: TCard
-      Width = 1229
+      Width = 1320
       Height = 642
-      ExplicitWidth = 1233
-      ExplicitHeight = 643
+      ExplicitWidth = 1229
+      ExplicitHeight = 642
       inherited pnlBotoesCad: TPanel
-        Top = 574
-        Width = 1233
-        ExplicitTop = 574
-        ExplicitWidth = 1233
+        Top = 573
+        Width = 1320
+        ExplicitTop = 573
+        ExplicitWidth = 1229
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1233
-        Height = 533
-        ExplicitWidth = 1233
-        ExplicitHeight = 533
+        Width = 1320
+        Height = 532
+        ExplicitWidth = 1229
+        ExplicitHeight = 532
         object lblDesc: TLabel
           Left = 44
           Top = 32
@@ -299,8 +300,8 @@ inherited frmContasPagar: TfrmContasPagar
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1233
-        ExplicitWidth = 1233
+        Width = 1320
+        ExplicitWidth = 1229
         inherited lblTitulo: TLabel
           Left = 23
           ExplicitLeft = 23
@@ -308,12 +309,12 @@ inherited frmContasPagar: TfrmContasPagar
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1229
+      Width = 1320
       Height = 642
       ExplicitWidth = 1225
       ExplicitHeight = 641
       inherited pnlPesquisa: TPanel
-        Width = 1229
+        Width = 1320
         Height = 145
         ExplicitWidth = 1225
         ExplicitHeight = 145
@@ -3082,7 +3083,7 @@ inherited frmContasPagar: TfrmContasPagar
           ExplicitWidth = 297
         end
         inherited btnPesquisae: TButton
-          Left = 1105
+          Left = 1196
           Top = 30
           Height = 85
           Margins.Top = 30
@@ -3259,7 +3260,7 @@ inherited frmContasPagar: TfrmContasPagar
       end
       inherited pnlBotoes: TPanel
         Top = 573
-        Width = 1229
+        Width = 1320
         ExplicitTop = 572
         ExplicitWidth = 1225
         inherited btnExcluir: TButton
@@ -3269,12 +3270,12 @@ inherited frmContasPagar: TfrmContasPagar
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
-          Left = 1105
+          Left = 1196
           ExplicitLeft = 1101
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
-          Left = 862
+          Left = 953
           Top = 4
           Width = 237
           Height = 61
@@ -3388,13 +3389,13 @@ inherited frmContasPagar: TfrmContasPagar
       end
       inherited pnlGrid: TPanel
         Top = 145
-        Width = 1229
+        Width = 1320
         Height = 428
         ExplicitTop = 145
         ExplicitWidth = 1225
         ExplicitHeight = 427
         inherited DBGrid1: TDBGrid
-          Width = 1227
+          Width = 1318
           Height = 426
           Color = clWhite
           DataSource = DataSourceCPagar
@@ -3484,6 +3485,45 @@ inherited frmContasPagar: TfrmContasPagar
             end>
         end
       end
+    end
+  end
+  object pnlParciais: TPanel [1]
+    Left = 1011
+    Top = 44
+    Width = 168
+    Height = 57
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 1
+    object checkParciais: TCheckBox
+      Left = 8
+      Top = 9
+      Width = 145
+      Height = 17
+      Caption = 'Somente Parciais'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = checkParciaisClick
+    end
+    object checkVencidas: TCheckBox
+      Left = 8
+      Top = 32
+      Width = 153
+      Height = 17
+      Caption = 'Somente vencidas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = checkParciaisClick
     end
   end
   inherited ImageList1: TImageList

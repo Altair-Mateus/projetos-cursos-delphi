@@ -24,11 +24,13 @@ object frmBaixarCP: TfrmBaixarCP
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 512
+    ExplicitHeight = 592
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11
       Top = 11
-      Width = 498
+      Width = 494
       Height = 342
       Margins.Left = 10
       Margins.Top = 10
@@ -38,12 +40,12 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 494
+      ExplicitWidth = 490
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 456
+        Width = 452
         Height = 300
         Margins.Left = 20
         Margins.Top = 20
@@ -55,7 +57,7 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        ExplicitWidth = 452
+        ExplicitWidth = 448
         object lblNDoc: TLabel
           Left = 60
           Top = 72
@@ -202,7 +204,7 @@ object frmBaixarCP: TfrmBaixarCP
       AlignWithMargins = True
       Left = 11
       Top = 363
-      Width = 498
+      Width = 494
       Height = 150
       Margins.Left = 10
       Margins.Top = 5
@@ -212,12 +214,12 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 494
+      ExplicitWidth = 490
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 456
+        Width = 452
         Height = 108
         Margins.Left = 20
         Margins.Top = 20
@@ -226,7 +228,7 @@ object frmBaixarCP: TfrmBaixarCP
         Align = alClient
         Caption = 'Detalhes'
         TabOrder = 0
-        ExplicitWidth = 452
+        ExplicitWidth = 448
         object lblObs: TLabel
           Left = 28
           Top = 32
@@ -277,15 +279,15 @@ object frmBaixarCP: TfrmBaixarCP
     end
     object pnlBotoes: TPanel
       Left = 1
-      Top = 523
-      Width = 518
+      Top = 522
+      Width = 514
       Height = 70
       Align = alBottom
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 522
-      ExplicitWidth = 514
+      ExplicitTop = 521
+      ExplicitWidth = 510
       object btnConfirmar: TButton
         AlignWithMargins = True
         Left = 131
@@ -305,7 +307,7 @@ object frmBaixarCP: TfrmBaixarCP
       end
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 267
+        Left = 263
         Top = 1
         Width = 120
         Height = 68
@@ -321,7 +323,7 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBiDiMode = False
         TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 263
+        ExplicitLeft = 259
       end
     end
   end
