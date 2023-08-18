@@ -55,6 +55,7 @@ type
     procedure rbIdClick(Sender: TObject);
     procedure dateInicialExit(Sender: TObject);
     procedure dateFinalExit(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -74,7 +75,7 @@ uses
   SistemaFinanceiro.Model.dmCaixa,
   SistemaFinanceiro.Utilitarios,
   SistemaFinanceiro.View.Principal,
-  System.DateUtils;
+  System.DateUtils, SistemaFinanceiro.View.Relatorios.Caixa;
 
 procedure TfrmCaixa.btnAlterarClick(Sender: TObject);
 begin
@@ -119,6 +120,28 @@ begin
   except on E : Exception do
 
     Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir lançamento do caixa', MB_OK + MB_ICONERROR);
+
+  end;
+
+end;
+
+procedure TfrmCaixa.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmRelCaixa := TfrmRelCaixa.Create(Self);
+
+  try
+
+    frmRelCaixa.DataSourceCaixa.DataSet := DataSourceCaixa.DataSet;
+
+    //  Exibe a pre visualizacao
+    frmRelCaixa.RLReport.Preview();
+
+  finally
+
+    FreeAndNil(frmRelCaixa);
 
   end;
 
@@ -310,6 +333,7 @@ begin
 
   btnAlterar.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
+  btnImprimir.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
 
 end;
 

@@ -4634,7 +4634,6 @@ inherited frmContasReceber: TfrmContasReceber
           OnClick = btnExcluirClick
         end
         inherited btnImprimir: TButton
-          Enabled = True
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
@@ -4790,7 +4789,7 @@ inherited frmContasReceber: TfrmContasReceber
               FieldName = 'PARCELA'
               Title.Alignment = taCenter
               Title.Caption = 'Parcela'
-              Width = 67
+              Width = 75
               Visible = True
             end
             item
@@ -4798,7 +4797,7 @@ inherited frmContasReceber: TfrmContasReceber
               FieldName = 'STATUS'
               Title.Alignment = taCenter
               Title.Caption = 'Status'
-              Width = 61
+              Width = 125
               Visible = True
             end
             item
