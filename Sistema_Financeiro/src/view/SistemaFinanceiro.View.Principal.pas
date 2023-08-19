@@ -8,7 +8,7 @@ uses
   Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha,
   SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa,
   SistemaFinanceiro.View.CPagar,
-  SistemaFinanceiro.View.CReceber;
+  SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes;
 
 type
   TfrmPrincipal = class(TForm)
@@ -51,6 +51,8 @@ type
     lblValorCR: TLabel;
     Image3: TImage;
     Label4: TLabel;
+    btnClientes: TButton;
+    mnuClientes: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -65,6 +67,8 @@ type
     procedure btnCRClick(Sender: TObject);
     procedure ContasaReceber1Click(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
+    procedure btnClientesClick(Sender: TObject);
+    procedure mnuClientesClick(Sender: TObject);
 
 
   private
@@ -74,6 +78,7 @@ type
     procedure ExibeTelaCReceber;
     procedure ExibeTelaCaixa;
     procedure ExibeTelaSaldoCaixa;
+    procedure ExibeTelaClientes;
 
   public
     { Public declarations }
@@ -101,6 +106,11 @@ uses
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
   ExibeTelaCaixa;
+end;
+
+procedure TfrmPrincipal.btnClientesClick(Sender: TObject);
+begin
+  ExibeTelaClientes;
 end;
 
 procedure TfrmPrincipal.btnCPClick(Sender: TObject);
@@ -148,6 +158,26 @@ begin
 
     //  Libera da memoria
     FreeAndNil(frmCaixa);
+
+  end;
+
+end;
+
+procedure TfrmPrincipal.ExibeTelaClientes;
+begin
+
+  //  Cria o Form
+  frmCliente := TfrmCliente.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    frmCliente.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmCliente);
 
   end;
 
@@ -315,6 +345,11 @@ begin
   lblUserLogado.Caption := '';
 end;
 
+procedure TfrmPrincipal.mnuClientesClick(Sender: TObject);
+begin
+  ExibeTelaClientes;
+end;
+
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);
 begin
   ExibeTelaUsuario;
@@ -322,7 +357,7 @@ end;
 
 procedure TfrmPrincipal.Panel1Click(Sender: TObject);
 begin
-ExibeTelaUsuario;
+  ExibeTelaUsuario;
 end;
 
 procedure TfrmPrincipal.ResumoMensalCaixa;

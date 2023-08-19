@@ -211,6 +211,15 @@
             <Form>frmRelCaixa</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.Clientes.pas">
+            <Form>frmCliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmClientes.pas">
+            <Form>dmClientes</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

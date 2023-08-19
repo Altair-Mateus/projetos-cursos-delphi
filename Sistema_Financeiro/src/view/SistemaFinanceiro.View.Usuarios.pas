@@ -99,6 +99,7 @@ begin
   end;
 
 end;
+
 procedure TfrmUsuarios.btnImprimirClick(Sender: TObject);
 begin
 
@@ -287,12 +288,12 @@ procedure TfrmUsuarios.ValidaCampos;
 begin
 
   if Trim(edtNome.Text) = '' then
-    begin
+  begin
 
-      Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-      edtNome.SetFocus;
-      abort;
-    end;
+    Application.MessageBox('Campo nome não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtNome.SetFocus;
+    abort;
+  end;
 
 
   if Trim(edtLogin.Text) = '' then

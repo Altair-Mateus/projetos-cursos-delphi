@@ -8,6 +8,7 @@ inherited frmUsuarios: TfrmUsuarios
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
     Height = 511
+    ActiveCard = CardCadastro
     ExplicitWidth = 811
     ExplicitHeight = 510
     inherited CardCadastro: TCard
