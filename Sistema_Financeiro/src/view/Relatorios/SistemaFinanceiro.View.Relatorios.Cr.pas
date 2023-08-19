@@ -25,6 +25,8 @@ type
     rllblContador: TRLLabel;
     rllblId: TRLLabel;
     rldbtId: TRLDBText;
+    rllblCodCliente: TRLLabel;
+    rldbtCodCliente: TRLDBText;
     procedure RLReportBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }

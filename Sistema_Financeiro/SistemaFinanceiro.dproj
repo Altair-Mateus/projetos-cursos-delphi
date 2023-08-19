@@ -220,6 +220,10 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Clientes.pas">
+            <Form>frmRelClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

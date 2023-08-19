@@ -3,34 +3,36 @@ inherited frmCliente: TfrmCliente
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
+  ExplicitTop = -145
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1341
-      ExplicitHeight = 644
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlBotoesCad: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 575
-        ExplicitWidth = 1341
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
+          ExplicitLeft = -5
+          ExplicitTop = 6
         end
       end
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
-        ExplicitWidth = 1341
-        ExplicitHeight = 534
+        ExplicitWidth = 1337
+        ExplicitHeight = 533
         object LabelNome: TLabel
           Left = 32
           Top = 48
@@ -166,36 +168,6 @@ inherited frmCliente: TfrmCliente
             OnClick = rbJuridicaClick
           end
         end
-        object edtCpf: TEdit
-          Left = 32
-          Top = 145
-          Width = 153
-          Height = 27
-          Color = clWhite
-          Enabled = False
-          MaxLength = 11
-          TabOrder = 2
-        end
-        object edtCnpj: TEdit
-          Left = 208
-          Top = 145
-          Width = 153
-          Height = 27
-          Color = clWhite
-          Enabled = False
-          MaxLength = 14
-          TabOrder = 3
-        end
-        object edtIe: TEdit
-          Left = 384
-          Top = 145
-          Width = 153
-          Height = 27
-          Color = clWhite
-          Enabled = False
-          MaxLength = 20
-          TabOrder = 4
-        end
         object edtEndereco: TEdit
           Left = 32
           Top = 217
@@ -203,7 +175,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 5
+          TabOrder = 2
         end
         object edtNumLog: TEdit
           Left = 384
@@ -212,7 +184,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 6
+          TabOrder = 3
         end
         object edtCidade: TEdit
           Left = 32
@@ -221,7 +193,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 7
+          TabOrder = 4
         end
         object edtCep: TEdit
           Left = 208
@@ -230,14 +202,14 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 8
+          TabOrder = 5
         end
         object cbUf: TComboBox
           Left = 384
           Top = 289
           Width = 65
           Height = 27
-          TabOrder = 9
+          TabOrder = 6
           Items.Strings = (
             'AC'
             'AL'
@@ -274,7 +246,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 10
+          TabOrder = 7
         end
         object edtCelular: TEdit
           Left = 32
@@ -283,7 +255,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 11
+          TabOrder = 8
         end
         object edtTelefone: TEdit
           Left = 208
@@ -292,7 +264,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 12
+          TabOrder = 9
         end
         object edtEmail: TEdit
           Left = 384
@@ -301,7 +273,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 13
+          TabOrder = 10
         end
         object edtBairro: TEdit
           Left = 472
@@ -310,12 +282,40 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
+          TabOrder = 11
+        end
+        object edtCpf: TMaskEdit
+          Left = 32
+          Top = 145
+          Width = 153
+          Height = 27
+          EditMask = '000.000.000-00;0;_'
+          MaxLength = 14
+          TabOrder = 12
+          Text = ''
+        end
+        object edtIe: TEdit
+          Left = 384
+          Top = 145
+          Width = 153
+          Height = 27
+          Color = clWhite
+          MaxLength = 10
+          TabOrder = 13
+        end
+        object edtCnpj: TMaskEdit
+          Left = 208
+          Top = 145
+          Width = 152
+          Height = 27
+          ImeName = 'edtCnpj'
           TabOrder = 14
+          Text = ''
         end
       end
       inherited PanelTitulo: TPanel
         Width = 1341
-        ExplicitWidth = 1341
+        ExplicitWidth = 1337
         inherited lblTitulo: TLabel
           Width = 210
           Caption = 'Inserindo um novo Cliente'
@@ -327,12 +327,12 @@ inherited frmCliente: TfrmCliente
     inherited CardPesquisa: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      ExplicitWidth = 1341
+      ExplicitHeight = 644
       inherited pnlPesquisa: TPanel
         Width = 1341
         Height = 137
-        ExplicitWidth = 1337
+        ExplicitWidth = 1341
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 176
@@ -567,7 +567,7 @@ inherited frmCliente: TfrmCliente
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1213
+          ExplicitLeft = 1217
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -666,14 +666,20 @@ inherited frmCliente: TfrmCliente
       inherited pnlBotoes: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        ExplicitTop = 575
+        ExplicitWidth = 1341
+        inherited btnAlterar: TButton
+          ExplicitTop = 5
+        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
+        inherited btnImprimir: TButton
+          OnClick = btnImprimirClick
+        end
         inherited btnSair: TButton
           Left = 1217
-          ExplicitLeft = 1213
+          ExplicitLeft = 1217
         end
       end
       inherited pnlGrid: TPanel
@@ -681,8 +687,8 @@ inherited frmCliente: TfrmCliente
         Width = 1341
         Height = 438
         ExplicitTop = 137
-        ExplicitWidth = 1337
-        ExplicitHeight = 437
+        ExplicitWidth = 1341
+        ExplicitHeight = 438
         inherited DBGrid1: TDBGrid
           Width = 1339
           Height = 436

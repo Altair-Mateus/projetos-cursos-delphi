@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage, Vcl.Mask;
 
 type
   TfrmCliente = class(TfrmCadastroPadrao)
@@ -14,12 +14,9 @@ type
     LabelNome: TLabel;
     gbTipoCliente: TGroupBox;
     rbFisica: TRadioButton;
-    edtCpf: TEdit;
     lblCpf: TLabel;
     lblCnpj: TLabel;
-    edtCnpj: TEdit;
     lblIe: TLabel;
-    edtIe: TEdit;
     edtEndereco: TEdit;
     lblEnderco: TLabel;
     edtNumLog: TEdit;
@@ -50,6 +47,9 @@ type
     rbDataCad: TRadioButton;
     rbNome: TRadioButton;
     rbId: TRadioButton;
+    edtCpf: TMaskEdit;
+    edtIe: TEdit;
+    edtCnpj: TMaskEdit;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -65,6 +65,7 @@ type
     procedure rbDataCadClick(Sender: TObject);
     procedure rbNomeClick(Sender: TObject);
     procedure rbIdClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -88,7 +89,7 @@ implementation
 
 uses
   SistemaFinanceiro.Model.dmClientes,
-  SistemaFinanceiro.Utilitarios;
+  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.View.Relatorios.Clientes;
 
 procedure TfrmCliente.btnAlterarClick(Sender: TObject);
 begin
@@ -133,6 +134,28 @@ begin
 
 end;
 
+procedure TfrmCliente.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmRelClientes := TfrmRelClientes.Create(Self);
+
+  try
+
+    frmRelClientes.DataSourceClientes.DataSet := DataSourceCliente.DataSet;
+
+    //  Mostra a pre vizualizacao
+    frmRelClientes.RLReport.Preview;
+
+  finally
+
+    FreeAndNil(frmRelClientes);
+
+  end;
+
+end;
+
 procedure TfrmCliente.btnIncluirClick(Sender: TObject);
 begin
   inherited;
@@ -152,6 +175,8 @@ begin
   //  Defindo tipo de cliente previamente como PF
   rbFisica.Checked;
   edtCpf.Enabled  := True;
+  edtCnpj.Enabled := False;
+  edtIe.Enabled   := False;
 
 end;
 
@@ -166,6 +191,8 @@ end;
 procedure TfrmCliente.btnSalvarClick(Sender: TObject);
 var
   TipoCli : String;
+  Cpf : String;
+  Cnpj : String;
 
 begin
 
@@ -189,6 +216,15 @@ begin
 
   end;
 
+  //  Ignora a mascara do cpf
+  Cpf := StringReplace(edtCpf.Text, '.', '', [rfReplaceAll]);
+  Cpf := StringReplace(Cpf, '-', '', [rfReplaceAll]);
+
+  //  Ignora a mascara do cnpj
+  Cnpj := StringReplace(edtCnpj.Text, '.', '', [rfReplaceAll]);
+  Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
+  Cnpj := StringReplace(Cnpj, '-', '', [rfReplaceAll]);
+
 
   //  Define o tipo de cliente
   if rbFisica.Checked then
@@ -203,8 +239,8 @@ begin
   //  Passando os dados para o dataset
   dmClientes.cdsClientesNOME.AsString         := Trim(edtNome.Text);
   dmClientes.cdsClientesTIPO.AsString         := TipoCli;
-  dmClientes.cdsClientesCPF.AsString          := Trim(edtCpf.Text);
-  dmClientes.cdsClientesCNPJ.AsString         := Trim(edtCnpj.Text);
+  dmClientes.cdsClientesCPF.AsString          := Cpf;
+  dmClientes.cdsClientesCNPJ.AsString         := Cnpj;
   dmClientes.cdsClientesIE.AsString           := Trim(edtIe.Text);
   dmClientes.cdsClientesENDERECO.AsString     := Trim(edtEndereco.Text);
   dmClientes.cdsClientesN_LOGRADOURO.AsString := Trim(edtNumLog.Text);
@@ -274,11 +310,22 @@ begin
 
   if dmClientes.cdsClientesTIPO.AsString = 'F' then
   begin
+
     rbFisica.Checked;
+
+    edtCpf.Enabled  := True;
+    edtCnpj.Enabled := False;
+    edtIe.Enabled   := False;
+
   end
   else
   begin
+
     rbJuridica.Checked;
+
+    edtCpf.Enabled  := False;
+    edtCnpj.Enabled := True;
+    edtIe.Enabled   := True;
   end;
 
 end;

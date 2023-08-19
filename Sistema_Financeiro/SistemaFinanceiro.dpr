@@ -34,7 +34,8 @@ uses
   SistemaFinanceiro.View.Relatorios.Cp in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Cp.pas' {frmRelCp},
   SistemaFinanceiro.View.Relatorios.Caixa in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Caixa.pas' {frmRelCaixa},
   SistemaFinanceiro.View.Clientes in 'src\view\SistemaFinanceiro.View.Clientes.pas' {frmCliente},
-  SistemaFinanceiro.Model.dmClientes in 'src\model\SistemaFinanceiro.Model.dmClientes.pas' {dmClientes: TDataModule};
+  SistemaFinanceiro.Model.dmClientes in 'src\model\SistemaFinanceiro.Model.dmClientes.pas' {dmClientes: TDataModule},
+  SistemaFinanceiro.View.Relatorios.Clientes in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Clientes.pas' {frmRelClientes};
 
 {$R *.res}
 begin
@@ -47,5 +48,6 @@ begin
   Application.CreateForm(TdmCPagar, dmCPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
   Application.CreateForm(TdmClientes, dmClientes);
+  Application.CreateForm(TfrmRelClientes, frmRelClientes);
   Application.Run;
 end.
