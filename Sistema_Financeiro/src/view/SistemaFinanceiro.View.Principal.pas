@@ -22,7 +22,6 @@ type
     pnlInfos: TPanel;
     lblUserLogado: TLabel;
     Image1: TImage;
-    btnusuarios: TButton;
     ImageList1: TImageList;
     btnCP: TButton;
     btnCR: TButton;
@@ -51,8 +50,11 @@ type
     lblValorCR: TLabel;
     Image3: TImage;
     Label4: TLabel;
-    btnClientes: TButton;
     mnuClientes: TMenuItem;
+    btnClientes: TButton;
+    btnusuarios: TButton;
+    btnFornec: TButton;
+    Fornecedores1: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);

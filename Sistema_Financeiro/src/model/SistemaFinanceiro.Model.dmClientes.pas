@@ -36,6 +36,7 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
+    function GetNomeCliente(IdCliente : String) : String;
 
   end;
 
@@ -83,6 +84,41 @@ begin
 
     FDQueryId.Close;
     FDQueryId.Free;
+
+  end;
+
+end;
+
+function TdmClientes.GetNomeCliente(IdCliente : String) : String;
+var
+  FDQueryNome : TFDQuery;
+
+begin
+
+  Result := '';
+
+  //  Criando a query
+  FDQueryNome := TFDQuery.Create(nil);
+
+  try
+
+    //  Definindo a conexão
+    FDQueryNome.Connection := DataModule1.FDConnection;
+
+    FDQueryNome.Close;
+    FDQueryNome.SQL.Clear;
+    FDQueryNome.SQL.Add('SELECT NOME FROM CLIENTES WHERE ID = :ID ');
+
+    FDQueryNome.ParamByName('ID').AsString := IdCliente;
+
+    FDQueryNome.Open();
+
+    Result := FDQueryNome.FieldByName('NOME').AsString;
+
+  finally
+
+    FDQueryNome.Close;
+    FDQueryNome.Free;
 
   end;
 

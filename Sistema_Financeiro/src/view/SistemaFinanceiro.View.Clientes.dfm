@@ -9,6 +9,7 @@ inherited frmCliente: TfrmCliente
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
+    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -134,7 +135,7 @@ inherited frmCliente: TfrmCliente
           Width = 449
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 200
           TabOrder = 0
         end
         object gbTipoCliente: TGroupBox
@@ -172,7 +173,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           Enabled = False
-          MaxLength = 100
+          MaxLength = 11
           TabOrder = 2
         end
         object edtCnpj: TEdit
@@ -182,7 +183,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           Enabled = False
-          MaxLength = 100
+          MaxLength = 14
           TabOrder = 3
         end
         object edtIe: TEdit
@@ -192,7 +193,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           Enabled = False
-          MaxLength = 100
+          MaxLength = 20
           TabOrder = 4
         end
         object edtEndereco: TEdit
@@ -210,7 +211,7 @@ inherited frmCliente: TfrmCliente
           Width = 65
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 10
           TabOrder = 6
         end
         object edtCidade: TEdit
@@ -228,7 +229,7 @@ inherited frmCliente: TfrmCliente
           Width = 153
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 10
           TabOrder = 8
         end
         object cbUf: TComboBox
@@ -281,7 +282,7 @@ inherited frmCliente: TfrmCliente
           Width = 153
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 15
           TabOrder = 11
         end
         object edtTelefone: TEdit
@@ -290,7 +291,7 @@ inherited frmCliente: TfrmCliente
           Width = 153
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 15
           TabOrder = 12
         end
         object edtEmail: TEdit
@@ -308,7 +309,7 @@ inherited frmCliente: TfrmCliente
           Width = 153
           Height = 27
           Color = clWhite
-          MaxLength = 100
+          MaxLength = 10
           TabOrder = 14
         end
       end

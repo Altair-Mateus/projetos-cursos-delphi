@@ -44,6 +44,7 @@ uses
   BCrypt, SistemaFinanceiro.Model.udmDados;
 {$R *.dfm}
 { TDataModuleUsuarios }
+
 procedure TdmUsuarios.cdsUsuariosstatusGetText(Sender: TField; var Text: string;
   DisplayText: Boolean);
 begin

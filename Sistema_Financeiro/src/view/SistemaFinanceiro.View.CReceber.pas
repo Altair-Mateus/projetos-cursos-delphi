@@ -6,7 +6,7 @@ uses
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.WinXCtrls, Vcl.ComCtrls, Datasnap.DBClient,
   Vcl.Menus, SistemaFinanceiro.View.BaixarCR, SistemaFinanceiro.View.CrDetalhe,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Clientes;
 type
   TfrmContasReceber = class(TfrmCadastroPadrao)
     DataSourceCReceber: TDataSource;
@@ -79,6 +79,9 @@ type
     edtCliente: TEdit;
     lblNomeCliente: TLabel;
     btnPesquisaCliente: TButton;
+    edtFiltroCliente: TEdit;
+    btnPesqCliente: TButton;
+    lblClienteFiltro: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -113,6 +116,10 @@ type
     procedure checkParciaisClick(Sender: TObject);
     procedure checkDiaFixoVctoClick(Sender: TObject);
     procedure edtClienteExit(Sender: TObject);
+    procedure btnPesquisaClienteClick(Sender: TObject);
+    procedure btnPesqClienteClick(Sender: TObject);
+    procedure edtFiltroClienteKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     { Private declarations }
@@ -122,6 +129,7 @@ type
     procedure CadParcelamento;
     procedure ExibeTelaBaixar;
     procedure ExibeDetalhe;
+    procedure BuscaNomeCliente;
 
   public
     { Public declarations }
@@ -404,6 +412,9 @@ begin
   //  Esvazia o dataset das parcelas
   cdsParcelas.EmptyDataSet;
 
+  //  Oculta o nome do cliente
+  lblNomeCliente.Visible := False;
+
 end;
 
 procedure TfrmContasReceber.btnLimparClick(Sender: TObject);
@@ -425,6 +436,54 @@ begin
   edtDiaFixoVcto.Text := '';
 
   checkDiaFixoVcto.Checked := False;
+
+end;
+
+procedure TfrmContasReceber.btnPesqClienteClick(Sender: TObject);
+begin
+
+  //  Cria o form
+  frmCliente := TfrmCliente.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmCliente.ShowModal;
+
+  finally
+
+    //  Pega a ID do cliente selecionado
+    edtFiltroCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID').AsString;
+
+    //  Libera da  memoria
+    FreeAndNil(frmCliente);
+
+  end;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasReceber.btnPesquisaClienteClick(Sender: TObject);
+begin
+
+  //  Cria o form
+  frmCliente := TfrmCliente.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmCliente.ShowModal;
+
+  finally
+
+    //  Pega a ID do cliente selecionado
+    edtCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID').AsString;
+
+    //  Libera da  memoria
+    FreeAndNil(frmCliente);
+
+  end;
 
 end;
 
@@ -458,6 +517,33 @@ begin
   frmPrincipal.TotalCR;
 
   inherited;
+end;
+
+procedure TfrmContasReceber.BuscaNomeCliente;
+var
+  NomeCliente : String;
+
+begin
+
+  if Trim(edtCliente.Text) <> '' then
+  begin
+
+    NomeCliente := dmClientes.GetNomeCliente(Trim(edtCliente.Text));
+
+    if NomeCliente = '' then
+    begin
+
+      Application.MessageBox('Cliente não encontrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      edtCliente.SetFocus;
+      edtCliente.Clear;
+
+    end;
+
+    lblNomeCliente.Visible := True;
+    lblNomeCliente.Caption := NomeCliente;
+
+  end;
+
 end;
 
 procedure TfrmContasReceber.CadParcelamento;
@@ -797,6 +883,7 @@ begin
   CardPanelParcela.ActiveCard := cardParcelaUnica;
 
   //  Carrega os dados
+  edtCliente.Text      := dmCReceber.cdsCReceberID_CLIENTE.AsString;
   memDesc.Text         := dmCReceber.cdsCReceberDESCRICAO.AsString;
   edtValorVenda.Text   := TUtilitario.FormatarValor(dmCReceber.cdsCReceberVALOR_VENDA.AsCurrency);
   dateVenda.Date       := dmCReceber.cdsCReceberDATA_VENDA.AsDateTime;
@@ -804,19 +891,22 @@ begin
   edtParcela.Text      := dmCReceber.cdsCReceberPARCELA.AsString;
   edtValorParcela.Text := TUtilitario.FormatarValor(dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency);
   dateVencimento.Date  := dmCReceber.cdsCReceberDATA_VENCIMENTO.AsDateTime;
+  BuscaNomeCliente;
 
 end;
 
 procedure TfrmContasReceber.edtClienteExit(Sender: TObject);
 begin
-  inherited;
 
-  if Trim(edtCliente.Text) <> '' then
-  begin
+  BuscaNomeCliente;
 
+end;
 
+procedure TfrmContasReceber.edtFiltroClienteKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
 
-  end;
+  Pesquisar;
 
 end;
 
@@ -933,6 +1023,7 @@ var
   LFiltroEdit: String;
   LFiltro : String;
   LOrdem : String;
+
 begin
 
   //  Validações
@@ -1014,6 +1105,18 @@ begin
     //  Criando os parametros
     dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DATUAL', TParamType.ptInput);
     dmCReceber.cdsCReceber.ParamByName('DATUAL').AsDate := NOW;
+
+  end;
+
+  //  Pesquisa por cliente
+  if Trim(edtFiltroCliente.Text) <> '' then
+  begin
+
+    LFiltro := LFiltro + ' AND ID_CLIENTE = :ID';
+
+    //  Criando os parametros
+    dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
+    dmCReceber.cdsCReceber.ParamByName('ID').AsString := Trim(edtFiltroCliente.Text);
 
   end;
 

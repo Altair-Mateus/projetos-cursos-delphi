@@ -100,6 +100,7 @@ object dmCReceber: TdmCReceber
       FieldName = 'CR_ORIGEM'
     end
     object cdsCReceberID_CLIENTE: TIntegerField
+      Alignment = taCenter
       FieldName = 'ID_CLIENTE'
       Required = True
     end
