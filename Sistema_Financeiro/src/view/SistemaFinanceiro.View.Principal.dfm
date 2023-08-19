@@ -10858,7 +10858,7 @@ object frmPrincipal: TfrmPrincipal
     TabOrder = 1
     StyleElements = [seFont, seClient]
     ExplicitWidth = 966
-    ExplicitHeight = 188
+    ExplicitHeight = 323
     object btnCP: TButton
       Left = 228
       Top = 161
@@ -11009,6 +11009,7 @@ object frmPrincipal: TfrmPrincipal
       ParentFont = False
       TabOrder = 5
       WordWrap = True
+      OnClick = btnFornecClick
     end
   end
   object pnlInfos: TPanel
@@ -11025,7 +11026,7 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 415
+    ExplicitTop = 550
     ExplicitWidth = 966
     object lblUserLogado: TLabel
       AlignWithMargins = True
@@ -11255,6 +11256,7 @@ object frmPrincipal: TfrmPrincipal
       object Fornecedores1: TMenuItem
         Caption = 'Fornecedores'
         ImageIndex = 6
+        OnClick = Fornecedores1Click
       end
     end
     object mnuFinanceiro: TMenuItem

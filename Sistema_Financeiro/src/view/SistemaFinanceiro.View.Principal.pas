@@ -8,7 +8,8 @@ uses
   Vcl.ImgList, SistemaFinanceiro.View.RedefinirSenha,
   SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa,
   SistemaFinanceiro.View.CPagar,
-  SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes;
+  SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
+  SistemaFinanceiro.View.Fornecedores;
 
 type
   TfrmPrincipal = class(TForm)
@@ -71,6 +72,8 @@ type
     procedure Panel1Click(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
     procedure mnuClientesClick(Sender: TObject);
+    procedure btnFornecClick(Sender: TObject);
+    procedure Fornecedores1Click(Sender: TObject);
 
 
   private
@@ -81,6 +84,7 @@ type
     procedure ExibeTelaCaixa;
     procedure ExibeTelaSaldoCaixa;
     procedure ExibeTelaClientes;
+    procedure ExibeTelaFonecedores;
 
   public
     { Public declarations }
@@ -123,6 +127,11 @@ end;
 procedure TfrmPrincipal.btnCRClick(Sender: TObject);
 begin
   ExibeTelaCReceber;
+end;
+
+procedure TfrmPrincipal.btnFornecClick(Sender: TObject);
+begin
+  ExibeTelaFonecedores
 end;
 
 procedure TfrmPrincipal.btnusuariosClick(Sender: TObject);
@@ -221,6 +230,26 @@ begin
     FreeAndNil(frmContasReceber);
 
   end
+end;
+
+procedure TfrmPrincipal.ExibeTelaFonecedores;
+begin
+
+  //  Cria o Form
+  frmFornecedores := TfrmFornecedores.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFornecedores.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmFornecedores);
+
+  end;
+
 end;
 
 procedure TfrmPrincipal.ExibeTelaSaldoCaixa;
@@ -345,6 +374,11 @@ end;
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   lblUserLogado.Caption := '';
+end;
+
+procedure TfrmPrincipal.Fornecedores1Click(Sender: TObject);
+begin
+  ExibeTelaFonecedores;
 end;
 
 procedure TfrmPrincipal.mnuClientesClick(Sender: TObject);

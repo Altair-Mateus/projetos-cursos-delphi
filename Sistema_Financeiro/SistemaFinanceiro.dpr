@@ -35,7 +35,9 @@ uses
   SistemaFinanceiro.View.Relatorios.Caixa in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Caixa.pas' {frmRelCaixa},
   SistemaFinanceiro.View.Clientes in 'src\view\SistemaFinanceiro.View.Clientes.pas' {frmCliente},
   SistemaFinanceiro.Model.dmClientes in 'src\model\SistemaFinanceiro.Model.dmClientes.pas' {dmClientes: TDataModule},
-  SistemaFinanceiro.View.Relatorios.Clientes in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Clientes.pas' {frmRelClientes};
+  SistemaFinanceiro.View.Relatorios.Clientes in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Clientes.pas' {frmRelClientes},
+  SistemaFinanceiro.Model.dmFornecedores in 'src\model\SistemaFinanceiro.Model.dmFornecedores.pas' {dmFornecedores: TDataModule},
+  SistemaFinanceiro.View.Fornecedores in 'src\view\SistemaFinanceiro.View.Fornecedores.pas' {frmFornecedores};
 
 {$R *.res}
 begin
@@ -49,5 +51,7 @@ begin
   Application.CreateForm(TdmCReceber, dmCReceber);
   Application.CreateForm(TdmClientes, dmClientes);
   Application.CreateForm(TfrmRelClientes, frmRelClientes);
+  Application.CreateForm(TdmFornecedores, dmFornecedores);
+  Application.CreateForm(TfrmFornecedores, frmFornecedores);
   Application.Run;
 end.

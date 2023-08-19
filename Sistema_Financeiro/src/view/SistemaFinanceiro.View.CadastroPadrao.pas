@@ -19,7 +19,6 @@ type
     lblPesquisar: TLabel;
     edtPesquisar: TEdit;
     btnPesquisae: TButton;
-    Image1: TImage;
     ImageList1: TImageList;
     btnIncluir: TButton;
     btnAlterar: TButton;

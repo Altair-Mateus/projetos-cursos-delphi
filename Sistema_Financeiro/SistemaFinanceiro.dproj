@@ -224,6 +224,15 @@
             <Form>frmRelClientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmFornecedores.pas">
+            <Form>dmFornecedores</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.Fornecedores.pas">
+            <Form>frmFornecedores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

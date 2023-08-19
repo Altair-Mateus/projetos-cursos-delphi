@@ -265,12 +265,6 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         TabOrder = 2
         ExplicitWidth = 797
         ExplicitHeight = 357
-        object Image1: TImage
-          Left = 640
-          Top = 152
-          Width = 105
-          Height = 105
-        end
         object DBGrid1: TDBGrid
           Left = 1
           Top = 1

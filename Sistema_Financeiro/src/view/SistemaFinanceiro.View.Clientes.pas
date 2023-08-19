@@ -312,6 +312,7 @@ begin
   begin
 
     rbFisica.Checked;
+    rbJuridica.Checked := False;
 
     edtCpf.Enabled  := True;
     edtCnpj.Enabled := False;
@@ -322,6 +323,7 @@ begin
   begin
 
     rbJuridica.Checked;
+    rbFisica.Checked := False;
 
     edtCpf.Enabled  := False;
     edtCnpj.Enabled := True;
@@ -425,6 +427,10 @@ begin
   edtCnpj.Enabled := False;
   edtIe.Enabled   := False;
 
+  edtCnpj.Clear;
+  edtIe.Clear;
+
+
 end;
 
 procedure TfrmCliente.rbIdClick(Sender: TObject);
@@ -442,6 +448,8 @@ begin
   edtCnpj.Enabled := True;
   edtIe.Enabled   := True;
   edtCpf.Enabled  := False;
+
+  edtCpf.Clear;
 
 end;
 
