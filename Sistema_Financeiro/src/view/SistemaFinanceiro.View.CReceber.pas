@@ -75,6 +75,10 @@ type
     lblIntervaloDias: TLabel;
     edtQtdParcelas: TEdit;
     lblQtdParcelas: TLabel;
+    lblCliente: TLabel;
+    edtCliente: TEdit;
+    lblNomeCliente: TLabel;
+    btnPesquisaCliente: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -108,6 +112,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure checkParciaisClick(Sender: TObject);
     procedure checkDiaFixoVctoClick(Sender: TObject);
+    procedure edtClienteExit(Sender: TObject);
 
   private
     { Private declarations }
@@ -133,7 +138,8 @@ implementation
 uses
   SistemaFinanceiro.Model.dmCReceber,
   SistemaFinanceiro.Utilitarios, System.DateUtils,
-  SistemaFinanceiro.View.Principal, SistemaFinanceiro.View.Relatorios.Cr;
+  SistemaFinanceiro.View.Principal, SistemaFinanceiro.View.Relatorios.Cr,
+  SistemaFinanceiro.Model.dmClientes;
 
 { TfrmContasReceber }
 
@@ -457,6 +463,8 @@ end;
 procedure TfrmContasReceber.CadParcelamento;
 var
   ValorVenda : Currency;
+  IdCliente : Integer;
+
 begin
 
   //  Valida valor da venda
@@ -465,6 +473,15 @@ begin
     edtValorVenda.SetFocus;
     Application.MessageBox('Valor da Venda inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
+  end;
+
+  if not TryStrToInt(edtCliente.Text, IdCliente) then
+  begin
+    begin
+    edtCliente.SetFocus;
+    Application.MessageBox('Campo CLIENTE não pode estar vazio', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
   end;
 
   //  Posiciona no reg 1 do cds
@@ -511,6 +528,7 @@ begin
     end;
 
     dmCReceber.GeraCodigo;
+    dmCReceber.cdsCReceberID_CLIENTE.AsInteger       := IdCliente;
     dmCReceber.cdsCReceberDATA_CADASTRO.AsDateTime   := now;
     dmCReceber.cdsCReceberSTATUS.AsString            := 'A';
     dmCReceber.cdsCReceberVALOR_ABATIDO.AsCurrency   := 0;
@@ -541,6 +559,7 @@ end;
 procedure TfrmContasReceber.CadParcelaUnica;
 var
   Parcela : Integer;
+  IdCliente : Integer;
   ValorVenda : Currency;
   ValorParcela : Currency;
 
@@ -564,6 +583,13 @@ begin
   end;
 
   //  Valida Campos obrigatórios
+  if not TryStrToInt(edtCliente.Text, IdCliente) then
+  begin
+    edtCliente.SetFocus;
+    Application.MessageBox('Campo CLIENTE não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
   if Trim(memDesc.text) = '' then
   begin
     memDesc.SetFocus;
@@ -600,6 +626,7 @@ begin
   end;
 
   //  Passando os dados para o dataset
+  dmCReceber.cdsCReceberID_CLIENTE.AsInteger       := IdCliente;
   dmCReceber.cdsCReceberNUMERO_DOCUMENTO.AsString  := Trim(edtNDoc.text);
   dmCReceber.cdsCReceberDESCRICAO.AsString         := Trim(memDesc.Text);
   dmCReceber.cdsCReceberPARCELA.AsInteger          := Parcela;
@@ -777,6 +804,19 @@ begin
   edtParcela.Text      := dmCReceber.cdsCReceberPARCELA.AsString;
   edtValorParcela.Text := TUtilitario.FormatarValor(dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency);
   dateVencimento.Date  := dmCReceber.cdsCReceberDATA_VENCIMENTO.AsDateTime;
+
+end;
+
+procedure TfrmContasReceber.edtClienteExit(Sender: TObject);
+begin
+  inherited;
+
+  if Trim(edtCliente.Text) <> '' then
+  begin
+
+
+
+  end;
 
 end;
 

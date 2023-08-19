@@ -35,6 +35,7 @@ type
     FDQueryCrDetalheNOME: TWideStringField;
     cdsCReceberPARCIAL: TWideStringField;
     cdsCReceberCR_ORIGEM: TIntegerField;
+    cdsCReceberID_CLIENTE: TIntegerField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 
@@ -141,6 +142,7 @@ begin
         cdsCReceberDATA_VENCIMENTO.AsDateTime := ContaReceber.DataVencimento;
         cdsCReceberPARCIAL.AsString           := 'S';
         cdsCReceberCR_ORIGEM.AsString         := ContaReceber.Id;
+        cdsCReceberID_CLIENTE.AsInteger       := ContaReceber.IdCliente;
 
         //  Gravando no BD
         cdsCReceber.Post;
@@ -381,6 +383,7 @@ begin
       Result.Status          := FDQueryCR.FieldByName('STATUS').AsString;
       Result.Parcial         := FDQueryCR.FieldByName('PARCIAL').AsString;
       Result.CrOrigem        := FDQueryCR.FieldByName('CR_ORIGEM').AsInteger;
+      Result.IdCliente       := FDQueryCR.FieldByName('ID_CLIENTE').AsInteger;
 
     except
 

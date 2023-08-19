@@ -18,7 +18,8 @@ type
       FDesc: String;
       FParcela: Integer;
       FParcial: String;
-    FCrOrigem: Integer;
+      FCrOrigem: Integer;
+      FIdCliente: Integer;
 
       procedure SetDataCadastro(const Value: TDate);
       procedure SetDataRecebimento(const Value: TDate);
@@ -33,7 +34,8 @@ type
       procedure SetValorParcela(const Value: Currency);
       procedure SetValorVenda(const Value: Currency);
       procedure SetParcial(const Value: String);
-    procedure SetCrOrigem(const Value: Integer);
+      procedure SetCrOrigem(const Value: Integer);
+      procedure SetIdCliente(const Value: Integer);
 
 
     public
@@ -50,7 +52,8 @@ type
       property DataRecebimento : TDate read FDataRecebimento write SetDataRecebimento;
       property Status          : String read FStatus write SetStatus;
       property Parcial         : String read FParcial write SetParcial;
-      property CrOrigem : Integer read FCrOrigem write SetCrOrigem;
+      property CrOrigem        : Integer read FCrOrigem write SetCrOrigem;
+      property IdCliente       : Integer read FIdCliente write SetIdCliente;
 
 
   end;
@@ -97,6 +100,11 @@ end;
 procedure TModelCR.SetID(const Value: String);
 begin
   FID := Value;
+end;
+
+procedure TModelCR.SetIdCliente(const Value: Integer);
+begin
+  FIdCliente := Value;
 end;
 
 procedure TModelCR.SetParcela(const Value: Integer);

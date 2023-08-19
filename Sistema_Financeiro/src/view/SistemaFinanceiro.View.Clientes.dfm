@@ -3,25 +3,24 @@ inherited frmCliente: TfrmCliente
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitLeft = -582
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ExplicitWidth = 795
-    ExplicitHeight = 508
+    ExplicitWidth = 1339
+    ExplicitHeight = 645
     inherited CardCadastro: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 797
-      ExplicitHeight = 507
+      ExplicitWidth = 1341
+      ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 438
-        ExplicitWidth = 797
+        ExplicitTop = 575
+        ExplicitWidth = 1341
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -29,8 +28,8 @@ inherited frmCliente: TfrmCliente
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
-        ExplicitWidth = 797
-        ExplicitHeight = 397
+        ExplicitWidth = 1341
+        ExplicitHeight = 534
         object LabelNome: TLabel
           Left = 32
           Top = 48
@@ -315,7 +314,7 @@ inherited frmCliente: TfrmCliente
       end
       inherited PanelTitulo: TPanel
         Width = 1341
-        ExplicitWidth = 797
+        ExplicitWidth = 1341
         inherited lblTitulo: TLabel
           Width = 210
           Caption = 'Inserindo um novo Cliente'
@@ -327,12 +326,12 @@ inherited frmCliente: TfrmCliente
     inherited CardPesquisa: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 793
-      ExplicitHeight = 506
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
         Width = 1341
         Height = 137
-        ExplicitWidth = 1341
+        ExplicitWidth = 1337
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 176
@@ -555,6 +554,7 @@ inherited frmCliente: TfrmCliente
           Left = 176
           Top = 64
           Width = 297
+          OnKeyDown = edtPesquisarKeyDown
           ExplicitLeft = 176
           ExplicitTop = 64
           ExplicitWidth = 297
@@ -566,7 +566,9 @@ inherited frmCliente: TfrmCliente
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 669
+          ExplicitLeft = 1213
+          ExplicitTop = 30
+          ExplicitHeight = 77
         end
         object cbTipo: TComboBox
           Left = 509
@@ -577,6 +579,7 @@ inherited frmCliente: TfrmCliente
           ItemIndex = 0
           TabOrder = 2
           Text = 'TODOS'
+          OnChange = cbTipoChange
           Items.Strings = (
             'TODOS'
             'F'#205'SICA'
@@ -619,6 +622,7 @@ inherited frmCliente: TfrmCliente
             ParentColor = False
             ParentFont = False
             TabOrder = 0
+            OnClick = rbDataCadClick
           end
           object rbNome: TRadioButton
             Left = 127
@@ -635,6 +639,7 @@ inherited frmCliente: TfrmCliente
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            OnClick = rbNomeClick
           end
           object rbId: TRadioButton
             Left = 3
@@ -653,28 +658,30 @@ inherited frmCliente: TfrmCliente
             ParentFont = False
             TabOrder = 2
             TabStop = True
+            OnClick = rbIdClick
           end
         end
       end
       inherited pnlBotoes: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 437
-        ExplicitWidth = 793
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnSair: TButton
           Left = 1217
-          ExplicitLeft = 669
+          ExplicitLeft = 1213
         end
       end
       inherited pnlGrid: TPanel
         Top = 137
         Width = 1341
         Height = 438
-        ExplicitWidth = 793
-        ExplicitHeight = 356
+        ExplicitTop = 137
+        ExplicitWidth = 1337
+        ExplicitHeight = 437
         inherited DBGrid1: TDBGrid
           Width = 1339
           Height = 436

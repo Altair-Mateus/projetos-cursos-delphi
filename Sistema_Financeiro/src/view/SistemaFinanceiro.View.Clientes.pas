@@ -59,6 +59,12 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cbTipoChange(Sender: TObject);
+    procedure rbDataCadClick(Sender: TObject);
+    procedure rbNomeClick(Sender: TObject);
+    procedure rbIdClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -225,6 +231,14 @@ begin
 
 end;
 
+procedure TfrmCliente.cbTipoChange(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmCliente.DBGrid1DblClick(Sender: TObject);
 begin
   inherited;
@@ -269,6 +283,15 @@ begin
 
 end;
 
+procedure TfrmCliente.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmCliente.HabilitaBotoes;
 begin
 
@@ -286,18 +309,48 @@ var
 
 begin
 
-  dmClientes.cdsClientes.Params.Clear;
 
-  //  Pesquisa por tipo
-//  case cbTipo of
-//
-////    1 : LFiltroEdit := LFiltro + ' AND TIPO = '''' ';
-//
-//  end;
+  if cbTipo.ItemIndex < 0 then
+   begin
+
+    cbTipo.SetFocus;
+    Application.MessageBox('Selecione um tipo de CLIENTE!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
 
   LFiltroEdit := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
   LFiltro := '';
   LOrdem := '';
+
+  dmClientes.cdsClientes.Params.Clear;
+
+  //  Pesquisa por tipo
+  case cbTipo.ItemIndex of
+
+    1 : LFiltroEdit := LFiltro + ' AND TIPO = ''F'' ';
+    2 : LFiltroEdit := LFiltro + ' AND TIPO = ''J'' ';
+
+  end;
+
+  // ordem de consulta
+  if rbId.Checked then
+  begin
+    LOrdem := ' ORDER BY ID';
+  end
+  else if rbDataCad.Checked then
+       begin
+         LOrdem := 'ORDER BY DATA_CADASTRO';
+       end
+       else if rbNome.Checked then
+            begin
+              LOrdem := 'ORDER BY NOME';
+            end
+            else
+            begin
+              LOrdem := ' ORDER BY ID';
+            end;
+
 
   dmClientes.cdsClientes.Close;
   dmClientes.cdsClientes.CommandText := 'SELECT * FROM CLIENTES WHERE 1 = 1 ' + LFiltroEdit +  lFiltro + LOrdem;
@@ -306,6 +359,14 @@ begin
   HabilitaBotoes;
 
   inherited;
+
+end;
+
+procedure TfrmCliente.rbDataCadClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 
@@ -319,6 +380,14 @@ begin
 
 end;
 
+procedure TfrmCliente.rbIdClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmCliente.rbJuridicaClick(Sender: TObject);
 begin
   inherited;
@@ -326,6 +395,14 @@ begin
   edtCnpj.Enabled := True;
   edtIe.Enabled   := True;
   edtCpf.Enabled  := False;
+
+end;
+
+procedure TfrmCliente.rbNomeClick(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 

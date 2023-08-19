@@ -99,6 +99,10 @@ object dmCReceber: TdmCReceber
     object cdsCReceberCR_ORIGEM: TIntegerField
       FieldName = 'CR_ORIGEM'
     end
+    object cdsCReceberID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+      Required = True
+    end
   end
   object DataSetProviderCReceber: TDataSetProvider
     DataSet = FDQueryCReceber
