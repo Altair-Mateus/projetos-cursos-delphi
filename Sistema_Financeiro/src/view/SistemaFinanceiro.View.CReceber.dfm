@@ -14,13 +14,13 @@ inherited frmContasReceber: TfrmContasReceber
     inherited CardCadastro: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      ExplicitWidth = 1341
+      ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        ExplicitTop = 575
+        ExplicitWidth = 1341
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -28,8 +28,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
-        ExplicitWidth = 1337
-        ExplicitHeight = 533
+        ExplicitWidth = 1341
+        ExplicitHeight = 534
         object lblDataVend: TLabel
           Left = 258
           Top = 159
@@ -68,9 +68,9 @@ inherited frmContasReceber: TfrmContasReceber
         object lblCliente: TLabel
           Left = 704
           Top = 32
-          Width = 48
+          Width = 81
           Height = 19
-          Caption = 'Cliente'
+          Caption = 'Cod Cliente'
         end
         object lblNomeCliente: TLabel
           Left = 816
@@ -338,18 +338,18 @@ inherited frmContasReceber: TfrmContasReceber
       end
       inherited PanelTitulo: TPanel
         Width = 1341
-        ExplicitWidth = 1337
+        ExplicitWidth = 1341
       end
     end
     inherited CardPesquisa: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1341
-      ExplicitHeight = 644
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
         Width = 1341
         Height = 137
-        ExplicitWidth = 1341
+        ExplicitWidth = 1337
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 213
@@ -4509,12 +4509,12 @@ inherited frmContasReceber: TfrmContasReceber
           ParentFont = False
         end
         object lblClienteFiltro: TLabel [7]
-          Left = 1037
+          Left = 1031
           Top = 98
-          Width = 54
+          Width = 87
           Height = 19
           Align = alCustom
-          Caption = 'Cliente:'
+          Caption = 'Cod Cliente:'
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -4528,7 +4528,7 @@ inherited frmContasReceber: TfrmContasReceber
           Left = 213
           Top = 39
           Width = 297
-          OnKeyDown = edtPesquisarKeyDown
+          OnChange = edtPesquisarChange
           ExplicitLeft = 213
           ExplicitTop = 39
           ExplicitWidth = 297
@@ -4540,7 +4540,7 @@ inherited frmContasReceber: TfrmContasReceber
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1217
+          ExplicitLeft = 1213
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -4679,7 +4679,7 @@ inherited frmContasReceber: TfrmContasReceber
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 4
-          OnExit = dateInicialExit
+          OnChange = dateInicialChange
         end
         object dateFinal: TDateTimePicker
           Left = 373
@@ -4690,7 +4690,7 @@ inherited frmContasReceber: TfrmContasReceber
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 5
-          OnExit = dateFinalExit
+          OnChange = dateFinalChange
         end
         object cbData: TComboBox
           Left = 550
@@ -4748,19 +4748,19 @@ inherited frmContasReceber: TfrmContasReceber
           end
         end
         object edtFiltroCliente: TEdit
-          Left = 1097
+          Left = 1124
           Top = 95
-          Width = 57
+          Width = 37
           Height = 27
           Color = clWhite
           MaxLength = 10
           NumbersOnly = True
           TabOrder = 8
+          OnChange = edtFiltroClienteChange
           OnExit = edtClienteExit
-          OnKeyDown = edtFiltroClienteKeyDown
         end
         object btnPesqCliente: TButton
-          Left = 1160
+          Left = 1167
           Top = 94
           Width = 35
           Height = 29
@@ -4773,8 +4773,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited pnlBotoes: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 575
-        ExplicitWidth = 1341
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -4783,7 +4783,7 @@ inherited frmContasReceber: TfrmContasReceber
         end
         inherited btnSair: TButton
           Left = 1217
-          ExplicitLeft = 1217
+          ExplicitLeft = 1213
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
@@ -4800,6 +4800,7 @@ inherited frmContasReceber: TfrmContasReceber
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ExplicitLeft = 970
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -4901,8 +4902,8 @@ inherited frmContasReceber: TfrmContasReceber
         Width = 1341
         Height = 438
         ExplicitTop = 137
-        ExplicitWidth = 1341
-        ExplicitHeight = 438
+        ExplicitWidth = 1337
+        ExplicitHeight = 437
         inherited DBGrid1: TDBGrid
           Width = 1339
           Height = 436

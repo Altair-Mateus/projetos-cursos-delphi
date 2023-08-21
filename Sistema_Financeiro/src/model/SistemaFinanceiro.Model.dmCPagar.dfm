@@ -93,6 +93,11 @@ object dmCPagar: TdmCPagar
     object cdsCPagarCP_ORIGEM: TIntegerField
       FieldName = 'CP_ORIGEM'
     end
+    object cdsCPagarID_FORNECEDOR: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ID_FORNECEDOR'
+      Required = True
+    end
   end
   object FDQueryCpDetalhes: TFDQuery
     Connection = DataModule1.FDConnection

@@ -1675,7 +1675,7 @@ inherited frmCaixa: TfrmCaixa
           Left = 185
           Top = 37
           Width = 297
-          OnKeyDown = edtPesquisarKeyDown
+          OnChange = edtPesquisarChange
           ExplicitLeft = 185
           ExplicitTop = 37
           ExplicitWidth = 297
@@ -1715,7 +1715,7 @@ inherited frmCaixa: TfrmCaixa
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 3
-          OnExit = dateFinalExit
+          OnChange = dateFinalChange
         end
         object dateInicial: TDateTimePicker
           Left = 185
@@ -1726,7 +1726,7 @@ inherited frmCaixa: TfrmCaixa
           Time = 0.872988819442980500
           ShowCheckbox = True
           TabOrder = 4
-          OnExit = dateInicialExit
+          OnChange = dateInicialChange
         end
         object gbFiltros: TGroupBox
           Left = 722

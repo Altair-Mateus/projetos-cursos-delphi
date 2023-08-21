@@ -3,14 +3,12 @@ inherited frmFornecedores: TfrmFornecedores
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitLeft = -582
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -658,7 +656,7 @@ inherited frmFornecedores: TfrmFornecedores
           Left = 182
           Top = 64
           Width = 297
-          OnKeyDown = edtPesquisarKeyDown
+          OnChange = edtPesquisarChange
           ExplicitLeft = 182
           ExplicitTop = 64
           ExplicitWidth = 297
@@ -683,7 +681,7 @@ inherited frmFornecedores: TfrmFornecedores
           ItemIndex = 0
           TabOrder = 2
           Text = 'TODOS'
-          OnDblClick = cbTipoDblClick
+          OnClick = cbTipoClick
           Items.Strings = (
             'TODOS'
             'F'#205'SICA'
@@ -771,9 +769,6 @@ inherited frmFornecedores: TfrmFornecedores
         Width = 1341
         ExplicitTop = 574
         ExplicitWidth = 1337
-        inherited btnAlterar: TButton
-          ExplicitTop = 5
-        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -818,17 +813,20 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TELEFONE'
               Title.Caption = 'Telefone'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CNPJ'
+              Width = 64
               Visible = True
             end
             item

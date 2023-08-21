@@ -101,12 +101,8 @@ type
     procedure Baixar1Click(Sender: TObject);
     procedure btnDetalhesClick(Sender: TObject);
     procedure DataSourceCReceberDataChange(Sender: TObject; Field: TField);
-    procedure dateInicialExit(Sender: TObject);
-    procedure dateFinalExit(Sender: TObject);
     procedure cbStatusClick(Sender: TObject);
     procedure cbDataClick(Sender: TObject);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure rbDataVencClick(Sender: TObject);
     procedure rbDataVendaClick(Sender: TObject);
     procedure rbIdClick(Sender: TObject);
@@ -118,8 +114,10 @@ type
     procedure edtClienteExit(Sender: TObject);
     procedure btnPesquisaClienteClick(Sender: TObject);
     procedure btnPesqClienteClick(Sender: TObject);
-    procedure edtFiltroClienteKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure edtFiltroClienteChange(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure dateInicialChange(Sender: TObject);
+    procedure dateFinalChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -790,7 +788,7 @@ begin
 
 end;
 
-procedure TfrmContasReceber.dateFinalExit(Sender: TObject);
+procedure TfrmContasReceber.dateFinalChange(Sender: TObject);
 begin
   inherited;
 
@@ -798,11 +796,12 @@ begin
 
 end;
 
-procedure TfrmContasReceber.dateInicialExit(Sender: TObject);
+procedure TfrmContasReceber.dateInicialChange(Sender: TObject);
 begin
   inherited;
 
   Pesquisar;
+
 end;
 
 procedure TfrmContasReceber.DBGrid1DblClick(Sender: TObject);
@@ -902,16 +901,15 @@ begin
 
 end;
 
-procedure TfrmContasReceber.edtFiltroClienteKeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmContasReceber.edtFiltroClienteChange(Sender: TObject);
 begin
+  inherited;
 
   Pesquisar;
 
 end;
 
-procedure TfrmContasReceber.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmContasReceber.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 
@@ -1010,8 +1008,8 @@ end;
 procedure TfrmContasReceber.HabilitaBotoes;
 begin
 
-  btnAlterar.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
-  btnExcluir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
+  btnAlterar.Enabled  := not DataSourceCReceber.DataSet.IsEmpty;
+  btnExcluir.Enabled  := not DataSourceCReceber.DataSet.IsEmpty;
   btnBaixarCR.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnDetalhes.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
   btnImprimir.Enabled := not DataSourceCReceber.DataSet.IsEmpty;
@@ -1150,13 +1148,15 @@ begin
 
 
   dmCReceber.cdsCReceber.Close;
-  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 ' + LFiltroEdit + LFiltro + LOrdem;
+  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 '
+                                         + LFiltroEdit + LFiltro + LOrdem;
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;
 
 
 end;
+
 procedure TfrmContasReceber.rbDataVencClick(Sender: TObject);
 begin
   inherited;

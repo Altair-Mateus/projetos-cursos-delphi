@@ -55,9 +55,6 @@ type
     procedure btnPesquisaeClick(Sender: TObject);
     procedure rbFisicaClick(Sender: TObject);
     procedure rbJuridicaClick(Sender: TObject);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure cbTipoDblClick(Sender: TObject);
     procedure rbDataCadClick(Sender: TObject);
     procedure rbNomeClick(Sender: TObject);
     procedure rbIdClick(Sender: TObject);
@@ -66,6 +63,8 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure cbTipoClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -146,6 +145,8 @@ begin
   edtCpf.Enabled  := False;
   edtCnpj.Enabled := True;
   edtIe.Enabled   := True;
+
+  cbUf.ItemIndex := -1;
 
 
 end;
@@ -236,7 +237,7 @@ begin
 
 end;
 
-procedure TfrmFornecedores.cbTipoDblClick(Sender: TObject);
+procedure TfrmFornecedores.cbTipoClick(Sender: TObject);
 begin
   inherited;
 
@@ -253,6 +254,9 @@ begin
 end;
 
 procedure TfrmFornecedores.EditarFornecedor;
+var
+  IndexCb : Integer;
+
 begin
 
   //  Coloca o dataset em modo de edição
@@ -271,17 +275,30 @@ begin
   edtNumLog.Text       := dmFornecedores.cdsFornecedoresN_LOGRADOURO.AsString;
   edtBairro.Text       := dmFornecedores.cdsFornecedoresBAIRRO.AsString;
   edtCidade.Text       := dmFornecedores.cdsFornecedoresCIDADE.AsString;
-  cbUf.Text            := dmFornecedores.cdsFornecedoresESTADO.AsString;
   edtCep.Text          := dmFornecedores.cdsFornecedoresCEP.AsString;
   edtCelular.Text      := dmFornecedores.cdsFornecedoresCELULAR.AsString;
   edtTelefone.Text     := dmFornecedores.cdsFornecedoresTELEFONE.AsString;
   edtComplemento.Text  := dmFornecedores.cdsFornecedoresCOMPLEMENTO.AsString;
   edtEmail.Text        := dmFornecedores.cdsFornecedoresEMAIL.AsString;
 
+  // Procura a sigla do estado no cb
+  IndexCb := cbUf.Items.IndexOf(dmFornecedores.cdsFornecedoresESTADO.AsString);
+
+  //  Ao localizar define a mesma no cb
+  if IndexCb >= 0 then
+  begin
+    cbUf.ItemIndex := IndexCb;
+  end
+  else
+  begin
+    cbUf.ItemIndex := -1;
+  end;
+
+
   if dmFornecedores.cdsFornecedoresTIPO.AsString = 'F' then
   begin
 
-    rbFisica.Checked;
+    rbFisica.Checked := True;
     rbJuridica.Checked := False;
 
     edtCpf.Enabled  := True;
@@ -292,7 +309,7 @@ begin
   else
   begin
 
-    rbJuridica.Checked;
+    rbJuridica.Checked := True;
     rbFisica.Checked := False;
 
     edtCpf.Enabled  := False;
@@ -303,8 +320,7 @@ begin
 
 end;
 
-procedure TfrmFornecedores.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmFornecedores.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 

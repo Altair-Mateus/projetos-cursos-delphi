@@ -62,7 +62,7 @@ var
 implementation
 
 uses
-  Vcl.WinXCtrls;
+  Vcl.WinXCtrls, Vcl.Mask;
 
 {$R *.dfm}
 
@@ -158,6 +158,11 @@ begin
       //  Cria o evento OnKeyPress para cada Edit encontrado
       TEdit(Components[I]).OnKeyPress := EditKeyPress;
 
+    end
+    else if Components[I] is TMaskEdit then
+    begin
+      // Cria o evento OnKeyPress para cada MaskEdit encontrado
+      TMaskEdit(Components[I]).OnKeyPress := EditKeyPress;
     end;
 
   end;
@@ -198,6 +203,11 @@ begin
     begin
       TRadioGroup(Components[Contador]).ItemIndex := -1;
     end;
+//    else if Components[Contador] is TComboBox then
+//    begin
+//      TComboBox(Components[Contador]).ItemIndex := -1;
+//    end;
+
 
   end;
 

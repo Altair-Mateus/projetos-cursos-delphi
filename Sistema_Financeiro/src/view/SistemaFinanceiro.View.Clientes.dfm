@@ -9,7 +9,6 @@ inherited frmCliente: TfrmCliente
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -173,7 +172,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 2
+          TabOrder = 5
         end
         object edtNumLog: TEdit
           Left = 384
@@ -182,7 +181,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 3
+          TabOrder = 6
         end
         object edtCidade: TEdit
           Left = 32
@@ -191,7 +190,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 4
+          TabOrder = 8
         end
         object edtCep: TEdit
           Left = 208
@@ -200,7 +199,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 5
+          TabOrder = 9
         end
         object cbUf: TComboBox
           Left = 384
@@ -208,7 +207,7 @@ inherited frmCliente: TfrmCliente
           Width = 65
           Height = 27
           Style = csDropDownList
-          TabOrder = 6
+          TabOrder = 10
           Items.Strings = (
             'AC'
             'AL'
@@ -245,7 +244,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 7
+          TabOrder = 11
         end
         object edtCelular: TEdit
           Left = 32
@@ -254,7 +253,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 8
+          TabOrder = 12
         end
         object edtTelefone: TEdit
           Left = 208
@@ -263,7 +262,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 9
+          TabOrder = 13
         end
         object edtEmail: TEdit
           Left = 384
@@ -272,7 +271,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 10
+          TabOrder = 14
         end
         object edtBairro: TEdit
           Left = 472
@@ -281,7 +280,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 11
+          TabOrder = 7
         end
         object edtCpf: TMaskEdit
           Left = 32
@@ -290,7 +289,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           EditMask = '000.000.000-00;0;_'
           MaxLength = 14
-          TabOrder = 12
+          TabOrder = 2
           Text = ''
         end
         object edtIe: TEdit
@@ -300,7 +299,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 13
+          TabOrder = 4
         end
         object edtCnpj: TMaskEdit
           Left = 208
@@ -308,7 +307,7 @@ inherited frmCliente: TfrmCliente
           Width = 152
           Height = 27
           ImeName = 'edtCnpj'
-          TabOrder = 14
+          TabOrder = 3
           Text = ''
         end
       end
@@ -554,7 +553,7 @@ inherited frmCliente: TfrmCliente
           Left = 176
           Top = 64
           Width = 297
-          OnKeyDown = edtPesquisarKeyDown
+          OnChange = edtPesquisarChange
           ExplicitLeft = 176
           ExplicitTop = 64
           ExplicitWidth = 297

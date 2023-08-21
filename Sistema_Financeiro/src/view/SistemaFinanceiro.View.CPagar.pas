@@ -6,7 +6,7 @@ uses
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
   SistemaFinanceiro.View.BaixarCP, Vcl.Menus, SistemaFinanceiro.View.CpDetalhe,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Fornecedores;
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
     DataSourceCPagar: TDataSource;
@@ -75,6 +75,13 @@ type
     pnlParciais: TPanel;
     checkParciais: TCheckBox;
     checkVencidas: TCheckBox;
+    lblFornecedor: TLabel;
+    edtFornecedor: TEdit;
+    btnPesquisaFornecedor: TButton;
+    lblNomeFornecedor: TLabel;
+    lblFornecedorFiltro: TLabel;
+    edtFiltroFornecedor: TEdit;
+    btnPesqFornecedor: TButton;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -94,10 +101,6 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DataSourceCPagarDataChange(Sender: TObject; Field: TField);
     procedure btnDetalhesClick(Sender: TObject);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure dateInicialExit(Sender: TObject);
-    procedure dateFinalExit(Sender: TObject);
     procedure cbStatusClick(Sender: TObject);
     procedure cbDataClick(Sender: TObject);
     procedure rbDataVencClick(Sender: TObject);
@@ -108,6 +111,13 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure checkParciaisClick(Sender: TObject);
     procedure checkDiaFixoVctoClick(Sender: TObject);
+    procedure btnPesquisaFornecedorClick(Sender: TObject);
+    procedure edtFornecedorExit(Sender: TObject);
+    procedure btnPesqFornecedorClick(Sender: TObject);
+    procedure edtFiltroFornecedorChange(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure dateInicialChange(Sender: TObject);
+    procedure dateFinalChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -117,6 +127,7 @@ type
     procedure EditarRegCPagar;
     procedure ExibeTelaBaixar;
     procedure ExibeDetalhe;
+    procedure BuscaNomeFornecedor;
 
   public
     { Public declarations }
@@ -135,7 +146,7 @@ uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Utilitarios,
   System.DateUtils, SistemaFinanceiro.View.Principal,
-  SistemaFinanceiro.View.Relatorios.Cp;
+  SistemaFinanceiro.View.Relatorios.Cp, SistemaFinanceiro.Model.dmFornecedores;
 
 { TfrmCadastroPadrao1 }
 procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
@@ -417,11 +428,61 @@ begin
 
 end;
 
+procedure TfrmContasPagar.btnPesqFornecedorClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmFornecedores := TfrmFornecedores.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFornecedores.ShowModal;
+
+  finally
+
+    //  Pega a ID do cliente selecionado
+    edtFiltroFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID').AsString;
+
+    //  Libera da  memoria
+    FreeAndNil(frmFornecedores);
+
+  end;
+
+  Pesquisar;
+
+end;
+
 procedure TfrmContasPagar.btnPesquisaeClick(Sender: TObject);
 begin
   inherited;
 
   Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.btnPesquisaFornecedorClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmFornecedores := TfrmFornecedores.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFornecedores.ShowModal;
+
+  finally
+
+    //  Pega a ID do cliente selecionado
+    edtFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID').AsString;
+
+    //  Libera da  memoria
+    FreeAndNil(frmFornecedores);
+
+  end;
 
 end;
 
@@ -449,9 +510,37 @@ begin
 
 end;
 
+procedure TfrmContasPagar.BuscaNomeFornecedor;
+var
+  NomeFornecedor : String;
+
+begin
+
+  if Trim(edtFornecedor.Text) <> '' then
+  begin
+
+    NomeFornecedor := dmFornecedores.GetNomeFornecedor(Trim(edtFornecedor.Text));
+
+    if NomeFornecedor = '' then
+    begin
+
+      Application.MessageBox('Cliente não encontrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      edtFornecedor.SetFocus;
+      edtFornecedor.Clear;
+
+    end;
+
+    lblNomeFornecedor.Visible := True;
+    lblNomeFornecedor.Caption := NomeFornecedor;
+
+  end;
+
+end;
+
 procedure TfrmContasPagar.CadParcelamento;
 var
   ValorCompra : Currency;
+  IdFornecedor : Integer;
 
 begin
 
@@ -463,6 +552,15 @@ begin
     Application.MessageBox('Valor da Compra inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;  
   
+  end;
+
+  if not TryStrToInt(edtFornecedor.Text, IdFornecedor) then
+  begin
+
+    edtFornecedor.SetFocus;
+    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
   end;
 
   //  Posiciona no primeiro registro do cds
@@ -522,6 +620,7 @@ begin
     dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := cdsParcelasVALOR.AsCurrency;
     dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := cdsParcelasVENCIMENTO.AsDateTime;
     dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
+    dmCPagar.cdsCPagarID_FORNECEDOR.AsInteger    := IdFornecedor;
 
     //  Gravando no banco
     dmCPagar.cdsCPagar.Post;
@@ -543,6 +642,7 @@ var
   Parcela : Integer;
   ValorCompra : Currency;
   ValorParcela : Currency;
+  IdFornecedor : Integer;
 
 begin
 
@@ -564,8 +664,17 @@ begin
   if Trim(memDesc.Text) = '' then
   begin
     memDesc.SetFocus;
-    Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo FORNECEDOR não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+  end;
+
+  if not TryStrToInt(edtFornecedor.Text, IdFornecedor) then
+  begin
+
+    edtFornecedor.SetFocus;
+    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
   end;
 
   if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
@@ -605,6 +714,7 @@ begin
   dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
   dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
   dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
+  dmCPagar.cdsCPagarID_FORNECEDOR.AsInteger    := IdFornecedor;
 
   //  Gravando no BD
   dmCPagar.cdsCPagar.Post;
@@ -676,7 +786,7 @@ begin
 
 end;
 
-procedure TfrmContasPagar.dateFinalExit(Sender: TObject);
+procedure TfrmContasPagar.dateFinalChange(Sender: TObject);
 begin
   inherited;
 
@@ -684,7 +794,7 @@ begin
 
 end;
 
-procedure TfrmContasPagar.dateInicialExit(Sender: TObject);
+procedure TfrmContasPagar.dateInicialChange(Sender: TObject);
 begin
   inherited;
 
@@ -781,8 +891,23 @@ begin
 
 end;
 
-procedure TfrmContasPagar.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmContasPagar.edtFiltroFornecedorChange(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.edtFornecedorExit(Sender: TObject);
+begin
+  inherited;
+
+  BuscaNomeFornecedor;
+
+end;
+
+procedure TfrmContasPagar.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 
@@ -974,6 +1099,18 @@ begin
       dmCPagar.cdsCPagar.ParamByName('DATUAL').AsDate := NOW;
 
     end;
+
+  //  Pesquisa por clientes
+  if Trim(edtFiltroFornecedor.Text) <> '' then
+  begin
+
+    LFiltro := LFiltro + ' AND ID_FORNECEDOR = :ID';
+
+    //  Criando os parametros
+    dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
+    dmCPagar.cdsCPagar.ParamByName('ID').AsString := Trim(edtFiltroFornecedor.Text);
+
+  end;
 
   //  Ordem de pesquisa
   if rbId.Checked then

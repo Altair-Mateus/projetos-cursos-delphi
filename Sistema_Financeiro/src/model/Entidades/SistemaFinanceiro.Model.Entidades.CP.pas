@@ -1,9 +1,7 @@
 unit SistemaFinanceiro.Model.Entidades.CP;
-
 interface
 type
   TModelCP = class
-
     private
       FID: String;
       FValorParcela: Currency;
@@ -19,7 +17,7 @@ type
       FParcela: Integer;
     FParcial: String;
     FCpOrigem: Integer;
-
+    FIdFornecedor: Integer;
       procedure SetID(const Value: String);
       procedure SetDataCadastro(const Value: TDate);
       procedure SetDataCompra(const Value: TDate);
@@ -32,11 +30,9 @@ type
       procedure SetValorAbatido(const Value: Currency);
       procedure SetValorCompra(const Value: Currency);
       procedure SetValorParcela(const Value: Currency);
-
     procedure SetParcial(const Value: String);
-
-    procedure SetCpOrigem(const Value: Integer);    public
-
+    procedure SetCpOrigem(const Value: Integer);
+    procedure SetIdFornecedor(const Value: Integer);    public
       property ID             : String read FID write SetID;
       property Doc            : String read FDoc write SetDoc;
       property Desc           : String read FDesc write SetDesc;
@@ -50,13 +46,13 @@ type
       property DataPagamento  : TDate read FDataPagamento write SetDataPagamento;
       property Status         : String read FStatus write SetStatus;
       property Parcial        : String read FParcial write SetParcial;
-      property CpOrigem : Integer read FCpOrigem write SetCpOrigem;
+      property CpOrigem       : Integer read FCpOrigem write SetCpOrigem;
+      property IdFornecedor   : Integer read FIdFornecedor write SetIdFornecedor;
+
+
   end;
-
 implementation
-
 { TModelCP }
-
 procedure TModelCP.SetCpOrigem(const Value: Integer);
 begin
   FCpOrigem := Value;
@@ -66,42 +62,39 @@ procedure TModelCP.SetDataCadastro(const Value: TDate);
 begin
   FDataCadastro := Value;
 end;
-
 procedure TModelCP.SetDataCompra(const Value: TDate);
 begin
   FDataCompra := Value;
 end;
-
 procedure TModelCP.SetDataPagamento(const Value: TDate);
 begin
   FDataPagamento := Value;
 end;
-
 procedure TModelCP.SetDataVencimento(const Value: TDate);
 begin
   FDataVencimento := Value;
 end;
-
 procedure TModelCP.SetDesc(const Value: String);
 begin
   FDesc := Value;
 end;
-
 procedure TModelCP.SetDoc(const Value: String);
 begin
   FDoc := Value;
 end;
-
 procedure TModelCP.SetID(const Value: String);
 begin
   FID := Value;
+end;
+procedure TModelCP.SetIdFornecedor(const Value: Integer);
+begin
+   FIdFornecedor := Value;
 end;
 
 procedure TModelCP.SetParcela(const Value: Integer);
 begin
   FParcela := Value;
 end;
-
 procedure TModelCP.SetParcial(const Value: String);
 begin
   FParcial := Value;
@@ -111,20 +104,16 @@ procedure TModelCP.SetStatus(const Value: String);
 begin
   FStatus := Value;
 end;
-
 procedure TModelCP.SetValorAbatido(const Value: Currency);
 begin
   FValorAbatido := Value;
 end;
-
 procedure TModelCP.SetValorCompra(const Value: Currency);
 begin
   FValorCompra := Value;
 end;
-
 procedure TModelCP.SetValorParcela(const Value: Currency);
 begin
   FValorParcela := Value;
 end;
-
 end.

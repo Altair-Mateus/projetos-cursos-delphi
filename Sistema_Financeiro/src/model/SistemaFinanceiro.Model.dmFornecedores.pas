@@ -109,7 +109,7 @@ begin
 
     FDQueryNome.Close;
     FDQueryNome.SQL.Clear;
-    FDQueryNome.SQL.Add('SELECT RAZAO_SOCIAL FROM CLIENTES WHERE ID = :ID ');
+    FDQueryNome.SQL.Add('SELECT RAZAO_SOCIAL FROM FORNECEDORES WHERE ID = :ID ');
 
     FDQueryNome.ParamByName('ID').AsString := IdFornecedor;
 

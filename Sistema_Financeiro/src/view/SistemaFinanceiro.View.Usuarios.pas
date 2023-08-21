@@ -29,9 +29,8 @@ type
     procedure mnuLimpaSenhaClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure btnImprimirClick(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -228,8 +227,7 @@ begin
 
 end;
 
-procedure TfrmUsuarios.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmUsuarios.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 

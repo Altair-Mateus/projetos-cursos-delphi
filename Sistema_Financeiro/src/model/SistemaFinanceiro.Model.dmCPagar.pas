@@ -34,6 +34,7 @@ type
     FDQueryCpDetalhesNOME: TWideStringField;
     cdsCPagarPARCIAL: TWideStringField;
     cdsCPagarCP_ORIGEM: TIntegerField;
+    cdsCPagarID_FORNECEDOR: TIntegerField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private
@@ -136,6 +137,7 @@ begin
         cdsCPagarDATA_VENCIMENTO.AsDateTime := ContaPagar.DataVencimento;
         cdsCPagarPARCIAL.AsString           := 'S';
         cdsCPagarCP_ORIGEM.AsString         := ContaPagar.ID;
+        cdsCPagarID_FORNECEDOR.AsInteger    := ContaPagar.IdFornecedor;
 
         //  Gravando no BD
         cdsCPagar.Post;
@@ -369,6 +371,7 @@ begin
       Result.Status         := FDQueryCP.FieldByName('STATUS').AsString;
       Result.Parcial        := FDQueryCP.FieldByName('PARCIAL').AsString;
       Result.CpOrigem       := FDQueryCP.FieldByName('CP_ORIGEM').AsInteger;
+      Result.IdFornecedor   := FDQueryCP.FieldByName('ID_FORNECEDOR').AsInteger;
 
     except
       Result.Free;

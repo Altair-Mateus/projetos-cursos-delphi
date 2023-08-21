@@ -49,16 +49,15 @@ type
     procedure edtValorExit(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure cbTipoLctoClick(Sender: TObject);
     procedure rbDataClick(Sender: TObject);
     procedure rbValorClick(Sender: TObject);
     procedure rbIdClick(Sender: TObject);
-    procedure dateInicialExit(Sender: TObject);
-    procedure dateFinalExit(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure cbOrigemClick(Sender: TObject);
+    procedure dateInicialChange(Sender: TObject);
+    procedure dateFinalChange(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -240,7 +239,7 @@ begin
 
 end;
 
-procedure TfrmCaixa.dateFinalExit(Sender: TObject);
+procedure TfrmCaixa.dateFinalChange(Sender: TObject);
 begin
   inherited;
 
@@ -248,7 +247,7 @@ begin
 
 end;
 
-procedure TfrmCaixa.dateInicialExit(Sender: TObject);
+procedure TfrmCaixa.dateInicialChange(Sender: TObject);
 begin
   inherited;
 
@@ -315,8 +314,7 @@ begin
 
 end;
 
-procedure TfrmCaixa.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmCaixa.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 

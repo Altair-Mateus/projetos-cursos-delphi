@@ -59,13 +59,12 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure cbTipoChange(Sender: TObject);
     procedure rbDataCadClick(Sender: TObject);
     procedure rbNomeClick(Sender: TObject);
     procedure rbIdClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure edtPesquisarChange(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -178,6 +177,8 @@ begin
   edtCnpj.Enabled := False;
   edtIe.Enabled   := False;
 
+  cbUf.ItemIndex := -1;
+
 end;
 
 procedure TfrmCliente.btnPesquisaeClick(Sender: TObject);
@@ -284,6 +285,9 @@ begin
 end;
 
 procedure TfrmCliente.EditarCliente;
+var
+  IndexCb : Integer;
+
 begin
 
   //  Coloca o dataset em modo de edição
@@ -301,17 +305,29 @@ begin
   edtNumLog.Text      := dmClientes.cdsClientesN_LOGRADOURO.AsString;
   edtBairro.Text      := dmClientes.cdsClientesBAIRRO.AsString;
   edtCidade.Text      := dmClientes.cdsClientesCIDADE.AsString;
-  cbUf.Text           := dmClientes.cdsClientesESTADO.AsString;
   edtCep.Text         := dmClientes.cdsClientesCEP.AsString;
   edtCelular.Text     := dmClientes.cdsClientesCELULAR.AsString;
   edtTelefone.Text    := dmClientes.cdsClientesTELEFONE.AsString;
   edtComplemento.Text := dmClientes.cdsClientesCOMPLEMENTO.AsString;
   edtEmail.Text       := dmClientes.cdsClientesEMAIL.AsString;
 
+  // Procura a sigla do estado no cb
+  IndexCb := cbUf.Items.IndexOf(dmClientes.cdsClientesESTADO.AsString);
+
+  //  Ao localizar define a mesma no cb
+  if IndexCb >= 0 then
+  begin
+    cbUf.ItemIndex := IndexCb;
+  end
+  else
+  begin
+    cbUf.ItemIndex := -1;
+  end;
+
   if dmClientes.cdsClientesTIPO.AsString = 'F' then
   begin
 
-    rbFisica.Checked;
+    rbFisica.Checked   := True;
     rbJuridica.Checked := False;
 
     edtCpf.Enabled  := True;
@@ -322,8 +338,8 @@ begin
   else
   begin
 
-    rbJuridica.Checked;
-    rbFisica.Checked := False;
+    rbJuridica.Checked := True;
+    rbFisica.Checked   := False;
 
     edtCpf.Enabled  := False;
     edtCnpj.Enabled := True;
@@ -332,8 +348,7 @@ begin
 
 end;
 
-procedure TfrmCliente.edtPesquisarKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmCliente.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
 
