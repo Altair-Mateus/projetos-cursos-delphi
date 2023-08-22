@@ -691,7 +691,7 @@ inherited frmCliente: TfrmCliente
           Columns = <
             item
               Expanded = False
-              FieldName = 'ID'
+              FieldName = 'ID_CLI'
               Title.Caption = 'Id'
               Width = 40
               Visible = True

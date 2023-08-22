@@ -451,7 +451,7 @@ begin
   finally
 
     //  Pega a ID do cliente selecionado
-    edtFiltroCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID').AsString;
+    edtFiltroCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID_CLI').AsString;
 
     //  Libera da  memoria
     FreeAndNil(frmCliente);
@@ -476,7 +476,7 @@ begin
   finally
 
     //  Pega a ID do cliente selecionado
-    edtCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID').AsString;
+    edtCliente.Text := frmCliente.DataSourceCliente.DataSet.FieldByName('ID_CLI').AsString;
 
     //  Libera da  memoria
     FreeAndNil(frmCliente);
@@ -1061,9 +1061,9 @@ begin
 
   //  Pesquisa por tipo
   case cbStatus.ItemIndex of
-    1 : LFiltro := LFiltro + ' AND STATUS = ''P'' ';
-    2 : LFiltro := LFiltro + ' AND STATUS = ''A'' ';
-    3 : LFiltro := LFiltro + ' AND STATUS = ''C'' ';
+    1 : LFiltro := LFiltro + ' AND CR.STATUS = ''P'' ';
+    2 : LFiltro := LFiltro + ' AND CR.STATUS = ''A'' ';
+    3 : LFiltro := LFiltro + ' AND CR.STATUS = ''C'' ';
   end;
 
   //  Pesquisa por data
@@ -1072,10 +1072,9 @@ begin
 
     case cbData.ItemIndex of
 
-      0 : LFiltro := LFiltro + ' AND DATA_VENDA BETWEEN :DTINI AND :DTFIM ';
-      1 : LFiltro := LFiltro + ' AND DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
-      2 : LFiltro := LFiltro + ' AND DATA_RECEBIMENTO BETWEEN :DTINI AND :DTFIM ';
-      3 : LFiltro := LFiltro + ' AND DATA_CADASTRO BETWEEN :DTINI AND :DTFIM ';
+      0 : LFiltro := LFiltro + ' AND CR.DATA_VENDA BETWEEN :DTINI AND :DTFIM ';
+      1 : LFiltro := LFiltro + ' AND CR.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
+      2 : LFiltro := LFiltro + ' AND CR.DATA_RECEBIMENTO BETWEEN :DTINI AND :DTFIM ';
 
     end;
 
@@ -1090,7 +1089,7 @@ begin
    if checkParciais.Checked then
    begin
 
-    LFiltro := LFiltro + ' AND PARCIAL = ''S'' ';
+    LFiltro := LFiltro + ' AND CR.PARCIAL = ''S'' ';
 
    end;
 
@@ -1098,7 +1097,7 @@ begin
   if checkVencidas.Checked then
   begin
 
-    LFiltro := LFiltro + ' AND STATUS = ''A'' AND DATA_VENCIMENTO < :DATUAL ';
+    LFiltro := LFiltro + ' AND CR.STATUS = ''A'' AND CR.DATA_VENCIMENTO < :DATUAL ';
 
     //  Criando os parametros
     dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftDate, 'DATUAL', TParamType.ptInput);
@@ -1110,7 +1109,7 @@ begin
   if Trim(edtFiltroCliente.Text) <> '' then
   begin
 
-    LFiltro := LFiltro + ' AND ID_CLIENTE = :ID';
+    LFiltro := LFiltro + ' AND CR.ID_CLIENTE = :ID';
 
     //  Criando os parametros
     dmCReceber.cdsCReceber.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
@@ -1148,8 +1147,12 @@ begin
 
 
   dmCReceber.cdsCReceber.Close;
-  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 '
-                                         + LFiltroEdit + LFiltro + LOrdem;
+//  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 '
+//                                         + LFiltroEdit + LFiltro + LOrdem;
+
+dmCReceber.cdsCReceber.CommandText := 'SELECT CR.*, CL.NOME FROM CONTAS_RECEBER CR LEFT JOIN CLIENTES CL '
+                                      + ' ON CR.ID_CLIENTE = CL.ID_CLI WHERE 1 = 1'
+                                      + LFiltroEdit + LFiltro;
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;

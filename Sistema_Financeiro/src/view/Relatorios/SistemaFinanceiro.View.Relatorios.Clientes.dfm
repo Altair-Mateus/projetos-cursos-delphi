@@ -1,7 +1,5 @@
 inherited frmRelClientes: TfrmRelClientes
   Caption = 'frmRelClientes'
-  ClientHeight = 441
-  ClientWidth = 774
   ExplicitWidth = 786
   ExplicitHeight = 479
   TextHeight = 15
@@ -78,10 +76,10 @@ inherited frmRelClientes: TfrmRelClientes
       object rldbtId: TRLDBText
         Left = 0
         Top = 0
-        Width = 17
+        Width = 41
         Height = 18
         Align = faLeftTop
-        DataField = 'id'
+        DataField = 'id_cli'
         DataSource = DataSourceClientes
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack

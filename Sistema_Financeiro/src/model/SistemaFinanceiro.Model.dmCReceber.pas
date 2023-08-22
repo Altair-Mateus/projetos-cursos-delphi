@@ -36,6 +36,7 @@ type
     cdsCReceberPARCIAL: TWideStringField;
     cdsCReceberCR_ORIGEM: TIntegerField;
     cdsCReceberID_CLIENTE: TIntegerField;
+    cdsCReceberNOME: TWideStringField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

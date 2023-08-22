@@ -22,7 +22,7 @@ object dmClientes: TdmClientes
     Left = 328
     Top = 64
     object cdsClientesID: TIntegerField
-      FieldName = 'ID'
+      FieldName = 'ID_CLI'
       Required = True
     end
     object cdsClientesNOME: TWideStringField

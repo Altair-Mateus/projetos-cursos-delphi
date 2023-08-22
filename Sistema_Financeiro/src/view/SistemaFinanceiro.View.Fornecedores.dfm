@@ -639,10 +639,10 @@ inherited frmFornecedores: TfrmFornecedores
         object lblTipo: TLabel [3]
           Left = 509
           Top = 39
-          Width = 108
+          Width = 116
           Height = 19
           Align = alCustom
-          Caption = 'Tipo Forncedor'
+          Caption = 'Tipo Fornecedor'
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite

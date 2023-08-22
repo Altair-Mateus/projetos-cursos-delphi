@@ -400,7 +400,7 @@ begin
   // ordem de consulta
   if rbId.Checked then
   begin
-    LOrdem := ' ORDER BY ID';
+    LOrdem := ' ORDER BY ID_CLI';
   end
   else if rbDataCad.Checked then
        begin
@@ -412,7 +412,7 @@ begin
             end
             else
             begin
-              LOrdem := ' ORDER BY ID';
+              LOrdem := ' ORDER BY ID_CLI';
             end;
 
 

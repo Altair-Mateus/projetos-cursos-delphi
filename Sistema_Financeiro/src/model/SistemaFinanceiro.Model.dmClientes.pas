@@ -70,7 +70,7 @@ begin
 
      FDQueryId.Close;
      FDQueryId.sql.Clear;
-     FDQueryId.Open('SELECT MAX(ID) AS ID FROM CLIENTES');
+     FDQueryId.Open('SELECT MAX(ID_CLI) AS ID FROM CLIENTES');
 
     //  Ultimo codigo usado + 1
     cod := FDQueryId.FieldByName('ID').AsInteger + 1;
@@ -107,7 +107,7 @@ begin
 
     FDQueryNome.Close;
     FDQueryNome.SQL.Clear;
-    FDQueryNome.SQL.Add('SELECT NOME FROM CLIENTES WHERE ID = :ID ');
+    FDQueryNome.SQL.Add('SELECT NOME FROM CLIENTES WHERE ID_CLI = :ID ');
 
     FDQueryNome.ParamByName('ID').AsString := IdCliente;
 

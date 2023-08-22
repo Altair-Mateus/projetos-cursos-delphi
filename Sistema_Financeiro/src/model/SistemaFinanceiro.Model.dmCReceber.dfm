@@ -4,7 +4,10 @@ object dmCReceber: TdmCReceber
   object FDQueryCReceber: TFDQuery
     Connection = DataModule1.FDConnection
     SQL.Strings = (
-      'SELECT * FROM CONTAS_RECEBER;')
+      'SELECT CR.*, CL.NOME FROM '
+      'CONTAS_RECEBER CR LEFT JOIN '
+      'CLIENTES CL ON '
+      'CR.ID_CLIENTE = CL.ID_CLI;')
     Left = 128
     Top = 176
   end
@@ -103,6 +106,10 @@ object dmCReceber: TdmCReceber
       Alignment = taCenter
       FieldName = 'ID_CLIENTE'
       Required = True
+    end
+    object cdsCReceberNOME: TWideStringField
+      FieldName = 'NOME'
+      Size = 100
     end
   end
   object DataSetProviderCReceber: TDataSetProvider
