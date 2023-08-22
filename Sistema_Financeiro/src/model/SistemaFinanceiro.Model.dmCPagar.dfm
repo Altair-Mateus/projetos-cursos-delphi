@@ -4,7 +4,9 @@ object dmCPagar: TdmCPagar
   object FDQueryCPagar: TFDQuery
     Connection = DataModule1.FDConnection
     SQL.Strings = (
-      'SELECT * FROM CONTAS_PAGAR;')
+      'SELECT CP.*, F.RAZAO_SOCIAL FROM CONTAS_PAGAR CP'
+      'LEFT JOIN FORNECEDORES F '
+      'ON CP.ID_FORNECEDOR = F.ID_FORNEC;')
     Left = 144
     Top = 200
   end
@@ -97,6 +99,10 @@ object dmCPagar: TdmCPagar
       Alignment = taCenter
       FieldName = 'ID_FORNECEDOR'
       Required = True
+    end
+    object cdsCPagarRAZAO_SOCIALFORNEC: TWideStringField
+      FieldName = 'RAZAO_SOCIAL'
+      Size = 200
     end
   end
   object FDQueryCpDetalhes: TFDQuery

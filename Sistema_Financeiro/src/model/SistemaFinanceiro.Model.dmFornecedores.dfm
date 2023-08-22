@@ -22,7 +22,7 @@ object dmFornecedores: TdmFornecedores
     Left = 424
     Top = 144
     object cdsFornecedoresID: TIntegerField
-      FieldName = 'ID'
+      FieldName = 'ID_FORNEC'
       Required = True
     end
     object cdsFornecedoresRAZAO_SOCIAL: TWideStringField

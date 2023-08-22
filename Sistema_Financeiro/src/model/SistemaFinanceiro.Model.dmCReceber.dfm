@@ -164,5 +164,13 @@ object dmCReceber: TdmCReceber
       FieldName = 'NOME'
       Size = 100
     end
+    object FDQueryCrDetalheDESCONTO_BX: TIntegerField
+      FieldName = 'DESCONTO_BX'
+      Origin = 'DESCONTO_BX'
+    end
+    object FDQueryCrDetalheJUROS_BX: TIntegerField
+      FieldName = 'JUROS_BX'
+      Origin = 'JUROS_BX'
+    end
   end
 end

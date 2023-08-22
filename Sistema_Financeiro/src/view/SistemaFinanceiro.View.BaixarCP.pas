@@ -203,6 +203,7 @@ end;
 
 procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
 begin
+
   edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
 
 end;

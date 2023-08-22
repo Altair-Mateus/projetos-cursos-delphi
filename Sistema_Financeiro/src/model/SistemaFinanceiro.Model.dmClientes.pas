@@ -37,6 +37,7 @@ type
     { Public declarations }
     procedure GeraCodigo;
     function GetNomeCliente(IdCliente : String) : String;
+    function GetCr(IdCliente : Integer) : Boolean;
 
   end;
 
@@ -86,6 +87,42 @@ begin
     FDQueryId.Free;
 
   end;
+
+end;
+
+function TdmClientes.GetCr(IdCliente: Integer): Boolean;
+var
+  FDQueryCrCli : TFDQuery;
+
+begin
+
+  FDQueryCrCli := TFDQuery.Create(nil);
+
+  try
+    //  Estabelece a conexao com o banco
+    FDQueryCrCli.Connection := DataModule1.FDConnection;
+    FDQueryCrCli.Close;
+    FDQueryCrCli.SQL.Clear;
+    FDQueryCrCli.SQL.Add('SELECT * FROM CONTAS_RECEBER WHERE ID_CLIENTE = :IDCLI');
+
+    FDQueryCrCli.ParamByName('IDCLI').AsInteger := IdCliente;
+
+    FDQueryCrCli.Open();
+
+    if not FDQueryCrCli.IsEmpty then
+    begin
+      Result := True;
+    end;
+
+
+  finally
+
+    FDQueryCrCli.Close;
+    FDQueryCrCli.Free;
+
+  end
+
+
 
 end;
 

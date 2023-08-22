@@ -1120,39 +1120,37 @@ begin
   //  Ordem de pesquisa
   if rbId.Checked then
   begin
-    lOrdem := ' ORDER BY ID DESC';
+    lOrdem := ' ORDER BY CR.ID DESC';
   end
     else if rbDataVenc.Checked then
     begin
-      lOrdem := ' ORDER BY DATA_VENCIMENTO DESC';
+      lOrdem := ' ORDER BY CR.DATA_VENCIMENTO DESC';
     end
       else if rbValorParcela.Checked then
       begin
-        lOrdem := ' ORDER BY VALOR_PARCELA DESC';
+        lOrdem := ' ORDER BY CR.VALOR_PARCELA DESC';
       end
         else if rbValorVenda.Checked then
         begin
-          lOrdem := ' ORDER BY VALOR_VENDA DESC';
+          lOrdem := ' ORDER BY CR.VALOR_VENDA DESC';
         end
           else if rbDataVenda.Checked then
           begin
-            lOrdem := ' ORDER BY DATA_VENDA DESC';
+            lOrdem := ' ORDER BY CR.DATA_VENDA DESC';
           end
             else
             begin
-              lOrdem := ' ORDER BY ID DESC';
+              lOrdem := ' ORDER BY CR.ID DESC';
             end;
 
 
 
 
   dmCReceber.cdsCReceber.Close;
-//  dmCReceber.cdsCReceber.CommandText := 'SELECT * FROM CONTAS_RECEBER WHERE 1 = 1 '
-//                                         + LFiltroEdit + LFiltro + LOrdem;
 
-dmCReceber.cdsCReceber.CommandText := 'SELECT CR.*, CL.NOME FROM CONTAS_RECEBER CR LEFT JOIN CLIENTES CL '
+  dmCReceber.cdsCReceber.CommandText := 'SELECT CR.*, CL.NOME FROM CONTAS_RECEBER CR LEFT JOIN CLIENTES CL '
                                       + ' ON CR.ID_CLIENTE = CL.ID_CLI WHERE 1 = 1'
-                                      + LFiltroEdit + LFiltro;
+                                      + LFiltroEdit + LFiltro + LOrdem;
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;

@@ -37,7 +37,8 @@ uses
   SistemaFinanceiro.Model.dmClientes in 'src\model\SistemaFinanceiro.Model.dmClientes.pas' {dmClientes: TDataModule},
   SistemaFinanceiro.View.Relatorios.Clientes in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Clientes.pas' {frmRelClientes},
   SistemaFinanceiro.Model.dmFornecedores in 'src\model\SistemaFinanceiro.Model.dmFornecedores.pas' {dmFornecedores: TDataModule},
-  SistemaFinanceiro.View.Fornecedores in 'src\view\SistemaFinanceiro.View.Fornecedores.pas' {frmFornecedores};
+  SistemaFinanceiro.View.Fornecedores in 'src\view\SistemaFinanceiro.View.Fornecedores.pas' {frmFornecedores},
+  SistemaFinanceiro.View.Relatorios.Fornecedores in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Fornecedores.pas' {frmRelFornecedores};
 
 {$R *.res}
 begin
@@ -50,8 +51,6 @@ begin
   Application.CreateForm(TdmCPagar, dmCPagar);
   Application.CreateForm(TdmCReceber, dmCReceber);
   Application.CreateForm(TdmClientes, dmClientes);
-  Application.CreateForm(TfrmRelClientes, frmRelClientes);
   Application.CreateForm(TdmFornecedores, dmFornecedores);
-  Application.CreateForm(TfrmFornecedores, frmFornecedores);
   Application.Run;
 end.

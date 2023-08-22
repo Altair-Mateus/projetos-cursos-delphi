@@ -1,7 +1,7 @@
 inherited frmRelCp: TfrmRelCp
   Caption = 'frmRelCp'
-  ExplicitWidth = 786
-  ExplicitHeight = 479
+  ClientHeight = 442
+  ClientWidth = 778
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = DataSourceCp
@@ -44,7 +44,7 @@ inherited frmRelCp: TfrmRelCp
         ParentFont = False
       end
       object rllblVencimento: TRLLabel
-        Left = 212
+        Left = 276
         Top = 1
         Width = 106
         Height = 22
@@ -58,7 +58,7 @@ inherited frmRelCp: TfrmRelCp
         ParentFont = False
       end
       object rllblParcela: TRLLabel
-        Left = 345
+        Left = 388
         Top = 1
         Width = 69
         Height = 22
@@ -72,7 +72,7 @@ inherited frmRelCp: TfrmRelCp
         ParentFont = False
       end
       object rllblStatus: TRLLabel
-        Left = 442
+        Left = 474
         Top = 1
         Width = 58
         Height = 22
@@ -92,6 +92,20 @@ inherited frmRelCp: TfrmRelCp
         Height = 22
         Align = faTopOnly
         Caption = 'Valor Parcela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object rllblCodCli: TRLLabel
+        Left = 206
+        Top = 1
+        Width = 64
+        Height = 22
+        Align = faTopOnly
+        Caption = 'Cliente'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -19
@@ -134,7 +148,7 @@ inherited frmRelCp: TfrmRelCp
         Text = ''
       end
       object rldbtDataVenc: TRLDBText
-        Left = 212
+        Left = 268
         Top = 0
         Width = 128
         Height = 18
@@ -151,7 +165,7 @@ inherited frmRelCp: TfrmRelCp
         Text = ''
       end
       object rldbtParcela: TRLDBText
-        Left = 345
+        Left = 388
         Top = 0
         Width = 56
         Height = 18
@@ -168,7 +182,7 @@ inherited frmRelCp: TfrmRelCp
         Text = ''
       end
       object rldbtStatus: TRLDBText
-        Left = 445
+        Left = 474
         Top = 0
         Width = 45
         Height = 18
@@ -190,6 +204,23 @@ inherited frmRelCp: TfrmRelCp
         Height = 18
         Align = faTopOnly
         DataField = 'valor_parcela'
+        DataSource = DataSourceCp
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Text = ''
+      end
+      object rldbCodFornec: TRLDBText
+        Left = 161
+        Top = 0
+        Width = 141
+        Height = 18
+        Align = faTopOnly
+        Alignment = taCenter
+        DataField = 'ID_FORNECEDOR'
         DataSource = DataSourceCp
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack

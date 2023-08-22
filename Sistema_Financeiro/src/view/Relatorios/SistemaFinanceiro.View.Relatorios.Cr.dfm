@@ -1,5 +1,7 @@
 inherited frmRelCr: TfrmRelCr
   Caption = 'frmRelCr'
+  ExplicitWidth = 786
+  ExplicitHeight = 479
   TextHeight = 15
   inherited RLReport: TRLReport
     Borders.Sides = sdCustom
@@ -214,7 +216,7 @@ inherited frmRelCr: TfrmRelCr
         Text = ''
       end
       object rldbtCodCliente: TRLDBText
-        Left = 214
+        Left = 212
         Top = 0
         Width = 72
         Height = 18

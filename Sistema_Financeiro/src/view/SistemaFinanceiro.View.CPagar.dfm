@@ -3564,6 +3564,13 @@ inherited frmContasPagar: TfrmContasPagar
             end
             item
               Expanded = False
+              FieldName = 'RAZAO_SOCIAL'
+              Title.Caption = 'Nome Fornecedor'
+              Width = 300
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'DESCRICAO'
               Title.Caption = 'Descri'#231#227'o'
               Width = 300

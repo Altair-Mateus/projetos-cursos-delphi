@@ -25,6 +25,8 @@ type
     rllblTotal: TRLLabel;
     rllblContador: TRLLabel;
     DataSourceCp: TDataSource;
+    rllblCodCli: TRLLabel;
+    rldbCodFornec: TRLDBText;
     procedure RLReportBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }

@@ -4932,7 +4932,7 @@ inherited frmContasReceber: TfrmContasReceber
               Expanded = False
               FieldName = 'NOME'
               Title.Caption = 'Nome Cliente'
-              Width = 290
+              Width = 300
               Visible = True
             end
             item

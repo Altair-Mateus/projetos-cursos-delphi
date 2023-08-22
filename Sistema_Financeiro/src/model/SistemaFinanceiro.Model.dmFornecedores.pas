@@ -38,6 +38,7 @@ type
     { Public declarations }
     procedure GeraCodigo;
     function GetNomeFornecedor(IdFornecedor : String) : String;
+    function GetCpFornec(IdFornec : Integer) : Boolean;
 
   end;
 
@@ -71,7 +72,7 @@ begin
 
      FDQueryId.Close;
      FDQueryId.sql.Clear;
-     FDQueryId.Open('SELECT MAX(ID) AS ID FROM FORNECEDORES');
+     FDQueryId.Open('SELECT MAX(ID_FORNEC) AS ID FROM FORNECEDORES');
 
     //  Ultimo codigo usado + 1
     cod := FDQueryId.FieldByName('ID').AsInteger + 1;
@@ -88,6 +89,40 @@ begin
 
   end;
 
+
+end;
+
+function TdmFornecedores.GetCpFornec(IdFornec: Integer): Boolean;
+var
+  FDQueryCpFornec : TFDQuery;
+
+begin
+
+  FDQueryCpFornec := TFDQuery.Create(nil);
+
+  try
+    //  Estabelece a conexao com o banco
+    FDQueryCpFornec.Connection := DataModule1.FDConnection;
+    FDQueryCpFornec.Close;
+    FDQueryCpFornec.SQL.Clear;
+    FDQueryCpFornec.SQL.Add('SELECT * FROM CONTAS_PAGAR WHERE ID_FORNECEDOR = :IDFORNEC');
+
+    FDQueryCpFornec.ParamByName('IDFORNEC').AsInteger := IdFornec;
+
+    FDQueryCpFornec.Open();
+
+    if not FDQueryCpFornec.IsEmpty then
+    begin
+      Result := True;
+    end;
+
+
+  finally
+
+    FDQueryCpFornec.Close;
+    FDQueryCpFornec.Free;
+
+  end
 
 end;
 
@@ -109,7 +144,7 @@ begin
 
     FDQueryNome.Close;
     FDQueryNome.SQL.Clear;
-    FDQueryNome.SQL.Add('SELECT RAZAO_SOCIAL FROM FORNECEDORES WHERE ID = :ID ');
+    FDQueryNome.SQL.Add('SELECT RAZAO_SOCIAL FROM FORNECEDORES WHERE ID_FORNEC = :ID');
 
     FDQueryNome.ParamByName('ID').AsString := IdFornecedor;
 

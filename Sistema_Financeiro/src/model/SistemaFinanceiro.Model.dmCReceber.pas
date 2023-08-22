@@ -6,7 +6,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
   Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   SistemaFinanceiro.Model.Entidades.CR.Detalhe,
-  SistemaFinanceiro.Model.Entidades.CR;
+  SistemaFinanceiro.Model.Entidades.CR, Vcl.Dialogs;
 
 type
   TdmCReceber = class(TDataModule)
@@ -37,6 +37,8 @@ type
     cdsCReceberCR_ORIGEM: TIntegerField;
     cdsCReceberID_CLIENTE: TIntegerField;
     cdsCReceberNOME: TWideStringField;
+    FDQueryCrDetalheDESCONTO_BX: TIntegerField;
+    FDQueryCrDetalheJUROS_BX: TIntegerField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

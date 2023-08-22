@@ -121,6 +121,14 @@ begin
     exit;
   end;
 
+  //  Verifica se o cliente possui uma CR cadastrada
+  if dmClientes.GetCr(DataSourceCliente.DataSet.FieldByName('ID_CLI').AsInteger)  = True then
+  begin
+    Application.MessageBox('Não é possível excluir cliente com Conta a Receber Cadastrada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+  end;
+
+
   try
 
     //  Excluindo registro

@@ -65,6 +65,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
     procedure cbTipoClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -86,7 +87,8 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmFornecedores, SistemaFinanceiro.Utilitarios;
+uses SistemaFinanceiro.Model.dmFornecedores, SistemaFinanceiro.Utilitarios,
+  SistemaFinanceiro.View.Relatorios.Fornecedores;
 
 procedure TfrmFornecedores.btnAlterarClick(Sender: TObject);
 begin
@@ -110,6 +112,15 @@ begin
     exit;
   end;
 
+  if dmFornecedores.GetCpFornec(DataSourceFornecedor.DataSet.FieldByName('ID_FORNEC').AsInteger) = True then
+  begin
+
+    Application.MessageBox('Não é possível excluir um fornecedor com Conta a Pagar Cadastrada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+
   try
 
     //  Excluindo registro
@@ -121,6 +132,28 @@ begin
   end;
 
 
+
+end;
+
+procedure TfrmFornecedores.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+
+   //  Cria o form
+  frmRelFornecedores := TfrmRelFornecedores.Create(Self);
+
+  try
+
+    frmRelFornecedores.DataSourceFornecedores.DataSet := DataSourceFornecedor.DataSet;
+
+    //  Mostra a pre vizualizacao
+    frmRelFornecedores.RLReport.Preview;
+
+  finally
+
+    FreeAndNil(frmRelFornecedores);
+
+  end;
 
 end;
 
@@ -372,7 +405,7 @@ begin
   // ordem de consulta
   if rbId.Checked then
   begin
-    LOrdem := ' ORDER BY ID';
+    LOrdem := ' ORDER BY ID_FORNEC';
   end
   else if rbDataCad.Checked then
        begin
@@ -384,7 +417,7 @@ begin
             end
             else
             begin
-              LOrdem := ' ORDER BY ID';
+              LOrdem := ' ORDER BY ID_FORNEC';
             end;
 
 
@@ -416,6 +449,7 @@ begin
   edtIe.Enabled   := False;
 
   edtCnpj.Clear;
+  edtIe.Clear;
 
 end;
 
@@ -434,6 +468,8 @@ begin
   edtCnpj.Enabled := True;
   edtIe.Enabled   := True;
   edtCpf.Enabled  := False;
+
+  edtCpf.Clear;
 
 end;
 

@@ -443,7 +443,7 @@ begin
   finally
 
     //  Pega a ID do cliente selecionado
-    edtFiltroFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID').AsString;
+    edtFiltroFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID_FORNEC').AsString;
 
     //  Libera da  memoria
     FreeAndNil(frmFornecedores);
@@ -477,7 +477,7 @@ begin
   finally
 
     //  Pega a ID do cliente selecionado
-    edtFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID').AsString;
+    edtFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID_FORNEC').AsString;
 
     //  Libera da  memoria
     FreeAndNil(frmFornecedores);
@@ -1054,9 +1054,9 @@ begin
 
   //  Pesquisa por tipo
   case cbStatus.ItemIndex of
-    1 : LFiltro := LFiltro + ' AND STATUS = ''P'' ';
-    2 : LFiltro := LFiltro + ' AND STATUS = ''A'' ';
-    3 : LFiltro := LFiltro + ' AND STATUS = ''C'' ';
+    1 : LFiltro := LFiltro + ' AND CP.STATUS = ''P'' ';
+    2 : LFiltro := LFiltro + ' AND CP.STATUS = ''A'' ';
+    3 : LFiltro := LFiltro + ' AND CP.STATUS = ''C'' ';
   end;
 
   //  Pesquisa por data
@@ -1065,10 +1065,9 @@ begin
 
     case cbData.ItemIndex of
 
-      0 : LFiltro := LFiltro + ' AND DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
-      1 : LFiltro := LFiltro + ' AND DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
-      2 : LFiltro := LFiltro + ' AND DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
-      3 : LFiltro := LFiltro + ' AND DATA_CADASTRO BETWEEN :DTINI AND :DTFIM ';
+      0 : LFiltro := LFiltro + ' AND CP.DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
+      1 : LFiltro := LFiltro + ' AND CP.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
+      2 : LFiltro := LFiltro + ' AND CP.DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
 
     end;
 
@@ -1084,7 +1083,7 @@ begin
     if checkParciais.Checked then
     begin
 
-      LFiltro := LFiltro + ' AND PARCIAL = ''S'' ';
+      LFiltro := LFiltro + ' AND CP.PARCIAL = ''S'' ';
 
     end;
 
@@ -1092,7 +1091,7 @@ begin
     if checkVencidas.Checked then
     begin
 
-      LFiltro := LFiltro + ' AND STATUS = ''A'' AND DATA_VENCIMENTO < :DATUAL ';
+      LFiltro := LFiltro + ' AND CP.STATUS = ''A'' AND CP.DATA_VENCIMENTO < :DATUAL ';
 
       //  Criando os parametros
       dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftDate, 'DATUAL', TParamType.ptInput);
@@ -1100,11 +1099,11 @@ begin
 
     end;
 
-  //  Pesquisa por clientes
+  //  Pesquisa por FORNECEDORES
   if Trim(edtFiltroFornecedor.Text) <> '' then
   begin
 
-    LFiltro := LFiltro + ' AND ID_FORNECEDOR = :ID';
+    LFiltro := LFiltro + ' AND CP.ID_FORNECEDOR = :ID';
 
     //  Criando os parametros
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
@@ -1115,31 +1114,33 @@ begin
   //  Ordem de pesquisa
   if rbId.Checked then
   begin
-    lOrdem := ' ORDER BY ID DESC';
+    lOrdem := ' ORDER BY CP.ID DESC';
   end
     else if rbDataVenc.Checked then
     begin
-      lOrdem := ' ORDER BY DATA_VENCIMENTO';
+      lOrdem := ' ORDER BY CP.DATA_VENCIMENTO';
     end
       else if rbValorParcela.Checked then
       begin
-        lOrdem := ' ORDER BY VALOR_PARCELA';
+        lOrdem := ' ORDER BY CP.VALOR_PARCELA';
       end
         else if rbValorCompra.Checked then
         begin
-          lOrdem := ' ORDER BY VALOR_COMPRA';
+          lOrdem := ' ORDER BY CP.VALOR_COMPRA';
         end
           else if rbDataCompra.Checked then
           begin
-            lOrdem := ' ORDER BY DATA_COMPRA';
+            lOrdem := ' ORDER BY CP.DATA_COMPRA';
           end
             else
             begin
-              lOrdem := ' ORDER BY ID DESC';
+              lOrdem := ' ORDER BY CP.ID DESC';
             end;
 
   dmCPagar.cdsCPagar.Close;
-  dmCPagar.cdsCPagar.CommandText := 'SELECT * FROM CONTAS_PAGAR WHERE 1 = 1 ' + LFiltroEdit + LFiltro + lOrdem;
+  dmCPagar.cdsCPagar.CommandText := 'SELECT CP.*, F.RAZAO_SOCIAL FROM CONTAS_PAGAR CP ' +
+                                    'LEFT JOIN FORNECEDORES F ON CP.ID_FORNECEDOR = F.ID_FORNEC WHERE 1 = 1 ' +
+                                    LFiltroEdit + LFiltro + lOrdem;
   dmCPagar.cdsCPagar.Open;
 
   HabilitaBotoes;

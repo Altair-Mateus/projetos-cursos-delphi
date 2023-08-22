@@ -40,9 +40,22 @@ type
     pnlBotoes: TPanel;
     btnConfirmar: TButton;
     btnCancelar: TButton;
+    lblIdCliente: TLabel;
+    lblCodCliente: TLabel;
+    lblDesconto: TLabel;
+    edtValorDesc: TEdit;
+    lblJuros: TLabel;
+    edtValorJuros: TEdit;
+    lblPorcentagem: TLabel;
+    edtPorcJuros: TEdit;
+    checkDesconto: TCheckBox;
+    checkJuros: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
+    procedure edtValorExit(Sender: TObject);
+    procedure checkDescontoClick(Sender: TObject);
+    procedure checkJurosClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -105,6 +118,8 @@ begin
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorParcela);
     lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorAbatido);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaReceber.ValorParcela - ContaReceber.ValorAbatido));
+    lblCodCliente.Caption    := IntToStr(ContaReceber.IdCliente);
+
 
     if ContaReceber.Doc = '' then
     begin
@@ -187,6 +202,29 @@ begin
 
 end;
 
+procedure TfrmBaixarCR.checkDescontoClick(Sender: TObject);
+begin
+
+  //  Libera e mostra o campo do desconto
+  edtValorDesc.Enabled := True;
+  edtValorDesc.Visible := True;
+  lblDesconto.Visible  := True
+
+end;
+
+procedure TfrmBaixarCR.checkJurosClick(Sender: TObject);
+begin
+
+  // Libera e mostra os campos de Juros
+  edtValorJuros.Enabled  := True;
+  edtValorJuros.Visible  := True;
+  edtPorcJuros.Enabled   := True;
+  edtPorcJuros.Visible   := True;
+  lblJuros.Visible       := True;
+  lblPorcentagem.Visible := True;
+
+end;
+
 procedure TfrmBaixarCR.EditKeyPress(Sender: TObject; var Key: Char);
 begin
 
@@ -198,6 +236,13 @@ begin
     //  Pula para o proximo
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
+
+end;
+
+procedure TfrmBaixarCR.edtValorExit(Sender: TObject);
+begin
+
+  edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
 
 end;
 
@@ -216,7 +261,9 @@ begin
     end;
   end;
 
-  edtValor.OnKeyPress := TUtilitario.KeyPressValor;
+  edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
+  edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
+  edtValorJuros.OnKeyPress := TUtilitario.KeyPressValor;
 
   datePgto.Date := now;
 

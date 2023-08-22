@@ -35,6 +35,7 @@ type
     cdsCPagarPARCIAL: TWideStringField;
     cdsCPagarCP_ORIGEM: TIntegerField;
     cdsCPagarID_FORNECEDOR: TIntegerField;
+    cdsCPagarRAZAO_SOCIALFORNEC: TWideStringField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private
