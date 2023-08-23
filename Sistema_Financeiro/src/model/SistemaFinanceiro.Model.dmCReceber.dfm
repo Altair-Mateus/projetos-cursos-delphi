@@ -167,6 +167,7 @@ object dmCReceber: TdmCReceber
     object FDQueryCrDetalheDESCONTO_BX: TIntegerField
       FieldName = 'DESCONTO_BX'
       Origin = 'DESCONTO_BX'
+      DisplayFormat = 'R$ #,##0.00'
     end
     object FDQueryCrDetalheJUROS_BX: TIntegerField
       FieldName = 'JUROS_BX'

@@ -85,7 +85,7 @@ begin
 
   try
     //  Estabelece conexão com o banco
-    FDQueryCR.Connection := DataModule1.FDConnection;
+    FDQueryCR.Connection    := DataModule1.FDConnection;
     FDQueryCrDet.Connection := DataModule1.FDConnection;
     FDQueryCaixa.Connection := DataModule1.FDConnection;
 
@@ -107,49 +107,58 @@ begin
 
     try
       //  Se o valor pago for parcial irá colocar status como Paga e irá
-      //  Criar uma nova duplicata com o valor restante
+      //  Criar uma nova duplicata com o valor restante c
       if ContaReceber.ValorAbatido < ContaReceber.ValorParcela then
       begin
 
-        //  Inseriando nova duplcata parcial
+        //  Se não ter desconto adiciona a parcial
+        if (BaixaCR.ValorDesc = 0) or ( not ((ContaReceber.ValorAbatido - BaixaCR.ValorDesc) = ContaReceber.ValorParcela) ) then
+        begin
+
+          //  Inseriando nova duplcata parcial
          if not (cdsCReceber.State in [dsInsert, dsEdit]) then
-        begin
+          begin
 
-          //  Colocando o data set em modo de inserção de dados
-          cdsCReceber.Insert;
+            //  Colocando o data set em modo de inserção de dados
+            cdsCReceber.Insert;
+
+          end;
+
+          //  gera a id
+          GeraCodigo;
+          cdsCReceberDATA_CADASTRO.AsDateTime := now;
+          cdsCReceberSTATUS.AsString          := 'A';
+          cdsCReceberVALOR_ABATIDO.AsCurrency := 0;
+
+
+          //  Passando os dados para o dataset
+          if (ContaReceber.Doc = '') or (ContaReceber.Parcial = 'S' ) then
+          begin
+            cdsCReceberNUMERO_DOCUMENTO.AsString  := ContaReceber.Doc;
+          end
+          else
+          begin
+            cdsCReceberNUMERO_DOCUMENTO.AsString  := Format('%s-P', [ContaReceber.Doc]);
+          end;
+
+          cdsCReceberDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaReceber.ID, ContaReceber.Doc]);
+          cdsCReceberVALOR_VENDA.AsCurrency     := ContaReceber.ValorVenda;
+          cdsCReceberDATA_VENDA.AsDateTime      := ContaReceber.DataVenda;
+          cdsCReceberPARCELA.AsInteger          := ContaReceber.Parcela;
+          cdsCReceberVALOR_PARCELA.AsCurrency   := ((ContaReceber.ValorParcela - BaixaCR.Valor) - BaixaCR.ValorDesc);
+          cdsCReceberDATA_VENCIMENTO.AsDateTime := ContaReceber.DataVencimento;
+          cdsCReceberPARCIAL.AsString           := 'S';
+          cdsCReceberCR_ORIGEM.AsString         := ContaReceber.Id;
+          cdsCReceberID_CLIENTE.AsInteger       := ContaReceber.IdCliente;
+
+          //  Gravando no BD
+          cdsCReceber.Post;
+          cdsCReceber.ApplyUpdates(0);
 
         end;
 
-        //  gera a id
-        GeraCodigo;
-        cdsCReceberDATA_CADASTRO.AsDateTime := now;
-        cdsCReceberSTATUS.AsString          := 'A';
-        cdsCReceberVALOR_ABATIDO.AsCurrency := 0;
 
 
-        //  Passando os dados para o dataset
-        if (ContaReceber.Doc = '') or (ContaReceber.Parcial = 'S' ) then
-        begin
-          cdsCReceberNUMERO_DOCUMENTO.AsString  := ContaReceber.Doc;
-        end
-        else
-        begin
-          cdsCReceberNUMERO_DOCUMENTO.AsString  := Format('%s-P', [ContaReceber.Doc]);
-        end;
-
-        cdsCReceberDESCRICAO.AsString         := Format('Parcial - Restante da Conta ID Nº %s - Doc Nº %s', [ContaReceber.ID, ContaReceber.Doc]);
-        cdsCReceberVALOR_VENDA.AsCurrency     := ContaReceber.ValorVenda;
-        cdsCReceberDATA_VENDA.AsDateTime      := ContaReceber.DataVenda;
-        cdsCReceberPARCELA.AsInteger          := ContaReceber.Parcela;
-        cdsCReceberVALOR_PARCELA.AsCurrency   := ContaReceber.ValorParcela - BaixaCR.Valor;
-        cdsCReceberDATA_VENCIMENTO.AsDateTime := ContaReceber.DataVencimento;
-        cdsCReceberPARCIAL.AsString           := 'S';
-        cdsCReceberCR_ORIGEM.AsString         := ContaReceber.Id;
-        cdsCReceberID_CLIENTE.AsInteger       := ContaReceber.IdCliente;
-
-        //  Gravando no BD
-        cdsCReceber.Post;
-        cdsCReceber.ApplyUpdates(0);
 
         // Montando o SQL para atualizar a duplicata anterior
         SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
@@ -187,7 +196,7 @@ begin
         FDQueryCR.ParamByName('VALORPARCELA').AsCurrency := ContaReceber.ValorParcela;
         FDQueryCR.ParamByName('STATUS').AsString         := ContaReceber.Status;
         FDQueryCR.ParamByName('DATAREC').AsDate          := BaixaCR.Data;
-        FDQueryCR.ParamByName('IDCR').AsString          := ContaReceber.ID;
+        FDQueryCR.ParamByName('IDCR').AsString           := ContaReceber.ID;
 
         FDQueryCR.Prepare;
         FDQueryCR.ExecSQL;
@@ -196,8 +205,8 @@ begin
 
       //  Montando o SQL para persisitr os dados na tabela Contas_receber_detalhe
       SQLInsert := 'INSERT INTO CONTAS_RECEBER_DETALHE (ID, ID_CONTA_RECEBER, DETALHES, ' +
-             ' VALOR, DATA, USUARIO) VALUES (:ID, :IDCR, :DETALHES, :VALOR, ' +
-             ' :DATA, :USUARIO)';
+             ' VALOR, DATA, USUARIO, DESCONTO_BX) VALUES (:ID, :IDCR, :DETALHES, :VALOR, ' +
+             ' :DATA, :USUARIO, :DESC )';
 
       FDQueryCrDet.SQL.Add(SQLInsert);
 
@@ -207,6 +216,7 @@ begin
       FDQueryCrDet.ParamByName('VALOR').AsCurrency  := BaixaCR.Valor;
       FDQueryCrDet.ParamByName('DATA').AsDate       := BaixaCR.Data;
       FDQueryCrDet.ParamByName('USUARIO').AsString  := BaixaCR.Usuario;
+      FDQueryCrDet.ParamByName('DESC').AsCurrency   := BaixaCR.ValorDesc;
 
       FDQueryCrDet.Prepare;
       FDQueryCrDet.ExecSQL;

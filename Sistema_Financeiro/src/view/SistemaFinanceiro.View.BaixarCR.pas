@@ -44,21 +44,21 @@ type
     lblCodCliente: TLabel;
     lblDesconto: TLabel;
     edtValorDesc: TEdit;
-    lblJuros: TLabel;
-    edtValorJuros: TEdit;
-    lblPorcentagem: TLabel;
-    edtPorcJuros: TEdit;
     checkDesconto: TCheckBox;
-    checkJuros: TCheckBox;
+    edtPorcDesc: TEdit;
+    lblValorDesc: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
     procedure checkDescontoClick(Sender: TObject);
-    procedure checkJurosClick(Sender: TObject);
+    procedure edtValorDescExit(Sender: TObject);
+    procedure edtPorcDescExit(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
+    function CalcValorDesc : Currency;
+    function CalcPorcentDesc : Currency;
 
   public
     { Public declarations }
@@ -153,7 +153,10 @@ procedure TfrmBaixarCR.btnConfirmarClick(Sender: TObject);
 var
   CrDetalhe : TModelCrDetalhe;
   ValorAbater : Currency;
+  ValorDesc : Currency;
+
 begin
+
   //  Validações dos campos
   if Trim(edtObs.Text) = '' then
   begin
@@ -161,40 +164,68 @@ begin
     Application.MessageBox('A observação não pode estar vazia!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
   if datePgto.Date > Date then
   begin
     datePgto.SetFocus;
     Application.MessageBox('A data de pagamento não pode ser maior que a data atual', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
   ValorAbater := 0;
-  TryStrToCurr(edtValor.Text, ValorAbater);
-  if ValorAbater <= 0  then
+  ValorDesc   := 0;
+
+
+  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
   begin
     edtValor.SetFocus;
     Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
   if ValorAbater > dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency  then
   begin
     edtValor.SetFocus;
     Application.MessageBox('Valor pago não pode ser maior que o valor da parcela!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
+  if checkDesconto.Checked then
+  begin
+
+    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency) then
+    begin
+
+      edtValorDesc.SetFocus;
+      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+  end;
+
   CrDetalhe := TModelCrDetalhe.Create;
+
   try
-    CrDetalhe.IdCr     := FID;
-    CrDetalhe.Detalhes := Trim(edtObs.Text);
-    CrDetalhe.Valor    := ValorAbater;
-    CrDetalhe.Data     := datePgto.Date;
-    CrDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+
+    CrDetalhe.IdCr       := FID;
+    CrDetalhe.Detalhes   := Trim(edtObs.Text);
+    CrDetalhe.Valor      := ValorAbater;
+    CrDetalhe.Data       := datePgto.Date;
+    CrDetalhe.Usuario    := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+    CrDetalhe.ValorDesc  := ValorDesc;
+
+
     try
+
       dmCReceber.BaixarCR(CrDetalhe);
       Application.MessageBox('Conta baixada com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
       ModalResult := mrOk;
+
     except on E : Exception do
       Application.MessageBox(PWideChar(E.Message), 'Erro ao baixar documento!', MB_OK + MB_ICONWARNING);
     end;
+
   finally
     CrDetalhe.Free;
   end;
@@ -202,26 +233,105 @@ begin
 
 end;
 
-procedure TfrmBaixarCR.checkDescontoClick(Sender: TObject);
+function TfrmBaixarCR.CalcPorcentDesc: Currency;
+var
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+  ValorDesc : Currency;
+  ValorCr : Currency;
+
 begin
 
-  //  Libera e mostra o campo do desconto
-  edtValorDesc.Enabled := True;
-  edtValorDesc.Visible := True;
-  lblDesconto.Visible  := True
+  ValorCr := dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if PorcentDesc > 0 then
+    begin
+
+      //  Calcula o valor do desconto
+      ValorDesc := (PorcentDesc / 100) * ValorCr;
+
+      //  Atribui o valor do desconto ao campo
+      edtValorDesc.Text := TUtilitario.FormatarValor(ValorDesc);
+
+      //  Calcula o valor final
+      ValorFinal := ValorCr - ValorDesc;
+
+      //  retorna o valor final
+      Result := ValorFinal;
+
+    end;
+end;
+
+function TfrmBaixarCR.CalcValorDesc : Currency;
+var
+  ValorCr     : Currency;
+  ValorDesc   : Currency;
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+
+begin
+
+  ValorCr := dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if ValorDesc > 0 then
+  begin
+
+    //  Calcula a porcentagem de desconto
+    PorcentDesc := (ValorDesc / ValorCr) * 100;
+
+    //  Atribui a porcentagem no campo
+    edtPorcDesc.Text := TUtilitario.FormatarValor(PorcentDesc);
+
+    //  Calcula o valor final
+    ValorFinal := ValorCr - ValorDesc;
+
+    //  retorna o valor final
+    Result := ValorFinal;
+
+  end;
 
 end;
 
-procedure TfrmBaixarCR.checkJurosClick(Sender: TObject);
+procedure TfrmBaixarCR.checkDescontoClick(Sender: TObject);
 begin
 
-  // Libera e mostra os campos de Juros
-  edtValorJuros.Enabled  := True;
-  edtValorJuros.Visible  := True;
-  edtPorcJuros.Enabled   := True;
-  edtPorcJuros.Visible   := True;
-  lblJuros.Visible       := True;
-  lblPorcentagem.Visible := True;
+  if checkDesconto.Checked then
+  begin
+
+    //  Libera e mostra os campos do desconto
+    edtValorDesc.Enabled := True;
+    edtValorDesc.Visible := True;
+    edtPorcDesc.Visible  := True;
+    edtPorcDesc.Enabled  := True;
+    lblDesconto.Visible  := True;
+    lblValorDesc.Visible := True;
+
+  end
+  else
+  begin
+
+    //  Bloqueia e oculta os campos do desconto
+    edtValorDesc.Enabled := False;
+    edtValorDesc.Visible := False;
+    edtPorcDesc.Visible  := False;
+    edtPorcDesc.Enabled  := False;
+    lblDesconto.Visible  := False;
+    lblValorDesc.Visible := False;
+
+
+  end;
 
 end;
 
@@ -236,6 +346,20 @@ begin
     //  Pula para o proximo
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
+
+end;
+
+procedure TfrmBaixarCR.edtPorcDescExit(Sender: TObject);
+begin
+
+  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+
+end;
+
+procedure TfrmBaixarCR.edtValorDescExit(Sender: TObject);
+begin
+
+  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
 
 end;
 
@@ -263,7 +387,6 @@ begin
 
   edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
   edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
-  edtValorJuros.OnKeyPress := TUtilitario.KeyPressValor;
 
   datePgto.Date := now;
 

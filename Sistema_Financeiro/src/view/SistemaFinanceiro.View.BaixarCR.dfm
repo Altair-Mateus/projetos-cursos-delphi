@@ -2,7 +2,7 @@ object frmBaixarCR: TfrmBaixarCR
   Left = 0
   Top = 0
   Caption = 'Baixar Conta a Receber'
-  ClientHeight = 593
+  ClientHeight = 541
   ClientWidth = 659
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,19 +17,19 @@ object frmBaixarCR: TfrmBaixarCR
     Left = 0
     Top = 0
     Width = 659
-    Height = 593
+    Height = 541
     Align = alClient
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 512
+    ExplicitWidth = 655
     ExplicitHeight = 592
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11
       Top = 11
       Width = 637
-      Height = 286
+      Height = 254
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -38,12 +38,13 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 633
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
         Width = 595
-        Height = 244
+        Height = 212
         Margins.Left = 20
         Margins.Top = 20
         Margins.Right = 20
@@ -54,45 +55,45 @@ object frmBaixarCR: TfrmBaixarCR
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        ExplicitHeight = 276
+        ExplicitWidth = 591
         object lblNDoc: TLabel
-          Left = 314
-          Top = 91
+          Left = 306
+          Top = 75
           Width = 111
           Height = 19
           Caption = 'N'#186' Documento:'
         end
         object lblParc: TLabel
-          Left = 25
-          Top = 91
+          Left = 17
+          Top = 75
           Width = 56
           Height = 19
           Caption = 'Parcela:'
         end
         object lblVenc: TLabel
-          Left = 314
-          Top = 140
+          Left = 306
+          Top = 124
           Width = 89
           Height = 19
           Caption = 'Vencimento:'
         end
         object lblVParcela: TLabel
-          Left = 25
-          Top = 140
+          Left = 17
+          Top = 124
           Width = 98
           Height = 19
           Caption = 'Valor Parcela:'
         end
         object lblVAbatido: TLabel
-          Left = 314
-          Top = 190
+          Left = 306
+          Top = 174
           Width = 83
           Height = 19
           Caption = 'Valor Pago:'
         end
         object lblDoc: TLabel
-          Left = 452
-          Top = 91
+          Left = 444
+          Top = 75
           Width = 50
           Height = 19
           Caption = 'lblDoc'
@@ -104,8 +105,8 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblParcela: TLabel
-          Left = 153
-          Top = 91
+          Left = 145
+          Top = 75
           Width = 81
           Height = 19
           Caption = 'lblParcela'
@@ -117,8 +118,8 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblVencimento: TLabel
-          Left = 452
-          Top = 140
+          Left = 444
+          Top = 124
           Width = 116
           Height = 19
           Caption = 'lblVencimento'
@@ -130,8 +131,8 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblValorParcela: TLabel
-          Left = 153
-          Top = 140
+          Left = 145
+          Top = 124
           Width = 124
           Height = 19
           Caption = 'lblValorParcela'
@@ -143,8 +144,8 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblValorAbatido: TLabel
-          Left = 452
-          Top = 190
+          Left = 444
+          Top = 174
           Width = 127
           Height = 19
           Caption = 'lblValorAbatido'
@@ -156,15 +157,15 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblId: TLabel
-          Left = 25
-          Top = 48
+          Left = 17
+          Top = 32
           Width = 69
           Height = 19
           Caption = 'ID Conta:'
         end
         object lblIdConta: TLabel
-          Left = 153
-          Top = 48
+          Left = 145
+          Top = 32
           Width = 85
           Height = 19
           Caption = 'lblIdConta'
@@ -176,8 +177,8 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblValorRestante: TLabel
-          Left = 161
-          Top = 190
+          Left = 153
+          Top = 174
           Width = 137
           Height = 19
           Caption = 'lblValorRestante'
@@ -189,22 +190,22 @@ object frmBaixarCR: TfrmBaixarCR
           ParentFont = False
         end
         object lblVRestante: TLabel
-          Left = 28
-          Top = 190
+          Left = 20
+          Top = 174
           Width = 108
           Height = 19
           Caption = 'Valor Restante:'
         end
         object lblIdCliente: TLabel
-          Left = 314
-          Top = 48
+          Left = 306
+          Top = 32
           Width = 87
           Height = 19
           Caption = 'Cod Cliente:'
         end
         object lblCodCliente: TLabel
-          Left = 452
-          Top = 48
+          Left = 444
+          Top = 32
           Width = 109
           Height = 19
           Caption = 'lblCodCliente'
@@ -220,9 +221,9 @@ object frmBaixarCR: TfrmBaixarCR
     object pnlDetalhes: TPanel
       AlignWithMargins = True
       Left = 11
-      Top = 307
+      Top = 275
       Width = 637
-      Height = 206
+      Height = 184
       Margins.Left = 10
       Margins.Top = 5
       Margins.Right = 10
@@ -236,7 +237,7 @@ object frmBaixarCR: TfrmBaixarCR
         Left = 21
         Top = 21
         Width = 595
-        Height = 164
+        Height = 142
         Margins.Left = 20
         Margins.Top = 20
         Margins.Right = 20
@@ -244,7 +245,8 @@ object frmBaixarCR: TfrmBaixarCR
         Align = alClient
         Caption = 'Detalhes'
         TabOrder = 0
-        ExplicitHeight = 188
+        ExplicitWidth = 591
+        ExplicitHeight = 204
         object lblObs: TLabel
           Left = 28
           Top = 32
@@ -253,11 +255,11 @@ object frmBaixarCR: TfrmBaixarCR
           Caption = 'Observa'#231#227'o:'
         end
         object lblValor: TLabel
-          Left = 361
+          Left = 393
           Top = 72
-          Width = 107
+          Width = 67
           Height = 19
-          Caption = 'Valor Pago R$:'
+          Caption = 'Valor R$:'
         end
         object lblData: TLabel
           Left = 28
@@ -267,30 +269,19 @@ object frmBaixarCR: TfrmBaixarCR
           Caption = 'Data Pgto:'
         end
         object lblDesconto: TLabel
-          Left = 28
+          Left = 229
           Top = 104
-          Width = 137
-          Height = 19
-          Caption = 'Valor Desconto R$:'
-          Enabled = False
+          Width = 92
+          Height = 17
+          Caption = 'Desconto %:'
           Visible = False
         end
-        object lblJuros: TLabel
-          Left = 271
-          Top = 105
-          Width = 61
-          Height = 19
-          Caption = 'Valor R$'
-          Enabled = False
-          Visible = False
-        end
-        object lblPorcentagem: TLabel
-          Left = 431
-          Top = 105
-          Width = 39
-          Height = 19
-          Caption = 'ou %'
-          Enabled = False
+        object lblValorDesc: TLabel
+          Left = 425
+          Top = 104
+          Width = 42
+          Height = 17
+          Caption = 'ou R$'
           Visible = False
         end
         object edtObs: TEdit
@@ -318,58 +309,39 @@ object frmBaixarCR: TfrmBaixarCR
           TabOrder = 1
         end
         object edtValorDesc: TEdit
-          Left = 171
-          Top = 97
-          Width = 87
-          Height = 27
-          Enabled = False
-          TabOrder = 3
-          Visible = False
-          OnExit = edtValorExit
-        end
-        object edtValorJuros: TEdit
-          Left = 338
-          Top = 97
-          Width = 87
-          Height = 27
-          Enabled = False
-          TabOrder = 4
-          Visible = False
-          OnExit = edtValorExit
-        end
-        object edtPorcJuros: TEdit
-          Left = 474
+          Left = 473
           Top = 97
           Width = 87
           Height = 27
           Enabled = False
           TabOrder = 5
           Visible = False
-          OnExit = edtValorExit
+          OnExit = edtValorDescExit
         end
         object checkDesconto: TCheckBox
-          Left = 28
-          Top = 144
+          Left = 31
+          Top = 105
           Width = 164
           Height = 17
           Caption = 'Informar Desconto'
-          TabOrder = 6
+          TabOrder = 3
           OnClick = checkDescontoClick
         end
-        object checkJuros: TCheckBox
-          Left = 338
-          Top = 144
-          Width = 210
-          Height = 17
-          Caption = 'Informar Juros/Acr'#233'scimo'
-          TabOrder = 7
-          OnClick = checkJurosClick
+        object edtPorcDesc: TEdit
+          Left = 327
+          Top = 97
+          Width = 87
+          Height = 27
+          Enabled = False
+          TabOrder = 4
+          Visible = False
+          OnExit = edtPorcDescExit
         end
       end
     end
     object pnlBotoes: TPanel
       Left = 1
-      Top = 522
+      Top = 470
       Width = 657
       Height = 70
       Align = alBottom
@@ -377,7 +349,7 @@ object frmBaixarCR: TfrmBaixarCR
       ParentBackground = False
       TabOrder = 2
       ExplicitTop = 521
-      ExplicitWidth = 510
+      ExplicitWidth = 653
       object btnConfirmar: TButton
         AlignWithMargins = True
         Left = 191
@@ -394,7 +366,6 @@ object frmBaixarCR: TfrmBaixarCR
         Images = ImageList1
         TabOrder = 0
         OnClick = btnConfirmarClick
-        ExplicitLeft = 131
       end
       object btnCancelar: TButton
         AlignWithMargins = True
@@ -414,7 +385,7 @@ object frmBaixarCR: TfrmBaixarCR
         ParentBiDiMode = False
         TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 259
+        ExplicitLeft = 342
       end
     end
   end

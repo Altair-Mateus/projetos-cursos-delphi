@@ -272,8 +272,15 @@ object frmCrDetalhe: TfrmCrDetalhe
         end
         item
           Expanded = False
+          FieldName = 'DESCONTO_BX'
+          Title.Caption = 'Desconto'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'VALOR'
           Title.Caption = 'Valor Pago'
+          Width = 92
           Visible = True
         end
         item
