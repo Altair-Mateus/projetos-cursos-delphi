@@ -362,25 +362,25 @@ end;
 procedure TfrmBaixarCR.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+  edtValor.Text := CurrToStr(CalcPorcentDesc);
 end;
 
 procedure TfrmBaixarCR.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+  edtValor.Text := CurrToStr(CalcPorcentDesc);
 end;
 
 procedure TfrmBaixarCR.edtValorDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
+  edtValor.Text := CurrToStr(CalcValorDesc);
 end;
 
 procedure TfrmBaixarCR.edtValorDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
+  edtValor.Text := CurrToStr(CalcValorDesc);
 end;
 
 procedure TfrmBaixarCR.edtValorExit(Sender: TObject);
@@ -405,9 +405,16 @@ begin
     end;
   end;
 
+  //  Coloca no KeyPress a formatação para valores
   edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
   edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
   edtPorcDesc.OnKeyPress   := TUtilitario.KeyPressValor;
+
+  //  Coloca no KeyPress o enter para ir para o proximo campo
+  edtValor.OnKeyPress      := EditKeyPress;
+  edtValorDesc.OnKeyPress  := EditKeyPress;
+  edtPorcDesc.OnKeyPress   := EditKeyPress;
+
 
   datePgto.Date := now;
 

@@ -324,6 +324,7 @@ object frmBaixarCR: TfrmBaixarCR
           Top = 105
           Width = 164
           Height = 17
+          TabStop = False
           Caption = 'Informar Desconto'
           TabOrder = 3
           OnClick = checkDescontoClick

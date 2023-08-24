@@ -322,10 +322,11 @@ object frmBaixarCP: TfrmBaixarCP
           OnKeyUp = edtValorDescKeyUp
         end
         object checkDesconto: TCheckBox
-          Left = 31
-          Top = 105
+          Left = 28
+          Top = 98
           Width = 164
           Height = 17
+          TabStop = False
           Caption = 'Informar Desconto'
           TabOrder = 3
           OnClick = checkDescontoClick
