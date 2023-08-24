@@ -15,7 +15,6 @@ type
     btnCancelar: TButton;
     ImageList1: TImageList;
     gbDocInfo: TGroupBox;
-    gbDetalhes: TGroupBox;
     lblNDoc: TLabel;
     lblParc: TLabel;
     lblVenc: TLabel;
@@ -26,25 +25,42 @@ type
     lblVencimento: TLabel;
     lblValorParcela: TLabel;
     lblValorAbatido: TLabel;
-    lblObs: TLabel;
-    lblValor: TLabel;
-    edtObs: TEdit;
-    edtValor: TEdit;
     lblId: TLabel;
     lblIdConta: TLabel;
-    lblData: TLabel;
-    datePgto: TDateTimePicker;
     lblValorRestante: TLabel;
     lblVRestante: TLabel;
+    lblIdCliente: TLabel;
+    lblCodCliente: TLabel;
+    gbDetalhes: TGroupBox;
+    lblObs: TLabel;
+    lblValor: TLabel;
+    lblData: TLabel;
+    lblDesconto: TLabel;
+    lblValorDesc: TLabel;
+    edtObs: TEdit;
+    edtValor: TEdit;
+    datePgto: TDateTimePicker;
+    edtValorDesc: TEdit;
+    checkDesconto: TCheckBox;
+    edtPorcDesc: TEdit;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edtValorExit(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
+    procedure checkDescontoClick(Sender: TObject);
+    procedure edtPorcDescExit(Sender: TObject);
+    procedure edtValorDescExit(Sender: TObject);
+    procedure edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     { Private declarations }
     FID : Integer;
+    function CalcValorDesc : Currency;
+    function CalcPorcentDesc : Currency;
 
   public
     { Public declarations }
@@ -127,6 +143,7 @@ procedure TfrmBaixarCP.btnConfirmarClick(Sender: TObject);
 var
   CpDetalhe : TModelCpDetalhe;
   ValorAbater : Currency;
+  ValorDesc : Currency;
 
 begin
 
@@ -146,14 +163,16 @@ begin
   end;
 
   ValorAbater := 0;
-  TryStrToCurr(edtValor.Text, ValorAbater);
+  ValorDesc   := 0;
 
-  if ValorAbater <= 0  then
+
+  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
   begin
     edtValor.SetFocus;
     Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
 
   if ValorAbater > dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency  then
   begin
@@ -162,14 +181,29 @@ begin
     abort;
   end;
 
+  if checkDesconto.Checked then
+  begin
+
+    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency) then
+    begin
+
+      edtValorDesc.SetFocus;
+      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+  end;
+
   CpDetalhe := TModelCpDetalhe.Create;
   try
 
-    CpDetalhe.IdCP     := FID;
-    CpDetalhe.Detalhes := Trim(edtObs.Text);
-    CpDetalhe.Valor    := ValorAbater;
-    CpDetalhe.Data     := datePgto.Date;
-    CpDetalhe.Usuario  := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+    CpDetalhe.IdCP      := FID;
+    CpDetalhe.Detalhes  := Trim(edtObs.Text);
+    CpDetalhe.Valor     := ValorAbater;
+    CpDetalhe.Data      := datePgto.Date;
+    CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+    CpDetalhe.ValorDesc := ValorDesc;
 
     try
 
@@ -187,6 +221,112 @@ begin
 
 end;
 
+function TfrmBaixarCP.CalcPorcentDesc: Currency;
+var
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+  ValorDesc : Currency;
+  ValorCp : Currency;
+
+begin
+
+  ValorCp := dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+  Result := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if PorcentDesc > 0 then
+    begin
+
+      //  Calcula o valor do desconto
+      ValorDesc := (PorcentDesc / 100) * ValorCp;
+
+      //  Atribui o valor do desconto ao campo
+      edtValorDesc.Text := TUtilitario.FormatarValor(ValorDesc);
+
+      //  Calcula o valor final
+      ValorFinal := ValorCp - ValorDesc;
+
+      //  retorna o valor final
+      Result := ValorFinal;
+
+    end;
+
+end;
+
+function TfrmBaixarCP.CalcValorDesc: Currency;
+var
+  ValorCp     : Currency;
+  ValorDesc   : Currency;
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+
+begin
+
+  Result := 0;
+
+  ValorCp := dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if ValorDesc > 0 then
+  begin
+
+    //  Calcula a porcentagem de desconto
+    PorcentDesc := (ValorDesc / ValorCp) * 100;
+
+    //  Atribui a porcentagem no campo
+    edtPorcDesc.Text := TUtilitario.FormatarValor(PorcentDesc);
+
+    //  Calcula o valor final
+    ValorFinal := ValorCp - ValorDesc;
+
+    //  retorna o valor final
+    Result := ValorFinal;
+
+  end;
+
+end;
+
+procedure TfrmBaixarCP.checkDescontoClick(Sender: TObject);
+begin
+
+  if checkDesconto.Checked then
+  begin
+
+    //  Libera e mostra os campos do desconto
+    edtValorDesc.Enabled := True;
+    edtValorDesc.Visible := True;
+    edtPorcDesc.Visible  := True;
+    edtPorcDesc.Enabled  := True;
+    lblDesconto.Visible  := True;
+    lblValorDesc.Visible := True;
+
+  end
+  else
+  begin
+
+    //  Bloqueia e oculta os campos do desconto
+    edtValorDesc.Enabled := False;
+    edtValorDesc.Visible := False;
+    edtPorcDesc.Visible  := False;
+    edtPorcDesc.Enabled  := False;
+    lblDesconto.Visible  := False;
+    lblValorDesc.Visible := False;
+
+
+  end;
+
+end;
+
 procedure TfrmBaixarCP.EditKeyPress(Sender: TObject; var Key: Char);
 begin
 
@@ -199,6 +339,28 @@ begin
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
 
+end;
+
+procedure TfrmBaixarCP.edtPorcDescExit(Sender: TObject);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+end;
+
+procedure TfrmBaixarCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+end;
+
+procedure TfrmBaixarCP.edtValorDescExit(Sender: TObject);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
+end;
+
+procedure TfrmBaixarCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
 end;
 
 procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
@@ -240,6 +402,8 @@ begin
   end;
 
   edtValor.OnKeyPress := TUtilitario.KeyPressValor;
+  edtValorDesc.OnKeyPress := TUtilitario.KeyPressValor;
+  edtPorcDesc.OnKeyPress := TUtilitario.KeyPressValor;
   datePgto.Date := now;
 
 end;

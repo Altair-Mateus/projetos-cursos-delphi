@@ -16,19 +16,21 @@ type
     Image1: TImage;
     DBGrid1: TDBGrid;
     pnlPesquisa: TPanel;
-    lblTNDoc: TLabel;
-    lblTVencimento: TLabel;
-    lblTNumParcela: TLabel;
-    lblNumParcela: TLabel;
-    lblVencimento: TLabel;
-    lblNumDoc: TLabel;
-    lblValorVenda: TLabel;
-    lblDesc: TLabel;
-    lblValorParcela: TLabel;
+    DataSourceCPDetalhe: TDataSource;
     lblTValorParcela: TLabel;
     lblTValorVenda: TLabel;
+    lblValorVenda: TLabel;
+    lblValorParcela: TLabel;
+    lblTCodFornec: TLabel;
+    lblCodFornec: TLabel;
+    lblNumParcela: TLabel;
+    lblVencimento: TLabel;
+    lblDesc: TLabel;
+    lblNumDoc: TLabel;
+    lblTNDoc: TLabel;
     lblTDesc: TLabel;
-    DataSourceCPDetalhe: TDataSource;
+    lblTVencimento: TLabel;
+    lblTNumParcela: TLabel;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -91,6 +93,7 @@ begin
     lblNumParcela.Caption   := IntToStr(Cp.Parcela);
     lblValorVenda.Caption   := TUtilitario.FormatoMoeda(Cp.ValorCompra);
     lblValorParcela.Caption := TUtilitario.FormatoMoeda(Cp.ValorParcela);
+    lblCodFornec.Caption    := IntToStr(Cp.IdFornecedor);
 
   finally
 

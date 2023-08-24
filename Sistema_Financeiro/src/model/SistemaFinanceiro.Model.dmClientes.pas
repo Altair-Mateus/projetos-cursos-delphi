@@ -79,8 +79,7 @@ begin
     cdsClientesID.AsInteger := cod;
 
     //  Insere o registro no final da tabela
-    FDQueryId.Append()
-    ;
+    FDQueryId.Append();
   finally
 
     FDQueryId.Close;
@@ -97,6 +96,8 @@ var
 begin
 
   FDQueryCrCli := TFDQuery.Create(nil);
+
+  Result := False;
 
   try
     //  Estabelece a conexao com o banco

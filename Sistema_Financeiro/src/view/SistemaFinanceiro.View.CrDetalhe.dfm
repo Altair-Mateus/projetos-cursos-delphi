@@ -18,13 +18,12 @@ object frmCrDetalhe: TfrmCrDetalhe
     Left = 0
     Top = 0
     Width = 772
-    Height = 97
+    Height = 129
     Align = alTop
     BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 768
     object lblTNDoc: TLabel
       Left = 16
       Top = 16
@@ -42,7 +41,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblTVencimento: TLabel
       Left = 16
-      Top = 41
+      Top = 66
       Width = 102
       Height = 19
       Caption = 'Vencimento:'
@@ -57,7 +56,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblTNumParcela: TLabel
       Left = 16
-      Top = 66
+      Top = 91
       Width = 118
       Height = 19
       Caption = 'N'#186' da Parcela:'
@@ -72,7 +71,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblNumParcela: TLabel
       Left = 192
-      Top = 64
+      Top = 89
       Width = 101
       Height = 19
       Caption = 'lblNumParcela'
@@ -87,7 +86,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblVencimento: TLabel
       Left = 192
-      Top = 39
+      Top = 64
       Width = 100
       Height = 19
       Caption = 'lblVencimento'
@@ -117,7 +116,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblValorVenda: TLabel
       Left = 568
-      Top = 39
+      Top = 64
       Width = 98
       Height = 19
       Caption = 'lblValorVenda'
@@ -131,8 +130,8 @@ object frmCrDetalhe: TfrmCrDetalhe
       ParentFont = False
     end
     object lblDesc: TLabel
-      Left = 568
-      Top = 14
+      Left = 192
+      Top = 39
       Width = 50
       Height = 19
       Caption = 'lblDesc'
@@ -147,7 +146,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblValorParcela: TLabel
       Left = 568
-      Top = 64
+      Top = 89
       Width = 104
       Height = 19
       Caption = 'lblValorParcela'
@@ -162,7 +161,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblTValorParcela: TLabel
       Left = 408
-      Top = 66
+      Top = 91
       Width = 134
       Height = 19
       Caption = 'Valor da Parcela'
@@ -177,7 +176,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object lblTValorVenda: TLabel
       Left = 408
-      Top = 41
+      Top = 66
       Width = 130
       Height = 19
       Caption = 'Valor da Venda:'
@@ -191,8 +190,8 @@ object frmCrDetalhe: TfrmCrDetalhe
       ParentFont = False
     end
     object lblTDesc: TLabel
-      Left = 408
-      Top = 16
+      Left = 16
+      Top = 41
       Width = 84
       Height = 19
       Caption = 'Descri'#231#227'o:'
@@ -202,6 +201,36 @@ object frmCrDetalhe: TfrmCrDetalhe
       Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTCodCliente: TLabel
+      Left = 408
+      Top = 14
+      Width = 125
+      Height = 19
+      Caption = 'C'#243'digo Cliente:'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblCodCliente: TLabel
+      Left = 568
+      Top = 14
+      Width = 93
+      Height = 19
+      Caption = 'lblCodCliente'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ParentColor = False
       ParentFont = False
     end
@@ -234,11 +263,12 @@ object frmCrDetalhe: TfrmCrDetalhe
   end
   object pnlGrid: TPanel
     Left = 0
-    Top = 97
+    Top = 129
     Width = 772
-    Height = 332
+    Height = 300
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 97
     ExplicitWidth = 768
     ExplicitHeight = 331
     object Image1: TImage
@@ -251,7 +281,7 @@ object frmCrDetalhe: TfrmCrDetalhe
       Left = 1
       Top = 1
       Width = 770
-      Height = 330
+      Height = 298
       Align = alClient
       DataSource = DataSourceConsultaCr
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]

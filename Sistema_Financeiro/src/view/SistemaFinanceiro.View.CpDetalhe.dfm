@@ -40,11 +40,12 @@ object frmCpDetalhe: TfrmCpDetalhe
   end
   object pnlGrid: TPanel
     Left = 0
-    Top = 97
+    Top = 129
     Width = 768
-    Height = 331
+    Height = 299
     Align = alClient
     TabOrder = 1
+    ExplicitTop = 97
     ExplicitWidth = 764
     ExplicitHeight = 330
     object Image1: TImage
@@ -57,7 +58,7 @@ object frmCpDetalhe: TfrmCpDetalhe
       Left = 1
       Top = 1
       Width = 766
-      Height = 329
+      Height = 297
       Align = alClient
       DataSource = DataSourceCPDetalhe
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -78,8 +79,15 @@ object frmCpDetalhe: TfrmCpDetalhe
         end
         item
           Expanded = False
+          FieldName = 'DESCONTO_BX'
+          Title.Caption = 'Desconto'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'VALOR'
           Title.Caption = 'Valor Pago'
+          Width = 105
           Visible = True
         end
         item
@@ -101,19 +109,78 @@ object frmCpDetalhe: TfrmCpDetalhe
     Left = 0
     Top = 0
     Width = 768
-    Height = 97
+    Height = 129
     Align = alTop
     BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 764
-    object lblTNDoc: TLabel
-      Left = 16
-      Top = 16
-      Width = 149
+    object lblTValorParcela: TLabel
+      Left = 408
+      Top = 91
+      Width = 134
       Height = 19
-      Caption = 'N'#186' do Documento:'
+      Caption = 'Valor da Parcela'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTValorVenda: TLabel
+      Left = 408
+      Top = 66
+      Width = 130
+      Height = 19
+      Caption = 'Valor da Venda:'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorVenda: TLabel
+      Left = 576
+      Top = 64
+      Width = 98
+      Height = 19
+      Caption = 'lblValorVenda'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorParcela: TLabel
+      Left = 576
+      Top = 89
+      Width = 104
+      Height = 19
+      Caption = 'lblValorParcela'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTCodFornec: TLabel
+      Left = 408
+      Top = 14
+      Width = 158
+      Height = 19
+      Caption = 'C'#243'digo Fornecedor:'
       Color = 5934893
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -123,39 +190,24 @@ object frmCpDetalhe: TfrmCpDetalhe
       ParentColor = False
       ParentFont = False
     end
-    object lblTVencimento: TLabel
-      Left = 16
-      Top = 41
-      Width = 102
+    object lblCodFornec: TLabel
+      Left = 576
+      Top = 14
+      Width = 92
       Height = 19
-      Caption = 'Vencimento:'
-      Color = 5934638
+      Caption = 'lblCodFornec'
+      Color = 5934893
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblTNumParcela: TLabel
-      Left = 16
-      Top = 66
-      Width = 118
-      Height = 19
-      Caption = 'N'#186' da Parcela:'
-      Color = 5934638
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentColor = False
       ParentFont = False
     end
     object lblNumParcela: TLabel
       Left = 192
-      Top = 64
+      Top = 89
       Width = 101
       Height = 19
       Caption = 'lblNumParcela'
@@ -170,10 +222,25 @@ object frmCpDetalhe: TfrmCpDetalhe
     end
     object lblVencimento: TLabel
       Left = 192
-      Top = 39
+      Top = 64
       Width = 100
       Height = 19
       Caption = 'lblVencimento'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblDesc: TLabel
+      Left = 192
+      Top = 39
+      Width = 50
+      Height = 19
+      Caption = 'lblDesc'
       Color = 5868590
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -198,73 +265,13 @@ object frmCpDetalhe: TfrmCpDetalhe
       ParentColor = False
       ParentFont = False
     end
-    object lblValorVenda: TLabel
-      Left = 568
-      Top = 39
-      Width = 98
+    object lblTNDoc: TLabel
+      Left = 16
+      Top = 16
+      Width = 149
       Height = 19
-      Caption = 'lblValorVenda'
-      Color = 5868590
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblDesc: TLabel
-      Left = 568
-      Top = 14
-      Width = 50
-      Height = 19
-      Caption = 'lblDesc'
-      Color = 5868590
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblValorParcela: TLabel
-      Left = 568
-      Top = 64
-      Width = 104
-      Height = 19
-      Caption = 'lblValorParcela'
-      Color = 5868590
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblTValorParcela: TLabel
-      Left = 408
-      Top = 66
-      Width = 134
-      Height = 19
-      Caption = 'Valor da Parcela'
-      Color = 5868590
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblTValorVenda: TLabel
-      Left = 408
-      Top = 41
-      Width = 130
-      Height = 19
-      Caption = 'Valor da Venda:'
-      Color = 5934638
+      Caption = 'N'#186' do Documento:'
+      Color = 5934893
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
@@ -274,12 +281,42 @@ object frmCpDetalhe: TfrmCpDetalhe
       ParentFont = False
     end
     object lblTDesc: TLabel
-      Left = 408
-      Top = 16
+      Left = 16
+      Top = 41
       Width = 84
       Height = 19
       Caption = 'Descri'#231#227'o:'
       Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTVencimento: TLabel
+      Left = 16
+      Top = 66
+      Width = 102
+      Height = 19
+      Caption = 'Vencimento:'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblTNumParcela: TLabel
+      Left = 16
+      Top = 91
+      Width = 118
+      Height = 19
+      Caption = 'N'#186' da Parcela:'
+      Color = 5934638
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16

@@ -4,8 +4,8 @@ object frmBaixarCP: TfrmBaixarCP
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Baixar Contas a Pagar'
-  ClientHeight = 593
-  ClientWidth = 516
+  ClientHeight = 550
+  ClientWidth = 638
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,20 +18,20 @@ object frmBaixarCP: TfrmBaixarCP
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 516
-    Height = 593
+    Width = 638
+    Height = 550
     Align = alClient
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 512
-    ExplicitHeight = 592
+    ExplicitWidth = 634
+    ExplicitHeight = 549
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11
       Top = 11
-      Width = 494
-      Height = 342
+      Width = 616
+      Height = 262
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -40,13 +40,13 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 490
+      ExplicitWidth = 612
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 452
-        Height = 300
+        Width = 574
+        Height = 220
         Margins.Left = 20
         Margins.Top = 20
         Margins.Right = 20
@@ -57,45 +57,45 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        ExplicitWidth = 448
+        ExplicitWidth = 570
         object lblNDoc: TLabel
-          Left = 60
-          Top = 72
+          Left = 290
+          Top = 75
           Width = 111
           Height = 19
           Caption = 'N'#186' Documento:'
         end
         object lblParc: TLabel
-          Left = 60
-          Top = 107
+          Left = 17
+          Top = 75
           Width = 56
           Height = 19
           Caption = 'Parcela:'
         end
         object lblVenc: TLabel
-          Left = 60
-          Top = 148
+          Left = 290
+          Top = 124
           Width = 89
           Height = 19
           Caption = 'Vencimento:'
         end
         object lblVParcela: TLabel
-          Left = 60
-          Top = 188
+          Left = 17
+          Top = 124
           Width = 98
           Height = 19
           Caption = 'Valor Parcela:'
         end
         object lblVAbatido: TLabel
-          Left = 60
-          Top = 230
+          Left = 290
+          Top = 174
           Width = 83
           Height = 19
           Caption = 'Valor Pago:'
         end
         object lblDoc: TLabel
-          Left = 244
-          Top = 72
+          Left = 428
+          Top = 75
           Width = 50
           Height = 19
           Caption = 'lblDoc'
@@ -107,8 +107,8 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblParcela: TLabel
-          Left = 244
-          Top = 107
+          Left = 145
+          Top = 75
           Width = 81
           Height = 19
           Caption = 'lblParcela'
@@ -120,8 +120,8 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblVencimento: TLabel
-          Left = 244
-          Top = 148
+          Left = 428
+          Top = 124
           Width = 116
           Height = 19
           Caption = 'lblVencimento'
@@ -133,8 +133,8 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblValorParcela: TLabel
-          Left = 244
-          Top = 188
+          Left = 145
+          Top = 124
           Width = 124
           Height = 19
           Caption = 'lblValorParcela'
@@ -146,8 +146,8 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblValorAbatido: TLabel
-          Left = 244
-          Top = 228
+          Left = 428
+          Top = 174
           Width = 127
           Height = 19
           Caption = 'lblValorAbatido'
@@ -159,14 +159,14 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblId: TLabel
-          Left = 60
+          Left = 17
           Top = 32
           Width = 69
           Height = 19
           Caption = 'ID Conta:'
         end
         object lblIdConta: TLabel
-          Left = 244
+          Left = 145
           Top = 32
           Width = 85
           Height = 19
@@ -179,8 +179,8 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblValorRestante: TLabel
-          Left = 244
-          Top = 268
+          Left = 145
+          Top = 174
           Width = 137
           Height = 19
           Caption = 'lblValorRestante'
@@ -192,20 +192,40 @@ object frmBaixarCP: TfrmBaixarCP
           ParentFont = False
         end
         object lblVRestante: TLabel
-          Left = 60
-          Top = 270
+          Left = 20
+          Top = 174
           Width = 108
           Height = 19
           Caption = 'Valor Restante:'
+        end
+        object lblIdCliente: TLabel
+          Left = 290
+          Top = 32
+          Width = 87
+          Height = 19
+          Caption = 'Cod Cliente:'
+        end
+        object lblCodCliente: TLabel
+          Left = 428
+          Top = 32
+          Width = 109
+          Height = 19
+          Caption = 'lblCodCliente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
       end
     end
     object pnlDetalhes: TPanel
       AlignWithMargins = True
       Left = 11
-      Top = 363
-      Width = 494
-      Height = 150
+      Top = 283
+      Width = 616
+      Height = 182
       Margins.Left = 10
       Margins.Top = 5
       Margins.Right = 10
@@ -214,13 +234,13 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 490
+      ExplicitWidth = 612
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 452
-        Height = 108
+        Width = 574
+        Height = 140
         Margins.Left = 20
         Margins.Top = 20
         Margins.Right = 20
@@ -228,7 +248,7 @@ object frmBaixarCP: TfrmBaixarCP
         Align = alClient
         Caption = 'Detalhes'
         TabOrder = 0
-        ExplicitWidth = 448
+        ExplicitWidth = 570
         object lblObs: TLabel
           Left = 28
           Top = 32
@@ -237,11 +257,11 @@ object frmBaixarCP: TfrmBaixarCP
           Caption = 'Observa'#231#227'o:'
         end
         object lblValor: TLabel
-          Left = 276
+          Left = 393
           Top = 72
-          Width = 43
+          Width = 67
           Height = 19
-          Caption = 'Valor:'
+          Caption = 'Valor R$:'
         end
         object lblData: TLabel
           Left = 28
@@ -250,51 +270,97 @@ object frmBaixarCP: TfrmBaixarCP
           Height = 19
           Caption = 'Data Pgto:'
         end
+        object lblDesconto: TLabel
+          Left = 229
+          Top = 104
+          Width = 92
+          Height = 19
+          Caption = 'Desconto %:'
+          Visible = False
+        end
+        object lblValorDesc: TLabel
+          Left = 425
+          Top = 104
+          Width = 42
+          Height = 19
+          Caption = 'ou R$'
+          Visible = False
+        end
         object edtObs: TEdit
           Left = 136
           Top = 31
-          Width = 289
+          Width = 425
           Height = 27
           TabOrder = 0
         end
         object edtValor: TEdit
-          Left = 338
+          Left = 474
           Top = 64
           Width = 87
           Height = 27
           TabOrder = 2
           OnExit = edtValorExit
-          OnKeyPress = edtValorKeyPress
         end
         object datePgto: TDateTimePicker
           Left = 136
           Top = 64
-          Width = 126
+          Width = 185
           Height = 27
           Date = 45133.000000000000000000
           Time = 0.840443912034970700
           TabOrder = 1
         end
+        object edtValorDesc: TEdit
+          Left = 473
+          Top = 97
+          Width = 87
+          Height = 27
+          Enabled = False
+          TabOrder = 5
+          Visible = False
+          OnExit = edtValorDescExit
+          OnKeyDown = edtValorDescKeyDown
+        end
+        object checkDesconto: TCheckBox
+          Left = 31
+          Top = 105
+          Width = 164
+          Height = 17
+          Caption = 'Informar Desconto'
+          TabOrder = 3
+          OnClick = checkDescontoClick
+        end
+        object edtPorcDesc: TEdit
+          Left = 327
+          Top = 97
+          Width = 87
+          Height = 27
+          Enabled = False
+          TabOrder = 4
+          Visible = False
+          OnExit = edtPorcDescExit
+          OnKeyDown = edtPorcDescKeyDown
+        end
       end
     end
     object pnlBotoes: TPanel
       Left = 1
-      Top = 522
-      Width = 514
+      Top = 479
+      Width = 636
       Height = 70
       Align = alBottom
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 521
-      ExplicitWidth = 510
+      ExplicitTop = 478
+      ExplicitWidth = 632
       object btnConfirmar: TButton
         AlignWithMargins = True
-        Left = 131
+        Left = 191
         Top = 1
         Width = 120
         Height = 68
-        Margins.Left = 130
+        Margins.Left = 190
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
@@ -307,13 +373,13 @@ object frmBaixarCP: TfrmBaixarCP
       end
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 263
+        Left = 325
         Top = 1
         Width = 120
         Height = 68
         Margins.Left = 0
         Margins.Top = 0
-        Margins.Right = 130
+        Margins.Right = 190
         Margins.Bottom = 0
         Align = alRight
         BiDiMode = bdLeftToRight
@@ -323,7 +389,7 @@ object frmBaixarCP: TfrmBaixarCP
         ParentBiDiMode = False
         TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 259
+        ExplicitLeft = 321
       end
     end
   end

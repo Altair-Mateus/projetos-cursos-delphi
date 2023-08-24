@@ -54,6 +54,10 @@ type
     procedure checkDescontoClick(Sender: TObject);
     procedure edtValorDescExit(Sender: TObject);
     procedure edtPorcDescExit(Sender: TObject);
+    procedure edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     FID : Integer;
@@ -246,6 +250,7 @@ begin
   ValorDesc   := 0;
   ValorFinal  := 0;
   PorcentDesc := 0;
+  Result := 0;
 
   TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
   TryStrToCurr(edtValorDesc.Text, ValorDesc);
@@ -276,6 +281,8 @@ var
   PorcentDesc : Currency;
 
 begin
+
+  Result := 0;
 
   ValorCr := dmCReceber.cdsCReceberVALOR_PARCELA.AsCurrency;
   ValorDesc   := 0;
@@ -356,11 +363,23 @@ begin
 
 end;
 
+procedure TfrmBaixarCR.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+end;
+
 procedure TfrmBaixarCR.edtValorDescExit(Sender: TObject);
 begin
 
   edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
 
+end;
+
+procedure TfrmBaixarCR.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
 end;
 
 procedure TfrmBaixarCR.edtValorExit(Sender: TObject);
@@ -387,6 +406,7 @@ begin
 
   edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
   edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
+  edtPorcDesc.OnKeyPress   := TUtilitario.KeyPressValor;
 
   datePgto.Date := now;
 

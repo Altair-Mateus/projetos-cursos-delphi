@@ -29,6 +29,8 @@ type
     lblTValorParcela: TLabel;
     lblTValorVenda: TLabel;
     lblTDesc: TLabel;
+    lblTCodCliente: TLabel;
+    lblCodCliente: TLabel;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -94,6 +96,7 @@ begin
     lblNumParcela.Caption   := IntToStr(Cr.Parcela);
     lblValorVenda.Caption   := TUtilitario.FormatoMoeda(Cr.ValorVenda);
     lblValorParcela.Caption := TUtilitario.FormatoMoeda(Cr.ValorParcela);
+    lblCodCliente.Caption   := IntToStr(Cr.IdCliente);
 
   finally
 

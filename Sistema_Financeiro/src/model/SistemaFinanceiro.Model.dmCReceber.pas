@@ -106,17 +106,14 @@ begin
     end;
 
     try
-      //  Se o valor pago for parcial irá colocar status como Paga e irá
-      //  Criar uma nova duplicata com o valor restante c
-      if ContaReceber.ValorAbatido < ContaReceber.ValorParcela then
+
+      //  Se o valor da parcela - o valor pago for diferente do valor
+      //  de desconto irá gerar uma parcial
+      if (ContaReceber.ValorParcela - BaixaCR.Valor) <> BaixaCR.ValorDesc then
       begin
 
-        //  Se não ter desconto adiciona a parcial
-        if (BaixaCR.ValorDesc = 0) or ( not ((ContaReceber.ValorAbatido - BaixaCR.ValorDesc) = ContaReceber.ValorParcela) ) then
-        begin
-
           //  Inseriando nova duplcata parcial
-         if not (cdsCReceber.State in [dsInsert, dsEdit]) then
+          if not (cdsCReceber.State in [dsInsert, dsEdit]) then
           begin
 
             //  Colocando o data set em modo de inserção de dados
@@ -157,10 +154,7 @@ begin
 
         end;
 
-
-
-
-        // Montando o SQL para atualizar a duplicata anterior
+        //  Monatando o SQL para atualizar a conta baixada
         SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
                 ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
                 ' DATA_RECEBIMENTO = :DATAREC' +
@@ -169,39 +163,15 @@ begin
         FDQueryCR.Close;
         FDQueryCR.SQL.Clear;
         FDQueryCR.SQL.Add(SQLUpdate);
+
         FDQueryCR.ParamByName('VALORABATIDO').AsCurrency := ContaReceber.ValorAbatido;
         FDQueryCR.ParamByName('VALORPARCELA').AsCurrency := ContaReceber.ValorParcela;
         FDQueryCR.ParamByName('STATUS').AsString         := 'P';
-        FDQueryCR.ParamByName('DATAREC').AsDate          := BaixaCr.Data;
-        FDQueryCR.ParamByName('IDCR').AsString           := ContaReceber.ID;
-        FDQueryCR.Prepare;
-        FDQueryCR.ExecSQL;
-
-      end;
-
-      //  Se o valor pago for total
-      if ContaReceber.ValorAbatido = ContaReceber.ValorParcela then
-      begin
-
-        SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
-                ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
-                ' DATA_RECEBIMENTO = :DATAREC' +
-                ' WHERE ID = :IDCR; ';
-
-        FDQueryCR.Close;
-        FDQueryCR.SQL.Clear;
-        FDQueryCR.SQL.Add(SQLUpdate);
-
-        FDQueryCR.ParamByName('VALORABATIDO').AsCurrency := ContaReceber.ValorAbatido;
-        FDQueryCR.ParamByName('VALORPARCELA').AsCurrency := ContaReceber.ValorParcela;
-        FDQueryCR.ParamByName('STATUS').AsString         := ContaReceber.Status;
         FDQueryCR.ParamByName('DATAREC').AsDate          := BaixaCR.Data;
         FDQueryCR.ParamByName('IDCR').AsString           := ContaReceber.ID;
 
         FDQueryCR.Prepare;
         FDQueryCR.ExecSQL;
-
-      end;
 
       //  Montando o SQL para persisitr os dados na tabela Contas_receber_detalhe
       SQLInsert := 'INSERT INTO CONTAS_RECEBER_DETALHE (ID, ID_CONTA_RECEBER, DETALHES, ' +
