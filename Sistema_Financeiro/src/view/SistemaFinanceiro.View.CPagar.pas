@@ -993,6 +993,9 @@ begin
 
   edtValorCompra.OnKeyPress  := TUtilitario.KeyPressValor;
   edtValorParcela.OnKeyPress := TUtilitario.KeyPressValor;
+  edtValorCompra.OnKeyPress  := EditKeyPress;
+  edtValorParcela.OnKeyPress := EditKeyPress;
+
 
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);

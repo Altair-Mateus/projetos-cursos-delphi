@@ -335,6 +335,7 @@ begin
 
   inherited;
   edtValor.OnKeyPress := TUtilitario.KeyPressValor;
+  edtValor.OnKeyPress := EditKeyPress;
 
   //  Define as datas
   dateInicial.Date := StartOfTheMonth(Now);

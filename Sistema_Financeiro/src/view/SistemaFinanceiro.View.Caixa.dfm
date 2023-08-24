@@ -9,6 +9,7 @@ inherited frmCaixa: TfrmCaixa
   inherited CardPanelPrincipal: TCardPanel
     Width = 1259
     Height = 606
+    ActiveCard = CardCadastro
     ExplicitWidth = 1255
     ExplicitHeight = 605
     inherited CardCadastro: TCard

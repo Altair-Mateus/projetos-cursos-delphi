@@ -37,8 +37,8 @@ type
     cdsCReceberCR_ORIGEM: TIntegerField;
     cdsCReceberID_CLIENTE: TIntegerField;
     cdsCReceberNOME: TWideStringField;
-    FDQueryCrDetalheDESCONTO_BX: TIntegerField;
     FDQueryCrDetalheJUROS_BX: TIntegerField;
+    FDQueryCrDetalheDESCONTO_BX: TFMTBCDField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

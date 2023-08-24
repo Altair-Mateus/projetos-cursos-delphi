@@ -36,7 +36,7 @@ type
     cdsCPagarCP_ORIGEM: TIntegerField;
     cdsCPagarID_FORNECEDOR: TIntegerField;
     cdsCPagarRAZAO_SOCIALFORNEC: TWideStringField;
-    FDQueryCpDetalhesDESCONTO_BX: TIntegerField;
+    FDQueryCpDetalhesDESCONTO_BX: TCurrencyField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

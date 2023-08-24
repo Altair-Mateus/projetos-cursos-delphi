@@ -57,18 +57,15 @@ type
       Shift: TShiftState);
     procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-
   private
     { Private declarations }
     FID : Integer;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
-
   public
     { Public declarations }
     procedure BaixarCP(Id: Integer);
     procedure EditKeyPress(Sender: TObject; var Key: Char);
-
   end;
 var
   frmBaixarCP: TfrmBaixarCP;
@@ -79,36 +76,28 @@ uses
   SistemaFinanceiro.Utilitarios,
   SistemaFinanceiro.Model.dmUsuarios;
 { TfrmBaixarCP }
-
 procedure TfrmBaixarCP.BaixarCP(Id: Integer);
 var
   ContaPagar : TModelCP;
-
 begin
-
   FID := ID;
-
   //  Valida ID do CP
   if FID < 0 then
   begin
     raise Exception.Create('ID do contas a pagar Inválido!');
   end;
-
   ContaPagar := dmCPagar.GetCP(FID);
   try
-
     //  Se o status já for P irá ignorar
     if ContaPagar.Status = 'P' then
     begin
       raise Exception.Create('Não é possível baixar uma conta já Paga!');
     end;
-
     //  Se o status já for C irá ignorar
     if ContaPagar.Status = 'C' then
     begin
       raise Exception.Create('Não é possível baixar uma conta cancelada!');
     end;
-
     //  Carregando dados para as labels
     lblIdConta.Caption       := IntToStr(FID);
     lblParcela.Caption       := IntToStr(ContaPagar.Parcela);
@@ -116,7 +105,6 @@ begin
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
     lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
-
     if ContaPagar.Doc = '' then
     begin
       lblDoc.Caption := 'Não Informado';
@@ -125,30 +113,23 @@ begin
       begin
         lblDoc.Caption := ContaPagar.Doc;
       end;
-
     edtObs.Text := '';
     edtValor.Text := '';
-
   finally
     //  Libera da memoria
     ContaPagar.Free;
   end;
-
 end;
-
 procedure TfrmBaixarCP.btnCancelarClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
 end;
-
 procedure TfrmBaixarCP.btnConfirmarClick(Sender: TObject);
 var
   CpDetalhe : TModelCpDetalhe;
   ValorAbater : Currency;
   ValorDesc : Currency;
-
 begin
-
   //  Validações dos campos
   if Trim(edtObs.Text) = '' then
   begin
@@ -156,7 +137,6 @@ begin
     Application.MessageBox('A observação não pode estar vazia!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
-
   if datePgto.Date > Date then
   begin
     datePgto.SetFocus;
@@ -175,14 +155,12 @@ begin
     abort;
   end;
 
-
   if ValorAbater > dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency  then
   begin
     edtValor.SetFocus;
     Application.MessageBox('Valor pago não pode ser maior que o valor da parcela!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
-
   if checkDesconto.Checked then
   begin
 
@@ -196,10 +174,8 @@ begin
     end;
 
   end;
-
   CpDetalhe := TModelCpDetalhe.Create;
   try
-
     CpDetalhe.IdCP      := FID;
     CpDetalhe.Detalhes  := Trim(edtObs.Text);
     CpDetalhe.Valor     := ValorAbater;
@@ -218,11 +194,10 @@ begin
     end;
 
   finally
+
     CpDetalhe.Free;
   end;
-
 end;
-
 function TfrmBaixarCP.CalcPorcentDesc: Currency;
 var
   ValorFinal : Currency;
@@ -331,7 +306,6 @@ end;
 
 procedure TfrmBaixarCP.EditKeyPress(Sender: TObject; var Key: Char);
 begin
-
   if Key = #13 then
   begin
     //  Verifica se a tecla pressionada é o Enter
@@ -340,9 +314,7 @@ begin
     //  Pula para o proximo
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
-
 end;
-
 procedure TfrmBaixarCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -369,14 +341,10 @@ end;
 
 procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
 begin
-
   edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
-
 end;
-
 procedure TfrmBaixarCP.edtValorKeyPress(Sender: TObject; var Key: Char);
 begin
-
   if Key = #13 then
   begin
     //  Verifica se a tecla pressionada é o Enter
@@ -390,19 +358,16 @@ end;
 procedure TfrmBaixarCP.FormCreate(Sender: TObject);
 var
   I : Integer;
-
 begin
 
   //  Percorre os componentes TEdit
   for I := 0 to ComponentCount - 1 do
   begin
-
     if (Components[I] is TEdit) or (Components[I] is TDateTimePicker) then
     begin
       //  Cria o evento OnKeyPress para cada Edit encontrado
       TEdit(Components[I]).OnKeyPress := EditKeyPress;
     end;
-
   end;
 
   //  Coloca no KeyPress a formatação para valores
@@ -416,7 +381,5 @@ begin
   edtPorcDesc.OnKeyPress   := EditKeyPress;
 
   datePgto.Date := now;
-
 end;
-
 end.
