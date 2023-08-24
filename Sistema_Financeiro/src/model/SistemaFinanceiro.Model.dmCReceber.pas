@@ -154,7 +154,7 @@ begin
 
         end;
 
-        //  Monatando o SQL para atualizar a conta baixada
+        //  Montando o SQL para atualizar a conta baixada
         SQLUpdate := 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = :VALORABATIDO, ' +
                 ' VALOR_PARCELA = :VALORPARCELA, STATUS = :STATUS, ' +
                 ' DATA_RECEBIMENTO = :DATAREC' +

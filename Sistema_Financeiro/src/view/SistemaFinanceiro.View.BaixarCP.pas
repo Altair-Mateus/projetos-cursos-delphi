@@ -49,11 +49,13 @@ type
     procedure edtValorExit(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
     procedure checkDescontoClick(Sender: TObject);
-    procedure edtPorcDescExit(Sender: TObject);
-    procedure edtValorDescExit(Sender: TObject);
     procedure edtPorcDescKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtValorDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtPorcDescKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
 
   private
@@ -230,11 +232,11 @@ var
 
 begin
 
-  ValorCp := dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency;
+  ValorCp     := dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency;
   ValorDesc   := 0;
   ValorFinal  := 0;
   PorcentDesc := 0;
-  Result := 0;
+  Result      := 0;
 
   TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
   TryStrToCurr(edtValorDesc.Text, ValorDesc);
@@ -246,7 +248,7 @@ begin
       ValorDesc := (PorcentDesc / 100) * ValorCp;
 
       //  Atribui o valor do desconto ao campo
-      edtValorDesc.Text := TUtilitario.FormatarValor(ValorDesc);
+      edtValorDesc.Text := CurrToStr(ValorDesc);
 
       //  Calcula o valor final
       ValorFinal := ValorCp - ValorDesc;
@@ -284,7 +286,7 @@ begin
     PorcentDesc := (ValorDesc / ValorCp) * 100;
 
     //  Atribui a porcentagem no campo
-    edtPorcDesc.Text := TUtilitario.FormatarValor(PorcentDesc);
+    edtPorcDesc.Text := CurrToStr(PorcentDesc);
 
     //  Calcula o valor final
     ValorFinal := ValorCp - ValorDesc;
@@ -341,23 +343,25 @@ begin
 
 end;
 
-procedure TfrmBaixarCP.edtPorcDescExit(Sender: TObject);
-begin
-  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
-end;
-
 procedure TfrmBaixarCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
 end;
 
-procedure TfrmBaixarCP.edtValorDescExit(Sender: TObject);
+procedure TfrmBaixarCP.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(CalcPorcentDesc);
+end;
+
+procedure TfrmBaixarCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);
 end;
 
-procedure TfrmBaixarCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmBaixarCP.edtValorDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := TUtilitario.FormatarValor(CalcValorDesc);

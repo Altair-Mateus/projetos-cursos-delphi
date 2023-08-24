@@ -318,8 +318,8 @@ object frmBaixarCP: TfrmBaixarCP
           Enabled = False
           TabOrder = 5
           Visible = False
-          OnExit = edtValorDescExit
           OnKeyDown = edtValorDescKeyDown
+          OnKeyUp = edtValorDescKeyUp
         end
         object checkDesconto: TCheckBox
           Left = 31
@@ -338,8 +338,8 @@ object frmBaixarCP: TfrmBaixarCP
           Enabled = False
           TabOrder = 4
           Visible = False
-          OnExit = edtPorcDescExit
           OnKeyDown = edtPorcDescKeyDown
+          OnKeyUp = edtPorcDescKeyUp
         end
       end
     end
