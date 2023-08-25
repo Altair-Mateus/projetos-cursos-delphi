@@ -343,11 +343,12 @@ begin
   end;
 
   //  Bloqueios
-  edtQtdParcelas.Enabled := False;
+  edtQtdParcelas.Enabled   := False;
   edtIntervaloDias.Enabled := False;
-  edtDiaFixoVcto.Enabled := False;
+  edtDiaFixoVcto.Enabled   := False;
   checkDiaFixoVcto.Enabled := False;
-  btnGerar.Enabled := False
+  btnGerar.Enabled         := False;
+  btnLimpar.Enabled        := True;
 
 end;
 
@@ -398,17 +399,23 @@ begin
   dateVenda.Date := now;
   dateVencimento.Date := now + 7;
 
-  toggleParcelamento.State := tssOff;
-  toggleParcelamento.Enabled := True;
-
-  edtParcela.Enabled := False;
-  edtValorParcela.Enabled := False;
-
   //  Seta previamente a parcela
   edtParcela.Text := '1';
 
   //  Esvazia o dataset das parcelas
   cdsParcelas.EmptyDataSet;
+
+  //  Liberacoes
+  edtQtdParcelas.Enabled     := True;
+  edtIntervaloDias.Enabled   := True;
+  edtDiaFixoVcto.Enabled     := False;
+  checkDiaFixoVcto.Enabled   := True;
+  btnGerar.Enabled           := True;
+  btnLimpar.Enabled          := False;
+  toggleParcelamento.State   := tssOff;
+  toggleParcelamento.Enabled := True;
+  edtParcela.Enabled         := False;
+  edtValorParcela.Enabled    := False;
 
   //  Oculta o nome do cliente
   lblNomeCliente.Visible := False;
@@ -422,16 +429,17 @@ begin
   //  Esvazia o dataset das parcelas
   cdsParcelas.EmptyDataSet;
 
-  //  Liberações
-  edtQtdParcelas.Enabled := True;
+   //  Liberações
+  edtQtdParcelas.Enabled   := True;
   edtIntervaloDias.Enabled := True;
-  edtDiaFixoVcto.Enabled := True;
+  edtDiaFixoVcto.Enabled   := True;
   checkDiaFixoVcto.Enabled := True;
-  btnGerar.Enabled := True;
+  btnGerar.Enabled         := True;
+  btnLimpar.Enabled        := False;
 
-  edtQtdParcelas.Text := '';
-  edtIntervaloDias.Text := '';
-  edtDiaFixoVcto.Text := '';
+  edtQtdParcelas.Clear;
+  edtIntervaloDias.Clear;
+  edtDiaFixoVcto.Clear;
 
   checkDiaFixoVcto.Checked := False;
 

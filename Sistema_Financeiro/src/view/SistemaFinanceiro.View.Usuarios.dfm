@@ -13,11 +13,13 @@ inherited frmUsuarios: TfrmUsuarios
     inherited CardCadastro: TCard
       Width = 813
       Height = 509
-      ExplicitWidth = 809
+      ExplicitWidth = 813
+      ExplicitHeight = 509
       inherited pnlBotoesCad: TPanel
         Top = 440
         Width = 813
-        ExplicitWidth = 809
+        ExplicitTop = 440
+        ExplicitWidth = 813
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -25,7 +27,8 @@ inherited frmUsuarios: TfrmUsuarios
       inherited PanelCampos: TPanel
         Width = 813
         Height = 399
-        ExplicitWidth = 809
+        ExplicitWidth = 813
+        ExplicitHeight = 399
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -106,7 +109,7 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelTitulo: TPanel
         Width = 813
-        ExplicitWidth = 809
+        ExplicitWidth = 813
         inherited lblTitulo: TLabel
           Width = 211
           Caption = 'Inserindo um novo usu'#225'rio'
@@ -117,29 +120,29 @@ inherited frmUsuarios: TfrmUsuarios
     inherited CardPesquisa: TCard
       Width = 813
       Height = 509
-      ExplicitWidth = 813
-      ExplicitHeight = 509
+      ExplicitWidth = 809
+      ExplicitHeight = 508
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited edtPesquisar: TEdit
           OnChange = edtPesquisarChange
         end
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 689
+          ExplicitLeft = 685
         end
       end
       inherited pnlBotoes: TPanel
         Top = 440
         Width = 813
-        ExplicitTop = 440
-        ExplicitWidth = 813
+        ExplicitTop = 439
+        ExplicitWidth = 809
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -148,14 +151,14 @@ inherited frmUsuarios: TfrmUsuarios
         end
         inherited btnSair: TButton
           Left = 689
-          ExplicitLeft = 689
+          ExplicitLeft = 685
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
         Height = 359
-        ExplicitWidth = 813
-        ExplicitHeight = 359
+        ExplicitWidth = 809
+        ExplicitHeight = 358
         inherited DBGrid1: TDBGrid
           Width = 811
           Height = 357

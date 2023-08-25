@@ -3315,8 +3315,7 @@ inherited frmContasPagar: TfrmContasPagar
           Items.Strings = (
             'DATA COMPRA'
             'DATA VENCIMENTO'
-            'DATA PAGAMENTO'
-            'DATA CADASTRO')
+            'DATA PAGAMENTO')
         end
         object dateFinal: TDateTimePicker
           Left = 352
@@ -3630,13 +3629,6 @@ inherited frmContasPagar: TfrmContasPagar
               FieldName = 'VALOR_ABATIDO'
               Title.Caption = 'Valor Pago'
               Width = 107
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATA_CADASTRO'
-              Title.Caption = 'Data de Cadastro'
-              Width = 139
               Visible = True
             end>
         end

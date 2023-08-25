@@ -8,8 +8,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Cadastro Padr'#227'o'
-  ClientHeight = 508
-  ClientWidth = 795
+  ClientHeight = 507
+  ClientWidth = 791
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,8 +23,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
   object CardPanelPrincipal: TCardPanel
     Left = 0
     Top = 0
-    Width = 795
-    Height = 508
+    Width = 791
+    Height = 507
     Align = alClient
     ActiveCard = CardPesquisa
     Caption = 'CardPanel1'

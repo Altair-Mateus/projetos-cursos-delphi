@@ -203,7 +203,7 @@ begin
   //  Valida os campos obrigatórios
   ValidaCampos;
 
-  //  Se for um novo cliente
+  //  Se for um novo fornecedor
   if (dmFornecedores.cdsFornecedores.State in [dsInsert]) then
   begin
 
@@ -295,7 +295,7 @@ begin
   //  Coloca o dataset em modo de edição
   dmFornecedores.cdsFornecedores.Edit;
 
-  //  Coloca o nome do usuario no titulo
+  //  Coloca o nome do fornecedor no titulo
   lblTitulo.Caption := dmFornecedores.cdsFornecedoresId.AsString + ' - ' + dmFornecedores.cdsFornecedoresRAZAO_SOCIAL.AsString;
 
   //  Carrega os dados

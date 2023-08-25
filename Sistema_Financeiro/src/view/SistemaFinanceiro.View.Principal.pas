@@ -9,7 +9,7 @@ uses
   SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa,
   SistemaFinanceiro.View.CPagar,
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
-  SistemaFinanceiro.View.Fornecedores;
+  SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto;
 
 type
   TfrmPrincipal = class(TForm)
@@ -53,9 +53,10 @@ type
     Label4: TLabel;
     mnuClientes: TMenuItem;
     btnClientes: TButton;
-    btnusuarios: TButton;
     btnFornec: TButton;
     Fornecedores1: TMenuItem;
+    N2: TMenuItem;
+    FormasdePagamento1: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -74,6 +75,7 @@ type
     procedure mnuClientesClick(Sender: TObject);
     procedure btnFornecClick(Sender: TObject);
     procedure Fornecedores1Click(Sender: TObject);
+    procedure FormasdePagamento1Click(Sender: TObject);
 
 
   private
@@ -85,6 +87,7 @@ type
     procedure ExibeTelaSaldoCaixa;
     procedure ExibeTelaClientes;
     procedure ExibeTelaFonecedores;
+    procedure ExibeTelaFrPgto;
 
   public
     { Public declarations }
@@ -152,6 +155,27 @@ end;
 procedure TfrmPrincipal.ContasaReceber1Click(Sender: TObject);
 begin
   ExibeTelaCReceber;
+end;
+
+procedure TfrmPrincipal.ExibeTelaFrPgto;
+begin
+
+  //Cria o form
+  frmFrPgto := TfrmFrPgto.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFrPgto.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmFrPgto);
+
+  end;
+
+
 end;
 
 procedure TfrmPrincipal.ExibeTelaCaixa;
@@ -287,6 +311,11 @@ begin
     //  Libera da memoria
     FreeAndNil(frmUsuarios);
   end
+end;
+
+procedure TfrmPrincipal.FormasdePagamento1Click(Sender: TObject);
+begin
+  ExibeTelaFrPgto;
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);

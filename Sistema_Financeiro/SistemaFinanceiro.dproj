@@ -237,6 +237,19 @@
             <Form>frmRelFornecedores</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmFrPgto.pas">
+            <Form>dmFrPgto</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.FrPgto.pas">
+            <Form>frmFrPgto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FrPgto.pas">
+            <Form>frmRelFrPgto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

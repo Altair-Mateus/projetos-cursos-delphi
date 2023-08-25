@@ -238,8 +238,8 @@ end;
 procedure TfrmUsuarios.HabilitaBotoes;
 begin
 
-  btnAlterar.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
-  btnExcluir.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
+  btnAlterar.Enabled  := not DataSourceUsuarios.DataSet.IsEmpty;
+  btnExcluir.Enabled  := not DataSourceUsuarios.DataSet.IsEmpty;
   btnImprimir.Enabled := not DataSourceUsuarios.DataSet.IsEmpty;
 
 end;

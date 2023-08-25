@@ -342,11 +342,12 @@ begin
   end;
 
   //  Bloqueios
-  edtQtdParcelas.Enabled := False;
+  edtQtdParcelas.Enabled   := False;
   edtIntervaloDias.Enabled := False;
-  edtDiaFixoVcto.Enabled := False;
+  edtDiaFixoVcto.Enabled   := False;
   checkDiaFixoVcto.Enabled := False;
-  btnGerar.Enabled := False
+  btnGerar.Enabled         := False;
+  btnLimpar.Enabled        := True;
 
 end;
 
@@ -392,17 +393,24 @@ begin
   dateCompra.Date := now;
   dateVencimento.Date := now + 7;
 
-  toggleParcelamento.State := tssOff;
-  toggleParcelamento.Enabled := True;
-
-  edtParcela.Enabled := False;
-  edtValorParcela.Enabled := False;
-
   //  Seta parcela previamente como 1
   edtParcela.Text := '1';
 
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
+
+  //  Liberacoes
+  edtQtdParcelas.Enabled     := True;
+  edtIntervaloDias.Enabled   := True;
+  edtDiaFixoVcto.Enabled     := False;
+  checkDiaFixoVcto.Enabled   := True;
+  btnGerar.Enabled           := True;
+  btnLimpar.Enabled          := False;
+  toggleParcelamento.State   := tssOff;
+  toggleParcelamento.Enabled := True;
+  edtParcela.Enabled         := False;
+  edtValorParcela.Enabled    := False;
+  lblNomeFornecedor.Visible  := False;
 
 end;
 
@@ -414,15 +422,16 @@ begin
   cdsParcelas.EmptyDataSet;
 
   //  Liberações
-  edtQtdParcelas.Enabled := True;
+  edtQtdParcelas.Enabled   := True;
   edtIntervaloDias.Enabled := True;
-  edtDiaFixoVcto.Enabled := True;
+  edtDiaFixoVcto.Enabled   := True;
   checkDiaFixoVcto.Enabled := True;
-  btnGerar.Enabled := True;
+  btnGerar.Enabled         := True;
+  btnLimpar.Enabled        := False;
 
-  edtQtdParcelas.Text := '';
-  edtIntervaloDias.Text := '';
-  edtDiaFixoVcto.Text := '';
+  edtQtdParcelas.Clear;
+  edtIntervaloDias.Clear;
+  edtDiaFixoVcto.Clear;
 
   checkDiaFixoVcto.Checked := False;
 
@@ -664,7 +673,7 @@ begin
   if Trim(memDesc.Text) = '' then
   begin
     memDesc.SetFocus;
-    Application.MessageBox('Campo FORNECEDOR não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo DESCRICAO não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
 
@@ -672,7 +681,7 @@ begin
   begin
 
     edtFornecedor.SetFocus;
-    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo FORNECEDOR não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;
@@ -888,6 +897,8 @@ begin
   edtValorParcela.Text := TUtilitario.FormatarValor(dmCPagar.cdsCPagarVALOR_PARCELA.AsString);
   dateVencimento.Date  := dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime;
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
+
+  BuscaNomeFornecedor;
 
 end;
 

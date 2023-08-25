@@ -469,6 +469,7 @@ end;
 
 procedure TfrmCaixa.ValidaCampos;
 begin
+
   if Trim(memDesc.Text) = '' then
   begin
     Application.MessageBox('Campo Descrição não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -487,5 +488,6 @@ begin
     Application.MessageBox('Selecione o tipo do lançamento!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
+
 end;
 end.
