@@ -43,6 +43,7 @@ begin
   Result := StringReplace(Result, '{', '', [rfReplaceAll]);
   Result := StringReplace(Result, '}', '', [rfReplaceAll]);
 end;
+
 class procedure TUtilitario.KeyPressValor(Sender: TObject; var Key: Char);
 begin
   //  Se for digitado um ponto, será convertido para virgula
@@ -64,6 +65,7 @@ begin
   end;
 
 end;
+
 class function TUtilitario.LikeFind(Pesquisa: String; Grid: TDBGrid): String;
 var
   LContador : Integer;

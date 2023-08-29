@@ -250,6 +250,15 @@
             <Form>frmRelFrPgto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BaixarCR.FrPgto.pas">
+            <Form>frmFrPgtoBaixaCr</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmPgtoBxCr.pas">
+            <Form>dmPgtoBxCr</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -28,6 +28,8 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
+    function GetNomeFrPgto(Id : String) : String;
+
 
   end;
 
@@ -90,6 +92,39 @@ begin
     FDQueryId.Free;
 
   end;
+
+end;
+
+function TdmFrPgto.GetNomeFrPgto(Id: String): String;
+var
+  FDQueryNome : TFDQuery;
+
+begin
+
+   FDQueryNome := TFDQuery.Create(Self);
+   Result := '';
+
+   try
+
+    //  Estabelece conexão
+    FDQueryNome.Connection := DataModule1.FDConnection;
+
+    FDQueryNome.Close;
+    FDQueryNome.SQL.Clear;
+    FDQueryNome.SQL.Add('SELECT NOME_FR FROM FR_PGTO WHERE ID_FR = :ID');
+
+    FDQueryNome.ParamByName('ID').AsString := Id;
+
+    FDQueryNome.Open;
+
+    Result := FDQueryNome.FieldByName('NOME_FR').AsString;
+
+   finally
+
+    FDQueryNome.Close;
+    FDQueryNome.Free;
+
+   end;
 
 end;
 

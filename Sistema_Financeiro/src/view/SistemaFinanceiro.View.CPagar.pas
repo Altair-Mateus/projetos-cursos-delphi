@@ -751,15 +751,14 @@ procedure TfrmContasPagar.checkDiaFixoVctoClick(Sender: TObject);
 begin
   inherited;
 
-
-
-  if checkDiaFixoVcto.Checked then
+    if checkDiaFixoVcto.Checked then
   begin
 
-    edtDiaFixoVcto.Visible := True;
-    lblDiaFixo.Visible     := True;
+    edtDiaFixoVcto.Visible   := True;
+    edtDiaFixoVcto.Enabled   := True;
+    lblDiaFixo.Visible       := True;
     edtIntervaloDias.Enabled := False;
-    edtIntervaloDias.Text := '30';
+    edtIntervaloDias.Text    := '30';
 
     edtDiaFixoVcto.SetFocus;
 
@@ -767,10 +766,11 @@ begin
   else
   begin
 
-    edtDiaFixoVcto.Visible := False;
-    lblDiaFixo.Visible     := False;
+    edtDiaFixoVcto.Visible   := False;
+    edtDiaFixoVcto.Enabled   := False;
+    lblDiaFixo.Visible       := False;
     edtIntervaloDias.Enabled := True;
-    edtIntervaloDias.Text := '';
+    edtIntervaloDias.Clear;
 
   end;
 

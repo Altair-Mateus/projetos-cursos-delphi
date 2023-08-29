@@ -41,7 +41,9 @@ uses
   SistemaFinanceiro.View.Relatorios.Fornecedores in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.Fornecedores.pas' {frmRelFornecedores},
   SistemaFinanceiro.Model.dmFrPgto in 'src\model\SistemaFinanceiro.Model.dmFrPgto.pas' {dmFrPgto: TDataModule},
   SistemaFinanceiro.View.FrPgto in 'src\view\SistemaFinanceiro.View.FrPgto.pas' {frmFrPgto},
-  SistemaFinanceiro.View.Relatorios.FrPgto in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FrPgto.pas' {frmRelFrPgto};
+  SistemaFinanceiro.View.Relatorios.FrPgto in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FrPgto.pas' {frmRelFrPgto},
+  SistemaFinanceiro.View.BaixarCR.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCR.FrPgto.pas' {frmFrPgtoBaixaCr},
+  SistemaFinanceiro.Model.dmPgtoBxCr in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCr.pas' {dmPgtoBxCr: TDataModule};
 
 {$R *.res}
 begin
@@ -56,5 +58,6 @@ begin
   Application.CreateForm(TdmClientes, dmClientes);
   Application.CreateForm(TdmFornecedores, dmFornecedores);
   Application.CreateForm(TdmFrPgto, dmFrPgto);
+  Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
   Application.Run;
 end.

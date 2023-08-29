@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
   Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
   SistemaFinanceiro.Model.Entidades.CR.Detalhe,
-  SistemaFinanceiro.Model.Entidades.CR;
+  SistemaFinanceiro.Model.Entidades.CR, SistemaFinanceiro.View.BaixarCR.FrPgto;
 
 type
   TfrmBaixarCR = class(TForm)
@@ -221,8 +221,36 @@ begin
     CrDetalhe.Usuario    := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
     CrDetalhe.ValorDesc  := ValorDesc;
 
-
+    //  Forma de pgto
     try
+
+      //  Cria o form
+      frmFrPgtoBaixaCr:= TfrmFrPgtoBaixaCr.Create(Self);
+
+      //  Passa as informações para a tela de pgto
+      frmFrPgtoBaixaCr.FrPgtoCr(FID, ValorAbater);
+
+      //  Exibe o form
+      frmFrPgtoBaixaCr.ShowModal;
+
+    except on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
+
+    end;
+
+    //  Verifica se deu tudo certo com as formas de pgto
+    if frmFrPgtoBaixaCr.ModalResult <> mrOk then
+    begin
+      abort;
+    end
+      else
+      begin
+        FreeAndNil(frmFrPgtoBaixaCr);
+      end;
+
+
+     try
 
       dmCReceber.BaixarCR(CrDetalhe);
       Application.MessageBox('Conta baixada com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
