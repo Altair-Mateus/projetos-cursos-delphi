@@ -13,13 +13,12 @@ type
     pnlBotoes: TPanel;
     btnSair: TButton;
     pnlGrid: TPanel;
-    Image1: TImage;
     DBGrid1: TDBGrid;
     pnlPesquisa: TPanel;
     DataSourceCPDetalhe: TDataSource;
     lblTValorParcela: TLabel;
-    lblTValorVenda: TLabel;
-    lblValorVenda: TLabel;
+    lblTValorCompra: TLabel;
+    lblValorCompra: TLabel;
     lblValorParcela: TLabel;
     lblTCodFornec: TLabel;
     lblCodFornec: TLabel;
@@ -31,6 +30,9 @@ type
     lblTDesc: TLabel;
     lblTVencimento: TLabel;
     lblTNumParcela: TLabel;
+    lblFrPgto: TLabel;
+    DBGridPgto: TDBGrid;
+    DataSourcePgto: TDataSource;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -61,6 +63,7 @@ procedure TfrmCpDetalhe.ExibirCPDetalhes(IDCp: integer);
 var
   Cp : TModelCp;
   SQL : String;
+  SqlPgto : String;
 
 begin
 
@@ -91,7 +94,7 @@ begin
     lblDesc.Caption         := Cp.Desc;
     lblVencimento.Caption   := FormatDateTime('DD/MM/YYYY', Cp.DataVencimento);
     lblNumParcela.Caption   := IntToStr(Cp.Parcela);
-    lblValorVenda.Caption   := TUtilitario.FormatoMoeda(Cp.ValorCompra);
+    lblValorCompra.Caption  := TUtilitario.FormatoMoeda(Cp.ValorCompra);
     lblValorParcela.Caption := TUtilitario.FormatoMoeda(Cp.ValorParcela);
     lblCodFornec.Caption    := IntToStr(Cp.IdFornecedor);
 
@@ -116,6 +119,22 @@ begin
   dmCPagar.FDQueryCpDetalhes.ParamByName('IDCP').AsInteger := IDCp;
   dmCPagar.FDQueryCpDetalhes.Prepare;
   dmCPagar.FDQueryCpDetalhes.Open();
+
+
+  //  Montando o SQL dos pagamentos
+  SqlPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CP PG ' +
+             'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR ' +
+             'WHERE PG.ID_CP = :IDCP';
+
+  dmCPagar.FDQueryPgtoCp.Close;
+  dmCPagar.FDQueryPgtoCp.SQL.Clear;
+  dmCPagar.FDQueryPgtoCp.Params.Clear;
+  dmCPagar.FDQueryPgtoCp.SQL.Add(SqlPgto);
+
+  dmCPagar.FDQueryPgtoCp.ParamByName('IDCP').AsInteger := IDCp;
+  dmCPagar.FDQueryPgtoCp.Prepare;
+  dmCPagar.FDQueryPgtoCp.Open();
+
 
 end;
 

@@ -4,7 +4,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList, SistemaFinanceiro.Model.Entidades.CP,
-  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.ComCtrls;
+  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.ComCtrls,
+  SistemaFinanceiro.View.BaixarCP.FrPgto;
 type
   TfrmBaixarCP = class(TForm)
     pnlPrincipal: TPanel;
@@ -197,7 +198,9 @@ begin
     end;
 
   end;
+
   CpDetalhe := TModelCpDetalhe.Create;
+
   try
     CpDetalhe.IdCP      := FID;
     CpDetalhe.Detalhes  := Trim(edtObs.Text);
@@ -205,6 +208,34 @@ begin
     CpDetalhe.Data      := datePgto.Date;
     CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
     CpDetalhe.ValorDesc := ValorDesc;
+
+    //  Forma de pgto
+    try
+
+      //  Cria o form
+      frmFrPgtoBaixaCp:= TfrmFrPgtoBaixaCp.Create(Self);
+
+      //  Passa as informações para a tela de pgto
+      frmFrPgtoBaixaCp.FrPgtoCp(FID, ValorAbater);
+
+      //  Exibe o form
+      frmFrPgtoBaixaCp.ShowModal;
+
+    except on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
+
+    end;
+
+    //  Verifica se deu tudo certo com as formas de pgto
+    if frmFrPgtoBaixaCp.ModalResult <> mrOk then
+    begin
+      abort;
+    end
+      else
+      begin
+        FreeAndNil(frmFrPgtoBaixaCp);
+      end;
 
     try
 
@@ -220,7 +251,9 @@ begin
 
     CpDetalhe.Free;
   end;
+
 end;
+
 function TfrmBaixarCP.CalcPorcentDesc: Currency;
 var
   ValorFinal : Currency;

@@ -1,6 +1,7 @@
 object frmBaixarCR: TfrmBaixarCR
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Baixar Conta a Receber'
   ClientHeight = 541
   ClientWidth = 659

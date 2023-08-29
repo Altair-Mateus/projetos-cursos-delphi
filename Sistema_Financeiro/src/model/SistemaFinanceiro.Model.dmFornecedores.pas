@@ -98,6 +98,7 @@ var
 
 begin
 
+  Result := False;
   FDQueryCpFornec := TFDQuery.Create(nil);
 
   try

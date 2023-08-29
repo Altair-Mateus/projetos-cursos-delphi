@@ -109,8 +109,8 @@ object dmCPagar: TdmCPagar
     Connection = DataModule1.FDConnection
     SQL.Strings = (
       'SELECT * FROM CONTAS_PAGAR_DETALHE;')
-    Left = 296
-    Top = 288
+    Left = 144
+    Top = 296
     object FDQueryCpDetalhesID: TIntegerField
       FieldName = 'ID'
       Origin = 'ID'
@@ -154,6 +154,57 @@ object dmCPagar: TdmCPagar
     object FDQueryCpDetalhesDESCONTO_BX: TCurrencyField
       FieldName = 'DESCONTO_BX'
       Origin = 'DESCONTO_BX'
+      DisplayFormat = 'R$ #,##0.00'
+    end
+  end
+  object FDQueryPgtoCp: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CP PG '
+      'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR;')
+    Left = 280
+    Top = 296
+    object FDQueryPgtoCpID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryPgtoCpID_CP: TIntegerField
+      FieldName = 'ID_CP'
+      Origin = 'ID_CP'
+      Required = True
+    end
+    object FDQueryPgtoCpID_FR_PGTO: TIntegerField
+      FieldName = 'ID_FR_PGTO'
+      Origin = 'ID_FR_PGTO'
+      Required = True
+    end
+    object FDQueryPgtoCpNR_FR: TIntegerField
+      FieldName = 'NR_FR'
+      Origin = 'NR_FR'
+      Required = True
+    end
+    object FDQueryPgtoCpDATA_HORA: TSQLTimeStampField
+      FieldName = 'DATA_HORA'
+      Origin = 'DATA_HORA'
+      Required = True
+    end
+    object FDQueryPgtoCpVALOR_PAGO: TFMTBCDField
+      FieldName = 'VALOR_PAGO'
+      Origin = 'VALOR_PAGO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+      Size = 2
+    end
+    object FDQueryPgtoCpNOME_FR: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME_FR'
+      Origin = 'NOME_FR'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
     end
   end
 end

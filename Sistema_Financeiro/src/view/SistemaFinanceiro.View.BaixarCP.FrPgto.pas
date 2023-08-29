@@ -1,46 +1,46 @@
-unit SistemaFinanceiro.View.BaixarCR.FrPgto;
+unit SistemaFinanceiro.View.BaixarCP.FrPgto;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, System.ImageList, Vcl.ImgList, Datasnap.DBClient,
-  SistemaFinanceiro.View.FrPgto;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
+  SistemaFinanceiro.View.FrPgto, Datasnap.DBClient;
 
 type
-  TfrmFrPgtoBaixaCr = class(TForm)
+  TfrmFrPgtoBaixaCp = class(TForm)
+    ImageList1: TImageList;
     pnlBotoes: TPanel;
     btnConfirmar: TButton;
     btnCancelar: TButton;
-    ImageList1: TImageList;
     pnlForma: TPanel;
-    pnlGrid: TPanel;
-    DBGrid1: TDBGrid;
-    dsFrPgto: TDataSource;
-    cdsFrPgto: TClientDataSet;
     lblCodFrPgto: TLabel;
+    lblValorForma: TLabel;
+    lblValorTotalCr: TLabel;
+    lblValorRest: TLabel;
+    lblNomeFrPgto: TLabel;
     edtCodFrPgto: TEdit;
     btnPesqFrPgto: TButton;
     edtValorForma: TEdit;
-    lblValorForma: TLabel;
-    lblValorTotalCr: TLabel;
-    edtValorCr: TEdit;
+    edtValorCp: TEdit;
     edtValorRest: TEdit;
-    lblValorRest: TLabel;
-    cdsFrPgtoNome: TWideStringField;
-    cdsFrPgtovalorpago: TCurrencyField;
     btnAdiciona: TButton;
     btnLimpar: TButton;
-    cdsFrPgtoid_fr: TIntegerField;
-    lblNomeFrPgto: TLabel;
-    procedure btnPesqFrPgtoClick(Sender: TObject);
-    procedure edtValorFormaEnter(Sender: TObject);
-    procedure btnAdicionaClick(Sender: TObject);
-    procedure edtCodFrPgtoExit(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
-    procedure btnLimparClick(Sender: TObject);
+    pnlGrid: TPanel;
+    DBGrid1: TDBGrid;
+    cdsFrPgto: TClientDataSet;
+    dsFrPgto: TDataSource;
+    cdsFrPgtoID_FR: TIntegerField;
+    cdsFrPgtoNOME: TWideStringField;
+    cdsFrPgtoVALORPAGO: TCurrencyField;
     procedure FormCreate(Sender: TObject);
+    procedure edtValorFormaEnter(Sender: TObject);
+    procedure edtCodFrPgtoExit(Sender: TObject);
+    procedure btnPesqFrPgtoClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure btnAdicionaClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -52,34 +52,33 @@ type
 
   public
     { Public declarations }
-    procedure FrPgtoCr(Id : Integer; ValorCr : Currency);
+    procedure FrPgtoCp(Id : Integer; ValorCr : Currency);
 
   end;
 
 var
-  frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr;
+  frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp;
 
 implementation
 
 {$R *.dfm}
 
 uses
+  SistemaFinanceiro.Model.dmFrPgto,
+  SistemaFinanceiro.Model.dmPgtoBxCp;
 
-  SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Utilitarios,
-  SistemaFinanceiro.Model.dmPgtoBxCr;
-
-procedure TfrmFrPgtoBaixaCr.btnAdicionaClick(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.btnAdicionaClick(Sender: TObject);
 var
   ValorForma : Currency;
   ValorRest  : Currency;
-  ValorCr    : Currency;
+  ValorCp    : Currency;
 
 begin
 
   //  Valida Campos
-  if (not TryStrToCurr(edtValorCr.Text, ValorCr)) or (ValorCr <= 0) then
+  if (not TryStrToCurr(edtValorCp.Text, ValorCp)) or (ValorCp <= 0) then
   begin
-    Application.MessageBox('Valor da Conta a Receber Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Valor da Conta a Pagar Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
   end;
 
@@ -96,7 +95,7 @@ begin
     abort;
   end;
 
-  if (ValorForma > ValorCr) or (ValorForma > ValorRest) then
+  if (ValorForma > ValorCp) or (ValorForma > ValorRest) then
   begin
 
     edtValorForma.Clear;
@@ -136,16 +135,16 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.btnCancelarClick(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.btnCancelarClick(Sender: TObject);
 begin
-  ModalResult := mrCancel;
+  Modalresult := mrCancel;
 end;
 
-procedure TfrmFrPgtoBaixaCr.btnConfirmarClick(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.btnConfirmarClick(Sender: TObject);
 var
   Contador   : Integer;
   TotalPgtos : Currency;
-  ValorCr    : Currency;
+  ValorCp    : Currency;
 
 begin
 
@@ -153,7 +152,7 @@ begin
   Contador   := 0;
 
   //  Valida valor CR
-  if (not TryStrToCurr(edtValorCr.Text, ValorCr)) or (ValorCr <= 0) then
+  if (not TryStrToCurr(edtValorCp.Text, ValorCp)) or (ValorCp <= 0) then
   begin
     Application.MessageBox('Valor da Conta a Receber Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
@@ -167,29 +166,28 @@ begin
 
   end;
 
+
   // Coloca na primeira posição do dataset
   cdsFrPgto.First;
 
-  //  Soma o valor de todas as formas de pagamento
+  //  Soma o total das formas de pagamento
   while not cdsFrPgto.Eof do
   begin
 
     TotalPgtos := TotalPgtos + cdsFrPgto.FieldByName('VALORPAGO').AsCurrency;
 
-    //  Avança para o proximo
     cdsFrPgto.Next;
 
   end;
 
-  //  Compara com o valor total do CR
-  if TotalPgtos < ValorCr then
+  //  Compara o valor total e o valor da conta
+  if TotalPgtos < ValorCp then
   begin
 
     Application.MessageBox('Valor das formas de pagamento menor que o valor da conta!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;
-
 
 
   // Coloca na primeira posição do dataset
@@ -201,21 +199,21 @@ begin
 
     Contador := Contador + 1;
 
-    if dmPgtoBxCr.cdsPgtoBxCr.State in [dsBrowse, dsInactive] then
+    if dmPgtoBxCp.cdsPgtoBxCp.State in [dsBrowse, dsInactive] then
     begin
-      dmPgtoBxCr.cdsPgtoBxCr.Insert;
+      dmPgtoBxCp.cdsPgtoBxCp.Insert;
     end;
 
-    dmPgtoBxCr.GeraCodigo;
-    dmPgtoBxCr.cdsPgtoBxCrID_CR.AsInteger       := FId;
-    dmPgtoBxCr.cdsPgtoBxCrID_FR_PGTO.AsInteger  := cdsFrPgtoid_fr.AsInteger;
-    dmPgtoBxCr.cdsPgtoBxCrNR_FR.AsInteger       := Contador;
-    dmPgtoBxCr.cdsPgtoBxCrDATA_HORA.AsDateTime  := Now;
-    dmPgtoBxCr.cdsPgtoBxCrVALOR_PAGO.AsCurrency := cdsFrPgtovalorpago.AsCurrency;
+    dmPgtoBxCp.GeraCodigo;
+    dmPgtoBxCp.cdsPgtoBxCpID_CP.AsInteger       := FId;
+    dmPgtoBxCp.cdsPgtoBxCpID_FR_PGTO.AsInteger  := cdsFrPgtoID_FR.AsInteger;
+    dmPgtoBxCp.cdsPgtoBxCpNR_FR.AsInteger       := Contador;
+    dmPgtoBxCp.cdsPgtoBxCpDATA_HORA.AsDateTime  := Now;
+    dmPgtoBxCp.cdsPgtoBxCpVALOR_PAGO.AsCurrency := cdsFrPgtoVALORPAGO.AsCurrency;
 
     //  Gravando no banco
-    dmPgtoBxCr.cdsPgtoBxCr.Post;
-    dmPgtoBxCr.cdsPgtoBxCr.ApplyUpdates(0);
+    dmPgtoBxCp.cdsPgtoBxCp.Post;
+    dmPgtoBxCp.cdsPgtoBxCp.ApplyUpdates(0);
 
     cdsFrPgto.Next;
 
@@ -226,13 +224,13 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.btnLimparClick(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.btnLimparClick(Sender: TObject);
 begin
 
   cdsFrPgto.EmptyDataSet;
 
   //  Reinicia o valor restante
-  edtValorRest.Text := Trim(edtValorCr.Text);
+  edtValorRest.Text := Trim(edtValorCp.Text);
 
   //  Limpa os campos
   edtCodFrPgto.Clear;
@@ -243,9 +241,8 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.btnPesqFrPgtoClick(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.btnPesqFrPgtoClick(Sender: TObject);
 begin
-
   //  Cria o form
   frmFrPgto := TfrmFrPgto.Create(Self);
 
@@ -268,7 +265,7 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.BuscaNomeFrPgto;
+procedure TfrmFrPgtoBaixaCp.BuscaNomeFrPgto;
 var
   NomeFrPgto : String;
 
@@ -295,7 +292,7 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.EditKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmFrPgtoBaixaCp.EditKeyPress(Sender: TObject; var Key: Char);
 begin
 
   if Key = #13 then
@@ -309,24 +306,22 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.edtCodFrPgtoExit(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.edtCodFrPgtoExit(Sender: TObject);
 begin
   BuscaNomeFrPgto;
 end;
 
-procedure TfrmFrPgtoBaixaCr.edtValorFormaEnter(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.edtValorFormaEnter(Sender: TObject);
 begin
-
-  //  Assume previamente o valor total da CR
+  //  Assume previamente o valor total da Cp
   edtValorForma.Text := edtValorRest.Text;
-
 end;
 
-procedure TfrmFrPgtoBaixaCr.FormCreate(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.FormCreate(Sender: TObject);
 begin
 
   //  Coloca no KeyPress a formatação para valores
-  edtValorCr.OnKeyPress    := KeyPressValor;
+  edtValorCp.OnKeyPress    := KeyPressValor;
   edtValorRest.OnKeyPress  := KeyPressValor;
   edtValorForma.OnKeyPress := KeyPressValor;
 
@@ -334,36 +329,36 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.FormShow(Sender: TObject);
+procedure TfrmFrPgtoBaixaCp.FormShow(Sender: TObject);
 begin
   edtCodFrPgto.SetFocus;
 end;
 
-procedure TfrmFrPgtoBaixaCr.FrPgtoCr(Id: Integer; ValorCr : Currency);
+procedure TfrmFrPgtoBaixaCp.FrPgtoCp(Id: Integer; ValorCr: Currency);
 begin
 
   FID := Id;
 
-  //  Valida ID do CR
+  //  Valida ID do CP
   if FID < 0 then
   begin
-    raise Exception.Create('ID do contas a receber Inválido!');
+    raise Exception.Create('ID do contas a Pagar Inválido!');
   end;
 
   if ValorCr <= 0 then
   begin
-    raise Exception.Create('Valor da Conta a Receber Inválido!');
+    raise Exception.Create('Valor da Conta a Pagar Inválido!');
   end;
 
-  // Puxa o valor da CR
-  edtValorCr.Text   := CurrToStr(ValorCr);
+  // Puxa o valor da Cp
+  edtValorCp.Text   := CurrToStr(ValorCr);
   edtValorRest.Text := CurrToStr(ValorCr);
 
   edtValorForma.Clear;
 
 end;
 
-procedure TfrmFrPgtoBaixaCr.KeyPressValor(Sender: TObject; var Key: Char);
+procedure TfrmFrPgtoBaixaCp.KeyPressValor(Sender: TObject; var Key: Char);
 begin
 
   if Key = #13 then

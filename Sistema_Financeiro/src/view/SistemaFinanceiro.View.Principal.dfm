@@ -10880,7 +10880,7 @@ object frmPrincipal: TfrmPrincipal
       Images = ImageList1
       ParentBiDiMode = False
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 1
       WordWrap = True
       OnClick = btnCPClick
     end
@@ -10907,7 +10907,7 @@ object frmPrincipal: TfrmPrincipal
       ParentFont = False
       ParentShowHint = False
       ShowHint = False
-      TabOrder = 1
+      TabOrder = 2
       WordWrap = True
       OnClick = btnCRClick
     end
@@ -10932,7 +10932,7 @@ object frmPrincipal: TfrmPrincipal
       Images = ImageList1
       ParentBiDiMode = False
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 0
       WordWrap = True
       OnClick = btnCaixaClick
     end

@@ -43,7 +43,9 @@ uses
   SistemaFinanceiro.View.FrPgto in 'src\view\SistemaFinanceiro.View.FrPgto.pas' {frmFrPgto},
   SistemaFinanceiro.View.Relatorios.FrPgto in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FrPgto.pas' {frmRelFrPgto},
   SistemaFinanceiro.View.BaixarCR.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCR.FrPgto.pas' {frmFrPgtoBaixaCr},
-  SistemaFinanceiro.Model.dmPgtoBxCr in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCr.pas' {dmPgtoBxCr: TDataModule};
+  SistemaFinanceiro.Model.dmPgtoBxCr in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCr.pas' {dmPgtoBxCr: TDataModule},
+  SistemaFinanceiro.Model.dmPgtoBxCp in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCp.pas' {dmPgtoBxCp: TDataModule},
+  SistemaFinanceiro.View.BaixarCP.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCP.FrPgto.pas' {frmFrPgtoBaixaCp};
 
 {$R *.res}
 begin
@@ -59,5 +61,6 @@ begin
   Application.CreateForm(TdmFornecedores, dmFornecedores);
   Application.CreateForm(TdmFrPgto, dmFrPgto);
   Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
+  Application.CreateForm(TdmPgtoBxCp, dmPgtoBxCp);
   Application.Run;
 end.

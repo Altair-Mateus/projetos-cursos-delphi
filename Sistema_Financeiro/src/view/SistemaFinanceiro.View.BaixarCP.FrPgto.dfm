@@ -1,4 +1,4 @@
-object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
+object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
@@ -7,7 +7,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
   ClientWidth = 391
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
+  Font.Color = clBlack
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
@@ -179,7 +179,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       TabOrder = 1
       OnEnter = edtValorFormaEnter
     end
-    object edtValorCr: TEdit
+    object edtValorCp: TEdit
       Left = 151
       Top = 168
       Width = 108
@@ -244,28 +244,30 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
+      TitleFont.Color = clBlack
       TitleFont.Height = -16
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       Columns = <
         item
           Expanded = False
-          FieldName = 'id_fr'
+          FieldName = 'ID_FR'
           Title.Caption = 'Cod'
-          Width = 51
+          Width = 45
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'Nome'
-          Width = 200
+          FieldName = 'NOME'
+          Title.Caption = 'Nome'
+          Width = 210
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'valorpago'
+          FieldName = 'VALORPAGO'
           Title.Caption = 'Valor'
+          Width = 114
           Visible = True
         end>
     end
@@ -1934,32 +1936,32 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object dsFrPgto: TDataSource
-    DataSet = cdsFrPgto
-    Left = 344
-    Top = 329
-  end
   object cdsFrPgto: TClientDataSet
     PersistDataPacket.Data = {
-      670000009619E0BD01000000180000000300000000000300000067000569645F
-      66720400010000000000044E6F6D6501004A0000000100055749445448020002
-      00C8000976616C6F727061676F08000400000001000753554254595045020049
+      670000009619E0BD01000000180000000300000000000300000067000549445F
+      46520400010000000000044E4F4D4501004A0000000100055749445448020002
+      00C8000956414C4F525041474F08000400000001000753554254595045020049
       0006004D6F6E6579000000}
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 344
-    Top = 265
-    object cdsFrPgtoid_fr: TIntegerField
-      FieldName = 'id_fr'
+    Left = 336
+    Top = 329
+    object cdsFrPgtoID_FR: TIntegerField
+      FieldName = 'ID_FR'
     end
-    object cdsFrPgtoNome: TWideStringField
-      FieldName = 'Nome'
+    object cdsFrPgtoNOME: TWideStringField
+      FieldName = 'NOME'
       Size = 100
     end
-    object cdsFrPgtovalorpago: TCurrencyField
-      FieldName = 'valorpago'
+    object cdsFrPgtoVALORPAGO: TCurrencyField
+      FieldName = 'VALORPAGO'
       DisplayFormat = 'R$ #,##0.00'
     end
+  end
+  object dsFrPgto: TDataSource
+    DataSet = cdsFrPgto
+    Left = 328
+    Top = 273
   end
 end

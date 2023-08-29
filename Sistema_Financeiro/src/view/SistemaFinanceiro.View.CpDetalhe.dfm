@@ -44,22 +44,32 @@ object frmCpDetalhe: TfrmCpDetalhe
     Width = 768
     Height = 299
     Align = alClient
+    Color = 5737262
+    ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 97
     ExplicitWidth = 764
-    ExplicitHeight = 330
-    object Image1: TImage
-      Left = 640
-      Top = 152
-      Width = 105
-      Height = 105
+    ExplicitHeight = 298
+    object lblFrPgto: TLabel
+      Left = 16
+      Top = 140
+      Width = 182
+      Height = 19
+      Caption = 'Formas de Pagamento'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
       Width = 766
-      Height = 297
-      Align = alClient
+      Height = 120
+      Align = alTop
       DataSource = DataSourceCPDetalhe
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
@@ -104,6 +114,49 @@ object frmCpDetalhe: TfrmCpDetalhe
           Visible = True
         end>
     end
+    object DBGridPgto: TDBGrid
+      Left = 1
+      Top = 178
+      Width = 766
+      Height = 120
+      Align = alBottom
+      DataSource = DataSourcePgto
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_FR_PGTO'
+          Title.Caption = 'Cod'
+          Width = 46
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_FR'
+          Title.Caption = 'Forma de Pagamento'
+          Width = 364
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_PAGO'
+          Title.Caption = 'Valor Pago'
+          Width = 143
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA_HORA'
+          Title.Caption = 'Data/Hora'
+          Width = 173
+          Visible = True
+        end>
+    end
   end
   object pnlPesquisa: TPanel
     Left = 0
@@ -115,6 +168,7 @@ object frmCpDetalhe: TfrmCpDetalhe
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 764
     object lblTValorParcela: TLabel
       Left = 408
       Top = 91
@@ -130,13 +184,13 @@ object frmCpDetalhe: TfrmCpDetalhe
       ParentColor = False
       ParentFont = False
     end
-    object lblTValorVenda: TLabel
+    object lblTValorCompra: TLabel
       Left = 408
       Top = 66
-      Width = 130
+      Width = 136
       Height = 19
-      Caption = 'Valor da Venda:'
-      Color = 5934638
+      Caption = 'Valor da Compra'
+      Color = 5934893
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
@@ -145,13 +199,13 @@ object frmCpDetalhe: TfrmCpDetalhe
       ParentColor = False
       ParentFont = False
     end
-    object lblValorVenda: TLabel
+    object lblValorCompra: TLabel
       Left = 576
       Top = 64
-      Width = 98
+      Width = 110
       Height = 19
-      Caption = 'lblValorVenda'
-      Color = 5868590
+      Caption = 'lblValorCompra'
+      Color = 5934638
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
@@ -1927,6 +1981,11 @@ object frmCpDetalhe: TfrmCpDetalhe
   object DataSourceCPDetalhe: TDataSource
     DataSet = dmCPagar.FDQueryCpDetalhes
     Left = 672
+    Top = 257
+  end
+  object DataSourcePgto: TDataSource
+    DataSet = dmCPagar.FDQueryPgtoCp
+    Left = 536
     Top = 257
   end
 end
