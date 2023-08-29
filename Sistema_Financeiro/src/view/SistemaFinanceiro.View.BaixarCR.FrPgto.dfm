@@ -239,6 +239,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       TabStop = False
       Align = alClient
       DataSource = dsFrPgto
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText

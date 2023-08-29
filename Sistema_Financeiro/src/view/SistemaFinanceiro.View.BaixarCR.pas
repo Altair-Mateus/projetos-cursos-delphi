@@ -65,6 +65,7 @@ type
     FID : Integer;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
+    procedure KeyPressValor(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
@@ -136,8 +137,8 @@ begin
         lblDoc.Caption := ContaReceber.Doc;
       end;
 
-    edtObs.Text := '';
-    edtValor.Text := '';
+    edtObs.Clear;
+    edtValor.Text := CurrToStr(ContaReceber.ValorParcela);
 
   finally
 
@@ -419,32 +420,49 @@ begin
 end;
 
 procedure TfrmBaixarCR.FormCreate(Sender: TObject);
-var
-  I : Integer;
 begin
 
-  //  Percorre os componentes TEdit
-  for I := 0 to ComponentCount - 1 do
-  begin
-    if (Components[I] is TEdit) or (Components[I] is TDateTimePicker) then
-    begin
-      //  Cria o evento OnKeyPress para cada Edit encontrado
-      TEdit(Components[I]).OnKeyPress := EditKeyPress;
-    end;
-  end;
-
-  //  Coloca no KeyPress a formatação para valores
-  edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
-  edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
-  edtPorcDesc.OnKeyPress   := TUtilitario.KeyPressValor;
-
   //  Coloca no KeyPress o enter para ir para o proximo campo
-  edtValor.OnKeyPress      := EditKeyPress;
-  edtValorDesc.OnKeyPress  := EditKeyPress;
-  edtPorcDesc.OnKeyPress   := EditKeyPress;
+  edtObs.OnKeyPress        := EditKeyPress;
+  datePgto.OnKeyPress      := EditKeyPress;
+  edtValor.OnKeyPress      := KeyPressValor;
+  edtValorDesc.OnKeyPress  := KeyPressValor;
+  edtPorcDesc.OnKeyPress   := KeyPressValor;
 
 
   datePgto.Date := now;
+
+end;
+
+procedure TfrmBaixarCR.KeyPressValor(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+  //  Se for digitado um ponto, será convertido para virgula
+  if Key = FormatSettings.ThousandSeparator then
+   begin
+      Key := #0;
+    end;
+
+  // Permite apenas digitar os caracteres dentro do charinset
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
+  begin
+    Key := #0;
+  end;
+
+  // Valida se já existe o ponto decimal
+  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
+  begin
+    Key := #0;
+  end;
 
 end;
 

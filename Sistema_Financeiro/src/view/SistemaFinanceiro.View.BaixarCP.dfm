@@ -4,8 +4,8 @@ object frmBaixarCP: TfrmBaixarCP
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Baixar Contas a Pagar'
-  ClientHeight = 550
-  ClientWidth = 638
+  ClientHeight = 549
+  ClientWidth = 634
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,12 @@ object frmBaixarCP: TfrmBaixarCP
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 638
-    Height = 550
+    Width = 634
+    Height = 549
     Align = alClient
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 634
-    ExplicitHeight = 549
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11

@@ -14,7 +14,6 @@ type
     pnlBotoes: TPanel;
     btnSair: TButton;
     pnlGrid: TPanel;
-    Image1: TImage;
     DBGrid1: TDBGrid;
     DataSourceConsultaCr: TDataSource;
     lblTNDoc: TLabel;
@@ -31,6 +30,9 @@ type
     lblTDesc: TLabel;
     lblTCodCliente: TLabel;
     lblCodCliente: TLabel;
+    DBGridPgto: TDBGrid;
+    DataSourcePgto: TDataSource;
+    lblFrPgto: TLabel;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -64,6 +66,7 @@ procedure TfrmCrDetalhe.ExibirCRDetalhes(IDCR: integer);
 var
   CR : TModelCr;
   SQL : String;
+  SQLPgto : String;
 
 begin
 
@@ -117,6 +120,20 @@ begin
   dmCReceber.FDQueryCrDetalhe.ParamByName('IDCR').AsInteger := IDCR;
   dmCReceber.FDQueryCrDetalhe.Prepare;
   dmCReceber.FDQueryCrDetalhe.Open();
+
+  //  Montando o SQL dos pagamentos
+  SQLPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CR PG ' +
+             'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR ' +
+             ' WHERE ID_CR = :IDCR';
+
+  dmCReceber.FDQueryPgtoCr.Close;
+  dmCReceber.FDQueryPgtoCr.SQL.Clear;
+  dmCReceber.FDQueryPgtoCr.Params.Clear;
+  dmCReceber.FDQueryPgtoCr.SQL.Add(SQLPgto);
+
+  dmCReceber.FDQueryPgtoCr.ParamByName('IDCR').AsInteger := IDCR;
+  dmCReceber.FDQueryPgtoCr.Prepare;
+  dmCReceber.FDQueryPgtoCr.Open();
 
 end;
 

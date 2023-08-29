@@ -62,42 +62,55 @@ type
     FID : Integer;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
+    procedure KeyPressValor(Sender: TObject; var Key: Char);
+    procedure EditKeyPress(Sender: TObject; var Key: Char);
+
   public
     { Public declarations }
     procedure BaixarCP(Id: Integer);
-    procedure EditKeyPress(Sender: TObject; var Key: Char);
+
   end;
 var
   frmBaixarCP: TfrmBaixarCP;
+
 implementation
 {$R *.dfm}
 uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Utilitarios,
   SistemaFinanceiro.Model.dmUsuarios;
+
 { TfrmBaixarCP }
 procedure TfrmBaixarCP.BaixarCP(Id: Integer);
 var
   ContaPagar : TModelCP;
+
 begin
+
   FID := ID;
+
   //  Valida ID do CP
   if FID < 0 then
   begin
     raise Exception.Create('ID do contas a pagar Inválido!');
   end;
+
   ContaPagar := dmCPagar.GetCP(FID);
+
   try
+
     //  Se o status já for P irá ignorar
     if ContaPagar.Status = 'P' then
     begin
       raise Exception.Create('Não é possível baixar uma conta já Paga!');
     end;
+
     //  Se o status já for C irá ignorar
     if ContaPagar.Status = 'C' then
     begin
       raise Exception.Create('Não é possível baixar uma conta cancelada!');
     end;
+
     //  Carregando dados para as labels
     lblIdConta.Caption       := IntToStr(FID);
     lblParcela.Caption       := IntToStr(ContaPagar.Parcela);
@@ -105,6 +118,7 @@ begin
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
     lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
+
     if ContaPagar.Doc = '' then
     begin
       lblDoc.Caption := 'Não Informado';
@@ -113,23 +127,31 @@ begin
       begin
         lblDoc.Caption := ContaPagar.Doc;
       end;
-    edtObs.Text := '';
-    edtValor.Text := '';
+
+    edtObs.Clear;
+    edtValor.Text := CurrToStr(ContaPagar.ValorParcela);
+
   finally
+
     //  Libera da memoria
     ContaPagar.Free;
+
   end;
 end;
+
 procedure TfrmBaixarCP.btnCancelarClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
 end;
+
 procedure TfrmBaixarCP.btnConfirmarClick(Sender: TObject);
 var
   CpDetalhe : TModelCpDetalhe;
   ValorAbater : Currency;
   ValorDesc : Currency;
+
 begin
+
   //  Validações dos campos
   if Trim(edtObs.Text) = '' then
   begin
@@ -137,6 +159,7 @@ begin
     Application.MessageBox('A observação não pode estar vazia!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
   if datePgto.Date > Date then
   begin
     datePgto.SetFocus;
@@ -315,6 +338,7 @@ begin
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
 end;
+
 procedure TfrmBaixarCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -343,6 +367,7 @@ procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
 begin
   edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
 end;
+
 procedure TfrmBaixarCP.edtValorKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
@@ -370,16 +395,45 @@ begin
     end;
   end;
 
-  //  Coloca no KeyPress a formatação para valores
-  edtValor.OnKeyPress      := TUtilitario.KeyPressValor;
-  edtValorDesc.OnKeyPress  := TUtilitario.KeyPressValor;
-  edtPorcDesc.OnKeyPress   := TUtilitario.KeyPressValor;
-
-  //  Coloca no KeyPress o enter para ir para o proximo campo
-  edtValor.OnKeyPress      := EditKeyPress;
-  edtValorDesc.OnKeyPress  := EditKeyPress;
-  edtPorcDesc.OnKeyPress   := EditKeyPress;
+    //  Coloca no KeyPress o enter para ir para o proximo campo
+  edtValor.OnKeyPress      := KeyPressValor;
+  edtValorDesc.OnKeyPress  := KeyPressValor;
+  edtPorcDesc.OnKeyPress   := KeyPressValor;
 
   datePgto.Date := now;
+
 end;
+
+procedure TfrmBaixarCP.KeyPressValor(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+  //  Se for digitado um ponto, será convertido para virgula
+  if Key = FormatSettings.ThousandSeparator then
+   begin
+      Key := #0;
+    end;
+
+  // Permite apenas digitar os caracteres dentro do charinset
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
+  begin
+    Key := #0;
+  end;
+
+  // Valida se já existe o ponto decimal
+  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
+  begin
+    Key := #0;
+  end;
+
+end;
+
 end.

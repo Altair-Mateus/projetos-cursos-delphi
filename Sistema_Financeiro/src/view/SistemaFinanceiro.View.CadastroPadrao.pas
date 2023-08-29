@@ -37,18 +37,24 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
+
   public
     { Public declarations }
     procedure LimpaCampos;
     procedure ValidaSelecao;
+
   protected
     procedure Pesquisar; virtual;
     procedure EditKeyPress(Sender: TObject; var Key: Char);
+
   end;
+
 var
   frmCadastroPadrao: TfrmCadastroPadrao;
+
 implementation
 uses
   Vcl.WinXCtrls, Vcl.Mask, Vcl.ComCtrls;

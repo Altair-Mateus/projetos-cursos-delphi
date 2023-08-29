@@ -128,6 +128,7 @@ type
     procedure ExibeTelaBaixar;
     procedure ExibeDetalhe;
     procedure BuscaNomeFornecedor;
+    procedure KeyPressValor(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
@@ -1002,10 +1003,8 @@ procedure TfrmContasPagar.FormCreate(Sender: TObject);
 begin
   inherited;
 
-  edtValorCompra.OnKeyPress  := TUtilitario.KeyPressValor;
-  edtValorParcela.OnKeyPress := TUtilitario.KeyPressValor;
-  edtValorCompra.OnKeyPress  := EditKeyPress;
-  edtValorParcela.OnKeyPress := EditKeyPress;
+  edtValorCompra.OnKeyPress  := KeyPressValor;
+  edtValorParcela.OnKeyPress := KeyPressValor;
 
 
   //  Define as datas da consulta
@@ -1017,13 +1016,46 @@ end;
 procedure TfrmContasPagar.HabilitaBotoes;
 begin
 
-  btnAlterar.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
-  btnExcluir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
+  btnAlterar.Enabled  := not DataSourceCPagar.DataSet.IsEmpty;
+  btnExcluir.Enabled  := not DataSourceCPagar.DataSet.IsEmpty;
   btnBaixarCP.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnDetalhes.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
   btnImprimir.Enabled := not DataSourceCPagar.DataSet.IsEmpty;
 
 end;
+
+procedure TfrmContasPagar.KeyPressValor(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+  //  Se for digitado um ponto, será convertido para virgula
+  if Key = FormatSettings.ThousandSeparator then
+   begin
+      Key := #0;
+    end;
+
+  // Permite apenas digitar os caracteres dentro do charinset
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
+  begin
+    Key := #0;
+  end;
+
+  // Valida se já existe o ponto decimal
+  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
+  begin
+    Key := #0;
+  end;
+
+end;
+
 procedure TfrmContasPagar.Pesquisar;
 var
   LFiltroEdit: String;

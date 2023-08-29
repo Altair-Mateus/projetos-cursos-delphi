@@ -64,6 +64,7 @@ type
     procedure ValidaCampos;
     procedure HabilitaBotoes;
     procedure EditarRegCaixa;
+    procedure KeyPressValor(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
@@ -334,8 +335,7 @@ procedure TfrmCaixa.FormCreate(Sender: TObject);
 begin
 
   inherited;
-  edtValor.OnKeyPress := TUtilitario.KeyPressValor;
-  edtValor.OnKeyPress := EditKeyPress;
+  edtValor.OnKeyPress := KeyPressValor;
 
   //  Define as datas
   dateInicial.Date := StartOfTheMonth(Now);
@@ -349,6 +349,38 @@ begin
   btnAlterar.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
   btnExcluir.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
   btnImprimir.Enabled := not DataSourceCaixa.DataSet.IsEmpty;
+
+end;
+
+procedure TfrmCaixa.KeyPressValor(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+    //  Verifica se a tecla pressionada é o Enter
+    //  Cancela o efeito do enter
+    Key := #0;
+    //  Pula para o proximo
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+
+  //  Se for digitado um ponto, será convertido para virgula
+  if Key = FormatSettings.ThousandSeparator then
+   begin
+      Key := #0;
+    end;
+
+  // Permite apenas digitar os caracteres dentro do charinset
+  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
+  begin
+    Key := #0;
+  end;
+
+  // Valida se já existe o ponto decimal
+  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
+  begin
+    Key := #0;
+  end;
 
 end;
 

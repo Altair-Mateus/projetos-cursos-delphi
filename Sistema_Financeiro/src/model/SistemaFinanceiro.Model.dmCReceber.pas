@@ -39,6 +39,14 @@ type
     cdsCReceberNOME: TWideStringField;
     FDQueryCrDetalheJUROS_BX: TIntegerField;
     FDQueryCrDetalheDESCONTO_BX: TFMTBCDField;
+    FDQueryPgtoCr: TFDQuery;
+    FDQueryPgtoCrID_FR_PGTO: TIntegerField;
+    FDQueryPgtoCrNR_FR: TIntegerField;
+    FDQueryPgtoCrDATA_HORA: TSQLTimeStampField;
+    FDQueryPgtoCrVALOR_PAGO: TFMTBCDField;
+    FDQueryPgtoCrID: TIntegerField;
+    FDQueryPgtoCrID_CR: TIntegerField;
+    FDQueryPgtoCrNOME: TWideStringField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 
