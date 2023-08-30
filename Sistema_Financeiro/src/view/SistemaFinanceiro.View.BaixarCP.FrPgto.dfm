@@ -260,14 +260,14 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
           Expanded = False
           FieldName = 'NOME'
           Title.Caption = 'Nome'
-          Width = 210
+          Width = 186
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'VALORPAGO'
           Title.Caption = 'Valor'
-          Width = 114
+          Width = 125
           Visible = True
         end>
     end

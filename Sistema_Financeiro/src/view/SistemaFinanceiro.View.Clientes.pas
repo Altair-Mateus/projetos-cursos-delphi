@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage, Vcl.Mask;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage, Vcl.Mask, Vcl.WinXCtrls;
 
 type
   TfrmCliente = class(TfrmCadastroPadrao)
@@ -50,6 +50,10 @@ type
     edtCpf: TMaskEdit;
     edtIe: TEdit;
     edtCnpj: TMaskEdit;
+    LabelStatus: TLabel;
+    ToggleStatus: TToggleSwitch;
+    lblStatus: TLabel;
+    cbStatus: TComboBox;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -65,6 +69,7 @@ type
     procedure rbIdClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
+    procedure cbStatusClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -202,6 +207,7 @@ var
   TipoCli : String;
   Cpf : String;
   Cnpj : String;
+  Status : String;
 
 begin
 
@@ -245,6 +251,16 @@ begin
     TipoCli := 'J';
   end;
 
+  //  Define o status do cliente
+  if ToggleStatus.State = tssOn then
+  begin
+    Status := 'A';
+  end
+  else
+  begin
+    Status := 'I';
+  end;
+
   //  Passando os dados para o dataset
   dmClientes.cdsClientesNOME.AsString         := Trim(edtNome.Text);
   dmClientes.cdsClientesTIPO.AsString         := TipoCli;
@@ -261,6 +277,7 @@ begin
   dmClientes.cdsClientesTELEFONE.AsString     := Trim(edtTelefone.Text);
   dmClientes.cdsClientesCOMPLEMENTO.AsString  := Trim(edtComplemento.Text);
   dmClientes.cdsClientesEMAIL.AsString        := Trim(edtEmail.Text);
+  dmClientes.cdsClientesSTATUS.AsString       := Status;
 
   //  Gravando no banco de dados
   dmClientes.cdsClientes.Post;
@@ -274,6 +291,12 @@ begin
 
   inherited;
 
+end;
+
+procedure TfrmCliente.cbStatusClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TfrmCliente.cbTipoChange(Sender: TObject);
@@ -303,6 +326,15 @@ begin
 
   //  Coloca o nome do usuario no titulo
   lblTitulo.Caption := dmClientes.cdsClientesId.AsString + ' - ' + dmClientes.cdsClientesNOME.AsString;
+
+  if dmClientes.cdsClientesSTATUS.AsString = 'A' then
+  begin
+    ToggleStatus.State := tssOn;
+  end
+    else
+    begin
+      ToggleStatus.State := tssOff;
+    end;
 
   //  Carrega os dados
   edtNome.Text        := dmClientes.cdsClientesNOME.AsString;
@@ -402,6 +434,14 @@ begin
 
     1 : LFiltroEdit := LFiltro + ' AND TIPO = ''F'' ';
     2 : LFiltroEdit := LFiltro + ' AND TIPO = ''J'' ';
+
+  end;
+
+  //  Pesquisa por Status
+  case cbStatus.ItemIndex of
+
+    1 : LFiltroEdit := LFiltro + ' AND STATUS = ''A'' ';
+    2 : LFiltroEdit := LFiltro + ' AND STATUS = ''I'' ';
 
   end;
 

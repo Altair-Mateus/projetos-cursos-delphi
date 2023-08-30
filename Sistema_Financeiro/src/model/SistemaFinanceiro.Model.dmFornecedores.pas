@@ -32,6 +32,7 @@ type
     cdsFornecedoresDATA_ALTERACAO: TSQLTimeStampField;
     cdsFornecedoresCEP: TWideStringField;
     cdsFornecedoresIE: TWideStringField;
+    cdsFornecedoresSTATUS: TWideStringField;
   private
     { Private declarations }
   public
@@ -39,6 +40,7 @@ type
     procedure GeraCodigo;
     function GetNomeFornecedor(IdFornecedor : String) : String;
     function GetCpFornec(IdFornec : Integer) : Boolean;
+    function GetStatus(IdFornec : String) : Boolean;
 
   end;
 
@@ -159,6 +161,49 @@ begin
     FDQueryNome.Free;
 
   end;
+
+end;
+
+function TdmFornecedores.GetStatus(IdFornec: String): Boolean;
+var
+  FDQueryStatus : TFDQuery;
+
+begin
+
+   FDQueryStatus := TFDQuery.Create(Self);
+   Result := False;
+
+   try
+
+    //  Estabelece conexão
+    FDQueryStatus.Connection := DataModule1.FDConnection;
+
+    FDQueryStatus.Close;
+    FDQueryStatus.SQL.Clear;
+    FDQueryStatus.SQL.Add('SELECT STATUS FROM FORNECEDORES WHERE ID_FORNEC = :ID');
+
+    FDQueryStatus.ParamByName('ID').AsString := IdFornec;
+
+    FDQueryStatus.Open;
+
+    if FDQueryStatus.FieldByName('STATUS').AsString = 'I' then
+    begin
+      Result := False;
+    end
+    else if FDQueryStatus.FieldByName('STATUS').AsString = 'A' then
+    begin
+      Result := True;
+    end;
+
+
+   finally
+
+    FDQueryStatus.Close;
+    FDQueryStatus.Free;
+
+   end;
+
+
 
 end;
 

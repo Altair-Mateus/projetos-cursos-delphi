@@ -3,7 +3,7 @@ inherited frmFornecedores: TfrmFornecedores
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitTop = -135
+  ExplicitLeft = -582
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
@@ -135,6 +135,13 @@ inherited frmFornecedores: TfrmFornecedores
           Width = 104
           Height = 19
           Caption = 'Nome Fantasia'
+        end
+        object LabelStatus: TLabel
+          Left = 824
+          Top = 75
+          Width = 43
+          Height = 19
+          Caption = 'Status'
         end
         object edtNome: TEdit
           Left = 32
@@ -326,6 +333,26 @@ inherited frmFornecedores: TfrmFornecedores
           Color = clWhite
           MaxLength = 200
           TabOrder = 1
+        end
+        object ToggleStatus: TToggleSwitch
+          Left = 888
+          Top = 73
+          Width = 105
+          Height = 21
+          Color = 9750962
+          DisabledColor = 5737262
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBtnText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          FrameColor = 5737262
+          ParentFont = False
+          State = tssOn
+          StateCaptions.CaptionOn = 'Ativo'
+          StateCaptions.CaptionOff = 'Inativo'
+          TabOrder = 16
+          ThumbColor = 5737262
         end
       end
       inherited PanelTitulo: TPanel
@@ -653,6 +680,22 @@ inherited frmFornecedores: TfrmFornecedores
           ParentColor = False
           ParentFont = False
         end
+        object lblStatus: TLabel [4]
+          Left = 710
+          Top = 39
+          Width = 127
+          Height = 19
+          Align = alCustom
+          Caption = 'Status Fornecedor'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         inherited edtPesquisar: TEdit
           Left = 182
           Top = 64
@@ -689,7 +732,7 @@ inherited frmFornecedores: TfrmFornecedores
             'JUR'#205'DICA')
         end
         object gbFiltros: TGroupBox
-          Left = 719
+          Left = 903
           Top = 15
           Width = 236
           Height = 92
@@ -764,6 +807,21 @@ inherited frmFornecedores: TfrmFornecedores
             OnClick = rbIdClick
           end
         end
+        object cbStatus: TComboBox
+          Left = 710
+          Top = 64
+          Width = 155
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 4
+          Text = 'TODOS'
+          OnClick = cbStatusClick
+          Items.Strings = (
+            'TODOS'
+            'ATIVO'
+            'INATIVO')
+        end
       end
       inherited pnlBotoes: TPanel
         Top = 575
@@ -817,20 +875,17 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TELEFONE'
               Title.Caption = 'Telefone'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CNPJ'
-              Width = 64
               Visible = True
             end
             item

@@ -31,6 +31,7 @@ type
     cdsClientesEMAIL: TWideStringField;
     cdsClientesDATA_CADASTRO: TSQLTimeStampField;
     cdsClientesDATA_ALTERACAO: TSQLTimeStampField;
+    cdsClientesSTATUS: TWideStringField;
   private
     { Private declarations }
   public
@@ -38,6 +39,7 @@ type
     procedure GeraCodigo;
     function GetNomeCliente(IdCliente : String) : String;
     function GetCr(IdCliente : Integer) : Boolean;
+    FUNCTION GetStatus(IdCliente : String) : Boolean;
 
   end;
 
@@ -159,6 +161,49 @@ begin
     FDQueryNome.Free;
 
   end;
+
+end;
+
+function TdmClientes.GetStatus(IdCliente: String): Boolean;
+var
+  FDQueryStatus : TFDQuery;
+
+begin
+
+   FDQueryStatus := TFDQuery.Create(Self);
+   Result := False;
+
+   try
+
+    //  Estabelece conexão
+    FDQueryStatus.Connection := DataModule1.FDConnection;
+
+    FDQueryStatus.Close;
+    FDQueryStatus.SQL.Clear;
+    FDQueryStatus.SQL.Add('SELECT STATUS FROM CLIENTES WHERE ID_CLI = :ID');
+
+    FDQueryStatus.ParamByName('ID').AsString := IdCliente;
+
+    FDQueryStatus.Open;
+
+    if FDQueryStatus.FieldByName('STATUS').AsString = 'I' then
+    begin
+      Result := False;
+    end
+    else if FDQueryStatus.FieldByName('STATUS').AsString = 'A' then
+    begin
+      Result := True;
+    end;
+
+
+   finally
+
+    FDQueryStatus.Close;
+    FDQueryStatus.Free;
+
+   end;
+
+
 
 end;
 

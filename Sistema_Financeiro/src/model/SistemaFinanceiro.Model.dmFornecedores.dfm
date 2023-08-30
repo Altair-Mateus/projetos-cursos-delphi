@@ -97,5 +97,10 @@ object dmFornecedores: TdmFornecedores
     object cdsFornecedoresIE: TWideStringField
       FieldName = 'IE'
     end
+    object cdsFornecedoresSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Required = True
+      Size = 1
+    end
   end
 end

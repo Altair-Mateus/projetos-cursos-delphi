@@ -1,7 +1,7 @@
 object frmCrDetalhe: TfrmCrDetalhe
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu, biMaximize]
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Detalhes Conta Paga'
   ClientHeight = 498

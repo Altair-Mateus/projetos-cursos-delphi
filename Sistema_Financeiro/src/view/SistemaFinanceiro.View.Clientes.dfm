@@ -3,7 +3,7 @@ inherited frmCliente: TfrmCliente
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitTop = -135
+  ExplicitTop = -142
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
@@ -128,6 +128,13 @@ inherited frmCliente: TfrmCliente
           Width = 42
           Height = 19
           Caption = 'Bairro'
+        end
+        object LabelStatus: TLabel
+          Left = 560
+          Top = 147
+          Width = 43
+          Height = 19
+          Caption = 'Status'
         end
         object edtNome: TEdit
           Left = 32
@@ -310,6 +317,26 @@ inherited frmCliente: TfrmCliente
           ImeName = 'edtCnpj'
           TabOrder = 3
           Text = ''
+        end
+        object ToggleStatus: TToggleSwitch
+          Left = 624
+          Top = 145
+          Width = 105
+          Height = 21
+          Color = 9750962
+          DisabledColor = 5737262
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBtnText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          FrameColor = 5737262
+          ParentFont = False
+          State = tssOn
+          StateCaptions.CaptionOn = 'Ativo'
+          StateCaptions.CaptionOff = 'Inativo'
+          TabOrder = 15
+          ThumbColor = 5737262
         end
       end
       inherited PanelTitulo: TPanel
@@ -550,6 +577,22 @@ inherited frmCliente: TfrmCliente
           ParentColor = False
           ParentFont = False
         end
+        object lblStatus: TLabel [4]
+          Left = 710
+          Top = 39
+          Width = 96
+          Height = 19
+          Align = alCustom
+          Caption = 'Status Cliente'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         inherited edtPesquisar: TEdit
           Left = 176
           Top = 64
@@ -586,7 +629,7 @@ inherited frmCliente: TfrmCliente
             'JUR'#205'DICA')
         end
         object gbFiltros: TGroupBox
-          Left = 719
+          Left = 903
           Top = 15
           Width = 236
           Height = 92
@@ -660,6 +703,21 @@ inherited frmCliente: TfrmCliente
             TabStop = True
             OnClick = rbIdClick
           end
+        end
+        object cbStatus: TComboBox
+          Left = 710
+          Top = 64
+          Width = 155
+          Height = 27
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 4
+          Text = 'TODOS'
+          OnClick = cbStatusClick
+          Items.Strings = (
+            'TODOS'
+            'ATIVO'
+            'INATIVO')
         end
       end
       inherited pnlBotoes: TPanel
@@ -762,6 +820,10 @@ inherited frmCliente: TfrmCliente
         end
       end
     end
+  end
+  inherited ImageList1: TImageList
+    Left = 816
+    Top = 248
   end
   object DataSourceCliente: TDataSource
     DataSet = dmClientes.cdsClientes

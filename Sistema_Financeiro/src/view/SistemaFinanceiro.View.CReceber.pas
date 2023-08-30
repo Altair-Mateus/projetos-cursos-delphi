@@ -492,6 +492,8 @@ begin
 
   end;
 
+  edtCliente.SetFocus;
+
 end;
 
 procedure TfrmContasReceber.btnPesquisaeClick(Sender: TObject);
@@ -909,6 +911,23 @@ procedure TfrmContasReceber.edtClienteExit(Sender: TObject);
 begin
 
   BuscaNomeCliente;
+
+  if Trim(edtCliente.Text) <> '' then
+  begin
+
+    if dmClientes.GetStatus(Trim(edtCliente.Text)) = False then
+    begin
+
+      edtCliente.Clear;
+      edtCliente.SetFocus;
+      lblNomeCliente.Caption := '';
+      Application.MessageBox('Cliente não está Ativo, verifique o cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+
+    end;
+
+
+  end;
 
 end;
 

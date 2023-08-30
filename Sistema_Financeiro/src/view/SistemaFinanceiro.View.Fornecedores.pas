@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage, Vcl.Mask;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.Imaging.pngimage, Vcl.Mask, Vcl.WinXCtrls;
 
 type
   TfrmFornecedores = class(TfrmCadastroPadrao)
@@ -52,6 +52,10 @@ type
     edtEmail: TEdit;
     lblNomeFantasia: TLabel;
     edtNomeFantasia: TEdit;
+    LabelStatus: TLabel;
+    ToggleStatus: TToggleSwitch;
+    lblStatus: TLabel;
+    cbStatus: TComboBox;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure rbFisicaClick(Sender: TObject);
     procedure rbJuridicaClick(Sender: TObject);
@@ -66,6 +70,7 @@ type
     procedure edtPesquisarChange(Sender: TObject);
     procedure cbTipoClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure cbStatusClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -197,6 +202,7 @@ var
   TipoFornecedor : String;
   Cpf : String;
   Cnpj : String;
+  Status : String;
 
 begin
 
@@ -229,8 +235,17 @@ begin
   Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
   Cnpj := StringReplace(Cnpj, '-', '', [rfReplaceAll]);
 
+  //  Define o status do fornecedor
+  if ToggleStatus.State = tssOn then
+  begin
+    Status := 'A';
+  end
+  else
+  begin
+    Status := 'I';
+  end;
 
-  //  Define o tipo de cliente
+  //  Define o tipo de fornecedor
   if rbFisica.Checked then
   begin
     TipoFornecedor := 'F';
@@ -257,6 +272,7 @@ begin
   dmFornecedores.cdsFornecedoresTELEFONE.AsString      := Trim(edtTelefone.Text);
   dmFornecedores.cdsFornecedoresCOMPLEMENTO.AsString   := Trim(edtComplemento.Text);
   dmFornecedores.cdsFornecedoresEMAIL.AsString         := Trim(edtEmail.Text);
+  dmFornecedores.cdsFornecedoresSTATUS.AsString        := Status;
 
   //  Gravando no banco de dados
   dmFornecedores.cdsFornecedores.Post;
@@ -268,6 +284,12 @@ begin
   //  Atualiza a lista de pesquisa
   Pesquisar;
 
+end;
+
+procedure TfrmFornecedores.cbStatusClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TfrmFornecedores.cbTipoClick(Sender: TObject);
@@ -297,6 +319,15 @@ begin
 
   //  Coloca o nome do fornecedor no titulo
   lblTitulo.Caption := dmFornecedores.cdsFornecedoresId.AsString + ' - ' + dmFornecedores.cdsFornecedoresRAZAO_SOCIAL.AsString;
+
+  if dmFornecedores.cdsFornecedoresSTATUS.AsString = 'A' then
+  begin
+    ToggleStatus.State := tssOn;
+  end
+    else
+    begin
+      ToggleStatus.State := tssOff;
+    end;
 
   //  Carrega os dados
   edtNome.Text         := dmFornecedores.cdsFornecedoresRAZAO_SOCIAL.AsString;
@@ -399,6 +430,14 @@ begin
 
     1 : LFiltroEdit := LFiltro + ' AND TIPO = ''F'' ';
     2 : LFiltroEdit := LFiltro + ' AND TIPO = ''J'' ';
+
+  end;
+
+  //  Pesquisa por status
+  case cbStatus.ItemIndex of
+
+    1 : LFiltroEdit := LFiltro + ' AND STATUS = ''A'' ';
+    2 : LFiltroEdit := LFiltro + ' AND STATUS = ''I'' ';
 
   end;
 

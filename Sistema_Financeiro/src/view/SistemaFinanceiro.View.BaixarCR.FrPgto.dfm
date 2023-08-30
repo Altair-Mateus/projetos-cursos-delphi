@@ -259,13 +259,14 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
         item
           Expanded = False
           FieldName = 'Nome'
-          Width = 200
+          Width = 188
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'valorpago'
           Title.Caption = 'Valor'
+          Width = 122
           Visible = True
         end>
     end

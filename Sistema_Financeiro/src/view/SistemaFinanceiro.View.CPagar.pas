@@ -494,6 +494,8 @@ begin
 
   end;
 
+  edtFornecedor.SetFocus;
+
 end;
 
 procedure TfrmContasPagar.btnSalvarClick(Sender: TObject);
@@ -916,6 +918,23 @@ begin
   inherited;
 
   BuscaNomeFornecedor;
+
+  if Trim(edtFornecedor.Text) <> '' then
+  begin
+
+    if dmFornecedores.GetStatus(Trim(edtFornecedor.Text)) = False then
+    begin
+
+      edtFornecedor.Clear;
+      edtFornecedor.SetFocus;
+      lblNomeFornecedor.Caption := '';
+      Application.MessageBox('Fornecedor não está Ativo, verifique o cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+
+    end;
+
+
+  end;
 
 end;
 

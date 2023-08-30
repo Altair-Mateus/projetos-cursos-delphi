@@ -10,6 +10,7 @@ inherited frmContasPagar: TfrmContasPagar
   inherited CardPanelPrincipal: TCardPanel
     Width = 1322
     Height = 644
+    ActiveCard = CardCadastro
     ExplicitWidth = 1318
     ExplicitHeight = 643
     inherited CardCadastro: TCard
@@ -363,6 +364,7 @@ inherited frmContasPagar: TfrmContasPagar
           ImageIndex = 11
           Images = ImageList1
           TabOrder = 7
+          TabStop = False
           OnClick = btnPesquisaFornecedorClick
         end
       end
