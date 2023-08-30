@@ -1186,7 +1186,7 @@ begin
   end
     else if rbDataVenc.Checked then
     begin
-      lOrdem := ' ORDER BY CR.DATA_VENCIMENTO DESC';
+      lOrdem := ' ORDER BY CR.DATA_VENCIMENTO';
     end
       else if rbValorParcela.Checked then
       begin

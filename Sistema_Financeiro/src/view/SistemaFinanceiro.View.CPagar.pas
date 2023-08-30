@@ -1187,15 +1187,15 @@ begin
     end
       else if rbValorParcela.Checked then
       begin
-        lOrdem := ' ORDER BY CP.VALOR_PARCELA';
+        lOrdem := ' ORDER BY CP.VALOR_PARCELA DESC';
       end
         else if rbValorCompra.Checked then
         begin
-          lOrdem := ' ORDER BY CP.VALOR_COMPRA';
+          lOrdem := ' ORDER BY CP.VALOR_COMPRA DESC';
         end
           else if rbDataCompra.Checked then
           begin
-            lOrdem := ' ORDER BY CP.DATA_COMPRA';
+            lOrdem := ' ORDER BY CP.DATA_COMPRA DESC';
           end
             else
             begin
