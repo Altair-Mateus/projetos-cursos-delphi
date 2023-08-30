@@ -817,17 +817,20 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TELEFONE'
               Title.Caption = 'Telefone'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CNPJ'
+              Width = 64
               Visible = True
             end
             item

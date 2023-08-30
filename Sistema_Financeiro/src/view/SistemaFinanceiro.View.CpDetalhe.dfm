@@ -121,6 +121,7 @@ object frmCpDetalhe: TfrmCpDetalhe
       Height = 120
       Align = alBottom
       DataSource = DataSourcePgto
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText

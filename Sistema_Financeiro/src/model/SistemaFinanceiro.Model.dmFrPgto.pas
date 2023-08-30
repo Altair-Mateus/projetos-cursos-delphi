@@ -28,7 +28,9 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
-    function GetNomeFrPgto(Id : String) : String;
+    function  GetNomeFrPgto(Id : String) : String;
+    function  GetCpCrFrPgto(Id : Integer) : Boolean;
+    function  GetStatus(Id : String) : Boolean;
 
 
   end;
@@ -95,6 +97,48 @@ begin
 
 end;
 
+function TdmFrPgto.GetCpCrFrPgto(Id: Integer): Boolean;
+var
+  FDQueryCrCp : TFDQuery;
+
+
+begin
+
+  Result := False;
+  FDQueryCrCp := TFDQuery.Create(Self);
+
+  //  Verifica se existem CP com a fr de pgto
+  try
+
+    //  Estabelece a conexão com o banco
+    FDQueryCrCp.Connection := DataModule1.FDConnection;
+
+    FDQueryCrCp.Close;
+    FDQueryCrCp.SQL.Clear;
+    FDQueryCrCp.SQL.Add('SELECT FIRST 1 * FROM PGTO_BX_CP PGTOCP JOIN PGTO_BX_CR PGTOCR ');
+    FDQueryCrCp.SQL.Add('ON PGTOCP.ID_FR_PGTO = PGTOCR.ID_FR_PGTO ');
+    FDQueryCrCp.SQL.Add('WHERE PGTOCP.ID_FR_PGTO = :IDFR AND PGTOCR.ID_FR_PGTO  = :IDFR');
+
+    FDQueryCrCp.ParamByName('IDFR').AsInteger := Id;
+
+    FDQueryCrCp.Open();
+
+    if not FDQueryCrCp.IsEmpty then
+    begin
+
+      Result := True;
+
+    end;
+
+  finally
+
+    FDQueryCrCp.Close;
+    FDQueryCrCp.Free;
+
+  end;
+
+end;
+
 function TdmFrPgto.GetNomeFrPgto(Id: String): String;
 var
   FDQueryNome : TFDQuery;
@@ -125,6 +169,48 @@ begin
     FDQueryNome.Free;
 
    end;
+
+end;
+
+function TdmFrPgto.GetStatus(Id: String): Boolean;
+var
+  FDQueryStatus : TFDQuery;
+
+begin
+
+   FDQueryStatus := TFDQuery.Create(Self);
+   Result := False;
+
+   try
+
+    //  Estabelece conexão
+    FDQueryStatus.Connection := DataModule1.FDConnection;
+
+    FDQueryStatus.Close;
+    FDQueryStatus.SQL.Clear;
+    FDQueryStatus.SQL.Add('SELECT STATUS FROM FR_PGTO WHERE ID_FR = :ID');
+
+    FDQueryStatus.ParamByName('ID').AsString := Id;
+
+    FDQueryStatus.Open;
+
+    if FDQueryStatus.FieldByName('STATUS').AsString = 'I' then
+    begin
+      Result := False;
+    end
+    else if FDQueryStatus.FieldByName('STATUS').AsString = 'A' then
+    begin
+      Result := True;
+    end;
+
+
+   finally
+
+    FDQueryStatus.Close;
+    FDQueryStatus.Free;
+
+   end;
+
 
 end;
 

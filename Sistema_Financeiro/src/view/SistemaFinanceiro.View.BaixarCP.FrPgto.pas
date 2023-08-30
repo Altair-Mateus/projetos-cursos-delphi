@@ -309,6 +309,21 @@ end;
 procedure TfrmFrPgtoBaixaCp.edtCodFrPgtoExit(Sender: TObject);
 begin
   BuscaNomeFrPgto;
+
+  if Trim(edtCodFrPgto.Text) <> '' then
+  begin
+    if dmFrPgto.GetStatus(Trim(edtCodFrPgto.Text)) = False then
+    begin
+
+      edtCodFrPgto.Clear;
+      edtCodFrPgto.SetFocus;
+      lblNomeFrPgto.Caption := '';
+      Application.MessageBox('Forma de Pagamento não está Ativa!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+
+    end;
+  end;
+
 end;
 
 procedure TfrmFrPgtoBaixaCp.edtValorFormaEnter(Sender: TObject);

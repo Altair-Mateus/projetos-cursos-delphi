@@ -86,11 +86,20 @@ begin
     exit;
   end;
 
+  if dmFrPgto.GetCpCrFrPgto(DataSourceFrPgto.DataSet.FieldByName('ID_FR').AsInteger) = True then
+  begin
+
+    Application.MessageBox('Não é possível excluir uma Forma de Pagamento com Baixa de Contas cadastradas!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+
   try
 
     //  Excluindo registro
     dmFrPgto.cdsFrPgto.Delete;
-     dmFrPgto.cdsFrPgto.ApplyUpdates(0);
+    dmFrPgto.cdsFrPgto.ApplyUpdates(0);
 
   except on E : Exception do
     Application.MessageBox(PWidechar(E.Message), 'Erro ao excluir Forma de pagamento', MB_OK + MB_ICONERROR);
