@@ -3,25 +3,25 @@ inherited frmCaixa: TfrmCaixa
   ClientHeight = 606
   ClientWidth = 1259
   WindowState = wsMaximized
+  OnDestroy = FormDestroy
   ExplicitWidth = 1271
   ExplicitHeight = 644
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1259
     Height = 606
-    ActiveCard = CardCadastro
     ExplicitWidth = 1255
     ExplicitHeight = 605
     inherited CardCadastro: TCard
       Width = 1257
       Height = 604
-      ExplicitWidth = 1253
-      ExplicitHeight = 603
+      ExplicitWidth = 1257
+      ExplicitHeight = 604
       inherited pnlBotoesCad: TPanel
         Top = 535
         Width = 1257
-        ExplicitTop = 534
-        ExplicitWidth = 1253
+        ExplicitTop = 535
+        ExplicitWidth = 1257
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -29,8 +29,8 @@ inherited frmCaixa: TfrmCaixa
       inherited PanelCampos: TPanel
         Width = 1257
         Height = 494
-        ExplicitWidth = 1253
-        ExplicitHeight = 493
+        ExplicitWidth = 1257
+        ExplicitHeight = 494
         object lblNDoc: TLabel
           Left = 40
           Top = 48
@@ -138,7 +138,7 @@ inherited frmCaixa: TfrmCaixa
       end
       inherited PanelTitulo: TPanel
         Width = 1257
-        ExplicitWidth = 1253
+        ExplicitWidth = 1257
         inherited lblTitulo: TLabel
           Width = 325
           Caption = 'Inserindo um novo Lan'#231'amento no Caixa'
@@ -149,12 +149,12 @@ inherited frmCaixa: TfrmCaixa
     inherited CardPesquisa: TCard
       Width = 1257
       Height = 604
-      ExplicitWidth = 1257
-      ExplicitHeight = 604
+      ExplicitWidth = 1253
+      ExplicitHeight = 603
       inherited pnlPesquisa: TPanel
         Width = 1257
         Height = 145
-        ExplicitWidth = 1257
+        ExplicitWidth = 1253
         ExplicitHeight = 145
         inherited lblPesquisar: TLabel
           Left = 185
@@ -1687,8 +1687,9 @@ inherited frmCaixa: TfrmCaixa
           Height = 85
           Margins.Top = 30
           Margins.Bottom = 30
+          ParentFont = False
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1133
+          ExplicitLeft = 1129
           ExplicitTop = 30
           ExplicitHeight = 85
         end
@@ -1825,8 +1826,8 @@ inherited frmCaixa: TfrmCaixa
       inherited pnlBotoes: TPanel
         Top = 535
         Width = 1257
-        ExplicitTop = 535
-        ExplicitWidth = 1257
+        ExplicitTop = 534
+        ExplicitWidth = 1253
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -1835,7 +1836,7 @@ inherited frmCaixa: TfrmCaixa
         end
         inherited btnSair: TButton
           Left = 1133
-          ExplicitLeft = 1133
+          ExplicitLeft = 1129
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
@@ -1852,6 +1853,7 @@ inherited frmCaixa: TfrmCaixa
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ExplicitLeft = 995
           object lblCorReceita: TLabel
             Left = 31
             Top = 16
@@ -1885,14 +1887,117 @@ inherited frmCaixa: TfrmCaixa
             TabOrder = 1
           end
         end
+        object pnlValoresEntSai: TPanel
+          AlignWithMargins = True
+          Left = 864
+          Top = 4
+          Width = 122
+          Height = 61
+          Margins.Right = 10
+          Align = alRight
+          BevelOuter = bvNone
+          TabOrder = 6
+          ExplicitLeft = 860
+          object lblVTotalEnt: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 116
+            Height = 19
+            Align = alTop
+            Alignment = taRightJustify
+            Caption = 'lblVTotalEnt'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clHotLight
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            ExplicitLeft = 18
+            ExplicitWidth = 101
+          end
+          object lblVTotalSai: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 28
+            Width = 116
+            Height = 19
+            Align = alTop
+            Alignment = taRightJustify
+            Caption = 'lblVTotalSai'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 5198079
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            ExplicitLeft = 20
+            ExplicitWidth = 99
+          end
+        end
+        object pnlTitTotEntSai: TPanel
+          AlignWithMargins = True
+          Left = 722
+          Top = 4
+          Width = 136
+          Height = 61
+          Align = alRight
+          BevelOuter = bvNone
+          TabOrder = 7
+          ExplicitLeft = 718
+          object lblTotalEntradas: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 130
+            Height = 19
+            Align = alTop
+            Alignment = taRightJustify
+            Caption = 'Total Entradas:'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            ExplicitLeft = 25
+            ExplicitWidth = 108
+          end
+          object lblTotalSaidas: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 28
+            Width = 130
+            Height = 19
+            Align = alTop
+            Alignment = taRightJustify
+            Caption = 'Total Sa'#237'das:'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            ExplicitLeft = 41
+            ExplicitWidth = 92
+          end
+        end
       end
       inherited pnlGrid: TPanel
         Top = 145
         Width = 1257
         Height = 390
         ExplicitTop = 145
-        ExplicitWidth = 1257
-        ExplicitHeight = 390
+        ExplicitWidth = 1253
+        ExplicitHeight = 389
         inherited DBGrid1: TDBGrid
           Width = 1255
           Height = 388
@@ -1900,42 +2005,42 @@ inherited frmCaixa: TfrmCaixa
           Columns = <
             item
               Expanded = False
-              FieldName = 'id'
+              FieldName = 'ID'
               Title.Caption = 'Id'
               Width = 63
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'data_cadastro'
+              FieldName = 'DATA_CADASTRO'
               Title.Caption = 'Data'
               Width = 101
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'numero_doc'
+              FieldName = 'NUMERO_DOC'
               Title.Caption = 'N'#186' Documento'
               Width = 134
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'descricao'
+              FieldName = 'DESCRICAO'
               Title.Caption = 'Descri'#231#227'o'
               Width = 555
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'tipo'
+              FieldName = 'TIPO'
               Title.Caption = 'Tipo'
               Width = 52
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'valor'
+              FieldName = 'VALOR'
               Title.Caption = 'Valor'
               Width = 110
               Visible = True

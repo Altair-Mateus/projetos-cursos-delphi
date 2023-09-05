@@ -166,6 +166,8 @@ begin
 
   end;
 
+  Pesquisar;
+
 end;
 
 procedure TfrmCliente.btnIncluirClick(Sender: TObject);

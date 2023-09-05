@@ -149,8 +149,8 @@ begin
     cdsUsuariosid.AsInteger := cod;
 
     //  Insere o registro no final da tabela
-    FDQueryId.Append()
-    ;
+    FDQueryId.Append();
+
   finally
 
     FDQueryId.Close;

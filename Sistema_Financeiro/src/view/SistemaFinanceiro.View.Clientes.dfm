@@ -3,7 +3,7 @@ inherited frmCliente: TfrmCliente
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitTop = -142
+  ExplicitTop = -135
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19

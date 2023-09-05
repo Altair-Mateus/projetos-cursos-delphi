@@ -372,6 +372,8 @@ begin
 
   end;
 
+  Pesquisar;
+
 end;
 
 procedure TfrmContasPagar.btnIncluirClick(Sender: TObject);

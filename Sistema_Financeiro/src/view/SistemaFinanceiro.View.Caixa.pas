@@ -4,7 +4,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask, Vcl.Imaging.pngimage, SistemaFinanceiro.Model.Entidades.ResumoCaixa;
 type
   TfrmCaixa = class(TfrmCadastroPadrao)
     DataSourceCaixa: TDataSource;
@@ -38,6 +38,12 @@ type
     lblCaixa: TLabel;
     cbOrigem: TComboBox;
     lblOrigem: TLabel;
+    lblTotalEntradas: TLabel;
+    lblTotalSaidas: TLabel;
+    lblVTotalEnt: TLabel;
+    lblVTotalSai: TLabel;
+    pnlValoresEntSai: TPanel;
+    pnlTitTotEntSai: TPanel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -58,13 +64,16 @@ type
     procedure dateInicialChange(Sender: TObject);
     procedure dateFinalChange(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   private
     { Private declarations }
+    FResumoCaixa : TModelResumoCaixa;
     procedure ValidaCampos;
     procedure HabilitaBotoes;
     procedure EditarRegCaixa;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
+
 
   public
     { Public declarations }
@@ -143,6 +152,8 @@ begin
 
     frmRelCaixa.DataSourceCaixa.DataSet := DataSourceCaixa.DataSet;
 
+    frmRelCaixa.ResumoCaixa(FResumoCaixa);
+
     //  Exibe a pre visualizacao
     frmRelCaixa.RLReport.Preview();
 
@@ -151,6 +162,8 @@ begin
     FreeAndNil(frmRelCaixa);
 
   end;
+
+  Pesquisar;
 
 end;
 
@@ -343,6 +356,12 @@ begin
 
 end;
 
+procedure TfrmCaixa.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FResumoCaixa.Free;
+end;
+
 procedure TfrmCaixa.HabilitaBotoes;
 begin
 
@@ -427,8 +446,8 @@ begin
   case cbOrigem.ItemIndex of
 
     1 : LFiltro := LFiltro + ' AND ORIGEM = ''CR'' ';
-    2 : LFiltro := LFiltro + 'AND ORIGEM = ''CP'' ';
-    3 : LFiltro := LFiltro + 'AND ORIGEM = ''CX'' ';
+    2 : LFiltro := LFiltro + ' AND ORIGEM = ''CP'' ';
+    3 : LFiltro := LFiltro + ' AND ORIGEM = ''CX'' ';
 
   end;
 
@@ -469,6 +488,16 @@ begin
   dmCaixa.cdsCaixa.Close;
   dmCaixa.cdsCaixa.CommandText := 'SELECT * FROM CAIXA WHERE 1 = 1' + LFiltroEdit + LFiltro + LOrdem;
   dmCaixa.cdsCaixa.Open;
+
+  if Assigned(FResumoCaixa) then
+    FResumoCaixa.Free;
+
+  //  Atualiza valores de entrada e saida
+  FResumoCaixa := dmCaixa.ResumoCaixa(dateInicial.Date, dateFinal.Date);
+
+  lblVTotalEnt.Caption := TUtilitario.FormatoMoeda(FResumoCaixa.TotalEntradas);
+  lblVTotalSai.Caption := TUtilitario.FormatoMoeda(FResumoCaixa.TotalSaidas);
+
 
   HabilitaBotoes;
   inherited;

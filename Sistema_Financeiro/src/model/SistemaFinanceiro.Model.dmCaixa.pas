@@ -11,14 +11,14 @@ type
     FDQueryCaixa: TFDQuery;
     DataSetProviderCaixa: TDataSetProvider;
     cdsCaixa: TClientDataSet;
-    cdsCaixaid: TIntegerField;
-    cdsCaixadata_cadastro: TDateField;
-    cdsCaixavalor: TFMTBCDField;
-    cdsCaixanumero_doc: TWideStringField;
-    cdsCaixadescricao: TWideStringField;
-    cdsCaixatipo: TWideStringField;
     cdsCaixaORIGEM: TWideStringField;
     cdsCaixaID_ORIGEM: TIntegerField;
+    cdsCaixaVALOR: TFMTBCDField;
+    cdsCaixaID: TIntegerField;
+    cdsCaixaNUMERO_DOC: TWideStringField;
+    cdsCaixaDESCRICAO: TWideStringField;
+    cdsCaixaTIPO: TWideStringField;
+    cdsCaixaDATA_CADASTRO: TDateField;
   private
     { Private declarations }
     function GetSaldoAnteriorCaixa(Data : TDate) : Currency;

@@ -160,6 +160,8 @@ begin
 
   end;
 
+  Pesquisar;
+
 end;
 
 procedure TfrmFornecedores.btnIncluirClick(Sender: TObject);

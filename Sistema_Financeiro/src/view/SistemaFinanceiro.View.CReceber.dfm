@@ -4911,7 +4911,7 @@ inherited frmContasReceber: TfrmContasReceber
             item
               Expanded = False
               FieldName = 'ID'
-              Width = 36
+              Width = 61
               Visible = True
             end
             item

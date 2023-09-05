@@ -1,11 +1,9 @@
 inherited frmFrPgto: TfrmFrPgto
   Caption = 'Cadastro de Formas de Pagamento'
-  ClientHeight = 507
   ClientWidth = 791
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 791
-    Height = 507
     inherited CardCadastro: TCard
       ExplicitWidth = 789
       ExplicitHeight = 505
@@ -153,6 +151,7 @@ inherited frmFrPgto: TfrmFrPgto
       end
     end
     inherited CardPesquisa: TCard
+      Height = 504
       inherited pnlPesquisa: TPanel
         object lblStatus: TLabel [1]
           Left = 278

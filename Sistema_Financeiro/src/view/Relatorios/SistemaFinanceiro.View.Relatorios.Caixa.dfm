@@ -1,5 +1,7 @@
 inherited frmRelCaixa: TfrmRelCaixa
   Caption = 'frmRelCaixa'
+  ClientHeight = 442
+  ClientWidth = 778
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = DataSourceCaixa
@@ -167,8 +169,8 @@ inherited frmRelCaixa: TfrmRelCaixa
       end
     end
     inherited rlbRodape: TRLBand
-      Top = 181
-      ExplicitTop = 181
+      Top = 225
+      ExplicitTop = 225
     end
     object RLBand1: TRLBand
       Left = 39
@@ -188,6 +190,69 @@ inherited frmRelCaixa: TfrmRelCaixa
         Height = 19
         Align = faCenterLeft
         Caption = 'Contagem'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object RLBand2: TRLBand
+      Left = 39
+      Top = 181
+      Width = 716
+      Height = 44
+      BandType = btSummary
+      object rllblVTotEnt: TRLLabel
+        Left = 622
+        Top = 1
+        Width = 94
+        Height = 19
+        Align = faCenterRight
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object rllblVTotSai: TRLLabel
+        Left = 624
+        Top = 23
+        Width = 92
+        Height = 19
+        Align = faCenterRight
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object rllblTotEnt: TRLLabel
+        Left = 420
+        Top = 0
+        Width = 144
+        Height = 19
+        Align = faTopOnly
+        Caption = 'Total de Entradas:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object rllblTotSai: TRLLabel
+        Left = 437
+        Top = 25
+        Width = 127
+        Height = 19
+        Align = faBottomOnly
+        Caption = 'Total de Sa'#237'das:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16

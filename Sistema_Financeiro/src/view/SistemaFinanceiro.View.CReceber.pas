@@ -372,6 +372,8 @@ begin
 
   end;
 
+  Pesquisar;
+
 end;
 
 procedure TfrmContasReceber.btnIncluirClick(Sender: TObject);

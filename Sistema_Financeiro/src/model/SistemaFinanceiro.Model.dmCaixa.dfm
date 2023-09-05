@@ -20,31 +20,6 @@ object dmCaixa: TdmCaixa
     ProviderName = 'DataSetProviderCaixa'
     Left = 496
     Top = 168
-    object cdsCaixaid: TIntegerField
-      Alignment = taLeftJustify
-      FieldName = 'id'
-    end
-    object cdsCaixadata_cadastro: TDateField
-      Alignment = taCenter
-      FieldName = 'data_cadastro'
-    end
-    object cdsCaixavalor: TFMTBCDField
-      FieldName = 'valor'
-      DisplayFormat = 'R$ #,##0.00'
-      Size = 18
-    end
-    object cdsCaixanumero_doc: TWideStringField
-      FieldName = 'numero_doc'
-    end
-    object cdsCaixadescricao: TWideStringField
-      FieldName = 'descricao'
-      Size = 200
-    end
-    object cdsCaixatipo: TWideStringField
-      Alignment = taCenter
-      FieldName = 'tipo'
-      Size = 1
-    end
     object cdsCaixaORIGEM: TWideStringField
       FieldName = 'ORIGEM'
       Required = True
@@ -52,6 +27,36 @@ object dmCaixa: TdmCaixa
     end
     object cdsCaixaID_ORIGEM: TIntegerField
       FieldName = 'ID_ORIGEM'
+    end
+    object cdsCaixaVALOR: TFMTBCDField
+      FieldName = 'VALOR'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+      Size = 2
+    end
+    object cdsCaixaID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCaixaNUMERO_DOC: TWideStringField
+      FieldName = 'NUMERO_DOC'
+    end
+    object cdsCaixaDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 200
+    end
+    object cdsCaixaTIPO: TWideStringField
+      Alignment = taCenter
+      FieldName = 'TIPO'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCaixaDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Required = True
     end
   end
 end

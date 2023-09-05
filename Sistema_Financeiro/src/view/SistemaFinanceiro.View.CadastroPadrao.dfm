@@ -40,12 +40,10 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
-      ExplicitWidth = 801
-      ExplicitHeight = 508
       object pnlBotoesCad: TPanel
         Left = 0
-        Top = 439
-        Width = 801
+        Top = 436
+        Width = 789
         Height = 69
         Align = alBottom
         Color = 5934638
@@ -80,8 +78,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelCampos: TPanel
         Left = 0
         Top = 41
-        Width = 801
-        Height = 398
+        Width = 789
+        Height = 395
         Margins.Top = 0
         Align = alClient
         Color = clWhite
@@ -91,7 +89,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelTitulo: TPanel
         Left = 0
         Top = 0
-        Width = 801
+        Width = 789
         Height = 41
         Margins.Left = 0
         Margins.Top = 0

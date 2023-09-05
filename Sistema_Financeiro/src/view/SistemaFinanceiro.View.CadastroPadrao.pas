@@ -106,6 +106,20 @@ end;
 procedure TfrmCadastroPadrao.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
 
+  if not Odd(DBGrid1.DataSource.DataSet.RecNo) then
+  begin
+
+    if not(gdSelected in State) then
+    begin
+
+      TDBGrid(Sender).Canvas.Brush.Color := $00F6F5F5;
+      TDBGrid(Sender).Canvas.FillRect(Rect);
+
+    end;
+
+
+  end;
+
   if (gdSelected in State) then
   begin
     DBGrid1.Canvas.Brush.Color := $00578B2E;  // Define a cor de fundo da célula selecionada
