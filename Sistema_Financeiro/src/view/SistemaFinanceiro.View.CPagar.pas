@@ -902,6 +902,7 @@ begin
   edtValorParcela.Text := TUtilitario.FormatarValor(dmCPagar.cdsCPagarVALOR_PARCELA.AsString);
   dateVencimento.Date  := dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime;
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
+  edtFornecedor.Text   := dmCPagar.cdsCPagarID_FORNECEDOR.AsString;
 
   BuscaNomeFornecedor;
 
