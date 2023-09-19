@@ -9,7 +9,8 @@ uses
   SistemaFinanceiro.View.Caixa, SistemaFinanceiro.View.SaldoCaixa,
   SistemaFinanceiro.View.CPagar,
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
-  SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto;
+  SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto,
+  SistemaFinanceiro.View.CadAdmin;
 
 type
   TfrmPrincipal = class(TForm)
@@ -336,6 +337,30 @@ begin
 
   end;
 
+  if dmUsuarios.TblUsuariosVazia = True then
+  begin
+
+    //  Cria o form
+    frmCadAdmin := TfrmCadAdmin.Create(Self);
+
+    try
+
+      //  Exibe o form
+      frmCadAdmin.ShowModal;
+
+      if frmCadAdmin.ModalResult <> mrOk then
+      begin
+        Application.Terminate;
+      end;
+
+    finally
+
+      FreeAndNil(frmCadAdmin);
+
+    end;
+
+  end;
+
   //Cria o Form do Login
   frmLogin := TfrmLogin.Create(Self);
 
@@ -377,7 +402,7 @@ begin
   end;
 
   //  Mostra o Usuario logado
-  lblUserLogado.Caption := dmUsuarios.GetUsuarioLogado.NomeUsuarioLogado;
+  lblUserLogado.Caption := dmUsuarios.GetUsuarioLogado.Nome;
 
   ResumoMensalCaixa;
   TotalCP;

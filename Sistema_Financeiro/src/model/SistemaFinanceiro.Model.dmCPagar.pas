@@ -36,7 +36,6 @@ type
     cdsCPagarCP_ORIGEM: TIntegerField;
     cdsCPagarID_FORNECEDOR: TIntegerField;
     cdsCPagarRAZAO_SOCIALFORNEC: TWideStringField;
-    FDQueryCpDetalhesDESCONTO_BX: TCurrencyField;
     FDQueryPgtoCp: TFDQuery;
     FDQueryPgtoCpID: TIntegerField;
     FDQueryPgtoCpID_CP: TIntegerField;
@@ -45,6 +44,7 @@ type
     FDQueryPgtoCpDATA_HORA: TSQLTimeStampField;
     FDQueryPgtoCpVALOR_PAGO: TFMTBCDField;
     FDQueryPgtoCpNOME_FR: TWideStringField;
+    FDQueryCpDetalhesDESCONTO_BX: TBCDField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

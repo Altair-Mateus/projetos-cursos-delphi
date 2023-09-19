@@ -43,7 +43,7 @@ procedure TfrmRelatorioPadrao.RLReportBeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
 
-  rllblNomeUser.Caption := Format('Impresso por %s', [dmUsuarios.GetUsuarioLogado.NomeUsuarioLogado]);
+  rllblNomeUser.Caption := Format('Impresso por %s', [dmUsuarios.GetUsuarioLogado.Nome]);
 
 end;
 

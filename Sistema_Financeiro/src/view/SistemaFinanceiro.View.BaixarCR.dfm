@@ -3,8 +3,8 @@ object frmBaixarCR: TfrmBaixarCR
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Baixar Conta a Receber'
-  ClientHeight = 541
-  ClientWidth = 659
+  ClientHeight = 540
+  ClientWidth = 655
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,14 +17,12 @@ object frmBaixarCR: TfrmBaixarCR
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 659
-    Height = 541
+    Width = 655
+    Height = 540
     Align = alClient
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 655
-    ExplicitHeight = 540
     object pnlDocInfo: TPanel
       AlignWithMargins = True
       Left = 11

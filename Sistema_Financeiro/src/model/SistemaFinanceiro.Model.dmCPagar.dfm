@@ -151,10 +151,11 @@ object dmCPagar: TdmCPagar
       FieldName = 'NOME'
       Size = 100
     end
-    object FDQueryCpDetalhesDESCONTO_BX: TCurrencyField
+    object FDQueryCpDetalhesDESCONTO_BX: TBCDField
       FieldName = 'DESCONTO_BX'
       Origin = 'DESCONTO_BX'
       DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
     end
   end
   object FDQueryPgtoCp: TFDQuery

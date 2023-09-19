@@ -16,7 +16,7 @@ object dmUsuarios: TdmUsuarios
     ObjectView = False
     Params = <>
     ProviderName = 'DataSetProviderUsuarios'
-    Left = 328
+    Left = 304
     Top = 64
     object cdsUsuariosid: TIntegerField
       FieldName = 'id'

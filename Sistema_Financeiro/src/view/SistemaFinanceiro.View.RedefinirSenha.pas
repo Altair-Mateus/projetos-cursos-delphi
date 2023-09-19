@@ -116,7 +116,7 @@ procedure TfrmRedefinirSenha.FormShow(Sender: TObject);
 begin
 
   //  Seta o nome do usuário
-  lblUsuario.Caption := FUsuario.NomeUsuarioLogado;
+  lblUsuario.Caption := FUsuario.Nome;
 
 end;
 

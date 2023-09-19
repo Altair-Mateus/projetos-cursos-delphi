@@ -268,8 +268,8 @@
             <Form>frmFrPgtoBaixaCp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\SistemaFinanceiro.View.ConfigBanco.pas">
-            <Form>frmConfigBanco</Form>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.CadAdmin.pas">
+            <Form>frmCadAdmin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

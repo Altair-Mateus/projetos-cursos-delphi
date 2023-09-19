@@ -206,7 +206,7 @@ begin
     CpDetalhe.Detalhes  := Trim(edtObs.Text);
     CpDetalhe.Valor     := ValorAbater;
     CpDetalhe.Data      := datePgto.Date;
-    CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.IdUsuarioLogado;
+    CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.Id;
     CpDetalhe.ValorDesc := ValorDesc;
 
     //  Forma de pgto
@@ -414,24 +414,15 @@ begin
 end;
 
 procedure TfrmBaixarCP.FormCreate(Sender: TObject);
-var
-  I : Integer;
 begin
 
-  //  Percorre os componentes TEdit
-  for I := 0 to ComponentCount - 1 do
-  begin
-    if (Components[I] is TEdit) or (Components[I] is TDateTimePicker) then
-    begin
-      //  Cria o evento OnKeyPress para cada Edit encontrado
-      TEdit(Components[I]).OnKeyPress := EditKeyPress;
-    end;
-  end;
-
-    //  Coloca no KeyPress o enter para ir para o proximo campo
+  //  Coloca no KeyPress o enter para ir para o proximo campo
+  edtObs.OnKeyPress        := EditKeyPress;
+  datePgto.OnKeyPress      := EditKeyPress;
   edtValor.OnKeyPress      := KeyPressValor;
   edtValorDesc.OnKeyPress  := KeyPressValor;
   edtPorcDesc.OnKeyPress   := KeyPressValor;
+
 
   datePgto.Date := now;
 

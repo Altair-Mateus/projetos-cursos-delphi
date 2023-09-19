@@ -18,7 +18,7 @@ type
     cdsPgtoBxCrID_FR_PGTO: TIntegerField;
     cdsPgtoBxCrNR_FR: TIntegerField;
     cdsPgtoBxCrDATA_HORA: TSQLTimeStampField;
-    cdsPgtoBxCrVALOR_PAGO: TFMTBCDField;
+    cdsPgtoBxCrVALOR_PAGO: TBCDField;
   private
     { Private declarations }
 

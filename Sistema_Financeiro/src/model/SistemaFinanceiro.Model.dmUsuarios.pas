@@ -32,18 +32,77 @@ type
     procedure EfetuaLogin(Login: String; Senha : String);
     procedure LimparSenhaTemp(IdUsuario: String);
     procedure RedefinirSenha(Usuario: TModelUsuario);
+    procedure CadastrarUsuario(Usuario : TModelUsuario);
     function VerificaLogin(Login: String; Id: String) : Boolean;
     function GetUsuarioLogado: TModelUsuario;
+    function TblUsuariosVazia : Boolean;
     CONST TEMP_PASSWORD = '12345';
+
+
   end;
+
 var
   dmUsuarios: TdmUsuarios;
+
 implementation
+
 {%CLASSGROUP 'Vcl.Controls.TControl'}
+
 uses
   BCrypt, SistemaFinanceiro.Model.udmDados;
 {$R *.dfm}
+
 { TDataModuleUsuarios }
+
+procedure TdmUsuarios.CadastrarUsuario(Usuario: TModelUsuario);
+var
+  FDQueryUser :TFDQuery;
+  SQL : String;
+
+begin
+
+  FDQueryUser := TFDQuery.Create(nil);
+
+  try
+
+    SQL := 'INSERT INTO USUARIOS (ID, NOME, LOGIN, SENHA, STATUS, DATA_CADASTRO, SENHA_TEMP) ' +
+           ' VALUES (:ID, :NOME, :LOGIN, :SENHA, :STATUS, :DATA, :SENHATEMP)';
+
+
+    //  Conexao com o BD
+    FDQueryUser.Connection := DataModule1.FDConnection;
+
+    FDQueryUser.Close;
+    FDQueryUser.SQL.Clear;
+    FDQueryUser.SQL.Add(SQL);
+
+    FDQueryUser.ParamByName('ID').AsInteger    := 1;
+    FDQueryUser.ParamByName('NOME').AsString   := Usuario.Nome;
+    FDQueryUser.ParamByName('LOGIN').AsString  := Usuario.Login;
+    FDQueryUser.ParamByName('SENHA').AsString  := TBCrypt.GenerateHash(Usuario.Senha);
+    FDQueryUser.ParamByName('DATA').AsDate     := Now;
+    FDQueryUser.ParamByName('STATUS').AsString := 'A';
+
+    if Usuario.Senha_Temp then
+    begin
+      FDQueryUser.ParamByName('SENHATEMP').AsString := 'S';
+    end
+    else
+    begin
+      FDQueryUser.ParamByName('SENHATEMP').AsString := 'N';
+    end;
+
+    FDQueryUser.Prepare;
+    FDQueryUser.ExecSQL;
+
+  finally
+
+    FDQueryUser.Close;
+    FDQueryUser.Free;
+
+  end;
+
+end;
 
 procedure TdmUsuarios.cdsUsuariosstatusGetText(Sender: TField; var Text: string;
   DisplayText: Boolean);
@@ -67,6 +126,7 @@ begin
   FUsuario := TModelUsuario.Create;
 
 end;
+
 procedure TdmUsuarios.DataModuleDestroy(Sender: TObject);
 begin
 
@@ -74,6 +134,7 @@ begin
   FUsuario.Free;
 
 end;
+
 procedure TdmUsuarios.EfetuaLogin(Login, Senha: String);
 var
   FDQueryLogin : TFDQuery;
@@ -110,11 +171,11 @@ begin
       raise Exception.Create('Usuário e/ou senha inválidos');
     end;
 
-    FUsuario.IdUsuarioLogado    := FDQueryLogin.FieldByName('ID').AsString;
-    FUsuario.NomeUsuarioLogado  := FDQueryLogin.FieldByName('NOME').AsString;
-    FUsuario.LoginUsuarioLogado := FDQueryLogin.FieldByName('LOGIN').AsString;
-    FUsuario.Senha              := FDQueryLogin.FieldByName('SENHA').AsString;
-    FUsuario.Senha_Temp         := FDQueryLogin.FieldByName('SENHA_TEMP').AsString = 'S';
+    FUsuario.Id         := FDQueryLogin.FieldByName('ID').AsString;
+    FUsuario.Nome       := FDQueryLogin.FieldByName('NOME').AsString;
+    FUsuario.Login      := FDQueryLogin.FieldByName('LOGIN').AsString;
+    FUsuario.Senha      := FDQueryLogin.FieldByName('SENHA').AsString;
+    FUsuario.Senha_Temp := FDQueryLogin.FieldByName('SENHA_TEMP').AsString = 'S';
 
   finally
 
@@ -166,63 +227,91 @@ end;
 
 procedure TdmUsuarios.LimparSenhaTemp(IdUsuario: String);
 var
-  FDQuery : TFDQuery;
+  FDQueryLSenha : TFDQuery;
 
 begin
-  FDQuery := TFDQuery.Create(nil);
+  FDQueryLSenha := TFDQuery.Create(nil);
 
   try
 
     //  Estabelece a conexao com o banco
-    FDQuery.Connection := DataModule1.FDConnection;
+    FDQueryLSenha.Connection := DataModule1.FDConnection;
 
-    FDQuery.SQL.Clear;
-    FDQuery.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
-    FDQuery.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
+    FDQueryLSenha.SQL.Clear;
+    FDQueryLSenha.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
+    FDQueryLSenha.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
 
-    FDQuery.ParamByName('SENHA_TEMP').AsString := 'S';
-    FDQuery.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(TEMP_PASSWORD);
-    FDQuery.ParamByName('ID').AsString         := IdUsuario;
+    FDQueryLSenha.ParamByName('SENHA_TEMP').AsString := 'S';
+    FDQueryLSenha.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(TEMP_PASSWORD);
+    FDQueryLSenha.ParamByName('ID').AsString         := IdUsuario;
 
-    FDQuery.ExecSQL;
+    FDQueryLSenha.ExecSQL;
 
   finally
 
-    FDQuery.Close;
-    FDQuery.Free;
+    FDQueryLSenha.Close;
+    FDQueryLSenha.Free;
 
   end;
 end;
 
 procedure TdmUsuarios.RedefinirSenha(Usuario: TModelUsuario);
 var
-  FDQuery : TFDQuery;
+  FDQueryRSenha : TFDQuery;
 
 begin
 
-  FDQuery := TFDQuery.Create(nil);
+  FDQueryRSenha := TFDQuery.Create(nil);
 
   try
 
     //  Estabelece a conexao com o banco
-    FDQuery.Connection := DataModule1.FDConnection;
+    FDQueryRSenha.Connection := DataModule1.FDConnection;
 
-    FDQuery.SQL.Clear;
-    FDQuery.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
-    FDQuery.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
+    FDQueryRSenha.SQL.Clear;
+    FDQueryRSenha.SQL.Add('UPDATE USUARIOS SET SENHA_TEMP = :SENHA_TEMP, ');
+    FDQueryRSenha.SQL.Add('SENHA = :SENHA WHERE ID = :ID');
 
-    FDQuery.ParamByName('SENHA_TEMP').AsString := 'N';
-    FDQuery.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(Usuario.Senha);
-    FDQuery.ParamByName('ID').AsString         := Usuario.IdUsuarioLogado;
+    FDQueryRSenha.ParamByName('SENHA_TEMP').AsString := 'N';
+    FDQueryRSenha.ParamByName('SENHA').AsString      := TBCrypt.GenerateHash(Usuario.Senha);
+    FDQueryRSenha.ParamByName('ID').AsString         := Usuario.Id;
 
-    FDQuery.ExecSQL;
+    FDQueryRSenha.ExecSQL;
 
   finally
 
-    FDQuery.Close;
-    FDQuery.Free;
+    FDQueryRSenha.Close;
+    FDQueryRSenha.Free;
 
   end;
+end;
+
+function TdmUsuarios.TblUsuariosVazia: Boolean;
+var
+  FDQueryUser : TFDQuery;
+
+begin
+
+  FDQueryUser := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryUser.Connection := DataModule1.FDConnection;
+
+    FDQueryUser.Close;
+    FDQueryUser.SQL.Clear;
+    FDQueryUser.Open('SELECT * FROM USUARIOS');
+
+    Result := FDQueryUser.IsEmpty;
+
+  finally
+
+    FDQueryUser.Close;
+    FDQueryUser.Free;
+
+  end;
+
 end;
 
 function TdmUsuarios.VerificaLogin(Login, Id: String): Boolean;

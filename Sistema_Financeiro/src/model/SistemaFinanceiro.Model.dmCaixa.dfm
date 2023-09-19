@@ -28,13 +28,6 @@ object dmCaixa: TdmCaixa
     object cdsCaixaID_ORIGEM: TIntegerField
       FieldName = 'ID_ORIGEM'
     end
-    object cdsCaixaVALOR: TFMTBCDField
-      FieldName = 'VALOR'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object cdsCaixaID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -57,6 +50,12 @@ object dmCaixa: TdmCaixa
     object cdsCaixaDATA_CADASTRO: TDateField
       FieldName = 'DATA_CADASTRO'
       Required = True
+    end
+    object cdsCaixaVALOR: TBCDField
+      FieldName = 'VALOR'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
     end
   end
 end

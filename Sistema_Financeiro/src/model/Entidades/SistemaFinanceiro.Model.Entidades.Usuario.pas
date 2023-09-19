@@ -6,24 +6,24 @@ type
 
   TModelUsuario = class
   private
-    FLoginUsuarioLogado: String;
-    FNomeUsuarioLogado: String;
-    FIdUsuarioLogado: String;
+    FLogin: String;
+    FNome: String;
+    FId: String;
     FSenha_Temp: Boolean;
     FSenha: String;
 
-    procedure SetIdUsuarioLogado(const Value: String);
-    procedure SetLoginUsuarioLogado(const Value: String);
-    procedure SetNomeUsuarioLogado(const Value: String);
+    procedure SetId(const Value: String);
+    procedure SetLogin(const Value: String);
+    procedure SetNome(const Value: String);
     procedure SetSenha(const Value: String);
     procedure SetSenha_Temp(const Value: Boolean);
 
   public
-    property NomeUsuarioLogado  : String read FNomeUsuarioLogado write SetNomeUsuarioLogado;
-    property LoginUsuarioLogado : String read FLoginUsuarioLogado write SetLoginUsuarioLogado;
-    property IdUsuarioLogado    : String read FIdUsuarioLogado write SetIdUsuarioLogado;
-    property Senha              : String read FSenha write SetSenha;
-    property Senha_Temp         : Boolean read FSenha_Temp write SetSenha_Temp;
+    property Nome         : String read FNome write SetNome;
+    property Login        : String read FLogin write SetLogin;
+    property Id           : String read FId write SetId;
+    property Senha        : String read FSenha write SetSenha;
+    property Senha_Temp   : Boolean read FSenha_Temp write SetSenha_Temp;
 
 
 
@@ -33,19 +33,19 @@ implementation
 
 { TModelUsuario }
 
-procedure TModelUsuario.SetIdUsuarioLogado(const Value: String);
+procedure TModelUsuario.SetId(const Value: String);
 begin
-  FIdUsuarioLogado := Value;
+  FId := Value;
 end;
 
-procedure TModelUsuario.SetLoginUsuarioLogado(const Value: String);
+procedure TModelUsuario.SetLogin(const Value: String);
 begin
-  FLoginUsuarioLogado := Value;
+  FLogin := Value;
 end;
 
-procedure TModelUsuario.SetNomeUsuarioLogado(const Value: String);
+procedure TModelUsuario.SetNome(const Value: String);
 begin
-  FNomeUsuarioLogado := Value;
+  FNome := Value;
 end;
 
 procedure TModelUsuario.SetSenha(const Value: String);

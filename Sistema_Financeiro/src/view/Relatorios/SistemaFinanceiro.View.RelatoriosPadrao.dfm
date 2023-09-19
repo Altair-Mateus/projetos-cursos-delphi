@@ -2,8 +2,8 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
   Left = 0
   Top = 0
   Caption = 'RelPadrao'
-  ClientHeight = 442
-  ClientWidth = 778
+  ClientHeight = 441
+  ClientWidth = 774
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

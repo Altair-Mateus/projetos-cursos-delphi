@@ -48,12 +48,11 @@ object dmPgtoBxCr: TdmPgtoBxCr
       Origin = 'DATA_HORA'
       Required = True
     end
-    object cdsPgtoBxCrVALOR_PAGO: TFMTBCDField
+    object cdsPgtoBxCrVALOR_PAGO: TBCDField
       FieldName = 'VALOR_PAGO'
       Origin = 'VALOR_PAGO'
       Required = True
       Precision = 18
-      Size = 2
     end
   end
 end

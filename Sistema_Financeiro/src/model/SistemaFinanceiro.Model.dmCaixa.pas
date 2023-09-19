@@ -13,12 +13,12 @@ type
     cdsCaixa: TClientDataSet;
     cdsCaixaORIGEM: TWideStringField;
     cdsCaixaID_ORIGEM: TIntegerField;
-    cdsCaixaVALOR: TFMTBCDField;
     cdsCaixaID: TIntegerField;
     cdsCaixaNUMERO_DOC: TWideStringField;
     cdsCaixaDESCRICAO: TWideStringField;
     cdsCaixaTIPO: TWideStringField;
     cdsCaixaDATA_CADASTRO: TDateField;
+    cdsCaixaVALOR: TBCDField;
   private
     { Private declarations }
     function GetSaldoAnteriorCaixa(Data : TDate) : Currency;
