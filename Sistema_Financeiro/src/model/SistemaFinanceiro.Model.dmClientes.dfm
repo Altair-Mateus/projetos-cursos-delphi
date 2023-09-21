@@ -93,8 +93,8 @@ object dmClientes: TdmClientes
     object cdsClientesDATA_ALTERACAO: TSQLTimeStampField
       FieldName = 'DATA_ALTERACAO'
     end
-    object cdsClientesSTATUS: TWideStringField
-      FieldName = 'STATUS'
+    object cdsClientesSTATUS_CLI: TWideStringField
+      FieldName = 'STATUS_CLI'
       Required = True
       Size = 1
     end

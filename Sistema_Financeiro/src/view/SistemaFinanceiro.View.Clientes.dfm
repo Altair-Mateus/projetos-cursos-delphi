@@ -3,13 +3,13 @@ inherited frmCliente: TfrmCliente
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitTop = -135
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
+    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -29,6 +29,7 @@ inherited frmCliente: TfrmCliente
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
+        ExplicitLeft = 24
         ExplicitWidth = 1341
         ExplicitHeight = 534
         object LabelNome: TLabel
@@ -130,7 +131,7 @@ inherited frmCliente: TfrmCliente
           Caption = 'Bairro'
         end
         object LabelStatus: TLabel
-          Left = 560
+          Left = 568
           Top = 147
           Width = 43
           Height = 19
@@ -139,19 +140,19 @@ inherited frmCliente: TfrmCliente
         object edtNome: TEdit
           Left = 32
           Top = 73
-          Width = 449
+          Width = 505
           Height = 27
           Color = clWhite
           MaxLength = 200
           TabOrder = 0
         end
         object gbTipoCliente: TGroupBox
-          Left = 512
+          Left = 576
           Top = 48
           Width = 177
           Height = 52
           Caption = 'Tipo de Cliente'
-          TabOrder = 1
+          TabOrder = 14
           object rbFisica: TRadioButton
             Left = 8
             Top = 24
@@ -160,7 +161,6 @@ inherited frmCliente: TfrmCliente
             Caption = 'F'#237'sica'
             Checked = True
             TabOrder = 0
-            TabStop = True
             OnClick = rbFisicaClick
           end
           object rbJuridica: TRadioButton
@@ -180,7 +180,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 5
+          TabOrder = 4
         end
         object edtNumLog: TEdit
           Left = 384
@@ -189,7 +189,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 6
+          TabOrder = 5
         end
         object edtCidade: TEdit
           Left = 32
@@ -198,7 +198,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 8
+          TabOrder = 7
         end
         object edtCep: TEdit
           Left = 208
@@ -207,7 +207,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 9
+          TabOrder = 8
         end
         object cbUf: TComboBox
           Left = 384
@@ -215,7 +215,7 @@ inherited frmCliente: TfrmCliente
           Width = 65
           Height = 27
           Style = csDropDownList
-          TabOrder = 10
+          TabOrder = 9
           Items.Strings = (
             'AC'
             'AL'
@@ -248,11 +248,11 @@ inherited frmCliente: TfrmCliente
         object edtComplemento: TEdit
           Left = 472
           Top = 289
-          Width = 321
+          Width = 281
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 11
+          TabOrder = 10
         end
         object edtCelular: TEdit
           Left = 32
@@ -261,7 +261,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 12
+          TabOrder = 11
         end
         object edtTelefone: TEdit
           Left = 208
@@ -270,25 +270,25 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 13
+          TabOrder = 12
         end
         object edtEmail: TEdit
           Left = 384
           Top = 361
-          Width = 241
+          Width = 369
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 14
+          TabOrder = 13
         end
         object edtBairro: TEdit
           Left = 472
           Top = 217
-          Width = 153
+          Width = 281
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 7
+          TabOrder = 6
         end
         object edtCpf: TMaskEdit
           Left = 32
@@ -297,7 +297,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           EditMask = '000.000.000-00;0;_'
           MaxLength = 14
-          TabOrder = 2
+          TabOrder = 1
           Text = ''
         end
         object edtIe: TEdit
@@ -307,7 +307,7 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 10
-          TabOrder = 4
+          TabOrder = 3
         end
         object edtCnpj: TMaskEdit
           Left = 208
@@ -315,11 +315,11 @@ inherited frmCliente: TfrmCliente
           Width = 152
           Height = 27
           ImeName = 'edtCnpj'
-          TabOrder = 3
+          TabOrder = 2
           Text = ''
         end
         object ToggleStatus: TToggleSwitch
-          Left = 624
+          Left = 632
           Top = 145
           Width = 105
           Height = 21
@@ -827,7 +827,7 @@ inherited frmCliente: TfrmCliente
   end
   object DataSourceCliente: TDataSource
     DataSet = dmClientes.cdsClientes
-    Left = 689
+    Left = 897
     Top = 250
   end
 end

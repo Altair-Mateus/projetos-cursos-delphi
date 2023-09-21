@@ -11,6 +11,7 @@ type
     FId: String;
     FSenha_Temp: Boolean;
     FSenha: String;
+    FAdmin: Boolean;
 
     procedure SetId(const Value: String);
     procedure SetLogin(const Value: String);
@@ -18,20 +19,25 @@ type
     procedure SetSenha(const Value: String);
     procedure SetSenha_Temp(const Value: Boolean);
 
+    procedure SetAdmin(const Value: Boolean);
   public
     property Nome         : String read FNome write SetNome;
     property Login        : String read FLogin write SetLogin;
     property Id           : String read FId write SetId;
     property Senha        : String read FSenha write SetSenha;
     property Senha_Temp   : Boolean read FSenha_Temp write SetSenha_Temp;
-
-
+    property Admin        : Boolean read FAdmin write SetAdmin;
 
   end;
 
 implementation
 
 { TModelUsuario }
+
+procedure TModelUsuario.SetAdmin(const Value: Boolean);
+begin
+  FAdmin := Value;
+end;
 
 procedure TModelUsuario.SetId(const Value: String);
 begin

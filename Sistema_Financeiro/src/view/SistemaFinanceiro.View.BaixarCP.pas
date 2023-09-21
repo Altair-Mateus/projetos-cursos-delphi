@@ -30,8 +30,8 @@ type
     lblIdConta: TLabel;
     lblValorRestante: TLabel;
     lblVRestante: TLabel;
-    lblIdCliente: TLabel;
-    lblCodCliente: TLabel;
+    lblIdFornec: TLabel;
+    lblCodFornec: TLabel;
     gbDetalhes: TGroupBox;
     lblObs: TLabel;
     lblValor: TLabel;
@@ -119,6 +119,7 @@ begin
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
     lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
+    lblCodFornec.Caption     := IntToStr(ContaPagar.IdFornecedor);
 
     if ContaPagar.Doc = '' then
     begin
@@ -375,30 +376,40 @@ end;
 procedure TfrmBaixarCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+
   edtValor.Text := CurrToStr(CalcPorcentDesc);
+
 end;
 
 procedure TfrmBaixarCP.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+
   edtValor.Text := CurrToStr(CalcPorcentDesc);
+
 end;
 
 procedure TfrmBaixarCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+
   edtValor.Text := CurrToStr(CalcValorDesc);
+
 end;
 
 procedure TfrmBaixarCP.edtValorDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+
   edtValor.Text := CurrToStr(CalcValorDesc);
+
 end;
 
 procedure TfrmBaixarCP.edtValorExit(Sender: TObject);
 begin
-  edtValor.Text := TUtilitario.FormatarValor(edtValor.Text);
+
+  edtValor.Text := TUtilitario.FormatarValor(Trim(edtValor.Text));
+
 end;
 
 procedure TfrmBaixarCP.edtValorKeyPress(Sender: TObject; var Key: Char);

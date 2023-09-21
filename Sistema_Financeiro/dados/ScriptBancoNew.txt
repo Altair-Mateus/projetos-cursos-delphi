@@ -40,7 +40,7 @@ CREATE TABLE CLIENTES (
     EMAIL           VARCHAR(100),
     DATA_CADASTRO   TIMESTAMP NOT NULL,
     DATA_ALTERACAO  TIMESTAMP,
-    STATUS          VARCHAR(1) NOT NULL
+    STATUS_CLI      VARCHAR(1) NOT NULL
 );
 
 
@@ -124,7 +124,7 @@ CREATE TABLE FORNECEDORES (
     DATA_ALTERACAO  TIMESTAMP,
     CEP             VARCHAR(10),
     IE              VARCHAR(20),
-    STATUS          VARCHAR(1) NOT NULL
+    STATUS_FOR      VARCHAR(1) NOT NULL
 );
 
 
@@ -166,7 +166,8 @@ CREATE TABLE USUARIOS (
     SENHA          VARCHAR(60) NOT NULL,
     STATUS         VARCHAR(1) NOT NULL,
     DATA_CADASTRO  DATE NOT NULL,
-    SENHA_TEMP     VARCHAR(1)
+    SENHA_TEMP     VARCHAR(1),
+    USER_ADMIN     VARCHAR(1)
 );
 
 /******************************************************************************/

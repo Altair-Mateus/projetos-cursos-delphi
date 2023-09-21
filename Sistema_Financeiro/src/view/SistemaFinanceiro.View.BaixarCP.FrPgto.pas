@@ -95,6 +95,15 @@ begin
     abort;
   end;
 
+  if Trim(edtCodFrPgto.Text) = '' then
+  begin
+
+    edtCodFrPgto.SetFocus;
+    Application.MessageBox('Forma de Pagamento não informada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
   if (ValorForma > ValorCp) or (ValorForma > ValorRest) then
   begin
 
@@ -276,7 +285,7 @@ begin
 
     NomeFrPgto := dmFrPgto.GetNomeFrPgto(Trim(edtCodFrPgto.Text));
 
-    if NomeFrPgto = '' then
+    if (Trim(edtCodFrPgto.Text) = '') or (NomeFrPgto = '') then
     begin
 
       Application.MessageBox('Forma de Pagamento não encontrada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -308,6 +317,7 @@ end;
 
 procedure TfrmFrPgtoBaixaCp.edtCodFrPgtoExit(Sender: TObject);
 begin
+
   BuscaNomeFrPgto;
 
   if Trim(edtCodFrPgto.Text) <> '' then

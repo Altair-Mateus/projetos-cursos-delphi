@@ -10,7 +10,7 @@ uses
   SistemaFinanceiro.View.CPagar,
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
   SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto,
-  SistemaFinanceiro.View.CadAdmin;
+  SistemaFinanceiro.View.CadAdmin, System.IOUtils;
 
 type
   TfrmPrincipal = class(TForm)
@@ -58,6 +58,15 @@ type
     Fornecedores1: TMenuItem;
     N2: TMenuItem;
     FormasdePagamento1: TMenuItem;
+    imgLogo: TImage;
+    pnlBtnLeft: TPanel;
+    pnlBtnRight: TPanel;
+    pnlImgLogo: TPanel;
+    pnlNome: TPanel;
+    lblNomeSistema: TLabel;
+    Configuraes1: TMenuItem;
+    AlterarImagemPrincipal1: TMenuItem;
+    OpenDialog1: TOpenDialog;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -77,6 +86,7 @@ type
     procedure btnFornecClick(Sender: TObject);
     procedure Fornecedores1Click(Sender: TObject);
     procedure FormasdePagamento1Click(Sender: TObject);
+    procedure AlterarImagemPrincipal1Click(Sender: TObject);
 
 
   private
@@ -89,6 +99,7 @@ type
     procedure ExibeTelaClientes;
     procedure ExibeTelaFonecedores;
     procedure ExibeTelaFrPgto;
+    procedure CarregaImgPrincipal;
 
   public
     { Public declarations }
@@ -112,6 +123,46 @@ uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Model.dmCReceber,
   MidasLib;
+
+procedure TfrmPrincipal.AlterarImagemPrincipal1Click(Sender: TObject);
+var
+  NomeImg, DestImg : String;
+
+begin
+
+  //  Setando tipos de arquivos do open dialog
+  OpenDialog1.Filter := 'Imagens (*.png)|*.png';
+
+  if OpenDialog1.Execute() then
+  begin
+
+    // pega o nome da imagem
+    NomeImg := OpenDialog1.FileName;
+
+    //  Define o destino e nome padrao
+    DestImg := ExtractFilePath(Application.ExeName) + 'img_logo' + ExtractFileExt(NomeImg);
+
+    //  Copia a logo para o local onde está o exe
+    try
+
+      CopyFile(PChar(NomeImg), Pchar(DestImg), False);
+
+      ShowMessage('Nova logo principal Configurada!')
+
+    except
+      on E: Exception do
+        ShowMessage('Erro ao copiar a imagem: ' + E.Message);
+
+    end;
+ 
+
+  end;
+
+
+  //  Atualiza Logo Principal
+  CarregaImgPrincipal;
+
+end;
 
 procedure TfrmPrincipal.btnCaixaClick(Sender: TObject);
 begin
@@ -146,6 +197,22 @@ end;
 procedure TfrmPrincipal.Caixa1Click(Sender: TObject);
 begin
   ExibeTelaCaixa;
+end;
+
+procedure TfrmPrincipal.CarregaImgPrincipal;
+begin
+
+  //  Carrega a logo da tela principal
+  if FileExists('img_logo.png') then
+  begin
+    imgLogo.Picture.LoadFromFile('img_logo.png');
+  end;
+
+
+  //  Mantem sempre no tamanho
+  imgLogo.Width := 300;
+  imgLogo.Height := 300;
+
 end;
 
 procedure TfrmPrincipal.ContasaPagar1Click(Sender: TObject);
@@ -361,7 +428,7 @@ begin
 
   end;
 
-  //Cria o Form do Login
+  //  Cria o Form do Login
   frmLogin := TfrmLogin.Create(Self);
 
   try
@@ -408,6 +475,8 @@ begin
   TotalCP;
   TotalCR;
   KeyPreview := True;
+
+  CarregaImgPrincipal;
 
 end;
 procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;

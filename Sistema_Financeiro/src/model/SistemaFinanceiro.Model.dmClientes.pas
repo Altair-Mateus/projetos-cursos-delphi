@@ -31,7 +31,7 @@ type
     cdsClientesEMAIL: TWideStringField;
     cdsClientesDATA_CADASTRO: TSQLTimeStampField;
     cdsClientesDATA_ALTERACAO: TSQLTimeStampField;
-    cdsClientesSTATUS: TWideStringField;
+    cdsClientesSTATUS_CLI: TWideStringField;
   private
     { Private declarations }
   public
@@ -180,17 +180,17 @@ begin
 
     FDQueryStatus.Close;
     FDQueryStatus.SQL.Clear;
-    FDQueryStatus.SQL.Add('SELECT STATUS FROM CLIENTES WHERE ID_CLI = :ID');
+    FDQueryStatus.SQL.Add('SELECT STATUS_CLI FROM CLIENTES WHERE ID_CLI = :ID');
 
     FDQueryStatus.ParamByName('ID').AsString := IdCliente;
 
     FDQueryStatus.Open;
 
-    if FDQueryStatus.FieldByName('STATUS').AsString = 'I' then
+    if FDQueryStatus.FieldByName('STATUS_CLI').AsString = 'I' then
     begin
       Result := False;
     end
-    else if FDQueryStatus.FieldByName('STATUS').AsString = 'A' then
+    else if FDQueryStatus.FieldByName('STATUS_CLI').AsString = 'A' then
     begin
       Result := True;
     end;

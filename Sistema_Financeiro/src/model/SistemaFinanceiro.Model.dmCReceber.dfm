@@ -39,30 +39,6 @@ object dmCReceber: TdmCReceber
       Origin = 'PARCELA'
       Required = True
     end
-    object cdsCReceberVALOR_PARCELA: TFMTBCDField
-      FieldName = 'VALOR_PARCELA'
-      Origin = 'VALOR_PARCELA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
-    object cdsCReceberVALOR_VENDA: TFMTBCDField
-      FieldName = 'VALOR_VENDA'
-      Origin = 'VALOR_VENDA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
-    object cdsCReceberVALOR_ABATIDO: TFMTBCDField
-      FieldName = 'VALOR_ABATIDO'
-      Origin = 'VALOR_ABATIDO'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object cdsCReceberDATA_CADASTRO: TDateField
       Alignment = taCenter
       FieldName = 'DATA_CADASTRO'
@@ -111,6 +87,24 @@ object dmCReceber: TdmCReceber
       FieldName = 'NOME'
       Size = 100
     end
+    object cdsCReceberVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsCReceberVALOR_VENDA: TBCDField
+      FieldName = 'VALOR_VENDA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsCReceberVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
   end
   object DataSetProviderCReceber: TDataSetProvider
     DataSet = FDQueryCReceber
@@ -140,14 +134,6 @@ object dmCReceber: TdmCReceber
       Origin = 'DETALHES'
       Size = 200
     end
-    object FDQueryCrDetalheVALOR: TFMTBCDField
-      FieldName = 'VALOR'
-      Origin = 'VALOR'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object FDQueryCrDetalheDATA: TDateField
       FieldName = 'DATA'
       Origin = '"DATA"'
@@ -164,16 +150,18 @@ object dmCReceber: TdmCReceber
       FieldName = 'NOME'
       Size = 100
     end
-    object FDQueryCrDetalheJUROS_BX: TIntegerField
-      FieldName = 'JUROS_BX'
-      Origin = 'JUROS_BX'
+    object FDQueryCrDetalheVALOR: TBCDField
+      FieldName = 'VALOR'
+      Origin = 'VALOR'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
     end
-    object FDQueryCrDetalheDESCONTO_BX: TFMTBCDField
+    object FDQueryCrDetalheDESCONTO_BX: TBCDField
       FieldName = 'DESCONTO_BX'
       Origin = 'DESCONTO_BX'
       DisplayFormat = 'R$ #,##0.00'
       Precision = 18
-      Size = 2
     end
   end
   object FDQueryPgtoCr: TFDQuery
@@ -192,14 +180,6 @@ object dmCReceber: TdmCReceber
       FieldName = 'ID_FR_PGTO'
       Origin = 'ID_FR_PGTO'
       Required = True
-    end
-    object FDQueryPgtoCrVALOR_PAGO: TFMTBCDField
-      FieldName = 'VALOR_PAGO'
-      Origin = 'VALOR_PAGO'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
     end
     object FDQueryPgtoCrDATA_HORA: TSQLTimeStampField
       FieldName = 'DATA_HORA'
@@ -220,6 +200,13 @@ object dmCReceber: TdmCReceber
     object FDQueryPgtoCrNOME: TWideStringField
       FieldName = 'NOME_FR'
       Size = 100
+    end
+    object FDQueryPgtoCrVALOR_PAGO: TBCDField
+      FieldName = 'VALOR_PAGO'
+      Origin = 'VALOR_PAGO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
     end
   end
 end

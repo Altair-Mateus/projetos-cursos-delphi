@@ -160,10 +160,12 @@ begin
   //  Se for um novo usuário será colocado a senha temporária
   if dmUsuarios.cdsUsuarios.State in [dsInsert] then
   begin
-    dmUsuarios.cdsUsuariossenha.AsString := TBCrypt.GenerateHash(dmUsuarios.TEMP_PASSWORD);
-    dmUsuarios.cdsUsuariossenha_temp.AsString := 'S';
-    dmUsuarios.cdsUsuariosdata_cadastro.AsDateTime := now;
+
     dmUsuarios.GeraCodigo;
+    dmUsuarios.cdsUsuariossenha.AsString           := TBCrypt.GenerateHash(dmUsuarios.TEMP_PASSWORD);
+    dmUsuarios.cdsUsuariossenha_temp.AsString      := 'S';
+    dmUsuarios.cdsUsuariosdata_cadastro.AsDateTime := now;
+
   end;
 
   //  Define o status do usuario
@@ -177,8 +179,8 @@ begin
     end;
 
   //  Passando os dados para o dataset
-  dmUsuarios.cdsUsuariosnome.AsString := Trim(edtNome.Text);
-  dmUsuarios.cdsUsuarioslogin.AsString := Trim(edtLogin.Text);
+  dmUsuarios.cdsUsuariosnome.AsString   := Trim(edtNome.Text);
+  dmUsuarios.cdsUsuarioslogin.AsString  := Trim(edtLogin.Text);
   dmUsuarios.cdsUsuariosstatus.AsString := LStatus;
 
   //  Gravando no banco de dados
@@ -205,6 +207,8 @@ end;
 
 procedure TfrmUsuarios.EditarUsuario;
 begin
+
+  lblAvisoSenha.Visible := False;
 
   //  Coloca o dataset em modo de edição
   dmUsuarios.cdsUsuarios.Edit;
@@ -247,6 +251,14 @@ end;
 procedure TfrmUsuarios.mnuLimpaSenhaClick(Sender: TObject);
 begin
   inherited;
+
+  if not dmUsuarios.GetUsuarioLogado.Admin then
+  begin
+
+    Application.MessageBox('Somente Administradores podem redefinir a senha!', 'Erro', MB_OK + MB_ICONERROR);
+    abort;
+
+  end;
 
   if not DataSourceUsuarios.DataSet.IsEmpty then
   begin

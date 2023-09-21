@@ -279,7 +279,7 @@ begin
   dmClientes.cdsClientesTELEFONE.AsString     := Trim(edtTelefone.Text);
   dmClientes.cdsClientesCOMPLEMENTO.AsString  := Trim(edtComplemento.Text);
   dmClientes.cdsClientesEMAIL.AsString        := Trim(edtEmail.Text);
-  dmClientes.cdsClientesSTATUS.AsString       := Status;
+  dmClientes.cdsClientesSTATUS_CLI.AsString       := Status;
 
   //  Gravando no banco de dados
   dmClientes.cdsClientes.Post;
@@ -329,7 +329,7 @@ begin
   //  Coloca o nome do usuario no titulo
   lblTitulo.Caption := dmClientes.cdsClientesId.AsString + ' - ' + dmClientes.cdsClientesNOME.AsString;
 
-  if dmClientes.cdsClientesSTATUS.AsString = 'A' then
+  if dmClientes.cdsClientesSTATUS_CLI.AsString = 'A' then
   begin
     ToggleStatus.State := tssOn;
   end

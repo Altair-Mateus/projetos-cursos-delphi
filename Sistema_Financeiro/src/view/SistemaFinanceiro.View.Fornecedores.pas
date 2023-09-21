@@ -274,7 +274,7 @@ begin
   dmFornecedores.cdsFornecedoresTELEFONE.AsString      := Trim(edtTelefone.Text);
   dmFornecedores.cdsFornecedoresCOMPLEMENTO.AsString   := Trim(edtComplemento.Text);
   dmFornecedores.cdsFornecedoresEMAIL.AsString         := Trim(edtEmail.Text);
-  dmFornecedores.cdsFornecedoresSTATUS.AsString        := Status;
+  dmFornecedores.cdsFornecedoresSTATUS_FOR.AsString        := Status;
 
   //  Gravando no banco de dados
   dmFornecedores.cdsFornecedores.Post;
@@ -322,7 +322,7 @@ begin
   //  Coloca o nome do fornecedor no titulo
   lblTitulo.Caption := dmFornecedores.cdsFornecedoresId.AsString + ' - ' + dmFornecedores.cdsFornecedoresRAZAO_SOCIAL.AsString;
 
-  if dmFornecedores.cdsFornecedoresSTATUS.AsString = 'A' then
+  if dmFornecedores.cdsFornecedoresSTATUS_FOR.AsString = 'A' then
   begin
     ToggleStatus.State := tssOn;
   end

@@ -1,26 +1,25 @@
 inherited frmFrPgto: TfrmFrPgto
   Caption = 'Cadastro de Formas de Pagamento'
   ClientWidth = 791
+  ExplicitHeight = 544
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 791
+    ActiveCard = CardCadastro
+    ExplicitHeight = 505
     inherited CardCadastro: TCard
-      ExplicitWidth = 789
-      ExplicitHeight = 505
+      Height = 504
+      ExplicitHeight = 504
       inherited pnlBotoesCad: TPanel
-        Top = 436
-        Width = 789
-        ExplicitTop = 436
-        ExplicitWidth = 789
+        Top = 435
+        ExplicitTop = 435
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 789
-        Height = 395
-        ExplicitWidth = 789
-        ExplicitHeight = 395
+        Height = 394
+        ExplicitHeight = 394
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -69,6 +68,7 @@ inherited frmFrPgto: TfrmFrPgto
           StateCaptions.CaptionOn = 'Ativo'
           StateCaptions.CaptionOff = 'Inativo'
           TabOrder = 1
+          TabStop = False
           ThumbColor = 5737262
         end
         object edtDesc: TEdit
@@ -140,8 +140,6 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 789
-        ExplicitWidth = 789
         inherited lblTitulo: TLabel
           Width = 332
           Caption = 'Inserindo uma nova Forma de Pagamento'
@@ -152,6 +150,7 @@ inherited frmFrPgto: TfrmFrPgto
     end
     inherited CardPesquisa: TCard
       Height = 504
+      ExplicitHeight = 503
       inherited pnlPesquisa: TPanel
         object lblStatus: TLabel [1]
           Left = 278
@@ -229,6 +228,8 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited pnlBotoes: TPanel
+        Top = 435
+        ExplicitTop = 434
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -237,7 +238,10 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited pnlGrid: TPanel
+        Height = 354
+        ExplicitHeight = 353
         inherited DBGrid1: TDBGrid
+          Height = 352
           DataSource = DataSourceFrPgto
           Columns = <
             item

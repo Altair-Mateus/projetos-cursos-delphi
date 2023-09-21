@@ -1,14 +1,15 @@
 inherited frmFornecedores: TfrmFornecedores
   Caption = 'Cadastro de Fornecedores'
-  ClientHeight = 646
-  ClientWidth = 1343
+  ClientHeight = 645
+  ClientWidth = 1339
   WindowState = wsMaximized
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
-    Width = 1343
-    Height = 646
+    Width = 1339
+    Height = 645
+    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -355,7 +356,7 @@ inherited frmFornecedores: TfrmFornecedores
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1341
+        Width = 1337
         ExplicitWidth = 1341
         inherited lblTitulo: TLabel
           Width = 245
@@ -366,8 +367,8 @@ inherited frmFornecedores: TfrmFornecedores
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1341
-      Height = 644
+      Width = 1337
+      Height = 643
       ExplicitWidth = 1337
       ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
@@ -823,8 +824,8 @@ inherited frmFornecedores: TfrmFornecedores
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 575
-        Width = 1341
+        Top = 574
+        Width = 1337
         ExplicitTop = 574
         ExplicitWidth = 1337
         inherited btnExcluir: TButton
@@ -840,8 +841,8 @@ inherited frmFornecedores: TfrmFornecedores
       end
       inherited pnlGrid: TPanel
         Top = 137
-        Width = 1341
-        Height = 438
+        Width = 1337
+        Height = 437
         ExplicitTop = 137
         ExplicitWidth = 1337
         ExplicitHeight = 437
@@ -874,20 +875,17 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TELEFONE'
               Title.Caption = 'Telefone'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CNPJ'
-              Width = 64
               Visible = True
             end
             item

@@ -12,6 +12,7 @@ object frmCadAdmin: TfrmCadAdmin
   Font.Name = 'Tahoma'
   Font.Style = []
   Position = poScreenCenter
+  OnCreate = FormCreate
   TextHeight = 14
   object pnlLogin: TPanel
     Left = 0
@@ -528,6 +529,20 @@ object frmCadAdmin: TfrmCadAdmin
       Font.Style = []
       ParentFont = False
     end
+    object lblAviso: TLabel
+      Left = 30
+      Top = 330
+      Width = 168
+      Height = 19
+      Alignment = taCenter
+      Caption = 'Seu LOGIN ser'#225': admin'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5737262
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object edtSenha: TEdit
       Left = 62
       Top = 199
@@ -572,12 +587,12 @@ object frmCadAdmin: TfrmCadAdmin
       ExplicitWidth = 390
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 245
+        Left = 210
         Top = 2
         Width = 113
         Height = 59
         Margins.Top = 1
-        Margins.Right = 35
+        Margins.Right = 70
         Margins.Bottom = 15
         Align = alRight
         Caption = 'Cancelar'
@@ -595,11 +610,11 @@ object frmCadAdmin: TfrmCadAdmin
       end
       object btnSalvar: TButton
         AlignWithMargins = True
-        Left = 36
+        Left = 71
         Top = 2
         Width = 113
         Height = 59
-        Margins.Left = 35
+        Margins.Left = 70
         Margins.Top = 1
         Margins.Bottom = 15
         Align = alLeft
@@ -614,6 +629,7 @@ object frmCadAdmin: TfrmCadAdmin
         ParentFont = False
         TabOrder = 0
         OnClick = btnSalvarClick
+        ExplicitLeft = 36
       end
     end
   end

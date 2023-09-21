@@ -16,9 +16,6 @@ type
     cdsCPagarNUMERO_DOC: TWideStringField;
     cdsCPagarDESCRICAO: TWideStringField;
     cdsCPagarPARCELA: TIntegerField;
-    cdsCPagarVALOR_PARCELA: TFMTBCDField;
-    cdsCPagarVALOR_COMPRA: TFMTBCDField;
-    cdsCPagarVALOR_ABATIDO: TFMTBCDField;
     cdsCPagarDATA_COMPRA: TDateField;
     cdsCPagarDATA_CADASTRO: TDateField;
     cdsCPagarDATA_VENCIMENTO: TDateField;
@@ -28,7 +25,6 @@ type
     FDQueryCpDetalhesID: TIntegerField;
     FDQueryCpDetalhesID_CONTA_PAGAR: TIntegerField;
     FDQueryCpDetalhesDETALHES: TWideStringField;
-    FDQueryCpDetalhesVALOR: TFMTBCDField;
     FDQueryCpDetalhesDATA: TDateField;
     FDQueryCpDetalhesUSUARIO: TWideStringField;
     FDQueryCpDetalhesNOME: TWideStringField;
@@ -42,9 +38,13 @@ type
     FDQueryPgtoCpID_FR_PGTO: TIntegerField;
     FDQueryPgtoCpNR_FR: TIntegerField;
     FDQueryPgtoCpDATA_HORA: TSQLTimeStampField;
-    FDQueryPgtoCpVALOR_PAGO: TFMTBCDField;
     FDQueryPgtoCpNOME_FR: TWideStringField;
     FDQueryCpDetalhesDESCONTO_BX: TBCDField;
+    cdsCPagarVALOR_PARCELA: TBCDField;
+    cdsCPagarVALOR_COMPRA: TBCDField;
+    cdsCPagarVALOR_ABATIDO: TBCDField;
+    FDQueryCpDetalhesVALOR: TBCDField;
+    FDQueryPgtoCpVALOR_PAGO: TBCDField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

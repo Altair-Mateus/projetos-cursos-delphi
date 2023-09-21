@@ -192,6 +192,12 @@ inherited frmUsuarios: TfrmUsuarios
               Title.Caption = 'Status'
               Width = 70
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'USER_ADMIN'
+              Title.Caption = 'Admin'
+              Visible = True
             end>
         end
       end

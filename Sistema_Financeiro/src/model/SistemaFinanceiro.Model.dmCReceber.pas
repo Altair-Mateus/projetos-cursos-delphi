@@ -17,9 +17,6 @@ type
     cdsCReceberNUMERO_DOCUMENTO: TWideStringField;
     cdsCReceberDESCRICAO: TWideStringField;
     cdsCReceberPARCELA: TIntegerField;
-    cdsCReceberVALOR_PARCELA: TFMTBCDField;
-    cdsCReceberVALOR_VENDA: TFMTBCDField;
-    cdsCReceberVALOR_ABATIDO: TFMTBCDField;
     cdsCReceberDATA_CADASTRO: TDateField;
     cdsCReceberDATA_VENCIMENTO: TDateField;
     cdsCReceberDATA_RECEBIMENTO: TDateField;
@@ -29,7 +26,6 @@ type
     FDQueryCrDetalheID: TIntegerField;
     FDQueryCrDetalheID_CONTA_RECEBER: TIntegerField;
     FDQueryCrDetalheDETALHES: TWideStringField;
-    FDQueryCrDetalheVALOR: TFMTBCDField;
     FDQueryCrDetalheDATA: TDateField;
     FDQueryCrDetalheUSUARIO: TWideStringField;
     FDQueryCrDetalheNOME: TWideStringField;
@@ -37,16 +33,19 @@ type
     cdsCReceberCR_ORIGEM: TIntegerField;
     cdsCReceberID_CLIENTE: TIntegerField;
     cdsCReceberNOME: TWideStringField;
-    FDQueryCrDetalheJUROS_BX: TIntegerField;
-    FDQueryCrDetalheDESCONTO_BX: TFMTBCDField;
     FDQueryPgtoCr: TFDQuery;
     FDQueryPgtoCrID_FR_PGTO: TIntegerField;
     FDQueryPgtoCrNR_FR: TIntegerField;
     FDQueryPgtoCrDATA_HORA: TSQLTimeStampField;
-    FDQueryPgtoCrVALOR_PAGO: TFMTBCDField;
     FDQueryPgtoCrID: TIntegerField;
     FDQueryPgtoCrID_CR: TIntegerField;
     FDQueryPgtoCrNOME: TWideStringField;
+    cdsCReceberVALOR_PARCELA: TBCDField;
+    cdsCReceberVALOR_VENDA: TBCDField;
+    cdsCReceberVALOR_ABATIDO: TBCDField;
+    FDQueryCrDetalheVALOR: TBCDField;
+    FDQueryPgtoCrVALOR_PAGO: TBCDField;
+    FDQueryCrDetalheDESCONTO_BX: TBCDField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

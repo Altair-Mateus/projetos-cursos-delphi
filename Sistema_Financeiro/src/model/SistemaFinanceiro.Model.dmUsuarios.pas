@@ -19,6 +19,7 @@ type
     cdsUsuariossenha: TWideStringField;
     cdsUsuariosstatus: TWideStringField;
     cdsUsuariossenha_temp: TWideStringField;
+    cdsUsuariosUSER_ADMIN: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdsUsuariosstatusGetText(Sender: TField; var Text: string;
@@ -65,8 +66,8 @@ begin
 
   try
 
-    SQL := 'INSERT INTO USUARIOS (ID, NOME, LOGIN, SENHA, STATUS, DATA_CADASTRO, SENHA_TEMP) ' +
-           ' VALUES (:ID, :NOME, :LOGIN, :SENHA, :STATUS, :DATA, :SENHATEMP)';
+    SQL := 'INSERT INTO USUARIOS (ID, NOME, LOGIN, SENHA, STATUS, DATA_CADASTRO, SENHA_TEMP, USER_ADMIN) ' +
+           ' VALUES (:ID, :NOME, :LOGIN, :SENHA, :STATUS, :DATA, :SENHATEMP, :ADMIN)';
 
 
     //  Conexao com o BD
@@ -90,6 +91,15 @@ begin
     else
     begin
       FDQueryUser.ParamByName('SENHATEMP').AsString := 'N';
+    end;
+
+    if Usuario.Admin then
+    begin
+      FDQueryUser.ParamByName('ADMIN').AsString := 'S';
+    end
+    else
+    begin
+      FDQueryUser.ParamByName('ADMIN ').AsString := 'N';
     end;
 
     FDQueryUser.Prepare;
@@ -176,6 +186,7 @@ begin
     FUsuario.Login      := FDQueryLogin.FieldByName('LOGIN').AsString;
     FUsuario.Senha      := FDQueryLogin.FieldByName('SENHA').AsString;
     FUsuario.Senha_Temp := FDQueryLogin.FieldByName('SENHA_TEMP').AsString = 'S';
+    FUsuario.Admin      := FDQueryLogin.FieldByName('USER_ADMIN').AsString = 'S';
 
   finally
 

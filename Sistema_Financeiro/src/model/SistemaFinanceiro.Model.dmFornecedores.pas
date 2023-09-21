@@ -32,7 +32,7 @@ type
     cdsFornecedoresDATA_ALTERACAO: TSQLTimeStampField;
     cdsFornecedoresCEP: TWideStringField;
     cdsFornecedoresIE: TWideStringField;
-    cdsFornecedoresSTATUS: TWideStringField;
+    cdsFornecedoresSTATUS_FOR: TWideStringField;
   private
     { Private declarations }
   public
@@ -180,17 +180,17 @@ begin
 
     FDQueryStatus.Close;
     FDQueryStatus.SQL.Clear;
-    FDQueryStatus.SQL.Add('SELECT STATUS FROM FORNECEDORES WHERE ID_FORNEC = :ID');
+    FDQueryStatus.SQL.Add('SELECT STATUS_FOR FROM FORNECEDORES WHERE ID_FORNEC = :ID');
 
     FDQueryStatus.ParamByName('ID').AsString := IdFornec;
 
     FDQueryStatus.Open;
 
-    if FDQueryStatus.FieldByName('STATUS').AsString = 'I' then
+    if FDQueryStatus.FieldByName('STATUS_FOR').AsString = 'I' then
     begin
       Result := False;
     end
-    else if FDQueryStatus.FieldByName('STATUS').AsString = 'A' then
+    else if FDQueryStatus.FieldByName('STATUS_FOR').AsString = 'A' then
     begin
       Result := True;
     end;

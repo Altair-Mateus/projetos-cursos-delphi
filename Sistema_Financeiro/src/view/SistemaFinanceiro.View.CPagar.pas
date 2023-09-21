@@ -538,7 +538,7 @@ begin
     if NomeFornecedor = '' then
     begin
 
-      Application.MessageBox('Cliente não encontrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      Application.MessageBox('Fornecedor não encontrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
       edtFornecedor.SetFocus;
       edtFornecedor.Clear;
 
@@ -572,7 +572,7 @@ begin
   begin
 
     edtFornecedor.SetFocus;
-    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo FORNECEDOR não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
 
   end;

@@ -40,27 +40,6 @@ object dmCPagar: TdmCPagar
       FieldName = 'PARCELA'
       Required = True
     end
-    object cdsCPagarVALOR_PARCELA: TFMTBCDField
-      FieldName = 'VALOR_PARCELA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
-    object cdsCPagarVALOR_COMPRA: TFMTBCDField
-      FieldName = 'VALOR_COMPRA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
-    object cdsCPagarVALOR_ABATIDO: TFMTBCDField
-      FieldName = 'VALOR_ABATIDO'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object cdsCPagarDATA_COMPRA: TDateField
       Alignment = taCenter
       FieldName = 'DATA_COMPRA'
@@ -104,6 +83,24 @@ object dmCPagar: TdmCPagar
       FieldName = 'RAZAO_SOCIAL'
       Size = 200
     end
+    object cdsCPagarVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsCPagarVALOR_COMPRA: TBCDField
+      FieldName = 'VALOR_COMPRA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsCPagarVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
   end
   object FDQueryCpDetalhes: TFDQuery
     Connection = DataModule1.FDConnection
@@ -127,14 +124,6 @@ object dmCPagar: TdmCPagar
       Origin = 'DETALHES'
       Size = 200
     end
-    object FDQueryCpDetalhesVALOR: TFMTBCDField
-      FieldName = 'VALOR'
-      Origin = 'VALOR'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object FDQueryCpDetalhesDATA: TDateField
       FieldName = 'DATA'
       Origin = '"DATA"'
@@ -154,6 +143,13 @@ object dmCPagar: TdmCPagar
     object FDQueryCpDetalhesDESCONTO_BX: TBCDField
       FieldName = 'DESCONTO_BX'
       Origin = 'DESCONTO_BX'
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object FDQueryCpDetalhesVALOR: TBCDField
+      FieldName = 'VALOR'
+      Origin = 'VALOR'
+      Required = True
       DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
@@ -191,14 +187,6 @@ object dmCPagar: TdmCPagar
       Origin = 'DATA_HORA'
       Required = True
     end
-    object FDQueryPgtoCpVALOR_PAGO: TFMTBCDField
-      FieldName = 'VALOR_PAGO'
-      Origin = 'VALOR_PAGO'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-      Size = 2
-    end
     object FDQueryPgtoCpNOME_FR: TWideStringField
       AutoGenerateValue = arDefault
       FieldName = 'NOME_FR'
@@ -206,6 +194,13 @@ object dmCPagar: TdmCPagar
       ProviderFlags = []
       ReadOnly = True
       Size = 50
+    end
+    object FDQueryPgtoCpVALOR_PAGO: TBCDField
+      FieldName = 'VALOR_PAGO'
+      Origin = 'VALOR_PAGO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
     end
   end
 end

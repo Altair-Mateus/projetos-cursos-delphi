@@ -52,6 +52,10 @@ object dmUsuarios: TdmUsuarios
       Origin = 'SENHA_TEMP'
       Size = 1
     end
+    object cdsUsuariosUSER_ADMIN: TWideStringField
+      FieldName = 'USER_ADMIN'
+      Size = 1
+    end
   end
   object DataSetProviderUsuarios: TDataSetProvider
     DataSet = FDQueryUsuarios
