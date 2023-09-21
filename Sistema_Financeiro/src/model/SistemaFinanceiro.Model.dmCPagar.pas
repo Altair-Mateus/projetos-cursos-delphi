@@ -26,7 +26,6 @@ type
     FDQueryCpDetalhesID_CONTA_PAGAR: TIntegerField;
     FDQueryCpDetalhesDETALHES: TWideStringField;
     FDQueryCpDetalhesDATA: TDateField;
-    FDQueryCpDetalhesUSUARIO: TWideStringField;
     FDQueryCpDetalhesNOME: TWideStringField;
     cdsCPagarPARCIAL: TWideStringField;
     cdsCPagarCP_ORIGEM: TIntegerField;
@@ -45,6 +44,7 @@ type
     cdsCPagarVALOR_ABATIDO: TBCDField;
     FDQueryCpDetalhesVALOR: TBCDField;
     FDQueryPgtoCpVALOR_PAGO: TBCDField;
+    FDQueryCpDetalhesUSUARIO: TIntegerField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

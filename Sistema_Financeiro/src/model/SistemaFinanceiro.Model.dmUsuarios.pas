@@ -37,6 +37,7 @@ type
     function VerificaLogin(Login: String; Id: String) : Boolean;
     function GetUsuarioLogado: TModelUsuario;
     function TblUsuariosVazia : Boolean;
+    function GetBaixa(Id: Integer) : Boolean;
     CONST TEMP_PASSWORD = '12345';
 
 
@@ -229,6 +230,62 @@ begin
     FDQueryId.Free;
 
   end;
+end;
+
+function TdmUsuarios.GetBaixa(Id: Integer): Boolean;
+var
+  FDQueryBaixa : TFDQuery;
+
+begin
+
+  Result := False;
+
+  FDQueryBaixa := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexão com o banco
+    FDQueryBaixa.Connection := DataModule1.FDConnection;
+
+    //  Verifica se o user fez alguma baixa no CR
+    FDQueryBaixa.Close;
+    FDQueryBaixa.SQL.Clear;
+    FDQueryBaixa.SQL.Add('SELECT FIRST 1 * FROM CONTAS_RECEBER_DETALHE ');
+    FDQueryBaixa.SQL.Add('WHERE USUARIO = :ID');
+
+    FDQueryBaixa.ParamByName('ID').AsInteger := ID;
+    FDQueryBaixa.Open();
+
+    if not FDQueryBaixa.IsEmpty then
+    begin
+      Result := True;
+    end
+    else
+    begin
+
+      //  Verifica se o user fez alguma baixa no CP
+      FDQueryBaixa.Close;
+      FDQueryBaixa.SQL.Clear;
+      FDQueryBaixa.SQL.Add('SELECT FIRST 1 * FROM CONTAS_PAGAR_DETALHE ');
+      FDQueryBaixa.SQL.Add('WHERE USUARIO = :ID');
+
+      FDQueryBaixa.ParamByName('ID').AsInteger := ID;
+      FDQueryBaixa.Open();
+
+      if not FDQueryBaixa.IsEmpty then
+      begin
+        Result := True;
+      end;
+
+    end;
+
+  finally
+
+    FDQueryBaixa.Close;
+    FDQueryBaixa.Free;
+
+  end;
+
 end;
 
 function TdmUsuarios.GetUsuarioLogado: TModelUsuario;

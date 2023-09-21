@@ -139,12 +139,6 @@ object dmCReceber: TdmCReceber
       Origin = '"DATA"'
       Required = True
     end
-    object FDQueryCrDetalheUSUARIO: TWideStringField
-      FieldName = 'USUARIO'
-      Origin = 'USUARIO'
-      Required = True
-      Size = 200
-    end
     object FDQueryCrDetalheNOME: TWideStringField
       DisplayLabel = 'Usu'#225'rio'
       FieldName = 'NOME'
@@ -162,6 +156,11 @@ object dmCReceber: TdmCReceber
       Origin = 'DESCONTO_BX'
       DisplayFormat = 'R$ #,##0.00'
       Precision = 18
+    end
+    object FDQueryCrDetalheUSUARIO: TIntegerField
+      FieldName = 'USUARIO'
+      Origin = 'USUARIO'
+      Required = True
     end
   end
   object FDQueryPgtoCr: TFDQuery

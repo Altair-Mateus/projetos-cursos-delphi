@@ -27,7 +27,6 @@ type
     FDQueryCrDetalheID_CONTA_RECEBER: TIntegerField;
     FDQueryCrDetalheDETALHES: TWideStringField;
     FDQueryCrDetalheDATA: TDateField;
-    FDQueryCrDetalheUSUARIO: TWideStringField;
     FDQueryCrDetalheNOME: TWideStringField;
     cdsCReceberPARCIAL: TWideStringField;
     cdsCReceberCR_ORIGEM: TIntegerField;
@@ -46,6 +45,7 @@ type
     FDQueryCrDetalheVALOR: TBCDField;
     FDQueryPgtoCrVALOR_PAGO: TBCDField;
     FDQueryCrDetalheDESCONTO_BX: TBCDField;
+    FDQueryCrDetalheUSUARIO: TIntegerField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

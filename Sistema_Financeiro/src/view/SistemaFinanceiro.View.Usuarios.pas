@@ -87,6 +87,16 @@ begin
     exit;
   end;
 
+  if dmUsuarios.GetBaixa(DataSourceUsuarios.DataSet.FieldByName('ID').AsInteger) = True then
+  begin
+
+    Application.MessageBox('Não é possível excluir um Usuário com Baixa de Contas cadastradas!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+
+
   try
 
     //  Excluindo registro

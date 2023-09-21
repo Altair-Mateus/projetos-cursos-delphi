@@ -101,7 +101,6 @@ function TdmFrPgto.GetCpCrFrPgto(Id: Integer): Boolean;
 var
   FDQueryCrCp : TFDQuery;
 
-
 begin
 
   Result := False;
@@ -113,21 +112,38 @@ begin
     //  Estabelece a conexão com o banco
     FDQueryCrCp.Connection := DataModule1.FDConnection;
 
+    //  Verifica se existe baixa com a fr pgto no Contas a Pagar
     FDQueryCrCp.Close;
     FDQueryCrCp.SQL.Clear;
-    FDQueryCrCp.SQL.Add('SELECT FIRST 1 * FROM PGTO_BX_CP PGTOCP JOIN PGTO_BX_CR PGTOCR ');
-    FDQueryCrCp.SQL.Add('ON PGTOCP.ID_FR_PGTO = PGTOCR.ID_FR_PGTO ');
-    FDQueryCrCp.SQL.Add('WHERE PGTOCP.ID_FR_PGTO = :IDFR AND PGTOCR.ID_FR_PGTO  = :IDFR');
-
+    FDQueryCrCp.SQL.Add('SELECT FIRST 1 * FROM PGTO_BX_CP WHERE ID_FR_PGTO = :IDFR');
     FDQueryCrCp.ParamByName('IDFR').AsInteger := Id;
 
     FDQueryCrCp.Open();
 
+    //  Se existir já retorna informando
     if not FDQueryCrCp.IsEmpty then
     begin
 
       Result := True;
 
+    end
+    else
+    begin
+      //  Se não existir no CP irá
+      //  Verificar se existe baixa com a fr pgto no Contas a Receber
+      FDQueryCrCp.Close;
+      FDQueryCrCp.SQL.Clear;
+      FDQueryCrCp.SQL.Add('SELECT FIRST 1 * FROM PGTO_BX_CR WHERE ID_FR_PGTO = :IDFR');
+      FDQueryCrCp.ParamByName('IDFR').AsInteger := Id;
+
+      FDQueryCrCp.Open();
+
+       if not FDQueryCrCp.IsEmpty then
+      begin
+
+        Result := True;
+
+      end;
     end;
 
   finally

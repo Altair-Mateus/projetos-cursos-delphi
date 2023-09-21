@@ -129,12 +129,6 @@ object dmCPagar: TdmCPagar
       Origin = '"DATA"'
       Required = True
     end
-    object FDQueryCpDetalhesUSUARIO: TWideStringField
-      FieldName = 'USUARIO'
-      Origin = 'USUARIO'
-      Required = True
-      Size = 200
-    end
     object FDQueryCpDetalhesNOME: TWideStringField
       DisplayLabel = 'Usu'#225'rio'
       FieldName = 'NOME'
@@ -152,6 +146,11 @@ object dmCPagar: TdmCPagar
       Required = True
       DisplayFormat = 'R$ #,##0.00'
       Precision = 18
+    end
+    object FDQueryCpDetalhesUSUARIO: TIntegerField
+      FieldName = 'USUARIO'
+      Origin = 'USUARIO'
+      Required = True
     end
   end
   object FDQueryPgtoCp: TFDQuery
