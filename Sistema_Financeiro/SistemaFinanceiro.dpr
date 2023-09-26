@@ -46,7 +46,8 @@ uses
   SistemaFinanceiro.Model.dmPgtoBxCr in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCr.pas' {dmPgtoBxCr: TDataModule},
   SistemaFinanceiro.Model.dmPgtoBxCp in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCp.pas' {dmPgtoBxCp: TDataModule},
   SistemaFinanceiro.View.BaixarCP.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCP.FrPgto.pas' {frmFrPgtoBaixaCp},
-  SistemaFinanceiro.View.CadAdmin in 'src\view\SistemaFinanceiro.View.CadAdmin.pas' {frmCadAdmin};
+  SistemaFinanceiro.View.CadAdmin in 'src\view\SistemaFinanceiro.View.CadAdmin.pas' {frmCadAdmin},
+  SistemaFinanceiro.View.Ajuda in 'src\view\SistemaFinanceiro.View.Ajuda.pas' {frmAjuda};
 
 {$R *.res}
 begin

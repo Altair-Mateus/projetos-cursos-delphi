@@ -2,6 +2,8 @@ inherited frmRelCaixa: TfrmRelCaixa
   Caption = 'frmRelCaixa'
   ClientHeight = 442
   ClientWidth = 778
+  ExplicitWidth = 790
+  ExplicitHeight = 480
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = DataSourceCaixa

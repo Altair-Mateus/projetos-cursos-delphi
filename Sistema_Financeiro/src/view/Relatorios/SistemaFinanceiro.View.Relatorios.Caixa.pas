@@ -63,9 +63,3 @@ begin
 end;
 
 end.
-
-
-uses SistemaFinanceiro.Model.Entidades.ResumoCaixa;
-
-
-uses SistemaFinanceiro.Model.Entidades.ResumoCaixa;

@@ -10,7 +10,7 @@ uses
   SistemaFinanceiro.View.CPagar,
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
   SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto,
-  SistemaFinanceiro.View.CadAdmin, System.IOUtils;
+  SistemaFinanceiro.View.CadAdmin, System.IOUtils, SistemaFinanceiro.View.Ajuda;
 
 type
   TfrmPrincipal = class(TForm)
@@ -53,20 +53,18 @@ type
     Image3: TImage;
     Label4: TLabel;
     mnuClientes: TMenuItem;
-    btnClientes: TButton;
-    btnFornec: TButton;
     Fornecedores1: TMenuItem;
     N2: TMenuItem;
     FormasdePagamento1: TMenuItem;
-    imgLogo: TImage;
-    pnlBtnLeft: TPanel;
-    pnlBtnRight: TPanel;
-    pnlImgLogo: TPanel;
-    pnlNome: TPanel;
-    lblNomeSistema: TLabel;
+    pnlBtn: TPanel;
+    pnlLogo: TPanel;
     Configuraes1: TMenuItem;
     AlterarImagemPrincipal1: TMenuItem;
     OpenDialog1: TOpenDialog;
+    btnFornec: TButton;
+    btnClientes: TButton;
+    imgLogo: TImage;
+    lblNomeSistema: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -87,6 +85,7 @@ type
     procedure Fornecedores1Click(Sender: TObject);
     procedure FormasdePagamento1Click(Sender: TObject);
     procedure AlterarImagemPrincipal1Click(Sender: TObject);
+    procedure mnuAjudaClick(Sender: TObject);
 
 
   private
@@ -99,6 +98,7 @@ type
     procedure ExibeTelaClientes;
     procedure ExibeTelaFonecedores;
     procedure ExibeTelaFrPgto;
+    procedure ExibeTelaAjuda;
     procedure CarregaImgPrincipal;
 
   public
@@ -243,6 +243,26 @@ begin
 
   end;
 
+
+end;
+
+procedure TfrmPrincipal.ExibeTelaAjuda;
+begin
+
+   //Cria o form
+  frmAjuda := TfrmAjuda.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmAjuda.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmAjuda);
+
+  end;
 
 end;
 
@@ -502,6 +522,11 @@ end;
 procedure TfrmPrincipal.Fornecedores1Click(Sender: TObject);
 begin
   ExibeTelaFonecedores;
+end;
+
+procedure TfrmPrincipal.mnuAjudaClick(Sender: TObject);
+begin
+  ExibeTelaAjuda;
 end;
 
 procedure TfrmPrincipal.mnuClientesClick(Sender: TObject);
