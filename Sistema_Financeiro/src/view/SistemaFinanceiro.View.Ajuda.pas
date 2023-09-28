@@ -14,12 +14,10 @@ type
     lblManual: TLabel;
     btnManual: TButton;
     ImageList1: TImageList;
-    pnlSuporte: TPanel;
-    pnlGitHub: TPanel;
-    lblSuporte: TLabel;
     btnGitHub: TButton;
     lblGithub: TLabel;
-    btnSupTec: TButton;
+    nlBottom: TPanel;
+    Panel1: TPanel;
     procedure btnGitHubClick(Sender: TObject);
     procedure btnSupTecClick(Sender: TObject);
     procedure btnManualClick(Sender: TObject);

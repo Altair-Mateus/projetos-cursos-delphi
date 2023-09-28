@@ -406,6 +406,7 @@ begin
   edtQtdParcelas.Enabled     := True;
   edtIntervaloDias.Enabled   := True;
   edtDiaFixoVcto.Enabled     := False;
+  checkDiaFixoVcto.Checked   := False;
   checkDiaFixoVcto.Enabled   := True;
   btnGerar.Enabled           := True;
   btnLimpar.Enabled          := False;

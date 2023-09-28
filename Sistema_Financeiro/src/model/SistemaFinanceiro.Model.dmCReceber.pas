@@ -408,7 +408,7 @@ begin
     FDQueryTotalCR.Close;
     FDQueryTotalCR.SQL.Clear;
     FDQueryTotalCR.SQL.Add('SELECT COALESCE(SUM(VALOR_PARCELA), 0) AS VALOR FROM CONTAS_RECEBER ');
-    FDQueryTotalCR.SQL.Add(' WHERE STATUS = ''A'' AND DATA_VENDA BETWEEN :DATA_INICIAL AND :DATA_FINAL ');
+    FDQueryTotalCR.SQL.Add(' WHERE STATUS = ''A'' AND DATA_VENCIMENTO BETWEEN :DATA_INICIAL AND :DATA_FINAL ');
 
     FDQueryTotalCR.ParamByName('DATA_INICIAL').AsDate := DataInicial;
     FDQueryTotalCR.ParamByName('DATA_FINAL').AsDate := DataFinal;

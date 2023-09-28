@@ -8,6 +8,7 @@ inherited frmUsuarios: TfrmUsuarios
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
     Height = 511
+    ActiveCard = CardCadastro
     ExplicitWidth = 811
     ExplicitHeight = 510
     inherited CardCadastro: TCard
@@ -51,10 +52,12 @@ inherited frmUsuarios: TfrmUsuarios
           Caption = 'Status'
         end
         object lblAvisoSenha: TLabel
-          Left = 16
-          Top = 342
-          Width = 574
+          AlignWithMargins = True
+          Left = 4
+          Top = 349
+          Width = 805
           Height = 46
+          Align = alBottom
           Caption = 
             'ATEN'#199#195'O: Ao salvar o cadastro a senha gerada ser'#225' a tempor'#225'ria. ' +
             'Quando logar a primeira vez com seu usu'#225'rio voc'#234' poder'#225' alterar ' +
@@ -67,6 +70,9 @@ inherited frmUsuarios: TfrmUsuarios
           ParentFont = False
           Visible = False
           WordWrap = True
+          ExplicitLeft = 16
+          ExplicitTop = 342
+          ExplicitWidth = 574
         end
         object edtNome: TEdit
           Left = 32
@@ -197,6 +203,7 @@ inherited frmUsuarios: TfrmUsuarios
               Expanded = False
               FieldName = 'USER_ADMIN'
               Title.Caption = 'Admin'
+              Width = 64
               Visible = True
             end>
         end

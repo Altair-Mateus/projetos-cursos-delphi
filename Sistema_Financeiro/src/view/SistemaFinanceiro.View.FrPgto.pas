@@ -39,6 +39,7 @@ type
     procedure cbStatusClick(Sender: TObject);
     procedure cbMetClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -69,6 +70,15 @@ begin
   inherited;
 
   EditarFrPgto;
+
+end;
+
+procedure TfrmFrPgto.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cancelando a incusão
+  dmFrPgto.cdsFrPgto.Cancel;
 
 end;
 

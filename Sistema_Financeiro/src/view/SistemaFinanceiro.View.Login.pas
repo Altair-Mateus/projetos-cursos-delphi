@@ -1,11 +1,10 @@
 unit SistemaFinanceiro.View.Login;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls, System.ImageList, Vcl.ImgList;
+  Vcl.StdCtrls, System.ImageList, Vcl.ImgList, SistemaFinanceiro.View.CadAdmin,
+  SistemaFinanceiro.View.RedefinirSenha;
 
 type
   TfrmLogin = class(TForm)
@@ -27,34 +26,31 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
-
     procedure ValidaCampos;
     procedure EditKeyPress(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
-  end;
 
+  end;
 var
   frmLogin: TfrmLogin;
 
 implementation
-
 {$R *.dfm}
 
 uses
-
-  SistemaFinanceiro.Model.dmUsuarios;
+  SistemaFinanceiro.Model.dmUsuarios, SistemaFinanceiro.View.Splash,
+  SistemaFinanceiro.View.Principal;
 
 { TfrmLogin }
 
 procedure TfrmLogin.btnCancelarClick(Sender: TObject);
 begin
-
   Application.Terminate;
-
 end;
 
 procedure TfrmLogin.btnEntrarClick(Sender: TObject);
@@ -68,16 +64,14 @@ begin
     ModalResult := mrOk;
 
   except
-
     on Erro: Exception do
     begin
-
       Application.MessageBox(PwideChar(Erro.Message),  'Atenção', MB_OK + MB_ICONEXCLAMATION);
       EditLogin.SetFocus;
-
     end;
 
   end;
+
 
 end;
 
@@ -86,12 +80,9 @@ begin
 
   if Key = #13 then
   begin
-
     //  Verifica se a tecla pressionada é o Enter
-
     //  Cancela o efeito do enter
     Key := #0;
-
     //  Pula para o proximo
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
@@ -101,23 +92,19 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 var
   I : Integer;
-
 begin
 
   //  Percorre os componentes TEdit
   for I := 0 to ComponentCount - 1 do
   begin
-
     if Components[I] is TEdit then
     begin
-
       //  Cria o evento OnKeyPress para cada Edit encontrado
       TEdit(Components[I]).OnKeyPress := EditKeyPress;
-
     end;
-
   end;
 
+  
 
 end;
 
@@ -134,7 +121,6 @@ begin
 
     Application.MessageBox('Campo Login não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     EditLogin.SetFocus;
-
     abort;
 
   end;
@@ -144,12 +130,9 @@ begin
 
     Application.MessageBox('Campo Senha não pode estar vazio!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     EditSenha.SetFocus;
-
     abort;
 
   end;
-
-
 
 end;
 

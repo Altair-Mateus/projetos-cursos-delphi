@@ -400,7 +400,7 @@ begin
     FDQueryTotalCP.Close;
     FDQueryTotalCP.SQL.Clear;
     FDQueryTotalCP.SQL.Add('SELECT COALESCE(SUM(VALOR_PARCELA), 0) AS VALOR FROM CONTAS_PAGAR ');
-    FDQueryTotalCP.SQL.Add(' WHERE STATUS = ''A'' AND DATA_COMPRA BETWEEN :DATA_INICIAL AND :DATA_FINAL ');
+    FDQueryTotalCP.SQL.Add(' WHERE STATUS = ''A'' AND DATA_VENCIMENTO BETWEEN :DATA_INICIAL AND :DATA_FINAL ');
 
     FDQueryTotalCP.ParamByName('DATA_INICIAL').AsDate := DataInicial;
     FDQueryTotalCP.ParamByName('DATA_FINAL').AsDate := DataFinal;

@@ -4,6 +4,7 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1322
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitTop = -130
   ExplicitWidth = 1334
   ExplicitHeight = 682
   TextHeight = 19
@@ -3406,6 +3407,9 @@ inherited frmContasPagar: TfrmContasPagar
         Width = 1320
         ExplicitTop = 572
         ExplicitWidth = 1316
+        inherited btnIncluir: TButton
+          ExplicitTop = 5
+        end
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end

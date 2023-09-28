@@ -1,6 +1,7 @@
 object frmAjuda: TfrmAjuda
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Ajuda'
   ClientHeight = 480
   ClientWidth = 467
@@ -14,10 +15,9 @@ object frmAjuda: TfrmAjuda
   TextHeight = 14
   object pnlInfo: TPanel
     Left = 0
-    Top = 0
-    Width = 467
-    Height = 480
-    Align = alClient
+    Top = 40
+    Width = 463
+    Height = 377
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 5737262
@@ -27,8 +27,6 @@ object frmAjuda: TfrmAjuda
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 463
-    ExplicitHeight = 479
     object lblAviso: TLabel
       Left = 40
       Top = 24
@@ -37,7 +35,7 @@ object frmAjuda: TfrmAjuda
       Caption = 'Est'#225' precisando de ajuda?'
       Color = clBlack
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5737262
+      Font.Color = clBlack
       Font.Height = -32
       Font.Name = 'Tahoma'
       Font.Style = []
@@ -55,8 +53,25 @@ object frmAjuda: TfrmAjuda
         'ar no bot'#227'o abaixo:'
       Color = clBlack
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5737262
+      Font.Color = clBlack
       Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object lblGithub: TLabel
+      Left = 83
+      Top = 242
+      Width = 276
+      Height = 46
+      Alignment = taCenter
+      Caption = 'Visite meu reposit'#243'rio no GitHub clicando no bot'#227'o abaixo'
+      Color = clBlack
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentColor = False
@@ -81,93 +96,45 @@ object frmAjuda: TfrmAjuda
       WordWrap = True
       OnClick = btnManualClick
     end
-    object pnlSuporte: TPanel
-      Left = 232
-      Top = 272
-      Width = 235
-      Height = 208
-      BorderStyle = bsSingle
-      DragCursor = crDefault
+    object btnGitHub: TButton
+      Left = 152
+      Top = 294
+      Width = 137
+      Height = 73
+      Caption = 'Acessar GitHub'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 7
+      Images = ImageList1
+      ParentFont = False
       TabOrder = 1
-      object lblSuporte: TLabel
-        Left = 23
-        Top = 26
-        Width = 196
-        Height = 46
-        Alignment = taCenter
-        Caption = 'Para Suporte t'#233'cnico clique no bot'#227'o abaixo:'
-        Color = clBlack
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 5737262
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        WordWrap = True
-      end
-      object btnSupTec: TButton
-        Left = 48
-        Top = 109
-        Width = 137
-        Height = 73
-        Caption = 'Suporte T'#233'cnico'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ImageIndex = 8
-        Images = ImageList1
-        ParentFont = False
-        TabOrder = 0
-        WordWrap = True
-        OnClick = btnSupTecClick
-      end
+      WordWrap = True
+      OnClick = btnGitHubClick
     end
-    object pnlGitHub: TPanel
-      Left = 0
-      Top = 272
-      Width = 233
-      Height = 208
-      BorderStyle = bsSingle
-      TabOrder = 2
-      object lblGithub: TLabel
-        Left = 8
-        Top = 26
-        Width = 192
-        Height = 69
-        Alignment = taCenter
-        Caption = 'Visite meu reposit'#243'rio no GitHub clicando no bot'#227'o abaixo'
-        Color = clBlack
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 5737262
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        WordWrap = True
-      end
-      object btnGitHub: TButton
-        Left = 40
-        Top = 109
-        Width = 137
-        Height = 73
-        Caption = 'Acessar GitHub'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ImageIndex = 7
-        Images = ImageList1
-        ParentFont = False
-        TabOrder = 0
-        WordWrap = True
-        OnClick = btnGitHubClick
-      end
-    end
+  end
+  object nlBottom: TPanel
+    Left = 0
+    Top = 416
+    Width = 467
+    Height = 64
+    Align = alBottom
+    Color = 5737262
+    ParentBackground = False
+    TabOrder = 1
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 467
+    Height = 64
+    Align = alTop
+    Color = 5737262
+    ParentBackground = False
+    TabOrder = 2
+    ExplicitTop = 416
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit

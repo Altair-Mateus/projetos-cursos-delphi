@@ -259,7 +259,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
         item
           Expanded = False
           FieldName = 'Nome'
-          Width = 188
+          Width = 179
           Visible = True
         end
         item

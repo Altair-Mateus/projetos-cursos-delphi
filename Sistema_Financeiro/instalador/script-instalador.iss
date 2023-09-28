@@ -2,14 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SistemaFinanceiro"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "Dev Altair Mateus T Alencastro"
 #define MyAppExeName "SistemaFinanceiro.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{2B8B563F-020E-4A5D-BCFB-E8BA97060BBB}
+AppId={{435DA290-BD2F-45D6-B0E8-CF631CF29248}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -19,7 +19,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\instalador
-OutputBaseFilename=instalador-sistema-financeiro
+OutputBaseFilename=setup
 SetupIconFile=D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\SistemaFinanceiro_Icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -34,6 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\Win32\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\instalador\recursos\SISTEMAFINANCEIRO.FDB"; DestDir: "{app}\dados"; Flags: ignoreversion
+Source: "D:\Projetos Desenvolvimento\Delphi\Sistema_Financeiro\instalador\recursos\manual.pdf"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

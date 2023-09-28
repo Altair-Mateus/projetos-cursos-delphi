@@ -71,6 +71,7 @@ type
     procedure cbTipoClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure cbStatusClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
     procedure ValidaCampos;
@@ -100,6 +101,15 @@ begin
   inherited;
 
   EditarFornecedor;
+
+end;
+
+procedure TfrmFornecedores.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cancelando a inclusão
+  dmFornecedores.cdsFornecedores.Cancel;
 
 end;
 

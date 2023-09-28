@@ -1,11 +1,10 @@
 unit SistemaFinanceiro.View.Splash;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.ComCtrls, Vcl.StdCtrls;
+  Vcl.ComCtrls, Vcl.StdCtrls, SistemaFinanceiro.View.CadAdmin,
+  SistemaFinanceiro.View.Login, SistemaFinanceiro.View.RedefinirSenha;
 
 type
   TfrmSplash = class(TForm)
@@ -21,6 +20,7 @@ type
     imgIniciando: TImage;
     procedure TimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
     procedure AtualizarStatus(mensagem: String; imagem: TImage);
@@ -33,15 +33,15 @@ var
   frmSplash: TfrmSplash;
 
 implementation
-
 {$R *.dfm}
+
+uses SistemaFinanceiro.Model.dmUsuarios, SistemaFinanceiro.View.Principal;
 
 procedure TfrmSplash.AtualizarStatus(mensagem: String; imagem: TImage);
 begin
 
   //  Altera o caption
   lblstatus.Caption := mensagem;
-
   //  Mostra a imagem
   imagem.Visible := True;
 
@@ -71,14 +71,10 @@ begin
 
     if ProgressBar.Position = 100 then
     begin
-
       Close;
-
     end;
 
-
   end;
-
 end;
 
 end.

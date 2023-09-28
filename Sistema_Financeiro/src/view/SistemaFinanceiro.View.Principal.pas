@@ -424,6 +424,7 @@ begin
 
   end;
 
+
   if dmUsuarios.TblUsuariosVazia = True then
   begin
 
@@ -499,6 +500,7 @@ begin
   CarregaImgPrincipal;
 
 end;
+
 procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin

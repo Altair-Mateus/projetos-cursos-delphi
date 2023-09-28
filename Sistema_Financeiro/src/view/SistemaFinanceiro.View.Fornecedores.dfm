@@ -3,34 +3,34 @@ inherited frmFornecedores: TfrmFornecedores
   ClientHeight = 645
   ClientWidth = 1339
   WindowState = wsMaximized
-  ExplicitWidth = 1355
-  ExplicitHeight = 684
+  ExplicitWidth = 1351
+  ExplicitHeight = 683
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1339
     Height = 645
     ActiveCard = CardCadastro
-    ExplicitWidth = 1339
-    ExplicitHeight = 645
+    ExplicitWidth = 1335
+    ExplicitHeight = 644
     inherited CardCadastro: TCard
-      Width = 1341
-      Height = 644
-      ExplicitWidth = 1341
-      ExplicitHeight = 644
+      Width = 1337
+      Height = 643
+      ExplicitWidth = 1333
+      ExplicitHeight = 642
       inherited pnlBotoesCad: TPanel
-        Top = 575
-        Width = 1341
-        ExplicitTop = 575
-        ExplicitWidth = 1341
+        Top = 574
+        Width = 1337
+        ExplicitTop = 573
+        ExplicitWidth = 1333
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1341
-        Height = 534
-        ExplicitWidth = 1341
-        ExplicitHeight = 534
+        Width = 1337
+        Height = 533
+        ExplicitWidth = 1333
+        ExplicitHeight = 532
         object LabelNome: TLabel
           Left = 32
           Top = 48
@@ -232,7 +232,7 @@ inherited frmFornecedores: TfrmFornecedores
           Width = 153
           Height = 27
           Color = clWhite
-          MaxLength = 10
+          MaxLength = 100
           TabOrder = 8
         end
         object cbUf: TComboBox
@@ -357,7 +357,7 @@ inherited frmFornecedores: TfrmFornecedores
       end
       inherited PanelTitulo: TPanel
         Width = 1337
-        ExplicitWidth = 1341
+        ExplicitWidth = 1333
         inherited lblTitulo: TLabel
           Width = 245
           Caption = 'Inserindo um novo Fornecedor'
@@ -372,7 +372,7 @@ inherited frmFornecedores: TfrmFornecedores
       ExplicitWidth = 1337
       ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
-        Width = 1341
+        Width = 1337
         Height = 137
         ExplicitWidth = 1337
         ExplicitHeight = 137
@@ -706,7 +706,7 @@ inherited frmFornecedores: TfrmFornecedores
           ExplicitWidth = 297
         end
         inherited btnPesquisae: TButton
-          Left = 1217
+          Left = 1213
           Top = 30
           Height = 77
           Margins.Top = 30
@@ -835,7 +835,7 @@ inherited frmFornecedores: TfrmFornecedores
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
-          Left = 1217
+          Left = 1213
           ExplicitLeft = 1213
         end
       end
@@ -847,8 +847,8 @@ inherited frmFornecedores: TfrmFornecedores
         ExplicitWidth = 1337
         ExplicitHeight = 437
         inherited DBGrid1: TDBGrid
-          Width = 1339
-          Height = 436
+          Width = 1335
+          Height = 435
           DataSource = DataSourceFornecedor
           Columns = <
             item
@@ -875,17 +875,20 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TELEFONE'
               Title.Caption = 'Telefone'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CNPJ'
+              Width = 64
               Visible = True
             end
             item

@@ -3,6 +3,7 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
+  ExplicitTop = -145
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19

@@ -1,25 +1,29 @@
 inherited frmFrPgto: TfrmFrPgto
   Caption = 'Cadastro de Formas de Pagamento'
   ClientWidth = 791
-  ExplicitHeight = 544
+  ExplicitWidth = 803
+  ExplicitHeight = 543
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 791
     ActiveCard = CardCadastro
-    ExplicitHeight = 505
+    ExplicitHeight = 504
     inherited CardCadastro: TCard
-      Height = 504
-      ExplicitHeight = 504
+      Height = 503
+      ExplicitWidth = 785
+      ExplicitHeight = 502
       inherited pnlBotoesCad: TPanel
-        Top = 435
-        ExplicitTop = 435
+        Top = 434
+        ExplicitTop = 433
+        ExplicitWidth = 785
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Height = 394
-        ExplicitHeight = 394
+        Height = 393
+        ExplicitWidth = 785
+        ExplicitHeight = 392
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -140,6 +144,7 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited PanelTitulo: TPanel
+        ExplicitWidth = 785
         inherited lblTitulo: TLabel
           Width = 332
           Caption = 'Inserindo uma nova Forma de Pagamento'
@@ -149,9 +154,11 @@ inherited frmFrPgto: TfrmFrPgto
       end
     end
     inherited CardPesquisa: TCard
-      Height = 504
+      Height = 503
+      ExplicitWidth = 789
       ExplicitHeight = 503
       inherited pnlPesquisa: TPanel
+        ExplicitWidth = 789
         object lblStatus: TLabel [1]
           Left = 278
           Top = 15
@@ -191,6 +198,7 @@ inherited frmFrPgto: TfrmFrPgto
         end
         inherited btnPesquisae: TButton
           OnClick = btnPesquisaeClick
+          ExplicitLeft = 665
         end
         object cbStatus: TComboBox
           Left = 278
@@ -228,20 +236,25 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 435
+        Top = 434
         ExplicitTop = 434
+        ExplicitWidth = 789
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
         inherited btnImprimir: TButton
           OnClick = btnImprimirClick
         end
+        inherited btnSair: TButton
+          ExplicitLeft = 665
+        end
       end
       inherited pnlGrid: TPanel
-        Height = 354
+        Height = 353
+        ExplicitWidth = 789
         ExplicitHeight = 353
         inherited DBGrid1: TDBGrid
-          Height = 352
+          Height = 351
           DataSource = DataSourceFrPgto
           Columns = <
             item
