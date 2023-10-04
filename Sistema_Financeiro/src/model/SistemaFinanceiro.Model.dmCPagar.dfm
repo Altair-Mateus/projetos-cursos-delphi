@@ -101,6 +101,14 @@ object dmCPagar: TdmCPagar
       DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
+    object cdsCPagarFATURA_CART: TWideStringField
+      FieldName = 'FATURA_CART'
+      Required = True
+      Size = 1
+    end
+    object cdsCPagarID_FATURA: TIntegerField
+      FieldName = 'ID_FATURA'
+    end
   end
   object FDQueryCpDetalhes: TFDQuery
     Connection = DataModule1.FDConnection

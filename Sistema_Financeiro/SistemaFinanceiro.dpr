@@ -47,7 +47,8 @@ uses
   SistemaFinanceiro.Model.dmPgtoBxCp in 'src\model\SistemaFinanceiro.Model.dmPgtoBxCp.pas' {dmPgtoBxCp: TDataModule},
   SistemaFinanceiro.View.BaixarCP.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCP.FrPgto.pas' {frmFrPgtoBaixaCp},
   SistemaFinanceiro.View.CadAdmin in 'src\view\SistemaFinanceiro.View.CadAdmin.pas' {frmCadAdmin},
-  SistemaFinanceiro.View.Ajuda in 'src\view\SistemaFinanceiro.View.Ajuda.pas' {frmAjuda};
+  SistemaFinanceiro.View.Ajuda in 'src\view\SistemaFinanceiro.View.Ajuda.pas' {frmAjuda},
+  SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule};
 
 {$R *.res}
 begin
@@ -64,5 +65,6 @@ begin
   Application.CreateForm(TdmFrPgto, dmFrPgto);
   Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
   Application.CreateForm(TdmPgtoBxCp, dmPgtoBxCp);
+  Application.CreateForm(TdmFaturaCartao, dmFaturaCartao);
   Application.Run;
 end.

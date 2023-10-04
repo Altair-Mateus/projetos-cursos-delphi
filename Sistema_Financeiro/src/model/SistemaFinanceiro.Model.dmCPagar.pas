@@ -45,6 +45,8 @@ type
     FDQueryCpDetalhesVALOR: TBCDField;
     FDQueryPgtoCpVALOR_PAGO: TBCDField;
     FDQueryCpDetalhesUSUARIO: TIntegerField;
+    cdsCPagarFATURA_CART: TWideStringField;
+    cdsCPagarID_FATURA: TIntegerField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

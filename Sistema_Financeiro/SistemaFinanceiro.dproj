@@ -4,7 +4,7 @@
         <ProjectVersion>19.5</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -288,6 +288,11 @@
         <DCCReference Include="src\view\SistemaFinanceiro.View.Ajuda.pas">
             <Form>frmAjuda</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas">
+            <Form>dmFaturaCartao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
