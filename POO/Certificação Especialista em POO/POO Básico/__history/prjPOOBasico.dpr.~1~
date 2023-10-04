@@ -1,0 +1,14 @@
+program prjPOOBasico;
+
+uses
+  Vcl.Forms,
+  fAula2 in 'fAula2.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.
