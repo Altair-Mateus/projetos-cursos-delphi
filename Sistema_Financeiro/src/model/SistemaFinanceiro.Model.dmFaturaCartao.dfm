@@ -21,27 +21,27 @@ object dmFaturaCartao: TdmFaturaCartao
     object cdsFaturaCartaoNOME: TWideStringField
       FieldName = 'NOME'
       Required = True
-      Size = 200
+      Size = 50
     end
     object cdsFaturaCartaoOBSERVACAO: TWideStringField
       FieldName = 'OBSERVACAO'
-      Size = 200
+      Size = 100
     end
-    object cdsFaturaCartaoDATA_CADASTRO: TDateField
+    object cdsFaturaCartaoDIA_VCTO: TIntegerField
+      FieldName = 'DIA_VCTO'
+      Required = True
+    end
+    object cdsFaturaCartaoDATA_CADASTRO: TSQLTimeStampField
       FieldName = 'DATA_CADASTRO'
       Required = True
     end
-    object cdsFaturaCartaoDATA_ALTERACAO: TDateField
+    object cdsFaturaCartaoDATA_ALTERACAO: TSQLTimeStampField
       FieldName = 'DATA_ALTERACAO'
     end
     object cdsFaturaCartaoSTATUS_FT: TWideStringField
       FieldName = 'STATUS_FT'
       Required = True
       Size = 1
-    end
-    object cdsFaturaCartaoDIA_VCTO: TIntegerField
-      FieldName = 'DIA_VCTO'
-      Required = True
     end
   end
   object DataSetProviderFaturaCartao: TDataSetProvider

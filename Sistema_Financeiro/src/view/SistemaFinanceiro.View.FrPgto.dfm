@@ -6,7 +6,6 @@ inherited frmFrPgto: TfrmFrPgto
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 791
-    ActiveCard = CardCadastro
     ExplicitHeight = 504
     inherited CardCadastro: TCard
       Height = 503

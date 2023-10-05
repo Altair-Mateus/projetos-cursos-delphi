@@ -16,14 +16,16 @@ type
     cdsFaturaCartaoID_FT: TIntegerField;
     cdsFaturaCartaoNOME: TWideStringField;
     cdsFaturaCartaoOBSERVACAO: TWideStringField;
-    cdsFaturaCartaoDATA_CADASTRO: TDateField;
-    cdsFaturaCartaoDATA_ALTERACAO: TDateField;
-    cdsFaturaCartaoSTATUS_FT: TWideStringField;
     cdsFaturaCartaoDIA_VCTO: TIntegerField;
+    cdsFaturaCartaoDATA_CADASTRO: TSQLTimeStampField;
+    cdsFaturaCartaoDATA_ALTERACAO: TSQLTimeStampField;
+    cdsFaturaCartaoSTATUS_FT: TWideStringField;
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure GeraCodigo;
+
   end;
 
 var
@@ -36,5 +38,43 @@ implementation
 uses SistemaFinanceiro.Model.udmDados;
 
 {$R *.dfm}
+
+{ TdmFaturaCartao }
+
+procedure TdmFaturaCartao.GeraCodigo;
+var
+  FDQueryId : TFDQuery;
+  cod : Integer;
+
+begin
+
+  cod := 0;
+  FDQueryId := TFDQuery.Create(Self);
+
+  try
+
+    //  Estabelece conexao com o BD
+    FDQueryId.Connection := DataModule1.FDConnection;
+
+    FDQueryId.Close;
+    FDQueryId.SQL.Clear;
+    FDQueryId.Open('SELECT MAX(ID_FT) AS ID FROM FATURA_CARTAO');
+
+    //  Ultimo cod usado + 1
+    cod := FDQueryId.FieldByName('ID').AsInteger + 1;
+
+    cdsFaturaCartaoID_FT.AsInteger := cod;
+
+    //  Insere o registro no final da tabela
+    FDQueryId.Append();
+
+  finally
+
+    FDQueryId.Close;
+    FDQueryId.Free;
+
+  end;
+
+end;
 
 end.

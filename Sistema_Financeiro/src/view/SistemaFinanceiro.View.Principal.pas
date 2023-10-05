@@ -10,7 +10,8 @@ uses
   SistemaFinanceiro.View.CPagar,
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
   SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto,
-  SistemaFinanceiro.View.CadAdmin, System.IOUtils, SistemaFinanceiro.View.Ajuda;
+  SistemaFinanceiro.View.CadAdmin, System.IOUtils, SistemaFinanceiro.View.Ajuda,
+  SistemaFinanceiro.View.FaturaCartao;
 
 type
   TfrmPrincipal = class(TForm)
@@ -65,6 +66,8 @@ type
     btnClientes: TButton;
     imgLogo: TImage;
     lblNomeSistema: TLabel;
+    FaturasdeCarto1: TMenuItem;
+    N3: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -86,6 +89,7 @@ type
     procedure FormasdePagamento1Click(Sender: TObject);
     procedure AlterarImagemPrincipal1Click(Sender: TObject);
     procedure mnuAjudaClick(Sender: TObject);
+    procedure FaturasdeCarto1Click(Sender: TObject);
 
 
   private
@@ -99,6 +103,7 @@ type
     procedure ExibeTelaFonecedores;
     procedure ExibeTelaFrPgto;
     procedure ExibeTelaAjuda;
+    procedure ExibeTelaFaturaCartao;
     procedure CarregaImgPrincipal;
 
   public
@@ -344,6 +349,26 @@ begin
   end
 end;
 
+procedure TfrmPrincipal.ExibeTelaFaturaCartao;
+begin
+
+  //  Cria o form
+  frmFaturaCartao := TfrmFaturaCartao.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFaturaCartao.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmFaturaCartao);
+
+  end;
+
+end;
+
 procedure TfrmPrincipal.ExibeTelaFonecedores;
 begin
 
@@ -399,6 +424,11 @@ begin
     //  Libera da memoria
     FreeAndNil(frmUsuarios);
   end
+end;
+
+procedure TfrmPrincipal.FaturasdeCarto1Click(Sender: TObject);
+begin
+  ExibeTelaFaturaCartao;
 end;
 
 procedure TfrmPrincipal.FormasdePagamento1Click(Sender: TObject);

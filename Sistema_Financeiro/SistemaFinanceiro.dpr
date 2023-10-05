@@ -48,7 +48,8 @@ uses
   SistemaFinanceiro.View.BaixarCP.FrPgto in 'src\view\SistemaFinanceiro.View.BaixarCP.FrPgto.pas' {frmFrPgtoBaixaCp},
   SistemaFinanceiro.View.CadAdmin in 'src\view\SistemaFinanceiro.View.CadAdmin.pas' {frmCadAdmin},
   SistemaFinanceiro.View.Ajuda in 'src\view\SistemaFinanceiro.View.Ajuda.pas' {frmAjuda},
-  SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule};
+  SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule},
+  SistemaFinanceiro.View.FaturaCartao in 'src\view\SistemaFinanceiro.View.FaturaCartao.pas' {frmFaturaCartao};
 
 {$R *.res}
 begin
