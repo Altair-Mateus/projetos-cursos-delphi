@@ -4698,9 +4698,9 @@ inherited frmContasReceber: TfrmContasReceber
           Width = 173
           Height = 27
           Style = csDropDownList
-          ItemIndex = 0
+          ItemIndex = 1
           TabOrder = 6
-          Text = 'DATA VENDA'
+          Text = 'DATA VENCIMENTO'
           OnClick = cbDataClick
           Items.Strings = (
             'DATA VENDA'

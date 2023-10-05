@@ -1,19 +1,17 @@
-inherited frmRelFrPgto: TfrmRelFrPgto
-  Caption = 'frmRelFrPgto'
-  ClientHeight = 442
-  ClientWidth = 778
-  ExplicitWidth = 790
-  ExplicitHeight = 480
+inherited frmRelFatCartao: TfrmRelFatCartao
+  Caption = 'frmRelFatCartao'
+  ExplicitWidth = 782
+  ExplicitHeight = 478
   TextHeight = 15
   inherited RLReport: TRLReport
-    DataSource = DataSourceFrPgto
+    DataSource = DataSourceFatCartao
     inherited rlbTitulo: TRLBand
       inherited rllblTitulo: TRLLabel
-        Left = 192
-        Width = 332
-        Caption = 'Rela'#231#227'o de Formas de Pagamento'
-        ExplicitLeft = 192
-        ExplicitWidth = 332
+        Left = 213
+        Width = 290
+        Caption = 'Rela'#231#227'o de Faturas de Cart'#227'o'
+        ExplicitLeft = 213
+        ExplicitWidth = 290
       end
     end
     inherited rlbNomeColunas: TRLBand
@@ -59,16 +57,30 @@ inherited frmRelFrPgto: TfrmRelFrPgto
         Font.Style = []
         ParentFont = False
       end
+      object rllblDiaVcto: TRLLabel
+        Left = 574
+        Top = 1
+        Width = 139
+        Height = 22
+        Align = faTopOnly
+        Caption = 'Dia Vencimento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
     end
     inherited rlbDados: TRLBand
       object rldbtId: TRLDBText
         Left = 0
         Top = 0
-        Width = 35
+        Width = 34
         Height = 18
         Align = faLeftTop
-        DataField = 'id_fr'
-        DataSource = DataSourceFrPgto
+        DataField = 'id_ft'
+        DataSource = DataSourceFatCartao
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -78,13 +90,13 @@ inherited frmRelFrPgto: TfrmRelFrPgto
         Text = ''
       end
       object RLDBText1: TRLDBText
-        Left = 96
+        Left = 104
         Top = 0
-        Width = 61
+        Width = 43
         Height = 18
         Align = faTopOnly
-        DataField = 'nome_fr'
-        DataSource = DataSourceFrPgto
+        DataField = 'nome'
+        DataSource = DataSourceFatCartao
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -94,13 +106,29 @@ inherited frmRelFrPgto: TfrmRelFrPgto
         Text = ''
       end
       object RLDBText2: TRLDBText
-        Left = 480
+        Left = 488
         Top = 0
-        Width = 45
+        Width = 62
         Height = 18
         Align = faTopOnly
-        DataField = 'status'
-        DataSource = DataSourceFrPgto
+        DataField = 'status_ft'
+        DataSource = DataSourceFatCartao
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Text = ''
+      end
+      object RLDBText3: TRLDBText
+        Left = 619
+        Top = 0
+        Width = 63
+        Height = 18
+        Align = faTopOnly
+        DataField = 'dia_vcto'
+        DataSource = DataSourceFatCartao
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -141,8 +169,8 @@ inherited frmRelFrPgto: TfrmRelFrPgto
       end
     end
   end
-  object DataSourceFrPgto: TDataSource
-    Left = 656
-    Top = 368
+  object DataSourceFatCartao: TDataSource
+    Left = 496
+    Top = 312
   end
 end

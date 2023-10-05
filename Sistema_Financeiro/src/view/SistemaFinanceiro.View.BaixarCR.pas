@@ -165,13 +165,6 @@ var
 begin
 
   //  Validações dos campos
-  if Trim(edtObs.Text) = '' then
-  begin
-    edtObs.SetFocus;
-    Application.MessageBox('A observação não pode estar vazia!', 'Atenção', MB_OK + MB_ICONWARNING);
-    abort;
-  end;
-
   if datePgto.Date > Date then
   begin
     datePgto.SetFocus;

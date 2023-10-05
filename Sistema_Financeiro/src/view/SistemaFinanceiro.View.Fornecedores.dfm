@@ -9,7 +9,6 @@ inherited frmFornecedores: TfrmFornecedores
   inherited CardPanelPrincipal: TCardPanel
     Width = 1339
     Height = 645
-    ActiveCard = CardCadastro
     ExplicitWidth = 1335
     ExplicitHeight = 644
     inherited CardCadastro: TCard
@@ -855,6 +854,7 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'ID_FORNEC'
               Title.Caption = 'Id'
+              Width = 64
               Visible = True
             end
             item
@@ -875,7 +875,6 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
-              Width = 64
               Visible = True
             end
             item

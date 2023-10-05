@@ -49,7 +49,8 @@ uses
   SistemaFinanceiro.View.CadAdmin in 'src\view\SistemaFinanceiro.View.CadAdmin.pas' {frmCadAdmin},
   SistemaFinanceiro.View.Ajuda in 'src\view\SistemaFinanceiro.View.Ajuda.pas' {frmAjuda},
   SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule},
-  SistemaFinanceiro.View.FaturaCartao in 'src\view\SistemaFinanceiro.View.FaturaCartao.pas' {frmFaturaCartao};
+  SistemaFinanceiro.View.FaturaCartao in 'src\view\SistemaFinanceiro.View.FaturaCartao.pas' {frmFaturaCartao},
+  SistemaFinanceiro.View.Relatorios.FaturaCartao in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FaturaCartao.pas' {frmRelFatCartao};
 
 {$R *.res}
 begin

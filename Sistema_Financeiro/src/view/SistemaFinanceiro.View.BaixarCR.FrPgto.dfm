@@ -184,7 +184,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       Top = 168
       Width = 108
       Height = 27
-      Enabled = False
+      ReadOnly = True
       TabOrder = 5
     end
     object edtValorRest: TEdit
@@ -192,7 +192,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
       Top = 168
       Width = 108
       Height = 27
-      Enabled = False
+      ReadOnly = True
       TabOrder = 6
     end
     object btnAdiciona: TButton

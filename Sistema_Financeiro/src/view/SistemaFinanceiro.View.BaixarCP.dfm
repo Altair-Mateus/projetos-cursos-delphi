@@ -371,6 +371,8 @@ object frmBaixarCP: TfrmBaixarCP
         Images = ImageList1
         TabOrder = 0
         OnClick = btnConfirmarClick
+        ExplicitLeft = 137
+        ExplicitTop = -12
       end
       object btnCancelar: TButton
         AlignWithMargins = True

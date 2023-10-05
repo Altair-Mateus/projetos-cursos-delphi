@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.WinXCtrls, Vcl.ComCtrls;
+  Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.WinXCtrls, Vcl.ComCtrls,
+  SistemaFinanceiro.View.Relatorios.FaturaCartao;
 
 type
   TfrmFaturaCartao = class(TfrmCadastroPadrao)
@@ -35,6 +36,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     procedure HabilitaBotoes;
@@ -92,6 +94,15 @@ begin
     exit;
   end;
 
+  if dmFaturaCartao.GetCpFat(DataSourceFaturaCartao.DataSet.FieldByName('ID_FT').AsInteger) = True then
+  begin
+
+    Application.MessageBox('Não é possível excluir uma fatura de cartão com Conta a Pagar Cadastrada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    exit;
+
+  end;
+
+
   try
 
     //  Excluindo o registro
@@ -103,6 +114,28 @@ begin
   end;
 
 
+
+end;
+
+procedure TfrmFaturaCartao.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+
+   //  Cria o form
+  frmRelFatCartao := TfrmRelFatCartao.Create(Self);
+
+  try
+
+    frmRelFatCartao.DataSourceFatCartao.DataSet := DataSourceFaturaCartao.DataSet;
+
+    //  Mostra a pre vizualizacao
+    frmRelFatCartao.RLReport.Preview;
+
+  finally
+
+    FreeAndNil(frmRelFatCartao);
+
+  end;
 
 end;
 

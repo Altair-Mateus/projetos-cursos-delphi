@@ -6,7 +6,8 @@ uses
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
   SistemaFinanceiro.View.BaixarCP, Vcl.Menus, SistemaFinanceiro.View.CpDetalhe,
-  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Fornecedores;
+  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Fornecedores,
+  SistemaFinanceiro.View.FaturaCartao;
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
     DataSourceCPagar: TDataSource;
@@ -82,6 +83,15 @@ type
     lblFornecedorFiltro: TLabel;
     edtFiltroFornecedor: TEdit;
     btnPesqFornecedor: TButton;
+    lblFatura: TLabel;
+    toggleFatura: TToggleSwitch;
+    lblCodFatCartao: TLabel;
+    edtCodFatCartao: TEdit;
+    btnPesqFat: TButton;
+    lblNomeFatCartao: TLabel;
+    btnPesqFtCartao: TButton;
+    edtFiltroFatCartao: TEdit;
+    lblCodFtCartao: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -112,15 +122,22 @@ type
     procedure checkParciaisClick(Sender: TObject);
     procedure checkDiaFixoVctoClick(Sender: TObject);
     procedure btnPesquisaFornecedorClick(Sender: TObject);
-    procedure edtFornecedorExit(Sender: TObject);
     procedure btnPesqFornecedorClick(Sender: TObject);
     procedure edtFiltroFornecedorChange(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
     procedure dateInicialChange(Sender: TObject);
     procedure dateFinalChange(Sender: TObject);
+    procedure toggleFaturaClick(Sender: TObject);
+    procedure btnPesqFatClick(Sender: TObject);
+    procedure edtCodFatCartaoExit(Sender: TObject);
+    procedure edtFornecedorExit(Sender: TObject);
+    procedure edtFiltroFatCartaoChange(Sender: TObject);
+    procedure btnPesqFtCartaoClick(Sender: TObject);
 
   private
     { Private declarations }
+    DataVctoFat : Integer;
+
     procedure HabilitaBotoes;
     procedure CadParcelaUnica;
     procedure CadParcelamento;
@@ -128,6 +145,7 @@ type
     procedure ExibeTelaBaixar;
     procedure ExibeDetalhe;
     procedure BuscaNomeFornecedor;
+    procedure BuscaNomeFatCartao;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
 
   public
@@ -147,7 +165,8 @@ uses
   SistemaFinanceiro.Model.dmCPagar,
   SistemaFinanceiro.Utilitarios,
   System.DateUtils, SistemaFinanceiro.View.Principal,
-  SistemaFinanceiro.View.Relatorios.Cp, SistemaFinanceiro.Model.dmFornecedores;
+  SistemaFinanceiro.View.Relatorios.Cp, SistemaFinanceiro.Model.dmFornecedores,
+  SistemaFinanceiro.Model.dmFaturaCartao;
 
 { TfrmCadastroPadrao1 }
 procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
@@ -410,11 +429,13 @@ begin
   checkDiaFixoVcto.Enabled   := True;
   btnGerar.Enabled           := True;
   btnLimpar.Enabled          := False;
+  toggleFatura.State         := tssOff;
   toggleParcelamento.State   := tssOff;
   toggleParcelamento.Enabled := True;
   edtParcela.Enabled         := False;
   edtValorParcela.Enabled    := False;
   lblNomeFornecedor.Visible  := False;
+  lblNomeFatCartao.Visible   := False;
 
 end;
 
@@ -427,17 +448,47 @@ begin
 
   //  Liberações
   edtQtdParcelas.Enabled   := True;
-  edtIntervaloDias.Enabled := True;
-  edtDiaFixoVcto.Enabled   := True;
-  checkDiaFixoVcto.Enabled := True;
   btnGerar.Enabled         := True;
   btnLimpar.Enabled        := False;
 
   edtQtdParcelas.Clear;
-  edtIntervaloDias.Clear;
-  edtDiaFixoVcto.Clear;
 
-  checkDiaFixoVcto.Checked := False;
+  if DataVctoFat = 0 then
+  begin
+
+    checkDiaFixoVcto.Checked := False;
+    checkDiaFixoVcto.Enabled := True;
+    edtDiaFixoVcto.Enabled   := True;
+    edtIntervaloDias.Enabled := True;
+    edtIntervaloDias.Clear;
+    edtDiaFixoVcto.Clear;
+
+  end;
+
+end;
+
+procedure TfrmContasPagar.btnPesqFatClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmFaturaCartao := TfrmFaturaCartao.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFaturaCartao.ShowModal;
+
+  finally
+
+    //  Pega a Id da fatura selecionada
+    edtCodFatCartao.Text := frmFaturaCartao.DataSourceFaturaCartao.DataSet.FieldByName('ID_FT').AsString;
+    edtCodFatCartao.SetFocus;
+
+    //  Libera da memória
+    FreeAndNil(frmFaturaCartao);
+
+  end;
 
 end;
 
@@ -460,6 +511,32 @@ begin
 
     //  Libera da  memoria
     FreeAndNil(frmFornecedores);
+
+  end;
+
+  Pesquisar;
+
+end;
+
+procedure TfrmContasPagar.btnPesqFtCartaoClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Cria o form
+  frmFaturaCartao := TfrmFaturaCartao.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmFaturaCartao.ShowModal;
+
+  finally
+
+    //  Pega a Id da fatura selecionada
+    edtFiltroFatCartao.Text := frmFaturaCartao.DataSourceFaturaCartao.DataSet.FieldByName('ID_FT').AsString;
+
+    //  Libera da memória
+    FreeAndNil(frmFaturaCartao);
 
   end;
 
@@ -522,6 +599,38 @@ begin
 
   //  Atualiza relatorio tela principal
   frmPrincipal.TotalCP;
+
+end;
+
+procedure TfrmContasPagar.BuscaNomeFatCartao;
+var
+  NomeFatCartao : String;
+
+begin
+
+  if Trim(edtCodFatCartao.Text) <> '' then
+  begin
+
+    NomeFatCartao := dmFaturaCartao.GetNomeFatCartao(Trim(edtCodFatCartao.Text));
+
+    if NomeFatCartao = '' then
+    begin
+
+      Application.MessageBox('Fatura de Cartão não encontrada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      edtCodFatCartao.SetFocus;
+      edtCodFatCartao.Clear;
+      abort;
+
+    end;
+
+    lblNomeFatCartao.Caption := NomeFatCartao;
+    lblNomeFatCartao.Visible := True;
+
+    DataVctoFat := dmFaturaCartao.GetDataVcto(Trim(edtCodFatCartao.Text));
+    dateVencimento.Date := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
+
+  end;
+
 
 end;
 
@@ -637,6 +746,22 @@ begin
     dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
     dmCPagar.cdsCPagarID_FORNECEDOR.AsInteger    := IdFornecedor;
 
+    if toggleFatura.State = tssOff then
+    begin
+
+      dmCPagar.cdsCPagarFATURA_CART.AsString := 'N';
+
+    end
+      else
+      begin
+
+        dmCPagar.cdsCPagarFATURA_CART.AsString := 'S';
+        dmCPagar.cdsCPagarID_FATURA.AsString   := Trim(edtCodFatCartao.Text);
+
+      end;
+
+
+
     //  Gravando no banco
     dmCPagar.cdsCPagar.Post;
     dmCPagar.cdsCPagar.ApplyUpdates(0);
@@ -727,9 +852,24 @@ begin
   dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime     := dateCompra.Date;
   dmCPagar.cdsCPagarPARCELA.AsInteger          := Parcela;
   dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
-  dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
   dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
   dmCPagar.cdsCPagarID_FORNECEDOR.AsInteger    := IdFornecedor;
+  dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+
+  if toggleFatura.State = tssOff then
+  begin
+
+    dmCPagar.cdsCPagarFATURA_CART.AsString := 'N';
+
+  end
+    else
+    begin
+
+      dmCPagar.cdsCPagarFATURA_CART.AsString := 'S';
+      dmCPagar.cdsCPagarID_FATURA.AsString   := Trim(edtCodFatCartao.Text);
+
+    end;
+
 
   //  Gravando no BD
   dmCPagar.cdsCPagar.Post;
@@ -905,7 +1045,58 @@ begin
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
   edtFornecedor.Text   := dmCPagar.cdsCPagarID_FORNECEDOR.AsString;
 
+  if dmCPagar.cdsCPagarFATURA_CART.AsString = 'S' then
+  begin
+
+    toggleFatura.State      := tssOn;
+    lblCodFatCartao.Visible  := True;
+    lblNomeFatCartao.Visible := True;
+    edtCodFatCartao.Visible  := True;
+    btnPesqFat.Visible       := True;
+
+    edtCodFatCartao.Text := dmCPagar.cdsCPagarID_FATURA.AsString;
+    BuscaNomeFatCartao;
+
+  end
+    else
+    begin
+      toggleFatura.State    := tssOff;
+    end;
+
+
   BuscaNomeFornecedor;
+
+end;
+
+procedure TfrmContasPagar.edtCodFatCartaoExit(Sender: TObject);
+begin
+  inherited;
+
+  BuscaNomeFatCartao;
+
+  if Trim(edtCodFatCartao.Text) <> '' then
+  begin
+
+    if dmFaturaCartao.GetStatusFatCartao(Trim(edtCodFatCartao.Text)) = False then
+    begin
+
+      edtCodFatCartao.Clear;
+      edtCodFatCartao.SetFocus;
+      lblNomeFatCartao.Caption := '';
+      Application.MessageBox('Fatura de Cartão não está Ativa, verifique o cadastro!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+
+    end;
+
+  end;
+
+end;
+
+procedure TfrmContasPagar.edtFiltroFatCartaoChange(Sender: TObject);
+begin
+  inherited;
+
+  Pesquisar;
 
 end;
 
@@ -921,7 +1112,7 @@ procedure TfrmContasPagar.edtFornecedorExit(Sender: TObject);
 begin
   inherited;
 
-  BuscaNomeFornecedor;
+   BuscaNomeFornecedor;
 
   if Trim(edtFornecedor.Text) <> '' then
   begin
@@ -941,6 +1132,7 @@ begin
   end;
 
 end;
+
 
 procedure TfrmContasPagar.edtPesquisarChange(Sender: TObject);
 begin
@@ -1172,11 +1364,23 @@ begin
   if Trim(edtFiltroFornecedor.Text) <> '' then
   begin
 
-    LFiltro := LFiltro + ' AND CP.ID_FORNECEDOR = :ID';
+    LFiltro := LFiltro + ' AND CP.ID_FORNECEDOR = :ID ';
 
     //  Criando os parametros
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
     dmCPagar.cdsCPagar.ParamByName('ID').AsString := Trim(edtFiltroFornecedor.Text);
+
+  end;
+
+  //  Pesquisa por Fatura de Cartao
+  if Trim(edtFiltroFatCartao.Text) <> '' then
+  begin
+
+    LFiltro := LFiltro + ' AND ID_FATURA = :ID_FT ';
+
+    //  Criando os parametros
+    dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID_FT', TParamType.ptInput);
+    dmCPagar.cdsCPagar.ParamByName('ID_FT').AsString := Trim(edtFiltroFatCartao.Text);
 
   end;
 
@@ -1256,6 +1460,45 @@ begin
 
 end;
 
+procedure TfrmContasPagar.toggleFaturaClick(Sender: TObject);
+begin
+  inherited;
+
+  if toggleFatura.State = tssOff then
+  begin
+
+    lblCodFatCartao.Visible  := False;
+    lblNomeFatCartao.Visible := False;
+    edtCodFatCartao.Visible  := False;
+    btnPesqFat.Visible       := False;
+
+    DataVctoFat := 0;
+
+    if toggleParcelamento.State = tssOn then
+    begin
+
+      checkDiaFixoVcto.Checked := False;
+      checkDiaFixoVcto.Enabled := True;
+      edtDiaFixoVcto.Clear;
+      edtDiaFixoVcto.Enabled   := True;
+
+    end;
+
+  end
+    else if toggleFatura.State = tssOn then
+         begin
+
+          lblCodFatCartao.Visible := True;
+          edtCodFatCartao.Visible := True;
+          btnPesqFat.Visible      := True;
+
+          edtCodFatCartao.SetFocus;
+
+         end;
+
+
+end;
+
 procedure TfrmContasPagar.toggleParcelamentoClick(Sender: TObject);
 begin
 
@@ -1267,7 +1510,21 @@ begin
   end
     else if toggleParcelamento.State = tssOn then
          begin
-           CardPanelParcela.ActiveCard := cardParcelamento;
+
+          CardPanelParcela.ActiveCard := cardParcelamento;
+
+          edtQtdParcelas.SetFocus;
+
+          if toggleFatura.State = tssOn then
+           begin
+
+            checkDiaFixoVcto.Checked := True;
+            checkDiaFixoVcto.Enabled := False;
+            edtDiaFixoVcto.Text      := IntToStr(DataVctoFat);
+            edtDiaFixoVcto.Enabled   := False;
+
+           end;
+
          end;
 end;
 

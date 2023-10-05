@@ -2,6 +2,8 @@ inherited frmRelCp: TfrmRelCp
   Caption = 'frmRelCp'
   ClientHeight = 442
   ClientWidth = 778
+  ExplicitWidth = 790
+  ExplicitHeight = 480
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = DataSourceCp
@@ -99,13 +101,13 @@ inherited frmRelCp: TfrmRelCp
         Font.Style = []
         ParentFont = False
       end
-      object rllblCodCli: TRLLabel
-        Left = 206
+      object rllblCodFornec: TRLLabel
+        Left = 205
         Top = 1
-        Width = 64
+        Width = 65
         Height = 22
         Align = faTopOnly
-        Caption = 'Cliente'
+        Caption = 'Fornec'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -19
