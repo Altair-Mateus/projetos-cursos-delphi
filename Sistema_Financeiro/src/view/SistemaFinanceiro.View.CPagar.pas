@@ -92,6 +92,10 @@ type
     btnPesqFtCartao: TButton;
     edtFiltroFatCartao: TEdit;
     lblCodFtCartao: TLabel;
+    pnlAviso: TPanel;
+    pnlImgAviso: TPanel;
+    lblAvisoFatura: TLabel;
+    imgAviso: TImage;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -147,6 +151,8 @@ type
     procedure BuscaNomeFornecedor;
     procedure BuscaNomeFatCartao;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
+    procedure GeraParcelas;
+    procedure FatCartaoAtiva;
 
   public
     { Public declarations }
@@ -255,6 +261,7 @@ begin
     Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
 
     Pesquisar;
+
     //  Atualiza o relatorio na tela inicial
     frmPrincipal.TotalCP;
 
@@ -265,110 +272,8 @@ begin
 end;
 
 procedure TfrmContasPagar.btnGerarClick(Sender: TObject);
-var
-  QtdParcelas   : Integer;
-  IntervaloDias : Integer;
-  ValorCompra   : Currency;
-  ValorParcela  : Currency;
-  ValorResiduo  : Currency;
-  Contador      : Integer;
-  DiaFixoVcto   : Integer;
-
 begin
-
-  //  Valida campos
-  if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
-  begin
-    edtValorCompra.SetFocus;
-    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
-  begin
-    edtQtdParcelas.SetFocus;
-    Application.MessageBox('Números de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if QtdParcelas <= 1 then
-  begin
-    edtQtdParcelas.SetFocus;
-    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-
-  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
-  begin
-    edtIntervaloDias.SetFocus;
-    Application.MessageBox('Intervalo de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if checkDiaFixoVcto.Checked then
-  begin
-    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28)  or (DiaFixoVcto < 1) then
-    begin
-        edtDiaFixoVcto.SetFocus;
-        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-      abort;
-    end;
-  end;
-
-  //  Calculando valores das parcelas
-  //  Trunca o valor final das parcelas
-  ValorParcela := (Trunc(ValorCompra / QtdParcelas * 100) / 100);
-
-  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
-  ValorResiduo := ValorCompra - (ValorParcela * QtdParcelas);
-
-  //  Esvaziando data set
-  cdsParcelas.EmptyDataSet;
-
-  for Contador := 1 to QtdParcelas do
-  begin
-
-    cdsParcelas.Insert;
-    cdsParcelasPARCELA.AsInteger := Contador;
-
-    //  Adiciona o valor do residuo na primeira parcela
-    cdsParcelasVALOR.AsCurrency  := ValorParcela + ValorResiduo;
-    ValorResiduo := 0;  //  Zera o valor de residuo
-
-
-
-    //  Define a data de vencimento
-    if checkDiaFixoVcto.Checked then
-    begin
-
-      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), DiaFixoVcto);
-
-    end
-    else
-    begin
-      cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
-    end;
-
-
-    //  Define o numero do doc
-    if not (edtNDoc.Text = '') then
-    begin
-      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
-    end;
-
-    cdsParcelas.Post;
-
-  end;
-
-  //  Bloqueios
-  edtQtdParcelas.Enabled   := False;
-  edtIntervaloDias.Enabled := False;
-  edtDiaFixoVcto.Enabled   := False;
-  checkDiaFixoVcto.Enabled := False;
-  btnGerar.Enabled         := False;
-  btnLimpar.Enabled        := True;
-
+  GeraParcelas;
 end;
 
 procedure TfrmContasPagar.btnImprimirClick(Sender: TObject);
@@ -421,7 +326,7 @@ begin
   //  Esvaziando data set de parcelas
   cdsParcelas.EmptyDataSet;
 
-  //  Liberacoes
+  //  Liberacoes e bloqueios
   edtQtdParcelas.Enabled     := True;
   edtIntervaloDias.Enabled   := True;
   edtDiaFixoVcto.Enabled     := False;
@@ -760,8 +665,6 @@ begin
 
       end;
 
-
-
     //  Gravando no banco
     dmCPagar.cdsCPagar.Post;
     dmCPagar.cdsCPagar.ApplyUpdates(0);
@@ -819,30 +722,47 @@ begin
 
   if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
   begin
+
     edtValorCompra.SetFocus;
     Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+
   end;
 
   if (not TryStrToInt(edtParcela.Text, Parcela)) or (Parcela <= 0) then
   begin
+
     edtParcela.SetFocus;
     Application.MessageBox('Número da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+
   end;
 
   if dateVencimento.Date < dateCompra.Date then
   begin
+
     dateVencimento.SetFocus;
     Application.MessageBox('Data de vencimento não pode ser inferior a data de compra!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+
+  end;
+
+  if dateCompra.Date > Now then
+  begin
+
+    dateCompra.SetFocus;
+    Application.MessageBox('Data de compra não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
   end;
 
   if not TryStrToCurr(edtValorParcela.Text, ValorParcela) then
   begin
+
     edtValorParcela.SetFocus;
     Application.MessageBox('Valor da parcela Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+
   end;
 
   //  Passando os dados para o dataset
@@ -854,7 +774,21 @@ begin
   dmCPagar.cdsCPagarVALOR_PARCELA.AsCurrency   := ValorParcela;
   dmCPagar.cdsCPagarPARCIAL.AsString           := 'N';
   dmCPagar.cdsCPagarID_FORNECEDOR.AsInteger    := IdFornecedor;
-  dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+
+  //  Verifica se é fatura, se for a data de vcto
+  //  será pega a da fatura
+  if (toggleFatura.State = tssOn) and (edtCodFatCartao.Text <> '') then
+  begin
+
+    dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
+
+  end
+  else
+  begin
+
+    dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
+
+  end;
 
   if toggleFatura.State = tssOff then
   begin
@@ -1000,7 +934,7 @@ end;
 procedure TfrmContasPagar.EditarRegCPagar;
 begin
 
-  edtParcela.Enabled := True;
+  edtParcela.Enabled      := True;
   edtValorParcela.Enabled := True;
 
   //  Esvaziando data set de parcelas
@@ -1009,6 +943,7 @@ begin
   //  Se o documento já foi baixado cancela a edição
   if dmCPagar.cdsCPagarSTATUS.AsString = 'P' then
   begin
+
     CardPanelPrincipal.ActiveCard := CardPesquisa;
     Application.MessageBox('Documento já pago não pode ser alterado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
@@ -1030,7 +965,7 @@ begin
   // Coloca o numero do registro no titulo
   lblTitulo.Caption := 'Alterando Registro Nº ' + dmCPagar.cdsCPagarID.AsString;
 
-  //  Bloqueia o toogle
+  //  Bloqueia o toogle de parcelamento
   toggleParcelamento.Enabled  := False;
   toggleParcelamento.State    := tssOff;
   CardPanelParcela.ActiveCard := cardParcelaUnica;
@@ -1045,10 +980,11 @@ begin
   dateCompra.Date      := dmCPagar.cdsCPagarDATA_COMPRA.AsDateTime;
   edtFornecedor.Text   := dmCPagar.cdsCPagarID_FORNECEDOR.AsString;
 
+  //  Verifica se a CP foi vinculado a uma fatura de cartão
   if dmCPagar.cdsCPagarFATURA_CART.AsString = 'S' then
   begin
 
-    toggleFatura.State      := tssOn;
+    toggleFatura.State       := tssOn;
     lblCodFatCartao.Visible  := True;
     lblNomeFatCartao.Visible := True;
     edtCodFatCartao.Visible  := True;
@@ -1087,6 +1023,20 @@ begin
       abort;
 
     end;
+
+  end;
+
+  if toggleParcelamento.State = tssOn then
+  begin
+
+    FatCartaoAtiva;
+
+  end;
+
+  if edtQtdParcelas.Text <> '' then
+  begin
+
+    GeraParcelas;
 
   end;
 
@@ -1214,6 +1164,21 @@ begin
 
 end;
 
+procedure TfrmContasPagar.FatCartaoAtiva;
+begin
+
+  if toggleFatura.State = tssOn then
+  begin
+
+    checkDiaFixoVcto.Checked := True;
+    checkDiaFixoVcto.Enabled := False;
+    edtDiaFixoVcto.Text      := IntToStr(DataVctoFat);
+    edtDiaFixoVcto.Enabled   := False;
+
+  end;
+
+end;
+
 procedure TfrmContasPagar.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -1225,6 +1190,138 @@ begin
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
+
+end;
+
+procedure TfrmContasPagar.GeraParcelas;
+var
+  QtdParcelas   : Integer;
+  IntervaloDias : Integer;
+  ValorCompra   : Currency;
+  ValorParcela  : Currency;
+  ValorResiduo  : Currency;
+  Contador      : Integer;
+  DiaFixoVcto   : Integer;
+
+begin
+
+  //  Valida campos
+  if (not TryStrToCurr(edtValorCompra.Text, ValorCompra)) or (ValorCompra <= 0) then
+  begin
+    edtValorCompra.SetFocus;
+    Application.MessageBox('Valor da compra Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if dateCompra.Date > Now then
+  begin
+
+    dateCompra.SetFocus;
+    Application.MessageBox('Data de compra não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
+  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Números de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if QtdParcelas <= 1 then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+
+  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
+  begin
+    edtIntervaloDias.SetFocus;
+    Application.MessageBox('Intervalo de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if checkDiaFixoVcto.Checked then
+  begin
+    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28)  or (DiaFixoVcto < 1) then
+    begin
+        edtDiaFixoVcto.SetFocus;
+        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+    end;
+  end;
+
+  //  Calculando valores das parcelas
+  //  Trunca o valor final das parcelas
+  ValorParcela := (Trunc(ValorCompra / QtdParcelas * 100) / 100);
+
+  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
+  ValorResiduo := ValorCompra - (ValorParcela * QtdParcelas);
+
+  //  Esvaziando data set
+  cdsParcelas.EmptyDataSet;
+
+  for Contador := 1 to QtdParcelas do
+  begin
+
+    cdsParcelas.Insert;
+    cdsParcelasPARCELA.AsInteger := Contador;
+
+    //  Adiciona o valor do residuo na primeira parcela
+    cdsParcelasVALOR.AsCurrency  := ValorParcela + ValorResiduo;
+    ValorResiduo := 0;  //  Zera o valor de residuo
+
+
+
+    //  Define a data de vencimento
+    //  Se for fatura, sera pego o dia de vcto
+    //  a data cadastrada na fatura
+    if (toggleFatura.State = tssOn) and (edtCodFatCartao.Text <> '') then
+    begin
+
+      FatCartaoAtiva;
+
+      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, 30 *  Contador)), DataVctoFat);
+
+    end
+    else
+    begin
+
+      //  Se tiver dia de vencimento fixo
+      if checkDiaFixoVcto.Checked then
+      begin
+
+        cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, 30 *  Contador)), DiaFixoVcto);
+
+      end
+      else
+      begin
+        cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+      end;
+
+    end;
+
+
+    //  Define o numero do doc
+    if not (edtNDoc.Text = '') then
+    begin
+      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    end;
+
+    cdsParcelas.Post;
+
+  end;
+
+  //  Bloqueios
+  edtQtdParcelas.Enabled   := False;
+  edtIntervaloDias.Enabled := False;
+  edtDiaFixoVcto.Enabled   := False;
+  checkDiaFixoVcto.Enabled := False;
+  btnGerar.Enabled         := False;
+  btnLimpar.Enabled        := True;
 
 end;
 
@@ -1274,8 +1371,8 @@ end;
 procedure TfrmContasPagar.Pesquisar;
 var
   LFiltroEdit: String;
-  LFiltro : String;
-  LOrdem : String;
+  LFiltro    : String;
+  LOrdem     : String;
 
 begin
 
@@ -1308,9 +1405,10 @@ begin
   end;
 
   LFiltroEdit := TUtilitario.LikeFind(edtPesquisar.Text, DBGrid1);
-  LFiltro := '';
-  LOrdem := '';
+  LFiltro     := '';
+  LOrdem      := '';
 
+  //  Limpa os parametros do cds
   dmCPagar.cdsCPagar.Params.Clear;
 
   //  Pesquisa por tipo
@@ -1338,6 +1436,7 @@ begin
     dmCPagar.cdsCPagar.ParamByName('DTINI').AsDate := dateInicial.Date;
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftDate, 'DTFIM', TParamType.ptInput);
     dmCPagar.cdsCPagar.ParamByName('DTFIM').AsDate := dateFinal.Date;
+
   end;
 
    //  Pesquisa parciais
@@ -1376,7 +1475,7 @@ begin
   if Trim(edtFiltroFatCartao.Text) <> '' then
   begin
 
-    LFiltro := LFiltro + ' AND ID_FATURA = :ID_FT ';
+    LFiltro := LFiltro + ' AND CP.ID_FATURA = :ID_FT ';
 
     //  Criando os parametros
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID_FT', TParamType.ptInput);
@@ -1467,6 +1566,7 @@ begin
   if toggleFatura.State = tssOff then
   begin
 
+    //  Oculta as info de fatura
     lblCodFatCartao.Visible  := False;
     lblNomeFatCartao.Visible := False;
     edtCodFatCartao.Visible  := False;
@@ -1488,6 +1588,7 @@ begin
     else if toggleFatura.State = tssOn then
          begin
 
+          //  Oculta as info de fatura
           lblCodFatCartao.Visible := True;
           edtCodFatCartao.Visible := True;
           btnPesqFat.Visible      := True;
@@ -1506,24 +1607,16 @@ begin
 
   if toggleParcelamento.State = tssOff then
   begin
+
     CardPanelParcela.ActiveCard := cardParcelaUnica;
+
   end
     else if toggleParcelamento.State = tssOn then
          begin
 
           CardPanelParcela.ActiveCard := cardParcelamento;
 
-          edtQtdParcelas.SetFocus;
-
-          if toggleFatura.State = tssOn then
-           begin
-
-            checkDiaFixoVcto.Checked := True;
-            checkDiaFixoVcto.Enabled := False;
-            edtDiaFixoVcto.Text      := IntToStr(DataVctoFat);
-            edtDiaFixoVcto.Enabled   := False;
-
-           end;
+          FatCartaoAtiva;
 
          end;
 end;

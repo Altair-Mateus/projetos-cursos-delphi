@@ -93,6 +93,7 @@ begin
   try
     //  Estabelece a conexao com o banco
     FDQueryCpFt.Connection := DataModule1.FDConnection;
+
     FDQueryCpFt.Close;
     FDQueryCpFt.SQL.Clear;
     FDQueryCpFt.SQL.Add('SELECT * FROM CONTAS_PAGAR WHERE ID_FATURA = :ID');

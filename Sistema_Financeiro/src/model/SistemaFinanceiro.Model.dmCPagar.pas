@@ -151,6 +151,8 @@ begin
         cdsCPagarPARCIAL.AsString           := 'S';
         cdsCPagarCP_ORIGEM.AsString         := ContaPagar.ID;
         cdsCPagarID_FORNECEDOR.AsInteger    := ContaPagar.IdFornecedor;
+        cdsCPagarFATURA_CART.AsString       := ContaPagar.FatCartao;
+        cdsCPagarID_FATURA.AsInteger        := ContaPagar.IdFatCartao;
 
         //  Gravando no BD
         cdsCPagar.Post;
@@ -182,8 +184,8 @@ begin
 
       //  Montando o SQL para persisitr os dados na tabela Contas_pagar_detalhe
       SQLInsert := 'INSERT INTO CONTAS_PAGAR_DETALHE (ID, ID_CONTA_PAGAR, DETALHES, ' +
-             ' VALOR, DATA, USUARIO, DESCONTO_BX) VALUES (:ID, :IDCP, :DETALHES, :VALOR, ' +
-             ' :DATA, :USUARIO, :DESC)';
+                   ' VALOR, DATA, USUARIO, DESCONTO_BX) VALUES (:ID, :IDCP, :DETALHES, :VALOR, ' +
+                   ' :DATA, :USUARIO, :DESC)';
 
       FDQueryCpDet.SQL.Add(SQLInsert);
       FDQueryCpDet.ParamByName('ID').AsInteger      := GeraCodigoCPDetalhe;
@@ -206,7 +208,7 @@ begin
         LancarCaixa.Desc         := Format('Baixa Conta ID Nº %s Pagar - Nº Documento: %s - Parcela: %d', [ContaPagar.ID, contaPagar.Doc, ContaPagar.Parcela]);
         LancarCaixa.Valor        := BaixaCP.Valor;
         LancarCaixa.Tipo         := 'D';
-        LancarCaixa.DataCadastro := now;
+        LancarCaixa.DataCadastro := Now;
         LancarCaixa.Origem       := 'CP';
         LancarCaixa.IdOrigem     := StrToInt(ContaPagar.ID);
 
@@ -240,14 +242,18 @@ begin
 
 
     finally
+
       FDQueryCP.Close;
       FDQueryCP.Free;
       FDQueryCpDet.Close;
       FDQueryCpDet.Free;
+
     end;
 
   finally
+
     ContaPagar.Free;
+
   end;
 
 end;
@@ -372,6 +378,8 @@ begin
       Result.Parcial        := FDQueryCP.FieldByName('PARCIAL').AsString;
       Result.CpOrigem       := FDQueryCP.FieldByName('CP_ORIGEM').AsInteger;
       Result.IdFornecedor   := FDQueryCP.FieldByName('ID_FORNECEDOR').AsInteger;
+      Result.FatCartao      := FDQueryCP.FieldByName('FATURA_CART').AsString;
+      Result.IdFatCartao    := FDQueryCP.FieldByName('ID_FATURA').AsInteger;
 
     except
       Result.Free;

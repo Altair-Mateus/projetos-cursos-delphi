@@ -332,6 +332,16 @@ begin
 
   end;
 
+  if StrToInt(Trim(edtDiaVcto.Text)) > 28 then
+  begin
+
+    Application.MessageBox('Dia de vencimento Inválido!!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    edtDiaVcto.SetFocus;
+    abort;
+
+  end;
+
+
 end;
 
 end.

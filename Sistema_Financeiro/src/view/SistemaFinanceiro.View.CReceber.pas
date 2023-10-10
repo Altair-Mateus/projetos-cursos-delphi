@@ -91,7 +91,6 @@ type
     procedure edtValorParcelaExit(Sender: TObject);
     procedure btnLimparClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
-    procedure btnGerarClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -118,6 +117,7 @@ type
     procedure edtPesquisarChange(Sender: TObject);
     procedure dateInicialChange(Sender: TObject);
     procedure dateFinalChange(Sender: TObject);
+    procedure btnGerarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -129,6 +129,7 @@ type
     procedure ExibeDetalhe;
     procedure BuscaNomeCliente;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
+    procedure GeraParcelas;
 
   public
     { Public declarations }
@@ -249,108 +250,9 @@ begin
 end;
 
 procedure TfrmContasReceber.btnGerarClick(Sender: TObject);
-var
-  QtdParcelas   : Integer;
-  IntervaloDias : Integer;
-  ValorVenda    : Currency;
-  ValorParcela  : Currency;
-  ValorResiduo  : Currency;
-  Contador      : Integer;
-  DiaFixoVcto   : Integer;
-
 begin
-
-  //  Valida Campos
-  if (not TryStrToCurr(edtValorVenda.Text, ValorVenda)) or (ValorVenda <= 0)then
-  begin
-    edtValorVenda.SetFocus;
-    Application.MessageBox('Valor da Venda Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
-  begin
-    edtQtdParcelas.SetFocus;
-    Application.MessageBox('Quantidade de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if QtdParcelas <= 1 then
-  begin
-    edtQtdParcelas.SetFocus;
-    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
-  begin
-    edtIntervaloDias.SetFocus;
-    Application.MessageBox('Intervalor de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    abort;
-  end;
-
-  if checkDiaFixoVcto.Checked then
-  begin
-    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28) or (DiaFixoVcto < 1) then
-    begin
-        edtDiaFixoVcto.SetFocus;
-        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-      abort;
-    end;
-  end;
-
-  //  Calculando valores das parcelas
-  //  Trunca o valor final das parcelas
-  ValorParcela := (Trunc(ValorVenda / QtdParcelas * 100) / 100);
-
-  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
-  ValorResiduo := ValorVenda - (ValorParcela * QtdParcelas);
-
-  //  Esvaziando data set
-  cdsParcelas.IsEmpty;
-
-  for Contador := 1 to QtdParcelas do
-  begin
-
-    cdsParcelas.Insert;
-    cdsParcelasParcela.AsInteger := Contador;
-
-    //  Adiciona o valor do residuo na primeira parcela
-    cdsParcelasValor.AsCurrency := ValorParcela + ValorResiduo;
-    ValorResiduo := 0;  //  Zera o valor de residuo
-
-    //  Define a data de vencimento
-     //  Define a data de vencimento
-    if checkDiaFixoVcto.Checked then
-    begin
-
-      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), DiaFixoVcto);
-
-    end
-    else
-    begin
-      cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateVenda.Date, IntervaloDias *  Contador);
-    end;
-
-
-    //  Define o numero do documento
-    if not (edtNDoc.Text = '') then
-    begin
-      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
-    end;
-
-    cdsParcelas.Post;
-
-  end;
-
-  //  Bloqueios
-  edtQtdParcelas.Enabled   := False;
-  edtIntervaloDias.Enabled := False;
-  edtDiaFixoVcto.Enabled   := False;
-  checkDiaFixoVcto.Enabled := False;
-  btnGerar.Enabled         := False;
-  btnLimpar.Enabled        := True;
-
+  inherited;
+  GeraParcelas;
 end;
 
 procedure TfrmContasReceber.btnImprimirClick(Sender: TObject);
@@ -1035,6 +937,111 @@ begin
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
+
+end;
+
+procedure TfrmContasReceber.GeraParcelas;
+var
+  QtdParcelas   : Integer;
+  IntervaloDias : Integer;
+  ValorVenda    : Currency;
+  ValorParcela  : Currency;
+  ValorResiduo  : Currency;
+  Contador      : Integer;
+  DiaFixoVcto   : Integer;
+
+begin
+
+  //  Valida Campos
+  if (not TryStrToCurr(edtValorVenda.Text, ValorVenda)) or (ValorVenda <= 0)then
+  begin
+    edtValorVenda.SetFocus;
+    Application.MessageBox('Valor da Venda Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Quantidade de Parcelas Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if QtdParcelas <= 1 then
+  begin
+    edtQtdParcelas.SetFocus;
+    Application.MessageBox('Para gerar parcelas a quantidade deve ser maior que 1!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if not TryStrToInt(edtIntervaloDias.Text, IntervaloDias) then
+  begin
+    edtIntervaloDias.SetFocus;
+    Application.MessageBox('Intervalor de dias Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+  end;
+
+  if checkDiaFixoVcto.Checked then
+  begin
+    if (not TryStrToInt(edtDiaFixoVcto.Text, DiaFixoVcto)) or (DiaFixoVcto > 28) or (DiaFixoVcto < 1) then
+    begin
+        edtDiaFixoVcto.SetFocus;
+        Application.MessageBox('Dia fixo de vencimento Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      abort;
+    end;
+  end;
+
+  //  Calculando valores das parcelas
+  //  Trunca o valor final das parcelas
+  ValorParcela := (Trunc(ValorVenda / QtdParcelas * 100) / 100);
+
+  //  Calcula o valor do residuo do Trunc para colocar em uma das parcelas
+  ValorResiduo := ValorVenda - (ValorParcela * QtdParcelas);
+
+  //  Esvaziando data set
+  cdsParcelas.IsEmpty;
+
+  for Contador := 1 to QtdParcelas do
+  begin
+
+    cdsParcelas.Insert;
+    cdsParcelasParcela.AsInteger := Contador;
+
+    //  Adiciona o valor do residuo na primeira parcela
+    cdsParcelasValor.AsCurrency := ValorParcela + ValorResiduo;
+    ValorResiduo := 0;  //  Zera o valor de residuo
+
+    //  Define a data de vencimento
+     //  Define a data de vencimento
+    if checkDiaFixoVcto.Checked then
+    begin
+
+      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateVenda.Date, IntervaloDias *  Contador)), DiaFixoVcto);
+
+    end
+    else
+    begin
+      cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateVenda.Date, IntervaloDias *  Contador);
+    end;
+
+
+    //  Define o numero do documento
+    if not (edtNDoc.Text = '') then
+    begin
+      cdsParcelasDocumento.AsString := Trim(edtNDoc.Text) + '-' + IntToStr(Contador);
+    end;
+
+    cdsParcelas.Post;
+
+  end;
+
+  //  Bloqueios
+  edtQtdParcelas.Enabled   := False;
+  edtIntervaloDias.Enabled := False;
+  edtDiaFixoVcto.Enabled   := False;
+  checkDiaFixoVcto.Enabled := False;
+  btnGerar.Enabled         := False;
+  btnLimpar.Enabled        := True;
 
 end;
 
