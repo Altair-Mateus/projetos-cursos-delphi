@@ -4,6 +4,7 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1322
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitTop = -133
   ExplicitWidth = 1334
   ExplicitHeight = 682
   TextHeight = 19
@@ -307,8 +308,8 @@ inherited frmContasPagar: TfrmContasPagar
               OnClick = btnLimparClick
             end
             object DBGridParcelas: TDBGrid
-              Left = 2
-              Top = 96
+              Left = 4
+              Top = 101
               Width = 704
               Height = 129
               Color = clCream
@@ -324,6 +325,7 @@ inherited frmContasPagar: TfrmContasPagar
                 item
                   Expanded = False
                   FieldName = 'PARCELA'
+                  ReadOnly = True
                   Title.Caption = 'Parcela'
                   Visible = True
                 end
@@ -337,6 +339,7 @@ inherited frmContasPagar: TfrmContasPagar
                 item
                   Expanded = False
                   FieldName = 'VENCIMENTO'
+                  ReadOnly = True
                   Title.Caption = 'Vencimento'
                   Width = 132
                   Visible = True
@@ -344,6 +347,7 @@ inherited frmContasPagar: TfrmContasPagar
                 item
                   Expanded = False
                   FieldName = 'VALOR'
+                  ReadOnly = True
                   Title.Caption = 'Valor R$'
                   Visible = True
                 end>
@@ -448,8 +452,8 @@ inherited frmContasPagar: TfrmContasPagar
         end
         object pnlAviso: TPanel
           AlignWithMargins = True
-          Left = 943
-          Top = 373
+          Left = 767
+          Top = 359
           Width = 377
           Height = 165
           Margins.Right = 5
@@ -554,12 +558,12 @@ inherited frmContasPagar: TfrmContasPagar
     inherited CardPesquisa: TCard
       Width = 1320
       Height = 642
-      ExplicitWidth = 1316
-      ExplicitHeight = 641
+      ExplicitWidth = 1320
+      ExplicitHeight = 642
       inherited pnlPesquisa: TPanel
         Width = 1320
         Height = 145
-        ExplicitWidth = 1316
+        ExplicitWidth = 1320
         ExplicitHeight = 145
         inherited lblPesquisar: TLabel
           Left = 192
@@ -3365,7 +3369,7 @@ inherited frmContasPagar: TfrmContasPagar
           Margins.Bottom = 30
           ImageIndex = 6
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1192
+          ExplicitLeft = 1196
           ExplicitTop = 30
           ExplicitHeight = 85
         end
@@ -3617,8 +3621,8 @@ inherited frmContasPagar: TfrmContasPagar
       inherited pnlBotoes: TPanel
         Top = 573
         Width = 1320
-        ExplicitTop = 572
-        ExplicitWidth = 1316
+        ExplicitTop = 573
+        ExplicitWidth = 1320
         inherited btnAlterar: TButton
           ImageIndex = 2
         end
@@ -3633,7 +3637,7 @@ inherited frmContasPagar: TfrmContasPagar
         inherited btnSair: TButton
           Left = 1196
           ImageIndex = 14
-          ExplicitLeft = 1192
+          ExplicitLeft = 1196
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
@@ -3650,7 +3654,6 @@ inherited frmContasPagar: TfrmContasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 5
-          ExplicitLeft = 949
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -3754,8 +3757,8 @@ inherited frmContasPagar: TfrmContasPagar
         Width = 1320
         Height = 428
         ExplicitTop = 145
-        ExplicitWidth = 1316
-        ExplicitHeight = 427
+        ExplicitWidth = 1320
+        ExplicitHeight = 428
         inherited DBGrid1: TDBGrid
           Width = 1318
           Height = 426
@@ -3856,8 +3859,8 @@ inherited frmContasPagar: TfrmContasPagar
     end
   end
   inherited ImageList1: TImageList
-    Left = 896
-    Top = 432
+    Left = 1256
+    Top = 280
     Bitmap = {
       494C01010F001800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
@@ -5981,8 +5984,8 @@ inherited frmContasPagar: TfrmContasPagar
   object DataSourceCPagar: TDataSource
     DataSet = dmCPagar.cdsCPagar
     OnDataChange = DataSourceCPagarDataChange
-    Left = 888
-    Top = 496
+    Left = 1248
+    Top = 344
   end
   object cdsParcelas: TClientDataSet
     PersistDataPacket.Data = {
@@ -5995,8 +5998,8 @@ inherited frmContasPagar: TfrmContasPagar
     Aggregates = <>
     IndexFieldNames = 'Parcela'
     Params = <>
-    Left = 785
-    Top = 434
+    Left = 1145
+    Top = 282
     object cdsParcelasPARCELA: TIntegerField
       FieldName = 'PARCELA'
     end
@@ -6013,7 +6016,7 @@ inherited frmContasPagar: TfrmContasPagar
   end
   object dsParcelas: TDataSource
     DataSet = cdsParcelas
-    Left = 785
-    Top = 498
+    Left = 1145
+    Top = 346
   end
 end

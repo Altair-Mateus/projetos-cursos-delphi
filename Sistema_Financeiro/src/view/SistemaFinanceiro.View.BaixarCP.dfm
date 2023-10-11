@@ -74,7 +74,7 @@ object frmBaixarCP: TfrmBaixarCP
         end
         object lblVenc: TLabel
           Left = 290
-          Top = 124
+          Top = 174
           Width = 89
           Height = 19
           Caption = 'Vencimento:'
@@ -86,12 +86,12 @@ object frmBaixarCP: TfrmBaixarCP
           Height = 19
           Caption = 'Valor Parcela:'
         end
-        object lblVAbatido: TLabel
+        object lblDataCompra: TLabel
           Left = 290
-          Top = 174
-          Width = 83
+          Top = 124
+          Width = 118
           Height = 19
-          Caption = 'Valor Pago:'
+          Caption = 'Data da compra:'
         end
         object lblDoc: TLabel
           Left = 428
@@ -121,7 +121,7 @@ object frmBaixarCP: TfrmBaixarCP
         end
         object lblVencimento: TLabel
           Left = 428
-          Top = 124
+          Top = 174
           Width = 116
           Height = 19
           Caption = 'lblVencimento'
@@ -145,14 +145,14 @@ object frmBaixarCP: TfrmBaixarCP
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object lblValorAbatido: TLabel
+        object lblDtCompra: TLabel
           Left = 428
-          Top = 174
-          Width = 127
+          Top = 124
+          Width = 102
           Height = 19
-          Caption = 'lblValorAbatido'
+          Caption = 'lblDtCompra'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = 5737262
+          Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
@@ -194,9 +194,9 @@ object frmBaixarCP: TfrmBaixarCP
         object lblVRestante: TLabel
           Left = 20
           Top = 174
-          Width = 108
+          Width = 101
           Height = 19
-          Caption = 'Valor Restante:'
+          Caption = 'Valor a Pagar:'
         end
         object lblIdFornec: TLabel
           Left = 290
@@ -371,8 +371,6 @@ object frmBaixarCP: TfrmBaixarCP
         Images = ImageList1
         TabOrder = 0
         OnClick = btnConfirmarClick
-        ExplicitLeft = 137
-        ExplicitTop = -12
       end
       object btnCancelar: TButton
         AlignWithMargins = True

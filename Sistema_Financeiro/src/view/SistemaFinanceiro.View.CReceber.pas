@@ -320,8 +320,8 @@ begin
   btnLimpar.Enabled          := False;
   toggleParcelamento.State   := tssOff;
   toggleParcelamento.Enabled := True;
-  edtParcela.Enabled         := False;
-  edtValorParcela.Enabled    := False;
+  edtParcela.ReadOnly        := True;
+  edtValorParcela.ReadOnly   := True;
 
   //  Oculta o nome do cliente
   lblNomeCliente.Visible := False;
@@ -625,6 +625,15 @@ begin
     abort;
   end;
 
+  if dateVenda.Date > Now then
+  begin
+
+    dateVenda.SetFocus;
+    Application.MessageBox('Data de venda não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
   //  Passando os dados para o dataset
   dmCReceber.cdsCReceberID_CLIENTE.AsInteger       := IdCliente;
   dmCReceber.cdsCReceberNUMERO_DOCUMENTO.AsString  := Trim(edtNDoc.text);
@@ -798,6 +807,9 @@ begin
   toggleParcelamento.Enabled  := False;
   toggleParcelamento.State    := tssOff;
   CardPanelParcela.ActiveCard := cardParcelaUnica;
+  edtParcela.ReadOnly         := True;
+
+  edtValorParcela.ReadOnly := False;
 
   //  Carrega os dados
   edtCliente.Text      := dmCReceber.cdsCReceberID_CLIENTE.AsString;
@@ -955,9 +967,20 @@ begin
   //  Valida Campos
   if (not TryStrToCurr(edtValorVenda.Text, ValorVenda)) or (ValorVenda <= 0)then
   begin
+
     edtValorVenda.SetFocus;
     Application.MessageBox('Valor da Venda Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
+
+  end;
+
+  if dateVenda.Date > Now then
+  begin
+
+    dateVenda.SetFocus;
+    Application.MessageBox('Data de venda não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
   end;
 
   if not TryStrToInt(edtQtdParcelas.Text, QtdParcelas) then

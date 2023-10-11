@@ -11,7 +11,7 @@ type
   TfrmCpDetalhe = class(TForm)
     ImageList1: TImageList;
     pnlBotoes: TPanel;
-    btnSair: TButton;
+    btnVoltar: TButton;
     pnlGrid: TPanel;
     DBGrid1: TDBGrid;
     pnlPesquisa: TPanel;
@@ -33,7 +33,7 @@ type
     lblFrPgto: TLabel;
     DBGridPgto: TDBGrid;
     DataSourcePgto: TDataSource;
-    procedure btnSairClick(Sender: TObject);
+    procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,7 +54,7 @@ uses SistemaFinanceiro.Model.dmCPagar,
 
 { TfrmCpDetalhe }
 
-procedure TfrmCpDetalhe.btnSairClick(Sender: TObject);
+procedure TfrmCpDetalhe.btnVoltarClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;

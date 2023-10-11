@@ -208,7 +208,7 @@ begin
         LancarCaixa.Desc         := Format('Baixa Conta ID Nº %s Pagar - Nº Documento: %s - Parcela: %d', [ContaPagar.ID, contaPagar.Doc, ContaPagar.Parcela]);
         LancarCaixa.Valor        := BaixaCP.Valor;
         LancarCaixa.Tipo         := 'D';
-        LancarCaixa.DataCadastro := Now;
+        LancarCaixa.DataCadastro := BaixaCP.Data;
         LancarCaixa.Origem       := 'CP';
         LancarCaixa.IdOrigem     := StrToInt(ContaPagar.ID);
 

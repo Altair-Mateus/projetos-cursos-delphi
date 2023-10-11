@@ -19,12 +19,12 @@ type
     lblParc: TLabel;
     lblVenc: TLabel;
     lblVParcela: TLabel;
-    lblVAbatido: TLabel;
+    lblDataVenda: TLabel;
     lblDoc: TLabel;
     lblParcela: TLabel;
     lblVencimento: TLabel;
     lblValorParcela: TLabel;
-    lblValorAbatido: TLabel;
+    lblDtVenda: TLabel;
     lblId: TLabel;
     lblIdConta: TLabel;
     lblValorRestante: TLabel;
@@ -63,6 +63,7 @@ type
   private
     { Private declarations }
     FID : Integer;
+    DataVenda : TDateTime;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
@@ -123,7 +124,7 @@ begin
     lblParcela.Caption       := IntToStr(ContaReceber.Parcela);
     lblVencimento.Caption    := FormatDateTime('dd/mm/yyyy', ContaReceber.DataVencimento);
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorParcela);
-    lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaReceber.ValorAbatido);
+    lblDtVenda.Caption       := DateToStr(ContaReceber.DataVenda);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaReceber.ValorParcela - ContaReceber.ValorAbatido));
     lblCodCliente.Caption    := IntToStr(ContaReceber.IdCliente);
 
@@ -136,6 +137,9 @@ begin
       begin
         lblDoc.Caption := ContaReceber.Doc;
       end;
+
+    //  Armazena a data da venda
+    DataVenda := ContaReceber.DataVenda;
 
     edtObs.Clear;
     edtValor.Text := CurrToStr(ContaReceber.ValorParcela);
@@ -167,10 +171,22 @@ begin
   //  Validações dos campos
   if datePgto.Date > Date then
   begin
+
     datePgto.SetFocus;
-    Application.MessageBox('A data de pagamento não pode ser maior que a data atual', 'Atenção', MB_OK + MB_ICONWARNING);
+    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
+
   end;
+
+  if datePgto.Date < DataVenda then
+  begin
+
+    datePgto.SetFocus;
+    Application.MessageBox('A data de pagamento não pode ser menor que a data da venda!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
+
 
   ValorAbater := 0;
   ValorDesc   := 0;

@@ -12,7 +12,7 @@ type
     pnlPesquisa: TPanel;
     ImageList1: TImageList;
     pnlBotoes: TPanel;
-    btnSair: TButton;
+    btnVoltar: TButton;
     pnlGrid: TPanel;
     DBGrid1: TDBGrid;
     DataSourceConsultaCr: TDataSource;
@@ -33,7 +33,7 @@ type
     DBGridPgto: TDBGrid;
     DataSourcePgto: TDataSource;
     lblFrPgto: TLabel;
-    procedure btnSairClick(Sender: TObject);
+    procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,7 +57,7 @@ uses
 
 { TfrmConsultarCr }
 
-procedure TfrmCrDetalhe.btnSairClick(Sender: TObject);
+procedure TfrmCrDetalhe.btnVoltarClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;

@@ -3,7 +3,6 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitLeft = -572
   ExplicitTop = -135
   ExplicitWidth = 1355
   ExplicitHeight = 684
@@ -11,19 +10,18 @@ inherited frmContasReceber: TfrmContasReceber
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1341
-      ExplicitHeight = 644
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlBotoesCad: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 575
-        ExplicitWidth = 1341
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -31,8 +29,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
-        ExplicitWidth = 1341
-        ExplicitHeight = 534
+        ExplicitWidth = 1337
+        ExplicitHeight = 533
         object lblDataVend: TLabel
           Left = 258
           Top = 159
@@ -222,6 +220,30 @@ inherited frmContasReceber: TfrmContasReceber
               TitleFont.Height = -16
               TitleFont.Name = 'Tahoma'
               TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Parcela'
+                  ReadOnly = True
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Documento'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Vencimento'
+                  ReadOnly = True
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Valor'
+                  ReadOnly = True
+                  Visible = True
+                end>
             end
             object edtDiaFixoVcto: TEdit
               Left = 306
@@ -341,18 +363,18 @@ inherited frmContasReceber: TfrmContasReceber
       end
       inherited PanelTitulo: TPanel
         Width = 1341
-        ExplicitWidth = 1341
+        ExplicitWidth = 1337
       end
     end
     inherited CardPesquisa: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      ExplicitWidth = 1341
+      ExplicitHeight = 644
       inherited pnlPesquisa: TPanel
         Width = 1341
         Height = 137
-        ExplicitWidth = 1337
+        ExplicitWidth = 1341
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 213
@@ -4543,7 +4565,7 @@ inherited frmContasReceber: TfrmContasReceber
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1213
+          ExplicitLeft = 1217
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -4775,8 +4797,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited pnlBotoes: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        ExplicitTop = 575
+        ExplicitWidth = 1341
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -4786,7 +4808,7 @@ inherited frmContasReceber: TfrmContasReceber
         inherited btnSair: TButton
           Left = 1217
           ImageIndex = 12
-          ExplicitLeft = 1213
+          ExplicitLeft = 1217
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
@@ -4803,7 +4825,6 @@ inherited frmContasReceber: TfrmContasReceber
           Font.Style = []
           ParentFont = False
           TabOrder = 5
-          ExplicitLeft = 970
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -4905,8 +4926,8 @@ inherited frmContasReceber: TfrmContasReceber
         Width = 1341
         Height = 438
         ExplicitTop = 137
-        ExplicitWidth = 1337
-        ExplicitHeight = 437
+        ExplicitWidth = 1341
+        ExplicitHeight = 438
         inherited DBGrid1: TDBGrid
           Width = 1339
           Height = 436

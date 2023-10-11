@@ -337,8 +337,8 @@ begin
   toggleFatura.State         := tssOff;
   toggleParcelamento.State   := tssOff;
   toggleParcelamento.Enabled := True;
-  edtParcela.Enabled         := False;
-  edtValorParcela.Enabled    := False;
+  edtParcela.ReadOnly        := True;
+  edtValorParcela.ReadOnly   := True;
   lblNomeFornecedor.Visible  := False;
   lblNomeFatCartao.Visible   := False;
 
@@ -374,7 +374,6 @@ end;
 
 procedure TfrmContasPagar.btnPesqFatClick(Sender: TObject);
 begin
-  inherited;
 
   //  Cria o form
   frmFaturaCartao := TfrmFaturaCartao.Create(Self);
@@ -459,7 +458,6 @@ end;
 
 procedure TfrmContasPagar.btnPesquisaFornecedorClick(Sender: TObject);
 begin
-  inherited;
 
   //  Cria o form
   frmFornecedores := TfrmFornecedores.Create(Self);
@@ -969,6 +967,9 @@ begin
   toggleParcelamento.Enabled  := False;
   toggleParcelamento.State    := tssOff;
   CardPanelParcela.ActiveCard := cardParcelaUnica;
+  edtParcela.ReadOnly         := True;
+
+  edtValorParcela.ReadOnly := False;
 
   //  Carrega os dados
   edtNDoc.Text         := dmCPagar.cdsCPagarNUMERO_DOC.AsString;

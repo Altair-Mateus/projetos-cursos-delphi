@@ -20,12 +20,12 @@ type
     lblParc: TLabel;
     lblVenc: TLabel;
     lblVParcela: TLabel;
-    lblVAbatido: TLabel;
+    lblDataCompra: TLabel;
     lblDoc: TLabel;
     lblParcela: TLabel;
     lblVencimento: TLabel;
     lblValorParcela: TLabel;
-    lblValorAbatido: TLabel;
+    lblDtCompra: TLabel;
     lblId: TLabel;
     lblIdConta: TLabel;
     lblValorRestante: TLabel;
@@ -61,6 +61,7 @@ type
   private
     { Private declarations }
     FID : Integer;
+    DataCompra : TDateTime;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
@@ -117,7 +118,7 @@ begin
     lblParcela.Caption       := IntToStr(ContaPagar.Parcela);
     lblVencimento.Caption    := FormatDateTime('dd/mm/yyyy', ContaPagar.DataVencimento);
     lblValorParcela.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorParcela);
-    lblValorAbatido.Caption  := 'R$ ' + TUtilitario.FormatarValor(ContaPagar.ValorAbatido);
+    lblDtCompra.Caption      := DateToStr(ContaPagar.DataCompra);
     lblValorRestante.Caption := 'R$ ' + TUtilitario.FormatarValor((ContaPagar.ValorParcela - ContaPagar.ValorAbatido));
     lblCodFornec.Caption     := IntToStr(ContaPagar.IdFornecedor);
 
@@ -129,6 +130,9 @@ begin
       begin
         lblDoc.Caption := ContaPagar.Doc;
       end;
+
+    //  Puxa a data da compra
+    DataCompra := ContaPagar.DataCompra;
 
     edtObs.Clear;
     edtValor.Text := CurrToStr(ContaPagar.ValorParcela);
@@ -157,10 +161,22 @@ begin
   //  Validações dos campos
   if datePgto.Date > Date then
   begin
+
     datePgto.SetFocus;
-    Application.MessageBox('A data de pagamento não pode ser maior que a data atual', 'Atenção', MB_OK + MB_ICONWARNING);
+    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
+
   end;
+
+  if datePgto.Date < DataCompra then
+  begin
+
+    datePgto.SetFocus;
+    Application.MessageBox('A data de pagamento não pode ser menor que a data da compra!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
+
 
   ValorAbater := 0;
   ValorDesc   := 0;
@@ -179,6 +195,7 @@ begin
     Application.MessageBox('Valor pago não pode ser maior que o valor da parcela!', 'Atenção', MB_OK + MB_ICONWARNING);
     abort;
   end;
+
   if checkDesconto.Checked then
   begin
 
