@@ -44,6 +44,10 @@ type
     lblVTotalSai: TLabel;
     pnlValoresEntSai: TPanel;
     pnlTitTotEntSai: TPanel;
+    lblOB: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);

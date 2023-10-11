@@ -8,18 +8,19 @@ inherited frmUsuarios: TfrmUsuarios
   inherited CardPanelPrincipal: TCardPanel
     Width = 815
     Height = 511
+    ActiveCard = CardCadastro
     ExplicitWidth = 811
     ExplicitHeight = 510
     inherited CardCadastro: TCard
       Width = 813
       Height = 509
-      ExplicitWidth = 809
-      ExplicitHeight = 508
+      ExplicitWidth = 813
+      ExplicitHeight = 509
       inherited pnlBotoesCad: TPanel
         Top = 440
         Width = 813
-        ExplicitTop = 439
-        ExplicitWidth = 809
+        ExplicitTop = 440
+        ExplicitWidth = 813
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -27,8 +28,8 @@ inherited frmUsuarios: TfrmUsuarios
       inherited PanelCampos: TPanel
         Width = 813
         Height = 399
-        ExplicitWidth = 809
-        ExplicitHeight = 398
+        ExplicitWidth = 813
+        ExplicitHeight = 399
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -71,6 +72,32 @@ inherited frmUsuarios: TfrmUsuarios
           WordWrap = True
           ExplicitWidth = 797
         end
+        object Label5: TLabel
+          Left = 80
+          Top = 40
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 77
+          Top = 112
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object edtNome: TEdit
           Left = 32
           Top = 65
@@ -112,7 +139,7 @@ inherited frmUsuarios: TfrmUsuarios
       end
       inherited PanelTitulo: TPanel
         Width = 813
-        ExplicitWidth = 809
+        ExplicitWidth = 813
         inherited lblTitulo: TLabel
           Width = 211
           Caption = 'Inserindo um novo usu'#225'rio'
@@ -123,29 +150,29 @@ inherited frmUsuarios: TfrmUsuarios
     inherited CardPesquisa: TCard
       Width = 813
       Height = 509
-      ExplicitWidth = 813
-      ExplicitHeight = 509
+      ExplicitWidth = 809
+      ExplicitHeight = 508
       inherited pnlPesquisa: TPanel
         Width = 813
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited edtPesquisar: TEdit
           OnChange = edtPesquisarChange
         end
         inherited btnPesquisae: TButton
           Left = 689
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 689
+          ExplicitLeft = 685
         end
       end
       inherited pnlBotoes: TPanel
         Top = 440
         Width = 813
-        ExplicitTop = 440
-        ExplicitWidth = 813
+        ExplicitTop = 439
+        ExplicitWidth = 809
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -155,15 +182,14 @@ inherited frmUsuarios: TfrmUsuarios
         inherited btnSair: TButton
           Left = 689
           ImageIndex = 8
-          ExplicitLeft = 690
-          ExplicitTop = 5
+          ExplicitLeft = 685
         end
       end
       inherited pnlGrid: TPanel
         Width = 813
         Height = 359
-        ExplicitWidth = 813
-        ExplicitHeight = 359
+        ExplicitWidth = 809
+        ExplicitHeight = 358
         inherited DBGrid1: TDBGrid
           Width = 811
           Height = 357
@@ -202,7 +228,6 @@ inherited frmUsuarios: TfrmUsuarios
               Expanded = False
               FieldName = 'USER_ADMIN'
               Title.Caption = 'Admin'
-              Width = 64
               Visible = True
             end>
         end

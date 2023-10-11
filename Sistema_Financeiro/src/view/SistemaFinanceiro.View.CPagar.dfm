@@ -4,13 +4,14 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1322
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -133
+  ExplicitTop = -89
   ExplicitWidth = 1334
   ExplicitHeight = 682
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1322
     Height = 644
+    ActiveCard = CardCadastro
     ExplicitWidth = 1318
     ExplicitHeight = 643
     inherited CardCadastro: TCard
@@ -121,6 +122,58 @@ inherited frmContasPagar: TfrmContasPagar
           ParentFont = False
           Visible = False
         end
+        object Label2: TLabel
+          Left = 117
+          Top = 32
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 192
+          Top = 159
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 384
+          Top = 159
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 918
+          Top = 32
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object memDesc: TMemo
           Left = 42
           Top = 57
@@ -206,6 +259,32 @@ inherited frmContasPagar: TfrmContasPagar
               Height = 19
               Caption = 'Vencimento'
             end
+            object Label5: TLabel
+              Left = 89
+              Top = 69
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label7: TLabel
+              Left = 362
+              Top = 0
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
             object edtParcela: TEdit
               Left = 0
               Top = 25
@@ -260,11 +339,51 @@ inherited frmContasPagar: TfrmContasPagar
               Caption = 'Intervalo em Dias'
             end
             object lblDiaFixo: TLabel
-              Left = 308
+              Left = 326
               Top = 7
               Width = 145
               Height = 19
               Caption = 'Dia Fixo Vencimento'
+              Visible = False
+            end
+            object Label6: TLabel
+              Left = 120
+              Top = 7
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label8: TLabel
+              Left = 287
+              Top = 7
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label9: TLabel
+              Left = 475
+              Top = 7
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
               Visible = False
             end
             object edtQtdParcelas: TEdit
@@ -279,14 +398,14 @@ inherited frmContasPagar: TfrmContasPagar
             object edtIntervaloDias: TEdit
               Left = 154
               Top = 32
-              Width = 127
+              Width = 151
               Height = 27
               Color = clWhite
               MaxLength = 10
               TabOrder = 1
             end
             object btnGerar: TButton
-              Left = 491
+              Left = 502
               Top = 0
               Width = 100
               Height = 57
@@ -353,9 +472,9 @@ inherited frmContasPagar: TfrmContasPagar
                 end>
             end
             object edtDiaFixoVcto: TEdit
-              Left = 306
+              Left = 326
               Top = 32
-              Width = 127
+              Width = 159
               Height = 27
               Color = clWhite
               MaxLength = 10
@@ -459,6 +578,7 @@ inherited frmContasPagar: TfrmContasPagar
           Margins.Right = 5
           Margins.Bottom = 5
           TabOrder = 11
+          Visible = False
           object lblAvisoFatura: TLabel
             Left = 87
             Top = 40

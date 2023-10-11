@@ -9,18 +9,19 @@ inherited frmFornecedores: TfrmFornecedores
   inherited CardPanelPrincipal: TCardPanel
     Width = 1339
     Height = 645
+    ActiveCard = CardCadastro
     ExplicitWidth = 1335
     ExplicitHeight = 644
     inherited CardCadastro: TCard
       Width = 1337
       Height = 643
-      ExplicitWidth = 1333
-      ExplicitHeight = 642
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlBotoesCad: TPanel
         Top = 574
         Width = 1337
-        ExplicitTop = 573
-        ExplicitWidth = 1333
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -28,8 +29,8 @@ inherited frmFornecedores: TfrmFornecedores
       inherited PanelCampos: TPanel
         Width = 1337
         Height = 533
-        ExplicitWidth = 1333
-        ExplicitHeight = 532
+        ExplicitWidth = 1337
+        ExplicitHeight = 533
         object LabelNome: TLabel
           Left = 32
           Top = 48
@@ -141,6 +142,19 @@ inherited frmFornecedores: TfrmFornecedores
           Width = 43
           Height = 19
           Caption = 'Status'
+        end
+        object lblNomeOb: TLabel
+          Left = 79
+          Top = 48
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object edtNome: TEdit
           Left = 32
@@ -356,7 +370,7 @@ inherited frmFornecedores: TfrmFornecedores
       end
       inherited PanelTitulo: TPanel
         Width = 1337
-        ExplicitWidth = 1333
+        ExplicitWidth = 1337
         inherited lblTitulo: TLabel
           Width = 245
           Caption = 'Inserindo um novo Fornecedor'
@@ -368,12 +382,12 @@ inherited frmFornecedores: TfrmFornecedores
     inherited CardPesquisa: TCard
       Width = 1337
       Height = 643
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      ExplicitWidth = 1333
+      ExplicitHeight = 642
       inherited pnlPesquisa: TPanel
         Width = 1337
         Height = 137
-        ExplicitWidth = 1337
+        ExplicitWidth = 1333
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 182
@@ -711,7 +725,7 @@ inherited frmFornecedores: TfrmFornecedores
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1213
+          ExplicitLeft = 1209
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -825,8 +839,8 @@ inherited frmFornecedores: TfrmFornecedores
       inherited pnlBotoes: TPanel
         Top = 574
         Width = 1337
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        ExplicitTop = 573
+        ExplicitWidth = 1333
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -835,7 +849,7 @@ inherited frmFornecedores: TfrmFornecedores
         end
         inherited btnSair: TButton
           Left = 1213
-          ExplicitLeft = 1213
+          ExplicitLeft = 1209
         end
       end
       inherited pnlGrid: TPanel
@@ -843,8 +857,8 @@ inherited frmFornecedores: TfrmFornecedores
         Width = 1337
         Height = 437
         ExplicitTop = 137
-        ExplicitWidth = 1337
-        ExplicitHeight = 437
+        ExplicitWidth = 1333
+        ExplicitHeight = 436
         inherited DBGrid1: TDBGrid
           Width = 1335
           Height = 435
@@ -854,7 +868,6 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'ID_FORNEC'
               Title.Caption = 'Id'
-              Width = 64
               Visible = True
             end
             item
@@ -875,6 +888,7 @@ inherited frmFornecedores: TfrmFornecedores
               Expanded = False
               FieldName = 'CELULAR'
               Title.Caption = 'Celular'
+              Width = 64
               Visible = True
             end
             item

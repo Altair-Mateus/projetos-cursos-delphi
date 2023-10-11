@@ -136,6 +136,19 @@ inherited frmCliente: TfrmCliente
           Height = 19
           Caption = 'Status'
         end
+        object lblNomeOb: TLabel
+          Left = 79
+          Top = 48
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object edtNome: TEdit
           Left = 32
           Top = 73
@@ -143,6 +156,8 @@ inherited frmCliente: TfrmCliente
           Height = 27
           Color = clWhite
           MaxLength = 200
+          ParentShowHint = False
+          ShowHint = False
           TabOrder = 0
         end
         object gbTipoCliente: TGroupBox

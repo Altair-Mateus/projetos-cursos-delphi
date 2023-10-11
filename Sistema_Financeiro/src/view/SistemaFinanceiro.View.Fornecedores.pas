@@ -56,6 +56,7 @@ type
     ToggleStatus: TToggleSwitch;
     lblStatus: TLabel;
     cbStatus: TComboBox;
+    lblNomeOb: TLabel;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure rbFisicaClick(Sender: TObject);
     procedure rbJuridicaClick(Sender: TObject);

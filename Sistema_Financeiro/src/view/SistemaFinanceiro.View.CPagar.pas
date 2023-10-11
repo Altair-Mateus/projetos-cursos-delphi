@@ -96,6 +96,15 @@ type
     pnlImgAviso: TPanel;
     lblAvisoFatura: TLabel;
     imgAviso: TImage;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label6: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -837,6 +846,7 @@ begin
     lblDiaFixo.Visible       := True;
     edtIntervaloDias.Enabled := False;
     edtIntervaloDias.Text    := '30';
+    Label9.Visible           := True;
 
     edtDiaFixoVcto.SetFocus;
 
@@ -849,6 +859,7 @@ begin
     lblDiaFixo.Visible       := False;
     edtIntervaloDias.Enabled := True;
     edtIntervaloDias.Clear;
+    Label9.Visible           := False;
 
   end;
 
@@ -1585,6 +1596,8 @@ begin
 
     end;
 
+    pnlAviso.Visible := False;
+
   end
     else if toggleFatura.State = tssOn then
          begin
@@ -1595,6 +1608,8 @@ begin
           btnPesqFat.Visible      := True;
 
           edtCodFatCartao.SetFocus;
+
+          pnlAviso.Visible := True;
 
          end;
 

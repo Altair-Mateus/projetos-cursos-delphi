@@ -82,6 +82,15 @@ type
     edtFiltroCliente: TEdit;
     btnPesqCliente: TButton;
     lblClienteFiltro: TLabel;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -679,6 +688,7 @@ begin
     lblDiaFixo.Visible       := True;
     edtIntervaloDias.Enabled := False;
     edtIntervaloDias.Text    := '30';
+    Label9.Visible           := True;
 
     edtDiaFixoVcto.SetFocus;
 
@@ -690,6 +700,7 @@ begin
     edtDiaFixoVcto.Enabled   := False;
     lblDiaFixo.Visible       := False;
     edtIntervaloDias.Enabled := True;
+    label9.Visible           := False;
     edtIntervaloDias.Clear;
 
   end;

@@ -54,6 +54,7 @@ type
     ToggleStatus: TToggleSwitch;
     lblStatus: TLabel;
     cbStatus: TComboBox;
+    lblNomeOb: TLabel;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);

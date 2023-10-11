@@ -29,6 +29,8 @@ type
     lblStatus: TLabel;
     LBLmET: TLabel;
     cbMet: TComboBox;
+    Label5: TLabel;
+    Label1: TLabel;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);

@@ -3,13 +3,13 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitTop = -135
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
+    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -74,7 +74,7 @@ inherited frmContasReceber: TfrmContasReceber
           Caption = 'Cod Cliente'
         end
         object lblNomeCliente: TLabel
-          Left = 816
+          Left = 960
           Top = 60
           Width = 107
           Height = 19
@@ -86,6 +86,58 @@ inherited frmContasReceber: TfrmContasReceber
           Font.Style = []
           ParentFont = False
           Visible = False
+        end
+        object Label2: TLabel
+          Left = 117
+          Top = 32
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 180
+          Top = 159
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 372
+          Top = 159
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 791
+          Top = 32
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object CardPanelParcela: TCardPanel
           Left = 40
@@ -125,6 +177,32 @@ inherited frmContasReceber: TfrmContasReceber
               Height = 19
               Caption = 'Vencimento'
             end
+            object Label5: TLabel
+              Left = 362
+              Top = 0
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label6: TLabel
+              Left = 89
+              Top = 69
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
             object edtParcela: TEdit
               Left = 0
               Top = 25
@@ -163,7 +241,7 @@ inherited frmContasReceber: TfrmContasReceber
             CardIndex = 1
             TabOrder = 1
             object lblDiaFixo: TLabel
-              Left = 308
+              Left = 324
               Top = 7
               Width = 145
               Height = 19
@@ -184,8 +262,48 @@ inherited frmContasReceber: TfrmContasReceber
               Height = 19
               Caption = 'Qtd de Parcelas'
             end
+            object Label7: TLabel
+              Left = 120
+              Top = 7
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label8: TLabel
+              Left = 287
+              Top = 8
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label9: TLabel
+              Left = 475
+              Top = 7
+              Width = 10
+              Height = 19
+              Caption = '*'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
             object btnGerar: TButton
-              Left = 491
+              Left = 500
               Top = 0
               Width = 100
               Height = 57
@@ -246,9 +364,9 @@ inherited frmContasReceber: TfrmContasReceber
                 end>
             end
             object edtDiaFixoVcto: TEdit
-              Left = 306
+              Left = 324
               Top = 32
-              Width = 127
+              Width = 161
               Height = 27
               Color = clWhite
               MaxLength = 10
@@ -267,7 +385,7 @@ inherited frmContasReceber: TfrmContasReceber
             object edtIntervaloDias: TEdit
               Left = 154
               Top = 32
-              Width = 127
+              Width = 148
               Height = 27
               Color = clWhite
               MaxLength = 10
@@ -343,15 +461,16 @@ inherited frmContasReceber: TfrmContasReceber
         object edtCliente: TEdit
           Left = 704
           Top = 57
-          Width = 57
+          Width = 185
           Height = 27
           Color = clWhite
           MaxLength = 20
           TabOrder = 1
+          TextHint = 'Clique no bot'#227'o ao lado'
           OnExit = edtClienteExit
         end
         object btnPesquisaCliente: TButton
-          Left = 767
+          Left = 911
           Top = 56
           Width = 35
           Height = 29

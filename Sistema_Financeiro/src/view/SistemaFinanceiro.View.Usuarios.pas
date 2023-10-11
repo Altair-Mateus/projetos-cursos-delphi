@@ -21,6 +21,8 @@ type
     PopupMenu: TPopupMenu;
     mnuLimpaSenha: TMenuItem;
     lblAvisoSenha: TLabel;
+    Label5: TLabel;
+    Label1: TLabel;
     procedure btnAlterarClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);

@@ -6,23 +6,28 @@ inherited frmFrPgto: TfrmFrPgto
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 791
+    ActiveCard = CardCadastro
+    ExplicitWidth = 787
     ExplicitHeight = 504
     inherited CardCadastro: TCard
+      Width = 789
       Height = 503
-      ExplicitWidth = 785
-      ExplicitHeight = 502
+      ExplicitWidth = 789
+      ExplicitHeight = 503
       inherited pnlBotoesCad: TPanel
         Top = 434
-        ExplicitTop = 433
-        ExplicitWidth = 785
+        Width = 789
+        ExplicitTop = 434
+        ExplicitWidth = 789
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
+        Width = 789
         Height = 393
-        ExplicitWidth = 785
-        ExplicitHeight = 392
+        ExplicitWidth = 789
+        ExplicitHeight = 393
         object LabelNome: TLabel
           Left = 32
           Top = 40
@@ -43,6 +48,32 @@ inherited frmFrPgto: TfrmFrPgto
           Width = 67
           Height = 19
           Caption = 'Descri'#231#227'o'
+        end
+        object Label5: TLabel
+          Left = 80
+          Top = 40
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 111
+          Top = 112
+          Width = 10
+          Height = 19
+          Caption = '*'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object edtNome: TEdit
           Left = 32
@@ -76,7 +107,7 @@ inherited frmFrPgto: TfrmFrPgto
         end
         object edtDesc: TEdit
           Left = 32
-          Top = 151
+          Top = 137
           Width = 537
           Height = 27
           Color = clWhite
@@ -143,7 +174,8 @@ inherited frmFrPgto: TfrmFrPgto
         end
       end
       inherited PanelTitulo: TPanel
-        ExplicitWidth = 785
+        Width = 789
+        ExplicitWidth = 789
         inherited lblTitulo: TLabel
           Width = 332
           Caption = 'Inserindo uma nova Forma de Pagamento'
@@ -153,11 +185,13 @@ inherited frmFrPgto: TfrmFrPgto
       end
     end
     inherited CardPesquisa: TCard
+      Width = 789
       Height = 503
-      ExplicitWidth = 789
-      ExplicitHeight = 503
+      ExplicitWidth = 785
+      ExplicitHeight = 502
       inherited pnlPesquisa: TPanel
-        ExplicitWidth = 789
+        Width = 789
+        ExplicitWidth = 785
         object lblStatus: TLabel [1]
           Left = 278
           Top = 15
@@ -196,8 +230,9 @@ inherited frmFrPgto: TfrmFrPgto
           ExplicitWidth = 249
         end
         inherited btnPesquisae: TButton
+          Left = 665
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 665
+          ExplicitLeft = 661
         end
         object cbStatus: TComboBox
           Left = 278
@@ -236,8 +271,9 @@ inherited frmFrPgto: TfrmFrPgto
       end
       inherited pnlBotoes: TPanel
         Top = 434
-        ExplicitTop = 434
-        ExplicitWidth = 789
+        Width = 789
+        ExplicitTop = 433
+        ExplicitWidth = 785
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -245,14 +281,17 @@ inherited frmFrPgto: TfrmFrPgto
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
-          ExplicitLeft = 665
+          Left = 665
+          ExplicitLeft = 661
         end
       end
       inherited pnlGrid: TPanel
+        Width = 789
         Height = 353
-        ExplicitWidth = 789
-        ExplicitHeight = 353
+        ExplicitWidth = 785
+        ExplicitHeight = 352
         inherited DBGrid1: TDBGrid
+          Width = 787
           Height = 351
           DataSource = DataSourceFrPgto
           Columns = <

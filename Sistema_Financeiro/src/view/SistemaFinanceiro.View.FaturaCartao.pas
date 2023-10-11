@@ -27,6 +27,8 @@ type
     edtDtAlt: TEdit;
     lblDtAlt: TLabel;
     edtDtCad: TEdit;
+    Label5: TLabel;
+    Label1: TLabel;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
     procedure cbStatusClick(Sender: TObject);
