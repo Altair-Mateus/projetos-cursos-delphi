@@ -302,6 +302,10 @@
             <Form>frmRelFatCartao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BxMultiplaCp.pas">
+            <Form>frmBxMultiplaCP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

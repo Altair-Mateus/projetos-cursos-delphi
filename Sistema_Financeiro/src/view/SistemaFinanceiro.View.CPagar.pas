@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.WinXCtrls, Datasnap.DBClient, System.SysUtils,
   SistemaFinanceiro.View.BaixarCP, Vcl.Menus, SistemaFinanceiro.View.CpDetalhe,
   Vcl.Imaging.pngimage, SistemaFinanceiro.View.Fornecedores,
-  SistemaFinanceiro.View.FaturaCartao;
+  SistemaFinanceiro.View.FaturaCartao, SistemaFinanceiro.View.BxMultiplaCp;
 type
   TfrmContasPagar = class(TfrmCadastroPadrao)
     DataSourceCPagar: TDataSource;
@@ -105,6 +105,7 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    btnBxMultipla: TButton;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -146,6 +147,7 @@ type
     procedure edtFornecedorExit(Sender: TObject);
     procedure edtFiltroFatCartaoChange(Sender: TObject);
     procedure btnPesqFtCartaoClick(Sender: TObject);
+    procedure btnBxMultiplaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -156,6 +158,7 @@ type
     procedure CadParcelamento;
     procedure EditarRegCPagar;
     procedure ExibeTelaBaixar;
+    procedure ExibeTelaBxMultipla;
     procedure ExibeDetalhe;
     procedure BuscaNomeFornecedor;
     procedure BuscaNomeFatCartao;
@@ -205,6 +208,13 @@ begin
 
   inherited;
   ExibeTelaBaixar;
+
+end;
+
+procedure TfrmContasPagar.btnBxMultiplaClick(Sender: TObject);
+begin
+
+  ExibeTelaBxMultipla;
 
 end;
 
@@ -1173,6 +1183,25 @@ begin
   //  Atualiza relatorio tela principal
   frmPrincipal.TotalCP;
   frmPrincipal.ResumoMensalCaixa;
+
+end;
+
+procedure TfrmContasPagar.ExibeTelaBxMultipla;
+begin
+
+   // Cria o form
+  frmBxMultiplaCP := TfrmBxMultiplaCP.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmBxMultiplaCP.ShowModal;
+
+  finally
+
+    FreeAndNil(frmBxMultiplaCP);
+
+  end;
 
 end;
 
