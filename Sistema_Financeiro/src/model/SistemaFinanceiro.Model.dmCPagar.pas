@@ -47,6 +47,25 @@ type
     FDQueryCpDetalhesUSUARIO: TIntegerField;
     cdsCPagarFATURA_CART: TWideStringField;
     cdsCPagarID_FATURA: TIntegerField;
+    FDQueryBxMultipla: TFDQuery;
+    FDQueryBxMultiplaID: TIntegerField;
+    FDQueryBxMultiplaNUMERO_DOC: TWideStringField;
+    FDQueryBxMultiplaDESCRICAO: TWideStringField;
+    FDQueryBxMultiplaPARCELA: TIntegerField;
+    FDQueryBxMultiplaVALOR_PARCELA: TBCDField;
+    FDQueryBxMultiplaVALOR_COMPRA: TBCDField;
+    FDQueryBxMultiplaVALOR_ABATIDO: TBCDField;
+    FDQueryBxMultiplaDATA_COMPRA: TDateField;
+    FDQueryBxMultiplaDATA_CADASTRO: TDateField;
+    FDQueryBxMultiplaDATA_VENCIMENTO: TDateField;
+    FDQueryBxMultiplaDATA_PAGAMENTO: TDateField;
+    FDQueryBxMultiplaSTATUS: TWideStringField;
+    FDQueryBxMultiplaPARCIAL: TWideStringField;
+    FDQueryBxMultiplaCP_ORIGEM: TIntegerField;
+    FDQueryBxMultiplaID_FORNECEDOR: TIntegerField;
+    FDQueryBxMultiplaFATURA_CART: TWideStringField;
+    FDQueryBxMultiplaID_FATURA: TIntegerField;
+    FDQueryBxMultiplaRAZAO_SOCIAL: TWideStringField;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

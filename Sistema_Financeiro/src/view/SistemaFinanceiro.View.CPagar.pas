@@ -1018,7 +1018,10 @@ begin
   end
     else
     begin
+
       toggleFatura.State    := tssOff;
+      edtCodFatCartao.Clear;
+
     end;
 
 
@@ -1084,7 +1087,7 @@ procedure TfrmContasPagar.edtFornecedorExit(Sender: TObject);
 begin
   inherited;
 
-   BuscaNomeFornecedor;
+  BuscaNomeFornecedor;
 
   if Trim(edtFornecedor.Text) <> '' then
   begin

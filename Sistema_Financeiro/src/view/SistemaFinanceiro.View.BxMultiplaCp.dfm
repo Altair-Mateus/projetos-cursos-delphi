@@ -13,6 +13,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   Font.Style = []
   Position = poScreenCenter
   WindowState = wsMaximized
+  OnCreate = FormCreate
   TextHeight = 19
   object pnlFiltros: TPanel
     Left = 0
@@ -23,6 +24,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 946
     object lblDataInicial: TLabel
       Left = 18
       Top = 18
@@ -109,6 +111,22 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentFont = False
       Visible = False
     end
+    object lblData: TLabel
+      Left = 18
+      Top = 79
+      Width = 98
+      Height = 19
+      Align = alCustom
+      Caption = 'Filtrar data de'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
     object dateInicial: TDateTimePicker
       Left = 18
       Top = 39
@@ -118,6 +136,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       Time = 0.872988819442980500
       ShowCheckbox = True
       TabOrder = 0
+      OnChange = dateInicialChange
     end
     object dateFinal: TDateTimePicker
       Left = 178
@@ -128,24 +147,25 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       Time = 0.872988819442980500
       ShowCheckbox = True
       TabOrder = 1
+      OnChange = dateFinalChange
     end
     object btnVisualizar: TButton
       AlignWithMargins = True
       Left = 823
-      Top = 31
+      Top = 41
       Width = 121
-      Height = 99
-      Margins.Top = 30
+      Height = 79
+      Margins.Top = 40
       Margins.Right = 5
-      Margins.Bottom = 30
+      Margins.Bottom = 40
       Align = alRight
       Caption = 'Visualizar Contas'
       ImageIndex = 11
       Images = ImageList1
       TabOrder = 2
       WordWrap = True
-      ExplicitLeft = 739
-      ExplicitHeight = 59
+      OnClick = btnVisualizarClick
+      ExplicitLeft = 819
     end
     object edtFornecedor: TEdit
       Left = 344
@@ -157,6 +177,8 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       NumbersOnly = True
       TabOrder = 3
       TextHint = 'Clique no bot'#227'o ao lado'
+      OnChange = edtFornecedorChange
+      OnExit = edtFornecedorExit
     end
     object btnPesquisaFornecedor: TButton
       Left = 535
@@ -179,6 +201,8 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       NumbersOnly = True
       TabOrder = 5
       TextHint = 'Clique no bot'#227'o ao lado'
+      OnChange = edtCodFatCartaoChange
+      OnExit = edtCodFatCartaoExit
     end
     object btnPesqFat: TButton
       Left = 535
@@ -191,6 +215,20 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       TabStop = False
       OnClick = btnPesqFatClick
     end
+    object cbData: TComboBox
+      Left = 18
+      Top = 104
+      Width = 297
+      Height = 27
+      Style = csDropDownList
+      ItemIndex = 1
+      TabOrder = 7
+      Text = 'DATA VENCIMENTO'
+      OnChange = cbDataChange
+      Items.Strings = (
+        'DATA COMPRA'
+        'DATA VENCIMENTO')
+    end
   end
   object pnlContas: TPanel
     Left = 0
@@ -201,22 +239,101 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 504
-    ExplicitTop = 336
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 946
+    ExplicitHeight = 344
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
       Width = 948
       Height = 343
       Align = alClient
+      Color = clWhite
+      DataSource = DataSourceBxMultiplaCP
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -16
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGrid1DrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Width = 59
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO_DOC'
+          Title.Caption = 'N'#186' Documento'
+          Width = 117
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_FORNECEDOR'
+          Title.Caption = 'Cod Fornecedor'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'RAZAO_SOCIAL'
+          Title.Caption = 'Nome Fornecedor'
+          Width = 300
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Title.Caption = 'Descri'#231#227'o'
+          Width = 300
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PARCELA'
+          Title.Caption = 'Parcela'
+          Width = 67
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA_VENCIMENTO'
+          Title.Caption = ' Vencimento'
+          Width = 109
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_PARCELA'
+          Title.Caption = 'Valor Parcela'
+          Width = 137
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_COMPRA'
+          Title.Caption = 'Valor Compra'
+          Width = 142
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA_COMPRA'
+          Title.Caption = 'Data da Compra'
+          Width = 134
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA_PAGAMENTO'
+          Title.Caption = 'Data de Pagamento'
+          Width = 149
+          Visible = True
+        end>
     end
   end
   object pnlBotoes: TPanel
@@ -228,14 +345,15 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 416
-    ExplicitWidth = 864
+    ExplicitTop = 505
+    ExplicitWidth = 946
     object btnConfirmar: TButton
       AlignWithMargins = True
-      Left = 4
+      Left = 6
       Top = 4
       Width = 120
       Height = 61
+      Margins.Left = 5
       Align = alLeft
       Caption = 'Confirmar'
       ImageIndex = 10
@@ -244,16 +362,91 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     end
     object btnSair: TButton
       AlignWithMargins = True
-      Left = 826
+      Left = 132
       Top = 4
       Width = 120
       Height = 61
-      Align = alRight
+      Align = alLeft
       Caption = 'Voltar'
       ImageIndex = 14
       Images = ImageList1
       TabOrder = 1
-      ExplicitLeft = 1196
+    end
+    object pnlValorSelecionadas: TPanel
+      Left = 764
+      Top = 1
+      Width = 185
+      Height = 67
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 2
+      ExplicitLeft = 760
+      object lblValorSelecionadas: TLabel
+        Left = 13
+        Top = 6
+        Width = 156
+        Height = 19
+        Caption = 'Valor Selecionadas R$'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Edit1: TEdit
+        Left = 13
+        Top = 31
+        Width = 156
+        Height = 27
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object pnlQtdSelecionadas: TPanel
+      Left = 608
+      Top = 1
+      Width = 156
+      Height = 67
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 3
+      ExplicitLeft = 604
+      object lblQtdSelecionada: TLabel
+        Left = 22
+        Top = 7
+        Width = 114
+        Height = 19
+        Caption = 'Qtd Selecionada'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edtQtdSelecionada: TEdit
+        Left = 21
+        Top = 32
+        Width = 121
+        Height = 27
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
     end
   end
   object ImageList1: TImageList
@@ -2383,6 +2576,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       000000000000}
   end
   object DataSourceBxMultiplaCP: TDataSource
+    DataSet = dmCPagar.FDQueryBxMultipla
     Left = 768
     Top = 329
   end
