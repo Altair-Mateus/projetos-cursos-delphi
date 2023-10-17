@@ -38,15 +38,6 @@ type
     cdsParcelasValor: TCurrencyField;
     cbStatus: TComboBox;
     lblStatus: TLabel;
-    gbLegenda: TGroupBox;
-    lblPagas: TLabel;
-    lblVencida: TLabel;
-    lblCancelada: TLabel;
-    lblNormal: TLabel;
-    pnlPagas: TPanel;
-    pnlVencida: TPanel;
-    pnlNormal: TPanel;
-    pnlCancelada: TPanel;
     edtNDoc: TEdit;
     lblNDoc: TLabel;
     gbFiltros: TGroupBox;
@@ -91,6 +82,20 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    pnlTotais: TPanel;
+    lblQtdCp: TLabel;
+    lblTotalCpGrid: TLabel;
+    lblTQtdCo: TLabel;
+    lblTValorCp: TLabel;
+    gbLegenda: TGroupBox;
+    lblPagas: TLabel;
+    lblVencida: TLabel;
+    lblCancelada: TLabel;
+    lblNormal: TLabel;
+    pnlPagas: TPanel;
+    pnlVencida: TPanel;
+    pnlNormal: TPanel;
+    pnlCancelada: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -139,6 +144,8 @@ type
     procedure BuscaNomeCliente;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
     procedure GeraParcelas;
+    procedure CalcCrGrid;
+    procedure CalcQtdCrGrid;
 
   public
     { Public declarations }
@@ -657,6 +664,59 @@ begin
   //  Gravando no BD
   dmCReceber.cdsCReceber.Post;
   dmCReceber.cdsCReceber.ApplyUpdates(0);
+
+end;
+
+procedure TfrmContasReceber.CalcCrGrid;
+var
+  TotalCr: Currency;
+
+begin
+
+  TotalCr := 0;
+
+  //  Percorre e soma
+  with DBGrid1.DataSource.DataSet do
+  begin
+
+    //  Desativa o controle
+    DisableControls;
+
+    //  Posiciona no primeiro reg
+    First;
+
+    while not Eof do
+    begin
+
+      TotalCr := TotalCr + FieldByName('VALOR_PARCELA').AsCurrency;
+
+      Next;
+
+    end;
+
+    //  Reativa o controle
+    EnableControls;
+
+    lblTotalCpGrid.Caption := TUtilitario.FormatoMoeda(TotalCr);
+
+  end;
+
+end;
+
+procedure TfrmContasReceber.CalcQtdCrGrid;
+var
+  QtdCr: Integer;
+
+begin
+
+  QtdCr := 0;
+
+  //  Realiza a conta
+  QtdCr := DBGrid1.DataSource.DataSet.RecordCount;
+
+  //  Exibe na label
+  lblQtdCp.Caption := IntToStr(QtdCr);
+
 
 end;
 
@@ -1260,6 +1320,13 @@ begin
   dmCReceber.cdsCReceber.Open;
 
   HabilitaBotoes;
+
+  //  Calcula a quantidade e valor
+  CalcCrGrid;
+  CalcQtdCrGrid;
+
+  //  Posiciona no primeiro registro
+  DataSourceCReceber.DataSet.First;
 
 
 end;

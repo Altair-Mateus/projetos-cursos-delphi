@@ -3,13 +3,14 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
+  ExplicitLeft = -301
+  ExplicitTop = -247
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
-    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
@@ -4929,11 +4930,41 @@ inherited frmContasReceber: TfrmContasReceber
           ImageIndex = 12
           ExplicitLeft = 1217
         end
+        object btnBaixarCR: TButton
+          AlignWithMargins = True
+          Left = 508
+          Top = 4
+          Width = 121
+          Height = 61
+          Align = alLeft
+          Caption = 'Baixar '
+          Enabled = False
+          ImageIndex = 9
+          Images = ImageList1
+          TabOrder = 5
+          WordWrap = True
+          OnClick = btnBaixarCRClick
+        end
+        object btnDetalhes: TButton
+          AlignWithMargins = True
+          Left = 635
+          Top = 4
+          Width = 121
+          Height = 61
+          Align = alLeft
+          Caption = 'Detalhes da Baixa'
+          Enabled = False
+          ImageIndex = 10
+          Images = ImageList1
+          TabOrder = 6
+          WordWrap = True
+          OnClick = btnDetalhesClick
+        end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
-          Left = 974
+          Left = 1021
           Top = 4
-          Width = 237
+          Width = 190
           Height = 61
           Align = alRight
           Caption = 'Legendas'
@@ -4943,34 +4974,35 @@ inherited frmContasReceber: TfrmContasReceber
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 7
+          ExplicitLeft = 1000
           object lblPagas: TLabel
             Left = 31
             Top = 16
-            Width = 56
+            Width = 38
             Height = 13
-            Caption = 'Conta Paga'
+            Caption = 'C. Paga'
           end
           object lblVencida: TLabel
             Left = 31
             Top = 36
-            Width = 69
+            Width = 51
             Height = 13
-            Caption = 'Conta Vencida'
+            Caption = 'C. Vencida'
           end
           object lblCancelada: TLabel
-            Left = 143
+            Left = 119
             Top = 16
-            Width = 82
+            Width = 64
             Height = 13
-            Caption = 'Conta Cancelada'
+            Caption = 'C. Cancelada'
           end
           object lblNormal: TLabel
-            Left = 143
+            Left = 119
             Top = 36
-            Width = 65
+            Width = 47
             Height = 13
-            Caption = 'Conta Normal'
+            Caption = 'C. Normal'
           end
           object pnlPagas: TPanel
             Left = 11
@@ -4991,7 +5023,7 @@ inherited frmContasReceber: TfrmContasReceber
             TabOrder = 1
           end
           object pnlNormal: TPanel
-            Left = 123
+            Left = 99
             Top = 37
             Width = 14
             Height = 14
@@ -5000,7 +5032,7 @@ inherited frmContasReceber: TfrmContasReceber
             TabOrder = 2
           end
           object pnlCancelada: TPanel
-            Left = 123
+            Left = 99
             Top = 17
             Width = 14
             Height = 14
@@ -5009,47 +5041,17 @@ inherited frmContasReceber: TfrmContasReceber
             TabOrder = 3
           end
         end
-        object btnBaixarCR: TButton
-          AlignWithMargins = True
-          Left = 508
-          Top = 4
-          Width = 121
-          Height = 61
-          Align = alLeft
-          Caption = 'Baixar '
-          Enabled = False
-          ImageIndex = 9
-          Images = ImageList1
-          TabOrder = 6
-          WordWrap = True
-          OnClick = btnBaixarCRClick
-        end
-        object btnDetalhes: TButton
-          AlignWithMargins = True
-          Left = 635
-          Top = 4
-          Width = 121
-          Height = 61
-          Align = alLeft
-          Caption = 'Detalhes da Baixa'
-          Enabled = False
-          ImageIndex = 10
-          Images = ImageList1
-          TabOrder = 7
-          WordWrap = True
-          OnClick = btnDetalhesClick
-        end
       end
       inherited pnlGrid: TPanel
         Top = 137
         Width = 1341
-        Height = 438
+        Height = 409
         ExplicitTop = 137
         ExplicitWidth = 1341
         ExplicitHeight = 438
         inherited DBGrid1: TDBGrid
           Width = 1339
-          Height = 436
+          Height = 407
           DataSource = DataSourceCReceber
           Columns = <
             item
@@ -5144,6 +5146,80 @@ inherited frmContasReceber: TfrmContasReceber
               Width = 107
               Visible = True
             end>
+        end
+      end
+      object pnlTotais: TPanel
+        Left = 0
+        Top = 546
+        Width = 1341
+        Height = 29
+        Align = alBottom
+        Color = clWindow
+        ParentBackground = False
+        TabOrder = 3
+        ExplicitLeft = 1
+        ExplicitTop = 39
+        ExplicitWidth = 1339
+        object lblQtdCp: TLabel
+          AlignWithMargins = True
+          Left = 937
+          Top = 6
+          Width = 70
+          Height = 19
+          Margins.Top = 5
+          Align = alRight
+          Caption = 'lblQtdCp'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitLeft = 912
+          ExplicitTop = 5
+        end
+        object lblTotalCpGrid: TLabel
+          AlignWithMargins = True
+          Left = 1207
+          Top = 6
+          Width = 118
+          Height = 19
+          Margins.Top = 5
+          Margins.Right = 15
+          Align = alRight
+          Caption = 'lblTotalCpGrid'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitLeft = 1206
+          ExplicitTop = 5
+        end
+        object lblTQtdCo: TLabel
+          AlignWithMargins = True
+          Left = 769
+          Top = 6
+          Width = 162
+          Height = 19
+          Margins.Top = 5
+          Align = alRight
+          Caption = 'Quantidade de Contas:'
+          ExplicitLeft = 744
+          ExplicitTop = 5
+        end
+        object lblTValorCp: TLabel
+          AlignWithMargins = True
+          Left = 1040
+          Top = 6
+          Width = 161
+          Height = 19
+          Margins.Left = 30
+          Margins.Top = 5
+          Align = alRight
+          Caption = 'Valor total das Contas:'
+          ExplicitLeft = 1016
         end
       end
     end

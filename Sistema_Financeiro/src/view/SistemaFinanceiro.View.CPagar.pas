@@ -106,6 +106,11 @@ type
     Label8: TLabel;
     Label9: TLabel;
     btnBxMultipla: TButton;
+    pnlTotais: TPanel;
+    lblQtdCp: TLabel;
+    lblTotalCpGrid: TLabel;
+    lblTQtdCo: TLabel;
+    lblTValorCp: TLabel;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -165,6 +170,8 @@ type
     procedure KeyPressValor(Sender: TObject; var Key: Char);
     procedure GeraParcelas;
     procedure FatCartaoAtiva;
+    procedure CalcCpGrid;
+    procedure CalcQtdCpGrid;
 
   public
     { Public declarations }
@@ -828,6 +835,58 @@ begin
 
 end;
 
+procedure TfrmContasPagar.CalcCpGrid;
+var
+  TotalCp: Currency;
+
+begin
+
+  TotalCp := 0;
+
+  //  Percorre e soma
+  with DBGrid1.DataSource.DataSet do
+  begin
+
+    //  Desativa o controle
+    DisableControls;
+
+    //  Posiciona no primeiro reg
+    First;
+
+    while not Eof do
+    begin
+
+      TotalCp := TotalCp + FieldByName('VALOR_PARCELA').AsCurrency;
+
+      Next;
+
+    end;
+
+    //  Reativa o controle
+    EnableControls;
+
+    lblTotalCpGrid.Caption := TUtilitario.FormatoMoeda(TotalCp);
+
+  end;
+
+end;
+
+procedure TfrmContasPagar.CalcQtdCpGrid;
+var
+  QtdCp: Integer;
+
+begin
+
+  QtdCp := 0;
+
+  //  Realiza a conta
+  QtdCp := DBGrid1.DataSource.DataSet.RecordCount;
+
+  //  Exibe na label
+  lblQtdCp.Caption := IntToStr(QtdCp);
+
+end;
+
 procedure TfrmContasPagar.cbDataClick(Sender: TObject);
 begin
   inherited;
@@ -1235,6 +1294,8 @@ begin
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
 
+
+
 end;
 
 procedure TfrmContasPagar.GeraParcelas;
@@ -1560,6 +1621,13 @@ begin
   dmCPagar.cdsCPagar.Open;
 
   HabilitaBotoes;
+
+  //  Calcula a quantidade e valor
+  CalcCpGrid;
+  CalcQtdCpGrid;
+
+  //  Posiciona no primeiro registro
+  DataSourceCPagar.DataSet.First;
 
   inherited;
 end;

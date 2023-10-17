@@ -1951,9 +1951,9 @@ inherited frmCaixa: TfrmCaixa
           TabOrder = 6
           object lblVTotalEnt: TLabel
             AlignWithMargins = True
-            Left = 3
+            Left = 18
             Top = 3
-            Width = 116
+            Width = 101
             Height = 19
             Align = alTop
             Alignment = taRightJustify
@@ -1966,14 +1966,12 @@ inherited frmCaixa: TfrmCaixa
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            ExplicitLeft = 18
-            ExplicitWidth = 101
           end
           object lblVTotalSai: TLabel
             AlignWithMargins = True
-            Left = 3
+            Left = 20
             Top = 28
-            Width = 116
+            Width = 99
             Height = 19
             Align = alTop
             Alignment = taRightJustify
@@ -1986,8 +1984,6 @@ inherited frmCaixa: TfrmCaixa
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            ExplicitLeft = 20
-            ExplicitWidth = 99
           end
         end
         object pnlTitTotEntSai: TPanel
@@ -2001,9 +1997,9 @@ inherited frmCaixa: TfrmCaixa
           TabOrder = 7
           object lblTotalEntradas: TLabel
             AlignWithMargins = True
-            Left = 3
+            Left = 25
             Top = 3
-            Width = 130
+            Width = 108
             Height = 19
             Align = alTop
             Alignment = taRightJustify
@@ -2016,14 +2012,12 @@ inherited frmCaixa: TfrmCaixa
             Font.Style = []
             ParentColor = False
             ParentFont = False
-            ExplicitLeft = 25
-            ExplicitWidth = 108
           end
           object lblTotalSaidas: TLabel
             AlignWithMargins = True
-            Left = 3
+            Left = 41
             Top = 28
-            Width = 130
+            Width = 92
             Height = 19
             Align = alTop
             Alignment = taRightJustify
@@ -2036,8 +2030,6 @@ inherited frmCaixa: TfrmCaixa
             Font.Style = []
             ParentColor = False
             ParentFont = False
-            ExplicitLeft = 41
-            ExplicitWidth = 92
           end
         end
       end
