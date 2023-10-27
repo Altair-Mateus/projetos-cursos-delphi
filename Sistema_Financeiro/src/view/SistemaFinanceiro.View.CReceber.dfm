@@ -3,26 +3,25 @@ inherited frmContasReceber: TfrmContasReceber
   ClientHeight = 646
   ClientWidth = 1343
   WindowState = wsMaximized
-  ExplicitLeft = -301
-  ExplicitTop = -247
   ExplicitWidth = 1355
   ExplicitHeight = 684
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1343
     Height = 646
+    ActiveCard = CardCadastro
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      ExplicitWidth = 1341
+      ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        ExplicitTop = 575
+        ExplicitWidth = 1341
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
@@ -30,8 +29,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited PanelCampos: TPanel
         Width = 1341
         Height = 534
-        ExplicitWidth = 1337
-        ExplicitHeight = 533
+        ExplicitWidth = 1341
+        ExplicitHeight = 534
         object lblDataVend: TLabel
           Left = 258
           Top = 159
@@ -354,7 +353,6 @@ inherited frmContasReceber: TfrmContasReceber
                 item
                   Expanded = False
                   FieldName = 'Vencimento'
-                  ReadOnly = True
                   Visible = True
                 end
                 item
@@ -483,18 +481,18 @@ inherited frmContasReceber: TfrmContasReceber
       end
       inherited PanelTitulo: TPanel
         Width = 1341
-        ExplicitWidth = 1337
+        ExplicitWidth = 1341
       end
     end
     inherited CardPesquisa: TCard
       Width = 1341
       Height = 644
-      ExplicitWidth = 1341
-      ExplicitHeight = 644
+      ExplicitWidth = 1337
+      ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
         Width = 1341
         Height = 137
-        ExplicitWidth = 1341
+        ExplicitWidth = 1337
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 213
@@ -4685,7 +4683,7 @@ inherited frmContasReceber: TfrmContasReceber
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1217
+          ExplicitLeft = 1213
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -4917,8 +4915,8 @@ inherited frmContasReceber: TfrmContasReceber
       inherited pnlBotoes: TPanel
         Top = 575
         Width = 1341
-        ExplicitTop = 575
-        ExplicitWidth = 1341
+        ExplicitTop = 574
+        ExplicitWidth = 1337
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -4928,7 +4926,7 @@ inherited frmContasReceber: TfrmContasReceber
         inherited btnSair: TButton
           Left = 1217
           ImageIndex = 12
-          ExplicitLeft = 1217
+          ExplicitLeft = 1213
         end
         object btnBaixarCR: TButton
           AlignWithMargins = True
@@ -4975,7 +4973,7 @@ inherited frmContasReceber: TfrmContasReceber
           Font.Style = []
           ParentFont = False
           TabOrder = 7
-          ExplicitLeft = 1000
+          ExplicitLeft = 1017
           object lblPagas: TLabel
             Left = 31
             Top = 16
@@ -5047,8 +5045,8 @@ inherited frmContasReceber: TfrmContasReceber
         Width = 1341
         Height = 409
         ExplicitTop = 137
-        ExplicitWidth = 1341
-        ExplicitHeight = 438
+        ExplicitWidth = 1337
+        ExplicitHeight = 408
         inherited DBGrid1: TDBGrid
           Width = 1339
           Height = 407
@@ -5157,9 +5155,8 @@ inherited frmContasReceber: TfrmContasReceber
         Color = clWindow
         ParentBackground = False
         TabOrder = 3
-        ExplicitLeft = 1
-        ExplicitTop = 39
-        ExplicitWidth = 1339
+        ExplicitTop = 545
+        ExplicitWidth = 1337
         object lblQtdCp: TLabel
           AlignWithMargins = True
           Left = 937

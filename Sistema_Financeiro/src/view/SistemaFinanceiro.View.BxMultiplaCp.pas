@@ -34,12 +34,31 @@ type
     lblData: TLabel;
     cbData: TComboBox;
     pnlValorSelecionadas: TPanel;
-    Edit1: TEdit;
+    edtValorSel: TEdit;
     lblValorSelecionadas: TLabel;
     pnlQtdSelecionadas: TPanel;
     lblQtdSelecionada: TLabel;
     edtQtdSelecionada: TEdit;
     DBGrid1: TDBGrid;
+    pnlQtdCp: TPanel;
+    lblQtdCp: TLabel;
+    edtQtdCp: TEdit;
+    Panel2: TPanel;
+    lblValorCps: TLabel;
+    edtValorTotCP: TEdit;
+    ImageList2: TImageList;
+    pnlInfPag: TPanel;
+    Label1: TLabel;
+    datePgto: TDateTimePicker;
+    lblValor: TLabel;
+    edtValor: TEdit;
+    checkDesconto: TCheckBox;
+    lblDesconto: TLabel;
+    edtPorcDesc: TEdit;
+    lblValorDesc: TLabel;
+    edtValorDesc: TEdit;
+    lblCheckDesc: TLabel;
+    lblInfPag: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
     procedure btnPesqFatClick(Sender: TObject);
     procedure edtFornecedorExit(Sender: TObject);
@@ -53,12 +72,36 @@ type
     procedure cbDataChange(Sender: TObject);
     procedure dateInicialChange(Sender: TObject);
     procedure dateFinalChange(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure checkDescontoClick(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtPorcDescKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtValorExit(Sender: TObject);
   private
     { Private declarations }
     procedure BuscaNomeFornecedor;
     procedure BuscaNomeFatCartao;
     procedure EditKeyPress(Sender: TObject; var Key: Char);
     procedure Pesquisar;
+    procedure CalcCpGrid;
+    procedure CalcQtdCpGrid;
+    procedure CalcQtdCpSel;
+
+    function CalcCpSel : Currency;
+    function CalcValorDesc : Currency;
+    function CalcPorcentDesc : Currency;
+
 
   public
     { Public declarations }
@@ -71,7 +114,105 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmCPagar;
+uses SistemaFinanceiro.Model.dmCPagar, FireDAC.Stan.Param,
+  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe;
+
+procedure TfrmBxMultiplaCP.btnConfirmarClick(Sender: TObject);
+var
+  CpDetalhe         : TModelCpDetalhe;
+  ValorAbater       : Currency;
+  ValorDesc         : Currency;
+  ValorCpCel        : Currency;
+  Contador          : Integer;
+  DtMaisAntiga      : TDateTime;
+  DtCompraSel       : TDateTime;
+  IndexDtMaisAntiga : Integer;
+
+begin
+
+  //  Validações dos campos
+  if datePgto.Date > Date then
+  begin
+
+    datePgto.SetFocus;
+    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
+
+  if DBGrid1.SelectedRows.Count > 0 then
+  begin
+
+    // Inicializa com o maior valor possível da data
+    DtMaisAntiga := MaxDateTime;
+    IndexDtMaisAntiga := -1;
+
+    for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
+    begin
+
+      DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[Contador];
+
+      //  Pega a data de compra
+      DtCompraSel := DBGrid1.DataSource.DataSet.FieldByName('DATA_COMPRA').AsDateTime;
+
+      if DtCompraSel < DtMaisAntiga then
+      begin
+
+        DtMaisAntiga := DtCompraSel;
+        IndexDtMaisAntiga := Contador;
+
+      end;
+
+    end;
+
+
+    if datePgto.Date < DtMaisAntiga then
+    begin
+
+      datePgto.SetFocus;
+      Application.MessageBox('A data de pagamento não pode ser menor que a data da compra!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+  end;
+
+
+  ValorAbater := 0;
+  ValorDesc   := 0;
+  ValorCpCel  := CalcCpSel;
+
+  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
+  begin
+    edtValor.SetFocus;
+    Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
+
+  if ValorAbater > ValorCpCel then
+  begin
+    edtValor.SetFocus;
+    Application.MessageBox('Valor pago não pode ser maior que o valor das parcelas!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
+
+  if checkDesconto.Checked then
+  begin
+
+    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > ValorCpCel) then
+    begin
+
+      edtValorDesc.SetFocus;
+      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+      abort;
+
+    end;
+
+  end;
+
+
+
+end;
 
 procedure TfrmBxMultiplaCP.btnPesqFatClick(Sender: TObject);
 begin
@@ -120,6 +261,11 @@ begin
 
   edtFornecedor.SetFocus;
 
+end;
+
+procedure TfrmBxMultiplaCP.btnSairClick(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TfrmBxMultiplaCP.btnVisualizarClick(Sender: TObject);
@@ -182,9 +328,207 @@ begin
 
 end;
 
+procedure TfrmBxMultiplaCP.CalcCpGrid;
+var
+  TotalCp: Currency;
+
+begin
+
+  TotalCp := 0;
+
+  //  Percorre e soma
+  with DBGrid1.DataSource.DataSet do
+  begin
+
+    //  Desativa o controle
+    DisableControls;
+
+    //  Posiciona no primeiro reg
+    First;
+
+    while not Eof do
+    begin
+
+      TotalCp := TotalCp + FieldByName('VALOR_PARCELA').AsCurrency;
+
+      Next;
+
+    end;
+
+    //  Reativa o controle
+    EnableControls;
+
+    edtValorTotCP.Text := TUtilitario.FormatoMoeda(TotalCp);
+
+  end;
+
+end;
+
+function TfrmBxMultiplaCP.CalcCpSel : Currency;
+var
+  TotalCp: Currency;
+  I : Integer;
+begin
+
+  TotalCp := 0.0;
+
+   if DBGrid1.SelectedRows.Count > 0 then
+   begin
+
+    for I := 0 to DBGrid1.SelectedRows.Count - 1 do
+    begin
+
+      DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[I];
+      TotalCp := TotalCp + DBGrid1.DataSource.DataSet.FieldByName('VALOR_PARCELA').AsCurrency;
+
+    end;
+
+   end;
+
+   edtValor.Text := CurrToStr(TotalCp);
+   Result := TotalCp;
+
+end;
+
+function TfrmBxMultiplaCP.CalcPorcentDesc: Currency;
+var
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+  ValorDesc : Currency;
+  ValorCp : Currency;
+
+begin
+
+  ValorCp     := CalcCpSel;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+  Result      := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if PorcentDesc > 0 then
+    begin
+
+      //  Calcula o valor do desconto
+      ValorDesc := (PorcentDesc / 100) * ValorCp;
+
+      //  Atribui o valor do desconto ao campo
+      edtValorDesc.Text := CurrToStr(ValorDesc);
+
+      //  Calcula o valor final
+      ValorFinal := ValorCp - ValorDesc;
+
+      //  retorna o valor final
+      Result := ValorFinal;
+
+    end;
+
+
+end;
+
+procedure TfrmBxMultiplaCP.CalcQtdCpGrid;
+var
+  QtdCp: Integer;
+
+begin
+
+  QtdCp := 0;
+
+  //  Realiza a conta
+  QtdCp := DBGrid1.DataSource.DataSet.RecordCount;
+
+  //  Exibe na label
+  edtQtdCp.Text := IntToStr(QtdCp);
+
+end;
+
+procedure TfrmBxMultiplaCP.CalcQtdCpSel;
+begin
+
+  if Assigned(DBGrid1.SelectedRows) then
+  begin
+
+    //  Exibe no edit
+    edtQtdSelecionada.Text := IntToStr(DBGrid1.SelectedRows.Count);
+
+  end;
+
+end;
+
+function TfrmBxMultiplaCP.CalcValorDesc: Currency;
+var
+  ValorCp     : Currency;
+  ValorDesc   : Currency;
+  ValorFinal : Currency;
+  PorcentDesc : Currency;
+
+begin
+
+  Result := 0;
+
+  ValorCp := CalcCpSel;
+  ValorDesc   := 0;
+  ValorFinal  := 0;
+  PorcentDesc := 0;
+
+  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
+  TryStrToCurr(edtValorDesc.Text, ValorDesc);
+
+  if ValorDesc > 0 then
+  begin
+
+    //  Calcula a porcentagem de desconto
+    PorcentDesc := (ValorDesc / ValorCp) * 100;
+
+    //  Atribui a porcentagem no campo
+    edtPorcDesc.Text := CurrToStr(PorcentDesc);
+
+    //  Calcula o valor final
+    ValorFinal := ValorCp - ValorDesc;
+
+    //  retorna o valor final
+    Result := ValorFinal;
+
+  end;
+
+end;
+
 procedure TfrmBxMultiplaCP.cbDataChange(Sender: TObject);
 begin
   Pesquisar;
+end;
+
+procedure TfrmBxMultiplaCP.checkDescontoClick(Sender: TObject);
+begin
+
+  if checkDesconto.Checked then
+  begin
+
+    //  Libera e mostra os campos do desconto
+    edtValorDesc.Enabled := True;
+    edtValorDesc.Visible := True;
+    edtPorcDesc.Visible  := True;
+    edtPorcDesc.Enabled  := True;
+    lblDesconto.Visible  := True;
+    lblValorDesc.Visible := True;
+
+  end
+  else
+  begin
+
+    //  Bloqueia e oculta os campos do desconto
+    edtValorDesc.Enabled := False;
+    edtValorDesc.Visible := False;
+    edtPorcDesc.Visible  := False;
+    edtPorcDesc.Enabled  := False;
+    lblDesconto.Visible  := False;
+    lblValorDesc.Visible := False;
+
+
+  end;
+
 end;
 
 procedure TfrmBxMultiplaCP.dateFinalChange(Sender: TObject);
@@ -197,23 +541,33 @@ begin
   Pesquisar;
 end;
 
+procedure TfrmBxMultiplaCP.DBGrid1CellClick(Column: TColumn);
+begin
+
+//  if Column.Field = dmCPagar.cdsBxMultiplaSELECIONADO then
+//  begin
+//
+//    dmCPagar.cdsBxMultipla.Edit;
+//
+//    dmCPagar.cdsBxMultiplaSELECIONADO.AsString := 'S';
+//
+////    dmCPagar.cdsBxMultipla.ApplyUpdates(0);
+////
+////    DBGrid1.Refresh;
+//
+//    CalcCpSel;
+//    CalcQtdCpSel;
+//
+//  end;
+
+  edtValorSel.Text := TUtilitario.FormatoMoeda(CalcCpSel);
+  CalcQtdCpSel;
+
+end;
+
 procedure TfrmBxMultiplaCP.DBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-var
-  CheckBoxState: Integer;
-  R: TRect;
-
 begin
-//  if (Column.Field.FieldName = 'CheckboxField') and (DataSourceBxMultiplaCP.DataSet.RecordCount > 0) then
-//  begin
-//    DBGrid1.Canvas.FillRect(Rect);
-//    R := Rect;
-//    InflateRect(R, -2, -2);
-//    CheckBoxState := 0;
-//    if DataSourceBxMultiplaCP.DataSet.FieldByName('SELECIONADO').AsBoolean then
-//      CheckBoxState := DFCS_CHECKED;
-//    DrawFrameControl(DBGrid1.Canvas.Handle, R, DFC_BUTTON, DFCS_BUTTONCHECK or CheckBoxState);
-//  end;
 
   //  Altera a cor das duplicatas vencidas
   if (not DBGrid1.DataSource.DataSet.IsEmpty) and
@@ -239,12 +593,44 @@ begin
 
   if (gdSelected in State) then
   begin
+
     DBGrid1.Canvas.Brush.Color := $00578B2E;  // Define a cor de fundo da célula selecionada
     DBGrid1.Canvas.Font.Color := clWhite;  // Define a cor do texto da célula selecionada
+
   end;
+
+
 
   // Desenha a célula com as propriedades de cor atualizadas
   DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+//  if Column.Field = DBGrid1.DataSource.DataSet.FieldByName('SELECIONADO') then
+//  begin
+//    Column.Font.Size := 1;
+//    Column.Font.Color := clWhite;
+//    if (DBGrid1.DataSource.DataSet.FieldByName('SELECIONADO').AsString = 'S') then
+//    begin
+//      ImageList2.Draw(DBGrid1.Canvas, Rect.Left + 10, Rect.Top + 1, 0);
+//    end
+//    else
+//    begin
+//      ImageList2.Draw(DBGrid1.Canvas, Rect.Left + 10, Rect.Top + 1, 1);
+//    end;
+//  end;
+
+end;
+
+procedure TfrmBxMultiplaCP.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+  if key = VK_DOWN then
+  begin
+
+    edtValorSel.Text := TUtilitario.FormatoMoeda(CalcCpSel);
+    CalcQtdCpSel;
+
+  end;
 
 end;
 
@@ -264,7 +650,12 @@ end;
 
 procedure TfrmBxMultiplaCP.edtCodFatCartaoChange(Sender: TObject);
 begin
-  Pesquisar;
+
+  if not ((GetKeyState(VK_BACK) and $8000) <> 0) then
+  begin
+    Pesquisar;
+  end;
+
 end;
 
 procedure TfrmBxMultiplaCP.edtCodFatCartaoExit(Sender: TObject);
@@ -292,7 +683,12 @@ end;
 
 procedure TfrmBxMultiplaCP.edtFornecedorChange(Sender: TObject);
 begin
-  Pesquisar;
+
+  if not ((GetKeyState(VK_BACK) and $8000) <> 0) then
+  begin
+    Pesquisar;
+  end;
+
 end;
 
 procedure TfrmBxMultiplaCP.edtFornecedorExit(Sender: TObject);
@@ -319,10 +715,39 @@ begin
 
 end;
 
+procedure TfrmBxMultiplaCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := CurrToStr(CalcPorcentDesc);
+end;
+
+procedure TfrmBxMultiplaCP.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := CurrToStr(CalcPorcentDesc);
+end;
+
+procedure TfrmBxMultiplaCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := CurrToStr(CalcValorDesc);
+end;
+
+procedure TfrmBxMultiplaCP.edtValorDescKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  edtValor.Text := CurrToStr(CalcValorDesc);
+end;
+
+procedure TfrmBxMultiplaCP.edtValorExit(Sender: TObject);
+begin
+  edtValor.Text := TUtilitario.FormatarValor(Trim(edtValor.Text));
+end;
+
 procedure TfrmBxMultiplaCP.FormCreate(Sender: TObject);
 var
   I : Integer;
-  CheckBoxColumn: TColumn;
+
 begin
 
   //  Percorre os componentes TEdit
@@ -340,20 +765,19 @@ begin
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
-//
-//  // Adicionando um novo campo ao DataSet
-//  dmCPagar.FDQueryBxMultipla.Append;
-//  dmCPagar.FDQueryBxMultipla.FieldDefs.Add('SELECIONADO', ftBoolean, 0, False);
-//  dmCPagar.FDQueryBxMultipla.CreateDataSet;
-//  dmCPagar.FDQueryBxMultipla.Open();
-//
-//  // Adicionando uma nova coluna ao DBGrid
-//  CheckBoxColumn := DBGrid1.Columns.Add;
-//  CheckBoxColumn.FieldName := 'SELECIONADO';
-//  CheckBoxColumn.Title.Caption := 'Novo Checkbox';
-//
-//  // Personalizando o evento OnDrawColumnCell
-//  DBGrid1.OnDrawColumnCell := DBGrid1DrawColumnCell;
+
+  datePgto.Date := Now;
+
+end;
+
+procedure TfrmBxMultiplaCP.FormShow(Sender: TObject);
+begin
+
+  //  Fecha o dataset para limpar o dbgrid;
+  if Assigned(DataSourceBxMultiplaCP) and Assigned(DataSourceBxMultiplaCP.DataSet) then
+  begin
+    DataSourceBxMultiplaCP.DataSet.Close; // Fecha o conjunto de dados
+  end;
 
 end;
 
@@ -361,7 +785,6 @@ procedure TfrmBxMultiplaCP.Pesquisar;
 var
   LFiltro    : String;
   LOrdem     : String;
-  SQL        : String;
 
 begin
 
@@ -411,11 +834,11 @@ begin
     end;
 
 
-//    //  Criando os parametros
-//    dmCPagar.FDQueryBxMultipla.Params.CreateParam(ftDate, 'DTINI', ptInput);
-//    dmCPagar.FDQueryBxMultipla.ParamByName('DTINI').AsDate := dateInicial.Date;
-//    dmCPagar.FDQueryBxMultipla.Params.CreateParam(ftDate, 'DTFIM', ptInput);
-//    dmCPagar.FDQueryBxMultipla.ParamByName('DTFIM').AsDate := dateFinal.Date;
+    //  Criando os parametros
+    dmCPagar.cdsBxMultipla.Params.CreateParam(ftDate, 'DTINI', ptInput);
+    dmCPagar.cdsBxMultipla.ParamByName('DTINI').AsDateTime := dateInicial.Date;
+    dmCPagar.cdsBxMultipla.Params.CreateParam(ftDate, 'DTFIM', ptInput);
+    dmCPagar.cdsBxMultipla.ParamByName('DTFIM').AsDateTime := dateFinal.Date;
 
   end;
 
@@ -426,8 +849,8 @@ begin
     LFiltro := LFiltro + ' AND CP.ID_FORNECEDOR = :ID ';
 
     //  Criando os parametros
-//    dmCPagar.FDQueryBxMultipla.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
-//    dmCPagar.FDQueryBxMultipla.ParamByName('ID').AsString := Trim(edtFornecedor.Text);
+    dmCPagar.cdsBxMultipla.Params.CreateParam(TFieldType.ftString, 'ID', TParamType.ptInput);
+    dmCPagar.cdsBxMultipla.ParamByName('ID').AsString := Trim(edtFornecedor.Text);
 
   end;
 
@@ -438,52 +861,23 @@ begin
     LFiltro := LFiltro + ' AND CP.ID_FATURA = :ID_FT ';
 
     //  Criando os parametros
-//    dmCPagar.FDQueryBxMultipla.Params.CreateParam(TFieldType.ftString, 'ID_FT', TParamType.ptInput);
-//    dmCPagar.FDQueryBxMultipla.ParamByName('ID_FT').AsString := Trim(edtCodFatCartao.Text);
+    dmCPagar.cdsBxMultipla.Params.CreateParam(TFieldType.ftString, 'ID_FT', TParamType.ptInput);
+    dmCPagar.cdsBxMultipla.ParamByName('ID_FT').AsString := Trim(edtCodFatCartao.Text);
 
   end;
 
   //  Ordem de pesquisa
   lOrdem := ' ORDER BY CP.DATA_VENCIMENTO';
 
+  dmCPagar.cdsBxMultipla.Close;
+  dmCPagar.cdsBxMultipla.CommandText := 'SELECT CP.*, '''' SELECIONADO, F.RAZAO_SOCIAL FROM CONTAS_PAGAR CP ' +
+                                    'LEFT JOIN FORNECEDORES F ON CP.ID_FORNECEDOR = F.ID_FORNEC WHERE STATUS = ''A'' ' +
+                                     LFiltro + lOrdem;
+  dmCPagar.cdsBxMultipla.Open;
 
-  SQL := 'SELECT CP.*, F.RAZAO_SOCIAL FROM CONTAS_PAGAR CP ' +
-         'LEFT JOIN FORNECEDORES F ON CP.ID_FORNECEDOR = F.ID_FORNEC WHERE 1 = 1 ' +
-         LFiltro + LOrdem ;
-
-  dmCPagar.FDQueryBxMultipla.Close;
-  dmCPagar.FDQueryBxMultipla.SQL.Clear;
-  dmCPagar.FDQueryBxMultipla.SQL.Add(SQL);
-
-
-  //  Criando os parametros
-  if (dateInicial.Checked) and (dateFinal.Checked) then
-  begin
-
-
-    dmCPagar.FDQueryBxMultipla.ParamByName('DTINI').AsDate := dateInicial.Date;
-    dmCPagar.FDQueryBxMultipla.ParamByName('DTFIM').AsDate := dateFinal.Date;
-
-  end;
-
-  if Trim(edtFornecedor.Text) <> '' then
-  begin
-
-    dmCPagar.FDQueryBxMultipla.ParamByName('ID').AsString := Trim(edtFornecedor.Text);
-
-  end;
-
-  if Trim(edtCodFatCartao.Text) <> '' then
-  begin
-
-    dmCPagar.FDQueryBxMultipla.ParamByName('ID_FT').AsString := Trim(edtCodFatCartao.Text);
-
-  end;
-
-  dmCPagar.FDQueryBxMultipla.Prepare;
-  dmCPagar.FDQueryBxMultipla.Open;
-
-
+  //  Calcula a quantidade e valor
+  CalcCpGrid;
+  CalcQtdCpGrid;
 
 end;
 

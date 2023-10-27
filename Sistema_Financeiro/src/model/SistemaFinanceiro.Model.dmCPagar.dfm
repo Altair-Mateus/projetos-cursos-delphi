@@ -242,18 +242,21 @@ object dmCPagar: TdmCPagar
       FieldName = 'VALOR_PARCELA'
       Origin = 'VALOR_PARCELA'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object FDQueryBxMultiplaVALOR_COMPRA: TBCDField
       FieldName = 'VALOR_COMPRA'
       Origin = 'VALOR_COMPRA'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object FDQueryBxMultiplaVALOR_ABATIDO: TBCDField
       FieldName = 'VALOR_ABATIDO'
       Origin = 'VALOR_ABATIDO'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object FDQueryBxMultiplaDATA_COMPRA: TDateField
@@ -309,6 +312,92 @@ object dmCPagar: TdmCPagar
     object FDQueryBxMultiplaRAZAO_SOCIAL: TWideStringField
       FieldName = 'RAZAO_SOCIAL'
       Size = 200
+    end
+  end
+  object cdsBxMultipla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProviderCPagar'
+    Left = 536
+    Top = 296
+    object cdsBxMultiplaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsBxMultiplaNUMERO_DOC: TWideStringField
+      FieldName = 'NUMERO_DOC'
+    end
+    object cdsBxMultiplaDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 200
+    end
+    object cdsBxMultiplaPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Required = True
+    end
+    object cdsBxMultiplaVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Required = True
+      Precision = 18
+    end
+    object cdsBxMultiplaVALOR_COMPRA: TBCDField
+      FieldName = 'VALOR_COMPRA'
+      Required = True
+      Precision = 18
+    end
+    object cdsBxMultiplaVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Required = True
+      Precision = 18
+    end
+    object cdsBxMultiplaDATA_COMPRA: TDateField
+      FieldName = 'DATA_COMPRA'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_VENCIMENTO: TDateField
+      FieldName = 'DATA_VENCIMENTO'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_PAGAMENTO: TDateField
+      FieldName = 'DATA_PAGAMENTO'
+    end
+    object cdsBxMultiplaSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Required = True
+      Size = 1
+    end
+    object cdsBxMultiplaPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object cdsBxMultiplaCP_ORIGEM: TIntegerField
+      FieldName = 'CP_ORIGEM'
+    end
+    object cdsBxMultiplaID_FORNECEDOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR'
+      Required = True
+    end
+    object cdsBxMultiplaFATURA_CART: TWideStringField
+      FieldName = 'FATURA_CART'
+      Required = True
+      Size = 1
+    end
+    object cdsBxMultiplaID_FATURA: TIntegerField
+      FieldName = 'ID_FATURA'
+    end
+    object cdsBxMultiplaRAZAO_SOCIAL: TWideStringField
+      FieldName = 'RAZAO_SOCIAL'
+      ReadOnly = True
+      Size = 200
+    end
+    object cdsBxMultiplaSELECIONADO: TWideStringField
+      FieldName = 'SELECIONADO'
+      Size = 1
     end
   end
 end

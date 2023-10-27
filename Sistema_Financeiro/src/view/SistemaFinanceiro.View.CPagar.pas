@@ -111,6 +111,7 @@ type
     lblTotalCpGrid: TLabel;
     lblTQtdCo: TLabel;
     lblTValorCp: TLabel;
+    CheckFatVirada: TCheckBox;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -358,6 +359,7 @@ begin
   edtDiaFixoVcto.Enabled     := False;
   checkDiaFixoVcto.Checked   := False;
   checkDiaFixoVcto.Enabled   := True;
+  CheckFatVirada.Checked     := False;
   btnGerar.Enabled           := True;
   btnLimpar.Enabled          := False;
   toggleFatura.State         := tssOff;
@@ -367,6 +369,7 @@ begin
   edtValorParcela.ReadOnly   := True;
   lblNomeFornecedor.Visible  := False;
   lblNomeFatCartao.Visible   := False;
+
 
 end;
 
@@ -1048,6 +1051,7 @@ begin
   toggleParcelamento.State    := tssOff;
   CardPanelParcela.ActiveCard := cardParcelaUnica;
   edtParcela.ReadOnly         := True;
+  CheckFatVirada.Visible      := False;
 
   edtValorParcela.ReadOnly := False;
 
@@ -1306,6 +1310,7 @@ var
   ValorParcela  : Currency;
   ValorResiduo  : Currency;
   Contador      : Integer;
+  AuxContador   : Integer;
   DiaFixoVcto   : Integer;
 
 begin
@@ -1369,6 +1374,8 @@ begin
   //  Esvaziando data set
   cdsParcelas.EmptyDataSet;
 
+  AuxContador := 1;
+
   for Contador := 1 to QtdParcelas do
   begin
 
@@ -1389,7 +1396,14 @@ begin
 
       FatCartaoAtiva;
 
-      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, 30 *  Contador)), DataVctoFat);
+      if (CheckFatVirada.Checked) and (AuxContador = 1) then
+      begin
+
+        Inc(AuxContador);
+
+      end;
+
+      cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  AuxContador)), MonthOf(IncDay(dateCompra.Date, 30 *  AuxContador)), DataVctoFat);
 
     end
     else
@@ -1399,12 +1413,12 @@ begin
       if checkDiaFixoVcto.Checked then
       begin
 
-        cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  Contador)), MonthOf(IncDay(dateCompra.Date, 30 *  Contador)), DiaFixoVcto);
+        cdsParcelasVENCIMENTO.AsDateTime := EncodeDate(YearOf(IncDay(dateCompra.Date, IntervaloDias *  AuxContador)), MonthOf(IncDay(dateCompra.Date, 30 *  AuxContador)), DiaFixoVcto);
 
       end
       else
       begin
-        cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  Contador);
+        cdsParcelasVENCIMENTO.AsDateTime := IncDay(dateCompra.Date, IntervaloDias *  AuxContador);
       end;
 
     end;
@@ -1417,6 +1431,8 @@ begin
     end;
 
     cdsParcelas.Post;
+
+    Inc(AuxContador);
 
   end;
 
@@ -1697,6 +1713,7 @@ begin
     end;
 
     pnlAviso.Visible := False;
+    CheckFatVirada.Visible := False;
 
   end
     else if toggleFatura.State = tssOn then
@@ -1710,6 +1727,9 @@ begin
           edtCodFatCartao.SetFocus;
 
           pnlAviso.Visible := True;
+
+          if not (dmCPagar.cdsCPagar.State in [dsEdit]) then
+            CheckFatVirada.Visible := True;
 
          end;
 

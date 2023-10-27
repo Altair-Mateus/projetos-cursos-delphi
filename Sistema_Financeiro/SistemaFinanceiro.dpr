@@ -54,6 +54,7 @@ uses
   SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCP};
 
 {$R *.res}
+
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
