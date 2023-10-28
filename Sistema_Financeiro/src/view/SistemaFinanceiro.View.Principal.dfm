@@ -47,7 +47,7 @@ object frmPrincipal: TfrmPrincipal
       Color = 51942
       ParentBackground = False
       TabOrder = 0
-      object lblSaldoParcial: TLabel
+      object lblSaldoCx: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 15
@@ -56,7 +56,7 @@ object frmPrincipal: TfrmPrincipal
         Margins.Top = 15
         Align = alTop
         Alignment = taCenter
-        Caption = 'Saldo Parcial do Caixa'
+        Caption = 'Saldo do Caixa'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -65,7 +65,7 @@ object frmPrincipal: TfrmPrincipal
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 183
+        ExplicitWidth = 123
       end
       object lblValor: TLabel
         Left = 190
@@ -2503,13 +2503,13 @@ object frmPrincipal: TfrmPrincipal
       end
       object lblData: TLabel
         AlignWithMargins = True
-        Left = 150
+        Left = 140
         Top = 41
-        Width = 139
+        Width = 149
         Height = 13
         Margins.Top = 15
         Alignment = taRightJustify
-        Caption = '1'#186' ao '#218'ltimo dia do m'#234's atual'
+        Caption = #218'ltimos dois meses + m'#234's atual'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite

@@ -36,7 +36,7 @@ type
     N1: TMenuItem;
     ContasaReceber1: TMenuItem;
     pnlSaldoParcial: TPanel;
-    lblSaldoParcial: TLabel;
+    lblSaldoCx: TLabel;
     lblValor: TLabel;
     imgLucro: TImage;
     imgPerda: TImage;
@@ -584,12 +584,12 @@ var
 
 begin
 
-  DataInicial := StartOfTheMonth(Now);
+  DataInicial := StartOfTheMonth(IncMonth(Now, -2));
   DataFinal   := EndOfTheMonth(Now);
   ResumoCaixa := dmCaixa.ResumoCaixa(DataInicial, DataFinal);
   lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
 
-  if ResumoCaixa.SaldoParcial > 0 then
+  if ResumoCaixa.SaldoFinal > 0 then
   begin
 
     imgLucro.Visible  := True;
@@ -598,7 +598,7 @@ begin
     pnlSaldoParcial.Color :=  $006FE76E;
 
   end
-    else if ResumoCaixa.SaldoParcial < 0 then
+    else if ResumoCaixa.SaldoFinal < 0 then
     begin
 
       imgLucro.Visible  := False;
