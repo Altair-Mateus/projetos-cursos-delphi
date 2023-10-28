@@ -55,8 +55,8 @@ type
         property Parcial        : String read FParcial write SetParcial;
         property CpOrigem       : Integer read FCpOrigem write SetCpOrigem;
         property IdFornecedor   : Integer read FIdFornecedor write SetIdFornecedor;
-        property FatCartao : String read FFatCartao write SetFatCartao;
-        property IdFatCartao : Integer read FIdFatCartao write SetIdFatCartao;
+        property FatCartao      : String read FFatCartao write SetFatCartao;
+        property IdFatCartao    : Integer read FIdFatCartao write SetIdFatCartao;
 
 
 

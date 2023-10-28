@@ -240,7 +240,6 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       Height = 219
       TabStop = False
       Align = alClient
-      DataSource = dsFrPgto
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -1936,6 +1935,11 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
+  object dsFrPgto: TDataSource
+    DataSet = cdsFrPgto
+    Left = 323
+    Top = 281
+  end
   object cdsFrPgto: TClientDataSet
     PersistDataPacket.Data = {
       670000009619E0BD01000000180000000300000000000300000067000549445F
@@ -1945,8 +1949,8 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 336
-    Top = 329
+    Left = 323
+    Top = 337
     object cdsFrPgtoID_FR: TIntegerField
       FieldName = 'ID_FR'
     end
@@ -1958,10 +1962,5 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       FieldName = 'VALORPAGO'
       DisplayFormat = 'R$ #,##0.00'
     end
-  end
-  object dsFrPgto: TDataSource
-    DataSet = cdsFrPgto
-    Left = 328
-    Top = 273
   end
 end

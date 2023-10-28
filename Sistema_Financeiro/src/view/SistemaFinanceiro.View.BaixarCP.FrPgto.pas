@@ -29,8 +29,8 @@ type
     btnLimpar: TButton;
     pnlGrid: TPanel;
     DBGrid1: TDBGrid;
-    cdsFrPgto: TClientDataSet;
     dsFrPgto: TDataSource;
+    cdsFrPgto: TClientDataSet;
     cdsFrPgtoID_FR: TIntegerField;
     cdsFrPgtoNOME: TWideStringField;
     cdsFrPgtoVALORPAGO: TCurrencyField;

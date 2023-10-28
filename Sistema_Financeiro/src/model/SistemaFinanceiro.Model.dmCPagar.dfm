@@ -210,117 +210,14 @@ object dmCPagar: TdmCPagar
       Precision = 18
     end
   end
-  object FDQueryBxMultipla: TFDQuery
-    Connection = DataModule1.FDConnection
-    SQL.Strings = (
-      'SELECT CP.*, F.RAZAO_SOCIAL FROM CONTAS_PAGAR CP'
-      'LEFT JOIN FORNECEDORES F '
-      'ON CP.ID_FORNECEDOR = F.ID_FORNEC;')
-    Left = 400
-    Top = 296
-    object FDQueryBxMultiplaID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object FDQueryBxMultiplaNUMERO_DOC: TWideStringField
-      FieldName = 'NUMERO_DOC'
-      Origin = 'NUMERO_DOC'
-    end
-    object FDQueryBxMultiplaDESCRICAO: TWideStringField
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      Size = 200
-    end
-    object FDQueryBxMultiplaPARCELA: TIntegerField
-      FieldName = 'PARCELA'
-      Origin = 'PARCELA'
-      Required = True
-    end
-    object FDQueryBxMultiplaVALOR_PARCELA: TBCDField
-      FieldName = 'VALOR_PARCELA'
-      Origin = 'VALOR_PARCELA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-    end
-    object FDQueryBxMultiplaVALOR_COMPRA: TBCDField
-      FieldName = 'VALOR_COMPRA'
-      Origin = 'VALOR_COMPRA'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-    end
-    object FDQueryBxMultiplaVALOR_ABATIDO: TBCDField
-      FieldName = 'VALOR_ABATIDO'
-      Origin = 'VALOR_ABATIDO'
-      Required = True
-      DisplayFormat = 'R$ #,##0.00'
-      Precision = 18
-    end
-    object FDQueryBxMultiplaDATA_COMPRA: TDateField
-      FieldName = 'DATA_COMPRA'
-      Origin = 'DATA_COMPRA'
-      Required = True
-    end
-    object FDQueryBxMultiplaDATA_CADASTRO: TDateField
-      FieldName = 'DATA_CADASTRO'
-      Origin = 'DATA_CADASTRO'
-      Required = True
-    end
-    object FDQueryBxMultiplaDATA_VENCIMENTO: TDateField
-      FieldName = 'DATA_VENCIMENTO'
-      Origin = 'DATA_VENCIMENTO'
-      Required = True
-    end
-    object FDQueryBxMultiplaDATA_PAGAMENTO: TDateField
-      FieldName = 'DATA_PAGAMENTO'
-      Origin = 'DATA_PAGAMENTO'
-    end
-    object FDQueryBxMultiplaSTATUS: TWideStringField
-      FieldName = 'STATUS'
-      Origin = 'STATUS'
-      Required = True
-      Size = 1
-    end
-    object FDQueryBxMultiplaPARCIAL: TWideStringField
-      FieldName = 'PARCIAL'
-      Origin = 'PARCIAL'
-      Required = True
-      Size = 1
-    end
-    object FDQueryBxMultiplaCP_ORIGEM: TIntegerField
-      FieldName = 'CP_ORIGEM'
-      Origin = 'CP_ORIGEM'
-    end
-    object FDQueryBxMultiplaID_FORNECEDOR: TIntegerField
-      FieldName = 'ID_FORNECEDOR'
-      Origin = 'ID_FORNECEDOR'
-      Required = True
-    end
-    object FDQueryBxMultiplaFATURA_CART: TWideStringField
-      FieldName = 'FATURA_CART'
-      Origin = 'FATURA_CART'
-      Required = True
-      Size = 1
-    end
-    object FDQueryBxMultiplaID_FATURA: TIntegerField
-      FieldName = 'ID_FATURA'
-      Origin = 'ID_FATURA'
-    end
-    object FDQueryBxMultiplaRAZAO_SOCIAL: TWideStringField
-      FieldName = 'RAZAO_SOCIAL'
-      Size = 200
-    end
-  end
   object cdsBxMultipla: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProviderCPagar'
-    Left = 536
+    Left = 448
     Top = 296
     object cdsBxMultiplaID: TIntegerField
+      Alignment = taLeftJustify
       FieldName = 'ID'
       Required = True
     end
@@ -332,37 +229,45 @@ object dmCPagar: TdmCPagar
       Size = 200
     end
     object cdsBxMultiplaPARCELA: TIntegerField
+      Alignment = taCenter
       FieldName = 'PARCELA'
       Required = True
     end
     object cdsBxMultiplaVALOR_PARCELA: TBCDField
       FieldName = 'VALOR_PARCELA'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object cdsBxMultiplaVALOR_COMPRA: TBCDField
       FieldName = 'VALOR_COMPRA'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object cdsBxMultiplaVALOR_ABATIDO: TBCDField
       FieldName = 'VALOR_ABATIDO'
       Required = True
+      DisplayFormat = 'R$ #,##0.00'
       Precision = 18
     end
     object cdsBxMultiplaDATA_COMPRA: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_COMPRA'
       Required = True
     end
     object cdsBxMultiplaDATA_CADASTRO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_CADASTRO'
       Required = True
     end
     object cdsBxMultiplaDATA_VENCIMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_VENCIMENTO'
       Required = True
     end
     object cdsBxMultiplaDATA_PAGAMENTO: TDateField
+      Alignment = taCenter
       FieldName = 'DATA_PAGAMENTO'
     end
     object cdsBxMultiplaSTATUS: TWideStringField
@@ -379,6 +284,7 @@ object dmCPagar: TdmCPagar
       FieldName = 'CP_ORIGEM'
     end
     object cdsBxMultiplaID_FORNECEDOR: TIntegerField
+      Alignment = taCenter
       FieldName = 'ID_FORNECEDOR'
       Required = True
     end

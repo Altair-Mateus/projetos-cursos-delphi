@@ -28,8 +28,8 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
-    function ResumoCaixa(DataInicial, DataFinal : TDate ) : TModelResumoCaixa;
-    function GeraId : Integer;
+    function  ResumoCaixa(DataInicial, DataFinal : TDate ) : TModelResumoCaixa;
+    function  GeraId : Integer;
     procedure GravarLancamento(LancCaixa : TModelLancamentoCaixa; SQLGravar : TFDQuery);
 
   end;

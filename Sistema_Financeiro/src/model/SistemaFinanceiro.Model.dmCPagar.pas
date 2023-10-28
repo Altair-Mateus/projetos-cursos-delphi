@@ -47,25 +47,6 @@ type
     FDQueryCpDetalhesUSUARIO: TIntegerField;
     cdsCPagarFATURA_CART: TWideStringField;
     cdsCPagarID_FATURA: TIntegerField;
-    FDQueryBxMultipla: TFDQuery;
-    FDQueryBxMultiplaID: TIntegerField;
-    FDQueryBxMultiplaNUMERO_DOC: TWideStringField;
-    FDQueryBxMultiplaDESCRICAO: TWideStringField;
-    FDQueryBxMultiplaPARCELA: TIntegerField;
-    FDQueryBxMultiplaVALOR_PARCELA: TBCDField;
-    FDQueryBxMultiplaVALOR_COMPRA: TBCDField;
-    FDQueryBxMultiplaVALOR_ABATIDO: TBCDField;
-    FDQueryBxMultiplaDATA_COMPRA: TDateField;
-    FDQueryBxMultiplaDATA_CADASTRO: TDateField;
-    FDQueryBxMultiplaDATA_VENCIMENTO: TDateField;
-    FDQueryBxMultiplaDATA_PAGAMENTO: TDateField;
-    FDQueryBxMultiplaSTATUS: TWideStringField;
-    FDQueryBxMultiplaPARCIAL: TWideStringField;
-    FDQueryBxMultiplaCP_ORIGEM: TIntegerField;
-    FDQueryBxMultiplaID_FORNECEDOR: TIntegerField;
-    FDQueryBxMultiplaFATURA_CART: TWideStringField;
-    FDQueryBxMultiplaID_FATURA: TIntegerField;
-    FDQueryBxMultiplaRAZAO_SOCIAL: TWideStringField;
     cdsBxMultipla: TClientDataSet;
     cdsBxMultiplaID: TIntegerField;
     cdsBxMultiplaNUMERO_DOC: TWideStringField;
@@ -191,7 +172,11 @@ begin
         cdsCPagarCP_ORIGEM.AsString         := ContaPagar.ID;
         cdsCPagarID_FORNECEDOR.AsInteger    := ContaPagar.IdFornecedor;
         cdsCPagarFATURA_CART.AsString       := ContaPagar.FatCartao;
-        cdsCPagarID_FATURA.AsInteger        := ContaPagar.IdFatCartao;
+
+        if ContaPagar.FatCartao = 'S' then
+        begin
+          cdsCPagarID_FATURA.AsInteger        := ContaPagar.IdFatCartao;
+        end;
 
         //  Gravando no BD
         cdsCPagar.Post;

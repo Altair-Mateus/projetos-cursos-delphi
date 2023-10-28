@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
   System.ImageList, Vcl.ImgList, SistemaFinanceiro.View.Fornecedores,
   SistemaFinanceiro.View.FaturaCartao, SistemaFinanceiro.Model.dmFornecedores,
-  SistemaFinanceiro.Model.dmFaturaCartao, Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils;
+  SistemaFinanceiro.Model.dmFaturaCartao, Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils,
+  Datasnap.DBClient, SistemaFinanceiro.View.FrPgto;
 
 type
   TfrmBxMultiplaCP = class(TForm)
@@ -48,17 +49,17 @@ type
     edtValorTotCP: TEdit;
     ImageList2: TImageList;
     pnlInfPag: TPanel;
+    lblInfPag: TLabel;
     Label1: TLabel;
-    datePgto: TDateTimePicker;
     lblValor: TLabel;
+    lblDesconto: TLabel;
+    lblValorDesc: TLabel;
+    datePgto: TDateTimePicker;
     edtValor: TEdit;
     checkDesconto: TCheckBox;
-    lblDesconto: TLabel;
     edtPorcDesc: TEdit;
-    lblValorDesc: TLabel;
     edtValorDesc: TEdit;
     lblCheckDesc: TLabel;
-    lblInfPag: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
     procedure btnPesqFatClick(Sender: TObject);
     procedure edtFornecedorExit(Sender: TObject);
@@ -88,6 +89,7 @@ type
     procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtValorExit(Sender: TObject);
+
   private
     { Private declarations }
     procedure BuscaNomeFornecedor;
@@ -115,11 +117,14 @@ implementation
 {$R *.dfm}
 
 uses SistemaFinanceiro.Model.dmCPagar, FireDAC.Stan.Param,
-  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe;
+  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe,
+  SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmUsuarios;
+
 
 procedure TfrmBxMultiplaCP.btnConfirmarClick(Sender: TObject);
 var
   CpDetalhe         : TModelCpDetalhe;
+  ValorCpSel        : Currency;
   ValorAbater       : Currency;
   ValorDesc         : Currency;
   ValorCpCel        : Currency;
@@ -178,6 +183,7 @@ begin
   end;
 
 
+
   ValorAbater := 0;
   ValorDesc   := 0;
   ValorCpCel  := CalcCpSel;
@@ -210,7 +216,135 @@ begin
 
   end;
 
+  //  Forma de pgto  a implementar
+//  try
+//
+//    //  Cria o form
+//    frmFrPgtoBaixaCp:= TfrmFrPgtoBaixaCp.Create(Self);
+//
+//    //  Passa as informações para a tela de pgto
+//    frmFrPgtoBaixaCp.FrPgtoCp(FID, ValorAbater);
+//
+//    //  Exibe o form
+//    frmFrPgtoBaixaCp.ShowModal;
+//
+//  except on E : Exception do
+//
+//  Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
+//
+//    end;
+//
+//  //  Verifica se deu tudo certo com as formas de pgto
+//  if frmFrPgtoBaixaCp.ModalResult <> mrOk then
+//  begin
+//    abort;
+//  end
+//  else
+//  begin
+//    FreeAndNil(frmFrPgtoBaixaCp);
+//  end;
 
+
+  if DBGrid1.SelectedRows.Count > 0 then
+  begin
+
+    for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
+    begin
+
+      DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[Contador];
+
+      CpDetalhe := TModelCpDetalhe.Create;
+      ValorCpSel := 0;
+
+      try
+
+        //  Pegando o valor da conta
+        ValorCpSel := DBGrid1.DataSource.DataSet.FieldByName('VALOR_PARCELA').AsCurrency;
+
+        CpDetalhe.IdCP      := DBGrid1.DataSource.DataSet.FieldByName('ID').AsInteger;
+        CpDetalhe.Detalhes  := 'CP baixada pela rotina de Baixa Múltipla';
+        CpDetalhe.Data      := datePgto.Date;
+        CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.Id;
+
+        //  Valores pagos nas contas
+        //  Aplica o desconto somente na primeira CP selecionada
+        if (Contador = 0) then
+        begin
+
+          CpDetalhe.ValorDesc := ValorDesc;
+          CpDetalhe.Valor     := ValorcpSel - ValorDesc;
+
+        end
+        else
+        begin
+
+          if (ValorAbater - ValorCpSel) > 0 then
+          begin
+
+             //  Se for maior que 0 vai baixar a conta total
+            CpDetalhe.Valor := ValorCpSel;
+
+          end
+          else if ValorAbater > 0 then
+          begin
+
+            //  Se ainda tiver ValorAbater mas não o suficiente
+            //  para baicar toda a cp, ira baixar apenas o valor
+            //  abater e o restante será gerado uma CP Parcial
+            CpDetalhe.Valor := ValorAbater;
+
+          end
+          else
+          begin
+
+            //  Caso ainda tenha alguma CP selecionada porem
+            //  ValorAbater já está zerado irá baixar a conta
+            //  e irá gerar uma CP Parcial com o valor total
+            CpDetalhe.Valor := 0;
+
+          end;
+
+          showmessage('Valor abater antes' +  currtostr(valorabater));
+
+          //  Se estiver na Bx da 1ª CP e tiver desconto
+          //  Ira somar o valordesc no valor abater para
+          //  que não acabe gerando duplicatas parcias
+          //  sem precisar realmente gerar
+          if (Contador = 0) and (ValorDesc > 0) then
+          begin
+            ValorAbater := ValorAbater + ValorDesc;
+          end;
+
+        end;
+
+        //  Calcula o restante do valorabater
+        ValorAbater := ValorAbater - ValorCpSel;
+
+        showmessage('Valor abater depois' +  currtostr(valorabater));
+
+        try
+
+          dmCPagar.BaixarCP(CpDetalhe);
+          ShowMessage('entrou na baixa')
+
+        except on E : Exception do
+          Application.MessageBox(PWideChar(E.Message), 'Erro ao baixar documento!', MB_OK + MB_ICONWARNING);
+        end;
+
+
+      finally
+
+        CpDetalhe.Free;
+
+      end;
+
+    end;
+
+    Application.MessageBox('Contas baixadas com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+  end;
+
+  Pesquisar;
 
 end;
 
@@ -237,6 +371,7 @@ begin
   end;
 
 end;
+
 
 procedure TfrmBxMultiplaCP.btnPesquisaFornecedorClick(Sender: TObject);
 begin
@@ -328,6 +463,8 @@ begin
 
 end;
 
+
+
 procedure TfrmBxMultiplaCP.CalcCpGrid;
 var
   TotalCp: Currency;
@@ -368,6 +505,7 @@ function TfrmBxMultiplaCP.CalcCpSel : Currency;
 var
   TotalCp: Currency;
   I : Integer;
+
 begin
 
   TotalCp := 0.0;
@@ -385,7 +523,6 @@ begin
 
    end;
 
-   edtValor.Text := CurrToStr(TotalCp);
    Result := TotalCp;
 
 end;
@@ -562,6 +699,7 @@ begin
 
   edtValorSel.Text := TUtilitario.FormatoMoeda(CalcCpSel);
   CalcQtdCpSel;
+  edtValor.Text := Currtostr(CalccpSel);
 
 end;
 
@@ -575,20 +713,6 @@ begin
       and (DBGrid1.DataSource.DataSet.FieldByName('STATUS').AsString = 'A')then
   begin
     DBGrid1.Canvas.Font.Color := clRed;  // Define a cor do texto da célula
-  end;
-
-  if not Odd(DBGrid1.DataSource.DataSet.RecNo) then
-  begin
-
-    if not(gdSelected in State) then
-    begin
-
-      TDBGrid(Sender).Canvas.Brush.Color := $00F6F5F5;
-      TDBGrid(Sender).Canvas.FillRect(Rect);
-
-    end;
-
-
   end;
 
   if (gdSelected in State) then
@@ -681,6 +805,8 @@ begin
 
 end;
 
+
+
 procedure TfrmBxMultiplaCP.edtFornecedorChange(Sender: TObject);
 begin
 
@@ -743,6 +869,7 @@ procedure TfrmBxMultiplaCP.edtValorExit(Sender: TObject);
 begin
   edtValor.Text := TUtilitario.FormatarValor(Trim(edtValor.Text));
 end;
+
 
 procedure TfrmBxMultiplaCP.FormCreate(Sender: TObject);
 var
@@ -820,7 +947,7 @@ begin
   LOrdem      := '';
 
   //  Limpa os parametros do cds
-  dmCPagar.FDQueryBxMultipla.Params.Clear;
+  dmCPagar.cdsBxMultipla.Params.Clear;
 
   //  Pesquisa por data
   if (dateInicial.Checked) and (dateFinal.Checked) then

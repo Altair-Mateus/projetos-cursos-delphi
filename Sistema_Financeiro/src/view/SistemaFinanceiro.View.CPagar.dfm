@@ -4,7 +4,7 @@ inherited frmContasPagar: TfrmContasPagar
   ClientWidth = 1374
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -143
+  ExplicitTop = -133
   ExplicitWidth = 1386
   ExplicitHeight = 682
   TextHeight = 19
