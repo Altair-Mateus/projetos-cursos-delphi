@@ -1,16 +1,15 @@
-unit SistemaFinanceiro.View.BaixarCP.FrPgto;
+unit SistemaFinanceiro.View.BxMultiCP.FrPgto;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
-  SistemaFinanceiro.View.FrPgto, Datasnap.DBClient;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Datasnap.DBClient, System.ImageList, Vcl.ImgList,
+  SistemaFinanceiro.View.FrPgto;
 
 type
-  TfrmFrPgtoBaixaCp = class(TForm)
-    ImageList1: TImageList;
+  TfrmFrPgtoBxMultiCp = class(TForm)
     pnlBotoes: TPanel;
     btnConfirmar: TButton;
     btnCancelar: TButton;
@@ -29,45 +28,41 @@ type
     btnLimpar: TButton;
     pnlGrid: TPanel;
     DBGrid1: TDBGrid;
-    dsFrPgto: TDataSource;
+    ImageList1: TImageList;
     cdsFrPgto: TClientDataSet;
     cdsFrPgtoID_FR: TIntegerField;
     cdsFrPgtoNOME: TWideStringField;
     cdsFrPgtoVALORPAGO: TCurrencyField;
-    procedure FormCreate(Sender: TObject);
-    procedure edtValorFormaEnter(Sender: TObject);
-    procedure edtCodFrPgtoExit(Sender: TObject);
+    dsFrPgto: TDataSource;
     procedure btnPesqFrPgtoClick(Sender: TObject);
-    procedure btnLimparClick(Sender: TObject);
     procedure btnAdicionaClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure edtCodFrPgtoExit(Sender: TObject);
+    procedure edtValorFormaEnter(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    FId : Integer;
+    ValorDesc : Currency;
+    DataSetCp : TDataSet;
+    DBGridCp: TDBGrid;
     procedure BuscaNomeFrPgto;
-    procedure KeyPressValor(Sender: TObject; var Key: Char);
-    procedure EditKeyPress(Sender: TObject; var Key: Char);
 
   public
     { Public declarations }
-    procedure FrPgtoCp(Id : Integer; ValorCp : Currency);
+    procedure FrPgtoCP(ValorCp, Desc : Currency; DBGrid: TDBGrid);
 
   end;
 
 var
-  frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp;
+  frmFrPgtoBxMultiCp: TfrmFrPgtoBxMultiCp;
 
 implementation
 
 {$R *.dfm}
 
-uses
-  SistemaFinanceiro.Model.dmFrPgto,
-  SistemaFinanceiro.Model.dmPgtoBxCp;
+uses SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmPgtoBxCp;
 
-procedure TfrmFrPgtoBaixaCp.btnAdicionaClick(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.btnAdicionaClick(Sender: TObject);
 var
   ValorForma : Currency;
   ValorRest  : Currency;
@@ -142,25 +137,23 @@ begin
     btnConfirmar.SetFocus;
   end;
 
+
 end;
 
-procedure TfrmFrPgtoBaixaCp.btnCancelarClick(Sender: TObject);
-begin
-  Modalresult := mrCancel;
-end;
-
-procedure TfrmFrPgtoBaixaCp.btnConfirmarClick(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.btnConfirmarClick(Sender: TObject);
 var
-  Contador   : Integer;
+  ContadorFr : Integer;
+  ContadorCp : Integer;
   TotalPgtos : Currency;
   ValorCp    : Currency;
+  ValorCpSel : Currency;
 
 begin
 
   TotalPgtos := 0;
-  Contador   := 0;
+  ContadorFr := 0;
 
-  //  Valida valor CR
+  //  Valida valor Cp
   if (not TryStrToCurr(edtValorCp.Text, ValorCp)) or (ValorCp <= 0) then
   begin
     Application.MessageBox('Valor da Conta a Pagar Inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
@@ -203,37 +196,112 @@ begin
   cdsFrPgto.First;
 
   //  Gravando as formas de pagamento
-  while not cdsFrPgto.Eof do
+  if DBGridCp.SelectedRows.Count > 0 then
   begin
 
-    Contador := Contador + 1;
-
-    if dmPgtoBxCp.cdsPgtoBxCp.State in [dsBrowse, dsInactive] then
+    for ContadorCp := 0 to DBGridCp.SelectedRows.Count - 1 do
     begin
-      dmPgtoBxCp.cdsPgtoBxCp.Insert;
+
+      DBGridCp.DataSource.DataSet.Bookmark := DBGridCp.SelectedRows[ContadorCp];
+
+      //  Pegando o valor da conta
+      ValorCpSel := DBGridCp.DataSource.DataSet.FieldByName('VALOR_PARCELA').AsCurrency;
+
+      while not cdsFrPgto.Eof do
+      begin
+
+        ContadorFr := ContadorFr + 1;
+
+        if dmPgtoBxCp.cdsPgtoBxCp.State in [dsBrowse, dsInactive] then
+        begin
+          dmPgtoBxCp.cdsPgtoBxCp.Insert;
+        end;
+
+        dmPgtoBxCp.GeraCodigo;
+        dmPgtoBxCp.cdsPgtoBxCpID_CP.AsInteger       := DBGridCp.DataSource.DataSet.FieldByName('ID').AsInteger;
+        dmPgtoBxCp.cdsPgtoBxCpID_FR_PGTO.AsInteger  := cdsFrPgtoID_FR.AsInteger;
+        dmPgtoBxCp.cdsPgtoBxCpNR_FR.AsInteger       := ContadorFr;
+        dmPgtoBxCp.cdsPgtoBxCpDATA_HORA.AsDateTime  := Now;
+
+//        dmPgtoBxCp.cdsPgtoBxCpVALOR_PAGO.AsCurrency := cdsFrPgtoVALORPAGO.AsCurrency;
+
+         //  Valores pagos nas contas
+        //  Aplica o desconto somente na primeira CP selecionada
+        if (ContadorCp = 0) then
+        begin
+
+          dmPgtoBxCp.cdsPgtoBxCpVALOR_PAGO.AsCurrency := ValorcpSel - ValorDesc;
+
+        end
+        else
+        begin
+
+          if (ValorAbater - ValorCpSel) > 0 then
+          begin
+
+             //  Se for maior que 0 vai baixar a conta total
+            CpDetalhe.Valor := ValorCpSel;
+
+          end
+          else if ValorAbater > 0 then
+          begin
+
+            //  Se ainda tiver ValorAbater mas não o suficiente
+            //  para baicar toda a cp, ira baixar apenas o valor
+            //  abater e o restante será gerado uma CP Parcial
+            CpDetalhe.Valor := ValorAbater;
+
+          end
+          else
+          begin
+
+            //  Caso ainda tenha alguma CP selecionada porem
+            //  ValorAbater já está zerado irá baixar a conta
+            //  e irá gerar uma CP Parcial com o valor total
+            CpDetalhe.Valor := 0;
+
+          end;
+
+
+
+        //  Gravando no banco
+        dmPgtoBxCp.cdsPgtoBxCp.Post;
+        dmPgtoBxCp.cdsPgtoBxCp.ApplyUpdates(0);
+
+        cdsFrPgto.Next;
+
+      end;
+
     end;
-
-    dmPgtoBxCp.GeraCodigo;
-    dmPgtoBxCp.cdsPgtoBxCpID_CP.AsInteger       := FId;
-    dmPgtoBxCp.cdsPgtoBxCpID_FR_PGTO.AsInteger  := cdsFrPgtoID_FR.AsInteger;
-    dmPgtoBxCp.cdsPgtoBxCpNR_FR.AsInteger       := Contador;
-    dmPgtoBxCp.cdsPgtoBxCpDATA_HORA.AsDateTime  := Now;
-    dmPgtoBxCp.cdsPgtoBxCpVALOR_PAGO.AsCurrency := cdsFrPgtoVALORPAGO.AsCurrency;
-
-    //  Gravando no banco
-    dmPgtoBxCp.cdsPgtoBxCp.Post;
-    dmPgtoBxCp.cdsPgtoBxCp.ApplyUpdates(0);
-
-    cdsFrPgto.Next;
-
   end;
 
   //  Fecha a tela
   ModalResult := mrOk;
 
+
+//  if not DBGridCp.DataSource.DataSet.IsEmpty then
+//  begin
+//
+//    if DBGridCp.SelectedRows.Count > 0 then
+//    begin
+//
+//      for Contador := 0 to DBGridCp.SelectedRows.Count - 1 do
+//      begin
+//
+//        DBGridCp.DataSource.DataSet.Bookmark := DBGridCp.SelectedRows[Contador];
+//
+//        ShowMessage(DBGridCp.DataSource.DataSet.FieldByName('ID').AsString);
+//      end;
+//
+//    end;
+//
+//  end;
+
+
+
 end;
 
-procedure TfrmFrPgtoBaixaCp.btnLimparClick(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.btnLimparClick(Sender: TObject);
 begin
 
   cdsFrPgto.EmptyDataSet;
@@ -250,8 +318,9 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCp.btnPesqFrPgtoClick(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.btnPesqFrPgtoClick(Sender: TObject);
 begin
+
   //  Cria o form
   frmFrPgto := TfrmFrPgto.Create(Self);
 
@@ -274,7 +343,7 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCp.BuscaNomeFrPgto;
+procedure TfrmFrPgtoBxMultiCp.BuscaNomeFrPgto;
 var
   NomeFrPgto : String;
 
@@ -299,23 +368,10 @@ begin
 
   end;
 
-end;
-
-procedure TfrmFrPgtoBaixaCp.EditKeyPress(Sender: TObject; var Key: Char);
-begin
-
-  if Key = #13 then
-  begin
-    //  Verifica se a tecla pressionada é o Enter
-    //  Cancela o efeito do enter
-    Key := #0;
-    //  Pula para o proximo
-    Perform(WM_NEXTDLGCTL, 0, 0);
-  end;
 
 end;
 
-procedure TfrmFrPgtoBaixaCp.edtCodFrPgtoExit(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.edtCodFrPgtoExit(Sender: TObject);
 begin
 
   BuscaNomeFrPgto;
@@ -336,44 +392,29 @@ begin
 
 end;
 
-procedure TfrmFrPgtoBaixaCp.edtValorFormaEnter(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.edtValorFormaEnter(Sender: TObject);
 begin
+
   //  Assume previamente o valor total da Cp
   edtValorForma.Text := edtValorRest.Text;
-end;
-
-procedure TfrmFrPgtoBaixaCp.FormCreate(Sender: TObject);
-begin
-
-  //  Coloca no KeyPress a formatação para valores
-  edtValorCp.OnKeyPress    := KeyPressValor;
-  edtValorRest.OnKeyPress  := KeyPressValor;
-  edtValorForma.OnKeyPress := KeyPressValor;
-
-  edtCodFrPgto.OnKeyPress := EditKeyPress;
 
 end;
 
-procedure TfrmFrPgtoBaixaCp.FormShow(Sender: TObject);
+procedure TfrmFrPgtoBxMultiCp.FrPgtoCP(ValorCp, Desc: Currency; DBGrid: TDBGrid);
 begin
-  edtCodFrPgto.SetFocus;
-end;
-
-procedure TfrmFrPgtoBaixaCp.FrPgtoCp(Id: Integer; ValorCp: Currency);
-begin
-
-  FID := Id;
-
-  //  Valida ID do CP
-  if FID < 0 then
-  begin
-    raise Exception.Create('ID do contas a Pagar Inválido!');
-  end;
 
   if ValorCp <= 0 then
   begin
     raise Exception.Create('Valor da Conta a Pagar Inválido!');
   end;
+
+  if ValorDesc < 0 then
+  begin
+    raise Exception.Create('Valor do Desconto Inválido!');
+  end;
+
+  ValorDesc := Desc;
+  DBGridCp := DBGrid;
 
   // Puxa o valor da Cp
   edtValorCp.Text   := CurrToStr(ValorCp);
@@ -381,37 +422,6 @@ begin
 
   edtValorForma.Clear;
 
-end;
-
-procedure TfrmFrPgtoBaixaCp.KeyPressValor(Sender: TObject; var Key: Char);
-begin
-
-  if Key = #13 then
-  begin
-    //  Verifica se a tecla pressionada é o Enter
-    //  Cancela o efeito do enter
-    Key := #0;
-    //  Pula para o proximo
-    Perform(WM_NEXTDLGCTL, 0, 0);
-  end;
-
-  //  Se for digitado um ponto, será convertido para virgula
-  if Key = FormatSettings.ThousandSeparator then
-   begin
-      Key := #0;
-    end;
-
-  // Permite apenas digitar os caracteres dentro do charinset
-  if not (CharInSet(Key, ['0'..'9', FormatSettings.DecimalSeparator, #8, #13])) then
-  begin
-    Key := #0;
-  end;
-
-  // Valida se já existe o ponto decimal
-  if (Key = FormatSettings.DecimalSeparator) and (pos(Key, TEdit(Sender).Text) > 0) then
-  begin
-    Key := #0;
-  end;
 
 end;
 

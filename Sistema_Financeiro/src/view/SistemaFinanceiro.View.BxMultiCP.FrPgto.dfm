@@ -1,19 +1,15 @@
-object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
+object frmFrPgtoBxMultiCp: TfrmFrPgtoBxMultiCp
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
-  Caption = 'Forma de Pagamento'
+  Caption = 'Formas de Pagamento Baixa M'#250'ltipla CP'
   ClientHeight = 505
   ClientWidth = 391
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
-  Font.Color = clBlack
+  Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
-  Position = poScreenCenter
-  OnCreate = FormCreate
-  OnShow = FormShow
   TextHeight = 19
   object pnlBotoes: TPanel
     Left = 0
@@ -43,8 +39,6 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       TabOrder = 0
       WordWrap = True
       OnClick = btnConfirmarClick
-      ExplicitLeft = 80
-      ExplicitTop = 2
     end
     object btnCancelar: TButton
       AlignWithMargins = True
@@ -63,7 +57,6 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       Images = ImageList1
       ParentBiDiMode = False
       TabOrder = 1
-      OnClick = btnCancelarClick
       ExplicitLeft = 196
     end
   end
@@ -246,7 +239,7 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clBlack
+      TitleFont.Color = clWindowText
       TitleFont.Height = -16
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
@@ -1938,11 +1931,6 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object dsFrPgto: TDataSource
-    DataSet = cdsFrPgto
-    Left = 323
-    Top = 281
-  end
   object cdsFrPgto: TClientDataSet
     PersistDataPacket.Data = {
       670000009619E0BD01000000180000000300000000000300000067000549445F
@@ -1952,8 +1940,8 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 323
-    Top = 337
+    Left = 347
+    Top = 321
     object cdsFrPgtoID_FR: TIntegerField
       FieldName = 'ID_FR'
     end
@@ -1965,5 +1953,10 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       FieldName = 'VALORPAGO'
       DisplayFormat = 'R$ #,##0.00'
     end
+  end
+  object dsFrPgto: TDataSource
+    DataSet = cdsFrPgto
+    Left = 347
+    Top = 265
   end
 end

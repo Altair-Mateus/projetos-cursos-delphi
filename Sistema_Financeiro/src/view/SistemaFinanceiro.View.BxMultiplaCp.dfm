@@ -4,7 +4,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Baixar v'#225'rias Contas a Pagar'
   ClientHeight = 688
-  ClientWidth = 1314
+  ClientWidth = 1313
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,13 +19,13 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   object pnlFiltros: TPanel
     Left = 0
     Top = 0
-    Width = 1314
-    Height = 161
+    Width = 1313
+    Height = 177
     Align = alTop
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1310
+    ExplicitWidth = 1309
     object lblDataInicial: TLabel
       Left = 18
       Top = 18
@@ -128,6 +128,36 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentColor = False
       ParentFont = False
     end
+    object lblCheckParciais: TLabel
+      Left = 39
+      Top = 137
+      Width = 120
+      Height = 19
+      Caption = 'Somente Parciais'
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblCheckVencidas: TLabel
+      Left = 209
+      Top = 137
+      Width = 129
+      Height = 19
+      Caption = 'Somente Vencidas'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
     object dateInicial: TDateTimePicker
       Left = 18
       Top = 39
@@ -152,10 +182,10 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     end
     object btnVisualizar: TButton
       AlignWithMargins = True
-      Left = 1187
+      Left = 1186
       Top = 41
       Width = 121
-      Height = 79
+      Height = 95
       Margins.Top = 40
       Margins.Right = 5
       Margins.Bottom = 40
@@ -166,7 +196,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       TabOrder = 2
       WordWrap = True
       OnClick = btnVisualizarClick
-      ExplicitLeft = 1183
+      ExplicitLeft = 1182
     end
     object edtFornecedor: TEdit
       Left = 344
@@ -232,10 +262,10 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     end
     object pnlInfPag: TPanel
       AlignWithMargins = True
-      Left = 741
+      Left = 740
       Top = 11
       Width = 433
-      Height = 139
+      Height = 155
       Margins.Top = 10
       Margins.Right = 10
       Margins.Bottom = 10
@@ -243,7 +273,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       Color = 5737262
       ParentBackground = False
       TabOrder = 8
-      ExplicitLeft = 737
+      ExplicitLeft = 736
       object lblInfPag: TLabel
         Left = 13
         Top = 3
@@ -287,7 +317,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object lblDesconto: TLabel
         Left = 80
-        Top = 104
+        Top = 112
         Width = 92
         Height = 19
         Caption = 'Desconto %:'
@@ -301,7 +331,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object lblValorDesc: TLabel
         Left = 280
-        Top = 102
+        Top = 110
         Width = 42
         Height = 19
         Caption = 'ou R$'
@@ -315,7 +345,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object lblCheckDesc: TLabel
         Left = 39
-        Top = 74
+        Top = 87
         Width = 133
         Height = 19
         Caption = 'Informar Desconto'
@@ -353,9 +383,9 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object checkDesconto: TCheckBox
         Left = 12
-        Top = 76
-        Width = 21
-        Height = 17
+        Top = 85
+        Width = 160
+        Height = 21
         TabStop = False
         Color = 5934893
         ParentColor = False
@@ -364,7 +394,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object edtPorcDesc: TEdit
         Left = 178
-        Top = 99
+        Top = 107
         Width = 87
         Height = 27
         Enabled = False
@@ -381,7 +411,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
       object edtValorDesc: TEdit
         Left = 328
-        Top = 99
+        Top = 107
         Width = 87
         Height = 27
         Enabled = False
@@ -397,23 +427,55 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
         OnKeyUp = edtValorDescKeyUp
       end
     end
+    object checkParciais: TCheckBox
+      Left = 18
+      Top = 137
+      Width = 159
+      Height = 17
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 9
+      OnClick = checkParciaisClick
+    end
+    object checkVencidas: TCheckBox
+      Left = 185
+      Top = 137
+      Width = 160
+      Height = 17
+      Color = 5868590
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 10
+      OnClick = checkVencidasClick
+    end
   end
   object pnlContas: TPanel
     Left = 0
-    Top = 161
-    Width = 1314
-    Height = 458
+    Top = 177
+    Width = 1313
+    Height = 442
     Align = alClient
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 1310
-    ExplicitHeight = 457
+    ExplicitWidth = 1309
+    ExplicitHeight = 441
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1312
-      Height = 456
+      Width = 1311
+      Height = 440
       Align = alClient
       Color = clWhite
       DataSource = DataSourceBxMultiplaCP
@@ -510,14 +572,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   object pnlBotoes: TPanel
     Left = 0
     Top = 619
-    Width = 1314
+    Width = 1313
     Height = 69
     Align = alBottom
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
     ExplicitTop = 618
-    ExplicitWidth = 1310
+    ExplicitWidth = 1309
     object btnConfirmar: TButton
       AlignWithMargins = True
       Left = 6
@@ -546,14 +608,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       OnClick = btnSairClick
     end
     object pnlValorSelecionadas: TPanel
-      Left = 1128
+      Left = 1127
       Top = 1
       Width = 185
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 1124
+      ExplicitLeft = 1123
       object lblValorSelecionadas: TLabel
         Left = 13
         Top = 6
@@ -584,14 +646,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object pnlQtdSelecionadas: TPanel
-      Left = 972
+      Left = 971
       Top = 1
       Width = 156
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 968
+      ExplicitLeft = 967
       object lblQtdSelecionada: TLabel
         Left = 22
         Top = 7
@@ -622,14 +684,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object pnlQtdCp: TPanel
-      Left = 584
+      Left = 583
       Top = 1
       Width = 156
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 4
-      ExplicitLeft = 580
+      ExplicitLeft = 579
       object lblQtdCp: TLabel
         Left = 22
         Top = 7
@@ -660,14 +722,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object Panel2: TPanel
-      Left = 740
+      Left = 739
       Top = 1
       Width = 232
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitLeft = 736
+      ExplicitLeft = 735
       object lblValorCps: TLabel
         Left = 13
         Top = 6

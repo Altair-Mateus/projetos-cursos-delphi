@@ -8,7 +8,8 @@ uses
   System.ImageList, Vcl.ImgList, SistemaFinanceiro.View.Fornecedores,
   SistemaFinanceiro.View.FaturaCartao, SistemaFinanceiro.Model.dmFornecedores,
   SistemaFinanceiro.Model.dmFaturaCartao, Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils,
-  Datasnap.DBClient, SistemaFinanceiro.View.FrPgto;
+  Datasnap.DBClient, SistemaFinanceiro.View.FrPgto,
+  SistemaFinanceiro.View.BxMultiCP.FrPgto;
 
 type
   TfrmBxMultiplaCP = class(TForm)
@@ -60,6 +61,10 @@ type
     edtPorcDesc: TEdit;
     edtValorDesc: TEdit;
     lblCheckDesc: TLabel;
+    checkParciais: TCheckBox;
+    lblCheckParciais: TLabel;
+    checkVencidas: TCheckBox;
+    lblCheckVencidas: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
     procedure btnPesqFatClick(Sender: TObject);
     procedure edtFornecedorExit(Sender: TObject);
@@ -89,6 +94,8 @@ type
     procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtValorExit(Sender: TObject);
+    procedure checkParciaisClick(Sender: TObject);
+    procedure checkVencidasClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -182,8 +189,6 @@ begin
 
   end;
 
-
-
   ValorAbater := 0;
   ValorDesc   := 0;
   ValorCpCel  := CalcCpSel;
@@ -217,32 +222,32 @@ begin
   end;
 
   //  Forma de pgto  a implementar
-//  try
-//
-//    //  Cria o form
-//    frmFrPgtoBaixaCp:= TfrmFrPgtoBaixaCp.Create(Self);
-//
-//    //  Passa as informações para a tela de pgto
-//    frmFrPgtoBaixaCp.FrPgtoCp(FID, ValorAbater);
-//
-//    //  Exibe o form
-//    frmFrPgtoBaixaCp.ShowModal;
-//
-//  except on E : Exception do
-//
-//  Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
-//
-//    end;
-//
-//  //  Verifica se deu tudo certo com as formas de pgto
-//  if frmFrPgtoBaixaCp.ModalResult <> mrOk then
-//  begin
-//    abort;
-//  end
-//  else
-//  begin
-//    FreeAndNil(frmFrPgtoBaixaCp);
-//  end;
+  try
+
+    //  Cria o form
+    frmFrPgtoBxMultiCp := TfrmFrPgtoBxMultiCp.Create(Self);
+
+    //  Passa as informações para a tela de pgto
+    frmFrPgtoBxMultiCp.FrPgtoCp((ValorAbater - Valordesc), ValorDesc, DBGrid1);
+
+    //  Exibe o form
+    frmFrPgtoBxMultiCp.ShowModal;
+
+  except on E : Exception do
+
+   Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
+
+  end;
+
+  //  Verifica se deu tudo certo com as formas de pgto
+  if frmFrPgtoBxMultiCp.ModalResult <> mrOk then
+  begin
+    abort;
+  end
+  else
+  begin
+    FreeAndNil(frmFrPgtoBxMultiCp);
+  end;
 
 
   if DBGrid1.SelectedRows.Count > 0 then
@@ -668,6 +673,16 @@ begin
 
 end;
 
+procedure TfrmBxMultiplaCP.checkParciaisClick(Sender: TObject);
+begin
+  Pesquisar;
+end;
+
+procedure TfrmBxMultiplaCP.checkVencidasClick(Sender: TObject);
+begin
+  Pesquisar;
+end;
+
 procedure TfrmBxMultiplaCP.dateFinalChange(Sender: TObject);
 begin
   Pesquisar;
@@ -966,6 +981,24 @@ begin
     dmCPagar.cdsBxMultipla.ParamByName('DTINI').AsDateTime := dateInicial.Date;
     dmCPagar.cdsBxMultipla.Params.CreateParam(ftDate, 'DTFIM', ptInput);
     dmCPagar.cdsBxMultipla.ParamByName('DTFIM').AsDateTime := dateFinal.Date;
+
+  end;
+
+  //  Pesquisa parciais
+  if checkParciais.Checked then
+  begin
+    LFiltro := LFiltro + ' AND CP.PARCIAL = ''S'' ';
+  end;
+
+  //  Pesquisa vencidas
+  if checkVencidas.Checked then
+  begin
+
+    LFiltro := LFiltro + ' AND CP.DATA_VENCIMENTO < :DATUAL ';
+
+    //  Criando os parametros
+    dmCPagar.cdsCPagar.Params.CreateParam(ftDate, 'DATUAL', ptInput);
+    dmCPagar.cdsCPagar.ParamByName('DATUAL').AsDate := NOW;
 
   end;
 

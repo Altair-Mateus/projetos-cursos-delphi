@@ -261,6 +261,7 @@ begin
   finally
 
     CpDetalhe.Free;
+
   end;
 
 end;

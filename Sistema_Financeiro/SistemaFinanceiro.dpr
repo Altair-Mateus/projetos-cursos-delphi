@@ -51,7 +51,8 @@ uses
   SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule},
   SistemaFinanceiro.View.FaturaCartao in 'src\view\SistemaFinanceiro.View.FaturaCartao.pas' {frmFaturaCartao},
   SistemaFinanceiro.View.Relatorios.FaturaCartao in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FaturaCartao.pas' {frmRelFatCartao},
-  SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCP};
+  SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCP},
+  SistemaFinanceiro.View.BxMultiCP.FrPgto in 'src\view\SistemaFinanceiro.View.BxMultiCP.FrPgto.pas' {frmFrPgtoBxMultiCp};
 
 {$R *.res}
 
