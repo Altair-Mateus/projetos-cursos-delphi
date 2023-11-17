@@ -807,7 +807,14 @@ begin
   if (toggleFatura.State = tssOn) and (edtCodFatCartao.Text <> '') then
   begin
 
-    dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
+      if CheckFatVirada.Checked then
+      begin
+
+        dateVencimento.Date := IncMonth(dateVencimento.Date, 1);
+
+      end;
+
+      dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
 
   end
   else
@@ -816,6 +823,8 @@ begin
     dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := dateVencimento.Date;
 
   end;
+
+
 
   if toggleFatura.State = tssOff then
   begin
@@ -1636,6 +1645,7 @@ begin
                                     LFiltroEdit + LFiltro + lOrdem;
   dmCPagar.cdsCPagar.Open;
 
+
   HabilitaBotoes;
 
   //  Calcula a quantidade e valor
@@ -1646,7 +1656,9 @@ begin
   DataSourceCPagar.DataSet.First;
 
   inherited;
+
 end;
+
 procedure TfrmContasPagar.rbDataCompraClick(Sender: TObject);
 begin
   inherited;

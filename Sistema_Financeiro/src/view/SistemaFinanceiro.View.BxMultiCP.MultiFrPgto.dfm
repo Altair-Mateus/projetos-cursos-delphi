@@ -1,112 +1,33 @@
-object frmFrPgtoBxMultCp: TfrmFrPgtoBxMultCp
+object frmFrPgtoBxMultiCp: TfrmFrPgtoBxMultiCp
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
-  Caption = 'Informe a Forma de Pagamento'
-  ClientHeight = 243
-  ClientWidth = 428
+  Caption = 'Formas de Pagamento Baixa M'#250'ltipla CP'
+  ClientHeight = 505
+  ClientWidth = 391
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
-  Position = poScreenCenter
-  OnCreate = FormCreate
   TextHeight = 19
-  object pnlFrPgto: TPanel
-    Left = 0
-    Top = 0
-    Width = 428
-    Height = 174
-    Align = alClient
-    BevelOuter = bvNone
-    BorderStyle = bsSingle
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 0
-    ExplicitWidth = 424
-    ExplicitHeight = 173
-    object lblNomeFrPgto: TLabel
-      AlignWithMargins = True
-      Left = 3
-      Top = 111
-      Width = 418
-      Height = 19
-      Margins.Bottom = 40
-      Align = alBottom
-      Alignment = taCenter
-      Caption = 'lblNomeFrPgto'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5737262
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      Visible = False
-      ExplicitLeft = 16
-      ExplicitTop = 104
-      ExplicitWidth = 401
-    end
-    object lblInfFrPgto: TLabel
-      AlignWithMargins = True
-      Left = 3
-      Top = 20
-      Width = 418
-      Height = 19
-      Margins.Top = 20
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'Informe o C'#243'digo da Forma de Pagamento'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitWidth = 345
-    end
-    object edtCodFrPgto: TEdit
-      Left = 86
-      Top = 62
-      Width = 185
-      Height = 27
-      Color = clWhite
-      MaxLength = 20
-      NumbersOnly = True
-      TabOrder = 0
-      TextHint = 'Clique no bot'#227'o ao lado'
-      OnExit = edtCodFrPgtoExit
-    end
-    object btnPesqFrPgto: TButton
-      Left = 285
-      Top = 61
-      Width = 44
-      Height = 29
-      ImageIndex = 2
-      Images = ImageList1
-      TabOrder = 1
-      TabStop = False
-      OnClick = btnPesqFrPgtoClick
-    end
-  end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 174
-    Width = 428
-    Height = 69
+    Top = 446
+    Width = 391
+    Height = 59
     Align = alBottom
-    BevelOuter = bvNone
-    BorderStyle = bsSingle
-    TabOrder = 1
-    ExplicitTop = 173
-    ExplicitWidth = 424
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitTop = 445
+    ExplicitWidth = 387
     object btnConfirmar: TButton
       AlignWithMargins = True
-      Left = 70
-      Top = 0
+      Left = 71
+      Top = 1
       Width = 120
-      Height = 65
+      Height = 57
       Margins.Left = 70
       Margins.Top = 0
       Margins.Right = 0
@@ -121,10 +42,10 @@ object frmFrPgtoBxMultCp: TfrmFrPgtoBxMultCp
     end
     object btnCancelar: TButton
       AlignWithMargins = True
-      Left = 234
-      Top = 0
+      Left = 200
+      Top = 1
       Width = 120
-      Height = 65
+      Height = 57
       Margins.Left = 0
       Margins.Top = 0
       Margins.Right = 70
@@ -137,15 +58,222 @@ object frmFrPgtoBxMultCp: TfrmFrPgtoBxMultCp
       ParentBiDiMode = False
       TabOrder = 1
       OnClick = btnCancelarClick
-      ExplicitLeft = 230
+      ExplicitLeft = 196
+    end
+  end
+  object pnlForma: TPanel
+    Left = 0
+    Top = 0
+    Width = 391
+    Height = 225
+    Align = alTop
+    Color = 5737262
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitWidth = 387
+    object lblCodFrPgto: TLabel
+      Left = 16
+      Top = 16
+      Width = 137
+      Height = 19
+      Caption = 'Cod Forma de Pgto'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorForma: TLabel
+      Left = 16
+      Top = 77
+      Width = 108
+      Height = 19
+      Caption = 'Total da Forma'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorTotalCr: TLabel
+      Left = 151
+      Top = 143
+      Width = 105
+      Height = 19
+      Caption = 'Valor da Conta'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorRest: TLabel
+      Left = 16
+      Top = 143
+      Width = 102
+      Height = 19
+      Caption = 'Valor Restante'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblNomeFrPgto: TLabel
+      Left = 130
+      Top = 45
+      Width = 105
+      Height = 19
+      Caption = 'lblNomeFrPgto'
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      Visible = False
+    end
+    object edtCodFrPgto: TEdit
+      Left = 16
+      Top = 41
+      Width = 60
+      Height = 27
+      NumbersOnly = True
+      TabOrder = 0
+      OnExit = edtCodFrPgtoExit
+    end
+    object btnPesqFrPgto: TButton
+      Left = 82
+      Top = 41
+      Width = 41
+      Height = 29
+      ImageIndex = 2
+      Images = ImageList1
+      TabOrder = 4
+      TabStop = False
+      OnClick = btnPesqFrPgtoClick
+    end
+    object edtValorForma: TEdit
+      Left = 16
+      Top = 102
+      Width = 107
+      Height = 27
+      TabOrder = 1
+      OnEnter = edtValorFormaEnter
+    end
+    object edtValorCp: TEdit
+      Left = 151
+      Top = 168
+      Width = 108
+      Height = 27
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object edtValorRest: TEdit
+      Left = 16
+      Top = 168
+      Width = 108
+      Height = 27
+      ReadOnly = True
+      TabOrder = 6
+    end
+    object btnAdiciona: TButton
+      Left = 129
+      Top = 102
+      Width = 40
+      Height = 29
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 4
+      Images = ImageList1
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnAdicionaClick
+    end
+    object btnLimpar: TButton
+      Left = 280
+      Top = 153
+      Width = 102
+      Height = 42
+      Caption = 'Limpar'
+      ImageIndex = 5
+      Images = ImageList1
+      TabOrder = 3
+      TabStop = False
+      OnClick = btnLimparClick
+    end
+  end
+  object pnlGrid: TPanel
+    Left = 0
+    Top = 225
+    Width = 391
+    Height = 221
+    Align = alClient
+    TabOrder = 2
+    ExplicitWidth = 387
+    ExplicitHeight = 220
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 389
+      Height = 219
+      TabStop = False
+      Align = alClient
+      DataSource = dsFrPgto
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_FR'
+          Title.Caption = 'Cod'
+          Width = 45
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'Nome'
+          Width = 182
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALORPAGO'
+          Title.Caption = 'Valor'
+          Width = 125
+          Visible = True
+        end>
     end
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit
     Height = 40
     Width = 40
-    Left = 379
-    Top = 71
+    Left = 347
+    Top = 383
     Bitmap = {
       494C010107000800040028002800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000A000000050000000010020000000000000C8
@@ -1803,5 +1931,33 @@ object frmFrPgtoBxMultCp: TfrmFrPgtoBxMultCp
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object cdsFrPgto: TClientDataSet
+    PersistDataPacket.Data = {
+      670000009619E0BD01000000180000000300000000000300000067000549445F
+      46520400010000000000044E4F4D4501004A0000000100055749445448020002
+      00C8000956414C4F525041474F08000400000001000753554254595045020049
+      0006004D6F6E6579000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 347
+    Top = 321
+    object cdsFrPgtoID_FR: TIntegerField
+      FieldName = 'ID_FR'
+    end
+    object cdsFrPgtoNOME: TWideStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object cdsFrPgtoVALORPAGO: TCurrencyField
+      FieldName = 'VALORPAGO'
+      DisplayFormat = 'R$ #,##0.00'
+    end
+  end
+  object dsFrPgto: TDataSource
+    DataSet = cdsFrPgto
+    Left = 347
+    Top = 265
   end
 end

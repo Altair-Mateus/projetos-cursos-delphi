@@ -143,21 +143,6 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentColor = False
       ParentFont = False
     end
-    object lblCheckVencidas: TLabel
-      Left = 209
-      Top = 137
-      Width = 129
-      Height = 19
-      Caption = 'Somente Vencidas'
-      Color = 5934638
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-    end
     object dateInicial: TDateTimePicker
       Left = 18
       Top = 39
@@ -442,22 +427,6 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentFont = False
       TabOrder = 9
       OnClick = checkParciaisClick
-    end
-    object checkVencidas: TCheckBox
-      Left = 185
-      Top = 137
-      Width = 160
-      Height = 17
-      Color = 5868590
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 10
-      OnClick = checkVencidasClick
     end
   end
   object pnlContas: TPanel

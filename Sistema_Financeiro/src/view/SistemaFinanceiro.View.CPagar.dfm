@@ -10,6 +10,7 @@ inherited frmContasPagar: TfrmContasPagar
   inherited CardPanelPrincipal: TCardPanel
     Width = 1374
     Height = 644
+    ActiveCard = CardCadastro
     ExplicitWidth = 1370
     ExplicitHeight = 643
     inherited CardCadastro: TCard
@@ -224,7 +225,7 @@ inherited frmContasPagar: TfrmContasPagar
           Top = 296
           Width = 793
           Height = 249
-          ActiveCard = cardParcelamento
+          ActiveCard = cardParcelaUnica
           BevelOuter = bvNone
           Caption = 'CardPanel1'
           TabOrder = 6

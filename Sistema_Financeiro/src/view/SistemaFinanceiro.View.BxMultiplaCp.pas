@@ -63,8 +63,6 @@ type
     lblCheckDesc: TLabel;
     checkParciais: TCheckBox;
     lblCheckParciais: TLabel;
-    checkVencidas: TCheckBox;
-    lblCheckVencidas: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
     procedure btnPesqFatClick(Sender: TObject);
     procedure edtFornecedorExit(Sender: TObject);
@@ -125,7 +123,9 @@ implementation
 
 uses SistemaFinanceiro.Model.dmCPagar, FireDAC.Stan.Param,
   SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe,
-  SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmUsuarios;
+  SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmUsuarios,
+  SistemaFinanceiro.View.BxMultiCP.MultiFrPgto,
+  SistemaFinanceiro.Model.dmPgtoBxCp;
 
 
 procedure TfrmBxMultiplaCP.btnConfirmarClick(Sender: TObject);
@@ -139,6 +139,7 @@ var
   DtMaisAntiga      : TDateTime;
   DtCompraSel       : TDateTime;
   IndexDtMaisAntiga : Integer;
+  FrPgto            : Integer;
 
 begin
 
@@ -191,6 +192,7 @@ begin
 
   ValorAbater := 0;
   ValorDesc   := 0;
+  FrPgto      := 0;
   ValorCpCel  := CalcCpSel;
 
   if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
@@ -221,17 +223,14 @@ begin
 
   end;
 
-  //  Forma de pgto  a implementar
+  //  Forma de pgto
   try
 
     //  Cria o form
-    frmFrPgtoBxMultiCp := TfrmFrPgtoBxMultiCp.Create(Self);
-
-    //  Passa as informações para a tela de pgto
-    frmFrPgtoBxMultiCp.FrPgtoCp((ValorAbater - Valordesc), ValorDesc, DBGrid1);
+    frmFrPgtoBxMultCp := TfrmFrPgtoBxMultCp.Create(Self);
 
     //  Exibe o form
-    frmFrPgtoBxMultiCp.ShowModal;
+    frmFrPgtoBxMultCp.ShowModal;
 
   except on E : Exception do
 
@@ -240,13 +239,19 @@ begin
   end;
 
   //  Verifica se deu tudo certo com as formas de pgto
-  if frmFrPgtoBxMultiCp.ModalResult <> mrOk then
+  if frmFrPgtoBxMultCp.ModalResult <> mrOk then
   begin
     abort;
   end
   else
   begin
-    FreeAndNil(frmFrPgtoBxMultiCp);
+
+    FrPgto := frmFrPgtoBxMultCp.CodFrPgto;
+
+    showmessage(IntToStr(FrPgto));
+
+    FreeAndNil(frmFrPgtoBxMultCp);
+
   end;
 
 
@@ -309,7 +314,7 @@ begin
 
           end;
 
-          showmessage('Valor abater antes' +  currtostr(valorabater));
+//          showmessage('Valor abater antes' +  currtostr(valorabater));
 
           //  Se estiver na Bx da 1ª CP e tiver desconto
           //  Ira somar o valordesc no valor abater para
@@ -325,7 +330,7 @@ begin
         //  Calcula o restante do valorabater
         ValorAbater := ValorAbater - ValorCpSel;
 
-        showmessage('Valor abater depois' +  currtostr(valorabater));
+//        showmessage('Valor abater depois' +  currtostr(valorabater));
 
         try
 
@@ -336,6 +341,29 @@ begin
           Application.MessageBox(PWideChar(E.Message), 'Erro ao baixar documento!', MB_OK + MB_ICONWARNING);
         end;
 
+
+        try
+
+          if dmPgtoBxCp.cdsPgtoBxCp.State in [dsBrowse, dsInactive] then
+          begin
+            dmPgtoBxCp.cdsPgtoBxCp.Insert;
+          end;
+
+          dmPgtoBxCp.GeraCodigo;
+          dmPgtoBxCp.cdsPgtoBxCpID_CP.AsInteger       := CpDetalhe.IdCP ;
+          dmPgtoBxCp.cdsPgtoBxCpID_FR_PGTO.AsInteger  := FrPgto;
+          dmPgtoBxCp.cdsPgtoBxCpNR_FR.AsInteger       := 1;
+          dmPgtoBxCp.cdsPgtoBxCpDATA_HORA.AsDateTime  := Now;
+          dmPgtoBxCp.cdsPgtoBxCpVALOR_PAGO.AsCurrency := CpDetalhe.Valor;
+
+          //  Gravando no banco
+          dmPgtoBxCp.cdsPgtoBxCp.Post;
+          dmPgtoBxCp.cdsPgtoBxCp.ApplyUpdates(0);
+
+        except on E : Exception do
+          Application.MessageBox(PWideChar(E.Message), 'Erro ao salvar Forma de pagamento!', MB_OK + MB_ICONWARNING)
+
+        end;
 
       finally
 
@@ -990,18 +1018,6 @@ begin
     LFiltro := LFiltro + ' AND CP.PARCIAL = ''S'' ';
   end;
 
-  //  Pesquisa vencidas
-  if checkVencidas.Checked then
-  begin
-
-    LFiltro := LFiltro + ' AND CP.DATA_VENCIMENTO < :DATUAL ';
-
-    //  Criando os parametros
-    dmCPagar.cdsCPagar.Params.CreateParam(ftDate, 'DATUAL', ptInput);
-    dmCPagar.cdsCPagar.ParamByName('DATUAL').AsDate := NOW;
-
-  end;
-
   //  Pesquisa por FORNECEDORES
   if Trim(edtFornecedor.Text) <> '' then
   begin
@@ -1034,6 +1050,7 @@ begin
                                     'LEFT JOIN FORNECEDORES F ON CP.ID_FORNECEDOR = F.ID_FORNEC WHERE STATUS = ''A'' ' +
                                      LFiltro + lOrdem;
   dmCPagar.cdsBxMultipla.Open;
+
 
   //  Calcula a quantidade e valor
   CalcCpGrid;
