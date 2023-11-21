@@ -3,8 +3,8 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   Top = 0
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Baixar v'#225'rias Contas a Pagar'
-  ClientHeight = 688
-  ClientWidth = 1313
+  ClientHeight = 686
+  ClientWidth = 1305
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,13 +19,13 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   object pnlFiltros: TPanel
     Left = 0
     Top = 0
-    Width = 1313
+    Width = 1305
     Height = 177
     Align = alTop
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1309
+    ExplicitWidth = 1301
     object lblDataInicial: TLabel
       Left = 18
       Top = 18
@@ -167,7 +167,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     end
     object btnVisualizar: TButton
       AlignWithMargins = True
-      Left = 1186
+      Left = 1178
       Top = 41
       Width = 121
       Height = 95
@@ -181,7 +181,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       TabOrder = 2
       WordWrap = True
       OnClick = btnVisualizarClick
-      ExplicitLeft = 1182
+      ExplicitLeft = 1174
     end
     object edtFornecedor: TEdit
       Left = 344
@@ -247,7 +247,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     end
     object pnlInfPag: TPanel
       AlignWithMargins = True
-      Left = 740
+      Left = 732
       Top = 11
       Width = 433
       Height = 155
@@ -258,7 +258,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       Color = 5737262
       ParentBackground = False
       TabOrder = 8
-      ExplicitLeft = 736
+      ExplicitLeft = 728
       object lblInfPag: TLabel
         Left = 13
         Top = 3
@@ -432,19 +432,19 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   object pnlContas: TPanel
     Left = 0
     Top = 177
-    Width = 1313
-    Height = 442
+    Width = 1305
+    Height = 440
     Align = alClient
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 1309
-    ExplicitHeight = 441
+    ExplicitWidth = 1301
+    ExplicitHeight = 439
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1311
-      Height = 440
+      Width = 1303
+      Height = 438
       Align = alClient
       Color = clWhite
       DataSource = DataSourceBxMultiplaCP
@@ -540,15 +540,15 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 619
-    Width = 1313
+    Top = 617
+    Width = 1305
     Height = 69
     Align = alBottom
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 618
-    ExplicitWidth = 1309
+    ExplicitTop = 616
+    ExplicitWidth = 1301
     object btnConfirmar: TButton
       AlignWithMargins = True
       Left = 6
@@ -577,14 +577,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       OnClick = btnSairClick
     end
     object pnlValorSelecionadas: TPanel
-      Left = 1127
+      Left = 1119
       Top = 1
       Width = 185
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 1123
+      ExplicitLeft = 1115
       object lblValorSelecionadas: TLabel
         Left = 13
         Top = 6
@@ -615,14 +615,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object pnlQtdSelecionadas: TPanel
-      Left = 971
+      Left = 963
       Top = 1
       Width = 156
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 967
+      ExplicitLeft = 959
       object lblQtdSelecionada: TLabel
         Left = 22
         Top = 7
@@ -653,14 +653,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object pnlQtdCp: TPanel
-      Left = 583
+      Left = 575
       Top = 1
       Width = 156
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 4
-      ExplicitLeft = 579
+      ExplicitLeft = 571
       object lblQtdCp: TLabel
         Left = 22
         Top = 7
@@ -691,14 +691,14 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       end
     end
     object Panel2: TPanel
-      Left = 739
+      Left = 731
       Top = 1
       Width = 232
       Height = 67
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitLeft = 735
+      ExplicitLeft = 727
       object lblValorCps: TLabel
         Left = 13
         Top = 6

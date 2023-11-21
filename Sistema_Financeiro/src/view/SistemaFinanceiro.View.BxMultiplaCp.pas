@@ -9,7 +9,7 @@ uses
   SistemaFinanceiro.View.FaturaCartao, SistemaFinanceiro.Model.dmFornecedores,
   SistemaFinanceiro.Model.dmFaturaCartao, Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils,
   Datasnap.DBClient, SistemaFinanceiro.View.FrPgto,
-  SistemaFinanceiro.View.BxMultiCP.FrPgto;
+  SistemaFinanceiro.View.BxMultiCP.InfosBx;
 
 type
   TfrmBxMultiplaCP = class(TForm)
@@ -124,7 +124,6 @@ implementation
 uses SistemaFinanceiro.Model.dmCPagar, FireDAC.Stan.Param,
   SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe,
   SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmUsuarios,
-  SistemaFinanceiro.View.BxMultiCP.MultiFrPgto,
   SistemaFinanceiro.Model.dmPgtoBxCp;
 
 
@@ -144,14 +143,14 @@ var
 begin
 
   //  Validações dos campos
-  if datePgto.Date > Date then
-  begin
-
-    datePgto.SetFocus;
-    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
-    abort;
-
-  end;
+//  if datePgto.Date > Date then
+//  begin
+//
+//    datePgto.SetFocus;
+//    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
+//    abort;
+//
+//  end;
 
   if DBGrid1.SelectedRows.Count > 0 then
   begin
@@ -179,14 +178,14 @@ begin
     end;
 
 
-    if datePgto.Date < DtMaisAntiga then
-    begin
-
-      datePgto.SetFocus;
-      Application.MessageBox('A data de pagamento não pode ser menor que a data da compra!', 'Atenção', MB_OK + MB_ICONWARNING);
-      abort;
-
-    end;
+//    if datePgto.Date < DtMaisAntiga then
+//    begin
+//
+//      datePgto.SetFocus;
+//      Application.MessageBox('A data de pagamento não pode ser menor que a data da compra!', 'Atenção', MB_OK + MB_ICONWARNING);
+//      abort;
+//
+//    end;
 
   end;
 
@@ -195,69 +194,100 @@ begin
   FrPgto      := 0;
   ValorCpCel  := CalcCpSel;
 
-  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
-  begin
-    edtValor.SetFocus;
-    Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
-    abort;
-  end;
+//  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
+//  begin
+//    edtValor.SetFocus;
+//    Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+//    abort;
+//  end;
+//
+//  if ValorAbater > ValorCpCel then
+//  begin
+//    edtValor.SetFocus;
+//    Application.MessageBox('Valor pago não pode ser maior que o valor das parcelas!', 'Atenção', MB_OK + MB_ICONWARNING);
+//    abort;
+//  end;
+//
+//  if checkDesconto.Checked then
+//  begin
+//
+//    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > ValorCpCel) then
+//    begin
+//
+//      edtValorDesc.SetFocus;
+//      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
+//      abort;
+//
+//    end;
+//
+//  end;
 
-  if ValorAbater > ValorCpCel then
-  begin
-    edtValor.SetFocus;
-    Application.MessageBox('Valor pago não pode ser maior que o valor das parcelas!', 'Atenção', MB_OK + MB_ICONWARNING);
-    abort;
-  end;
 
-  if checkDesconto.Checked then
-  begin
-
-    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > ValorCpCel) then
-    begin
-
-      edtValorDesc.SetFocus;
-      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
-      abort;
-
-    end;
-
-  end;
-
-  //  Forma de pgto
-  try
-
-    //  Cria o form
-    frmFrPgtoBxMultCp := TfrmFrPgtoBxMultCp.Create(Self);
-
-    //  Exibe o form
-    frmFrPgtoBxMultCp.ShowModal;
-
-  except on E : Exception do
-
-   Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
-
-  end;
-
-  //  Verifica se deu tudo certo com as formas de pgto
-  if frmFrPgtoBxMultCp.ModalResult <> mrOk then
-  begin
-    abort;
-  end
-  else
-  begin
-
-    FrPgto := frmFrPgtoBxMultCp.CodFrPgto;
-
-    showmessage(IntToStr(FrPgto));
-
-    FreeAndNil(frmFrPgtoBxMultCp);
-
-  end;
 
 
   if DBGrid1.SelectedRows.Count > 0 then
   begin
 
+    {Pega a data mais antiga}
+    // Inicializa com o maior valor possível da data
+    DtMaisAntiga := MaxDateTime;
+    IndexDtMaisAntiga := -1;
+
+    for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
+    begin
+
+      DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[Contador];
+
+      //  Pega a data de compra
+      DtCompraSel := DBGrid1.DataSource.DataSet.FieldByName('DATA_COMPRA').AsDateTime;
+
+      if DtCompraSel < DtMaisAntiga then
+      begin
+
+        DtMaisAntiga := DtCompraSel;
+        IndexDtMaisAntiga := Contador;
+
+      end;
+
+    end;
+
+
+    {Chama a tela de Infos Baixa}
+    try
+
+      //  Cria o form
+      frmInfoBxMultCp := TfrmInfoBxMultCp.Create(Self);
+
+      //  Passa o valor total das contas selecionadas e a data da mais antiga
+      frmInfoBxMultCp.ValorPago   := CalcCpSel;
+      frmInfoBxMultCp.DtCpMaisAnt := DtMaisAntiga;
+
+      //  Exibe o form
+      frmInfoBxMultCp.ShowModal;
+
+    except on E : Exception do
+
+     Application.MessageBox(PWideChar(E.Message), 'Erro na forma de pagamento do documento!', MB_OK + MB_ICONWARNING);
+
+    end;
+
+    //  Verifica se deu tudo certo com as formas de pgto
+    if frmInfoBxMultCp.ModalResult <> mrOk then
+    begin
+      abort;
+    end
+    else
+    begin
+
+      FrPgto := frmInfoBxMultCp.CodFrPgto;
+      ValorAbater := frmInfoBxMultCp.ValorPago;
+
+      FreeAndNil(frmInfoBxMultCp);
+
+    end;
+
+
+    {Baixando as CPs}
     for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
     begin
 
@@ -374,6 +404,12 @@ begin
     end;
 
     Application.MessageBox('Contas baixadas com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+  end
+  else
+  begin
+
+     Application.MessageBox('Selecione uma ou mais contas!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
 
   end;
 

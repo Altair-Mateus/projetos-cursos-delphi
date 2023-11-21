@@ -310,8 +310,8 @@
             <Form>frmFrPgtoBxMultiCp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\SistemaFinanceiro.View.BxMultiCP.FrPgto.pas">
-            <Form>frmFrPgtoBxMultCp</Form>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BxMultiCP.InfosBx.pas">
+            <Form>frmInfoBxMultCp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
