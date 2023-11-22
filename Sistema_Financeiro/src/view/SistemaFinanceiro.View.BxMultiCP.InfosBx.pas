@@ -108,7 +108,7 @@ begin
   
   end;
 
-    if (not TryStrToCurr(edtValor.Text, FValorPago)) or (FValorPago <= 0)  then
+  if (not TryStrToCurr(edtValor.Text, FValorPago)) or (FValorPago <= 0)  then
   begin
     edtValor.SetFocus;
     Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
@@ -130,7 +130,7 @@ begin
   if checkDesconto.Checked then
   begin
 
-    if (not TryStrToCurr(edtValorDesc.Text, FValorDesc)) or (FValorDesc > FValorPago) then
+    if (not TryStrToCurr(edtValorDesc.Text, FValorDesc)) or (FValorDesc > FValorCpSel) then
     begin
 
       edtValorDesc.SetFocus;
@@ -149,9 +149,8 @@ begin
     abort;
 
   end;
-  
 
-//  ModalResult := mrOk;
+  ModalResult := mrOk;
 
 end;
 
@@ -216,7 +215,7 @@ var
 
 begin
 
-  ValorCp     := StrToCurr(edtValor.Text);
+  ValorCp     := FValorCpSel;
   ValorDesc   := 0;
   ValorFinal  := 0;
   PorcentDesc := 0;
@@ -256,7 +255,7 @@ begin
 
   Result := 0;
 
-  ValorCp     := StrToCurr(edtValor.Text);
+  ValorCp     := FValorCpSel;
   ValorDesc   := 0;
   ValorFinal  := 0;
   PorcentDesc := 0;

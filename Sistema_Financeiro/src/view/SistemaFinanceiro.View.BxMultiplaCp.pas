@@ -108,6 +108,7 @@ type
     function CalcCpSel : Currency;
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
+    function CalcDescBx(ValorCP, ValorTot, ValorDesc : Currency) : Currency;
 
 
   public
@@ -133,7 +134,7 @@ var
   ValorCpSel        : Currency;
   ValorAbater       : Currency;
   ValorDesc         : Currency;
-  ValorCpCel        : Currency;
+  ValorPgo          : Currency;
   Contador          : Integer;
   DtMaisAntiga      : TDateTime;
   DtCompraSel       : TDateTime;
@@ -192,7 +193,8 @@ begin
   ValorAbater := 0;
   ValorDesc   := 0;
   FrPgto      := 0;
-  ValorCpCel  := CalcCpSel;
+  ValorCpSel  := 0;
+  ValorPgo    := CalcCpSel;
 
 //  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
 //  begin
@@ -271,7 +273,7 @@ begin
 
     end;
 
-    //  Verifica se deu tudo certo com as formas de pgto
+    //  Verifica se deu tudo certo com as info de pgto
     if frmInfoBxMultCp.ModalResult <> mrOk then
     begin
       abort;
@@ -279,8 +281,9 @@ begin
     else
     begin
 
-      FrPgto := frmInfoBxMultCp.CodFrPgto;
+      FrPgto      := frmInfoBxMultCp.CodFrPgto;
       ValorAbater := frmInfoBxMultCp.ValorPago;
+      ValorDesc   := frmInfoBxMultCp.ValorDesc;
 
       FreeAndNil(frmInfoBxMultCp);
 
@@ -293,7 +296,7 @@ begin
 
       DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[Contador];
 
-      CpDetalhe := TModelCpDetalhe.Create;
+      CpDetalhe  := TModelCpDetalhe.Create;
       ValorCpSel := 0;
 
       try
@@ -305,24 +308,27 @@ begin
         CpDetalhe.Detalhes  := 'CP baixada pela rotina de Baixa Múltipla';
         CpDetalhe.Data      := datePgto.Date;
         CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.Id;
+        CpDetalhe.ValorDesc := CalcDescBx(ValorCpSel, ValorPgo, ValorDesc);
+
+        showmessage(CurrToStr(CpDetalhe.ValorDesc));
 
         //  Valores pagos nas contas
         //  Aplica o desconto somente na primeira CP selecionada
-        if (Contador = 0) then
-        begin
-
-          CpDetalhe.ValorDesc := ValorDesc;
-          CpDetalhe.Valor     := ValorcpSel - ValorDesc;
-
-        end
-        else
-        begin
+//        if (Contador = 0) then
+//        begin
+//
+//          CpDetalhe.ValorDesc := ValorDesc;
+//          CpDetalhe.Valor     := ValorcpSel - ValorDesc;
+//
+//        end
+//        else
+//        begin
 
           if (ValorAbater - ValorCpSel) > 0 then
           begin
 
              //  Se for maior que 0 vai baixar a conta total
-            CpDetalhe.Valor := ValorCpSel;
+            CpDetalhe.Valor := (ValorCpSel - CpDetalhe.ValorDesc);
 
           end
           else if ValorAbater > 0 then
@@ -331,7 +337,7 @@ begin
             //  Se ainda tiver ValorAbater mas não o suficiente
             //  para baicar toda a cp, ira baixar apenas o valor
             //  abater e o restante será gerado uma CP Parcial
-            CpDetalhe.Valor := ValorAbater;
+            CpDetalhe.Valor := (ValorAbater - CpDetalhe.ValorDesc);
 
           end
           else
@@ -350,14 +356,14 @@ begin
           //  Ira somar o valordesc no valor abater para
           //  que não acabe gerando duplicatas parcias
           //  sem precisar realmente gerar
-          if (Contador = 0) and (ValorDesc > 0) then
-          begin
-            ValorAbater := ValorAbater + ValorDesc;
-          end;
+//          if (Contador = 0) and (ValorDesc > 0) then
+//          begin
+//            ValorAbater := ValorAbater + ValorDesc;
+//          end;
 
-        end;
+//        end;
 
-        //  Calcula o restante do valorabater
+        //  Calcula o restante do valor abater
         ValorAbater := ValorAbater - ValorCpSel;
 
 //        showmessage('Valor abater depois' +  currtostr(valorabater));
@@ -365,7 +371,7 @@ begin
         try
 
           dmCPagar.BaixarCP(CpDetalhe);
-          ShowMessage('entrou na baixa')
+//          ShowMessage('entrou na baixa')
 
         except on E : Exception do
           Application.MessageBox(PWideChar(E.Message), 'Erro ao baixar documento!', MB_OK + MB_ICONWARNING);
@@ -593,6 +599,45 @@ begin
    end;
 
    Result := TotalCp;
+
+end;
+
+function TfrmBxMultiplaCP.CalcDescBx(ValorCP, ValorTot,
+  ValorDesc: Currency): Currency;
+var
+  PercentCp   : Currency;
+  ValorDescCp : Currency;
+
+begin
+
+  PercentCp   := 0;
+  ValorDescCp := 0;
+  Result      := 0;
+
+  if (ValorCP < 0) then
+  begin
+    Application.MessageBox('Valor Conta a Pagar < 0!', 'Atenção', MB_OK + MB_ICONWARNING);
+  end
+  else if (ValorTot < 0)  then
+  begin
+    Application.MessageBox('Valor Total das Contas < 0!', 'Atenção', MB_OK + MB_ICONWARNING);
+  end
+  else if (ValorDesc < 0) then
+  begin
+    Application.MessageBox('Valor Desconto < 0!', 'Atenção', MB_OK + MB_ICONWARNING);
+  end
+  else
+  begin
+
+    //  Descobre o percentual da conta
+    PercentCp := (ValorCP / ValorTot);
+
+    //  Descobre o valor do desconto para a conta
+    ValorDescCp := (PercentCp * ValorDesc);
+
+    Result := ValorDescCp;
+
+  end;
 
 end;
 

@@ -3,8 +3,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Informa'#231#245'es Baixa M'#250'ltipla CP'
-  ClientHeight = 484
-  ClientWidth = 629
+  ClientHeight = 453
+  ClientWidth = 511
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,22 +18,22 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
   object pnlGeral: TPanel
     Left = 0
     Top = 0
-    Width = 629
-    Height = 415
+    Width = 511
+    Height = 384
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 618
-    ExplicitHeight = 476
+    ExplicitWidth = 625
+    ExplicitHeight = 414
     object pnlInfos: TPanel
       AlignWithMargins = True
       Left = 10
       Top = 10
-      Width = 605
-      Height = 190
+      Width = 487
+      Height = 180
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -45,7 +45,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       TabOrder = 0
       object Label1: TLabel
         Left = 100
-        Top = 44
+        Top = 20
         Width = 75
         Height = 19
         Caption = 'Data Pgto:'
@@ -57,8 +57,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         ParentFont = False
       end
       object lblValor: TLabel
-        Left = 330
-        Top = 39
+        Left = 100
+        Top = 59
         Width = 107
         Height = 19
         Caption = 'Valor Pago R$:'
@@ -101,12 +101,12 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         Left = 1
         Top = 1
         Width = 80
-        Height = 184
+        Height = 174
         Align = alLeft
         Color = 5737262
         ParentBackground = False
         TabOrder = 0
-        ExplicitHeight = 235
+        ExplicitHeight = 184
         object Image1: TImage
           Left = 16
           Top = 60
@@ -263,8 +263,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         end
       end
       object datePgto: TDateTimePicker
-        Left = 187
-        Top = 36
+        Left = 227
+        Top = 12
         Width = 126
         Height = 27
         Date = 45133.000000000000000000
@@ -272,8 +272,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         TabOrder = 1
       end
       object edtValor: TEdit
-        Left = 443
-        Top = 36
+        Left = 227
+        Top = 56
         Width = 126
         Height = 27
         Font.Charset = DEFAULT_CHARSET
@@ -287,7 +287,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       end
       object checkDesconto: TCheckBox
         Left = 100
-        Top = 89
+        Top = 97
         Width = 160
         Height = 21
         TabStop = False
@@ -341,9 +341,9 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
     object pnlFrPgto: TPanel
       AlignWithMargins = True
       Left = 10
-      Top = 211
-      Width = 605
-      Height = 190
+      Top = 190
+      Width = 487
+      Height = 180
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -353,7 +353,6 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 202
       object lblNomeFrPgto: TLabel
         AlignWithMargins = True
         Left = 105
@@ -372,7 +371,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         Visible = False
       end
       object btnPesqFrPgto: TButton
-        Left = 420
+        Left = 300
         Top = 36
         Width = 44
         Height = 29
@@ -385,7 +384,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       object edtCodFrPgto: TEdit
         Left = 105
         Top = 38
-        Width = 296
+        Width = 176
         Height = 27
         Color = clWhite
         MaxLength = 20
@@ -398,17 +397,15 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         Left = 1
         Top = 1
         Width = 80
-        Height = 184
+        Height = 174
         Align = alLeft
         Color = 5868590
         ParentBackground = False
         TabOrder = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitHeight = 198
+        ExplicitHeight = 184
         object imgPgto: TImage
           Left = 16
-          Top = 72
+          Top = 56
           Width = 49
           Height = 49
           Picture.Data = {
@@ -502,22 +499,22 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 415
-    Width = 629
+    Top = 384
+    Width = 511
     Height = 69
     Align = alBottom
     BevelOuter = bvNone
     BorderStyle = bsSingle
     TabOrder = 1
-    ExplicitTop = 476
-    ExplicitWidth = 618
+    ExplicitTop = 414
+    ExplicitWidth = 625
     object btnConfirmar: TButton
       AlignWithMargins = True
-      Left = 190
+      Left = 130
       Top = 0
       Width = 120
       Height = 65
-      Margins.Left = 190
+      Margins.Left = 130
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -528,16 +525,17 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       TabOrder = 0
       WordWrap = True
       OnClick = btnConfirmarClick
+      ExplicitLeft = 190
     end
     object btnCancelar: TButton
       AlignWithMargins = True
-      Left = 315
+      Left = 257
       Top = 0
       Width = 120
       Height = 65
       Margins.Left = 0
       Margins.Top = 0
-      Margins.Right = 190
+      Margins.Right = 130
       Margins.Bottom = 0
       Align = alRight
       BiDiMode = bdLeftToRight
@@ -547,7 +545,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       ParentBiDiMode = False
       TabOrder = 1
       OnClick = btnCancelarClick
-      ExplicitLeft = 304
+      ExplicitLeft = 197
+      ExplicitTop = 1
     end
   end
   object ImageList1: TImageList
