@@ -49,18 +49,6 @@ type
     lblValorCps: TLabel;
     edtValorTotCP: TEdit;
     ImageList2: TImageList;
-    pnlInfPag: TPanel;
-    lblInfPag: TLabel;
-    Label1: TLabel;
-    lblValor: TLabel;
-    lblDesconto: TLabel;
-    lblValorDesc: TLabel;
-    datePgto: TDateTimePicker;
-    edtValor: TEdit;
-    checkDesconto: TCheckBox;
-    edtPorcDesc: TEdit;
-    edtValorDesc: TEdit;
-    lblCheckDesc: TLabel;
     checkParciais: TCheckBox;
     lblCheckParciais: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
@@ -80,20 +68,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
     procedure btnConfirmarClick(Sender: TObject);
-    procedure checkDescontoClick(Sender: TObject);
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure edtPorcDescKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure edtPorcDescKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure edtValorDescKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure edtValorDescKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure edtValorExit(Sender: TObject);
     procedure checkParciaisClick(Sender: TObject);
-    procedure checkVencidasClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -106,8 +83,6 @@ type
     procedure CalcQtdCpSel;
 
     function CalcCpSel : Currency;
-    function CalcValorDesc : Currency;
-    function CalcPorcentDesc : Currency;
     function CalcDescBx(ValorCP, ValorTot, ValorDesc : Currency) : Currency;
 
 
@@ -140,91 +115,16 @@ var
   DtCompraSel       : TDateTime;
   IndexDtMaisAntiga : Integer;
   FrPgto            : Integer;
+  DtPgto            : TDateTime;
 
 begin
-
-  //  Validações dos campos
-//  if datePgto.Date > Date then
-//  begin
-//
-//    datePgto.SetFocus;
-//    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
-//    abort;
-//
-//  end;
-
-  if DBGrid1.SelectedRows.Count > 0 then
-  begin
-
-    // Inicializa com o maior valor possível da data
-    DtMaisAntiga := MaxDateTime;
-    IndexDtMaisAntiga := -1;
-
-    for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
-    begin
-
-      DBGrid1.DataSource.DataSet.Bookmark := DBGrid1.SelectedRows[Contador];
-
-      //  Pega a data de compra
-      DtCompraSel := DBGrid1.DataSource.DataSet.FieldByName('DATA_COMPRA').AsDateTime;
-
-      if DtCompraSel < DtMaisAntiga then
-      begin
-
-        DtMaisAntiga := DtCompraSel;
-        IndexDtMaisAntiga := Contador;
-
-      end;
-
-    end;
-
-
-//    if datePgto.Date < DtMaisAntiga then
-//    begin
-//
-//      datePgto.SetFocus;
-//      Application.MessageBox('A data de pagamento não pode ser menor que a data da compra!', 'Atenção', MB_OK + MB_ICONWARNING);
-//      abort;
-//
-//    end;
-
-  end;
 
   ValorAbater := 0;
   ValorDesc   := 0;
   FrPgto      := 0;
   ValorCpSel  := 0;
   ValorPgo    := CalcCpSel;
-
-//  if (not TryStrToCurr(edtValor.Text, ValorAbater)) or (ValorAbater <= 0)  then
-//  begin
-//    edtValor.SetFocus;
-//    Application.MessageBox('Valor inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
-//    abort;
-//  end;
-//
-//  if ValorAbater > ValorCpCel then
-//  begin
-//    edtValor.SetFocus;
-//    Application.MessageBox('Valor pago não pode ser maior que o valor das parcelas!', 'Atenção', MB_OK + MB_ICONWARNING);
-//    abort;
-//  end;
-//
-//  if checkDesconto.Checked then
-//  begin
-//
-//    if (not TryStrToCurr(edtValorDesc.Text, ValorDesc)) or (ValorDesc > ValorCpCel) then
-//    begin
-//
-//      edtValorDesc.SetFocus;
-//      Application.MessageBox('Valor de desconto inválido!', 'Atenção', MB_OK + MB_ICONWARNING);
-//      abort;
-//
-//    end;
-//
-//  end;
-
-
+  DtPgto      := MaxDateTime;
 
 
   if DBGrid1.SelectedRows.Count > 0 then
@@ -246,7 +146,7 @@ begin
       if DtCompraSel < DtMaisAntiga then
       begin
 
-        DtMaisAntiga := DtCompraSel;
+        DtMaisAntiga      := DtCompraSel;
         IndexDtMaisAntiga := Contador;
 
       end;
@@ -284,6 +184,7 @@ begin
       FrPgto      := frmInfoBxMultCp.CodFrPgto;
       ValorAbater := frmInfoBxMultCp.ValorPago;
       ValorDesc   := frmInfoBxMultCp.ValorDesc;
+      DtPgto      := frmInfoBxMultCp.DataPgto;
 
       FreeAndNil(frmInfoBxMultCp);
 
@@ -306,67 +207,45 @@ begin
 
         CpDetalhe.IdCP      := DBGrid1.DataSource.DataSet.FieldByName('ID').AsInteger;
         CpDetalhe.Detalhes  := 'CP baixada pela rotina de Baixa Múltipla';
-        CpDetalhe.Data      := datePgto.Date;
+        CpDetalhe.Data      := DtPgto;
         CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.Id;
         CpDetalhe.ValorDesc := CalcDescBx(ValorCpSel, ValorPgo, ValorDesc);
 
         showmessage(CurrToStr(CpDetalhe.ValorDesc));
 
-        //  Valores pagos nas contas
-        //  Aplica o desconto somente na primeira CP selecionada
-//        if (Contador = 0) then
-//        begin
-//
-//          CpDetalhe.ValorDesc := ValorDesc;
-//          CpDetalhe.Valor     := ValorcpSel - ValorDesc;
-//
-//        end
-//        else
-//        begin
+        if (ValorAbater - (ValorCpSel - CpDetalhe.ValorDesc)) > 0 then
+        begin
 
-          if (ValorAbater - ValorCpSel) > 0 then
-          begin
+          //  Se for maior que 0 vai baixar a conta total
+          CpDetalhe.Valor := (ValorCpSel - CpDetalhe.ValorDesc);
 
-             //  Se for maior que 0 vai baixar a conta total
-            CpDetalhe.Valor := (ValorCpSel - CpDetalhe.ValorDesc);
+        end
+        else if ValorAbater > 0 then
+        begin
 
-          end
-          else if ValorAbater > 0 then
-          begin
+          //  Se ainda tiver ValorAbater mas não o suficiente
+          //  para baicar toda a cp, ira baixar apenas o valor
+          //  abater e o restante será gerado uma CP Parcial
+          CpDetalhe.Valor := ValorAbater;
 
-            //  Se ainda tiver ValorAbater mas não o suficiente
-            //  para baicar toda a cp, ira baixar apenas o valor
-            //  abater e o restante será gerado uma CP Parcial
-            CpDetalhe.Valor := (ValorAbater - CpDetalhe.ValorDesc);
+        end
+        else
+        begin
 
-          end
-          else
-          begin
+          //  Caso ainda tenha alguma CP selecionada porem
+          //  ValorAbater já está zerado irá baixar a conta
+          //  e irá gerar uma CP Parcial com o valor total
+          CpDetalhe.Valor := 0;
 
-            //  Caso ainda tenha alguma CP selecionada porem
-            //  ValorAbater já está zerado irá baixar a conta
-            //  e irá gerar uma CP Parcial com o valor total
-            CpDetalhe.Valor := 0;
+        end;
 
-          end;
+        showmessage('Valor abater antes' +  currtostr(valorabater));
 
-//          showmessage('Valor abater antes' +  currtostr(valorabater));
-
-          //  Se estiver na Bx da 1ª CP e tiver desconto
-          //  Ira somar o valordesc no valor abater para
-          //  que não acabe gerando duplicatas parcias
-          //  sem precisar realmente gerar
-//          if (Contador = 0) and (ValorDesc > 0) then
-//          begin
-//            ValorAbater := ValorAbater + ValorDesc;
-//          end;
-
-//        end;
 
         //  Calcula o restante do valor abater
-        ValorAbater := ValorAbater - ValorCpSel;
+        ValorAbater := (ValorAbater - (ValorCpSel - CpDetalhe.ValorDesc));
 
-//        showmessage('Valor abater depois' +  currtostr(valorabater));
+        showmessage('Valor abater depois' +  currtostr(valorabater));
 
         try
 
@@ -641,44 +520,6 @@ begin
 
 end;
 
-function TfrmBxMultiplaCP.CalcPorcentDesc: Currency;
-var
-  ValorFinal : Currency;
-  PorcentDesc : Currency;
-  ValorDesc : Currency;
-  ValorCp : Currency;
-
-begin
-
-  ValorCp     := CalcCpSel;
-  ValorDesc   := 0;
-  ValorFinal  := 0;
-  PorcentDesc := 0;
-  Result      := 0;
-
-  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
-  TryStrToCurr(edtValorDesc.Text, ValorDesc);
-
-  if PorcentDesc > 0 then
-    begin
-
-      //  Calcula o valor do desconto
-      ValorDesc := (PorcentDesc / 100) * ValorCp;
-
-      //  Atribui o valor do desconto ao campo
-      edtValorDesc.Text := CurrToStr(ValorDesc);
-
-      //  Calcula o valor final
-      ValorFinal := ValorCp - ValorDesc;
-
-      //  retorna o valor final
-      Result := ValorFinal;
-
-    end;
-
-
-end;
-
 procedure TfrmBxMultiplaCP.CalcQtdCpGrid;
 var
   QtdCp: Integer;
@@ -708,86 +549,14 @@ begin
 
 end;
 
-function TfrmBxMultiplaCP.CalcValorDesc: Currency;
-var
-  ValorCp     : Currency;
-  ValorDesc   : Currency;
-  ValorFinal : Currency;
-  PorcentDesc : Currency;
 
-begin
-
-  Result := 0;
-
-  ValorCp := CalcCpSel;
-  ValorDesc   := 0;
-  ValorFinal  := 0;
-  PorcentDesc := 0;
-
-  TryStrToCurr(edtPorcDesc.Text, PorcentDesc);
-  TryStrToCurr(edtValorDesc.Text, ValorDesc);
-
-  if ValorDesc > 0 then
-  begin
-
-    //  Calcula a porcentagem de desconto
-    PorcentDesc := (ValorDesc / ValorCp) * 100;
-
-    //  Atribui a porcentagem no campo
-    edtPorcDesc.Text := CurrToStr(PorcentDesc);
-
-    //  Calcula o valor final
-    ValorFinal := ValorCp - ValorDesc;
-
-    //  retorna o valor final
-    Result := ValorFinal;
-
-  end;
-
-end;
 
 procedure TfrmBxMultiplaCP.cbDataChange(Sender: TObject);
 begin
   Pesquisar;
 end;
 
-procedure TfrmBxMultiplaCP.checkDescontoClick(Sender: TObject);
-begin
-
-  if checkDesconto.Checked then
-  begin
-
-    //  Libera e mostra os campos do desconto
-    edtValorDesc.Enabled := True;
-    edtValorDesc.Visible := True;
-    edtPorcDesc.Visible  := True;
-    edtPorcDesc.Enabled  := True;
-    lblDesconto.Visible  := True;
-    lblValorDesc.Visible := True;
-
-  end
-  else
-  begin
-
-    //  Bloqueia e oculta os campos do desconto
-    edtValorDesc.Enabled := False;
-    edtValorDesc.Visible := False;
-    edtPorcDesc.Visible  := False;
-    edtPorcDesc.Enabled  := False;
-    lblDesconto.Visible  := False;
-    lblValorDesc.Visible := False;
-
-
-  end;
-
-end;
-
 procedure TfrmBxMultiplaCP.checkParciaisClick(Sender: TObject);
-begin
-  Pesquisar;
-end;
-
-procedure TfrmBxMultiplaCP.checkVencidasClick(Sender: TObject);
 begin
   Pesquisar;
 end;
@@ -823,7 +592,6 @@ begin
 
   edtValorSel.Text := TUtilitario.FormatoMoeda(CalcCpSel);
   CalcQtdCpSel;
-  edtValor.Text := Currtostr(CalccpSel);
 
 end;
 
@@ -965,35 +733,6 @@ begin
 
 end;
 
-procedure TfrmBxMultiplaCP.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  edtValor.Text := CurrToStr(CalcPorcentDesc);
-end;
-
-procedure TfrmBxMultiplaCP.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  edtValor.Text := CurrToStr(CalcPorcentDesc);
-end;
-
-procedure TfrmBxMultiplaCP.edtValorDescKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  edtValor.Text := CurrToStr(CalcValorDesc);
-end;
-
-procedure TfrmBxMultiplaCP.edtValorDescKeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  edtValor.Text := CurrToStr(CalcValorDesc);
-end;
-
-procedure TfrmBxMultiplaCP.edtValorExit(Sender: TObject);
-begin
-  edtValor.Text := TUtilitario.FormatarValor(Trim(edtValor.Text));
-end;
-
 
 procedure TfrmBxMultiplaCP.FormCreate(Sender: TObject);
 var
@@ -1016,8 +755,6 @@ begin
   //  Define as datas da consulta
   dateInicial.Date := StartOfTheMonth(Now);
   dateFinal.Date   := EndOfTheMonth(Now);
-
-  datePgto.Date := Now;
 
 end;
 

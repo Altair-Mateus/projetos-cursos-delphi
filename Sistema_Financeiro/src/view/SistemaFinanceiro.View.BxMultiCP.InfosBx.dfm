@@ -26,8 +26,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 625
-    ExplicitHeight = 414
+    ExplicitWidth = 507
+    ExplicitHeight = 383
     object pnlInfos: TPanel
       AlignWithMargins = True
       Left = 10
@@ -43,6 +43,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 483
       object Label1: TLabel
         Left = 100
         Top = 20
@@ -106,7 +107,6 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         Color = 5737262
         ParentBackground = False
         TabOrder = 0
-        ExplicitHeight = 184
         object Image1: TImage
           Left = 16
           Top = 60
@@ -353,6 +353,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 189
+      ExplicitWidth = 483
       object lblNomeFrPgto: TLabel
         AlignWithMargins = True
         Left = 105
@@ -402,7 +404,6 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         Color = 5868590
         ParentBackground = False
         TabOrder = 2
-        ExplicitHeight = 184
         object imgPgto: TImage
           Left = 16
           Top = 56
@@ -506,8 +507,8 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
     BevelOuter = bvNone
     BorderStyle = bsSingle
     TabOrder = 1
-    ExplicitTop = 414
-    ExplicitWidth = 625
+    ExplicitTop = 383
+    ExplicitWidth = 507
     object btnConfirmar: TButton
       AlignWithMargins = True
       Left = 130
@@ -525,7 +526,6 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       TabOrder = 0
       WordWrap = True
       OnClick = btnConfirmarClick
-      ExplicitLeft = 190
     end
     object btnCancelar: TButton
       AlignWithMargins = True
@@ -545,8 +545,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
       ParentBiDiMode = False
       TabOrder = 1
       OnClick = btnCancelarClick
-      ExplicitLeft = 197
-      ExplicitTop = 1
+      ExplicitLeft = 253
     end
   end
   object ImageList1: TImageList

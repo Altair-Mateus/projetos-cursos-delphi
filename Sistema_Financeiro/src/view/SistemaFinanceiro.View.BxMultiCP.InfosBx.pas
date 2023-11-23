@@ -141,6 +141,7 @@ begin
 
   end;
 
+
   if datePgto.Date < FDtCpMaisAnt then
   begin
 
@@ -150,7 +151,10 @@ begin
 
   end;
 
+  FDataPgto := datePgto.Date;
+
   ModalResult := mrOk;
+
 
 end;
 
