@@ -5,9 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
-  System.ImageList, Vcl.ImgList, SistemaFinanceiro.View.Fornecedores,
-  SistemaFinanceiro.View.FaturaCartao, SistemaFinanceiro.Model.dmFornecedores,
-  SistemaFinanceiro.Model.dmFaturaCartao, Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils,
+  System.ImageList, Vcl.ImgList,
+  SistemaFinanceiro.View.Fornecedores,
+  SistemaFinanceiro.View.FaturaCartao,
+  SistemaFinanceiro.Model.dmFornecedores,
+  SistemaFinanceiro.Model.dmFaturaCartao,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, System.DateUtils,
   Datasnap.DBClient, SistemaFinanceiro.View.FrPgto,
   SistemaFinanceiro.View.BxMultiCP.InfosBx;
 
@@ -51,6 +54,8 @@ type
     ImageList2: TImageList;
     checkParciais: TCheckBox;
     lblCheckParciais: TLabel;
+    checkSelAll: TCheckBox;
+    lblCheckSelAll: TLabel;
     procedure btnPesquisaFornecedorClick(Sender: TObject);
     procedure btnPesqFatClick(Sender: TObject);
     procedure edtFornecedorExit(Sender: TObject);
@@ -71,12 +76,14 @@ type
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure checkParciaisClick(Sender: TObject);
+    procedure checkSelAllClick(Sender: TObject);
 
   private
     { Private declarations }
     procedure BuscaNomeFornecedor;
     procedure BuscaNomeFatCartao;
     procedure EditKeyPress(Sender: TObject; var Key: Char);
+    procedure SelAllReg(DBGrid: TDBGrid);
     procedure Pesquisar;
     procedure CalcCpGrid;
     procedure CalcQtdCpGrid;
@@ -97,9 +104,13 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.dmCPagar, FireDAC.Stan.Param,
-  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe,
-  SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Model.dmUsuarios,
+uses
+  SistemaFinanceiro.Model.dmCPagar,
+  FireDAC.Stan.Param,
+  SistemaFinanceiro.Utilitarios,
+  SistemaFinanceiro.Model.Entidades.CP.Detalhe,
+  SistemaFinanceiro.Model.dmFrPgto,
+  SistemaFinanceiro.Model.dmUsuarios,
   SistemaFinanceiro.Model.dmPgtoBxCp;
 
 
@@ -132,7 +143,7 @@ begin
 
     {Pega a data mais antiga}
     // Inicializa com o maior valor possível da data
-    DtMaisAntiga := MaxDateTime;
+    DtMaisAntiga      := MaxDateTime;
     IndexDtMaisAntiga := -1;
 
     for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
@@ -211,7 +222,7 @@ begin
         CpDetalhe.Usuario   := dmUsuarios.GetUsuarioLogado.Id;
         CpDetalhe.ValorDesc := CalcDescBx(ValorCpSel, ValorPgo, ValorDesc);
 
-        showmessage(CurrToStr(CpDetalhe.ValorDesc));
+//        showmessage(CurrToStr(CpDetalhe.ValorDesc));
 
         if (ValorAbater - (ValorCpSel - CpDetalhe.ValorDesc)) > 0 then
         begin
@@ -239,13 +250,13 @@ begin
 
         end;
 
-        showmessage('Valor abater antes' +  currtostr(valorabater));
+//        showmessage('Valor abater antes' +  currtostr(valorabater));
 
 
         //  Calcula o restante do valor abater
         ValorAbater := (ValorAbater - (ValorCpSel - CpDetalhe.ValorDesc));
 
-        showmessage('Valor abater depois' +  currtostr(valorabater));
+//        showmessage('Valor abater depois' +  currtostr(valorabater));
 
         try
 
@@ -561,6 +572,13 @@ begin
   Pesquisar;
 end;
 
+procedure TfrmBxMultiplaCP.checkSelAllClick(Sender: TObject);
+begin
+
+  SelAllReg(DBGrid1)
+
+end;
+
 procedure TfrmBxMultiplaCP.dateFinalChange(Sender: TObject);
 begin
   Pesquisar;
@@ -869,11 +887,80 @@ begin
                                      LFiltro + lOrdem;
   dmCPagar.cdsBxMultipla.Open;
 
+  //  Coloca na primeira posição
+  DBGrid1.DataSource.DataSet.First;
 
   //  Calcula a quantidade e valor
   CalcCpGrid;
   CalcQtdCpGrid;
 
 end;
+
+procedure TfrmBxMultiplaCP.SelAllReg(DBGrid: TDBGrid);
+var
+  i: Integer;
+
+begin
+
+  // Verifica se o DBGrid está conectado a um DataSource
+  if Assigned(DBGrid.DataSource) and Assigned(DBGrid.DataSource.DataSet) then
+  begin
+
+    // Verifica se o data set esta aberto
+    if DBGrid.DataSource.DataSet.Active then
+    begin
+
+      // Verifica se o conjunto de dados não está vazio
+      if not DBGrid.DataSource.DataSet.IsEmpty then
+      begin
+
+        // Desativa controles de atualização para melhorar o desempenho
+        DBGrid.DataSource.DataSet.DisableControls;
+
+        //  Coloca na primeira posição
+        DBGrid.DataSource.DataSet.first;
+
+        try
+
+          for i := 0 to DBGrid.DataSource.DataSet.RecordCount - 1 do
+          begin
+
+            if checkSelAll.Checked then
+            begin
+
+              // Marca a linha como selecionada
+              DBGrid.SelectedRows.CurrentRowSelected := True;
+
+            end
+            else
+            begin
+
+              // Marca a linha como selecionada
+              DBGrid.SelectedRows.CurrentRowSelected := False;
+
+            end;
+
+
+
+            DBGrid.DataSource.DataSet.Next;
+
+          end;
+
+        finally
+
+          // Reativa controles
+          DBGrid.DataSource.DataSet.EnableControls;
+
+        end;
+
+      end;
+
+    end;
+
+  end;
+
+end;
+
+
 
 end.

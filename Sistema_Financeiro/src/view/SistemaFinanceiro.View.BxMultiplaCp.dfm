@@ -143,6 +143,21 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentColor = False
       ParentFont = False
     end
+    object lblCheckSelAll: TLabel
+      Left = 218
+      Top = 137
+      Width = 120
+      Height = 19
+      Caption = 'Selecionar Todas'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
     object dateInicial: TDateTimePicker
       Left = 18
       Top = 39
@@ -260,6 +275,22 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ParentFont = False
       TabOrder = 8
       OnClick = checkParciaisClick
+    end
+    object checkSelAll: TCheckBox
+      Left = 194
+      Top = 137
+      Width = 159
+      Height = 17
+      Color = 5934638
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 9
+      OnClick = checkSelAllClick
     end
   end
   object pnlContas: TPanel

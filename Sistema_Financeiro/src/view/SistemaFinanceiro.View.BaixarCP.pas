@@ -143,6 +143,7 @@ begin
     ContaPagar.Free;
 
   end;
+
 end;
 
 procedure TfrmBaixarCP.btnCancelarClick(Sender: TObject);

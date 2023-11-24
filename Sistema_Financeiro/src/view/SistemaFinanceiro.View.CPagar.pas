@@ -1278,6 +1278,12 @@ begin
 
   end;
 
+  Pesquisar;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.TotalCP;
+  frmPrincipal.ResumoMensalCaixa;
+
 end;
 
 procedure TfrmContasPagar.FatCartaoAtiva;
