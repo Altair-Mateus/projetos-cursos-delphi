@@ -1,8 +1,8 @@
-object frmInfoBxMultCp: TfrmInfoBxMultCp
+object frmInfoBxMult: TfrmInfoBxMult
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  Caption = 'Informa'#231#245'es Baixa M'#250'ltipla CP'
+  Caption = 'Informa'#231#245'es Baixa M'#250'ltipla '
   ClientHeight = 453
   ClientWidth = 511
   Color = clBtnFace
@@ -19,7 +19,7 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
     Left = 0
     Top = 0
     Width = 511
-    Height = 384
+    Height = 453
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
@@ -497,55 +497,55 @@ object frmInfoBxMultCp: TfrmInfoBxMultCp
         end
       end
     end
-  end
-  object pnlBotoes: TPanel
-    Left = 0
-    Top = 384
-    Width = 511
-    Height = 69
-    Align = alBottom
-    BevelOuter = bvNone
-    BorderStyle = bsSingle
-    TabOrder = 1
-    ExplicitTop = 383
-    ExplicitWidth = 507
-    object btnConfirmar: TButton
-      AlignWithMargins = True
-      Left = 130
-      Top = 0
-      Width = 120
-      Height = 65
-      Margins.Left = 130
-      Margins.Top = 0
-      Margins.Right = 0
-      Margins.Bottom = 0
-      Align = alLeft
-      Caption = 'Confirmar'
-      ImageIndex = 6
-      Images = ImageList1
-      TabOrder = 0
-      WordWrap = True
-      OnClick = btnConfirmarClick
-    end
-    object btnCancelar: TButton
-      AlignWithMargins = True
-      Left = 257
-      Top = 0
-      Width = 120
-      Height = 65
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 130
-      Margins.Bottom = 0
-      Align = alRight
-      BiDiMode = bdLeftToRight
-      Caption = 'Cancelar'
-      ImageIndex = 0
-      Images = ImageList1
-      ParentBiDiMode = False
-      TabOrder = 1
-      OnClick = btnCancelarClick
-      ExplicitLeft = 253
+    object pnlBotoes: TPanel
+      Left = 0
+      Top = 380
+      Width = 507
+      Height = 69
+      Align = alBottom
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      TabOrder = 2
+      ExplicitTop = 384
+      ExplicitWidth = 511
+      object btnConfirmar: TButton
+        AlignWithMargins = True
+        Left = 130
+        Top = 0
+        Width = 120
+        Height = 65
+        Margins.Left = 130
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alLeft
+        Caption = 'Confirmar'
+        ImageIndex = 6
+        Images = ImageList1
+        TabOrder = 0
+        WordWrap = True
+        OnClick = btnConfirmarClick
+      end
+      object btnCancelar: TButton
+        AlignWithMargins = True
+        Left = 253
+        Top = 0
+        Width = 120
+        Height = 65
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 130
+        Margins.Bottom = 0
+        Align = alRight
+        BiDiMode = bdLeftToRight
+        Caption = 'Cancelar'
+        ImageIndex = 0
+        Images = ImageList1
+        ParentBiDiMode = False
+        TabOrder = 1
+        OnClick = btnCancelarClick
+        ExplicitLeft = 257
+      end
     end
   end
   object ImageList1: TImageList

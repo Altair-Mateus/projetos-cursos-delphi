@@ -1,8 +1,8 @@
-object frmBxMultiplaCP: TfrmBxMultiplaCP
+object frmBxMultiplaCp: TfrmBxMultiplaCp
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMaximize]
-  Caption = 'Baixar v'#225'rias Contas a Pagar'
+  Caption = 'Baixar V'#225'rias CPs'
   ClientHeight = 686
   ClientWidth = 1305
   Color = clBtnFace
@@ -183,12 +183,12 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
     object btnVisualizar: TButton
       AlignWithMargins = True
       Left = 1178
-      Top = 41
+      Top = 46
       Width = 121
-      Height = 95
-      Margins.Top = 40
+      Height = 85
+      Margins.Top = 45
       Margins.Right = 5
-      Margins.Bottom = 40
+      Margins.Bottom = 45
       Align = alRight
       Caption = 'Visualizar Contas'
       ImageIndex = 11
@@ -197,6 +197,8 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       WordWrap = True
       OnClick = btnVisualizarClick
       ExplicitLeft = 1174
+      ExplicitTop = 41
+      ExplicitHeight = 95
     end
     object edtFornecedor: TEdit
       Left = 344
@@ -255,7 +257,7 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
       ItemIndex = 1
       TabOrder = 7
       Text = 'DATA VENCIMENTO'
-      OnChange = cbDataChange
+      OnClick = cbDataClick
       Items.Strings = (
         'DATA COMPRA'
         'DATA VENCIMENTO')
@@ -381,22 +383,8 @@ object frmBxMultiplaCP: TfrmBxMultiplaCP
         end
         item
           Expanded = False
-          FieldName = 'VALOR_COMPRA'
-          Title.Caption = 'Valor Compra'
-          Width = 142
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'DATA_COMPRA'
-          Title.Caption = 'Data da Compra'
-          Width = 134
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DATA_PAGAMENTO'
-          Title.Caption = 'Data de Pagamento'
+          Title.Caption = 'Data Compra'
           Width = 149
           Visible = True
         end>

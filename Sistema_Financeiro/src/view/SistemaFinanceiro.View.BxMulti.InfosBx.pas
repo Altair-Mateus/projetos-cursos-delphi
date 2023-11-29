@@ -1,4 +1,4 @@
-unit SistemaFinanceiro.View.BxMultiCP.InfosBx;
+unit SistemaFinanceiro.View.BxMulti.InfosBx;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Vcl.Imaging.pngimage, Vcl.ComCtrls;
 
 type
-  TfrmInfoBxMultCp = class(TForm)
+  TfrmInfoBxMult = class(TForm)
     pnlGeral: TPanel;
     pnlBotoes: TPanel;
     btnConfirmar: TButton;
@@ -57,7 +57,7 @@ type
     FDataPgto: TDate;
     FValorPago: Currency;
     FValorCpSel: Currency;
-    FDtCpMaisAnt: TDate;
+    FDtMaisAnt: TDate;
 
     procedure BuscaNomeFrPgto;
     procedure EditKeyPress(Sender: TObject; var Key: Char);
@@ -65,7 +65,7 @@ type
     function CalcValorDesc : Currency;
     function CalcPorcentDesc : Currency;
     procedure SetValorPago(const Value: Currency);
-    procedure SetDtCpMaisAnt(const Value: TDate);
+    procedure SetDtMaisAnt(const Value: TDate);
 
   public
     { Public declarations }
@@ -73,12 +73,12 @@ type
     property ValorPago   : Currency read FValorPago write SetValorPago;
     property ValorDesc   : Currency read FValorDesc;
     property DataPgto    : TDate    read FDataPgto;
-    property DtCpMaisAnt : TDate read FDtCpMaisAnt write SetDtCpMaisAnt;
+    property DtMaisAnt   : TDate    read FDtMaisAnt write SetDtMaisAnt;
 
   end;
 
 var
-  frmInfoBxMultCp: TfrmInfoBxMultCp;
+  frmInfoBxMult: TfrmInfoBxMult;
 
 implementation
 
@@ -90,21 +90,22 @@ uses SistemaFinanceiro.Model.dmFrPgto, SistemaFinanceiro.Utilitarios;
 
 
 
-procedure TfrmInfoBxMultCp.btnCancelarClick(Sender: TObject);
+procedure TfrmInfoBxMult.btnCancelarClick(Sender: TObject);
 begin
   ModalResult := MrCancel;
 end;
 
-procedure TfrmInfoBxMultCp.btnConfirmarClick(Sender: TObject);
+procedure TfrmInfoBxMult.btnConfirmarClick(Sender: TObject);
 begin
 
   //  Validaçoes
   if not TryStrToInt(edtCodFrPgto.Text, FCodFrPgto) then
   begin
 
+    edtCodFrPgto.SetFocus;
     Application.MessageBox('Forma de Pagamento não informada!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     abort;
-    edtCodFrPgto.SetFocus;
+
   
   end;
 
@@ -142,7 +143,7 @@ begin
   end;
 
 
-  if datePgto.Date < FDtCpMaisAnt then
+  if datePgto.Date < FDtMaisAnt then
   begin
 
     datePgto.SetFocus;
@@ -151,6 +152,16 @@ begin
 
   end;
 
+  if datePgto.Date > Now then
+   begin
+
+    datePgto.SetFocus;
+    Application.MessageBox('A data de pagamento não pode ser maior que a data atual!', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+
+  end;
+
+
   FDataPgto := datePgto.Date;
 
   ModalResult := mrOk;
@@ -158,7 +169,7 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.btnPesqFrPgtoClick(Sender: TObject);
+procedure TfrmInfoBxMult.btnPesqFrPgtoClick(Sender: TObject);
 begin
 
    //  Cria o form
@@ -183,7 +194,7 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.BuscaNomeFrPgto;
+procedure TfrmInfoBxMult.BuscaNomeFrPgto;
 var
   NomeFrPgto : String;
 
@@ -210,7 +221,7 @@ begin
 
 end;
 
-function TfrmInfoBxMultCp.CalcPorcentDesc: Currency;
+function TfrmInfoBxMult.CalcPorcentDesc: Currency;
 var
   ValorFinal : Currency;
   PorcentDesc : Currency;
@@ -248,7 +259,7 @@ begin
 
 end;
 
-function TfrmInfoBxMultCp.CalcValorDesc: Currency;
+function TfrmInfoBxMult.CalcValorDesc: Currency;
 var
   ValorCp     : Currency;
   ValorDesc   : Currency;
@@ -286,7 +297,7 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.checkDescontoClick(Sender: TObject);
+procedure TfrmInfoBxMult.checkDescontoClick(Sender: TObject);
 begin
 
   if checkDesconto.Checked then
@@ -316,7 +327,7 @@ begin
   end;
 end;
 
-procedure TfrmInfoBxMultCp.edtCodFrPgtoExit(Sender: TObject);
+procedure TfrmInfoBxMult.edtCodFrPgtoExit(Sender: TObject);
 begin
 
   BuscaNomeFrPgto;
@@ -337,36 +348,36 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmInfoBxMult.edtPorcDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := CurrToStr(CalcPorcentDesc);
 end;
 
-procedure TfrmInfoBxMultCp.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
+procedure TfrmInfoBxMult.edtPorcDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := CurrToStr(CalcPorcentDesc);
 end;
 
-procedure TfrmInfoBxMultCp.edtValorDescKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmInfoBxMult.edtValorDescKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := CurrToStr(CalcValorDesc);
 end;
 
-procedure TfrmInfoBxMultCp.edtValorDescKeyUp(Sender: TObject; var Key: Word;
+procedure TfrmInfoBxMult.edtValorDescKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   edtValor.Text := CurrToStr(CalcValorDesc);
 end;
 
-procedure TfrmInfoBxMultCp.edtValorExit(Sender: TObject);
+procedure TfrmInfoBxMult.edtValorExit(Sender: TObject);
 begin
   edtValor.Text := TUtilitario.FormatarValor(Trim(edtValor.Text));
 end;
 
-procedure TfrmInfoBxMultCp.FormCreate(Sender: TObject);
+procedure TfrmInfoBxMult.FormCreate(Sender: TObject);
 begin
 
   datePgto.Date := Now;
@@ -380,7 +391,7 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.FormShow(Sender: TObject);
+procedure TfrmInfoBxMult.FormShow(Sender: TObject);
 begin
 
   //  Coloca o valor pago previamente como o valor total das contas selecionadas
@@ -391,7 +402,7 @@ begin
 
 end;
 
-procedure TfrmInfoBxMultCp.keyPressvalor(Sender: TObject; var Key: Char);
+procedure TfrmInfoBxMult.keyPressvalor(Sender: TObject; var Key: Char);
 begin
    if Key = #13 then
   begin
@@ -421,17 +432,17 @@ begin
   end;
 end;
 
-procedure TfrmInfoBxMultCp.SetDtCpMaisAnt(const Value: TDate);
+procedure TfrmInfoBxMult.SetDtMaisAnt(const Value: TDate);
 begin
-  FDtCpMaisAnt := Value;
+  FDtMaisAnt := Value;
 end;
 
-procedure TfrmInfoBxMultCp.SetValorPago(const Value: Currency);
+procedure TfrmInfoBxMult.SetValorPago(const Value: Currency);
 begin
   FValorPago := Value;
 end;
 
-procedure TfrmInfoBxMultCp.EditKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmInfoBxMult.EditKeyPress(Sender: TObject; var Key: Char);
 begin
 
   if Key = #13 then

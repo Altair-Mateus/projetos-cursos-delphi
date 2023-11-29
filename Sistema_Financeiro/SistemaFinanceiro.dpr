@@ -51,9 +51,9 @@ uses
   SistemaFinanceiro.Model.dmFaturaCartao in 'src\model\SistemaFinanceiro.Model.dmFaturaCartao.pas' {dmFaturaCartao: TDataModule},
   SistemaFinanceiro.View.FaturaCartao in 'src\view\SistemaFinanceiro.View.FaturaCartao.pas' {frmFaturaCartao},
   SistemaFinanceiro.View.Relatorios.FaturaCartao in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FaturaCartao.pas' {frmRelFatCartao},
-  SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCP},
+  SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCp},
   SistemaFinanceiro.View.BxMultiCP.MultiFrPgto in 'src\view\SistemaFinanceiro.View.BxMultiCP.MultiFrPgto.pas' {frmFrPgtoBxMultiCp},
-  SistemaFinanceiro.View.BxMultiCP.InfosBx in 'src\view\SistemaFinanceiro.View.BxMultiCP.InfosBx.pas' {frmInfoBxMultCp};
+  SistemaFinanceiro.View.BxMulti.InfosBx in 'src\view\SistemaFinanceiro.View.BxMulti.InfosBx.pas' {frmInfoBxMult};
 
 {$R *.res}
 
@@ -72,6 +72,6 @@ begin
   Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
   Application.CreateForm(TdmPgtoBxCp, dmPgtoBxCp);
   Application.CreateForm(TdmFaturaCartao, dmFaturaCartao);
-  Application.CreateForm(TfrmInfoBxMultCp, frmInfoBxMultCp);
+  Application.CreateForm(TfrmInfoBxMult, frmInfoBxMult);
   Application.Run;
 end.

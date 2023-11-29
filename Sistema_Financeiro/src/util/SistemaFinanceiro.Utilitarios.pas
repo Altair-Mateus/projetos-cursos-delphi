@@ -83,10 +83,10 @@ begin
   //  Função trim remove os espaços no inicio e fim do texto
   for LContador := 0 to Pred(Grid.Columns.Count) do
   begin
-    if Grid.Columns.Items[LContador].Field.DataType = ftWideString then
+    if (Grid.Columns.Items[LContador].Field.DataType = ftWideString) then
     begin
       Result := Result + 'upper(trim(' + Grid.Columns.Items[LContador].FieldName + '))' +
-                ' LIKE ' + QuotedStr('%' + UpperCase(Trim(Pesquisa)) + '%') + ' OR ';
+                ' LIKE ' + QuotedStr('%' + AnsiUpperCase(Trim(Pesquisa)) + '%') + ' OR ';
     end;
   end;
 
@@ -103,3 +103,5 @@ begin
   Result := Trunc(Valor * LFator) / LFator;
 end;
 end.
+
+

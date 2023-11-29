@@ -154,6 +154,7 @@ type
     procedure edtFiltroFatCartaoChange(Sender: TObject);
     procedure btnPesqFtCartaoClick(Sender: TObject);
     procedure btnBxMultiplaClick(Sender: TObject);
+    procedure CheckFatViradaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -709,8 +710,8 @@ end;
 
 procedure TfrmContasPagar.CadParcelaUnica;
 var
-  Parcela : Integer;
-  ValorCompra : Currency;
+  Parcela      : Integer;
+  ValorCompra  : Currency;
   ValorParcela : Currency;
   IdFornecedor : Integer;
 
@@ -807,14 +808,7 @@ begin
   if (toggleFatura.State = tssOn) and (edtCodFatCartao.Text <> '') then
   begin
 
-      if CheckFatVirada.Checked then
-      begin
-
-        dateVencimento.Date := IncMonth(dateVencimento.Date, 1);
-
-      end;
-
-      dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
+    dmCPagar.cdsCPagarDATA_VENCIMENTO.AsDateTime := EncodeDate(YearOf(dateVencimento.Date), MonthOf(dateVencimento.Date), DataVctoFat);
 
   end
   else
@@ -947,6 +941,28 @@ begin
 
 end;
 
+procedure TfrmContasPagar.CheckFatViradaClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Pula o mês de vencimento caso seja CP p1
+  if CheckFatVirada.Checked then
+  begin
+
+    if toggleParcelamento.State = tssOff then
+    begin
+
+      dateVencimento.Date := IncMonth(dateVencimento.Date, 1);
+
+    end;
+  end
+  else
+  begin
+    dateVencimento.Date := IncMonth(dateVencimento.Date, -1);
+  end;
+
+end;
+
 procedure TfrmContasPagar.checkParciaisClick(Sender: TObject);
 begin
   inherited;
@@ -1061,6 +1077,7 @@ begin
   CardPanelParcela.ActiveCard := cardParcelaUnica;
   edtParcela.ReadOnly         := True;
   CheckFatVirada.Visible      := False;
+  CheckFatVirada.Checked      := False;
 
   edtValorParcela.ReadOnly := False;
 
