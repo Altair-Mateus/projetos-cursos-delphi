@@ -306,4 +306,101 @@ object dmCPagar: TdmCPagar
       Size = 1
     end
   end
+  object FDQueryCpParciais: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_PAGAR')
+    Left = 136
+    Top = 376
+    object FDQueryCpParciaisID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryCpParciaisNUMERO_DOC: TWideStringField
+      FieldName = 'NUMERO_DOC'
+      Origin = 'NUMERO_DOC'
+    end
+    object FDQueryCpParciaisDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 200
+    end
+    object FDQueryCpParciaisPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Origin = 'PARCELA'
+      Required = True
+    end
+    object FDQueryCpParciaisVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Origin = 'VALOR_PARCELA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object FDQueryCpParciaisVALOR_COMPRA: TBCDField
+      FieldName = 'VALOR_COMPRA'
+      Origin = 'VALOR_COMPRA'
+      Required = True
+      Precision = 18
+    end
+    object FDQueryCpParciaisVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Origin = 'VALOR_ABATIDO'
+      Required = True
+      Precision = 18
+    end
+    object FDQueryCpParciaisDATA_COMPRA: TDateField
+      FieldName = 'DATA_COMPRA'
+      Origin = 'DATA_COMPRA'
+      Required = True
+    end
+    object FDQueryCpParciaisDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Origin = 'DATA_CADASTRO'
+      Required = True
+    end
+    object FDQueryCpParciaisDATA_VENCIMENTO: TDateField
+      Alignment = taCenter
+      FieldName = 'DATA_VENCIMENTO'
+      Origin = 'DATA_VENCIMENTO'
+      Required = True
+    end
+    object FDQueryCpParciaisDATA_PAGAMENTO: TDateField
+      FieldName = 'DATA_PAGAMENTO'
+      Origin = 'DATA_PAGAMENTO'
+    end
+    object FDQueryCpParciaisSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Origin = 'STATUS'
+      Required = True
+      Size = 1
+    end
+    object FDQueryCpParciaisPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Origin = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object FDQueryCpParciaisCP_ORIGEM: TIntegerField
+      FieldName = 'CP_ORIGEM'
+      Origin = 'CP_ORIGEM'
+    end
+    object FDQueryCpParciaisID_FORNECEDOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR'
+      Origin = 'ID_FORNECEDOR'
+      Required = True
+    end
+    object FDQueryCpParciaisFATURA_CART: TWideStringField
+      FieldName = 'FATURA_CART'
+      Origin = 'FATURA_CART'
+      Required = True
+      Size = 1
+    end
+    object FDQueryCpParciaisID_FATURA: TIntegerField
+      FieldName = 'ID_FATURA'
+      Origin = 'ID_FATURA'
+    end
+  end
 end

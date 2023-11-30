@@ -15,7 +15,7 @@ type
     btnVoltar: TButton;
     pnlGrid: TPanel;
     DBGrid1: TDBGrid;
-    DataSourceConsultaCr: TDataSource;
+    DataSourceCrDetalhe: TDataSource;
     lblTNDoc: TLabel;
     lblTVencimento: TLabel;
     lblTNumParcela: TLabel;
@@ -33,6 +33,9 @@ type
     DBGridPgto: TDBGrid;
     DataSourcePgto: TDataSource;
     lblFrPgto: TLabel;
+    DBGridParciais: TDBGrid;
+    lblParciais: TLabel;
+    DataSourceParciais: TDataSource;
     procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
@@ -64,9 +67,10 @@ end;
 
 procedure TfrmCrDetalhe.ExibirCRDetalhes(IDCR: integer);
 var
-  CR : TModelCr;
-  SQL : String;
-  SQLPgto : String;
+  CR          : TModelCr;
+  SQL         : String;
+  SQLPgto     : String;
+  SQLParciais : String;
 
 begin
 
@@ -134,6 +138,34 @@ begin
   dmCReceber.FDQueryPgtoCr.ParamByName('IDCR').AsInteger := IDCR;
   dmCReceber.FDQueryPgtoCr.Prepare;
   dmCReceber.FDQueryPgtoCr.Open();
+
+
+  //  Montando SQL das Parciais
+  SQLParciais := 'SELECT * FROM CONTAS_RECEBER WHERE PARCIAL = ''S'' ' +
+                  ' AND CR_ORIGEM = :IDCR';
+
+  dmCReceber.FDQueryCrParciais.Close;
+  dmCReceber.FDQueryCrParciais.SQL.Clear;
+  dmCReceber.FDQueryCrParciais.Params.Clear;
+  dmCReceber.FDQueryCrParciais.SQL.Add(SQLParciais);
+
+  dmCReceber.FDQueryCrParciais.ParamByName('IDCR').AsInteger := IDCR;
+  dmCReceber.FDQueryCrParciais.Prepare;
+  dmCReceber.FDQueryCrParciais.Open;
+
+
+  //  Se não exisitir nenhuma CR Parcial ira ocultar
+  //  O grid das parciais e diminuir a altura da tela
+  if dmCReceber.FDQueryCrParciais.IsEmpty then
+  begin
+
+    lblParciais.Visible    := False;
+    DBGridParciais.Visible := False;
+
+    frmCrDetalhe.Height := 540;
+
+  end;
+
 
 end;
 

@@ -33,6 +33,9 @@ type
     lblFrPgto: TLabel;
     DBGridPgto: TDBGrid;
     DataSourcePgto: TDataSource;
+    DBGridParciais: TDBGrid;
+    lblParciais: TLabel;
+    DataSourceParciais: TDataSource;
     procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
@@ -61,9 +64,10 @@ end;
 
 procedure TfrmCpDetalhe.ExibirCPDetalhes(IDCp: integer);
 var
-  Cp : TModelCp;
-  SQL : String;
-  SqlPgto : String;
+  Cp          : TModelCp;
+  SQL         : String;
+  SqlPgto     : String;
+  SQLParciais : String;
 
 begin
 
@@ -134,6 +138,33 @@ begin
   dmCPagar.FDQueryPgtoCp.ParamByName('IDCP').AsInteger := IDCp;
   dmCPagar.FDQueryPgtoCp.Prepare;
   dmCPagar.FDQueryPgtoCp.Open();
+
+
+  //  Montando o SQL das Parciais
+  SQLParciais := 'SELECT * FROM CONTAS_PAGAR WHERE PARCIAL = ''S'' ' +
+                 ' AND CP_ORIGEM = :IDCP';
+
+  dmCPagar.FDQueryCpParciais.Close;
+  dmCPagar.FDQueryCpParciais.SQl.Clear;
+  dmCPagar.FDQueryCpParciais.Params.Clear;
+  dmCPagar.FDQueryCpParciais.SQL.Add(SQLParciais);
+
+  dmCPagar.FDQueryCpParciais.ParamByName('IDCP').AsInteger := IDCp;
+  dmCPagar.FDQueryCpParciais.Prepare;
+  dmCPagar.FDQueryCpParciais.Open;
+
+
+  //  Se não exisitir nenhuma CP Parcial ira ocultar
+  //  O grid das parciais e diminuir a altura da tela
+  if dmCPagar.FDQueryCpParciais.IsEmpty then
+  begin
+
+    lblParciais.Visible    := False;
+    DBGridParciais.Visible := False;
+
+    frmCpDetalhe.Height := 550;
+
+  end;
 
 
 end;

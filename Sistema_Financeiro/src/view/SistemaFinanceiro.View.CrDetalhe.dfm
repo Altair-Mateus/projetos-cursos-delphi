@@ -4,8 +4,8 @@ object frmCrDetalhe: TfrmCrDetalhe
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Detalhes Conta Paga'
-  ClientHeight = 498
-  ClientWidth = 772
+  ClientHeight = 600
+  ClientWidth = 841
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object frmCrDetalhe: TfrmCrDetalhe
   object pnlPesquisa: TPanel
     Left = 0
     Top = 0
-    Width = 772
+    Width = 841
     Height = 129
     Align = alTop
     BevelOuter = bvNone
@@ -238,8 +238,8 @@ object frmCrDetalhe: TfrmCrDetalhe
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 429
-    Width = 772
+    Top = 531
+    Width = 841
     Height = 69
     Align = alBottom
     Color = clWindow
@@ -249,7 +249,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     ExplicitWidth = 768
     object btnVoltar: TButton
       AlignWithMargins = True
-      Left = 648
+      Left = 717
       Top = 4
       Width = 120
       Height = 61
@@ -259,15 +259,14 @@ object frmCrDetalhe: TfrmCrDetalhe
       Images = ImageList1
       TabOrder = 0
       OnClick = btnVoltarClick
-      ExplicitLeft = 651
-      ExplicitTop = 5
+      ExplicitLeft = 644
     end
   end
   object pnlGrid: TPanel
     Left = 0
     Top = 129
-    Width = 772
-    Height = 300
+    Width = 841
+    Height = 402
     Align = alClient
     Color = 5737262
     ParentBackground = False
@@ -276,7 +275,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     ExplicitHeight = 299
     object lblFrPgto: TLabel
       Left = 16
-      Top = 140
+      Top = 113
       Width = 182
       Height = 19
       Caption = 'Formas de Pagamento'
@@ -289,13 +288,29 @@ object frmCrDetalhe: TfrmCrDetalhe
       ParentColor = False
       ParentFont = False
     end
+    object lblParciais: TLabel
+      Left = 16
+      Top = 273
+      Width = 203
+      Height = 19
+      Caption = 'Contas Parciais Geradas:'
+      Color = 5934893
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
     object DBGrid1: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 770
-      Height = 120
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 833
+      Height = 96
       Align = alTop
-      DataSource = DataSourceConsultaCr
+      DataSource = DataSourceCrDetalhe
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
       TabOrder = 0
@@ -341,10 +356,12 @@ object frmCrDetalhe: TfrmCrDetalhe
         end>
     end
     object DBGridPgto: TDBGrid
-      Left = 1
-      Top = 179
-      Width = 770
-      Height = 120
+      AlignWithMargins = True
+      Left = 4
+      Top = 138
+      Width = 833
+      Height = 115
+      Margins.Bottom = 50
       Align = alBottom
       DataSource = DataSourcePgto
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -374,6 +391,58 @@ object frmCrDetalhe: TfrmCrDetalhe
           FieldName = 'VALOR_PAGO'
           Title.Caption = 'Valor Pago'
           Width = 133
+          Visible = True
+        end>
+    end
+    object DBGridParciais: TDBGrid
+      AlignWithMargins = True
+      Left = 4
+      Top = 306
+      Width = 833
+      Height = 92
+      Align = alBottom
+      DataSource = DataSourceParciais
+      ReadOnly = True
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Title.Caption = 'Cod'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO_DOCUMENTO'
+          Title.Caption = 'N'#186' Documento'
+          Width = 122
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_PARCELA'
+          Title.Caption = 'Valor'
+          Width = 125
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA_VENCIMENTO'
+          Title.Caption = 'Data Vencimento'
+          Width = 140
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'STATUS'
+          Title.Caption = 'Status'
+          Width = 109
           Visible = True
         end>
     end
@@ -1976,14 +2045,19 @@ object frmCrDetalhe: TfrmCrDetalhe
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object DataSourceConsultaCr: TDataSource
+  object DataSourceCrDetalhe: TDataSource
     DataSet = dmCReceber.FDQueryCrDetalhe
-    Left = 664
-    Top = 241
+    Left = 680
+    Top = 233
   end
   object DataSourcePgto: TDataSource
     DataSet = dmCReceber.FDQueryPgtoCr
     Left = 552
-    Top = 249
+    Top = 233
+  end
+  object DataSourceParciais: TDataSource
+    DataSet = dmCReceber.FDQueryCrParciais
+    Left = 568
+    Top = 401
   end
 end

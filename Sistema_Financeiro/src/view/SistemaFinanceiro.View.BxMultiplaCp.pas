@@ -124,7 +124,6 @@ var
   Contador          : Integer;
   DtMaisAntiga      : TDateTime;
   DtCompraSel       : TDateTime;
-  IndexDtMaisAntiga : Integer;
   FrPgto            : Integer;
   DtPgto            : TDateTime;
 
@@ -145,7 +144,6 @@ begin
     {Pega a data mais antiga}
     // Inicializa com o maior valor possível da data
     DtMaisAntiga      := MaxDateTime;
-//    IndexDtMaisAntiga := -1;
 
     for Contador := 0 to DBGrid1.SelectedRows.Count - 1 do
     begin
@@ -159,7 +157,6 @@ begin
       begin
 
         DtMaisAntiga      := DtCompraSel;
-//        IndexDtMaisAntiga := Contador;
 
       end;
 

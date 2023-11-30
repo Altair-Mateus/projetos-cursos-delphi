@@ -208,4 +208,91 @@ object dmCReceber: TdmCReceber
       Precision = 18
     end
   end
+  object FDQueryCrParciais: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_RECEBER;')
+    Left = 360
+    Top = 288
+    object FDQueryCrParciaisID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQueryCrParciaisNUMERO_DOCUMENTO: TWideStringField
+      FieldName = 'NUMERO_DOCUMENTO'
+      Origin = 'NUMERO_DOCUMENTO'
+    end
+    object FDQueryCrParciaisDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 200
+    end
+    object FDQueryCrParciaisPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Origin = 'PARCELA'
+      Required = True
+    end
+    object FDQueryCrParciaisVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Origin = 'VALOR_PARCELA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object FDQueryCrParciaisVALOR_VENDA: TBCDField
+      FieldName = 'VALOR_VENDA'
+      Origin = 'VALOR_VENDA'
+      Required = True
+      Precision = 18
+    end
+    object FDQueryCrParciaisVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Origin = 'VALOR_ABATIDO'
+      Required = True
+      Precision = 18
+    end
+    object FDQueryCrParciaisDATA_VENDA: TDateField
+      FieldName = 'DATA_VENDA'
+      Origin = 'DATA_VENDA'
+      Required = True
+    end
+    object FDQueryCrParciaisDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Origin = 'DATA_CADASTRO'
+      Required = True
+    end
+    object FDQueryCrParciaisDATA_VENCIMENTO: TDateField
+      Alignment = taCenter
+      FieldName = 'DATA_VENCIMENTO'
+      Origin = 'DATA_VENCIMENTO'
+      Required = True
+    end
+    object FDQueryCrParciaisDATA_RECEBIMENTO: TDateField
+      FieldName = 'DATA_RECEBIMENTO'
+      Origin = 'DATA_RECEBIMENTO'
+    end
+    object FDQueryCrParciaisSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Origin = 'STATUS'
+      Required = True
+      Size = 1
+    end
+    object FDQueryCrParciaisPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Origin = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object FDQueryCrParciaisCR_ORIGEM: TIntegerField
+      FieldName = 'CR_ORIGEM'
+      Origin = 'CR_ORIGEM'
+    end
+    object FDQueryCrParciaisID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+      Origin = 'ID_CLIENTE'
+      Required = True
+    end
+  end
 end

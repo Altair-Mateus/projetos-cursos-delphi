@@ -46,6 +46,22 @@ type
     FDQueryPgtoCrVALOR_PAGO: TBCDField;
     FDQueryCrDetalheDESCONTO_BX: TBCDField;
     FDQueryCrDetalheUSUARIO: TIntegerField;
+    FDQueryCrParciais: TFDQuery;
+    FDQueryCrParciaisID: TIntegerField;
+    FDQueryCrParciaisNUMERO_DOCUMENTO: TWideStringField;
+    FDQueryCrParciaisDESCRICAO: TWideStringField;
+    FDQueryCrParciaisPARCELA: TIntegerField;
+    FDQueryCrParciaisVALOR_PARCELA: TBCDField;
+    FDQueryCrParciaisVALOR_VENDA: TBCDField;
+    FDQueryCrParciaisVALOR_ABATIDO: TBCDField;
+    FDQueryCrParciaisDATA_VENDA: TDateField;
+    FDQueryCrParciaisDATA_CADASTRO: TDateField;
+    FDQueryCrParciaisDATA_VENCIMENTO: TDateField;
+    FDQueryCrParciaisDATA_RECEBIMENTO: TDateField;
+    FDQueryCrParciaisSTATUS: TWideStringField;
+    FDQueryCrParciaisPARCIAL: TWideStringField;
+    FDQueryCrParciaisCR_ORIGEM: TIntegerField;
+    FDQueryCrParciaisID_CLIENTE: TIntegerField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 
