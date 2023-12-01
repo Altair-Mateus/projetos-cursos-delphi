@@ -6,7 +6,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.Provider,
   Datasnap.DBClient, SistemaFinanceiro.Model.Entidades.CP,
-  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.Dialogs;
+  SistemaFinanceiro.Model.Entidades.CP.Detalhe, Vcl.Dialogs,
+  Vcl.Forms, Winapi.Windows;
 type
   TdmCPagar = class(TDataModule)
     FDQueryCPagar: TFDQuery;
@@ -89,20 +90,27 @@ type
       DisplayText: Boolean);
   private
     { Private declarations }
+    procedure QryCancBxCP(SQl : String; Id : Integer);
+
   public
     { Public declarations }
     procedure GeraCodigo;
-    function GeraCodigoCPDetalhe : Integer;
     procedure BaixarCP(BaixaCP : TModelCpDetalhe);
-    function GetCP(Id : Integer) : TModelCP;
+    procedure CancBxCP(Id: Integer);
 
+    function GetCP(Id : Integer) : TModelCP;
+    function GeraCodigoCPDetalhe : Integer;
     function TotalCP(DataInicial, DataFinal : TDate) : Currency;
 
   end;
+
 var
   dmCPagar: TdmCPagar;
+
 implementation
+
 {%CLASSGROUP 'Vcl.Controls.TControl'}
+
 uses SistemaFinanceiro.Model.udmDados,
   SistemaFinanceiro.Model.Entidades.LancamentoCaixa,
   SistemaFinanceiro.Model.dmCaixa;
@@ -300,6 +308,85 @@ begin
 
 end;
 
+procedure TdmCPagar.CancBxCP(Id: Integer);
+var
+  SQLCp   : String;
+  SQlDet  : String;
+  SQlPgto : String;
+  SQLCx   : String;
+
+begin
+
+  if Id <= 0 then
+  begin
+   raise Exception.Create('Conta a pagar não encontrada!');
+  end;
+
+
+  //  Excluindo reg detalhe da cp
+  SQlDet := 'DELETE FROM CONTAS_PAGAR_DETALHE WHERE ID_CONTA_PAGAR = :IDCP';
+
+  try
+
+    QryCancBxCP(SQLDet, Id);
+
+  except
+    on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir detalhes da CP!', MB_OK + MB_ICONWARNING);
+
+  end;
+
+
+  //  Excluindo reg de pgtos da cp
+  SQLPgto := 'DELETE FROM PGTO_BX_CP WHERE ID_CP = :IDCP';
+
+  try
+
+    QryCancBxCP(SQlPgto, Id);
+
+  except
+    on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir pagamentos da CP!', MB_OK + MB_ICONWARNING);
+
+  end;
+
+
+  //  Excluindo reg do caixa da cp
+  SQLCx := 'DELETE FROM CAIXA WHERE ORIGEM = ''CP'' AND ID_ORIGEM = :IDCP';
+
+  try
+
+    QryCancBxCP(SQLCx, Id);
+
+  except
+    on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir lançamento no caixa da CP!', MB_OK + MB_ICONWARNING);
+
+  end;
+
+
+  //  Alterando o status da CP como Aberto
+  SQLCp := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = 0, DATA_PAGAMENTO = NULL, STATUS = ''A'' ' +
+         ' WHERE ID = :IDCP';
+
+  try
+
+    QryCancBxCP(SQLCp, Id);
+    Application.MessageBox('Conta cancelada com Sucesso!!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+  except
+    on E : Exception do
+
+      Application.MessageBox(PWideChar(E.Message), 'Erro ao cancelar a CP!', MB_OK + MB_ICONWARNING);
+
+  end;
+
+
+end;
+
 procedure TdmCPagar.cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
   DisplayText: Boolean);
 begin
@@ -431,6 +518,37 @@ begin
   finally
     FDQueryCP.Close;
     FDQueryCP.Free;
+  end;
+
+end;
+
+procedure TdmCPagar.QryCancBxCP(SQl: String; Id : Integer);
+var
+  FDQueryCancBx : TFDQuery;
+
+begin
+
+  FDQueryCancBx := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryCancBx.Connection := DataModule1.FDConnection;
+
+    FDQueryCancBx.Close;
+    FDQueryCancBx.SQL.Clear;
+    FDQueryCancBx.SQL.Add(SQL);
+
+    FDQueryCancBx.ParamByName('IDCP').AsInteger := Id;
+
+    FDQueryCancBx.Prepare;
+    FDQueryCancBx.ExecSQL;
+
+  finally
+
+    FDQueryCancBx.Close;
+    FDQueryCancBx.Free;
+
   end;
 
 end;

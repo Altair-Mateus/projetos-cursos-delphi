@@ -112,6 +112,8 @@ type
     lblTQtdCo: TLabel;
     lblTValorCp: TLabel;
     CheckFatVirada: TCheckBox;
+    PopupMenu: TPopupMenu;
+    CancelarBaixa1: TMenuItem;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -155,6 +157,7 @@ type
     procedure btnPesqFtCartaoClick(Sender: TObject);
     procedure btnBxMultiplaClick(Sender: TObject);
     procedure CheckFatViradaClick(Sender: TObject);
+    procedure CancelarBaixa1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -193,7 +196,7 @@ uses
   SistemaFinanceiro.Utilitarios,
   System.DateUtils, SistemaFinanceiro.View.Principal,
   SistemaFinanceiro.View.Relatorios.Cp, SistemaFinanceiro.Model.dmFornecedores,
-  SistemaFinanceiro.Model.dmFaturaCartao;
+  SistemaFinanceiro.Model.dmFaturaCartao, SistemaFinanceiro.Model.dmUsuarios;
 
 { TfrmCadastroPadrao1 }
 procedure TfrmContasPagar.Baixar1Click(Sender: TObject);
@@ -890,6 +893,34 @@ begin
 
   //  Exibe na label
   lblQtdCp.Caption := IntToStr(QtdCp);
+
+end;
+
+procedure TfrmContasPagar.CancelarBaixa1Click(Sender: TObject);
+var
+  IdCp : Integer;
+
+begin
+
+  if not dmUsuarios.GetUsuarioLogado.Admin then
+  begin
+
+    Application.MessageBox('Somente Administradores podem cancelar uma Baixa!', 'Erro', MB_OK + MB_ICONERROR);
+    abort;
+
+  end;
+
+  if not DataSourceCPagar.DataSet.IsEmpty then
+  begin
+
+    IdCp := DataSourceCPagar.DataSet.FieldByName('ID').AsInteger;
+
+    dmCPagar.CancBxCP(IdCp);
+
+    Pesquisar;
+
+  end;
+
 
 end;
 
