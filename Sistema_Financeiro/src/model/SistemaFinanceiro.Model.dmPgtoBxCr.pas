@@ -35,7 +35,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses SistemaFinanceiro.Model.udmDados;
+uses SistemaFinanceiro.Model.udmDados, Vcl.Dialogs;
 
 {$R *.dfm}
 
@@ -44,35 +44,37 @@ uses SistemaFinanceiro.Model.udmDados;
 procedure TdmPgtoBxCr.GeraCodigo;
 var
   FDQueryId : TFDQuery;
-  cod : Integer;
 
 begin
 
-  cod := 0;
   FDQueryId := TFDQuery.Create(Self);
 
-  try
-
-    //  Estabele a conexão com o BD
+   try
     FDQueryId.Connection := DataModule1.FDConnection;
+    FDQueryId.Connection.StartTransaction;
 
-    FDQueryId.Close;
-    FDQueryId.SQL.Clear;
-    FDQueryId.Open('SELECT MAX(ID) AS ID FROM PGTO_BX_CR');
+    try
 
-    //  Ultimo cod usado + 1
-    cod := FDQueryId.FieldByName('ID').AsInteger + 1;
+      FDQueryId.SQL.Text := 'SELECT COALESCE(MAX(ID), 0) + 1 AS NextID FROM PGTO_BX_CR';
+      FDQueryId.Open;
 
-    cdsPgtoBxCrID.AsInteger := cod;
+      cdsPgtoBxCrID.AsInteger := FDQueryId.FieldByName('NextID').AsInteger;
 
-    //  Insere o registro no final da tabela
-    FDQueryId.Append();
+      FDQueryId.Append;
 
+      FDQueryId.Connection.Commit;
+
+    except
+
+      on E: Exception do
+      begin
+        FDQueryId.Connection.Rollback;
+        ShowMessage('Erro: ' + E.Message);
+      end;
+
+    end;
   finally
-
-    FDQueryId.Close;
     FDQueryId.Free;
-
   end;
 
 end;

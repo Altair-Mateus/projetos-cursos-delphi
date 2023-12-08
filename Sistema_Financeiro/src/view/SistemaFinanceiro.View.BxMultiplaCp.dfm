@@ -197,8 +197,6 @@ object frmBxMultiplaCp: TfrmBxMultiplaCp
       WordWrap = True
       OnClick = btnVisualizarClick
       ExplicitLeft = 1174
-      ExplicitTop = 41
-      ExplicitHeight = 95
     end
     object edtFornecedor: TEdit
       Left = 344

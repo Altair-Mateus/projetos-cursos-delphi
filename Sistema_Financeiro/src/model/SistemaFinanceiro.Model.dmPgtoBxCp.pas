@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient,
+  Vcl.Dialogs;
 
 type
   TdmPgtoBxCp = class(TDataModule)
@@ -43,36 +44,39 @@ uses SistemaFinanceiro.Model.udmDados;
 procedure TdmPgtoBxCp.GeraCodigo;
 var
   FDQueryId : TFDQuery;
-  cod : Integer;
 
 begin
 
-  cod := 0;
-  FDQueryId := TFDQuery.Create(Self);
+  FDQueryId := TFDQuery.Create(nil);
 
   try
-
-    //  Estabelece conexão com o Bd
     FDQueryId.Connection := DataModule1.FDConnection;
+    FDQueryId.Connection.StartTransaction;
 
-    FDQueryId.Close;
-    FDQueryId.SQL.Clear;
-    FDQueryId.Open('SELECT MAX(ID) AS ID FROM PGTO_BX_CP');
+    try
 
-    //  Ultimo cod usado + 1
-    cod := FDQueryId.FieldByName('ID').AsInteger + 1;
+      FDQueryId.SQL.Text := 'SELECT COALESCE(MAX(ID), 0) + 1 AS NextID FROM PGTO_BX_CP';
+      FDQueryId.Open;
 
-    cdsPgtoBxCpID.AsInteger := cod;
+      cdsPgtoBxCpID.AsInteger := FDQueryId.FieldByName('NextID').AsInteger;
 
-    //  Insere o registro no final da tabela
-    FDQueryId.Append();
+      FDQueryId.Append;
 
+      FDQueryId.Connection.Commit;
+
+    except
+
+      on E: Exception do
+      begin
+        FDQueryId.Connection.Rollback;
+        ShowMessage('Erro: ' + E.Message);
+      end;
+
+    end;
   finally
-
-    FDQueryId.Close;
     FDQueryId.Free;
-
   end;
+
 
 end;
 

@@ -43,8 +43,6 @@ object frmFrPgtoBaixaCp: TfrmFrPgtoBaixaCp
       TabOrder = 0
       WordWrap = True
       OnClick = btnConfirmarClick
-      ExplicitLeft = 80
-      ExplicitTop = 2
     end
     object btnCancelar: TButton
       AlignWithMargins = True

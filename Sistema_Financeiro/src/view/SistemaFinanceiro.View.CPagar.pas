@@ -898,10 +898,12 @@ end;
 
 procedure TfrmContasPagar.CancelarBaixa1Click(Sender: TObject);
 var
-  IdCp : Integer;
+  IdCp   : Integer;
+  Option : Word;
 
 begin
 
+  //  Valida se o user logado é adm
   if not dmUsuarios.GetUsuarioLogado.Admin then
   begin
 
@@ -910,14 +912,37 @@ begin
 
   end;
 
+
   if not DataSourceCPagar.DataSet.IsEmpty then
   begin
 
+    //  Bloqueia o cancelamento se a conta não estiver como PAGA
+    if DataSourceCPagar.DataSet.FieldByName('STATUS').AsString <> 'P' then
+    begin
+
+      Application.MessageBox('Conta não baixada!!', 'Erro', MB_OK + MB_ICONERROR);
+      abort;
+
+    end;
+
+    Option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+    if Option = IDNO then
+    begin
+      exit;
+    end;
+
+    //  Pega a id da conta
     IdCp := DataSourceCPagar.DataSet.FieldByName('ID').AsInteger;
 
+    //  Chama a procedure que fara o trabalho
     dmCPagar.CancBxCP(IdCp);
 
     Pesquisar;
+
+    //  Atualiza relatorio tela principal
+    frmPrincipal.TotalCP;
+    frmPrincipal.ResumoMensalCaixa;
 
   end;
 

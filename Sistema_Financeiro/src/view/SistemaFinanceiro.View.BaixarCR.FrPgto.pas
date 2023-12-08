@@ -208,6 +208,8 @@ begin
 
     Contador := Contador + 1;
 
+    dmPgtoBxCr.cdsPgtoBxCr.Refresh;
+
     if dmPgtoBxCr.cdsPgtoBxCr.State in [dsBrowse, dsInactive] then
     begin
       dmPgtoBxCr.cdsPgtoBxCr.Insert;

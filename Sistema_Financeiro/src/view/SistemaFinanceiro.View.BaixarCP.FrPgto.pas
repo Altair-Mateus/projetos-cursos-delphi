@@ -208,9 +208,13 @@ begin
 
     Contador := Contador + 1;
 
+    //  Atualiza as info do dataset
+    dmPgtoBxCp.cdsPgtoBxCp.Refresh;
+
     if dmPgtoBxCp.cdsPgtoBxCp.State in [dsBrowse, dsInactive] then
     begin
       dmPgtoBxCp.cdsPgtoBxCp.Insert;
+
     end;
 
     dmPgtoBxCp.GeraCodigo;

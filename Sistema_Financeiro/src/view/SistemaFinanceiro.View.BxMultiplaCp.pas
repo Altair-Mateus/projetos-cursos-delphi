@@ -302,6 +302,10 @@ begin
 
   end;
 
+  //  Desmarca os checks e atualiza o grid
+  checkParciais.Checked := False;
+  checkSelAll.Checked   := False;
+
   Pesquisar;
 
 end;

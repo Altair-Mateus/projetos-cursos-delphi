@@ -96,6 +96,8 @@ type
     pnlVencida: TPanel;
     pnlNormal: TPanel;
     pnlCancelada: TPanel;
+    PopupMenu: TPopupMenu;
+    CancelarBaixa1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -132,6 +134,7 @@ type
     procedure dateInicialChange(Sender: TObject);
     procedure dateFinalChange(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
+    procedure CancelarBaixa1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -163,7 +166,7 @@ uses
   SistemaFinanceiro.Model.dmCReceber,
   SistemaFinanceiro.Utilitarios, System.DateUtils,
   SistemaFinanceiro.View.Principal, SistemaFinanceiro.View.Relatorios.Cr,
-  SistemaFinanceiro.Model.dmClientes;
+  SistemaFinanceiro.Model.dmClientes, SistemaFinanceiro.Model.dmUsuarios;
 
 { TfrmContasReceber }
 
@@ -716,6 +719,59 @@ begin
 
   //  Exibe na label
   lblQtdCp.Caption := IntToStr(QtdCr);
+
+
+end;
+
+procedure TfrmContasReceber.CancelarBaixa1Click(Sender: TObject);
+var
+  Option : Word;
+  IdCr   : Integer;
+
+begin
+
+  //  Valida se o user logado é adm
+  if not dmUsuarios.GetUsuarioLogado.Admin then
+  begin
+
+  Application.MessageBox('Somente Administradores podem cancelar uma Baixa!', 'Erro', MB_OK + MB_ICONERROR);
+    abort;
+
+  end;
+
+
+  if not DataSourceCReceber.DataSet.IsEmpty then
+  begin
+
+    //  Bloqueia o cancelamento se a conta não estiver como PAGA
+    if DataSourceCReceber.DataSet.FieldByName('STATUS').AsString <> 'P' then
+    begin
+
+      Application.MessageBox('Conta não baixada!!', 'Erro', MB_OK + MB_ICONERROR);
+      abort;
+
+    end;
+
+    Option := Application.MessageBox('Deseja cancelar o registro? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+    if Option = IDNO then
+    begin
+      exit;
+    end;
+
+    //  Pega a id da conta
+    IdCr := DataSourceCReceber.DataSet.FieldByName('ID').AsInteger;
+
+    //  Chama a procedure que fara o trabalho
+    dmCReceber.CancBxCR(IdCr);
+
+    Pesquisar;
+
+    //  Atualiza relatorio tela principal
+    frmPrincipal.TotalCr;
+    frmPrincipal.ResumoMensalCaixa;
+
+  end;
 
 
 end;

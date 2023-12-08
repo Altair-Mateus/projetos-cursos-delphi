@@ -6,7 +6,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
   Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   SistemaFinanceiro.Model.Entidades.CR.Detalhe,
-  SistemaFinanceiro.Model.Entidades.CR, Vcl.Dialogs;
+  SistemaFinanceiro.Model.Entidades.CR, Vcl.Dialogs, Vcl.Forms, Winapi.Windows;
 
 type
   TdmCReceber = class(TDataModule)
@@ -67,12 +67,15 @@ type
 
   private
     { Private declarations }
+    procedure QryCancBxCr(SQL : String; Id : Integer);
 
   public
     { Public declarations }
     procedure GeraCodigo;
-    function GeraCodigoCRDetalhe : Integer;
     procedure BaixarCR(BaixaCR : TModelCrDetalhe);
+    procedure CancBxCr(Id : Integer);
+
+    function GeraCodigoCRDetalhe : Integer;
     function GetCR(Id : Integer) : TModelCR;
     function TotalCR(DataInicial, DataFinal: TDate): Currency;
 
@@ -269,6 +272,48 @@ begin
 
 end;
 
+procedure TdmCReceber.CancBxCr(Id: Integer);
+const
+  SQLCp   = 'UPDATE CONTAS_RECEBER SET VALOR_ABATIDO = 0, DATA_RECEBIMENTO = NULL, STATUS = ''A'' ' +
+           ' WHERE ID = :IDCR';
+  SQlDet  = 'DELETE FROM CONTAS_RECEBER_DETALHE WHERE ID_CONTA_RECEBER = :IDCR';
+  SQlPgto = 'DELETE FROM PGTO_BX_CR WHERE ID_CR = :IDCR';
+  SQLCx   = 'DELETE FROM CAIXA WHERE ORIGEM = ''CR'' AND ID_ORIGEM = :IDCR';
+
+begin
+
+  //  Valida a ID
+  if Id <= 0 then
+  begin
+   raise Exception.Create('Conta a receber não encontrada!');
+  end;
+
+  DataModule1.FDConnection.StartTransaction;
+
+  try
+
+    QryCancBxCR(SQLDet, Id);
+    QryCancBxCR(SQLPgto, Id);
+    QryCancBxCR(SQLCx, Id);
+    QryCancBxCR(SQLCp, Id);
+
+    DataModule1.FDConnection.Commit;
+    Application.MessageBox('Conta cancelada com Sucesso!!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+  except
+
+    on E: Exception do
+    begin
+      DataModule1.FDConnection.Rollback;
+      Application.MessageBox(PWideChar(E.Message), 'Erro ao cancelar a CR!', MB_OK + MB_ICONWARNING);
+    end;
+
+  end;
+
+
+
+end;
+
 procedure TdmCReceber.cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
   DisplayText: Boolean);
 begin
@@ -402,6 +447,33 @@ begin
 
     FDQueryCR.Close;
     FDQueryCR.Free;
+
+  end;
+
+end;
+
+procedure TdmCReceber.QryCancBxCr(SQL : String; Id : Integer);
+var
+  FDQueryCancBx : TFDQuery;
+
+begin
+
+  FDQueryCancBx := TFDQuery.Create(nil);
+
+  try
+
+    //  Estabelece a conexao com o banco
+    FDQueryCancBx.Connection := DataModule1.FDConnection;
+
+    FDQueryCancBx.Close;
+    FDQueryCancBx.SQL.Clear;
+    FDQueryCancBx.SQL.Add(SQL);
+    FDQueryCancBx.ParamByName('IDCR').AsInteger := Id;
+    FDQueryCancBx.ExecSQL;
+
+  finally
+
+    FDQueryCancBx.Free;
 
   end;
 

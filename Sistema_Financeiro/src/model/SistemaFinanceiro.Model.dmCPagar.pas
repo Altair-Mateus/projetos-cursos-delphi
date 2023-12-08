@@ -309,78 +309,40 @@ begin
 end;
 
 procedure TdmCPagar.CancBxCP(Id: Integer);
-var
-  SQLCp   : String;
-  SQlDet  : String;
-  SQlPgto : String;
-  SQLCx   : String;
+Const
+  SQLCp   = 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = 0, DATA_PAGAMENTO = NULL, STATUS = ''A'' ' +
+            ' WHERE ID = :IDCP';
+  SQlDet  = 'DELETE FROM CONTAS_PAGAR_DETALHE WHERE ID_CONTA_PAGAR = :IDCP';
+  SQlPgto = 'DELETE FROM PGTO_BX_CP WHERE ID_CP = :IDCP';
+  SQLCx   = 'DELETE FROM CAIXA WHERE ORIGEM = ''CP'' AND ID_ORIGEM = :IDCP';
 
 begin
 
+  //  Valida a ID
   if Id <= 0 then
   begin
    raise Exception.Create('Conta a pagar não encontrada!');
   end;
 
-
-  //  Excluindo reg detalhe da cp
-  SQlDet := 'DELETE FROM CONTAS_PAGAR_DETALHE WHERE ID_CONTA_PAGAR = :IDCP';
+  DataModule1.FDConnection.StartTransaction;
 
   try
 
     QryCancBxCP(SQLDet, Id);
-
-  except
-    on E : Exception do
-
-      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir detalhes da CP!', MB_OK + MB_ICONWARNING);
-
-  end;
-
-
-  //  Excluindo reg de pgtos da cp
-  SQLPgto := 'DELETE FROM PGTO_BX_CP WHERE ID_CP = :IDCP';
-
-  try
-
-    QryCancBxCP(SQlPgto, Id);
-
-  except
-    on E : Exception do
-
-      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir pagamentos da CP!', MB_OK + MB_ICONWARNING);
-
-  end;
-
-
-  //  Excluindo reg do caixa da cp
-  SQLCx := 'DELETE FROM CAIXA WHERE ORIGEM = ''CP'' AND ID_ORIGEM = :IDCP';
-
-  try
-
+    QryCancBxCP(SQLPgto, Id);
     QryCancBxCP(SQLCx, Id);
-
-  except
-    on E : Exception do
-
-      Application.MessageBox(PWideChar(E.Message), 'Erro ao excluir lançamento no caixa da CP!', MB_OK + MB_ICONWARNING);
-
-  end;
-
-
-  //  Alterando o status da CP como Aberto
-  SQLCp := 'UPDATE CONTAS_PAGAR SET VALOR_ABATIDO = 0, DATA_PAGAMENTO = NULL, STATUS = ''A'' ' +
-         ' WHERE ID = :IDCP';
-
-  try
-
     QryCancBxCP(SQLCp, Id);
+
+    DataModule1.FDConnection.Commit;
     Application.MessageBox('Conta cancelada com Sucesso!!', 'Atenção', MB_OK + MB_ICONINFORMATION);
 
   except
-    on E : Exception do
 
+    on E: Exception do
+    begin
+      DataModule1.FDConnection.Rollback;
       Application.MessageBox(PWideChar(E.Message), 'Erro ao cancelar a CP!', MB_OK + MB_ICONWARNING);
+    end;
 
   end;
 
@@ -532,23 +494,16 @@ begin
 
   try
 
-    //  Estabelece a conexao com o banco
     FDQueryCancBx.Connection := DataModule1.FDConnection;
 
     FDQueryCancBx.Close;
     FDQueryCancBx.SQL.Clear;
     FDQueryCancBx.SQL.Add(SQL);
-
     FDQueryCancBx.ParamByName('IDCP').AsInteger := Id;
-
-    FDQueryCancBx.Prepare;
     FDQueryCancBx.ExecSQL;
 
   finally
-
-    FDQueryCancBx.Close;
     FDQueryCancBx.Free;
-
   end;
 
 end;
