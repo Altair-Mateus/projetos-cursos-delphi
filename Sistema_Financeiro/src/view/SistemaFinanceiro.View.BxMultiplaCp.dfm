@@ -22,6 +22,7 @@ object frmBxMultiplaCp: TfrmBxMultiplaCp
     Width = 1305
     Height = 177
     Align = alTop
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
@@ -182,10 +183,10 @@ object frmBxMultiplaCp: TfrmBxMultiplaCp
     end
     object btnVisualizar: TButton
       AlignWithMargins = True
-      Left = 1178
-      Top = 46
+      Left = 1179
+      Top = 45
       Width = 121
-      Height = 85
+      Height = 87
       Margins.Top = 45
       Margins.Right = 5
       Margins.Bottom = 45
@@ -197,6 +198,8 @@ object frmBxMultiplaCp: TfrmBxMultiplaCp
       WordWrap = True
       OnClick = btnVisualizarClick
       ExplicitLeft = 1174
+      ExplicitTop = 46
+      ExplicitHeight = 85
     end
     object edtFornecedor: TEdit
       Left = 344
@@ -299,16 +302,17 @@ object frmBxMultiplaCp: TfrmBxMultiplaCp
     Width = 1305
     Height = 440
     Align = alClient
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
     ExplicitWidth = 1301
     ExplicitHeight = 439
     object DBGrid1: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 1303
-      Height = 438
+      Left = 0
+      Top = 0
+      Width = 1305
+      Height = 440
       Align = alClient
       Color = clWhite
       DataSource = DataSourceBxMultiplaCP

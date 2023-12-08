@@ -20,6 +20,7 @@ object frmBaixarCR: TfrmBaixarCR
     Width = 655
     Height = 540
     Align = alClient
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
@@ -27,9 +28,9 @@ object frmBaixarCR: TfrmBaixarCR
     ExplicitHeight = 539
     object pnlDocInfo: TPanel
       AlignWithMargins = True
-      Left = 11
-      Top = 11
-      Width = 633
+      Left = 10
+      Top = 10
+      Width = 635
       Height = 254
       Margins.Left = 10
       Margins.Top = 10
@@ -39,12 +40,14 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 11
+      ExplicitTop = 11
       ExplicitWidth = 629
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 591
+        Width = 593
         Height = 212
         Margins.Left = 20
         Margins.Top = 20
@@ -221,9 +224,9 @@ object frmBaixarCR: TfrmBaixarCR
     end
     object pnlDetalhes: TPanel
       AlignWithMargins = True
-      Left = 11
-      Top = 275
-      Width = 633
+      Left = 10
+      Top = 274
+      Width = 635
       Height = 184
       Margins.Left = 10
       Margins.Top = 5
@@ -233,12 +236,14 @@ object frmBaixarCR: TfrmBaixarCR
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 11
+      ExplicitTop = 275
       ExplicitWidth = 629
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 591
+        Width = 593
         Height = 142
         Margins.Left = 20
         Margins.Top = 20
@@ -344,14 +349,15 @@ object frmBaixarCR: TfrmBaixarCR
       end
     end
     object pnlBotoes: TPanel
-      Left = 1
-      Top = 469
-      Width = 653
+      Left = 0
+      Top = 470
+      Width = 655
       Height = 70
       Align = alBottom
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
+      ExplicitLeft = 1
       ExplicitTop = 468
       ExplicitWidth = 649
       object btnConfirmar: TButton
@@ -370,11 +376,10 @@ object frmBaixarCR: TfrmBaixarCR
         Images = ImageList1
         TabOrder = 0
         OnClick = btnConfirmarClick
-        ExplicitLeft = 193
       end
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 342
+        Left = 344
         Top = 1
         Width = 120
         Height = 68

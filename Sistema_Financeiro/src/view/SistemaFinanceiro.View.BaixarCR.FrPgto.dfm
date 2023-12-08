@@ -71,6 +71,7 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
     Width = 391
     Height = 225
     Align = alTop
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 1
@@ -230,14 +231,15 @@ object frmFrPgtoBaixaCr: TfrmFrPgtoBaixaCr
     Width = 391
     Height = 221
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 2
     ExplicitWidth = 387
     ExplicitHeight = 220
     object DBGrid1: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 389
-      Height = 219
+      Left = 0
+      Top = 0
+      Width = 391
+      Height = 221
       TabStop = False
       Align = alClient
       DataSource = dsFrPgto

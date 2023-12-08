@@ -12,13 +12,13 @@ inherited frmContasReceber: TfrmContasReceber
     ExplicitWidth = 1339
     ExplicitHeight = 645
     inherited CardCadastro: TCard
-      Width = 1341
-      Height = 644
+      Width = 1343
+      Height = 646
       ExplicitWidth = 1341
       ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
-        Top = 575
-        Width = 1341
+        Top = 577
+        Width = 1343
         ExplicitTop = 575
         ExplicitWidth = 1341
         inherited btnSalvar: TButton
@@ -26,8 +26,8 @@ inherited frmContasReceber: TfrmContasReceber
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1341
-        Height = 534
+        Width = 1343
+        Height = 536
         ExplicitWidth = 1341
         ExplicitHeight = 534
         object lblDataVend: TLabel
@@ -479,17 +479,17 @@ inherited frmContasReceber: TfrmContasReceber
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1341
+        Width = 1343
         ExplicitWidth = 1341
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1341
-      Height = 644
+      Width = 1343
+      Height = 646
       ExplicitWidth = 1337
       ExplicitHeight = 643
       inherited pnlPesquisa: TPanel
-        Width = 1341
+        Width = 1343
         Height = 137
         ExplicitWidth = 1337
         ExplicitHeight = 137
@@ -4676,7 +4676,7 @@ inherited frmContasReceber: TfrmContasReceber
           ExplicitWidth = 297
         end
         inherited btnPesquisae: TButton
-          Left = 1217
+          Left = 1219
           Top = 30
           Height = 77
           Margins.Top = 30
@@ -4912,8 +4912,8 @@ inherited frmContasReceber: TfrmContasReceber
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 575
-        Width = 1341
+        Top = 577
+        Width = 1343
         ExplicitTop = 574
         ExplicitWidth = 1337
         inherited btnExcluir: TButton
@@ -4923,7 +4923,7 @@ inherited frmContasReceber: TfrmContasReceber
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
-          Left = 1217
+          Left = 1219
           ImageIndex = 12
           ExplicitLeft = 1213
         end
@@ -4959,7 +4959,7 @@ inherited frmContasReceber: TfrmContasReceber
         end
         object gbLegenda: TGroupBox
           AlignWithMargins = True
-          Left = 1021
+          Left = 1023
           Top = 4
           Width = 190
           Height = 61
@@ -5041,14 +5041,14 @@ inherited frmContasReceber: TfrmContasReceber
       end
       inherited pnlGrid: TPanel
         Top = 137
-        Width = 1341
-        Height = 409
+        Width = 1343
+        Height = 411
         ExplicitTop = 137
         ExplicitWidth = 1337
         ExplicitHeight = 408
         inherited DBGrid1: TDBGrid
-          Width = 1339
-          Height = 407
+          Width = 1341
+          Height = 409
           DataSource = DataSourceCReceber
           PopupMenu = PopupMenu
           Columns = <
@@ -5148,8 +5148,8 @@ inherited frmContasReceber: TfrmContasReceber
       end
       object pnlTotais: TPanel
         Left = 0
-        Top = 546
-        Width = 1341
+        Top = 548
+        Width = 1343
         Height = 29
         Align = alBottom
         Color = clWindow
@@ -5159,7 +5159,7 @@ inherited frmContasReceber: TfrmContasReceber
         ExplicitWidth = 1337
         object lblQtdCp: TLabel
           AlignWithMargins = True
-          Left = 937
+          Left = 939
           Top = 6
           Width = 70
           Height = 19
@@ -5177,7 +5177,7 @@ inherited frmContasReceber: TfrmContasReceber
         end
         object lblTotalCpGrid: TLabel
           AlignWithMargins = True
-          Left = 1207
+          Left = 1209
           Top = 6
           Width = 118
           Height = 19
@@ -5196,7 +5196,7 @@ inherited frmContasReceber: TfrmContasReceber
         end
         object lblTQtdCo: TLabel
           AlignWithMargins = True
-          Left = 769
+          Left = 771
           Top = 6
           Width = 162
           Height = 19
@@ -5208,7 +5208,7 @@ inherited frmContasReceber: TfrmContasReceber
         end
         object lblTValorCp: TLabel
           AlignWithMargins = True
-          Left = 1040
+          Left = 1042
           Top = 6
           Width = 161
           Height = 19

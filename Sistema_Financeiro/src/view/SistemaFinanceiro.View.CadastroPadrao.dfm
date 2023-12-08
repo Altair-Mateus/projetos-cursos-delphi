@@ -26,24 +26,25 @@ object frmCadastroPadrao: TfrmCadastroPadrao
     Width = 787
     Height = 506
     Align = alClient
-    ActiveCard = CardPesquisa
+    ActiveCard = CardCadastro
+    BevelOuter = bvNone
     Caption = 'CardPanel1'
     ParentBackground = False
     TabOrder = 0
     ExplicitWidth = 783
     ExplicitHeight = 505
     object CardCadastro: TCard
-      Left = 1
-      Top = 1
-      Width = 785
-      Height = 504
+      Left = 0
+      Top = 0
+      Width = 787
+      Height = 506
       Caption = 'Cadastro'
       CardIndex = 0
       TabOrder = 0
       object pnlBotoesCad: TPanel
         Left = 0
-        Top = 435
-        Width = 785
+        Top = 437
+        Width = 787
         Height = 69
         Align = alBottom
         Color = 5934638
@@ -78,10 +79,11 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelCampos: TPanel
         Left = 0
         Top = 41
-        Width = 785
-        Height = 394
+        Width = 787
+        Height = 396
         Margins.Top = 0
         Align = alClient
+        BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
@@ -89,13 +91,14 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object PanelTitulo: TPanel
         Left = 0
         Top = 0
-        Width = 785
+        Width = 787
         Height = 41
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
         Align = alTop
+        BevelOuter = bvNone
         Color = 5737262
         ParentBackground = False
         TabOrder = 2
@@ -117,19 +120,21 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       end
     end
     object CardPesquisa: TCard
-      Left = 1
-      Top = 1
-      Width = 785
-      Height = 504
+      Left = 0
+      Top = 0
+      Width = 787
+      Height = 506
       Caption = 'Pesquisa'
       CardIndex = 1
       TabOrder = 1
+      ExplicitLeft = 1
+      ExplicitTop = 1
       ExplicitWidth = 781
       ExplicitHeight = 503
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
-        Width = 785
+        Width = 787
         Height = 81
         Align = alTop
         BevelOuter = bvNone
@@ -163,7 +168,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         end
         object btnPesquisae: TButton
           AlignWithMargins = True
-          Left = 661
+          Left = 663
           Top = 5
           Width = 121
           Height = 71
@@ -179,8 +184,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 435
-        Width = 785
+        Top = 437
+        Width = 787
         Height = 69
         Align = alBottom
         Color = clWindow
@@ -243,7 +248,7 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         end
         object btnSair: TButton
           AlignWithMargins = True
-          Left = 661
+          Left = 663
           Top = 4
           Width = 120
           Height = 61
@@ -259,8 +264,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
       object pnlGrid: TPanel
         Left = 0
         Top = 81
-        Width = 785
-        Height = 354
+        Width = 787
+        Height = 356
         Align = alClient
         TabOrder = 2
         ExplicitWidth = 781
@@ -268,8 +273,8 @@ object frmCadastroPadrao: TfrmCadastroPadrao
         object DBGrid1: TDBGrid
           Left = 1
           Top = 1
-          Width = 783
-          Height = 352
+          Width = 785
+          Height = 354
           Align = alClient
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           ReadOnly = True

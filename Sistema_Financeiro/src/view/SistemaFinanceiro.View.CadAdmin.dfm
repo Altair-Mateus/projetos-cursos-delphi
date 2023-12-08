@@ -20,15 +20,16 @@ object frmCadAdmin: TfrmCadAdmin
     Width = 396
     Height = 442
     Align = alClient
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
     ExplicitWidth = 392
     ExplicitHeight = 441
     object imgPessoa: TImage
-      Left = 1
-      Top = 1
-      Width = 394
+      Left = 0
+      Top = 0
+      Width = 396
       Height = 88
       Align = alTop
       Center = True
@@ -376,6 +377,8 @@ object frmCadAdmin: TfrmCadAdmin
         802016060500412C0C0A00825818140004B1302800086261500010C4C2A00020
         8885F97F91260CF132C8F4960000000049454E44AE426082}
       Proportional = True
+      ExplicitLeft = 1
+      ExplicitTop = 1
       ExplicitWidth = 319
     end
     object imgCadeado: TImage
@@ -472,9 +475,9 @@ object frmCadAdmin: TfrmCadAdmin
     end
     object lbladmin: TLabel
       AlignWithMargins = True
-      Left = 4
-      Top = 92
-      Width = 388
+      Left = 3
+      Top = 91
+      Width = 390
       Height = 29
       Align = alTop
       Alignment = taCenter
@@ -485,6 +488,8 @@ object frmCadAdmin: TfrmCadAdmin
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 4
+      ExplicitTop = 92
       ExplicitWidth = 146
     end
     object lblRedefina: TLabel
@@ -576,21 +581,23 @@ object frmCadAdmin: TfrmCadAdmin
       TabOrder = 1
     end
     object pnlBtns: TPanel
-      Left = 1
-      Top = 364
-      Width = 394
+      Left = 0
+      Top = 365
+      Width = 396
       Height = 77
       Margins.Top = 1
       Align = alBottom
+      BevelOuter = bvNone
       TabOrder = 2
+      ExplicitLeft = 1
       ExplicitTop = 363
       ExplicitWidth = 390
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 210
-        Top = 2
+        Left = 213
+        Top = 1
         Width = 113
-        Height = 59
+        Height = 61
         Margins.Top = 1
         Margins.Right = 70
         Margins.Bottom = 15
@@ -606,14 +613,16 @@ object frmCadAdmin: TfrmCadAdmin
         ParentFont = False
         TabOrder = 1
         OnClick = btnCancelarClick
-        ExplicitLeft = 241
+        ExplicitLeft = 206
+        ExplicitTop = 2
+        ExplicitHeight = 59
       end
       object btnSalvar: TButton
         AlignWithMargins = True
-        Left = 71
-        Top = 2
+        Left = 70
+        Top = 1
         Width = 113
-        Height = 59
+        Height = 61
         Margins.Left = 70
         Margins.Top = 1
         Margins.Bottom = 15
@@ -629,7 +638,9 @@ object frmCadAdmin: TfrmCadAdmin
         ParentFont = False
         TabOrder = 0
         OnClick = btnSalvarClick
-        ExplicitLeft = 36
+        ExplicitLeft = 71
+        ExplicitTop = 2
+        ExplicitHeight = 59
       end
     end
   end

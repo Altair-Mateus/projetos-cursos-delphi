@@ -21,6 +21,7 @@ object frmBaixarCP: TfrmBaixarCP
     Width = 626
     Height = 547
     Align = alClient
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
@@ -28,9 +29,9 @@ object frmBaixarCP: TfrmBaixarCP
     ExplicitHeight = 546
     object pnlDocInfo: TPanel
       AlignWithMargins = True
-      Left = 11
-      Top = 11
-      Width = 604
+      Left = 10
+      Top = 10
+      Width = 606
       Height = 262
       Margins.Left = 10
       Margins.Top = 10
@@ -40,12 +41,14 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 11
+      ExplicitTop = 11
       ExplicitWidth = 600
       object gbDocInfo: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 562
+        Width = 564
         Height = 220
         Margins.Left = 20
         Margins.Top = 20
@@ -222,9 +225,9 @@ object frmBaixarCP: TfrmBaixarCP
     end
     object pnlDetalhes: TPanel
       AlignWithMargins = True
-      Left = 11
-      Top = 283
-      Width = 604
+      Left = 10
+      Top = 282
+      Width = 606
       Height = 182
       Margins.Left = 10
       Margins.Top = 5
@@ -234,12 +237,14 @@ object frmBaixarCP: TfrmBaixarCP
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 11
+      ExplicitTop = 283
       ExplicitWidth = 600
       object gbDetalhes: TGroupBox
         AlignWithMargins = True
         Left = 21
         Top = 21
-        Width = 562
+        Width = 564
         Height = 140
         Margins.Left = 20
         Margins.Top = 20
@@ -345,14 +350,15 @@ object frmBaixarCP: TfrmBaixarCP
       end
     end
     object pnlBotoes: TPanel
-      Left = 1
-      Top = 476
-      Width = 624
+      Left = 0
+      Top = 477
+      Width = 626
       Height = 70
       Align = alBottom
       Color = clWindow
       ParentBackground = False
       TabOrder = 2
+      ExplicitLeft = 1
       ExplicitTop = 475
       ExplicitWidth = 620
       object btnConfirmar: TButton
@@ -374,7 +380,7 @@ object frmBaixarCP: TfrmBaixarCP
       end
       object btnCancelar: TButton
         AlignWithMargins = True
-        Left = 313
+        Left = 315
         Top = 1
         Width = 120
         Height = 68
