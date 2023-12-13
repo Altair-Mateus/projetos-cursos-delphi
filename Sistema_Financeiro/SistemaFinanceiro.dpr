@@ -53,7 +53,8 @@ uses
   SistemaFinanceiro.View.Relatorios.FaturaCartao in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.FaturaCartao.pas' {frmRelFatCartao},
   SistemaFinanceiro.View.BxMultiplaCp in 'src\view\SistemaFinanceiro.View.BxMultiplaCp.pas' {frmBxMultiplaCp},
   SistemaFinanceiro.View.BxMultiCP.MultiFrPgto in 'src\view\SistemaFinanceiro.View.BxMultiCP.MultiFrPgto.pas' {frmFrPgtoBxMultiCp},
-  SistemaFinanceiro.View.BxMulti.InfosBx in 'src\view\SistemaFinanceiro.View.BxMulti.InfosBx.pas' {frmInfoBxMult};
+  SistemaFinanceiro.View.BxMulti.InfosBx in 'src\view\SistemaFinanceiro.View.BxMulti.InfosBx.pas' {frmInfoBxMult},
+  SistemaFinanceiro.View.BxMultiplaCr in 'src\view\SistemaFinanceiro.View.BxMultiplaCr.pas' {frmBxMultiplaCR};
 
 {$R *.res}
 
@@ -72,6 +73,5 @@ begin
   Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
   Application.CreateForm(TdmPgtoBxCp, dmPgtoBxCp);
   Application.CreateForm(TdmFaturaCartao, dmFaturaCartao);
-  Application.CreateForm(TfrmInfoBxMult, frmInfoBxMult);
   Application.Run;
 end.

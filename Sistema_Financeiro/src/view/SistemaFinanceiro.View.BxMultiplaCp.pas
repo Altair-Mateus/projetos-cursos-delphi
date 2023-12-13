@@ -48,7 +48,7 @@ type
     pnlQtdCp: TPanel;
     lblQtdCp: TLabel;
     edtQtdCp: TEdit;
-    Panel2: TPanel;
+    pnlQtdTotCP: TPanel;
     lblValorCps: TLabel;
     edtValorTotCP: TEdit;
     ImageList2: TImageList;
@@ -350,7 +350,7 @@ begin
 
   finally
 
-    //  Pega a ID do cliente selecionado
+    //  Pega a ID do fornecedor selecionado
     edtFornecedor.Text := frmFornecedores.DataSourceFornecedor.DataSet.FieldByName('ID_FORNEC').AsString;
 
     //  Libera da  memoria

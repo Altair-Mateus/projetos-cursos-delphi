@@ -314,6 +314,10 @@
             <Form>frmInfoBxMult</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.BxMultiplaCr.pas">
+            <Form>frmBxMultiplaCR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -62,6 +62,23 @@ type
     FDQueryCrParciaisPARCIAL: TWideStringField;
     FDQueryCrParciaisCR_ORIGEM: TIntegerField;
     FDQueryCrParciaisID_CLIENTE: TIntegerField;
+    cdsBxMultipla: TClientDataSet;
+    cdsBxMultiplaID: TIntegerField;
+    cdsBxMultiplaNUMERO_DOCUMENTO: TWideStringField;
+    cdsBxMultiplaDESCRICAO: TWideStringField;
+    cdsBxMultiplaPARCELA: TIntegerField;
+    cdsBxMultiplaVALOR_PARCELA: TBCDField;
+    cdsBxMultiplaVALOR_VENDA: TBCDField;
+    cdsBxMultiplaVALOR_ABATIDO: TBCDField;
+    cdsBxMultiplaDATA_VENDA: TDateField;
+    cdsBxMultiplaDATA_CADASTRO: TDateField;
+    cdsBxMultiplaDATA_VENCIMENTO: TDateField;
+    cdsBxMultiplaDATA_RECEBIMENTO: TDateField;
+    cdsBxMultiplaSTATUS: TWideStringField;
+    cdsBxMultiplaPARCIAL: TWideStringField;
+    cdsBxMultiplaCR_ORIGEM: TIntegerField;
+    cdsBxMultiplaID_CLIENTE: TIntegerField;
+    cdsBxMultiplaNOME: TWideStringField;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 
@@ -96,20 +113,24 @@ uses SistemaFinanceiro.Model.udmDados,
 procedure TdmCReceber.BaixarCR(BaixaCR: TModelCrDetalhe);
 var
   ContaReceber : TModelCR;
-  FDQueryCR : TFDQuery;
+  FDQueryCR    : TFDQuery;
   FDQueryCrDet : TFDQuery;
-  SQLUpdate : String;
-  SQLInsert : String;
-  LancarCaixa : TModelLancamentoCaixa;
+  SQLUpdate    : String;
+  SQLInsert    : String;
+  LancarCaixa  : TModelLancamentoCaixa;
   FDQueryCaixa : TFDQuery;
+
+const
+  ToleranciaValCr : Currency = 0.01;
 
 begin
   ContaReceber := GetCR(BaixaCR.IdCR);
-  FDQueryCR := TFDQuery.Create(nil);
+  FDQueryCR    := TFDQuery.Create(nil);
   FDQueryCrDet := TFDQuery.Create(nil);
   FDQueryCaixa := TFDQuery.Create(nil);
 
   try
+
     //  Estabelece conexão com o banco
     FDQueryCR.Connection    := DataModule1.FDConnection;
     FDQueryCrDet.Connection := DataModule1.FDConnection;
@@ -133,9 +154,8 @@ begin
 
     try
 
-      //  Se o valor da parcela - o valor pago for diferente do valor
-      //  de desconto irá gerar uma parcial
-      if (ContaReceber.ValorParcela - BaixaCR.Valor) <> BaixaCR.ValorDesc then
+      // Inclui conta parcial
+      if (Abs(ContaReceber.ValorParcela - BaixaCR.Valor) - BaixaCR.ValorDesc) > ToleranciaValCr then
       begin
 
           //  Inseriando nova duplcata parcial

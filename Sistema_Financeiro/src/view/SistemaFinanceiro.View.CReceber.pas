@@ -6,7 +6,8 @@ uses
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPanels, Vcl.WinXCtrls, Vcl.ComCtrls, Datasnap.DBClient,
   Vcl.Menus, SistemaFinanceiro.View.BaixarCR, SistemaFinanceiro.View.CrDetalhe,
-  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Clientes;
+  Vcl.Imaging.pngimage, SistemaFinanceiro.View.Clientes,
+  SistemaFinanceiro.View.BxMultiplaCr;
 type
   TfrmContasReceber = class(TfrmCadastroPadrao)
     DataSourceCReceber: TDataSource;
@@ -98,6 +99,7 @@ type
     pnlCancelada: TPanel;
     PopupMenu: TPopupMenu;
     CancelarBaixa1: TMenuItem;
+    btnBxMultipla: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -135,6 +137,7 @@ type
     procedure dateFinalChange(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure CancelarBaixa1Click(Sender: TObject);
+    procedure btnBxMultiplaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -143,6 +146,7 @@ type
     procedure CadParcelaUnica;
     procedure CadParcelamento;
     procedure ExibeTelaBaixar;
+    procedure ExibeTelaBxMultipla;
     procedure ExibeDetalhe;
     procedure BuscaNomeCliente;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
@@ -191,6 +195,13 @@ begin
   inherited;
 
   ExibeTelaBaixar;
+
+end;
+
+procedure TfrmContasReceber.btnBxMultiplaClick(Sender: TObject);
+begin
+
+  ExibeTelaBxMultipla;
 
 end;
 
@@ -1055,6 +1066,31 @@ begin
 
   end;
 
+
+  Pesquisar;
+
+  //  Atualiza relatorio tela principal
+  frmPrincipal.TotalCr;
+  frmPrincipal.ResumoMensalCaixa;
+
+end;
+
+procedure TfrmContasReceber.ExibeTelaBxMultipla;
+begin
+
+  //  Cria
+  frmBxMultiplaCR := TfrmBxMultiplaCR.Create(Self);
+
+  try
+
+    //  Exibe a tela
+    frmBxMultiplaCR.ShowModal;
+
+  finally
+
+    FreeAndNil(frmBxMultiplaCR);
+
+  end;
 
   Pesquisar;
 

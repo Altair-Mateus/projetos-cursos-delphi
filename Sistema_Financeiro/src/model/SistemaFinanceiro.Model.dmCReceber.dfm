@@ -295,4 +295,81 @@ object dmCReceber: TdmCReceber
       Required = True
     end
   end
+  object cdsBxMultipla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProviderCReceber'
+    Left = 496
+    Top = 288
+    object cdsBxMultiplaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsBxMultiplaNUMERO_DOCUMENTO: TWideStringField
+      FieldName = 'NUMERO_DOCUMENTO'
+    end
+    object cdsBxMultiplaDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 200
+    end
+    object cdsBxMultiplaPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Required = True
+    end
+    object cdsBxMultiplaVALOR_PARCELA: TBCDField
+      FieldName = 'VALOR_PARCELA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsBxMultiplaVALOR_VENDA: TBCDField
+      FieldName = 'VALOR_VENDA'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsBxMultiplaVALOR_ABATIDO: TBCDField
+      FieldName = 'VALOR_ABATIDO'
+      Required = True
+      DisplayFormat = 'R$ #,##0.00'
+      Precision = 18
+    end
+    object cdsBxMultiplaDATA_VENDA: TDateField
+      FieldName = 'DATA_VENDA'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_CADASTRO: TDateField
+      FieldName = 'DATA_CADASTRO'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_VENCIMENTO: TDateField
+      FieldName = 'DATA_VENCIMENTO'
+      Required = True
+    end
+    object cdsBxMultiplaDATA_RECEBIMENTO: TDateField
+      FieldName = 'DATA_RECEBIMENTO'
+    end
+    object cdsBxMultiplaSTATUS: TWideStringField
+      FieldName = 'STATUS'
+      Required = True
+      Size = 1
+    end
+    object cdsBxMultiplaPARCIAL: TWideStringField
+      FieldName = 'PARCIAL'
+      Required = True
+      Size = 1
+    end
+    object cdsBxMultiplaCR_ORIGEM: TIntegerField
+      FieldName = 'CR_ORIGEM'
+    end
+    object cdsBxMultiplaID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+      Required = True
+    end
+    object cdsBxMultiplaNOME: TWideStringField
+      FieldName = 'NOME'
+      ReadOnly = True
+      Size = 200
+    end
+  end
 end

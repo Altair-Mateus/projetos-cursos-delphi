@@ -120,14 +120,17 @@ uses SistemaFinanceiro.Model.udmDados,
 
 procedure TdmCPagar.BaixarCP(BaixaCP: TModelCpDetalhe);
 var
-  ContaPagar : TModelCP;
-  FDQueryCP : TFDQuery;
+  ContaPagar   : TModelCP;
+  FDQueryCP    : TFDQuery;
   FDQueryCpDet : TFDQuery;
   FDQueryCaixa : TFDQuery;
-  SQLUpdate : String;
-  SQLInsert : String;
-  LancarCaixa : TModelLancamentoCaixa;
+  SQLUpdate    : String;
+  SQLInsert    : String;
+  LancarCaixa  : TModelLancamentoCaixa;
   CodlancCaixa : String;
+
+const
+  ToleranciaValCp : Currency = 0.01;
 
 begin
 
@@ -159,9 +162,8 @@ begin
 
     try
 
-      //  Se o valor da parcela - o valor pago for diferente do valor
-      //  de desconto irá gerar uma parcial
-      if (ContaPagar.ValorParcela - BaixaCP.Valor) <> BaixaCP.ValorDesc then
+      // Inclui conta parcial
+      if (Abs(ContaPagar.ValorParcela - BaixaCP.Valor) - BaixaCP.ValorDesc) > ToleranciaValCp then
       begin
 
         //  Inseriando nova duplcata parcial

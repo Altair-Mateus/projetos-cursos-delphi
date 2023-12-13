@@ -218,7 +218,6 @@ end;
 procedure TfrmContasPagar.btnBaixarCPClick(Sender: TObject);
 begin
 
-  inherited;
   ExibeTelaBaixar;
 
 end;
