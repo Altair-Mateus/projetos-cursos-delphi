@@ -14951,6 +14951,15 @@ object frmPrincipal: TfrmPrincipal
         ImageIndex = 3
         OnClick = SaldodoCaixa1Click
       end
+      object ContasaPagar2: TMenuItem
+        Caption = 'Contas a Pagar'
+        ImageIndex = 0
+        object ResumoMensal1: TMenuItem
+          Caption = 'Resumo Mensal'
+          ImageIndex = 2
+          OnClick = ResumoMensal1Click
+        end
+      end
     end
     object mnuAjuda: TMenuItem
       Caption = 'Ajuda'

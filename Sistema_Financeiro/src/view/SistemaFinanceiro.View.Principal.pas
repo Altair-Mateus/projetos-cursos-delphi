@@ -11,7 +11,8 @@ uses
   SistemaFinanceiro.View.CReceber, SistemaFinanceiro.View.Clientes,
   SistemaFinanceiro.View.Fornecedores, SistemaFinanceiro.View.FrPgto,
   SistemaFinanceiro.View.CadAdmin, System.IOUtils, SistemaFinanceiro.View.Ajuda,
-  SistemaFinanceiro.View.FaturaCartao;
+  SistemaFinanceiro.View.FaturaCartao,
+  SistemaFinanceiro.View.GeraRelResumoMensalCp;
 
 type
   TfrmPrincipal = class(TForm)
@@ -68,6 +69,8 @@ type
     lblNomeSistema: TLabel;
     FaturasdeCarto1: TMenuItem;
     N3: TMenuItem;
+    ContasaPagar2: TMenuItem;
+    ResumoMensal1: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure mnuUsuariosClick(Sender: TObject);
@@ -90,6 +93,7 @@ type
     procedure AlterarImagemPrincipal1Click(Sender: TObject);
     procedure mnuAjudaClick(Sender: TObject);
     procedure FaturasdeCarto1Click(Sender: TObject);
+    procedure ResumoMensal1Click(Sender: TObject);
 
 
   private
@@ -104,6 +108,7 @@ type
     procedure ExibeTelaFrPgto;
     procedure ExibeTelaAjuda;
     procedure ExibeTelaFaturaCartao;
+    procedure ExibeTelaRelMensalCP;
     procedure CarregaImgPrincipal;
 
   public
@@ -248,6 +253,25 @@ begin
 
   end;
 
+
+end;
+
+procedure TfrmPrincipal.ExibeTelaRelMensalCP;
+begin
+
+  //  Cria o Form
+  frmGeraRelResumoMensalCp := TfrmGeraRelResumoMensalCp.Create(Self);
+
+  try
+
+    //  Exibe o form
+    frmGeraRelResumoMensalCp.ShowModal;
+
+  finally
+
+    FreeAndNil(frmGeraRelResumoMensalCp);
+
+  end;
 
 end;
 
@@ -574,6 +598,11 @@ end;
 procedure TfrmPrincipal.Panel1Click(Sender: TObject);
 begin
   ExibeTelaUsuario;
+end;
+
+procedure TfrmPrincipal.ResumoMensal1Click(Sender: TObject);
+begin
+  ExibeTelaRelMensalCP;
 end;
 
 procedure TfrmPrincipal.ResumoMensalCaixa;

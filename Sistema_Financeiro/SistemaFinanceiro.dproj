@@ -318,6 +318,14 @@
             <Form>frmBxMultiplaCR</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\Relatorios\SistemaFinanceiro.View.Relatorios.ResumoMensalCp.pas">
+            <Form>frmRelMensalCp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.GeraRelResumoMensalCp.pas">
+            <Form>frmGeraRelResumoMensalCp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

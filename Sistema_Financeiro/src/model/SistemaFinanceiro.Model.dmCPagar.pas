@@ -86,6 +86,7 @@ type
     FDQueryCpParciaisID_FORNECEDOR: TIntegerField;
     FDQueryCpParciaisFATURA_CART: TWideStringField;
     FDQueryCpParciaisID_FATURA: TIntegerField;
+    FDQueryRelatorios: TFDQuery;
     procedure cdsCPagarSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
   private

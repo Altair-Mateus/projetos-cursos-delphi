@@ -403,4 +403,11 @@ object dmCPagar: TdmCPagar
       Origin = 'ID_FATURA'
     end
   end
+  object FDQueryRelatorios: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_PAGAR;')
+    Left = 280
+    Top = 376
+  end
 end
