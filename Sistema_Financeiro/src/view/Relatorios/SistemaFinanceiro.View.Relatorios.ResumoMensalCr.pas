@@ -1,21 +1,21 @@
-unit SistemaFinanceiro.View.Relatorios.ResumoMensalCp;
+unit SistemaFinanceiro.View.Relatorios.ResumoMensalCr;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.RelatoriosPadrao,
-  RLFilters, RLPDFFilter, RLReport, Data.DB, RLXLSFilter;
+  RLFilters, RLPDFFilter, RLReport, Data.DB;
 
 type
-  TfrmRelMensalCp = class(TfrmRelatorioPadrao)
-    dsRelResumoMensal: TDataSource;
-    rllblValorTot: TRLLabel;
+  TfrmRelMensalCr = class(TfrmRelatorioPadrao)
     rllblAnoMes: TRLLabel;
-    rldbtMesAno: TRLDBText;
-    rldbtValorTotal: TRLDBText;
     rllblQtd: TRLLabel;
+    rllblValorTot: TRLLabel;
+    rldbtMesAno: TRLDBText;
     rldbtQtd: TRLDBText;
+    rldbtValorTotal: TRLDBText;
+    dsRelResumoMensal: TDataSource;
     RLBand1: TRLBand;
     rllblTotal: TRLLabel;
     rllblQuantidade: TRLLabel;
@@ -27,7 +27,7 @@ type
   end;
 
 var
-  frmRelMensalCp: TfrmRelMensalCp;
+  frmRelMensalCr: TfrmRelMensalCr;
 
 implementation
 
@@ -35,7 +35,7 @@ implementation
 
 uses SistemaFinanceiro.Utilitarios;
 
-procedure TfrmRelMensalCp.RLReportBeforePrint(Sender: TObject;
+procedure TfrmRelMensalCr.RLReportBeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 var
   Soma : Currency;
@@ -68,6 +68,7 @@ begin
 
   //  Conta a quantidade de contas
   rllblQuantidade.Caption := 'Total de Contas: ' + IntToStr(qtd);
+
 
 end;
 

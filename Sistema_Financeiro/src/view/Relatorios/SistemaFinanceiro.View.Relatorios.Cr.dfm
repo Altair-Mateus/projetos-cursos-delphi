@@ -1,7 +1,7 @@
 inherited frmRelCr: TfrmRelCr
   Caption = 'frmRelCr'
-  ExplicitWidth = 786
-  ExplicitHeight = 479
+  ExplicitWidth = 782
+  ExplicitHeight = 478
   TextHeight = 15
   inherited RLReport: TRLReport
     Borders.Sides = sdCustom

@@ -372,4 +372,11 @@ object dmCReceber: TdmCReceber
       Size = 200
     end
   end
+  object FDQueryRelatorios: TFDQuery
+    Connection = DataModule1.FDConnection
+    SQL.Strings = (
+      'SELECT * FROM CONTAS_RECEBER')
+    Left = 112
+    Top = 360
+  end
 end

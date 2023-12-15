@@ -1,7 +1,6 @@
-object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
+object frmGeraRelResumoMensalCr: TfrmGeraRelResumoMensalCr
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
   Caption = 'Gerar Relat'#243'rio de Resumo Mensal de CP'
   ClientHeight = 442
   ClientWidth = 628
@@ -35,9 +34,8 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 0
       ExplicitWidth = 624
-      ExplicitHeight = 375
+      ExplicitHeight = 326
       object lblDtIni: TLabel
         Left = 16
         Top = 24
@@ -52,23 +50,16 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         Height = 19
         Caption = 'Data Final'
       end
-      object lblFornec: TLabel
+      object lblCodCliente: TLabel
         Left = 16
         Top = 95
-        Width = 112
+        Width = 81
         Height = 19
-        Caption = 'Cod Fornecedor'
-      end
-      object lblFatura: TLabel
-        Left = 16
-        Top = 159
-        Width = 105
-        Height = 19
-        Caption = 'Cod Fat Cart'#227'o'
+        Caption = 'Cod Cliente'
       end
       object lblStatus: TLabel
         Left = 16
-        Top = 231
+        Top = 167
         Width = 89
         Height = 19
         Caption = 'Status Conta'
@@ -91,7 +82,7 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         Time = 0.435675902779621500
         TabOrder = 1
       end
-      object edtCodFornec: TEdit
+      object edtCodCliente: TEdit
         Left = 16
         Top = 120
         Width = 112
@@ -99,42 +90,24 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         NumbersOnly = True
         TabOrder = 2
       end
-      object edtCodFatCartao: TEdit
-        Left = 16
-        Top = 184
-        Width = 112
-        Height = 27
-        NumbersOnly = True
-        TabOrder = 3
-      end
-      object btnPesqFornec: TButton
+      object btnPesqCliente: TButton
         Left = 134
         Top = 120
         Width = 35
         Height = 27
         ImageIndex = 1
         Images = ImageList1
-        TabOrder = 4
-        OnClick = btnPesqFornecClick
-      end
-      object btnPesqFatCartao: TButton
-        Left = 134
-        Top = 184
-        Width = 35
-        Height = 27
-        ImageIndex = 1
-        Images = ImageList1
-        TabOrder = 5
-        OnClick = btnPesqFatCartaoClick
+        TabOrder = 3
+        OnClick = btnPesqClienteClick
       end
       object cbStatus: TComboBox
         Left = 16
-        Top = 256
+        Top = 192
         Width = 153
         Height = 27
         Style = csDropDownList
         ItemIndex = 2
-        TabOrder = 6
+        TabOrder = 4
         Text = 'ABERTA'
         Items.Strings = (
           'TODAS'
@@ -146,15 +119,15 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         Left = 323
         Top = 24
         Width = 185
-        Height = 105
+        Height = 97
         Caption = 'Considerar Data'
-        TabOrder = 7
-        object rbDtCompra: TRadioButton
+        TabOrder = 5
+        object rbDtVenda: TRadioButton
           Left = 16
           Top = 27
           Width = 113
           Height = 17
-          Caption = 'Data Compra'
+          Caption = 'Data Venda'
           TabOrder = 0
         end
         object rbDtVenc: TRadioButton
@@ -171,7 +144,7 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Left = 16
           Top = 73
           Width = 166
-          Height = 29
+          Height = 21
           Caption = 'Data Pagamento'
           TabOrder = 2
         end
@@ -184,7 +157,7 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
-        TabOrder = 8
+        TabOrder = 6
         object checkParciais: TCheckBox
           Left = 8
           Top = 9
@@ -264,7 +237,6 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         Images = ImageList1
         TabOrder = 2
         OnClick = btnCancelarClick
-        ExplicitLeft = 373
       end
     end
     object pnlTitulo: TPanel
@@ -274,8 +246,8 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
       Height = 49
       Align = alTop
       BevelOuter = bvNone
-      Caption = 'Resumo Mensal Contas a Pagar'
-      Color = 5737262
+      Caption = 'Resumo Mensal Contas a Receber'
+      Color = 5868590
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -284,6 +256,7 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
+      ExplicitWidth = 624
     end
   end
   object ImageList1: TImageList

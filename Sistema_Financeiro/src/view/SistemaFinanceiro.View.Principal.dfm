@@ -10947,7 +10947,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object btnFornec: TButton
         Left = 43
-        Top = 21
+        Top = 17
         Width = 171
         Height = 96
         Margins.Left = 15
@@ -14958,6 +14958,15 @@ object frmPrincipal: TfrmPrincipal
           Caption = 'Resumo Mensal'
           ImageIndex = 2
           OnClick = ResumoMensal1Click
+        end
+      end
+      object ContasaReceber2: TMenuItem
+        Caption = 'Contas a Receber'
+        ImageIndex = 1
+        object ResumoMensal2: TMenuItem
+          Caption = 'Resumo Mensal'
+          ImageIndex = 2
+          OnClick = ResumoMensal2Click
         end
       end
     end

@@ -1,34 +1,20 @@
-inherited frmRelMensalCp: TfrmRelMensalCp
+inherited frmRelMensalCr: TfrmRelMensalCr
   Caption = 'frmRelatorioPadrao1'
-  ClientHeight = 441
-  ClientWidth = 774
+  ExplicitWidth = 782
+  ExplicitHeight = 478
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = dsRelResumoMensal
     inherited rlbTitulo: TRLBand
       inherited rllblTitulo: TRLLabel
-        Left = 203
-        Width = 310
-        Caption = 'Resumo Mensal Contas a Pagar'
-        ExplicitLeft = 203
-        ExplicitWidth = 310
+        Left = 191
+        Width = 334
+        Caption = 'Resumo Mensal Contas a Receber'
+        ExplicitLeft = 191
+        ExplicitWidth = 334
       end
     end
     inherited rlbNomeColunas: TRLBand
-      object rllblValorTot: TRLLabel
-        Left = 352
-        Top = 1
-        Width = 96
-        Height = 22
-        Align = faTopOnly
-        Caption = 'Valor Total'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -19
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
       object rllblAnoMes: TRLLabel
         Left = 0
         Top = 1
@@ -57,10 +43,23 @@ inherited frmRelMensalCp: TfrmRelMensalCp
         Font.Style = []
         ParentFont = False
       end
+      object rllblValorTot: TRLLabel
+        Left = 352
+        Top = 1
+        Width = 96
+        Height = 22
+        Align = faTopOnly
+        Caption = 'Valor Total'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
     end
     inherited rlbDados: TRLBand
       Height = 30
-      Borders.Style = bsClear
       ExplicitHeight = 30
       object rldbtMesAno: TRLDBText
         Left = 3
@@ -68,6 +67,22 @@ inherited frmRelMensalCp: TfrmRelMensalCp
         Width = 82
         Height = 18
         DataField = 'ANO_MES'
+        DataSource = dsRelResumoMensal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Text = ''
+      end
+      object rldbtQtd: TRLDBText
+        Left = 202
+        Top = 5
+        Width = 38
+        Height = 18
+        Alignment = taCenter
+        DataField = 'QTD'
         DataSource = dsRelResumoMensal
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -93,22 +108,6 @@ inherited frmRelMensalCp: TfrmRelMensalCp
         ParentFont = False
         Text = ''
       end
-      object rldbtQtd: TRLDBText
-        Left = 202
-        Top = 5
-        Width = 38
-        Height = 18
-        Alignment = taCenter
-        DataField = 'QTD'
-        DataSource = dsRelResumoMensal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        Text = ''
-      end
     end
     inherited rlbRodape: TRLBand
       Top = 191
@@ -127,7 +126,7 @@ inherited frmRelMensalCp: TfrmRelMensalCp
       Borders.DrawBottom = True
       object rllblTotal: TRLLabel
         Left = 368
-        Top = 8
+        Top = 4
         Width = 60
         Height = 19
         Alignment = taCenter
@@ -141,7 +140,7 @@ inherited frmRelMensalCp: TfrmRelMensalCp
       end
       object rllblQuantidade: TRLLabel
         Left = 83
-        Top = 7
+        Top = 6
         Width = 92
         Height = 19
         Caption = 'Quantidade'
@@ -155,7 +154,7 @@ inherited frmRelMensalCp: TfrmRelMensalCp
     end
   end
   object dsRelResumoMensal: TDataSource
-    Left = 432
-    Top = 336
+    Left = 408
+    Top = 304
   end
 end

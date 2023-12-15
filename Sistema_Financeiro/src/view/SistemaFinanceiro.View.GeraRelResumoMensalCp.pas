@@ -23,7 +23,7 @@ type
     lblFatura: TLabel;
     edtCodFatCartao: TEdit;
     btnPesqFornec: TButton;
-    Button1: TButton;
+    btnPesqFatCartao: TButton;
     ImageList1: TImageList;
     lblStatus: TLabel;
     cbStatus: TComboBox;
@@ -36,17 +36,20 @@ type
     rbDtPag: TRadioButton;
     btnVisualizar: TButton;
     btnImprimir: TButton;
-    btnExportar: TButton;
     btnCancelar: TButton;
+    pnlTitulo: TPanel;
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesqFornecClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnPesqFatCartaoClick(Sender: TObject);
     procedure btnVisualizarClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+
   private
     { Private declarations }
     procedure GeraRelatorio;
     procedure GeraConsulta;
+    procedure GeraImpressao;
 
   public
     { Public declarations }
@@ -65,6 +68,15 @@ uses
 procedure TfrmGeraRelResumoMensalCp.btnCancelarClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmGeraRelResumoMensalCp.btnImprimirClick(Sender: TObject);
+begin
+
+  GeraConsulta;
+
+  GeraImpressao;
+
 end;
 
 procedure TfrmGeraRelResumoMensalCp.btnPesqFornecClick(Sender: TObject);
@@ -101,7 +113,7 @@ begin
 
 end;
 
-procedure TfrmGeraRelResumoMensalCp.Button1Click(Sender: TObject);
+procedure TfrmGeraRelResumoMensalCp.btnPesqFatCartaoClick(Sender: TObject);
 begin
 
   //  Cria o form
@@ -150,7 +162,7 @@ begin
 
     dateFinal.SetFocus;
     Application.MessageBox('Data Inicial não pode ser maior que a data Final!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    exit;
+    abort;
 
   end;
 
@@ -159,7 +171,7 @@ begin
 
     cbStatus.SetFocus;
     Application.MessageBox('Selecione um tipo de STATUS!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    exit;
+    abort;
 
   end;
 
@@ -173,24 +185,24 @@ begin
   begin
 
     LFiltro        := LFiltro + ' AND CP.DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM DATA_COMPRA), EXTRACT(YEAR DATA_COMPRA) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM DATA_COMPRA) || ''/'' || EXTRACT(YEAR FROM DATA_COMPRA) AS ano_mes ';
+    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_COMPRA), EXTRACT(YEAR FROM CP.DATA_COMPRA) ';
+    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_COMPRA) || ''/'' || EXTRACT(YEAR FROM CP.DATA_COMPRA) AS ano_mes ';
 
   end
   else if rbDtVenc.Checked then
   begin
 
     LFiltro        := LFiltro + ' AND CP.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM DATA_VENCIMENTO), EXTRACT(YEAR FROM DATA_VENCIMENTO) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM DATA_VENCIMENTO) AS ano_mes ';
+    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO), EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) ';
+    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) AS ano_mes ';
 
   end
   else
   begin
 
     LFiltro        := LFiltro + ' AND CP.DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM DATA_PAGAMENTO), EXTRACT(YEAR FROM DATA_PAGAMENTO) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM DATA_PAGAMENTO) || ''/'' || EXTRACT(YEAR FROM DATA_PAGAMENTO) AS ano_mes ';
+    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO), EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) ';
+    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) AS ano_mes ';
 
   end;
 
@@ -235,8 +247,6 @@ begin
   dmCPagar.FDQueryRelatorios.Params.Clear;
   dmCPagar.FDQueryRelatorios.SQL.Add(SQL);
 
-  ShowMessage(SQL);
-
   //  Criando os parametros
   dmCPagar.FDQueryRelatorios.ParamByName('DTINI').AsDate := dateIni.Date;
   dmCPagar.FDQueryRelatorios.ParamByName('DTFIM').AsDate := dateFinal.Date;
@@ -256,10 +266,31 @@ begin
 
 end;
 
+procedure TfrmGeraRelResumoMensalCp.GeraImpressao;
+begin
+
+  //  Cria o form
+  frmRelMensalCp := TfrmRelMensalCp.Create(Self);
+
+  try
+
+    frmRelMensalCp.dsRelResumoMensal.DataSet := dmCPagar.FDQueryRelatorios;
+
+    //  Imprime
+    frmRelMensalCp.RLReport.Print;
+
+  finally
+
+    FreeAndNil(frmRelMensalCp);
+
+  end;
+
+end;
+
 procedure TfrmGeraRelResumoMensalCp.GeraRelatorio;
 begin
 
-    //  Cria o form
+  //  Cria o form
   frmRelMensalCp := TfrmRelMensalCp.Create(Self);
 
   try

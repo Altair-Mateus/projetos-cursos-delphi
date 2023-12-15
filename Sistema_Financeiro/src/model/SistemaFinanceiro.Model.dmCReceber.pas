@@ -79,6 +79,7 @@ type
     cdsBxMultiplaCR_ORIGEM: TIntegerField;
     cdsBxMultiplaID_CLIENTE: TIntegerField;
     cdsBxMultiplaNOME: TWideStringField;
+    FDQueryRelatorios: TFDQuery;
     procedure cdsCReceberSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
 

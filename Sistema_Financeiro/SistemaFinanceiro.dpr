@@ -56,7 +56,9 @@ uses
   SistemaFinanceiro.View.BxMulti.InfosBx in 'src\view\SistemaFinanceiro.View.BxMulti.InfosBx.pas' {frmInfoBxMult},
   SistemaFinanceiro.View.BxMultiplaCr in 'src\view\SistemaFinanceiro.View.BxMultiplaCr.pas' {frmBxMultiplaCR},
   SistemaFinanceiro.View.Relatorios.ResumoMensalCp in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.ResumoMensalCp.pas' {frmRelMensalCp},
-  SistemaFinanceiro.View.GeraRelResumoMensalCp in 'src\view\SistemaFinanceiro.View.GeraRelResumoMensalCp.pas' {frmGeraRelResumoMensalCp};
+  SistemaFinanceiro.View.GeraRelResumoMensalCp in 'src\view\SistemaFinanceiro.View.GeraRelResumoMensalCp.pas' {frmGeraRelResumoMensalCp},
+  SistemaFinanceiro.View.GeraRelResumoMensalCr in 'src\view\SistemaFinanceiro.View.GeraRelResumoMensalCr.pas' {frmGeraRelResumoMensalCr},
+  SistemaFinanceiro.View.Relatorios.ResumoMensalCr in 'src\view\Relatorios\SistemaFinanceiro.View.Relatorios.ResumoMensalCr.pas' {frmRelMensalCr};
 
 {$R *.res}
 
@@ -75,7 +77,5 @@ begin
   Application.CreateForm(TdmPgtoBxCr, dmPgtoBxCr);
   Application.CreateForm(TdmPgtoBxCp, dmPgtoBxCp);
   Application.CreateForm(TdmFaturaCartao, dmFaturaCartao);
-  Application.CreateForm(TfrmRelMensalCp, frmRelMensalCp);
-  Application.CreateForm(TfrmGeraRelResumoMensalCp, frmGeraRelResumoMensalCp);
   Application.Run;
 end.
