@@ -334,6 +334,10 @@
             <Form>frmRelMensalCr</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\SistemaFinanceiro.View.DetalhesOrigemCpCr.pas">
+            <Form>frmDetalhesOrigemCpCr</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

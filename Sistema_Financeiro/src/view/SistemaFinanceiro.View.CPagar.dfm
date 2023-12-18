@@ -10,7 +10,6 @@ inherited frmContasPagar: TfrmContasPagar
   inherited CardPanelPrincipal: TCardPanel
     Width = 1374
     Height = 644
-    ActiveCard = CardPesquisa
     ExplicitWidth = 1370
     ExplicitHeight = 643
     inherited CardCadastro: TCard

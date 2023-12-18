@@ -4,7 +4,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SistemaFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask, Vcl.Imaging.pngimage, SistemaFinanceiro.Model.Entidades.ResumoCaixa;
+  Vcl.StdCtrls, Vcl.WinXPanels, Vcl.ComCtrls, Vcl.Mask, Vcl.Imaging.pngimage, SistemaFinanceiro.Model.Entidades.ResumoCaixa,
+  Vcl.Menus, SistemaFinanceiro.View.DetalhesOrigemCpCr;
 type
   TfrmCaixa = class(TfrmCadastroPadrao)
     DataSourceCaixa: TDataSource;
@@ -48,6 +49,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    PopupMenu1: TPopupMenu;
+    DetalhesOrigemCpCr: TMenuItem;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -69,6 +72,7 @@ type
     procedure dateFinalChange(Sender: TObject);
     procedure edtPesquisarChange(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure DetalhesOrigemCpCrClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -77,6 +81,7 @@ type
     procedure HabilitaBotoes;
     procedure EditarRegCaixa;
     procedure KeyPressValor(Sender: TObject; var Key: Char);
+    procedure ExibeTelaDetalhesOrigem;
 
 
   public
@@ -348,6 +353,26 @@ begin
 
 end;
 
+procedure TfrmCaixa.ExibeTelaDetalhesOrigem;
+begin
+
+  //  Cria o Form
+  frmDetalhesOrigemCpCr := TfrmDetalhesOrigemCpCr.Create(Self);
+
+  try
+
+    //  Exibe o Form
+    frmDetalhesOrigemCpCr.ShowModal;
+
+  finally
+
+    //  Libera da memoria
+    FreeAndNil(frmDetalhesOrigemCpCr);
+
+  end
+
+end;
+
 procedure TfrmCaixa.FormCreate(Sender: TObject);
 begin
 
@@ -555,4 +580,11 @@ begin
   end;
 
 end;
+procedure TfrmCaixa.DetalhesOrigemCpCrClick(Sender: TObject);
+begin
+
+  ExibeTelaDetalhesOrigem;
+
+end;
+
 end.
