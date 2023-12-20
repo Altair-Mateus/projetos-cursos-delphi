@@ -41,7 +41,6 @@ type
     lblComplemento: TLabel;
     edtComplemento: TEdit;
     lblCep: TLabel;
-    edtCep: TEdit;
     edtCidade: TEdit;
     lblCidade: TLabel;
     lblCelular: TLabel;
@@ -57,6 +56,7 @@ type
     lblStatus: TLabel;
     cbStatus: TComboBox;
     lblNomeOb: TLabel;
+    edtCep: TMaskEdit;
     procedure btnPesquisaeClick(Sender: TObject);
     procedure rbFisicaClick(Sender: TObject);
     procedure rbJuridicaClick(Sender: TObject);
@@ -213,9 +213,10 @@ end;
 procedure TfrmFornecedores.btnSalvarClick(Sender: TObject);
 var
   TipoFornecedor : String;
-  Cpf : String;
-  Cnpj : String;
-  Status : String;
+  Cpf            : String;
+  Cnpj           : String;
+  Status         : String;
+  Cep            : String;
 
 begin
 
@@ -239,14 +240,18 @@ begin
 
   end;
 
+
   //  Ignora a mascara do cpf
   Cpf := StringReplace(edtCpf.Text, '.', '', [rfReplaceAll]);
   Cpf := StringReplace(Cpf, '-', '', [rfReplaceAll]);
 
   //  Ignora a mascara do cnpj
   Cnpj := StringReplace(edtCnpj.Text, '.', '', [rfReplaceAll]);
-  Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
   Cnpj := StringReplace(Cnpj, '-', '', [rfReplaceAll]);
+  Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
+
+  //  Ignora a mascara do CEP
+  Cep := StringReplace(edtCep.Text, '-', '', [rfReplaceAll]);
 
   //  Define o status do fornecedor
   if ToggleStatus.State = tssOn then
@@ -272,20 +277,20 @@ begin
   dmFornecedores.cdsFornecedoresRAZAO_SOCIAL.AsString  := Trim(edtNome.Text);
   dmFornecedores.cdsFornecedoresNOME_FANTASIA.AsString := Trim(edtNomeFantasia.Text);
   dmFornecedores.cdsFornecedoresTIPO.AsString          := TipoFornecedor;
-  dmFornecedores.cdsFornecedoresCPF.AsString           := Cpf;
-  dmFornecedores.cdsFornecedoresCNPJ.AsString          := Cnpj;
+  dmFornecedores.cdsFornecedoresCPF.AsString           := Trim(Cpf);
+  dmFornecedores.cdsFornecedoresCNPJ.AsString          := Trim(Cnpj);
   dmFornecedores.cdsFornecedoresIE.AsString            := Trim(edtIe.Text);
   dmFornecedores.cdsFornecedoresENDERECO.AsString      := Trim(edtEndereco.Text);
   dmFornecedores.cdsFornecedoresN_LOGRADOURO.AsString  := Trim(edtNumLog.Text);
   dmFornecedores.cdsFornecedoresBAIRRO.AsString        := Trim(edtBairro.Text);
   dmFornecedores.cdsFornecedoresCIDADE.AsString        := Trim(edtCidade.Text);
   dmFornecedores.cdsFornecedoresESTADO.AsString        := cbUf.Text;
-  dmFornecedores.cdsFornecedoresCEP.AsString           := Trim(edtCep.Text);
+  dmFornecedores.cdsFornecedoresCEP.AsString           := Trim(Cep);
   dmFornecedores.cdsFornecedoresCELULAR.AsString       := Trim(edtCelular.Text);
   dmFornecedores.cdsFornecedoresTELEFONE.AsString      := Trim(edtTelefone.Text);
   dmFornecedores.cdsFornecedoresCOMPLEMENTO.AsString   := Trim(edtComplemento.Text);
   dmFornecedores.cdsFornecedoresEMAIL.AsString         := Trim(edtEmail.Text);
-  dmFornecedores.cdsFornecedoresSTATUS_FOR.AsString        := Status;
+  dmFornecedores.cdsFornecedoresSTATUS_FOR.AsString    := Status;
 
   //  Gravando no banco de dados
   dmFornecedores.cdsFornecedores.Post;

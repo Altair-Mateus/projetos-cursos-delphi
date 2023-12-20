@@ -95,6 +95,7 @@ type
 
     function GeraCodigoCRDetalhe : Integer;
     function GetCR(Id : Integer) : TModelCR;
+    function GetCrDet(Id : Integer) : TModelCrDetalhe;
     function TotalCR(DataInicial, DataFinal: TDate): Currency;
 
   end;
@@ -469,6 +470,53 @@ begin
     FDQueryCR.Close;
     FDQueryCR.Free;
 
+  end;
+
+end;
+
+function TdmCReceber.GetCrDet(Id: Integer): TModelCrDetalhe;
+var
+  FDQueryCrDet : TFDQuery;
+  SQL: String;
+
+begin
+
+  FDQueryCrDet := TFDQuery.Create(Nil);
+
+  try
+
+    //  Estabelece a conexão
+    FDQueryCrDet.Connection := DataModule1.FDConnection;
+
+    SQL:= 'SELECT * FROM CONTAS_RECEBER_DETALHE CP' +
+         ' LEFT JOIN USUARIOS US ON CP.USUARIO = US.ID ' +
+         ' WHERE ID_CONTA_RECEBER = :ID';
+
+    FDQueryCrDet.Close;
+    FDQueryCrDet.SQL.Clear;
+    FDQueryCrDet.SQL.Add(SQL);
+    FDQueryCrDet.ParamByName('ID').AsInteger := Id;
+    FDQueryCrDet.Open;
+
+    Result := TModelCrDetalhe.Create;
+
+    try
+
+      Result.Id        := FDQueryCrDet.FieldByName('ID').AsInteger;
+      Result.IdCr      := FDQueryCrDet.FieldByName('ID_CONTA_RECEBER').AsInteger;
+      Result.Detalhes  := FDQueryCrDet.FieldByName('DETALHES').AsString;
+      Result.Valor     := FDQueryCrDet.FieldByName('VALOR').AsCurrency;
+      Result.Data      := FDQueryCrDet.FieldByName('DATA').AsDateTime;
+      Result.Usuario   := FDQueryCrDet.FieldByName('NOME').AsString;
+      Result.ValorDesc := FDQueryCrDet.FieldByName('DESCONTO_BX').AsCurrency;
+
+    except
+      Result.Free;
+      raise;
+    end;
+
+  finally
+    FDQueryCrDet.Free;
   end;
 
 end;

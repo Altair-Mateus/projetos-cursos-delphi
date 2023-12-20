@@ -361,6 +361,8 @@ begin
 
   try
 
+    frmDetalhesOrigemCpCr.CarregaDados(DataSourceCaixa.DataSet.FieldByName('ID_ORIGEM').AsInteger, DataSourceCaixa.DataSet.FieldByName('ORIGEM').AsString);
+
     //  Exibe o Form
     frmDetalhesOrigemCpCr.ShowModal;
 
@@ -582,6 +584,15 @@ begin
 end;
 procedure TfrmCaixa.DetalhesOrigemCpCrClick(Sender: TObject);
 begin
+
+  if DataSourceCaixa.DataSet.FieldByName('ORIGEM').AsString = 'CX' then
+  begin
+
+    Application.MessageBox('Conta Inserida manualmente no Caixa!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    abort;
+
+  end;
+
 
   ExibeTelaDetalhesOrigem;
 

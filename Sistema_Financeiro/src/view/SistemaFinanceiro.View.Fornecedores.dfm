@@ -3,34 +3,34 @@ inherited frmFornecedores: TfrmFornecedores
   ClientHeight = 645
   ClientWidth = 1339
   WindowState = wsMaximized
+  ExplicitTop = -144
   ExplicitWidth = 1351
   ExplicitHeight = 683
   TextHeight = 19
   inherited CardPanelPrincipal: TCardPanel
     Width = 1339
     Height = 645
-    ActiveCard = CardCadastro
     ExplicitWidth = 1335
     ExplicitHeight = 644
     inherited CardCadastro: TCard
-      Width = 1337
-      Height = 643
-      ExplicitWidth = 1337
-      ExplicitHeight = 643
+      Width = 1339
+      Height = 645
+      ExplicitWidth = 1335
+      ExplicitHeight = 644
       inherited pnlBotoesCad: TPanel
-        Top = 574
-        Width = 1337
-        ExplicitTop = 574
-        ExplicitWidth = 1337
+        Top = 576
+        Width = 1339
+        ExplicitTop = 575
+        ExplicitWidth = 1335
         inherited btnSalvar: TButton
           OnClick = btnSalvarClick
         end
       end
       inherited PanelCampos: TPanel
-        Width = 1337
-        Height = 533
-        ExplicitWidth = 1337
-        ExplicitHeight = 533
+        Width = 1339
+        Height = 535
+        ExplicitWidth = 1335
+        ExplicitHeight = 534
         object LabelNome: TLabel
           Left = 32
           Top = 48
@@ -53,7 +53,7 @@ inherited frmFornecedores: TfrmFornecedores
           Caption = 'CNPJ'
         end
         object lblIe: TLabel
-          Left = 384
+          Left = 409
           Top = 120
           Width = 15
           Height = 19
@@ -196,9 +196,9 @@ inherited frmFornecedores: TfrmFornecedores
         object edtCpf: TMaskEdit
           Left = 32
           Top = 145
-          Width = 153
+          Width = 149
           Height = 27
-          EditMask = '000.000.000-00;0;_'
+          EditMask = '999.999.999-99;0; '
           MaxLength = 14
           TabOrder = 2
           Text = ''
@@ -206,16 +206,18 @@ inherited frmFornecedores: TfrmFornecedores
         object edtCnpj: TMaskEdit
           Left = 208
           Top = 145
-          Width = 152
+          Width = 177
           Height = 27
+          EditMask = '99.999.999/9999-99;0; '
           ImeName = 'edtCnpj'
+          MaxLength = 18
           TabOrder = 3
-          Text = ''
+          Text = '99.999.999/9999-99;0;'
         end
         object edtIe: TEdit
-          Left = 384
+          Left = 409
           Top = 145
-          Width = 153
+          Width = 144
           Height = 27
           Color = clWhite
           MaxLength = 20
@@ -254,7 +256,7 @@ inherited frmFornecedores: TfrmFornecedores
           Width = 65
           Height = 27
           Style = csDropDownList
-          TabOrder = 11
+          TabOrder = 10
           Items.Strings = (
             'AC'
             'AL'
@@ -291,16 +293,7 @@ inherited frmFornecedores: TfrmFornecedores
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 12
-        end
-        object edtCep: TEdit
-          Left = 208
-          Top = 289
-          Width = 153
-          Height = 27
-          Color = clWhite
-          MaxLength = 10
-          TabOrder = 10
+          TabOrder = 11
         end
         object edtCidade: TEdit
           Left = 32
@@ -318,7 +311,7 @@ inherited frmFornecedores: TfrmFornecedores
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 13
+          TabOrder = 12
         end
         object edtTelefone: TEdit
           Left = 208
@@ -327,7 +320,7 @@ inherited frmFornecedores: TfrmFornecedores
           Height = 27
           Color = clWhite
           MaxLength = 15
-          TabOrder = 14
+          TabOrder = 13
         end
         object edtEmail: TEdit
           Left = 384
@@ -336,7 +329,7 @@ inherited frmFornecedores: TfrmFornecedores
           Height = 27
           Color = clWhite
           MaxLength = 100
-          TabOrder = 15
+          TabOrder = 14
         end
         object edtNomeFantasia: TEdit
           Left = 424
@@ -364,13 +357,23 @@ inherited frmFornecedores: TfrmFornecedores
           State = tssOn
           StateCaptions.CaptionOn = 'Ativo'
           StateCaptions.CaptionOff = 'Inativo'
-          TabOrder = 16
+          TabOrder = 15
           ThumbColor = 5737262
+        end
+        object edtCep: TMaskEdit
+          Left = 208
+          Top = 289
+          Width = 152
+          Height = 27
+          EditMask = '99999-999;0; '
+          MaxLength = 9
+          TabOrder = 16
+          Text = ''
         end
       end
       inherited PanelTitulo: TPanel
-        Width = 1337
-        ExplicitWidth = 1337
+        Width = 1339
+        ExplicitWidth = 1335
         inherited lblTitulo: TLabel
           Width = 245
           Caption = 'Inserindo um novo Fornecedor'
@@ -380,14 +383,16 @@ inherited frmFornecedores: TfrmFornecedores
       end
     end
     inherited CardPesquisa: TCard
-      Width = 1337
-      Height = 643
-      ExplicitWidth = 1333
-      ExplicitHeight = 642
+      Width = 1339
+      Height = 645
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 1339
+      ExplicitHeight = 645
       inherited pnlPesquisa: TPanel
-        Width = 1337
+        Width = 1339
         Height = 137
-        ExplicitWidth = 1333
+        ExplicitWidth = 1339
         ExplicitHeight = 137
         inherited lblPesquisar: TLabel
           Left = 182
@@ -719,13 +724,13 @@ inherited frmFornecedores: TfrmFornecedores
           ExplicitWidth = 297
         end
         inherited btnPesquisae: TButton
-          Left = 1213
+          Left = 1215
           Top = 30
           Height = 77
           Margins.Top = 30
           Margins.Bottom = 30
           OnClick = btnPesquisaeClick
-          ExplicitLeft = 1209
+          ExplicitLeft = 1215
           ExplicitTop = 30
           ExplicitHeight = 77
         end
@@ -837,10 +842,10 @@ inherited frmFornecedores: TfrmFornecedores
         end
       end
       inherited pnlBotoes: TPanel
-        Top = 574
-        Width = 1337
-        ExplicitTop = 573
-        ExplicitWidth = 1333
+        Top = 576
+        Width = 1339
+        ExplicitTop = 576
+        ExplicitWidth = 1339
         inherited btnExcluir: TButton
           OnClick = btnExcluirClick
         end
@@ -848,20 +853,20 @@ inherited frmFornecedores: TfrmFornecedores
           OnClick = btnImprimirClick
         end
         inherited btnSair: TButton
-          Left = 1213
-          ExplicitLeft = 1209
+          Left = 1215
+          ExplicitLeft = 1215
         end
       end
       inherited pnlGrid: TPanel
         Top = 137
-        Width = 1337
-        Height = 437
+        Width = 1339
+        Height = 439
         ExplicitTop = 137
-        ExplicitWidth = 1333
-        ExplicitHeight = 436
+        ExplicitWidth = 1339
+        ExplicitHeight = 439
         inherited DBGrid1: TDBGrid
-          Width = 1335
-          Height = 435
+          Width = 1337
+          Height = 437
           DataSource = DataSourceFornecedor
           Columns = <
             item

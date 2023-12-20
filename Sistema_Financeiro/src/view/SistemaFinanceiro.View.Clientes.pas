@@ -23,7 +23,6 @@ type
     lblNumLog: TLabel;
     edtCidade: TEdit;
     lblCidade: TLabel;
-    edtCep: TEdit;
     lblCep: TLabel;
     cbUf: TComboBox;
     lblUf: TLabel;
@@ -55,6 +54,7 @@ type
     lblStatus: TLabel;
     cbStatus: TComboBox;
     lblNomeOb: TLabel;
+    edtCep: TMaskEdit;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -208,9 +208,10 @@ end;
 procedure TfrmCliente.btnSalvarClick(Sender: TObject);
 var
   TipoCli : String;
-  Cpf : String;
-  Cnpj : String;
-  Status : String;
+  Cpf     : String;
+  Cnpj    : String;
+  Status  : String;
+  Cep     : String;
 
 begin
 
@@ -240,9 +241,11 @@ begin
 
   //  Ignora a mascara do cnpj
   Cnpj := StringReplace(edtCnpj.Text, '.', '', [rfReplaceAll]);
-  Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
   Cnpj := StringReplace(Cnpj, '-', '', [rfReplaceAll]);
+  Cnpj := StringReplace(Cnpj, '/', '', [rfReplaceAll]);
 
+  //  Ignora a mascara do CEP
+  Cep := StringReplace(edtCep.Text, '-', '', [rfReplaceAll]);
 
   //  Define o tipo de cliente
   if rbFisica.Checked then
@@ -267,20 +270,20 @@ begin
   //  Passando os dados para o dataset
   dmClientes.cdsClientesNOME.AsString         := Trim(edtNome.Text);
   dmClientes.cdsClientesTIPO.AsString         := TipoCli;
-  dmClientes.cdsClientesCPF.AsString          := Cpf;
-  dmClientes.cdsClientesCNPJ.AsString         := Cnpj;
+  dmClientes.cdsClientesCPF.AsString          := Trim(Cpf);
+  dmClientes.cdsClientesCNPJ.AsString         := Trim(Cnpj);
   dmClientes.cdsClientesIE.AsString           := Trim(edtIe.Text);
   dmClientes.cdsClientesENDERECO.AsString     := Trim(edtEndereco.Text);
   dmClientes.cdsClientesN_LOGRADOURO.AsString := Trim(edtNumLog.Text);
   dmClientes.cdsClientesBAIRRO.AsString       := Trim(edtBairro.Text);
   dmClientes.cdsClientesCIDADE.AsString       := Trim(edtCidade.Text);
   dmClientes.cdsClientesESTADO.AsString       := cbUf.Text;
-  dmClientes.cdsClientesCEP.AsString          := Trim(edtCep.Text);
+  dmClientes.cdsClientesCEP.AsString          := Trim(Cep);
   dmClientes.cdsClientesCELULAR.AsString      := Trim(edtCelular.Text);
   dmClientes.cdsClientesTELEFONE.AsString     := Trim(edtTelefone.Text);
   dmClientes.cdsClientesCOMPLEMENTO.AsString  := Trim(edtComplemento.Text);
   dmClientes.cdsClientesEMAIL.AsString        := Trim(edtEmail.Text);
-  dmClientes.cdsClientesSTATUS_CLI.AsString       := Status;
+  dmClientes.cdsClientesSTATUS_CLI.AsString   := Status;
 
   //  Gravando no banco de dados
   dmClientes.cdsClientes.Post;

@@ -2,7 +2,7 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
   Left = 0
   Top = 0
   Caption = 'Detalhes da Origem do Lan'#231'amento no Caixa'
-  ClientHeight = 606
+  ClientHeight = 761
   ClientWidth = 1188
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,14 +16,12 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
     Left = 0
     Top = 0
     Width = 1188
-    Height = 606
+    Height = 761
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 320
-    ExplicitTop = 296
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 1184
+    ExplicitHeight = 605
     object pnlTitulo: TPanel
       Left = 0
       Top = 0
@@ -41,15 +39,17 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1184
     end
     object pnlBotoes: TPanel
       Left = 0
-      Top = 537
+      Top = 692
       Width = 1188
       Height = 69
       Align = alBottom
       TabOrder = 1
-      ExplicitTop = 565
+      ExplicitTop = 536
+      ExplicitWidth = 1184
       object btnSair: TButton
         AlignWithMargins = True
         Left = 1064
@@ -62,43 +62,44 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         Images = ImageList1
         TabOrder = 0
         OnClick = btnSairClick
-        ExplicitLeft = 1135
+        ExplicitLeft = 1060
       end
     end
     object pnlInfo: TPanel
       Left = 0
       Top = 57
       Width = 1188
-      Height = 480
+      Height = 635
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 55
+      ExplicitWidth = 1184
+      ExplicitHeight = 479
       object lblDesc: TLabel
         Left = 44
-        Top = 176
+        Top = 88
         Width = 67
         Height = 19
         Caption = 'Descri'#231#227'o'
       end
       object lblValor: TLabel
-        Left = 42
-        Top = 303
+        Left = 554
+        Top = 88
         Width = 61
         Height = 19
         Caption = 'Valor R$'
       end
       object lblData: TLabel
-        Left = 320
-        Top = 94
+        Left = 832
+        Top = 22
         Width = 49
         Height = 19
         Caption = 'lblData'
       end
       object lblNDoc: TLabel
-        Left = 42
-        Top = 94
+        Left = 554
+        Top = 22
         Width = 105
         Height = 19
         Caption = 'N'#186' Documento'
@@ -111,8 +112,8 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         Caption = 'lblForCli'
       end
       object lblFatCartao: TLabel
-        Left = 42
-        Top = 381
+        Left = 554
+        Top = 162
         Width = 117
         Height = 19
         Caption = 'Fatura de Cart'#227'o'
@@ -125,68 +126,90 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         Caption = 'C'#243'digo'
       end
       object lblVencimento: TLabel
-        Left = 256
-        Top = 303
+        Left = 832
+        Top = 88
         Width = 120
         Height = 19
         Caption = 'Data Vencimento'
       end
-      object lblDtPag: TLabel
-        Left = 601
-        Top = 22
-        Width = 138
+      object lblFrPgto: TLabel
+        Left = 554
+        Top = 296
+        Width = 158
         Height = 19
-        Caption = 'Data de Pagamento'
-      end
-      object lblValorPago: TLabel
-        Left = 822
-        Top = 22
-        Width = 101
-        Height = 19
-        Caption = 'Valor Pago R$'
+        Caption = 'Formas de Pagamento'
+        Color = 5934893
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
       end
       object lblDetBx: TLabel
-        Left = 606
-        Top = 176
+        Left = 42
+        Top = 296
         Width = 195
         Height = 19
         Caption = 'Observa'#231#245'es de Pagamento'
       end
       object lblNomeUser: TLabel
-        Left = 606
-        Top = 94
+        Left = 554
+        Top = 230
         Width = 243
         Height = 19
         Caption = 'Usu'#225'rio que realizou o pagamento'
       end
-      object lblFrPgto: TLabel
-        Left = 604
-        Top = 287
-        Width = 182
+      object lblDtPag: TLabel
+        Left = 42
+        Top = 230
+        Width = 138
         Height = 19
-        Caption = 'Formas de Pagamento'
+        Caption = 'Data de Pagamento'
+      end
+      object lblValorPago: TLabel
+        Left = 222
+        Top = 230
+        Width = 77
+        Height = 19
+        Caption = 'Valor Pago'
+      end
+      object lblValDesco: TLabel
+        Left = 387
+        Top = 230
+        Width = 107
+        Height = 19
+        Caption = 'Valor Desconto'
+      end
+      object lblParciais: TLabel
+        Left = 42
+        Top = 428
+        Width = 174
+        Height = 19
+        Caption = 'Contas Parciais Geradas:'
         Color = 5934893
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
+        Font.Color = clBlack
         Font.Height = -16
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object memDesc: TMemo
         Left = 42
-        Top = 201
+        Top = 113
         Width = 479
-        Height = 64
+        Height = 101
         MaxLength = 200
         ReadOnly = True
         TabOrder = 0
       end
       object edtValor: TEdit
-        Left = 42
-        Top = 328
-        Width = 185
+        Left = 554
+        Top = 113
+        Width = 250
         Height = 27
         Color = clWhite
         MaxLength = 16
@@ -194,8 +217,8 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         TabOrder = 1
       end
       object edtNDoc: TEdit
-        Left = 42
-        Top = 119
+        Left = 554
+        Top = 47
         Width = 250
         Height = 27
         Color = clWhite
@@ -216,9 +239,9 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         TextHint = 'Clique no bot'#227'o ao lado'
       end
       object edtFatCartao: TEdit
-        Left = 42
-        Top = 406
-        Width = 265
+        Left = 554
+        Top = 187
+        Width = 479
         Height = 27
         Color = clWhite
         MaxLength = 20
@@ -228,8 +251,8 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         TextHint = 'Clique no bot'#227'o ao lado'
       end
       object edtDataCompraVenda: TEdit
-        Left = 320
-        Top = 119
+        Left = 832
+        Top = 47
         Width = 201
         Height = 27
         Color = clWhite
@@ -238,71 +261,44 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
         TabOrder = 5
       end
       object edtDtVenc: TEdit
-        Left = 256
-        Top = 328
-        Width = 265
+        Left = 832
+        Top = 113
+        Width = 201
         Height = 27
         Color = clWhite
         MaxLength = 16
         ReadOnly = True
         TabOrder = 6
       end
-      object edtDtPag: TEdit
-        Left = 601
+      object edtCod: TEdit
+        Left = 42
         Top = 47
-        Width = 185
-        Height = 27
-        Color = 5868590
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        MaxLength = 16
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 7
-      end
-      object edtValPago: TEdit
-        Left = 822
-        Top = 47
-        Width = 185
-        Height = 27
-        Color = clWhite
-        MaxLength = 16
-        ReadOnly = True
-        TabOrder = 8
-      end
-      object memObsPag: TMemo
-        Left = 604
-        Top = 201
-        Width = 401
-        Height = 64
-        MaxLength = 200
-        ReadOnly = True
-        TabOrder = 9
-      end
-      object edtUser: TEdit
-        Left = 606
-        Top = 119
-        Width = 401
+        Width = 79
         Height = 27
         Color = clWhite
         MaxLength = 20
-        NumbersOnly = True
         ReadOnly = True
-        TabOrder = 10
-        TextHint = 'Clique no bot'#227'o ao lado'
+        TabOrder = 7
       end
       object DBGridPgto: TDBGrid
         AlignWithMargins = True
-        Left = 604
-        Top = 312
-        Width = 403
-        Height = 121
+        Left = 554
+        Top = 321
+        Width = 479
+        Height = 96
         Margins.Bottom = 50
+        Color = 5868590
+        DataSource = dsPagamentos
+        FixedColor = 5868590
+        GradientEndColor = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        TabOrder = 11
+        ParentFont = False
+        TabOrder = 8
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -16
@@ -320,7 +316,7 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
             Expanded = False
             FieldName = 'NOME_FR'
             Title.Caption = 'Forma de Pagamento'
-            Width = 225
+            Width = 265
             Visible = True
           end
           item
@@ -331,15 +327,139 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
             Visible = True
           end>
       end
-      object edtCod: TEdit
+      object memObsPag: TMemo
         Left = 42
-        Top = 47
-        Width = 79
+        Top = 321
+        Width = 479
+        Height = 96
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 200
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 9
+      end
+      object edtUser: TEdit
+        Left = 554
+        Top = 255
+        Width = 479
         Height = 27
-        Color = clWhite
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
         MaxLength = 20
+        NumbersOnly = True
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 10
+        TextHint = 'Clique no bot'#227'o ao lado'
+      end
+      object edtDtPag: TEdit
+        Left = 42
+        Top = 255
+        Width = 155
+        Height = 27
+        BevelWidth = 3
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 16
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 11
+      end
+      object edtValPago: TEdit
+        Left = 222
+        Top = 255
+        Width = 135
+        Height = 27
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 16
+        ParentFont = False
         ReadOnly = True
         TabOrder = 12
+      end
+      object edtValorDesc: TEdit
+        Left = 386
+        Top = 255
+        Width = 135
+        Height = 27
+        Color = 5868590
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 16
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 13
+      end
+      object DBGridParciais: TDBGrid
+        AlignWithMargins = True
+        Left = 42
+        Top = 453
+        Width = 479
+        Height = 92
+        DataSource = dsParciais
+        ReadOnly = True
+        TabOrder = 14
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'ID'
+            Title.Caption = 'Cod'
+            Width = 59
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NUMERO_DOC'
+            Title.Caption = 'N'#186' Documento'
+            Width = 110
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_PARCELA'
+            Title.Caption = 'Valor'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DATA_VENCIMENTO'
+            Title.Caption = 'Data Vencimento'
+            Width = 126
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STATUS'
+            Title.Caption = 'Status'
+            Width = 109
+            Visible = True
+          end>
       end
     end
   end
@@ -1940,5 +2060,13 @@ object frmDetalhesOrigemCpCr: TfrmDetalhesOrigemCpCr
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object dsPagamentos: TDataSource
+    Left = 1080
+    Top = 337
+  end
+  object dsParciais: TDataSource
+    Left = 1088
+    Top = 425
   end
 end

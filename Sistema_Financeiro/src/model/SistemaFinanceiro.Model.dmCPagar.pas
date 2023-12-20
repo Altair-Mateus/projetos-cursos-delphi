@@ -100,6 +100,7 @@ type
     procedure CancBxCP(Id: Integer);
 
     function GetCP(Id : Integer) : TModelCP;
+    function GetCpDet(Id : Integer) : TModelCpDetalhe;
     function GeraCodigoCPDetalhe : Integer;
     function TotalCP(DataInicial, DataFinal : TDate) : Currency;
 
@@ -481,9 +482,56 @@ begin
     end;
 
   finally
-    FDQueryCP.Close;
     FDQueryCP.Free;
   end;
+
+end;
+
+function TdmCPagar.GetCpDet(Id: Integer): TModelCpDetalhe;
+var
+  FDQueryCPDet : TFDQuery;
+  SQL: String;
+
+begin
+
+  FDQueryCPDet := TFDQuery.Create(Nil);
+
+  try
+
+    //  Estabelece a conexão
+    FDQueryCPDet.Connection := DataModule1.FDConnection;
+
+    SQL:= 'SELECT * FROM CONTAS_PAGAR_DETALHE CP' +
+         ' LEFT JOIN USUARIOS US ON CP.USUARIO = US.ID ' +
+         ' WHERE ID_CONTA_PAGAR = :ID';
+
+    FDQueryCPDet.Close;
+    FDQueryCPDet.SQL.Clear;
+    FDQueryCPDet.SQL.Add(SQL);
+    FDQueryCPDet.ParamByName('ID').AsInteger := Id;
+    FDQueryCPDet.Open;
+
+    Result := TModelCpDetalhe.Create;
+
+    try
+
+      Result.Id        := FDQueryCPDet.FieldByName('ID').AsInteger;
+      Result.IdCP      := FDQueryCPDet.FieldByName('ID_CONTA_PAGAR').AsInteger;
+      Result.Detalhes  := FDQueryCPDet.FieldByName('DETALHES').AsString;
+      Result.Valor     := FDQueryCPDet.FieldByName('VALOR').AsCurrency;
+      Result.Data      := FDQueryCPDet.FieldByName('DATA').AsDateTime;
+      Result.Usuario   := FDQueryCPDet.FieldByName('NOME').AsString;
+      Result.ValorDesc := FDQueryCPDet.FieldByName('DESCONTO_BX').AsCurrency;
+
+    except
+      Result.Free;
+      raise;
+    end;
+
+  finally
+    FDQueryCPDet.Free;
+  end;
+
 
 end;
 

@@ -4,7 +4,7 @@ object frmCrDetalhe: TfrmCrDetalhe
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Detalhes Conta Paga'
-  ClientHeight = 600
+  ClientHeight = 631
   ClientWidth = 841
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +24,7 @@ object frmCrDetalhe: TfrmCrDetalhe
     Color = 5737262
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 768
+    ExplicitWidth = 837
     object lblTNDoc: TLabel
       Left = 16
       Top = 16
@@ -238,15 +238,15 @@ object frmCrDetalhe: TfrmCrDetalhe
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 531
+    Top = 562
     Width = 841
     Height = 69
     Align = alBottom
     Color = clWindow
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 428
-    ExplicitWidth = 768
+    ExplicitTop = 530
+    ExplicitWidth = 837
     object btnVoltar: TButton
       AlignWithMargins = True
       Left = 717
@@ -259,23 +259,24 @@ object frmCrDetalhe: TfrmCrDetalhe
       Images = ImageList1
       TabOrder = 0
       OnClick = btnVoltarClick
-      ExplicitLeft = 644
+      ExplicitLeft = 713
     end
   end
   object pnlGrid: TPanel
     Left = 0
     Top = 129
     Width = 841
-    Height = 402
+    Height = 433
     Align = alClient
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 768
-    ExplicitHeight = 299
+    ExplicitWidth = 837
+    ExplicitHeight = 401
     object lblFrPgto: TLabel
-      Left = 16
-      Top = 113
+      Left = 4
+      Top = 155
       Width = 182
       Height = 19
       Caption = 'Formas de Pagamento'
@@ -289,8 +290,8 @@ object frmCrDetalhe: TfrmCrDetalhe
       ParentFont = False
     end
     object lblParciais: TLabel
-      Left = 16
-      Top = 273
+      Left = 4
+      Top = 312
       Width = 203
       Height = 19
       Caption = 'Contas Parciais Geradas:'
@@ -303,69 +304,17 @@ object frmCrDetalhe: TfrmCrDetalhe
       ParentColor = False
       ParentFont = False
     end
-    object DBGrid1: TDBGrid
-      AlignWithMargins = True
-      Left = 4
-      Top = 4
-      Width = 833
-      Height = 96
-      Align = alTop
-      DataSource = DataSourceCrDetalhe
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      ReadOnly = True
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -16
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'DETALHES'
-          Title.Caption = 'Detalhes'
-          Width = 209
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DESCONTO_BX'
-          Title.Caption = 'Desconto'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR'
-          Title.Caption = 'Valor Pago'
-          Width = 107
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DATA'
-          Title.Caption = 'Data da Baixa'
-          Width = 123
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOME'
-          Width = 300
-          Visible = True
-        end>
-    end
     object DBGridPgto: TDBGrid
       AlignWithMargins = True
-      Left = 4
-      Top = 138
-      Width = 833
+      Left = 3
+      Top = 180
+      Width = 835
       Height = 115
-      Margins.Bottom = 50
+      Margins.Bottom = 40
       Align = alBottom
       DataSource = DataSourcePgto
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 1
+      TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -16
@@ -396,14 +345,14 @@ object frmCrDetalhe: TfrmCrDetalhe
     end
     object DBGridParciais: TDBGrid
       AlignWithMargins = True
-      Left = 4
-      Top = 306
-      Width = 833
+      Left = 3
+      Top = 338
+      Width = 835
       Height = 92
       Align = alBottom
       DataSource = DataSourceParciais
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -16
@@ -445,6 +394,123 @@ object frmCrDetalhe: TfrmCrDetalhe
           Width = 109
           Visible = True
         end>
+    end
+    object pnlInfopag: TPanel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 835
+      Height = 137
+      Align = alTop
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      ExplicitLeft = 4
+      ExplicitTop = 6
+      object lblDtPag: TLabel
+        Left = 16
+        Top = 6
+        Width = 85
+        Height = 19
+        Caption = 'Data de Pag'
+        Color = 5868590
+        ParentColor = False
+      end
+      object lblNomeUser: TLabel
+        Left = 456
+        Top = 6
+        Width = 54
+        Height = 19
+        Caption = 'Usu'#225'rio'
+        Color = 5868590
+        ParentColor = False
+      end
+      object lblObsPag: TLabel
+        Left = 16
+        Top = 70
+        Width = 120
+        Height = 19
+        Caption = 'Observa'#231#245'es Pag'
+        Color = 5934893
+        ParentColor = False
+      end
+      object lblValorPago: TLabel
+        Left = 188
+        Top = 6
+        Width = 77
+        Height = 19
+        Caption = 'Valor Pago'
+      end
+      object lblVlDesc: TLabel
+        Left = 324
+        Top = 6
+        Width = 65
+        Height = 19
+        Caption = 'Desconto'
+        Color = 5934638
+        ParentColor = False
+      end
+      object edtDtPag: TEdit
+        Left = 16
+        Top = 31
+        Width = 153
+        Height = 27
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 16
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object edtObsPag: TEdit
+        Left = 16
+        Top = 95
+        Width = 802
+        Height = 27
+        Color = clWhite
+        MaxLength = 20
+        NumbersOnly = True
+        ReadOnly = True
+        TabOrder = 1
+        TextHint = 'Clique no bot'#227'o ao lado'
+      end
+      object edtUser: TEdit
+        Left = 456
+        Top = 31
+        Width = 361
+        Height = 27
+        Color = clWhite
+        MaxLength = 20
+        NumbersOnly = True
+        ReadOnly = True
+        TabOrder = 2
+        TextHint = 'Clique no bot'#227'o ao lado'
+      end
+      object edtValDesc: TEdit
+        Left = 324
+        Top = 31
+        Width = 113
+        Height = 27
+        Color = clWhite
+        MaxLength = 16
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object edtValPago: TEdit
+        Left = 188
+        Top = 31
+        Width = 121
+        Height = 27
+        Color = clWhite
+        MaxLength = 16
+        ReadOnly = True
+        TabOrder = 4
+      end
     end
   end
   object ImageList1: TImageList

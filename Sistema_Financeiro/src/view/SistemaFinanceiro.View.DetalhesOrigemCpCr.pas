@@ -29,18 +29,24 @@ type
     lblCod: TLabel;
     edtCod: TEdit;
     lblVencimento: TLabel;
-    lblDtPag: TLabel;
     edtDataCompraVenda: TEdit;
     edtDtVenc: TEdit;
-    edtDtPag: TEdit;
-    lblValorPago: TLabel;
-    edtValPago: TEdit;
+    dsPagamentos: TDataSource;
+    DBGridPgto: TDBGrid;
+    lblFrPgto: TLabel;
     memObsPag: TMemo;
     lblDetBx: TLabel;
     edtUser: TEdit;
     lblNomeUser: TLabel;
-    lblFrPgto: TLabel;
-    DBGridPgto: TDBGrid;
+    edtDtPag: TEdit;
+    lblDtPag: TLabel;
+    edtValPago: TEdit;
+    lblValorPago: TLabel;
+    edtValorDesc: TEdit;
+    lblValDesco: TLabel;
+    lblParciais: TLabel;
+    DBGridParciais: TDBGrid;
+    dsParciais: TDataSource;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -57,10 +63,13 @@ implementation
 
 {$R *.dfm}
 
-uses SistemaFinanceiro.Model.Entidades.CP, SistemaFinanceiro.Model.Entidades.CR,
+uses
+  SistemaFinanceiro.Model.Entidades.CP, SistemaFinanceiro.Model.Entidades.CR,
   SistemaFinanceiro.Model.dmCPagar, SistemaFinanceiro.Model.dmCReceber,
   SistemaFinanceiro.Model.dmClientes, SistemaFinanceiro.Model.dmFornecedores,
-  SistemaFinanceiro.Utilitarios;
+  SistemaFinanceiro.Utilitarios, SistemaFinanceiro.Model.Entidades.CP.Detalhe,
+  SistemaFinanceiro.Model.Entidades.CR.Detalhe,
+  SistemaFinanceiro.Model.dmFaturaCartao;
 
 procedure TfrmDetalhesOrigemCpCr.btnSairClick(Sender: TObject);
 begin
@@ -69,10 +78,12 @@ end;
 
 procedure TfrmDetalhesOrigemCpCr.CarregaDados(Id: Integer; Origem: String);
 var
-  Cp : TModelCp;
-  Cr : TModelCr;
-  SQLDet : String;
-  SQLPag : String;
+  Cp          : TModelCp;
+  Cr          : TModelCr;
+  CpDet       : TModelCpDetalhe;
+  CrDet       : TModelCrDetalhe;
+  SQLPgto     : String;
+  SQLParciais : String;
 
 begin
 
@@ -82,7 +93,7 @@ begin
     raise Exception.Create('ID do contas a pagar inválido!');
   end;
 
-  if (Origem <> 'CR') or (Origem <> 'CP') then
+  if (Origem <> 'CR') and (Origem <> 'CP') then
   begin
     raise Exception.Create('Origem inválida!');
   end;
@@ -94,7 +105,8 @@ begin
     //  Atualiza titulo
     pnlTitulo.Caption := 'Detalhes do lançamento no Caixa do Contas a Receber';
 
-    Cr := dmCReceber.GetCR(Id);
+    Cr    := dmCReceber.GetCR(Id);
+    CrDet := dmCReceber.GetCrDet(Id);
 
     try
 
@@ -105,7 +117,7 @@ begin
 
       //  Carrega os dados
       edtCod.Text       := Cr.ID;
-      edtForCli.Text    := IntToStr(Cr.IdCliente) + dmClientes.GetNomeCliente(IntToStr(Cr.IdCliente));
+      edtForCli.Text    := IntToStr(Cr.IdCliente) + ' - ' + dmClientes.GetNomeCliente(IntToStr(Cr.IdCliente));
       lblForCli.Caption := 'Cliente';
 
       if Cr.Doc <> '' then
@@ -123,44 +135,177 @@ begin
       lblFatCartao.Visible := False;
       edtFatCartao.Visible := False;
 
+
       //  Pegando dados dos detalhes da baixa
-      SQLDet := 'SELECT * FROM CONTAS_RECEBER_DETALHE CR' +
-                ' LEFT JOIN USUARIOS US ON CR.USUARIO = US.ID ' +
-                ' WHERE ID_CONTA_RECEBER = :IDCR';
-
-      dmCReceber.FDQueryCrDetalhe.Close;
-      dmCReceber.FDQueryCrDetalhe.SQL.Clear;
-      dmCReceber.FDQueryCrDetalhe.Params.Clear;
-      dmCReceber.FDQueryCrDetalhe.SQL.Add(SQLDet);
-
-      dmCPagar.FDQueryCpDetalhes.ParamByName('IDCR').AsInteger := Id;
-      dmCPagar.FDQueryCpDetalhes.Prepare;
-      dmCPagar.FDQueryCpDetalhes.Open();
-
-      edtUser.Text := dmCPagar.FDQueryCpDetalhesNOME.AsString;
+      edtDtPag.Text     := FormatDateTime('DD/MM/YYYY', CrDet.Data);
+      edtValPago.Text   := TUtilitario.FormatoMoeda(CrDet.Valor);
+      edtValorDesc.Text := TUtilitario.FormatoMoeda(CrDet.ValorDesc);
+      edtUser.Text      := CrDet.Usuario;
+      memObsPag.Text    := CrDet.Detalhes;
 
 
+      //  Montando o SQL dos pagamentos
+      SQLPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CR PG ' +
+                 'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR ' +
+                 ' WHERE ID_CR = :IDCR';
+
+      dmCReceber.FDQueryPgtoCr.Close;
+      dmCReceber.FDQueryPgtoCr.SQL.Clear;
+      dmCReceber.FDQueryPgtoCr.Params.Clear;
+      dmCReceber.FDQueryPgtoCr.SQL.Add(SQLPgto);
+
+      dmCReceber.FDQueryPgtoCr.ParamByName('IDCR').AsInteger := Id;
+      dmCReceber.FDQueryPgtoCr.Prepare;
+      dmCReceber.FDQueryPgtoCr.Open();
+
+      //  Definindo o dataset do datasource
+      dsPagamentos.DataSet := dmCReceber.FDQueryPgtoCr;
 
 
-//      //  Montando o SQL dos pagamentos
-//      SqlPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CP PG ' +
-//                 'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR ' +
-//                 'WHERE PG.ID_CP = :IDCP';
-//
-//      dmCPagar.FDQueryPgtoCp.Close;
-//      dmCPagar.FDQueryPgtoCp.SQL.Clear;
-//      dmCPagar.FDQueryPgtoCp.Params.Clear;
-//      dmCPagar.FDQueryPgtoCp.SQL.Add(SqlPgto);
-//
-//      dmCPagar.FDQueryPgtoCp.ParamByName('IDCP').AsInteger := IDCp;
-//      dmCPagar.FDQueryPgtoCp.Prepare;
-//      dmCPagar.FDQueryPgtoCp.Open();
+
+      //  Montando SQL das Parciais
+      SQLParciais := 'SELECT * FROM CONTAS_RECEBER WHERE PARCIAL = ''S'' ' +
+                      ' AND CR_ORIGEM = :IDCR';
+
+      dmCReceber.FDQueryCrParciais.Close;
+      dmCReceber.FDQueryCrParciais.SQL.Clear;
+      dmCReceber.FDQueryCrParciais.Params.Clear;
+      dmCReceber.FDQueryCrParciais.SQL.Add(SQLParciais);
+
+      dmCReceber.FDQueryCrParciais.ParamByName('IDCR').AsInteger := Id;
+      dmCReceber.FDQueryCrParciais.Prepare;
+      dmCReceber.FDQueryCrParciais.Open;
+
+
+      //  Se não exisitir nenhuma CR Parcial ira ocultar
+      //  O grid das parciais
+      if dmCReceber.FDQueryCrParciais.IsEmpty then
+      begin
+
+        lblParciais.Visible    := False;
+        DBGridParciais.Visible := False;
+      end;
+
+       //  Definindo o dataset do datasource
+       dsParciais.DataSet := dmCReceber.FDQueryCrParciais;
 
     finally
 
+      Cr.Free;
+      CrDet.Free;
+
     end;
 
-  end;
+  end
+  else if Origem = 'CP' then
+       begin
+
+        //  Atualiza titulo
+        pnlTitulo.Caption := 'Detalhes do lançamento no Caixa do Contas a Pagar';
+
+        Cp    := dmCPagar.GetCP(Id);
+        CpDet := dmCPagar.GetCpDet(Id);
+
+        try
+
+          if Cp.ID.IsEmpty then
+          begin
+            raise Exception.Create('Conta a receber não encontrada!');
+          end;
+
+          //  Carrega os dados
+          edtCod.Text       := Cp.ID;
+          edtForCli.Text    := IntToStr(Cp.IdFornecedor) + ' - ' + dmFornecedores.GetNomeFornecedor(IntToStr(Cp.IdFornecedor));
+          lblForCli.Caption := 'Fornecedor';
+
+          if Cp.Doc <> '' then
+            edtNDoc.Text := Cp.Doc
+          else
+            edtNDoc.Text := 'Não Informado';
+
+          edtDataCompraVenda.Text := FormatDateTime('DD/MM/YYYY', Cp.DataCompra);
+          lblData.Caption         := 'Data da Compra';
+
+          memDesc.Text   := Cp.Desc;
+          edtValor.Text  := TUtilitario.FormatoMoeda(Cp.ValorParcela);
+          edtDtVenc.Text := FormatDateTime('DD/MM/YYYY', Cp.DataVencimento);
+
+          if Cp.IdFatCartao > 0 then
+          begin
+
+            lblFatCartao.Visible := True;
+            edtFatCartao.Visible := True;
+            edtFatCartao.Text    := IntToStr(Cp.IdFatCartao) + ' - ' + dmFaturaCartao.GetNomeFatCartao(IntToStr(Cp.IdFatCartao));
+
+          end
+          else
+          begin
+             lblFatCartao.Visible := False;
+             edtFatCartao.Visible := False;
+          end;
+
+
+          //  Pegando dados dos detalhes da baixa
+          edtDtPag.Text     := FormatDateTime('DD/MM/YYYY', CpDet.Data);
+          edtValPago.Text   := TUtilitario.FormatoMoeda(CpDet.Valor);
+          edtValorDesc.Text := TUtilitario.FormatoMoeda(CpDet.ValorDesc);
+          edtUser.Text      := CpDet.Usuario;
+          memObsPag.Text    := CpDet.Detalhes;
+
+
+          //  Montando o SQL dos pagamentos
+          SqlPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CP PG ' +
+                     'LEFT JOIN FR_PGTO FR ON PG.ID_FR_PGTO = FR.ID_FR ' +
+                     'WHERE PG.ID_CP = :IDCP';
+
+          dmCPagar.FDQueryPgtoCp.Close;
+          dmCPagar.FDQueryPgtoCp.SQL.Clear;
+          dmCPagar.FDQueryPgtoCp.Params.Clear;
+          dmCPagar.FDQueryPgtoCp.SQL.Add(SqlPgto);
+
+          dmCPagar.FDQueryPgtoCp.ParamByName('IDCP').AsInteger := Id;
+          dmCPagar.FDQueryPgtoCp.Prepare;
+          dmCPagar.FDQueryPgtoCp.Open();
+
+          //  Definindo o dataset do datasource
+          dsPagamentos.DataSet := dmCPagar.FDQueryPgtoCp;
+
+
+          //  Montando o SQL das Parciais
+          SQLParciais := 'SELECT * FROM CONTAS_PAGAR WHERE PARCIAL = ''S'' ' +
+                         ' AND CP_ORIGEM = :IDCP';
+
+          dmCPagar.FDQueryCpParciais.Close;
+          dmCPagar.FDQueryCpParciais.SQl.Clear;
+          dmCPagar.FDQueryCpParciais.Params.Clear;
+          dmCPagar.FDQueryCpParciais.SQL.Add(SQLParciais);
+
+          dmCPagar.FDQueryCpParciais.ParamByName('IDCP').AsInteger := Id;
+          dmCPagar.FDQueryCpParciais.Prepare;
+          dmCPagar.FDQueryCpParciais.Open;
+
+
+          //  Se não exisitir nenhuma CP Parcial ira ocultar
+          //  O grid das parciais
+          if dmCPagar.FDQueryCpParciais.IsEmpty then
+          begin
+
+            lblParciais.Visible    := False;
+            DBGridParciais.Visible := False;
+
+          end;
+
+          //  Definindo o dataset do datasource
+          dsParciais.DataSet := dmCPagar.FDQueryCpParciais;
+
+        finally
+
+          Cp.Free;
+          CpDet.Free;
+
+        end;
+
+       end;
 
 end;
 

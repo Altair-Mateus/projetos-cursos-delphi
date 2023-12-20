@@ -14,7 +14,6 @@ type
     pnlBotoes: TPanel;
     btnVoltar: TButton;
     pnlGrid: TPanel;
-    DBGrid1: TDBGrid;
     DataSourceCrDetalhe: TDataSource;
     lblTNDoc: TLabel;
     lblTVencimento: TLabel;
@@ -36,6 +35,17 @@ type
     DBGridParciais: TDBGrid;
     lblParciais: TLabel;
     DataSourceParciais: TDataSource;
+    pnlInfopag: TPanel;
+    lblDtPag: TLabel;
+    lblNomeUser: TLabel;
+    lblObsPag: TLabel;
+    lblValorPago: TLabel;
+    lblVlDesc: TLabel;
+    edtDtPag: TEdit;
+    edtObsPag: TEdit;
+    edtUser: TEdit;
+    edtValDesc: TEdit;
+    edtValPago: TEdit;
     procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
@@ -68,6 +78,7 @@ end;
 procedure TfrmCrDetalhe.ExibirCRDetalhes(IDCR: integer);
 var
   CR          : TModelCr;
+  cRdET       : TModelCrDetalhe;
   SQL         : String;
   SQLPgto     : String;
   SQLParciais : String;
@@ -111,19 +122,21 @@ begin
 
   end;
 
-  //  Montando o SQL
-  SQL := 'SELECT * FROM CONTAS_RECEBER_DETALHE CR' +
-         ' LEFT JOIN USUARIOS US ON CR.USUARIO = US.ID ' +
-         ' WHERE ID_CONTA_RECEBER = :IDCR';
 
-  dmCReceber.FDQueryCrDetalhe.Close;
-  dmCReceber.FDQueryCrDetalhe.SQL.Clear;
-  dmCReceber.FDQueryCrDetalhe.Params.Clear;
-  dmCReceber.FDQueryCrDetalhe.SQL.Add(SQL);
+  CrDet := dmCReceber.GetCrDet(IdCr);
 
-  dmCReceber.FDQueryCrDetalhe.ParamByName('IDCR').AsInteger := IDCR;
-  dmCReceber.FDQueryCrDetalhe.Prepare;
-  dmCReceber.FDQueryCrDetalhe.Open();
+  try
+
+    edtDtPag.Text   := FormatDateTime('DD/MM/YYYY', CrDet.Data);
+    edtValPago.Text := TUtilitario.FormatoMoeda(CrDet.Valor);
+    edtValDesc.Text := TUtilitario.FormatoMoeda(CrDet.ValorDesc);
+    edtUser.Text    := CrDet.Usuario;
+    edtObsPag.Text  := CrDet.Detalhes;
+
+  finally
+    CrDet.Free;
+  end;
+
 
   //  Montando o SQL dos pagamentos
   SQLPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CR PG ' +
@@ -162,7 +175,7 @@ begin
     lblParciais.Visible    := False;
     DBGridParciais.Visible := False;
 
-    frmCrDetalhe.Height := 540;
+    frmCrDetalhe.Height := 570;
 
   end;
 

@@ -13,7 +13,6 @@ type
     pnlBotoes: TPanel;
     btnVoltar: TButton;
     pnlGrid: TPanel;
-    DBGrid1: TDBGrid;
     pnlPesquisa: TPanel;
     DataSourceCPDetalhe: TDataSource;
     lblTValorParcela: TLabel;
@@ -36,6 +35,17 @@ type
     DBGridParciais: TDBGrid;
     lblParciais: TLabel;
     DataSourceParciais: TDataSource;
+    edtDtPag: TEdit;
+    lblDtPag: TLabel;
+    lblValorPago: TLabel;
+    edtValPago: TEdit;
+    lblNomeUser: TLabel;
+    edtUser: TEdit;
+    lblVlDesc: TLabel;
+    edtValDesc: TEdit;
+    lblObsPag: TLabel;
+    edtObsPag: TEdit;
+    pnlInfopag: TPanel;
     procedure btnVoltarClick(Sender: TObject);
   private
     { Private declarations }
@@ -65,6 +75,7 @@ end;
 procedure TfrmCpDetalhe.ExibirCPDetalhes(IDCp: integer);
 var
   Cp          : TModelCp;
+  CpDet       : TModelCpDetalhe;
   SQL         : String;
   SqlPgto     : String;
   SQLParciais : String;
@@ -108,22 +119,20 @@ begin
 
   end;
 
-  //  Montando o SQL
-  SQL := 'SELECT * FROM CONTAS_PAGAR_DETALHE CP' +
-         ' LEFT JOIN USUARIOS US ON CP.USUARIO = US.ID ' +
-         ' WHERE ID_CONTA_PAGAR = :IDCP';
 
+  CpDet := dmCPagar.GetCpDet(IDCp);
 
+  try
 
-  dmCPagar.FDQueryCpDetalhes.Close;
-  dmCPagar.FDQueryCpDetalhes.SQL.Clear;
-  dmCPagar.FDQueryCpDetalhes.Params.Clear;
-  dmCPagar.FDQueryCpDetalhes.SQL.Add(SQL);
+    edtDtPag.Text   := FormatDateTime('DD/MM/YYYY', CpDet.Data);
+    edtValPago.Text := TUtilitario.FormatoMoeda(CpDet.Valor);
+    edtValDesc.Text := TUtilitario.FormatoMoeda(CpDet.ValorDesc);
+    edtUser.Text    := CpDet.Usuario;
+    edtObsPag.Text  := CpDet.Detalhes;
 
-  dmCPagar.FDQueryCpDetalhes.ParamByName('IDCP').AsInteger := IDCp;
-  dmCPagar.FDQueryCpDetalhes.Prepare;
-  dmCPagar.FDQueryCpDetalhes.Open();
-
+  finally
+    CpDet.Free;
+  end;
 
   //  Montando o SQL dos pagamentos
   SqlPgto := 'SELECT PG.*, FR.NOME_FR FROM PGTO_BX_CP PG ' +
@@ -162,7 +171,7 @@ begin
     lblParciais.Visible    := False;
     DBGridParciais.Visible := False;
 
-    frmCpDetalhe.Height := 550;
+    frmCpDetalhe.Height := 570;
 
   end;
 
