@@ -17,7 +17,7 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
     Width = 794
     Height = 1123
     Borders.Sides = sdAll
-    DefaultFilter = RLPDFFilter1
+    DefaultFilter = RLPDFFilter
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
@@ -156,12 +156,14 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       end
     end
   end
-  object RLPDFFilter1: TRLPDFFilter
+  object RLPDFFilter: TRLPDFFilter
+    DocumentInfo.Author = 'Dev Altair Mateus T Alencastro'
     DocumentInfo.Creator = 
       'FortesReport Community Edition v4.0.1.2 \251 Copyright '#194#169' 1999-2' +
       '021 Fortes Inform'#195#161'tica'
     FileName = 'relatorio'
     DisplayName = 'Documento PDF'
+    ImageFormat = ifOriginal
     Left = 304
     Top = 336
   end

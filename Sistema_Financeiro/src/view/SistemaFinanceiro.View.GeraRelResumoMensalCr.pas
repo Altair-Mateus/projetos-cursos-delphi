@@ -109,6 +109,7 @@ procedure TfrmGeraRelResumoMensalCr.FormCreate(Sender: TObject);
 begin
 
   //  Define as datas previamente
+
   dateIni.Date   := StartOfTheYear(Now);
   dateFinal.Date := EndOfTheYear(Now);
 
@@ -120,6 +121,7 @@ var
   LFiltro        : String;
   LExtract       : String;
   LSelectExtract : String;
+  LOrdem         : String;
 
 begin
 
@@ -146,6 +148,7 @@ begin
   SQL            := '';
   LExtract       := '';
   LSelectExtract := '';
+  LOrdem         := '';
 
   //  Pesquisa por data
   if rbDtVenda.Checked then
@@ -154,6 +157,7 @@ begin
     LFiltro        := LFiltro + ' AND CR.DATA_VENDA BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CR.DATA_VENDA), EXTRACT(YEAR FROM CR.DATA_VENDA) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CR.DATA_VENDA) || ''/'' || EXTRACT(YEAR FROM CR.DATA_VENDA) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CR.DATA_VENDA), EXTRACT(MONTH FROM CR.DATA_VENDA) ';
 
   end
   else if rbDtVenc.Checked then
@@ -162,6 +166,7 @@ begin
     LFiltro        := LFiltro + ' AND CR.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CR.DATA_VENCIMENTO), EXTRACT(YEAR FROM CR.DATA_VENCIMENTO) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CR.DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM CR.DATA_VENCIMENTO) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CR.DATA_VENCIMENTO), EXTRACT(MONTH FROM CR.DATA_VENCIMENTO) ';
 
   end
   else
@@ -170,6 +175,7 @@ begin
     LFiltro        := LFiltro + ' AND CR.DATA_RECEBIMENTO BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CR.DATA_RECEBIMENTO), EXTRACT(YEAR FROM CR.DATA_RECEBIMENTO) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CR.DATA_RECEBIMENTO) || ''/'' || EXTRACT(YEAR FROM CR.DATA_RECEBIMENTO) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CR.DATA_RECEBIMENTO), EXTRACT(MONTH FROM CR.DATA_RECEBIMENTO) ';
 
   end;
 
@@ -198,7 +204,7 @@ begin
   SQL := 'SELECT ' + LSelectExtract + ', SUM(VALOR_PARCELA) AS TOTAL_MENSAL,' +
          ' COUNT(*) AS QTD FROM CONTAS_RECEBER CR WHERE 1 = 1' + LFiltro +
          'GROUP BY ' + LExtract +
-         'ORDER BY ' + LExtract;
+         'ORDER BY ' + LOrdem;
 
   dmCReceber.FDQueryRelatorios.Close;
   dmCReceber.FDQueryRelatorios.SQL.Clear;

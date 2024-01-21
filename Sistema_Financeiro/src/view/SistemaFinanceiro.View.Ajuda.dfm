@@ -18,6 +18,7 @@ object frmAjuda: TfrmAjuda
     Top = 40
     Width = 463
     Height = 377
+    BevelOuter = bvNone
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 5737262
@@ -121,9 +122,12 @@ object frmAjuda: TfrmAjuda
     Width = 467
     Height = 64
     Align = alBottom
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = 415
+    ExplicitWidth = 463
   end
   object Panel1: TPanel
     Left = 0
@@ -131,10 +135,11 @@ object frmAjuda: TfrmAjuda
     Width = 467
     Height = 64
     Align = alTop
+    BevelOuter = bvNone
     Color = 5737262
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 416
+    ExplicitTop = -6
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit

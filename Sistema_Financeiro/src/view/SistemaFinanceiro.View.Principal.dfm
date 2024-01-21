@@ -10947,7 +10947,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object btnFornec: TButton
         Left = 43
-        Top = 17
+        Top = 22
         Width = 171
         Height = 96
         Margins.Left = 15

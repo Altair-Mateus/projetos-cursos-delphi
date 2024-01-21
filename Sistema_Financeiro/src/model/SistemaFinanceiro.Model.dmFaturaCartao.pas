@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
-  Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Winapi.Windows, Vcl.Forms;
 
 type
   TdmFaturaCartao = class(TDataModule)
@@ -25,6 +26,7 @@ type
   public
     { Public declarations }
     procedure GeraCodigo;
+    procedure AlteraDiaVcto(Id_Fat, Dia: Integer);
     function GetNomeFatCartao(IdFatCartao : String) : String;
     function GetDataVcto(IdFatCartao : String) : Integer;
     function GetStatusFatCartao(IdFatCartao : String) : boolean;
@@ -44,6 +46,65 @@ uses SistemaFinanceiro.Model.udmDados;
 {$R *.dfm}
 
 { TdmFaturaCartao }
+
+procedure TdmFaturaCartao.AlteraDiaVcto(Id_Fat, Dia: Integer);
+var
+  FDQueryFat : TFDQuery;
+
+const
+  SQL: String = ' UPDATE CONTAS_PAGAR SET DATA_VENCIMENTO = ' +
+                ' DATEADD(day, :DIA - EXTRACT(day FROM DATA_VENCIMENTO), DATA_VENCIMENTO) ' +
+                ' WHERE STATUS =''A'' AND FATURA_CART =''S'' AND ID_FATURA = :ID_FAT';
+begin
+
+  //  Valida a ID
+  if Id_Fat <= 0 then
+  begin
+   raise Exception.Create('Fatura de Cartão não encontrada!');
+  end;
+
+  FDQueryFat := TFDQuery.Create(Self);
+
+  try
+
+    //  Estabelece conexao com o BD
+    FDQueryFat.Connection := DataModule1.FDConnection;
+
+    try
+
+      DataModule1.FDConnection.StartTransaction;
+
+      FDQueryFat.Close;
+      FDQueryFat.SQL.Clear;
+      FDQueryFat.SQL.Add(SQL);
+
+      FDQueryFat.ParamByName('DIA').AsInteger := Dia;
+      FDQueryFat.ParamByName('ID_FAT').AsInteger := Id_Fat;
+
+      FDQueryFat.ExecSQL;
+
+
+      DataModule1.FDConnection.Commit;
+      Application.MessageBox('Dia de vencimento das Contas a Pagar alterado com Sucesso!!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+    except
+
+      on E: Exception do
+      begin
+        DataModule1.FDConnection.Rollback;
+        Application.MessageBox(PWideChar(E.Message), 'Erro ao alterar dia de vencimento das CPs!', MB_OK + MB_ICONWARNING);
+      end;
+
+    end;
+
+  finally
+
+    FDQueryFat.Free;
+
+  end;
+
+
+end;
 
 procedure TdmFaturaCartao.GeraCodigo;
 var

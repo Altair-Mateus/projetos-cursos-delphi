@@ -208,6 +208,7 @@ begin
 
     Contador := Contador + 1;
 
+    //  Atualiza as info do dataset
     dmPgtoBxCr.cdsPgtoBxCr.Refresh;
 
     if dmPgtoBxCr.cdsPgtoBxCr.State in [dsBrowse, dsInactive] then

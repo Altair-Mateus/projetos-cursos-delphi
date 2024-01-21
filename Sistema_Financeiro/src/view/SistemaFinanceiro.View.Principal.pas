@@ -648,7 +648,7 @@ begin
   DataInicial := StartOfTheMonth(IncMonth(Now, -2));
   DataFinal   := EndOfTheMonth(Now);
   ResumoCaixa := dmCaixa.ResumoCaixa(DataInicial, DataFinal);
-  lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoParcial);
+  lblValor.Caption := TUtilitario.FormatoMoeda(ResumoCaixa.SaldoFinal);
 
   if ResumoCaixa.SaldoFinal > 0 then
   begin

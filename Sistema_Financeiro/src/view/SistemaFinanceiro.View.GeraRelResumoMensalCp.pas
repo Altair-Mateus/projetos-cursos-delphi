@@ -28,7 +28,7 @@ type
     lblStatus: TLabel;
     cbStatus: TComboBox;
     gbData: TGroupBox;
-    pnlParciais: TPanel;
+    pnlOptions: TPanel;
     checkParciais: TCheckBox;
     checkVencidas: TCheckBox;
     rbDtCompra: TRadioButton;
@@ -38,12 +38,14 @@ type
     btnImprimir: TButton;
     btnCancelar: TButton;
     pnlTitulo: TPanel;
+    checkNaoConsideraFat: TCheckBox;
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesqFornecClick(Sender: TObject);
     procedure btnPesqFatCartaoClick(Sender: TObject);
     procedure btnVisualizarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure checkNaoConsideraFatClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -113,6 +115,27 @@ begin
 
 end;
 
+procedure TfrmGeraRelResumoMensalCp.checkNaoConsideraFatClick(Sender: TObject);
+begin
+
+  if checkNaoConsideraFat.Checked then
+  begin
+
+    btnPesqFatCartao.Enabled := False;
+    edtCodFatCartao.Enabled  := False;
+    edtCodFatCartao.Clear;
+
+  end
+  else
+  begin
+
+    btnPesqFatCartao.Enabled := True;
+    edtCodFatCartao.Enabled := True;
+
+  end;
+
+end;
+
 procedure TfrmGeraRelResumoMensalCp.btnPesqFatCartaoClick(Sender: TObject);
 begin
 
@@ -153,6 +176,7 @@ var
   LFiltro        : String;
   LExtract       : String;
   LSelectExtract : String;
+  LOrdem         : String;
 
 begin
 
@@ -179,6 +203,7 @@ begin
   SQL            := '';
   LExtract       := '';
   LSelectExtract := '';
+  LOrdem         := '';
 
   //  Pesquisa por data
   if rbDtCompra.Checked then
@@ -187,6 +212,7 @@ begin
     LFiltro        := LFiltro + ' AND CP.DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CP.DATA_COMPRA), EXTRACT(YEAR FROM CP.DATA_COMPRA) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_COMPRA) || ''/'' || EXTRACT(YEAR FROM CP.DATA_COMPRA) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_COMPRA), EXTRACT(MONTH FROM CP.DATA_COMPRA) ';
 
   end
   else if rbDtVenc.Checked then
@@ -195,6 +221,7 @@ begin
     LFiltro        := LFiltro + ' AND CP.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO), EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_VENCIMENTO), EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) ';
 
   end
   else
@@ -203,10 +230,9 @@ begin
     LFiltro        := LFiltro + ' AND CP.DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
     LExtract       := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO), EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) ';
     LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) AS ano_mes ';
+    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_PAGAMENTO), EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) ';
 
   end;
-
-
 
 
   //  Pesquisa por status
@@ -235,12 +261,14 @@ begin
   if checkVencidas.Checked then
     LFiltro := LFiltro + ' AND CP.STATUS = ''A'' AND CP.DATA_VENCIMENTO < :DTATUAL ';
 
+  //  Não considera faturas
+  if checkNaoConsideraFat.Checked then
+    LFiltro := LFiltro + 'AND FATURA_CART = ''N'' ';
 
-
-  SQL := 'SELECT ' + LSelectExtract + ', SUM(VALOR_PARCELA) AS TOTAL_MENSAL,' +
-         ' COUNT(*) AS QTD FROM CONTAS_PAGAR CP WHERE 1 = 1' + LFiltro +
+  SQL := 'SELECT ' + LSelectExtract + ', SUM(VALOR_PARCELA) AS TOTAL_MENSAL, ' +
+         ' COUNT(*) AS QTD FROM CONTAS_PAGAR CP WHERE 1 = 1 ' + LFiltro +
          'GROUP BY ' + LExtract +
-         'ORDER BY ' + LExtract;
+         'ORDER BY ' + LOrdem;
 
   dmCPagar.FDQueryRelatorios.Close;
   dmCPagar.FDQueryRelatorios.SQL.Clear;

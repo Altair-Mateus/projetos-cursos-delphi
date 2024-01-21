@@ -1,7 +1,5 @@
 inherited frmRelMensalCr: TfrmRelMensalCr
   Caption = 'frmRelatorioPadrao1'
-  ExplicitWidth = 782
-  ExplicitHeight = 478
   TextHeight = 15
   inherited RLReport: TRLReport
     DataSource = dsRelResumoMensal
@@ -152,6 +150,9 @@ inherited frmRelMensalCr: TfrmRelMensalCr
         ParentFont = False
       end
     end
+  end
+  inherited RLPDFFilter: TRLPDFFilter
+    ImageFormat = ifJPeg
   end
   object dsRelResumoMensal: TDataSource
     Left = 408

@@ -170,12 +170,15 @@ end;
 procedure TfrmFaturaCartao.btnSalvarClick(Sender: TObject);
 var
   LStatus : String;
+  option : Word;
 
 begin
   inherited;
 
   //  Valida os campos obrigatorios
   ValidaCampos;
+
+  option := IDNO;
 
   //  Se for um novo cad
   if dmFaturaCartao.cdsFaturaCartao.State in [dsInsert] then
@@ -188,7 +191,17 @@ begin
   //  Se for edição de um cad
   if dmFaturaCartao.cdsFaturaCartao.State in [dsEdit] then
   begin
+
     dmFaturaCartao.cdsFaturaCartaoDATA_ALTERACAO.AsDateTime := Now;
+
+    if dmFaturaCartao.cdsFaturaCartaoDIA_VCTO.AsInteger <> StrToInt(Trim(edtDiaVcto.Text)) then
+    begin
+
+      option := Application.MessageBox('Foi detectado alteração no dia de vencimento da fatura. ' +
+        'Deseja alterar o dia de vencimento das Contas em aberto registradas?? ', 'Confirmação', MB_YESNO + MB_ICONQUESTION);
+
+    end;
+
   end;
 
   //  Define o status da fatura
@@ -211,12 +224,15 @@ begin
   dmFaturaCartao.cdsFaturaCartao.Post;
   dmFaturaCartao.cdsFaturaCartao.ApplyUpdates(0);
 
+  //  Atualiza dia vcto faturas abertas
+  if option = IDYES then
+     dmFaturaCartao.AlteraDiaVcto(dmFaturaCartao.cdsFaturaCartaoID_FT.AsInteger, StrToInt(Trim(edtDiaVcto.Text)));
+
   //  Retorna ao cardPesquisa;
   CardPanelPrincipal.ActiveCard := CardPesquisa;
 
   //  Atualiza a lista de pesquisa
   Pesquisar;
-
 
 end;
 

@@ -21,7 +21,7 @@ type
     rlsiNumPag: TRLSystemInfo;
     rlsiLastPage: TRLSystemInfo;
     rllblNomeUser: TRLLabel;
-    RLPDFFilter1: TRLPDFFilter;
+    RLPDFFilter: TRLPDFFilter;
     procedure RLReportBeforePrint(Sender: TObject;
       var PrintIt: Boolean);
   private

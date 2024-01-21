@@ -1,6 +1,7 @@
 object frmGeraRelResumoMensalCr: TfrmGeraRelResumoMensalCr
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Gerar Relat'#243'rio de Resumo Mensal de CP'
   ClientHeight = 442
   ClientWidth = 628

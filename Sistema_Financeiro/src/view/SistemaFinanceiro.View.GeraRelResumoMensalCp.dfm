@@ -35,9 +35,8 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 0
       ExplicitWidth = 624
-      ExplicitHeight = 375
+      ExplicitHeight = 326
       object lblDtIni: TLabel
         Left = 16
         Top = 24
@@ -171,16 +170,16 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Left = 16
           Top = 73
           Width = 166
-          Height = 29
+          Height = 16
           Caption = 'Data Pagamento'
           TabOrder = 2
         end
       end
-      object pnlParciais: TPanel
-        Left = 323
-        Top = 140
-        Width = 185
-        Height = 57
+      object pnlOptions: TPanel
+        Left = 317
+        Top = 135
+        Width = 262
+        Height = 83
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -212,6 +211,21 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+        end
+        object checkNaoConsideraFat: TCheckBox
+          Left = 8
+          Top = 55
+          Width = 265
+          Height = 17
+          Caption = 'N'#227'o Considerar Fatura Cart'#227'o'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = checkNaoConsideraFatClick
         end
       end
     end
@@ -264,7 +278,6 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
         Images = ImageList1
         TabOrder = 2
         OnClick = btnCancelarClick
-        ExplicitLeft = 373
       end
     end
     object pnlTitulo: TPanel
@@ -284,6 +297,7 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
+      ExplicitWidth = 624
     end
   end
   object ImageList1: TImageList
@@ -291,8 +305,8 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
     DrawingStyle = dsTransparent
     Height = 32
     Width = 32
-    Left = 552
-    Top = 216
+    Left = 560
+    Top = 112
     Bitmap = {
       494C010105000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
