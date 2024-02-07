@@ -114,6 +114,7 @@ type
     CheckFatVirada: TCheckBox;
     PopupMenu: TPopupMenu;
     CancelarBaixa1: TMenuItem;
+    checkNaoConsideraFatura: TCheckBox;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisaeClick(Sender: TObject);
@@ -158,6 +159,7 @@ type
     procedure btnBxMultiplaClick(Sender: TObject);
     procedure CheckFatViradaClick(Sender: TObject);
     procedure CancelarBaixa1Click(Sender: TObject);
+    procedure checkNaoConsideraFaturaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -373,6 +375,7 @@ begin
   lblNomeFornecedor.Visible  := False;
   lblNomeFatCartao.Visible   := False;
 
+  memDesc.SetFocus;
 
 end;
 
@@ -1016,6 +1019,30 @@ begin
     dateVencimento.Date := IncMonth(dateVencimento.Date, -1);
   end;
 
+end;
+
+procedure TfrmContasPagar.checkNaoConsideraFaturaClick(Sender: TObject);
+begin
+  inherited;
+
+  //  Bloqueia as faturas de cartão
+  if checkNaoConsideraFatura.Checked then
+  begin
+
+    btnPesqFtCartao.Enabled := False;
+    edtFiltroFatCartao.Enabled  := False;
+    edtFiltroFatCartao.Clear;
+
+  end
+  else
+  begin
+
+    btnPesqFtCartao.Enabled := True;
+    edtFiltroFatCartao.Enabled := True;
+
+  end;
+
+  Pesquisar;
 end;
 
 procedure TfrmContasPagar.checkParciaisClick(Sender: TObject);
@@ -1688,6 +1715,14 @@ begin
     //  Criando os parametros
     dmCPagar.cdsCPagar.Params.CreateParam(TFieldType.ftString, 'ID_FT', TParamType.ptInput);
     dmCPagar.cdsCPagar.ParamByName('ID_FT').AsString := Trim(edtFiltroFatCartao.Text);
+
+  end;
+
+  //  Pesquisa Sem Fatura de cartão
+  if checkNaoConsideraFatura.Checked then
+  begin
+
+    LFiltro := LFiltro + 'AND FATURA_CART = ''N'' ';
 
   end;
 
