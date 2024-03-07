@@ -150,34 +150,22 @@ object frmGeraRelResumoMensalCr: TfrmGeraRelResumoMensalCr
           TabOrder = 2
         end
       end
-      object pnlParciais: TPanel
+      object pnlCheckBox: TPanel
         Left = 323
-        Top = 140
-        Width = 185
-        Height = 57
+        Top = 144
+        Width = 256
+        Height = 121
+        BevelKind = bkFlat
         BevelOuter = bvNone
-        Color = clWhite
-        ParentBackground = False
+        Padding.Left = 5
+        Padding.Top = 5
         TabOrder = 6
-        object checkParciais: TCheckBox
-          Left = 8
-          Top = 9
-          Width = 145
-          Height = 17
-          Caption = 'Somente Parciais'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-        end
         object checkVencidas: TCheckBox
-          Left = 8
-          Top = 32
-          Width = 153
-          Height = 17
+          Left = 5
+          Top = 30
+          Width = 247
+          Height = 25
+          Align = alTop
           Caption = 'Somente vencidas'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -185,7 +173,44 @@ object frmGeraRelResumoMensalCr: TfrmGeraRelResumoMensalCr
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
+          TabOrder = 0
+          ExplicitTop = 55
+        end
+        object checkParciais: TCheckBox
+          Left = 5
+          Top = 5
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Somente Parciais'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 1
+          ExplicitTop = 30
+        end
+        object checkTracoLinha: TCheckBox
+          Left = 5
+          Top = 80
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Tra'#231'o entre as Linhas'
+          TabOrder = 2
+          ExplicitTop = 130
+        end
+        object checkDestacaLinha: TCheckBox
+          Left = 5
+          Top = 55
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Destacar Linha'
+          TabOrder = 3
+          ExplicitTop = 105
         end
       end
     end

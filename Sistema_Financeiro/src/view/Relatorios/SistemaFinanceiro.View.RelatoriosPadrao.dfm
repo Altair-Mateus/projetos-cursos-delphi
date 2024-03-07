@@ -99,6 +99,7 @@ object frmRelatorioPadrao: TfrmRelatorioPadrao
       Borders.DrawTop = False
       Borders.DrawRight = False
       Borders.DrawBottom = False
+      BeforePrint = rlbDadosBeforePrint
     end
     object rlbRodape: TRLBand
       Left = 39

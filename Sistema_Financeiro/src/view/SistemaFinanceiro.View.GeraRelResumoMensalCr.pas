@@ -26,14 +26,16 @@ type
     rbDtVenda: TRadioButton;
     rbDtVenc: TRadioButton;
     rbDtPag: TRadioButton;
-    pnlParciais: TPanel;
-    checkParciais: TCheckBox;
-    checkVencidas: TCheckBox;
     pnlBotoes: TPanel;
     btnVisualizar: TButton;
     btnImprimir: TButton;
     btnCancelar: TButton;
     pnlTitulo: TPanel;
+    pnlCheckBox: TPanel;
+    checkVencidas: TCheckBox;
+    checkParciais: TCheckBox;
+    checkTracoLinha: TCheckBox;
+    checkDestacaLinha: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure btnPesqClienteClick(Sender: TObject);
     procedure btnVisualizarClick(Sender: TObject);
@@ -253,6 +255,12 @@ begin
 
    //  Cria o form
   frmRelMensalCr := TfrmRelMensalCr.Create(Self);
+
+   if checkTracoLinha.Checked then
+    frmRelMensalCr.TracoLinha := True;
+
+  if checkDestacaLinha.Checked then
+    frmRelMensalCr.DestacaLinha := True;
 
   try
 

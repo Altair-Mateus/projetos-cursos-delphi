@@ -19,11 +19,16 @@ type
     RLBand1: TRLBand;
     rllblTotal: TRLLabel;
     rllblQuantidade: TRLLabel;
+    rllblFatCartao: TRLLabel;
+    rldbtFatCartao: TRLDBText;
     procedure RLReportBeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure rlbDadosBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
+    FFatura: Boolean;
     { Private declarations }
   public
     { Public declarations }
+    property Fatura: Boolean read FFatura write FFatura;
   end;
 
 var
@@ -34,6 +39,20 @@ implementation
 {$R *.dfm}
 
 uses SistemaFinanceiro.Utilitarios;
+
+procedure TfrmRelMensalCp.rlbDadosBeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  inherited;
+
+  if FFatura then
+  begin
+    rllblFatCartao.Visible := True;
+    rldbtFatCartao.Visible := True;
+  end;
+
+
+end;
 
 procedure TfrmRelMensalCp.RLReportBeforePrint(Sender: TObject;
   var PrintIt: Boolean);

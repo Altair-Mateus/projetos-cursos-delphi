@@ -175,21 +175,23 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           TabOrder = 2
         end
       end
-      object pnlOptions: TPanel
-        Left = 317
-        Top = 135
-        Width = 262
-        Height = 83
+      object pnlCheckBox: TPanel
+        Left = 323
+        Top = 144
+        Width = 256
+        Height = 161
+        BevelKind = bkFlat
         BevelOuter = bvNone
-        Color = clWhite
-        ParentBackground = False
+        Padding.Left = 5
+        Padding.Top = 5
         TabOrder = 8
-        object checkParciais: TCheckBox
-          Left = 8
-          Top = 9
-          Width = 145
-          Height = 17
-          Caption = 'Somente Parciais'
+        object checkNaoConsideraFat: TCheckBox
+          Left = 5
+          Top = 5
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'N'#227'o Considerar Fatura Cart'#227'o'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -197,12 +199,15 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          OnClick = checkNaoConsideraFatClick
+          ExplicitWidth = 221
         end
         object checkVencidas: TCheckBox
-          Left = 8
-          Top = 32
-          Width = 153
-          Height = 17
+          Left = 5
+          Top = 55
+          Width = 247
+          Height = 25
+          Align = alTop
           Caption = 'Somente vencidas'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -211,13 +216,15 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ExplicitWidth = 221
         end
-        object checkNaoConsideraFat: TCheckBox
-          Left = 8
-          Top = 55
-          Width = 265
-          Height = 17
-          Caption = 'N'#227'o Considerar Fatura Cart'#227'o'
+        object checkParciais: TCheckBox
+          Left = 5
+          Top = 30
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Somente Parciais'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -225,7 +232,36 @@ object frmGeraRelResumoMensalCp: TfrmGeraRelResumoMensalCp
           Font.Style = []
           ParentFont = False
           TabOrder = 2
-          OnClick = checkNaoConsideraFatClick
+          ExplicitWidth = 221
+        end
+        object checkAgrupaFatura: TCheckBox
+          Left = 5
+          Top = 80
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Agrupar Faturas'
+          TabOrder = 3
+          ExplicitTop = 78
+        end
+        object checkTracoLinha: TCheckBox
+          Left = 5
+          Top = 130
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Tra'#231'o entre as Linhas'
+          TabOrder = 4
+          ExplicitTop = 105
+        end
+        object checkDestacaLinha: TCheckBox
+          Left = 5
+          Top = 105
+          Width = 247
+          Height = 25
+          Align = alTop
+          Caption = 'Destacar Linha'
+          TabOrder = 5
         end
       end
     end

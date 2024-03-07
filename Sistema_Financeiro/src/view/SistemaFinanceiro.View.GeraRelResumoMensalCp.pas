@@ -28,9 +28,6 @@ type
     lblStatus: TLabel;
     cbStatus: TComboBox;
     gbData: TGroupBox;
-    pnlOptions: TPanel;
-    checkParciais: TCheckBox;
-    checkVencidas: TCheckBox;
     rbDtCompra: TRadioButton;
     rbDtVenc: TRadioButton;
     rbDtPag: TRadioButton;
@@ -38,7 +35,13 @@ type
     btnImprimir: TButton;
     btnCancelar: TButton;
     pnlTitulo: TPanel;
+    pnlCheckBox: TPanel;
     checkNaoConsideraFat: TCheckBox;
+    checkVencidas: TCheckBox;
+    checkParciais: TCheckBox;
+    checkAgrupaFatura: TCheckBox;
+    checkTracoLinha: TCheckBox;
+    checkDestacaLinha: TCheckBox;
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesqFornecClick(Sender: TObject);
@@ -125,12 +128,16 @@ begin
     edtCodFatCartao.Enabled  := False;
     edtCodFatCartao.Clear;
 
+    checkAgrupaFatura.Checked := False;
+    checkAgrupaFatura.Enabled := False;
+
   end
   else
   begin
 
-    btnPesqFatCartao.Enabled := True;
-    edtCodFatCartao.Enabled := True;
+    btnPesqFatCartao.Enabled  := True;
+    edtCodFatCartao.Enabled   := True;
+    checkAgrupaFatura.Enabled := True;
 
   end;
 
@@ -177,6 +184,7 @@ var
   LExtract       : String;
   LSelectExtract : String;
   LOrdem         : String;
+  LJoin          : String;
 
 begin
 
@@ -204,33 +212,43 @@ begin
   LExtract       := '';
   LSelectExtract := '';
   LOrdem         := '';
+  LJoin          := '';
+
+  // Agrupa por Fatura
+  if checkAgrupaFatura.Checked then
+  begin
+    LSelectExtract := LSelectExtract + ' FT.NOME AS FATURA, ';
+    LJoin          := LJoin          + ' INNER JOIN FATURA_CARTAO FT ON CP.ID_FATURA = FT.ID_FT ';
+    LExtract       := LExtract       + ' CP.ID_FATURA, FT.NOME, ';
+    LOrdem         := LOrdem         + ' CP.ID_FATURA, ';
+  end;
 
   //  Pesquisa por data
   if rbDtCompra.Checked then
   begin
 
-    LFiltro        := LFiltro + ' AND CP.DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_COMPRA), EXTRACT(YEAR FROM CP.DATA_COMPRA) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_COMPRA) || ''/'' || EXTRACT(YEAR FROM CP.DATA_COMPRA) AS ano_mes ';
-    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_COMPRA), EXTRACT(MONTH FROM CP.DATA_COMPRA) ';
+    LFiltro        := LFiltro        + ' AND CP.DATA_COMPRA BETWEEN :DTINI AND :DTFIM ';
+    LExtract       := LExtract       + ' EXTRACT(MONTH FROM CP.DATA_COMPRA), EXTRACT(YEAR FROM CP.DATA_COMPRA) ';
+    LSelectExtract := LSelectExtract + ' EXTRACT(MONTH FROM CP.DATA_COMPRA) || ''/'' || EXTRACT(YEAR FROM CP.DATA_COMPRA) AS ano_mes ';
+    LOrdem         := LOrdem         + ' EXTRACT(YEAR FROM CP.DATA_COMPRA), EXTRACT(MONTH FROM CP.DATA_COMPRA) ';
 
   end
   else if rbDtVenc.Checked then
   begin
 
-    LFiltro        := LFiltro + ' AND CP.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO), EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) AS ano_mes ';
-    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_VENCIMENTO), EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) ';
+    LFiltro        := LFiltro        + ' AND CP.DATA_VENCIMENTO BETWEEN :DTINI AND :DTFIM ';
+    LExtract       := LExtract       + ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO), EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) ';
+    LSelectExtract := LSelectExtract + ' EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_VENCIMENTO) AS ano_mes ';
+    LOrdem         := LOrdem         + ' EXTRACT(YEAR FROM CP.DATA_VENCIMENTO), EXTRACT(MONTH FROM CP.DATA_VENCIMENTO) ';
 
   end
   else
   begin
 
-    LFiltro        := LFiltro + ' AND CP.DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
-    LExtract       := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO), EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) ';
-    LSelectExtract := ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) AS ano_mes ';
-    LOrdem         := ' EXTRACT(YEAR FROM CP.DATA_PAGAMENTO), EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) ';
+    LFiltro        := LFiltro        + ' AND CP.DATA_PAGAMENTO BETWEEN :DTINI AND :DTFIM ';
+    LExtract       := LExtract       + ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO), EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) ';
+    LSelectExtract := LSelectExtract + ' EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) || ''/'' || EXTRACT(YEAR FROM CP.DATA_PAGAMENTO) AS ano_mes ';
+    LOrdem         := LOrdem         + ' EXTRACT(YEAR FROM CP.DATA_PAGAMENTO), EXTRACT(MONTH FROM CP.DATA_PAGAMENTO) ';
 
   end;
 
@@ -263,10 +281,11 @@ begin
 
   //  Não considera faturas
   if checkNaoConsideraFat.Checked then
-    LFiltro := LFiltro + 'AND FATURA_CART = ''N'' ';
+    LFiltro := LFiltro + ' AND FATURA_CART = ''N'' ';
+
 
   SQL := 'SELECT ' + LSelectExtract + ', SUM(VALOR_PARCELA) AS TOTAL_MENSAL, ' +
-         ' COUNT(*) AS QTD FROM CONTAS_PAGAR CP WHERE 1 = 1 ' + LFiltro +
+         ' COUNT(*) AS QTD FROM CONTAS_PAGAR CP ' + LJoin + ' WHERE 1 = 1 ' + LFiltro +
          'GROUP BY ' + LExtract +
          'ORDER BY ' + LOrdem;
 
@@ -291,6 +310,8 @@ begin
 
   dmCPagar.FDQueryRelatorios.Prepare;
   dmCPagar.FDQueryRelatorios.Open();
+
+
 
 end;
 
@@ -320,6 +341,15 @@ begin
 
   //  Cria o form
   frmRelMensalCp := TfrmRelMensalCp.Create(Self);
+
+  if checkAgrupaFatura.Checked then
+    frmRelMensalCp.Fatura := True;
+
+  if checkTracoLinha.Checked then
+    frmRelMensalCp.TracoLinha := True;
+
+  if checkDestacaLinha.Checked then
+    frmRelMensalCp.DestacaLinha := True;
 
   try
 
